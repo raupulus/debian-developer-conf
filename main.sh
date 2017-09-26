@@ -23,3 +23,11 @@ verde="\033[1;32m"
 #############################
 ##   Variables Generales   ##
 #############################
+
+source Agregar_Repositorios.sh
+source Instalar_Software.sh
+source Tipografías.sh
+
+#agregar_repositorios
+#instalar_Software
+#agregar_fuentes
