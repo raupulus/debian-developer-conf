@@ -1,0 +1,5 @@
+[user]
+	name = 
+	email = 
+[core]
+	editor = nano -wc
