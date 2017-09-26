@@ -24,10 +24,16 @@ verde="\033[1;32m"
 ##   Variables Generales   ##
 #############################
 
+function agregar_llaves() {
+	echo "Instalando llaves de repositorios"
+}
 
 #Añade Repositorios extras a Debian
 function agregar_repositorios() {
 	echo "Agregando Repositorios"
 	sudo cp ./sources.list.d/* /etc/apt/sources.list.d/
 	echo "Repositorios Agregados"
+	sleep 1
+
+	agregar_llaves
 }
