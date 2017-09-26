@@ -27,16 +27,17 @@ verde="\033[1;32m"
 source ./Agregar_Repositorios.sh
 source ./Instalar_Software.sh
 source ./Tipografías.sh
+source ./Instalar_Configuraciones.sh
 
 while :
 	do
 		sleep 1
 		clear
 		echo ""
-		echo -e "   $rojoC 0)  $verdeC Salir"
-		echo -e "   $rojoC 1)  $verdeC Instalar Aplicaciones Básicas y agregar Repositorios"
-		echo -e "   $rojoC 2)  $verdeC Agregar Tipografías"
-		#echo -e "   $rojoC 3)  $verdeC Instalar Configuraciones" #Configuración bash, zsh, variables entorno...
+		echo -e "   $rojo 0)  $verde Salir"
+		echo -e "   $rojo 1)  $verde Instalar Aplicaciones Básicas y agregar Repositorios"
+		echo -e "   $rojo 2)  $verde Agregar Tipografías"
+		echo -e "   $rojoC 3)  $verdeC Instalar Configuraciones" #Configuración bash, zsh, variables entorno...
 		#echo -e "   $rojoC 4)  $verdeC Configurar GIT"
 		#echo -e "   $rojoC 5)  $verdeC Instalar Servidor Apache+PHP+SQL"
 
@@ -57,15 +58,21 @@ while :
 			#agregar_fuentes
 			read -p "Pulsa una tecla para continuar";;
 
+		3)#Instalar Configuraciones
+			clear
+			echo "Instalar Configuraciones"
+			#instalar_configuraciones
+			read -p "Pulsa una tecla para continuar";;
+
 		0)#SALIR
 			clear
-			echo -e "$rojo Se sale del menú$grisC"
+			echo -e "$rojo Se sale del menú$gris"
 			echo ""
 			exit 1;;
 
 		*)#Opción no válida
 			clear
 			echo ""
-			echo -e "                      $rojoC ATENCIÓN: Elección no válida$grisC"
+			echo -e "                      $rojo ATENCIÓN: Elección no válida$gris"
 esac
 done
