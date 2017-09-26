@@ -23,3 +23,11 @@ verde="\033[1;32m"
 #############################
 ##   Variables Generales   ##
 #############################
+
+
+#Añade Repositorios extras a Debian
+function agregar_repositorios() {
+	echo "Agregando Repositorios"
+	sudo cp ./sources.list.d/* /etc/apt/sources.list.d/
+	echo "Repositorios Agregados"
+}
