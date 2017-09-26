@@ -1,0 +1,97 @@
+"*":
+  "autoclose-html":
+    legacyMode: true
+  "autocomplete-plus":
+    autoActivationDelay: 1000
+  core:
+    autoHideMenuBar: true
+    disabledPackages: [
+      "language-clojure"
+      "language-csharp"
+      "language-go"
+      "language-java"
+      "language-mustache"
+      "language-objective-c"
+      "language-perl"
+      "metrics"
+      "linter-php"
+    ]
+    packagesWithKeymapsDisabled: [
+      "multi-cursor"
+    ]
+    telemetryConsent: "no"
+    themes: [
+      "one-light-ui"
+      "one-light-syntax"
+    ]
+  editor:
+    fontFamily: "Input"
+    fontSize: 18
+    scrollPastEnd: true
+    scrollSensitivity: 50
+    showIndentGuide: true
+    softWrapAtPreferredLineLength: true
+    tabLength: 4
+  "git-diff": {}
+  "git-log":
+    fontFamily: "Input, Inconsolata, Monaco, Consolas, 'Courier New', Courier"
+    fontScale: 0.8
+  "highlight-line":
+    enableBackgroundColor: false
+    enableUnderline: true
+    underline: "dotted"
+  jumpy:
+    highContrast: true
+  "linter-php": {}
+  "linter-phpcs":
+    autoExecutableSearch: false
+    codeStandardOrConfigFile: "/opt/composer/vendor/yiisoft/yii2-coding-standards/Yii2"
+    executablePath: "/opt/composer/vendor/bin/phpcs"
+    ignorePatterns: [
+      "**/views/**"
+      "**/tests/**"
+    ]
+  "linter-ui-default":
+    panelHeight: 166
+  "markdown-preview":
+    useGitHubStyle: true
+  minimap:
+    absoluteMode: true
+    plugins:
+      "minimap-autohider": true
+      "minimap-autohiderDecorationsZIndex": 0
+  "one-dark-ui":
+    fontSize: 14
+  "one-light-ui":
+    fontSize: 14
+  "php-cs-fixer":
+    executablePath: "/opt/composer/vendor/bin/php-cs-fixer"
+    executeOnSave: true
+    pathMode: "intersection"
+  "php-debug":
+    AutoExpandLocals: true
+    currentPanelMode: "bottom"
+  "php-integrator-autocomplete-plus": {}
+  "php-integrator-base:confirmed-upgrade-message": true
+  "php-integrator-navigation":
+    navigationRequireAltKey: false
+    navigationRequireMetaKey: true
+  "php-integrator-symbol-viewer": {}
+  "split-diff":
+    diffWords: true
+    ignoreWhitespace: true
+    leftEditorColor: "red"
+    rightEditorColor: "green"
+    syncHorizontalScroll: true
+  "symbols-list":
+    hideOnEmptyList: true
+  welcome:
+    showOnStartup: false
+  zentabs:
+    neverCloseUnsaved: true
+".diff.source":
+  editor:
+    tabLength: 4
+".html.php.text":
+  editor:
+    tabLength: 4
