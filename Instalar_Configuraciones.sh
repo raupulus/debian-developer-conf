@@ -24,6 +24,18 @@ verde="\033[1;32m"
 ##   Variables Generales   ##
 #############################
 
+#Instala el script de OhMyZSH
+function ohMyZSH() {
+	echo -e "$verde Descargando OhMyZSH$gris"
+}
+
+#Agregar Archivos de configuración al home
+function agregar_conf_home() {
+	echo -e "$verde Preparando para añadir archivos de configuración en el home de usuario$gris"
+}
+
+#Instalar Todas las configuraciones
 function instalar_configuraciones() {
 
+	ohMyZSH
 }
