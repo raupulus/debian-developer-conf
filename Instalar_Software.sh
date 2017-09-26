@@ -34,6 +34,16 @@ function atom_install() {
         echo -e "$verde Instalando $p"
         apm install $p
     done
+
+    if [ -d ~/home/.atom ]
+    then
+        cp ./home/atom/* ~/.atom/
+    else
+        mkdir ~/.atom
+        cp ./home/atom/* ~/.atom/
+    fi
+
+
 }
 
 #Instala complementos para Brackets IDE
@@ -52,4 +62,10 @@ function instalar_Software() {
 		sleep 1
 		sudo apt install -y $s
 	done
+
+    echo -e "Instalando Atom"
+    atom_install
+
+    echo -e "Instalando Brackets"
+    brackets_install
 }
