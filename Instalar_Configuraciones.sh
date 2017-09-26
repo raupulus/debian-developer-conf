@@ -27,7 +27,7 @@ verde="\033[1;32m"
 #Instala el script de OhMyZSH
 function ohMyZSH() {
 	echo -e "$verde Descargando OhMyZSH$gris"
-	git clone
+	curl -L http://install.ohmyz.sh | sh
 }
 
 #Agregar Archivos de configuración al home
@@ -56,10 +56,31 @@ function programas_default() {
   	#sudo update-alternatives --set x-terminal-emulator /usr/bin/tilix
 }
 
+#Elegir intérprete de comandos
+function terminal() {
+  #chsh -s /bin/zsh
+  while true
+  do
+  	read -p "$verde Introduce el terminal →$rojo bash/zsh $azul" term
+  	case $term in
+		bash)#Establecer bash como terminal
+			chsh -s /bin/bash
+			break;;
+		zsh)#Establecer zsh como terminal
+			chsh -s /bin/zsh
+			break;;
+		*)#Opción errónea
+			echo -e "$rojo Opción no válida"
+			break;;
+	esac
+  done
+}
+
 #Instalar Todas las configuraciones
 function instalar_configuraciones() {
   	agregar_conf_home
 	ohMyZSH
 	permisos
 	programas_default
+	terminal #Pregunta el terminal a usar
 }
