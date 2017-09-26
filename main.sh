@@ -28,6 +28,7 @@ source ./Agregar_Repositorios.sh
 source ./Instalar_Software.sh
 source ./Tipografías.sh
 source ./Instalar_Configuraciones.sh
+source ./Configurar_GIT
 
 while :
 	do
@@ -37,9 +38,9 @@ while :
 		echo -e "   $rojo 0)  $verde Salir"
 		echo -e "   $rojo 1)  $verde Instalar Aplicaciones Básicas y agregar Repositorios"
 		echo -e "   $rojo 2)  $verde Agregar Tipografías"
-		echo -e "   $rojoC 3)  $verdeC Instalar Configuraciones" #Configuración bash, zsh, variables entorno...
-		#echo -e "   $rojoC 4)  $verdeC Configurar GIT"
-		#echo -e "   $rojoC 5)  $verdeC Instalar Servidor Apache+PHP+SQL"
+		echo -e "   $rojo 3)  $verde Instalar Configuraciones" #Configuración bash, zsh, variables entorno...
+		echo -e "   $rojo 4)  $verde Configurar GIT"
+		#echo -e "   $rojo 5)  $verdeC Instalar Servidor Apache+PHP+SQL"
 
 
 	read entrada
@@ -62,6 +63,12 @@ while :
 			clear
 			echo "Instalar Configuraciones"
 			#instalar_configuraciones
+			read -p "Pulsa una tecla para continuar";;
+
+		4)#Configurar GIT
+			clear
+			echo "Configurar GIT"
+			#configuracion_git
 			read -p "Pulsa una tecla para continuar";;
 
 		0)#SALIR
