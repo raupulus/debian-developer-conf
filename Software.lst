@@ -28,7 +28,7 @@ pasystray
 pavucontrol
 network-manager-gnome
 exuberant-ctags
-
-
-
-
+cmake
+python
+python-dev
+composer
