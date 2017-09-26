@@ -23,3 +23,17 @@ verde="\033[1;32m"
 #############################
 ##   Variables Generales   ##
 #############################
+software=$(cat Software.lst)
+
+#Recorrer "Software.lst" Instalando paquetes ahí descritos
+function instalar_Software() {
+	echo "Actualizando listas de Repositorios"
+	sudo apt update
+	echo "Instalando Software adicional"
+	for s in $software
+	do
+		echo -e "$verde Preparando para instalar $rojo$s$gris"
+		sleep 1
+		sudo apt install -y $s
+	done
+}
