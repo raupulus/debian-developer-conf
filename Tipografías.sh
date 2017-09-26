@@ -23,3 +23,15 @@ verde="\033[1;32m"
 #############################
 ##   Variables Generales   ##
 #############################
+
+function agregar_fuentes() {
+	echo "Añadiendo fuentes Tipográficas al sistema"
+	fuentes=$(ls fonts)
+	for f in $fuentes
+	do
+		echo -e "$verde Instalando fuente$magenta →$rojo $f $gris"
+		sleep 1
+		sudo cp ./fonts/$f /usr/local/share/fonts/
+		sleep 1
+	done
+}
