@@ -52,8 +52,6 @@ function powerline() {
 }
 
 function agregar_fuentes() {
-	#powerline
-
 	echo "Añadiendo fuentes Tipográficas al sistema"
 	fuentes=$(ls ./fonts)
 	for f in $fuentes
@@ -69,5 +67,3 @@ function agregar_fuentes() {
 
 	powerline #Llama a la función powerline()
 }
-
-agregar_fuentes
