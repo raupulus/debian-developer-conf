@@ -34,8 +34,14 @@ function agregar_conf_home() {
 	echo -e "$verde Preparando para añadir archivos de configuración en el home de usuario$gris"
 }
 
+#Permisos
+function permisos() {
+    #TODO --> Quitar permios para atom como superusuario
+}
+
 #Instalar Todas las configuraciones
 function instalar_configuraciones() {
-
+    agregar_conf_home
 	ohMyZSH
+	permisos
 }
