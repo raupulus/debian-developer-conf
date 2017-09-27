@@ -32,7 +32,16 @@ function ohMyZSH() {
 
 function configurar_vim() {
 	echo -e "$verde Configurando VIM"
+
+	#Instalar Gestor de Plugins Vundle
+	echo -e "$verde Instalando gestor de plugins$rojo Vundle$gris"
 	git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
+
+	#Instalando Plugins
+	echo | vim +PluginInstall +qall
+
+	cd ~/.vim/bundle/YouCompleteMe
+	./install.py --clang-completer
 }
 
 #Agregar Archivos de configuración al home

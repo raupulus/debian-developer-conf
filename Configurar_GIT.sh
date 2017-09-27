@@ -24,6 +24,7 @@ verde="\033[1;32m"
 ##   Variables Generales   ##
 #############################
 
+DIR_ACTUAL=$(echo $PWD)
 nombre_git=""
 usuario_git=""
 correo_git=""
@@ -36,7 +37,6 @@ function datos_input() {
 
 #Configurar el usuario GIT local
 function configurar_git() {
-	DIR_ACTUAL=$(echo $PWD)
 	cd #Cambio al directorio home para que no de problemas GIT
     git config --global user.name $nombre_git
     git config --global user.email $correo_git
@@ -51,26 +51,32 @@ function configurar_git() {
 
 #Configura el usuario en GITHUB
 function configurar_github() {
+	cd
     git config --global github.name $nombre_git
     #TOFIX →   github-oauth.github.com is not defined.
 	#composer config -g github-oauth.github.com
+
+	cd $DIR_ACTUAL
 }
 
 #Crear TOKEN
 function crear_token() {
+	cd
 	xdg-open "https://github.com/settings/tokens/new?scopes=repo,gist&description=Nuevo_token" >/dev/null 2>&1
-    echo "Vete a $URL para crear un token, pulsa en 'Generate token', cópialo y pégalo aquí"
-	echo "$verde Introduce el TOKEN generado, pulsa INTRO si no deseas usar ninguno"
-	read -p "$verde Token →$rojo " TOKEN
+    echo -e "$verde Vete a$rojo $URL$verde para crear un token, pulsa en 'Generate token', cópialo y pégalo aquí"
+	echo -e "$verde Introduce el TOKEN generado, pulsa$amarillo INTRO$verde si no deseas usar ninguno$gris"
+	read -p " Token → " TOKEN
 
 	if [ -z $TOKEN ]
 	then
 		echo -e "$verde No se usará TOKEN$gris"
 	else
 		echo -e "$verde El token →$rojo $TOKEN$verde se está agregando$gris"
-		git config --global github.user "$usuario_git"
-		git config --global github.token "$TOKEN"
+		git config --global github.user $usuario_git
+		git config --global github.token $TOKEN
 	fi
+
+	cd $DIR_ACTUAL
 }
 
 #Crear Alias dentro de GIT
@@ -82,6 +88,8 @@ function crear_git_alias() {
 }
 
 function configuracion_git() {
+	cd
+
     echo -e "$verde Configurando GIT$gris"
     read -p "Introduce el nombre completo del programador → " nombre_git
 
@@ -118,4 +126,6 @@ function configuracion_git() {
 	#FIXME → Generar datos de conexión con GitHub en ~/.netrc
     #netrc "github.com" $usuario_git $TOKEN
     #netrc "api.github.com" $usuario_git $TOKEN
+
+	cd $DIR_ACTUAL
 }
