@@ -18,3 +18,20 @@ En otras ramas y distribuciones puede romper el sistema, para portarlo no hay de
 Se ha intentado hacer modular de forma que apenas sea necesario tocar los scripts para añadir/quitar funciones.
 
 La idea es que el script pregunte ciertas cosas como shell a usar (bash o zsh) pero también podemos añadir fuentes simplemente copiándolas al directorio "fonts" o instalar aplicaciones simplemente añadiéndolas a la lista de aplicaciones para instalar "Software.lst"
+
+## Ejecutar script
+Primero instalamos GIT
+```debian
+  sudo apt install git
+```
+
+Clonamos el repositorio actual en nuestro equipo
+```GIT
+  git clone https://github.com/fryntiz/preparar_entorno
+```
+
+Entramos y ejecutamos el script principal
+```bash
+  cd preparar_entorno
+  bash main.sh
+```
