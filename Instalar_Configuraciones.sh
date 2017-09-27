@@ -32,6 +32,7 @@ function ohMyZSH() {
 
 function configurar_vim() {
 	echo -e "$verde Configurando VIM"
+	git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
 }
 
 #Agregar Archivos de configuración al home
@@ -87,4 +88,5 @@ function instalar_configuraciones() {
 	permisos
 	programas_default
 	terminal #Pregunta el terminal a usar
+	configurar_vim
 }
