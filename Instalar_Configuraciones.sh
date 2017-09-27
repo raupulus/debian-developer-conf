@@ -41,8 +41,10 @@ function configurar_vim() {
 	#Instalando Plugins
 	echo | vim +PluginInstall +qall
 
+	git clone https://github.com/Valloric/YouCompleteMe ~/.vim/bundle/YouCompleteMe
 	cd ~/.vim/bundle/YouCompleteMe
-	./install.py --clang-completer
+	git submodule update --init --recursive
+	./install.py --clang-completer --omnisharp-completer --gocode-completer
 
 	cd $DIR_ACTUAL
 }
