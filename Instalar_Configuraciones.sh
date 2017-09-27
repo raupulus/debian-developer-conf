@@ -31,6 +31,7 @@ function ohMyZSH() {
 }
 
 function configurar_vim() {
+	DIR_ACTUAL=$(echo $PWD)
 	echo -e "$verde Configurando VIM"
 
 	#Instalar Gestor de Plugins Vundle
@@ -42,6 +43,8 @@ function configurar_vim() {
 
 	cd ~/.vim/bundle/YouCompleteMe
 	./install.py --clang-completer
+
+	cd $DIR_ACTUAL
 }
 
 #Agregar Archivos de configuración al home
