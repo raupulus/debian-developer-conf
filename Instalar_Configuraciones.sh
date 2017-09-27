@@ -42,7 +42,7 @@ function agregar_conf_home() {
 			mv ~/$c ~/$c.BACKUP
 		fi
 		echo -e "$verde Generando configuración$gris"
-		mv ./home/$c ~/$c
+		cp -r ./home/$c ~/$c
 	done
 }
 
