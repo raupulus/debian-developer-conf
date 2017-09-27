@@ -26,6 +26,25 @@ verde="\033[1;32m"
 
 function agregar_llaves() {
 	echo "Instalando llaves de repositorios"
+	sudo apt-get install debian-keyring
+	sudo apt-get install pkg-mozilla-archive-keyring
+	sudo apt-get install deb-multimedia-keyring
+
+	#Multisystem
+	sudo wget -q -O - http://liveusb.info/multisystem/depot/multisystem.asc | sudo apt-key add -
+
+	#Webmin
+	wget http://www.webmin.com/jcameron-key.asc && apt-key add jcameron-key.asc
+
+	#Virtualbox Oficial
+	curl -O https://www.virtualbox.org/download/oracle_vbox_2016.asc
+	sudo apt-key add oracle_vbox_2016.asc
+
+	#Docker
+	sudo apt-key adv --keyserver hkp://p80.pool.sks-keyservers.net:80 --recv-keys F76221572C52609D
+
+	#Mi propio repositorio en launchpad
+	gpg --keyserver keyserver.ubuntu.com --recv-key B5C6D9592512B8CD && gpg -a --export $PUBKRY | sudo apt-key add -
 }
 
 #Añade Repositorios extras a Debian
