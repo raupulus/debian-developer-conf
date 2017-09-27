@@ -17,8 +17,8 @@ deb-src http://ftp.es.debian.org/debian/ stable-updates non-free contrib main
 ##                 STRETCH BACKPORTS                   ##
 ########################################################
 ##### apt-get install debian-keyring
-# deb http://ftp.fr.debian.org/debian/ stretch-backports main contrib non-free
-# deb-src http://ftp.fr.debian.org/debian/ stretch-backports main contrib non-free
+deb http://ftp.fr.debian.org/debian/ stretch-backports main contrib non-free
+deb-src http://ftp.fr.debian.org/debian/ stretch-backports main contrib non-free
 
 
 ########################################################
@@ -64,6 +64,7 @@ deb https://apt.dockerproject.org/repo debian-stretch main
 ##                     FRYNTIZ                        ##
 ########################################################
 ### Mi propio repositorio en Launchpad
+### gpg --keyserver keyserver.ubuntu.com --recv-key B5C6D9592512B8CD && gpg -a --export $PUBKRY | sudo apt-key add -
 # deb http://ppa.launchpad.net/fryntiz/webdevtools/ubuntu/ xenial main
 # deb-src http://ppa.launchpad.net/fryntiz/webdevtools/ubuntu/ xenial main
 # deb http://ppa.launchpad.net/fryntiz/pentesting/ubuntu/ xenial main
