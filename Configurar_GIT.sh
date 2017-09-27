@@ -30,20 +30,30 @@ correo_git=""
 TOKEN=""
 
 function datos_input() {
-    read -p "$verde Introduce el usuario de GITHUB →$rojo " usuario_git
-    read -p "$verde Introduce el correo electronico →$rojo  " correo_git
+    read -p "Introduce el usuario de GITHUB → " usuario_git
+    read -p "Introduce el correo electronico → " correo_git
 }
 
 #Configurar el usuario GIT local
 function configurar_git() {
+	DIR_ACTUAL=$(echo $PWD)
+	cd #Cambio al directorio home para que no de problemas GIT
     git config --global user.name $nombre_git
-    git config --global user.email $usuario_git
+    git config --global user.email $correo_git
+	git config --global core.editor vim
+	git config --global color.ui true
+
+	#Reparar finales de linea que mete la mierda de windows CRLF to LF
+	git config --global core.autocrlf input
+
+	cd $DIR_ACTUAL
 }
 
 #Configura el usuario en GITHUB
 function configurar_github() {
     git config --global github.name $nombre_git
-    composer config -g github-oauth.github.com
+    #TOFIX →   github-oauth.github.com is not defined.
+	#composer config -g github-oauth.github.com
 }
 
 #Crear TOKEN
@@ -73,7 +83,7 @@ function crear_git_alias() {
 
 function configuracion_git() {
     echo -e "$verde Configurando GIT$gris"
-    read -p "$verde Introduce el nombre completo del programador →$rojo " nombre_git
+    read -p "Introduce el nombre completo del programador → " nombre_git
 
     datos_input
 
@@ -99,8 +109,10 @@ function configuracion_git() {
 	crear_git_alias
 
 	echo "Creando entradas en ~/.netrc..."
-    if ![ -f ~/.netrc ]
+    if [ -f ~/.netrc ]
 	then
+		mv ~/.netrc ~/.netrc.BACKUP
+	else
 		touch ~/.netrc
 	fi
 	#FIXME → Generar datos de conexión con GitHub en ~/.netrc

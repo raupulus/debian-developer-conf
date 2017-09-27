@@ -30,6 +30,10 @@ function ohMyZSH() {
 	curl -L http://install.ohmyz.sh | sh
 }
 
+function configurar_vim() {
+	echo -e "$verde Configurando VIM"
+}
+
 #Agregar Archivos de configuración al home
 function agregar_conf_home() {
   	conf=$(ls -A ./home/)
@@ -62,7 +66,7 @@ function programas_default() {
 function terminal() {
   while true
   do
-  	read -p "$verde Introduce el terminal →$rojo bash/zsh $azul" term
+  	read -p "Introduce el terminal → bash/zsh: " term
   	case $term in
 		bash)#Establecer bash como terminal
 			chsh -s /bin/bash
@@ -72,7 +76,6 @@ function terminal() {
 			break;;
 		*)#Opción errónea
 			echo -e "$rojo Opción no válida"
-			break;;
 	esac
   done
 }
