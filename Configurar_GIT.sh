@@ -29,8 +29,8 @@ usuario_git=""
 correo_git=""
 
 function datos_input() {
-    read -p "Introduce el usuario de GITHUB → " usuario_git
-    read -p "Introduce el correo electronico → " correo_git
+    read -p "$verde Introduce el usuario de GITHUB →$rojo " usuario_git
+    read -p "$verde Introduce el correo electronico →$rojo  " correo_git
 }
 
 #Configurar el usuario GIT local
@@ -45,9 +45,20 @@ function configurar_github() {
     composer config -g github-oauth.github.com
 }
 
+#Crear TOKEN
+function crear_token() {
+	read -p "$verde Introduce el TOKEN generado, pulsa INTRO si no deseas usar ninguno" TOKEN
+	if [ -z $TOKEN ]
+	then
+		echo -e "$verde No se usará TOKEN$gris"
+	else
+		echo -e "$verde Generando token con $TOKEN"
+	fi
+}
+
 function configuracion_git() {
     echo -e "$verde Configurando GIT$gris"
-    read -p "Introduce el nombre completo del programador → " nombre_git
+    read -p "$verde Introduce el nombre completo del programador →$rojo " nombre_git
 
     datos_input
 
@@ -55,7 +66,7 @@ function configuracion_git() {
     do
         if [ -z usuario_git ] || [ -z correo_git ]
         then
-            echo -e "$verde No puede estar vacio el usuario y el correo"
+            echo -e "$verde No puede estar vacio el usuario y el correo$gris"
             datos_input
         else
             break
