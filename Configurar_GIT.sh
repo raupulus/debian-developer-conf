@@ -103,6 +103,7 @@ function configuracion_git() {
 	then
 		touch ~/.netrc
 	fi
-    netrc "github.com" $usuario_git $TOKEN
-    netrc "api.github.com" $usuario_git $TOKEN
+	#FIXME → Generar datos de conexión con GitHub en ~/.netrc
+    #netrc "github.com" $usuario_git $TOKEN
+    #netrc "api.github.com" $usuario_git $TOKEN
 }
