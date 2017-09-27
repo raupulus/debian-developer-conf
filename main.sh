@@ -28,7 +28,7 @@ source ./Agregar_Repositorios.sh
 source ./Instalar_Software.sh
 source ./Tipografías.sh
 source ./Instalar_Configuraciones.sh
-source ./Configurar_GIT
+source ./Configurar_GIT.sh
 
 while :
 	do

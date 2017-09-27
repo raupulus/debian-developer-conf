@@ -45,7 +45,7 @@ function powerline() {
 		then
 			echo -e "$verde Instalando fuente$magenta →$rojo $f $gris"
 			sleep 1
-			#sudo cp -r ./fonts/powerline/$f/ /usr/local/share/fonts/
+			sudo cp -r ./fonts/powerline/$f/ /usr/local/share/fonts/
 			sleep 1
 		fi
 	done
@@ -60,7 +60,7 @@ function agregar_fuentes() {
 		then
 			echo -e "$verde Instalando fuente$magenta →$rojo $f $gris"
 			sleep 1
-			#sudo cp -r ./fonts/$f/ /usr/local/share/fonts/
+			sudo cp -r ./fonts/$f/ /usr/local/share/fonts/
 			sleep 1
 		fi
 	done

@@ -28,17 +28,18 @@ atom=$(cat Atom_Paquetes.lst) #Instala Paquetes de Atom
 
 #Instala complementos para Atom IDE
 function atom_install() {
-    echo -e "$verde Preparando instalación complementos Atom"
+    echo -e "$verde Instalando Atom $gris"
+    echo -e "$verde Preparando instalación complementos Atom$gris"
     for p in $atom
     do
-        echo -e "$verde Instalando $p"
+        echo -e "$verde Instalando $p $yellow"
         apm install $p
     done
 }
 
 #Instala complementos para Brackets IDE
 function brackets_install () {
-
+  	echo -e "$verde Preparando para instalar brackets$gris"
 }
 
 #Recorrer "Software.lst" Instalando paquetes ahí descritos
@@ -53,9 +54,9 @@ function instalar_Software() {
 		sudo apt install -y $s
 	done
 
-    echo -e "Instalando Atom"
-    atom_install
+	#Instalar Atom
+	atom_install
 
-    echo -e "Instalando Brackets"
+    #Instalar Brackets
     brackets_install
 }

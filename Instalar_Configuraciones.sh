@@ -32,33 +32,34 @@ function ohMyZSH() {
 
 #Agregar Archivos de configuración al home
 function agregar_conf_home() {
-  	conf=$(ls -lA ./home/)
+  	conf=$(ls -A ./home/)
 	echo -e "$verde Preparando para añadir archivos de configuración en el home de usuario$gris"
 	for c in $conf
 	do
-		if [ -f ~/home/$c ] || [ -d ~/home/$c ] #Si existe hago backup
+		if [ -f ~/$c ] || [ -d ~/$c ] #Si existe hago backup
 		then
-			echo -e "$verde Creando backup de ~/home/$c $gris"
-			mv "~/home/$c" "~/home/$c.BACKUP"
+			echo -e "$verde Creando backup de ~/home/$(whoami)/$c $gris"
+			mv ~/$c ~/$c.BACKUP
 		fi
 		echo -e "$verde Generando configuración$gris"
-		mv "./home/$c" "~/home/$c"
+		mv ./home/$c ~/$c
 	done
 }
 
 #Permisos
 function permisos() {
     #TODO --> Quitar permios para atom como superusuario
+	echo -e "$verde Estableciendo permisos en el sistema$gris"
 }
 
 #Establecer programas por defecto
 function programas_default() {
-  	#sudo update-alternatives --set x-terminal-emulator /usr/bin/tilix
+	echo -e "$verde Estableciendo programas por defecto$gris"
+	#sudo update-alternatives --set x-terminal-emulator /usr/bin/tilix
 }
 
 #Elegir intérprete de comandos
 function terminal() {
-  #chsh -s /bin/zsh
   while true
   do
   	read -p "$verde Introduce el terminal →$rojo bash/zsh $azul" term
