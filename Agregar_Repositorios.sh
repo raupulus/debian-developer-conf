@@ -31,7 +31,9 @@ function agregar_llaves() {
 #Añade Repositorios extras a Debian
 function agregar_repositorios() {
 	echo "Agregando Repositorios"
-	sudo cp ./sources.list.d/* /etc/apt/sources.list.d/
+	sudo cp ./sources.list/sources.list.d/* /etc/apt/sources.list.d/
+	sudo mv /etc/apt/sources.list /etc/apt/sources.list.BACKUP
+	sudo cp ./sources.list/sources.list /etc/apt/sources.list
 	echo "Repositorios Agregados"
 	sleep 1
 
