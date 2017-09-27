@@ -49,26 +49,26 @@ while :
 		1)#Instalar Aplicaciones Básicas
 			clear
 			echo "Instalar Aplicaciones Básicas"
-			#agregar_repositorios
-			#instalar_Software
+			agregar_repositorios
+			instalar_Software
 			read -p "Pulsa una tecla para continuar";;
 
-		2)#Agregar TipografíasC
+		2)#Agregar Tipografías
 			clear
 			echo "Agregar Tipografías"
-			#agregar_fuentes
+			agregar_fuentes
 			read -p "Pulsa una tecla para continuar";;
 
 		3)#Instalar Configuraciones
 			clear
 			echo "Instalar Configuraciones"
-			#instalar_configuraciones
+			instalar_configuraciones
 			read -p "Pulsa una tecla para continuar";;
 
 		4)#Configurar GIT
 			clear
 			echo "Configurar GIT"
-			#configuracion_git
+			configuracion_git
 			read -p "Pulsa una tecla para continuar";;
 
 		0)#SALIR
