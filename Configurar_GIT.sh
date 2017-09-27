@@ -56,6 +56,14 @@ function crear_token() {
 	fi
 }
 
+#Crear Alias dentro de GIT
+function crear_git_alias() {
+	echo -e "$verde Alias para el comando$rojo git lg$gris"
+	git config --global alias.lg "log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit"
+
+	git config --global push.default simple
+}
+
 function configuracion_git() {
     echo -e "$verde Configurando GIT$gris"
     read -p "$verde Introduce el nombre completo del programador →$rojo " nombre_git
@@ -78,4 +86,8 @@ function configuracion_git() {
 
     echo -e "$verde Configurar conexion con GITHUB"
     configurar_github
+
+	crear_token
+
+	crear_git_alias
 }
