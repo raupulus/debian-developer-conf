@@ -32,3 +32,4 @@ cmake
 python
 python-dev
 composer
+tilix
