@@ -27,6 +27,7 @@ verde="\033[1;32m"
 nombre_git=""
 usuario_git=""
 correo_git=""
+TOKEN=""
 
 function datos_input() {
     read -p "$verde Introduce el usuario de GITHUB →$rojo " usuario_git
@@ -41,18 +42,24 @@ function configurar_git() {
 
 #Configura el usuario en GITHUB
 function configurar_github() {
-    git config --global github.name $usuario_git
+    git config --global github.name $nombre_git
     composer config -g github-oauth.github.com
 }
 
 #Crear TOKEN
 function crear_token() {
-	read -p "$verde Introduce el TOKEN generado, pulsa INTRO si no deseas usar ninguno" TOKEN
+	xdg-open "https://github.com/settings/tokens/new?scopes=repo,gist&description=Nuevo_token" >/dev/null 2>&1
+    echo "Vete a $URL para crear un token, pulsa en 'Generate token', cópialo y pégalo aquí"
+	echo "$verde Introduce el TOKEN generado, pulsa INTRO si no deseas usar ninguno"
+	read -p "$verde Token →$rojo " TOKEN
+
 	if [ -z $TOKEN ]
 	then
 		echo -e "$verde No se usará TOKEN$gris"
 	else
-		echo -e "$verde Generando token con $TOKEN"
+		echo -e "$verde El token →$rojo $TOKEN$verde se está agregando$gris"
+		git config --global github.user "$usuario_git"
+		git config --global github.token "$TOKEN"
 	fi
 }
 
@@ -90,4 +97,12 @@ function configuracion_git() {
 	crear_token
 
 	crear_git_alias
+
+	echo "Creando entradas en ~/.netrc..."
+    if ![ -f ~/.netrc ]
+	then
+		touch ~/.netrc
+	fi
+    netrc "github.com" $usuario_git $TOKEN
+    netrc "api.github.com" $usuario_git $TOKEN
 }
