@@ -41,3 +41,4 @@ mono-xbuild
 gocode
 vim-addon-manager
 vim-gocomplete
+golang-go

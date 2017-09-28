@@ -44,7 +44,7 @@ function configurar_vim() {
 	git clone https://github.com/Valloric/YouCompleteMe ~/.vim/bundle/YouCompleteMe
 	cd ~/.vim/bundle/YouCompleteMe
 	git submodule update --init --recursive
-	./install.py --clang-completer --omnisharp-completer --gocode-completer
+	./install.py --clang-completer --gocode-completer
 
 	cd $DIR_ACTUAL
 }
