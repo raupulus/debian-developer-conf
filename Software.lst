@@ -36,3 +36,8 @@ composer
 tilix
 ninja-ide
 python3-dev
+xbuilder
+mono-xbuild
+gocode
+vim-addon-manager
+vim-gocomplete
