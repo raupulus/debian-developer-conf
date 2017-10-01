@@ -1,6 +1,4 @@
-# ~/.bashrc: executed by bash(1) for non-login shells.
-# see /usr/share/doc/bash/examples/startup-files (in the package bash-doc)
-# for examples
+# Version Modificada by |>Fryntiz<| → http://www.fryntiz.es && https://github.com/fryntiz
 
 # If not running interactively, don't do anything
 case $- in
@@ -16,8 +14,8 @@ HISTCONTROL=ignoreboth
 shopt -s histappend
 
 # for setting history length see HISTSIZE and HISTFILESIZE in bash(1)
-HISTSIZE=1000
-HISTFILESIZE=2000
+HISTSIZE=2000
+HISTFILESIZE=8000
 
 # check the window size after each command and, if necessary,
 # update the values of LINES and COLUMNS.
@@ -33,7 +31,7 @@ shopt -s checkwinsize
 # set variable identifying the chroot you work in (used in the prompt below)
 if [ -z "${debian_chroot:-}" ] && [ -r /etc/debian_chroot ]; then
     #debian_chroot=$(cat /etc/debian_chroot)
-    debian_chroot="Fryntiz-->"
+    debian_chroot="$(whoami)-->"
 fi
 
 # set a fancy prompt (non-color, unless we know we "want" color)
@@ -75,7 +73,7 @@ xterm*|rxvt*)
     ;;
 esac
 
-# enable color support of ls and also add handy aliases
+# Habilita el soporte de color para "ls" y algunos alias
 if [ -x /usr/bin/dircolors ]; then
     test -r ~/.dircolors && eval "$(dircolors -b ~/.dircolors)" || eval "$(dircolors -b)"
     alias ls='ls --color=auto'
@@ -87,26 +85,26 @@ if [ -x /usr/bin/dircolors ]; then
     alias egrep='egrep --color=auto'
 fi
 
-# colored GCC warnings and errors
-#export GCC_COLORS='error=01;31:warning=01;35:note=01;36:caret=01;32:locus=01:quote=01'
+# Colorear Errores y Advertencias de GCC
+export GCC_COLORS='error=01;31:warning=01;35:note=01;36:caret=01;32:locus=01:quote=01'
 
-# some more ls aliases
+# ALIAS
 alias ll='ls -l'
 alias la='ls -A'
 alias l='ls -CF'
+alias cd..="cd .."
+alias rm="rm -i"
+alias cp="cp -i"
+alias mv="mv -i"
+alias git="LANG=C git"
+alias glg="git lg"
 
-# Alias definitions.
-# You may want to put all your additions into a separate file like
-# ~/.bash_aliases, instead of adding them here directly.
-# See /usr/share/doc/bash-doc/examples in the bash-doc package.
-
+# Alias importados desde subdirectorio ~/.bash_aliases
 if [ -f ~/.bash_aliases ]; then
     . ~/.bash_aliases
 fi
 
-# enable programmable completion features (you don't need to enable
-# this, if it's already enabled in /etc/bash.bashrc and /etc/profile
-# sources /etc/bash.bashrc).
+# Habilitar Autocompletado, se obtiene de "sources /etc/bash.bashrc)"
 if ! shopt -oq posix; then
   if [ -f /usr/share/bash-completion/bash_completion ]; then
     . /usr/share/bash-completion/bash_completion
@@ -115,19 +113,45 @@ if ! shopt -oq posix; then
   fi
 fi
 
-
-#Compatibilidad con terminal "Tilix"
+# Compatibilidad con terminal "Tilix"
 if [ $TILIX_ID ] || [ $VTE_VERSION ]; then
-        source /etc/profile.d/vte.sh
+	source /etc/profile.d/vte.sh
 fi
 
-#Personalizado al ejecutar en el terminal cada vez que se abre
-neofetch
-echo -e "      \033[1;31m Para utilizar el menú interactivo usa el comando \033[1;32m\"fryntiz\" \033[1;00m"
+#POWERLINE EN BASH
+if [ -f /usr/bin/powerline-daemon ]; then
+  /usr/share/powerline/bindings/bash/powerline.sh -q
+  POWERLINE_BASH_CONTINUATION=1
+  POWERLINE_BASH_SELECT=1
+  . /usr/share/powerline/bindings/bash/powerline.sh
+fi
 
+###################################
+### Mensaje al iniciar terminal ###
+###################################
+if [ -f /usr/bin/neofetch ]; then
+	neofetch
+elif [ -f /usr/bin/screenfetch ]; then
+	screenfetch
+fi
 
+if [ -f /usr/bin/fryntiz ]; then
+	echo -e "      \033[1;31m Para utilizar el menú interactivo usa el comando \033[1;32m\"fryntiz\" \033[1;00m"
+fi
 
-
+###################################
+###     Exportando variables    ###
+###################################
 #Exportar editor de terminal
 export EDITOR="nano -c"
 export GIT_PS1_SHOWDIRTYSTATE=1
+export _JAVA_OPTIONS='-Dawt.useSystemAAFontSettings=on'
+
+# Less Colors for Man Pages
+export LESS_TERMCAP_mb=$'\E[01;31m'       # begin blinking
+export LESS_TERMCAP_md=$'\E[01;38;5;74m'  # begin bold
+export LESS_TERMCAP_me=$'\E[0m'           # end mode
+export LESS_TERMCAP_se=$'\E[0m'           # end standout-mode
+export LESS_TERMCAP_so=$(tput bold; tput setaf 16; tput setab 4)
+export LESS_TERMCAP_ue=$'\E[0m'           # end underline
+export LESS_TERMCAP_us=$'\E[04;38;5;146m' # begin underline
