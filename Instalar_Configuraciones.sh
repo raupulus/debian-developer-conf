@@ -26,8 +26,18 @@ verde="\033[1;32m"
 
 #Instala el script de OhMyZSH
 function ohMyZSH() {
-	#echo -e "$verde Descargando OhMyZSH$gris"
-	#curl -L http://install.ohmyz.sh | sh
+	#Comprobar si ya esta instalado
+	if [ -f ~/.oh-my-zsh/oh-my-zsh.sh ]
+	then
+		echo -e "$verdeYa esta$rojo OhMyZSH$verde instalado para este usuario, omitiendo paso$gris"
+	else
+		REINTENTOS=5
+		echo -e "$verde Descargando OhMyZSH$gris"
+		for (( i=1; i<$REINTENTOS; i++ ))
+		do
+			curl -L http://install.ohmyz.sh | sh && break
+		done
+	fi
 }
 
 #Funcion para configurar VIM con sus temas y complementos
@@ -39,7 +49,7 @@ function configurar_vim() {
 	then #Si existe solo actualiza plugins
 		echo | vim +PluginInstall +qall
 	else #Instala plugins dentro de ~/.vimrc #Se intenta 3 veces
-		for (i=0;i<3;i++)
+		for (( i=0; i<3; i++ ))
 		do
 			git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
 			echo | vim +PluginInstall +qall && break;
