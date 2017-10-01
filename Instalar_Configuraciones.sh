@@ -136,6 +136,23 @@ function programas_default() {
 		echo "$verde Estableciendo terminal por defecto a$rojo XTerm$gris"
 		sudo update-alternatives --set x-terminal-emulator /usr/bin/xterm
 	fi
+
+	#Navegador
+	if [ -f /usr/bin/firefox-esr ]
+	then
+		echo "$verde Estableciendo Navegador WEB por defecto a$rojo Firefox-ESR$gris"
+		sudo update-alternatives --set x-www-browser /usr/bin/firefox-esr
+	elif [ -f /usr/bin/firefox ]
+	then
+		sudo update-alternatives --set x-www-browser /usr/bin/firefox
+	elif [ -f /usr/bin/chromium ]
+	then
+		sudo update-alternatives --set x-www-browser /usr/bin/chromium
+	elif [ -f /usr/bin/chrome ]
+	then
+		sudo update-alternatives --set x-www-browser /usr/bin/chrome
+	if
+
 	#TODO → editor de texto, navegador web, cliente de correo
 }
 
@@ -147,10 +164,10 @@ function terminal() {
 	echo -e "$verde 2) zsh$gris"
   	read -p "Introduce el terminal → bash/zsh: " term
   	case $term in
-		bash || 1)#Establecer bash como terminal
+		bash | 1)#Establecer bash como terminal
 			chsh -s /bin/bash
 			break;;
-		zsh || 2)#Establecer zsh como terminal
+		zsh | 2)#Establecer zsh como terminal
 			chsh -s /bin/zsh
 			break;;
 		*)#Opción errónea
