@@ -26,8 +26,8 @@ verde="\033[1;32m"
 
 #Instala el script de OhMyZSH
 function ohMyZSH() {
-	echo -e "$verde Descargando OhMyZSH$gris"
-	curl -L http://install.ohmyz.sh | sh
+	#echo -e "$verde Descargando OhMyZSH$gris"
+	#curl -L http://install.ohmyz.sh | sh
 }
 
 function configurar_vim() {
@@ -36,15 +36,17 @@ function configurar_vim() {
 
 	#Instalar Gestor de Plugins Vundle
 	echo -e "$verde Instalando gestor de plugins$rojo Vundle$gris"
-	git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
+	if [ -f ~/.vim/bundle/Vundle.vim ]
+	then #Si existe solo actualiza plugins
+		echo | vim +PluginInstall +qall
+	else
+		git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
+		echo | vim +PluginInstall +qall #Instala plugins dentro de ~/.vimrc
 
-	#Instalando Plugins
-	echo | vim +PluginInstall +qall
-
-	git clone https://github.com/Valloric/YouCompleteMe ~/.vim/bundle/YouCompleteMe
-	cd ~/.vim/bundle/YouCompleteMe
-	git submodule update --init --recursive
-	./install.py --clang-completer --gocode-completer
+	#git clone https://github.com/Valloric/YouCompleteMe ~/.vim/bundle/YouCompleteMe
+	#cd ~/.vim/bundle/YouCompleteMe
+	#git submodule update --init --recursive
+	#./install.py --clang-completer --gocode-completer
 
 	cd $DIR_ACTUAL
 }
