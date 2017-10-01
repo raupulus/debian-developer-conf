@@ -34,7 +34,7 @@ function atom_install() {
 	else
 		REINTENTOS=3
 		echo -e "$verde Descargando$rojo ATOM$gris"
-		for (( i=1; i<$REINTENTOS; i++ ))
+		for (( i=1; i<=$REINTENTOS; i++ ))
 		do
 			wget https://atom.io/download/deb && mv deb atom.deb && break
 		done
@@ -58,7 +58,7 @@ function brackets_install () {
 	else
 		REINTENTOS=3
 		echo -e "$verde Descargando$rojo Brackets$gris"
-		for (( i=1; i<$REINTENTOS; i++ ))
+		for (( i=1; i<=$REINTENTOS; i++ ))
 		do
 			wget https://github.com/adobe/brackets/releases/download/release-1.11/Brackets.Release.1.11.64-bit.deb
 		done
@@ -68,12 +68,19 @@ function brackets_install () {
 }
 
 function dbeaver_install() {
-	#TODO → Controlar errores en descarga como en atom y brackets
-	echo -e "$verde Preparando instalacion para DBeaver"
-	#Temporalmente se aplica descarga directa
-	wget https://dbeaver.jkiss.org/files/dbeaver-ce_latest_amd64.deb
-	sudo dpkg -i dbeaver-ce_latest_amd64.deb
-	sudo apt install -f
+	if [ -f /usr/bin/dbeaver ]
+	then
+		echo -e "$verde Ya esta$rojo Dbeaver$verde instalado en el equipo, omitiendo paso$gris"
+	else
+		REINTENTOS=3
+		echo -e "$verde Descargando$rojo Dbeaver$gris"
+		for (( i=1; i<=$REINTENTOS; i++ ))
+		do
+			wget https://dbeaver.jkiss.org/files/dbeaver-ce_latest_amd64.deb && break
+		done
+		echo -e "$verde Preparando para instalar$rojo Dbeaver$gris"
+		sudo dpkg -i dbeaver-ce_latest_amd64.deb && sudo apt install -f
+	fi
 }
 
 function ninjaide_install() {
@@ -83,9 +90,12 @@ function ninjaide_install() {
 	sudo dpkg -i ninja-ide_2.3-2_all.deb
 	sudo apt install -f
 
-	#Resolviendo libreria QtWebKit.so
-	mkdir -p /usr/lib/python2.7/dist-packages/PyQt4/ 2>> /dev/null
-	cp ./LIB/usr/lib/python2.7/dist-packages/PyQt4/QtWebKit.so /usr/lib/python2.7/dist-packages/PyQt4/
+	#Resolviendo libreria QtWebKit.so si no existe
+	if [ ! -f /usr/lib/python2.7/dist-packages/PyQt4/QtWebKit.so ]
+	then
+		sudo mkdir -p /usr/lib/python2.7/dist-packages/PyQt4/ 2>> /dev/null
+		sudo cp ./LIB/usr/lib/python2.7/dist-packages/PyQt4/QtWebKit.so /usr/lib/python2.7/dist-packages/PyQt4/
+	fi
 }
 
 #Recorrer "Software.lst" Instalando paquetes ahí descritos
