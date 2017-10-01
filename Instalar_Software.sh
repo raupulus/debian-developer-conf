@@ -36,6 +36,7 @@ function atom_install() {
 		echo -e "$verde Descargando$rojo ATOM$gris"
 		for (( i=1; i<=$REINTENTOS; i++ ))
 		do
+			rm deb atom.deb 2>> /dev/null
 			wget https://atom.io/download/deb && mv deb atom.deb && break
 		done
 		echo -e "$verde Instalando$rojo Atom $gris"
@@ -60,7 +61,8 @@ function brackets_install () {
 		echo -e "$verde Descargando$rojo Brackets$gris"
 		for (( i=1; i<=$REINTENTOS; i++ ))
 		do
-			wget https://github.com/adobe/brackets/releases/download/release-1.11/Brackets.Release.1.11.64-bit.deb
+			rm Brackets.Release.1.11.64-bit.deb 2>> /dev/null
+			wget https://github.com/adobe/brackets/releases/download/release-1.11/Brackets.Release.1.11.64-bit.deb && break
 		done
 		echo -e "$verde Preparando para instalar$rojo Brackets$gris"
 		sudo dpkg -i Brackets.Release.1.11.64-bit.deb && sudo apt install -f -y
@@ -77,6 +79,7 @@ function dbeaver_install() {
 		echo -e "$verde Descargando$rojo Dbeaver$gris"
 		for (( i=1; i<=$REINTENTOS; i++ ))
 		do
+			rm dbeaver-ce_latest_amd64.deb 2>> /dev/null
 			wget https://dbeaver.jkiss.org/files/dbeaver-ce_latest_amd64.deb && break
 		done
 		echo -e "$verde Preparando para instalar$rojo Dbeaver$gris"
@@ -94,6 +97,7 @@ function ninjaide_install() {
 		echo -e "$verde Descargando$rojo Ninja IDE$gris"
 		for (( i=1; i<=$REINTENTOS; i++ ))
 		do
+			rm ninja-ide_2.3-2_all.deb 2>> /dev/null
 			wget http://ftp.es.debian.org/debian/pool/main/n/ninja-ide/ninja-ide_2.3-2_all.deb && break
 		done
 		echo -e "$verde Preparando para instalar$rojo Ninja IDE$gris"
@@ -113,7 +117,8 @@ function ninjaide_install() {
 function instalar_Software() {
 	echo "Actualizando listas de Repositorios"
 	sudo apt update
-	sudo apt --fix-broken install 2>>/dev/null
+	sudo apt --fix-broken install 2>> /dev/null
+	sudo apt install -f -y 2>> /dev/null
 	echo "Instalando Software adicional"
 	for s in $software
 	do
@@ -128,6 +133,6 @@ function instalar_Software() {
 	dbeaver_install
 	ninjaide_install
 
-	sudo apt --fix-broken install 2>>/dev/null
-	sudo apt install -f -y 2>>/dev/null
+	sudo apt --fix-broken install 2>> /dev/null
+	sudo apt install -f -y 2>> /dev/null
 }
