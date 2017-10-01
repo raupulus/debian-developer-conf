@@ -142,18 +142,41 @@ function programas_default() {
 	then
 		echo "$verde Estableciendo Navegador WEB por defecto a$rojo Firefox-ESR$gris"
 		sudo update-alternatives --set x-www-browser /usr/bin/firefox-esr
+		sudo update-alternatives --set gnome-www-browser /user/bin/firefox-esr
 	elif [ -f /usr/bin/firefox ]
 	then
+		echo "$verde Estableciendo Navegador WEB por defecto a$rojo Firefox$gris"
 		sudo update-alternatives --set x-www-browser /usr/bin/firefox
+		sudo update-alternatives --set gnome-www-browser /user/bin/firefox
 	elif [ -f /usr/bin/chromium ]
 	then
+	echo "$verde Estableciendo Navegador WEB por defecto a$rojo Chromium$gris"
 		sudo update-alternatives --set x-www-browser /usr/bin/chromium
+		sudo update-alternatives --set gnome-www-browser /user/bin/chromium
 	elif [ -f /usr/bin/chrome ]
 	then
+		echo "$verde Estableciendo Navegador WEB por defecto a$rojo chrome$gris"
 		sudo update-alternatives --set x-www-browser /usr/bin/chrome
+		sudo update-alternatives --set gnome-www-browser /user/bin/chrome
 	if
 
-	#TODO → editor de texto, navegador web, cliente de correo
+	#Editor de texto terminal
+	if [ -f /usr/bin/vim.gtk3 ]
+	then
+		echo "$verde Estableciendo Navegador WEB por defecto a$rojo Vim GTK3$gris"
+		sudo update-alternatives --set editor /usr/bin/vim.gtk3
+	elif [ -f /usr/bin/vim ]
+	then
+		echo "$verde Estableciendo Navegador WEB por defecto a$rojo Vim$gris"
+		sudo update-alternatives --set editor /usr/bin/vim
+	elif [ -f /bin/nano ]
+	then
+		echo "$verde Estableciendo Navegador WEB por defecto a$rojo Nano$gris"
+		sudo update-alternatives --set editor /bin/nano
+	fi
+
+
+	#TODO → editor de texto, cliente de correo
 }
 
 #Elegir intérprete de comandos
