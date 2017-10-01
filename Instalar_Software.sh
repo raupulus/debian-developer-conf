@@ -113,6 +113,7 @@ function ninjaide_install() {
 function instalar_Software() {
 	echo "Actualizando listas de Repositorios"
 	sudo apt update
+	sudo apt --fix-broken install 2>>/dev/null
 	echo "Instalando Software adicional"
 	for s in $software
 	do
@@ -126,4 +127,7 @@ function instalar_Software() {
     brackets_install
 	dbeaver_install
 	ninjaide_install
+
+	sudo apt --fix-broken install 2>>/dev/null
+	sudo apt install -f -y 2>>/dev/null
 }
