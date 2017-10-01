@@ -115,11 +115,11 @@ function ninjaide_install() {
 
 #Recorrer "Software.lst" Instalando paquetes ahí descritos
 function instalar_Software() {
-	echo "Actualizando listas de Repositorios"
+	echo -e "$verde Actualizando listas de$rojo Repositorios$gris"
 	sudo apt update
 	sudo apt --fix-broken install 2>> /dev/null
 	sudo apt install -f -y 2>> /dev/null
-	echo "Instalando Software adicional"
+	echo -e "$verde Instalando Software adicional$gris"
 	for s in $software
 	do
 		echo -e "$verde Preparando para instalar $rojo$s$gris"
