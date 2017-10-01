@@ -29,7 +29,7 @@ function ohMyZSH() {
 	#Comprobar si ya esta instalado
 	if [ -f ~/.oh-my-zsh/oh-my-zsh.sh ]
 	then
-		echo -e "$verdeYa esta$rojo OhMyZSH$verde instalado para este usuario, omitiendo paso$gris"
+		echo -e "$verde Ya esta$rojo OhMyZSH$verde instalado para este usuario, omitiendo paso$gris"
 	else
 		REINTENTOS=5
 		echo -e "$verde Descargando OhMyZSH$gris"
