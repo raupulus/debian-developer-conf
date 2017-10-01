@@ -52,14 +52,23 @@ function atom_install() {
 
 #Instala complementos para Brackets IDE
 function brackets_install () {
-  	echo -e "$verde Preparando para instalar brackets$gris"
-	#Temporalmente se aplica descarga directa
-	wget https://github.com/adobe/brackets/releases/download/release-1.11/Brackets.Release.1.11.64-bit.deb
-	sudo dpkg -i Brackets.Release.1.11.64-bit.deb
-	sudo apt install -f
+	if [ -f /usr/bin/brackets ]
+	then
+		echo -e "$verde Ya esta$rojo Brackets$verde instalado en el equipo, omitiendo paso$gris"
+	else
+		REINTENTOS=3
+		echo -e "$verde Descargando$rojo Brackets$gris"
+		for (( i=1; i<$REINTENTOS; i++ ))
+		do
+			wget https://github.com/adobe/brackets/releases/download/release-1.11/Brackets.Release.1.11.64-bit.deb
+		done
+		echo -e "$verde Preparando para instalar$rojo Brackets$gris"
+		sudo dpkg -i Brackets.Release.1.11.64-bit.deb && sudo apt install -f
+	fi
 }
 
 function dbeaver_install() {
+	#TODO → Controlar errores en descarga como en atom y brackets
 	echo -e "$verde Preparando instalacion para DBeaver"
 	#Temporalmente se aplica descarga directa
 	wget https://dbeaver.jkiss.org/files/dbeaver-ce_latest_amd64.deb
@@ -68,6 +77,7 @@ function dbeaver_install() {
 }
 
 function ninjaide_install() {
+	#TODO → Controlar errores en descarga como en atom y brackets
 	echo -e "$verde Preparando instalacion para Ninja IDE"
 	wget http://ftp.es.debian.org/debian/pool/main/n/ninja-ide/ninja-ide_2.3-2_all.deb
 	sudo dpkg -i ninja-ide_2.3-2_all.deb
