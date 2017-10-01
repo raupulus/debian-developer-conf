@@ -30,10 +30,9 @@ function ohMyZSH() {
 	#curl -L http://install.ohmyz.sh | sh
 }
 
+#Funcion para configurar VIM con sus temas y complementos
 function configurar_vim() {
-	DIR_ACTUAL=$(echo $PWD)
 	echo -e "$verde Configurando VIM"
-
 	#Instalar Gestor de Plugins Vundle
 	echo -e "$verde Instalando gestor de plugins$rojo Vundle$gris" && sleep 2
 	if [ -f ~/.vim/bundle/Vundle.vim ]
@@ -46,10 +45,11 @@ function configurar_vim() {
 			echo | vim +PluginInstall +qall && break;
 		done
 	fi
+	cd $DIR_ACTUAL
 
 	#funcion para instalar todos los plugins
 	function vim_plugins() {
-		plugins_vim="powerline,youcompleteme,xmledit,autopep8,python-jedi,python-indent"
+		plugins_vim="powerline,youcompleteme,xmledit,autopep8,python-jedi,python-indent,utilsinps"
 		for plugin in $plugins_vim
 		do
 			echo -e "Activando el plugin  → $rojo $plugin$yellow" && sleep 2
@@ -76,13 +76,6 @@ function configurar_vim() {
 
 	vim_plugins
 	vim_colores
-
-	#git clone https://github.com/Valloric/YouCompleteMe ~/.vim/bundle/YouCompleteMe
-	#cd ~/.vim/bundle/YouCompleteMe
-	#git submodule update --init --recursive
-	#./install.py --clang-completer --gocode-completer
-
-	cd $DIR_ACTUAL
 }
 
 #Agregar Archivos de configuración al home
@@ -115,7 +108,25 @@ function permisos() {
 #Establecer programas por defecto
 function programas_default() {
 	echo -e "$verde Estableciendo programas por defecto$gris"
-	#sudo update-alternatives --set x-terminal-emulator /usr/bin/tilix
+
+	#TERMINAl
+	if [ -f /usr/bin/tilix ]
+	then
+		echo "$verde Estableciendo terminal por defecto a$rojo Tilix$gris"
+		sudo update-alternatives --set x-terminal-emulator /usr/bin/tilix
+	elif [ -f /usr/bin/terminator ]
+	then
+		echo "$verde Estableciendo terminal por defecto a$rojo Terminator$gris"
+		sudo update-alternatives --set x-terminal-emulator /usr/bin/terminator
+	elif [ -f /usr/bin/sakura ]
+	then
+		echo "$verde Estableciendo terminal por defecto a$rojo Sakura$gris"
+		sudo update-alternatives --set x-terminal-emulator /usr/bin/sakura
+	else
+		echo "$verde Estableciendo terminal por defecto a$rojo XTerm$gris"
+		sudo update-alternatives --set x-terminal-emulator /usr/bin/xterm
+	fi
+	#TODO → editor de texto, navegador web, cliente de correo
 }
 
 #Elegir intérprete de comandos
