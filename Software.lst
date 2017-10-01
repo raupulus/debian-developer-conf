@@ -77,8 +77,6 @@ vim-autopep8
 vim-ctrlp
 vim-syntastic
 vim-scripts
-
-
 python-bottle
 python-jedi
 python-ipaddress
@@ -129,3 +127,4 @@ rubygems-integration
 pyflakes
 pyflakes3
 libxml-writer-perl
+gvfs-bin
