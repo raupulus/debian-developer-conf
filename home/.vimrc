@@ -1,8 +1,25 @@
 set nocompatible
 filetype off
+syntax on
+set expandtab
+set tabstop=4
+retab
+set shiftwidth=4
+set hlsearch
+set paste
+set ic
+color monokai
+colorshceme monokai
+set number
+set laststatus=2
+set encoding=utf-8
+filetype plugin indent on
+set fdm=syntax
+
 set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
 Plugin 'VundleVim/Vundle.vim'
+Plugin 'vim-airline/vim-airline-themes'
 Plugin 'seebi/dircolors-solarized'
 Plugin 'terryma/vim-multiple-cursors'
 Plugin 'christoomey/vim-tmux-navigator'
@@ -27,32 +44,7 @@ Plugin 'lifepillar/pgsql.vim'
 Plugin 'ivalkeen/vim-simpledb'
 Plugin 'von-forks/vim-bracketed-paste'
 call vundle#end()
-filetype plugin indent on
-syntax on
-set fdm=syntax
 
-python from powerline.vim import setup as powerline_setup
-python powerline_setup()
-python del powerline_setup
-set laststatus=2
-set t_Co=256
-
-let g:solarized_termcolors=256
-let g:solarized_termtrans=1
-let g:solarized_degrade=1
-let g:solarized_contrast="high"
-let g:solarized_visibility="low"
-set background=dark
-colorscheme solarized
-" highlight Normal ctermbg=NONE guibg=Black
-" highlight NonText ctermbg=NONE guibg=Black
-" highlight ExtraWhiteSpace ctermbg=16 guibg=Black
-" highlight rubyDefine ctermbg=NONE guibg=Black
-" autocmd BufWinEnter * match ExtraWhiteSpace /\t/
-set guifont=Input\ Semi-Condensed\ 13
-
-set nocompatible                " choose no compatibility with legacy vi
-set encoding=utf-8
 set showcmd                     " display incomplete commands
 
 set foldlevelstart=20           " se empieza con todos los pliegues desplegados
@@ -90,12 +82,6 @@ set textwidth=0
 set colorcolumn=80
 set autoindent
 set smarttab
-
-" Desactivo estas opciones por cuestiones de eficiencia:
-" set relativenumber
-" set cursorline
-
-set number
 set scrolloff=3
 
 " <Esc> pasa a modo Normal inmediatamente:
@@ -205,4 +191,3 @@ let g:UltiSnipsListSnippets = "<c-l>"
 nmap <F8> :TagbarToggle<CR>
 
 let g:sql_type_default = 'pgsql'
-
