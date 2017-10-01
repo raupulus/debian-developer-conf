@@ -28,17 +28,24 @@ atom=$(cat Atom_Paquetes.lst) #Instala Paquetes de Atom
 
 #Instala complementos para Atom IDE
 function atom_install() {
-    echo -e "$verde Instalando Atom $gris"
-	#Temporalmente se aplica descarga directa
-	wget https://atom.io/download/deb
-	mv deb atom.deb
-	sudo dpkg -i atom.deb
-	sudo apt install -f -y
+	if [ -f /usr/bin/atom ]
+	then
+		echo -e "$verde Ya esta$rojo ATOM$verde instalado en el equipo, omitiendo paso$gris"
+	else
+		REINTENTOS=3
+		echo -e "$verde Descargando$rojo ATOM$gris"
+		for (( i=1; i<$REINTENTOS; i++ ))
+		do
+			wget https://atom.io/download/deb && mv deb atom.deb && break
+		done
+		echo -e "$verde Instalando$rojo Atom $gris"
+		sudo dpkg -i atom.deb && sudo apt install -f -y
+	fi
 
-    echo -e "$verde Preparando instalación complementos Atom$gris"
+    echo -e "$verde Preparando instalación complementos$rojo Atom$gris"
     for p in $atom
     do
-        echo -e "$verde Instalando $p $yellow"
+        echo -e "$verde Instalando$rojo $p $yellow"
         apm install $p
     done
 }
