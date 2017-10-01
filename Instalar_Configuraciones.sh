@@ -175,8 +175,8 @@ function programas_default() {
 		sudo update-alternatives --set editor /bin/nano
 	fi
 
-
 	#TODO → editor de texto, cliente de correo
+	#x-window-manager
 }
 
 #Elegir intérprete de comandos
