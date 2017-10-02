@@ -34,8 +34,9 @@ function ohMyZSH() {
 		echo -e "$verde Descargando OhMyZSH$gris"
 		for (( i=1; i<=$REINTENTOS; i++ ))
 		do
+            ###TOFIX → Reparar script que sale mal: contraseña PAM y error (no continua por eso)
 			rm -R ~/.oh-my-zsh 2>> /dev/null
-			curl -L http://install.ohmyz.sh | sh && break
+			curl -L http://install.ohmyz.sh | sh && break || break
 		done
 	fi
 }
@@ -77,7 +78,7 @@ function configurar_vim() {
 	fi
 	cd $DIR_ACTUAL
 
-	#funcion para instalar todos los plugins
+	#Funcion para instalar todos los plugins
 	function vim_plugins() {
 		plugins_vim=("powerline" "youcompleteme" "xmledit" "autopep8" "python-jedi" "python-indent" "utilsinps")
 		for plugin in ${plugins_vim[*]}

@@ -115,16 +115,16 @@ function ninjaide_install() {
 
 #Recorrer "Software.lst" Instalando paquetes ahí descritos
 function instalar_Software() {
-	echo -e "$verde Actualizando listas de$rojo Repositorios$gris"
-	sudo apt update
+	echo -e "$verde Actualizando listas de$rojo Repositorios$verde (Paciencia)$gris"
+	sudo apt update >> /dev/null 2>> /dev/null
+    echo -e "$verde Comprobando estado del$rojo Gestor de paquetes$verde (Paciencia)$gris"
 	sudo apt --fix-broken install 2>> /dev/null
 	sudo apt install -f -y 2>> /dev/null
 	echo -e "$verde Instalando Software adicional$gris"
 	for s in $software
 	do
 		echo -e "$verde Preparando para instalar $rojo$s$gris"
-		sleep 1
-		sudo apt install -y $s
+		sudo apt install -y $s && echo -e "$rojo $s instalado correctamente" || echo -e "$rojo $s No se ha instalado"
 	done
 
 	#Instalaciones de software independiente
