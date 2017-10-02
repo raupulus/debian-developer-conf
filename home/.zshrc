@@ -64,13 +64,6 @@ source $ZSH/oh-my-zsh.sh
 # You may need to manually set your language environment
 # export LANG=en_US.UTF-8
 
-# Preferred editor for local and remote sessions
-# if [[ -n $SSH_CONNECTION ]]; then
-export EDITOR="vim"
-# else
-#   export EDITOR='mvim'
-# fi
-
 # Compilation flags
 # export ARCHFLAGS="-arch x86_64"
 
@@ -112,3 +105,21 @@ alias mv="mv -i"
 alias git="LANG=C git"
 alias glg="git lg"
 
+###################################
+### Mensaje al iniciar terminal ###
+###################################
+if [ -f /usr/bin/neofetch ]; then
+	neofetch
+elif [ -f /usr/bin/screenfetch ]; then
+	screenfetch
+fi
+
+if [ -f /usr/bin/fryntiz ]; then
+	echo -e "      \033[1;31m Para utilizar el menú interactivo usa el comando \033[1;32m\"fryntiz\" \033[1;00m"
+fi
+
+###################################
+###     Exportando variables    ###
+###################################
+#Exportar editor de terminal
+export EDITOR="vim"

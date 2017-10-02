@@ -31,15 +31,15 @@ correo_git=""
 TOKEN=""
 
 function datos_input() {
-    read -p "Introduce el usuario de GITHUB → " usuario_git
-    read -p "Introduce el correo electronico → " correo_git
+    read -p "Introduce el usuario de GITHUB → " "usuario_git"
+    read -p "Introduce el correo electronico → " "correo_git"
 }
 
 #Configurar el usuario GIT local
 function configurar_git() {
 	cd #Cambio al directorio home para que no de problemas GIT
-    git config --global user.name $nombre_git
-    git config --global user.email $correo_git
+    git config --global user.name "$nombre_git"
+    git config --global user.email "$correo_git"
 	git config --global core.editor vim
 	git config --global color.ui true
 
@@ -52,7 +52,8 @@ function configurar_git() {
 #Configura el usuario en GITHUB
 function configurar_github() {
 	cd
-    git config --global github.name $nombre_git
+    git config --global github.name "$nombre_git"
+    git config --global github.user "$usuario_git"
     #TOFIX →   github-oauth.github.com is not defined.
 	#composer config -g github-oauth.github.com
 
@@ -72,7 +73,6 @@ function crear_token() {
 		echo -e "$verde No se usará TOKEN$gris"
 	else
 		echo -e "$verde El token →$rojo $TOKEN$verde se está agregando$gris"
-		git config --global github.user $usuario_git
 		git config --global github.token $TOKEN
 	fi
 
