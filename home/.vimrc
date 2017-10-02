@@ -9,7 +9,7 @@ set hlsearch
 set paste
 set ic
 color monokai
-colorshceme monokai
+colorscheme monokai
 set number
 set laststatus=2
 set encoding=utf-8

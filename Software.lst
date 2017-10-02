@@ -1,4 +1,9 @@
 zsh
+zsh-antigen
+bash
+bash-completion
+powerline
+vim
 vim-nox
 curl
 wget
@@ -7,6 +12,7 @@ git
 build-essential
 python-pygments
 sakura
+terminator
 i3
 i3wm
 nitrogen
@@ -110,6 +116,7 @@ nodejs
 flake8
 rake
 ruby
+bundler
 ycmd
 tk
 erlang-base
