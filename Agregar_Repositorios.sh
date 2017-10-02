@@ -56,6 +56,8 @@ function agregar_llaves() {
 
 #Añade Repositorios extras a Debian
 function agregar_repositorios() {
+    sudo apt update
+    sudo apt install apt-transport-https
 	echo -e "$verde Agregando Repositorios$gris"
 	sudo cp ./sources.list/sources.list.d/* /etc/apt/sources.list.d/ 2>> /dev/null
 	sudo mv /etc/apt/sources.list /etc/apt/sources.list.BACKUP 2>> /dev/null
