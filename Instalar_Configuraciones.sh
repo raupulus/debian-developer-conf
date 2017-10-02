@@ -79,8 +79,8 @@ function configurar_vim() {
 
 	#funcion para instalar todos los plugins
 	function vim_plugins() {
-		plugins_vim="powerline,youcompleteme,xmledit,autopep8,python-jedi,python-indent,utilsinps"
-		for plugin in $plugins_vim
+		plugins_vim=("powerline" "youcompleteme" "xmledit" "autopep8" "python-jedi" "python-indent" "utilsinps")
+		for plugin in ${plugins_vim[*]}
 		do
 			echo -e "Activando el plugin  → $rojo $plugin$yellow" && sleep 2
 			vim-addon-manager install $plugin
