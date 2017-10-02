@@ -47,12 +47,32 @@ function configurar_vim() {
 	echo -e "$verde Instalando gestor de plugins$rojo Vundle$gris" && sleep 2
 	if [ -f ~/.vim/bundle/Vundle.vim ]
 	then #Si existe solo actualiza plugins
-		echo | vim +PluginInstall +qall
+		echo | vim +PluginInstall +qall || rm -R ~/.vim/bundle/Vundle.vim #Si falla borra dir
+		if [ ! -f ~/.vim/bundle/Vundle.vim ] #Comprueba si se ha borrado para rehacer
+		then
+			for (( i=1; i<=3; i++ ))
+			do
+				git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
+				echo | vim +PluginInstall +qall && break;
+				if [ $i -eq 3 ]
+				then
+					rm -R ~/.vim/bundle/Vundle.vim
+					git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
+					echo | vim +PluginInstall +qall && break;
+				fi
+			done
+		fi
 	else #Instala plugins dentro de ~/.vimrc #Se intenta 3 veces
-		for (( i=0; i<3; i++ ))
+		for (( i=1; i<=3; i++ ))
 		do
 			git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
 			echo | vim +PluginInstall +qall && break;
+			if [ $i -eq 3 ]
+			then
+				rm -R ~/.vim/bundle/Vundle.vim
+				git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
+				echo | vim +PluginInstall +qall && break;
+			fi
 		done
 	fi
 	cd $DIR_ACTUAL
@@ -158,7 +178,7 @@ function programas_default() {
 		echo -e "$verde Estableciendo Navegador WEB por defecto a$rojo chrome$gris"
 		sudo update-alternatives --set x-www-browser /usr/bin/chrome
 		sudo update-alternatives --set gnome-www-browser /user/bin/chrome
-	if
+	fi
 
 	#Editor de texto terminal
 	if [ -f /usr/bin/vim.gtk3 ]
