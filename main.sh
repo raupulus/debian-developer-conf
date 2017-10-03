@@ -29,6 +29,7 @@ source ./Instalar_Software.sh
 source ./Tipografías.sh
 source ./Instalar_Configuraciones.sh
 source ./Configurar_GIT.sh
+source ./Personalización_GTK.sh
 
 while :
 	do
@@ -70,6 +71,11 @@ while :
 			echo "Configurar GIT"
 			configuracion_git
 			read -p "Pulsa una tecla para continuar";;
+        5)#Configurar GIT
+			clear
+			echo "Personalizar"
+			personalizar
+			read -p "Pulsa una tecla para continuar";;
 
 		0)#SALIR
 			clear
@@ -81,5 +87,5 @@ while :
 			clear
 			echo ""
 			echo -e "                      $rojo ATENCIÓN: Elección no válida$gris"
-esac
+    esac
 done
