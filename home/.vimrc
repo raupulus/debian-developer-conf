@@ -15,7 +15,7 @@ set laststatus=2
 set encoding=utf-8
 filetype plugin indent on
 set fdm=syntax
-
+set foldlevelstart=20
 set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
 Plugin 'VundleVim/Vundle.vim'

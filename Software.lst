@@ -1,5 +1,6 @@
 zsh
 zsh-antigen
+zsh-syntax-highlighting
 bash
 bash-completion
 powerline
@@ -136,3 +137,5 @@ pyflakes
 pyflakes3
 libxml-writer-perl
 gvfs-bin
+gedit
+gedit-plugins

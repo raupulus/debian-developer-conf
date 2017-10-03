@@ -46,7 +46,7 @@ function atom_install() {
     echo -e "$verde Preparando instalación complementos$rojo Atom$gris"
     for p in $atom
     do
-        echo -e "$verde Instalando$rojo $p $yellow"
+        echo -e "$verde Instalando$rojo $p $amarillo"
         apm install $p
     done
 }
@@ -124,7 +124,7 @@ function instalar_Software() {
 	for s in $software
 	do
 		echo -e "$verde Preparando para instalar $rojo$s$gris"
-		sudo apt install -y $s && echo -e "$rojo $s instalado correctamente" || echo -e "$rojo $s No se ha instalado"
+		sudo apt install -y $s >> /dev/null 2>> /dev/null && echo -e "$rojo $s$verde instalado correctamente" || echo -e "$rojo $s$verde No se ha instalado"
 	done
 
 	#Instalaciones de software independiente

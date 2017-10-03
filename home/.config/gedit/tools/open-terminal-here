@@ -1,0 +1,14 @@
+#!/bin/sh
+# [Gedit Tool]
+# Output=output-panel
+# Comment=Abrir un terminal en la ubicación del documento
+# Applicability=always
+# Name=Abrir terminal aquí
+# Save-files=nothing
+# Shortcut=<Primary><Alt>t
+# Languages=
+# Input=nothing
+
+
+#TODO: use "gconftool-2 -g /desktop/gnome/applications/terminal/exec"
+tilix --working-directory="$GEDIT_CURRENT_DOCUMENT_DIR" &
