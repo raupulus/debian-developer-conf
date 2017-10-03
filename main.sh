@@ -43,8 +43,8 @@ while :
 		echo -e "   $rojo 3)  $verde Instalar Configuraciones$gris" #Configuración bash, zsh, variables entorno...
 		echo -e "   $rojo 4)  $verde Configurar GIT$gris"
 		echo -e "   $rojo 5)  $verde Personalizar Sistema y GTK$amarillo (No completado)$gris"
-		echo -e "   $rojo 6)  $verdeC Instalar Servidores Apache → PHP → SQL (No completado)$gris"
-		echo -e "   $rojo 7)  $verdeC Ejecutar todos los pasos anteriores$gris"
+		echo -e "   $rojo 6)  $verde Instalar Servidores Apache → PHP → SQL$amarillo (No completado)$gris"
+		echo -e "   $rojo 7)  $verde Ejecutar todos los pasos anteriores$gris"
 
 
 	read entrada
