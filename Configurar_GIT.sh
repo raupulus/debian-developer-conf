@@ -60,6 +60,22 @@ function configurar_github() {
 	cd $DIR_ACTUAL
 }
 
+function configurar_netrc() {
+    if [ -f ~/.netrc ]
+	then
+		mv ~/.netrc ~/.netrc.BACKUP
+	else
+		touch ~/.netrc
+	fi
+
+    echo "machine github.com" > ~/.netrc
+    echo "  login $usuario_git" >> ~/.netrc
+    echo "  login $TOKEN" >> ~/.netrc
+    echo "machine api.github.com" > ~/.netrc
+    echo "  login $usuario_git" >> ~/.netrc
+    echo "  login $TOKEN" >> ~/.netrc
+}
+
 #Crear TOKEN
 function crear_token() {
 	cd
@@ -111,21 +127,9 @@ function configuracion_git() {
 
     echo -e "$verde Configurar conexion con GITHUB"
     configurar_github
-
 	crear_token
-
+    configurar_netrc
 	crear_git_alias
-
-	echo "Creando entradas en ~/.netrc..."
-    if [ -f ~/.netrc ]
-	then
-		mv ~/.netrc ~/.netrc.BACKUP
-	else
-		touch ~/.netrc
-	fi
-	#FIXME → Generar datos de conexión con GitHub en ~/.netrc
-    #netrc "github.com" $usuario_git $TOKEN
-    #netrc "api.github.com" $usuario_git $TOKEN
 
 	cd $DIR_ACTUAL
 }
