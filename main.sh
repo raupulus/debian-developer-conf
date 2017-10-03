@@ -30,6 +30,7 @@ source ./Tipografías.sh
 source ./Instalar_Configuraciones.sh
 source ./Configurar_GIT.sh
 source ./Personalización_GTK.sh
+source ./Servidores.sh
 
 while :
 	do
@@ -83,7 +84,7 @@ while :
         6)#Servidores
 			clear
 			echo -e "$verde Instalando servidores Apache → PHP → SQL$gris"
-			#
+			instalar_servidores
 			read -p "Pulsa una tecla para continuar";;
 
         7)#Todas configuraciones
@@ -95,6 +96,7 @@ while :
             instalar_configuraciones
             configuracion_git
             personalizar
+            instalar_servidores
 			read -p "Pulsa una tecla para continuar";;
 
 		0)#SALIR
