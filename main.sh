@@ -36,12 +36,14 @@ while :
 		sleep 1
 		clear
 		echo ""
-		echo -e "   $rojo 0)  $verde Salir"
-		echo -e "   $rojo 1)  $verde Instalar Aplicaciones Básicas y agregar Repositorios"
-		echo -e "   $rojo 2)  $verde Agregar Tipografías"
-		echo -e "   $rojo 3)  $verde Instalar Configuraciones" #Configuración bash, zsh, variables entorno...
-		echo -e "   $rojo 4)  $verde Configurar GIT"
-		#echo -e "   $rojo 5)  $verdeC Instalar Servidor Apache+PHP+SQL"
+		echo -e "   $rojo 0)  $verde Salir$gris"
+		echo -e "   $rojo 1)  $verde Instalar Aplicaciones Básicas y agregar Repositorios$gris"
+		echo -e "   $rojo 2)  $verde Agregar Tipografías$gris"
+		echo -e "   $rojo 3)  $verde Instalar Configuraciones$gris" #Configuración bash, zsh, variables entorno...
+		echo -e "   $rojo 4)  $verde Configurar GIT$gris"
+		echo -e "   $rojo 5)  $verde Personalizar Sistema y GTK$gris"
+		echo -e "   $rojo 6)  $verdeC Instalar Servidores Apache → PHP → SQL$gris"
+		echo -e "   $rojo 7)  $verdeC Ejecutar todos los pasos anteriores$gris"
 
 
 	read entrada
@@ -49,39 +51,57 @@ while :
 
 		1)#Instalar Aplicaciones Básicas
 			clear
-			echo "Instalar Aplicaciones Básicas"
+			echo -e "$verde Instalar Aplicaciones Básicas$gris"
 			agregar_repositorios
 			instalar_Software
 			read -p "Pulsa una tecla para continuar";;
 
 		2)#Agregar Tipografías
 			clear
-			echo "Agregar Tipografías"
+			echo -e "$verde Agregar Tipografías$gris"
 			agregar_fuentes
 			read -p "Pulsa una tecla para continuar";;
 
 		3)#Instalar Configuraciones
 			clear
-			echo "Instalar Configuraciones"
+			echo -e "$verde Instalar Configuraciones$gris"
 			instalar_configuraciones
 			read -p "Pulsa una tecla para continuar";;
 
 		4)#Configurar GIT
 			clear
-			echo "Configurar GIT"
+			echo -e "$verde Configurar GIT$gris"
 			configuracion_git
 			read -p "Pulsa una tecla para continuar";;
-        5)#Configurar GIT
+
+        5)#Personalizar GTK
 			clear
-			echo "Personalizar"
+			echo -e "$verde Personalizar Entorno t GTK$gris"
 			personalizar
+			read -p "Pulsa una tecla para continuar";;
+
+        6)#Servidores
+			clear
+			echo -e "$verde Instalando servidores Apache → PHP → SQL$gris"
+			#
+			read -p "Pulsa una tecla para continuar";;
+
+        7)#Todas configuraciones
+			clear
+			echo -e "$verde Preparando para aplicar todas las configuraciones en serie$gris"
+			agregar_repositorios
+            instalar_Software
+            agregar_fuentes
+            instalar_configuraciones
+            configuracion_git
+            personalizar
 			read -p "Pulsa una tecla para continuar";;
 
 		0)#SALIR
 			clear
 			echo -e "$rojo Se sale del menú$gris"
 			echo ""
-			exit 1;;
+			exit 0;;
 
 		*)#Opción no válida
 			clear
