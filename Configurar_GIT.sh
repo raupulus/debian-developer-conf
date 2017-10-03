@@ -71,7 +71,7 @@ function configurar_netrc() {
     echo "machine github.com" > ~/.netrc
     echo "  login $usuario_git" >> ~/.netrc
     echo "  login $TOKEN" >> ~/.netrc
-    echo "machine api.github.com" > ~/.netrc
+    echo "machine api.github.com" >> ~/.netrc
     echo "  login $usuario_git" >> ~/.netrc
     echo "  login $TOKEN" >> ~/.netrc
 }
