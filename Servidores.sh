@@ -47,6 +47,7 @@ function server_php() {
 
     function instalar_php() {
     echo -e "$verde Instalando Apache 2$gris"
+        sudo apt install php libapache2-mod-php php-cli php-pgsql php-sqlite3 sqlite php-intl php-mbstring php-gd php-curl php-xml php-xdebug php-json
     }
 
     function configurar_php() {
