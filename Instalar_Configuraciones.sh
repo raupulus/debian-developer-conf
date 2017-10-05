@@ -228,4 +228,6 @@ function instalar_configuraciones() {
 	programas_default
 	terminal #Pregunta el terminal a usar
 	configurar_vim
+
+    sudo update-command-not-found
 }
