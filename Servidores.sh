@@ -46,16 +46,16 @@ function server_apache() {
 function server_php() {
 
     function instalar_php() {
-    echo -e "$verde Instalando Apache 2$gris"
+    echo -e "$verde Instalando PHP 2$gris"
         sudo apt install php libapache2-mod-php php-cli php-pgsql php-sqlite3 sqlite php-intl php-mbstring php-gd php-curl php-xml php-xdebug php-json
     }
 
     function configurar_php() {
-    echo -e "$verde Preparando configuracion de Apache 2$gris"
+    echo -e "$verde Preparando configuracion de PHP 2$gris"
     }
 
     function personalizar_php() {
-    echo -e "$verde Personalizando Apache 2$gris"
+    echo -e "$verde Personalizando PHP 2$gris"
     }
 
     instalar_php
@@ -66,15 +66,18 @@ function server_php() {
 function server_sql() {
 
     function instalar_sql() {
-    echo -e "$verde Instalando Apache 2$gris"
+    echo -e "$verde Instalando SQL 2$gris"
+        sudo apt install postgresql postgresql-client postgresql-contrib postgresql-all
     }
 
     function configurar_sql() {
-    echo -e "$verde Preparando configuracion de Apache 2$gris"
+    echo -e "$verde Preparando configuracion de SQL 2$gris"
     }
 
     function personalizar_sql() {
-    echo -e "$verde Personalizando Apache 2$gris"
+    echo -e "$verde Personalizando SQL 2$gris"
+        #sudo -u postgres createdb basedatos #Crea la base de datos basedatos
+        #sudo -u postgres createuser -P usuario #Crea el usuario usuario y pide que teclee su contraseña
     }
 
     instalar_sql
