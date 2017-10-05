@@ -28,6 +28,7 @@ function server_apache() {
 
     function instalar_apache() {
     echo -e "$verde Instalando Apache 2$gris"
+        sudo apt install apache2
     }
 
     function configurar_apache() {
@@ -52,6 +53,7 @@ function server_php() {
 
     function configurar_php() {
     echo -e "$verde Preparando configuracion de PHP 2$gris"
+        #composer global require --prefer-dist friendsofphp/php-cs-fixer squizlabs/php_codesniffer yiisoft/yii2-coding-standards phpmd/phpmd
     }
 
     function personalizar_php() {
