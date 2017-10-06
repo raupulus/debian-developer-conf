@@ -70,10 +70,14 @@ function configurar_netrc() {
 
     echo "machine github.com" > ~/.netrc
     echo "  login $usuario_git" >> ~/.netrc
-    echo "  login $TOKEN" >> ~/.netrc
+    echo "  password $TOKEN" >> ~/.netrc
     echo "machine api.github.com" >> ~/.netrc
     echo "  login $usuario_git" >> ~/.netrc
-    echo "  login $TOKEN" >> ~/.netrc
+    echo "  password $TOKEN" >> ~/.netrc
+
+    #Plantear GitLab, si está vacío no crear
+    #echo "  login $usuario_git" >> ~/.netrc
+    #echo "  password $TOKEN" >> ~/.netrc
 }
 
 #Crear TOKEN
