@@ -79,7 +79,6 @@ if [ -x /usr/bin/dircolors ]; then
     alias ls='ls --color=auto'
     alias dir='dir --color=auto'
     alias vdir='vdir --color=auto'
-
     alias grep='grep --color=auto'
     alias fgrep='fgrep --color=auto'
     alias egrep='egrep --color=auto'
@@ -92,12 +91,24 @@ export GCC_COLORS='error=01;31:warning=01;35:note=01;36:caret=01;32:locus=01:quo
 alias ll='ls -l'
 alias la='ls -A'
 alias l='ls -CF'
+alias ..="cd .."
 alias cd..="cd .."
-alias rm="rm -i"
-alias cp="cp -i"
-alias mv="mv -i"
+#alias rm="rm -i"
+#alias cp="cp -i"
+#alias mv="mv -i"
+
 alias git="LANG=C git"
 alias glg="git lg"
+alias gs='git status '
+alias ga='git add '
+alias gb='git branch '
+alias gc='git commit'
+alias gd='git diff'
+alias go='git checkout '
+alias gk='gitk --all&'
+alias gx='gitx --all'
+alias got='git '
+alias get='git '
 
 # Alias importados desde subdirectorio ~/.bash_aliases
 if [ -f ~/.bash_aliases ]; then
