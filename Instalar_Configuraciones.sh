@@ -257,6 +257,14 @@ function terminal() {
   done
 }
 
+function configurar_gedit() {
+    mkdir -p ~/.local/share/ 2>> /dev/null
+    cp -r ./gedit/.local/share/* ~/.local/share/
+
+    mkdir -p ~/.config/gedit/ 2>> /dev/null
+    cp -r ./gedit/.config/gedit/* ~/.config/gedit/
+}
+
 #Instalar Todas las configuraciones
 function instalar_configuraciones() {
   	agregar_conf_home
@@ -265,6 +273,7 @@ function instalar_configuraciones() {
 	programas_default
 	terminal #Pregunta el terminal a usar
 	configurar_vim
+    configurar_gedit
 
     sudo update-command-not-found
 }
