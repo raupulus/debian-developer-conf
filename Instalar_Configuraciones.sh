@@ -69,7 +69,9 @@ function bashit() {
             git clone https://github.com/clvv/fasd ~/.fasd && sudo make install -I ~/.fasd && break
 		done
 
+        #Instalando dependencias
         sudo apt install rbenv
+
         #Habilitar todos los plugins
         bashit enable plugin all
 
@@ -169,7 +171,7 @@ function agregar_conf_home() {
 
 #Permisos
 function permisos() {
-    #TODO --> Quitar permios para atom como superusuario
+    sudo rm /bin/atom
 	echo -e "$verde Estableciendo permisos en el sistema$gris"
 }
 
@@ -181,7 +183,8 @@ function programas_default() {
 	if [ -f /usr/bin/tilix ]
 	then
 		echo -e "$verde Estableciendo terminal por defecto a$rojo Tilix$gris"
-		sudo update-alternatives --set x-terminal-emulator /usr/bin/tilix
+		sudo update-alternatives --install /usr/bin/tilix x-terminal-emulator /usr/bin/tilix 1
+        sudo update-alternatives --set x-terminal-emulator /usr/bin/tilix
 	elif [ -f /usr/bin/terminator ]
 	then
 		echo -e "$verde Estableciendo terminal por defecto a$rojo Terminator$gris"
@@ -233,8 +236,20 @@ function programas_default() {
 		sudo update-alternatives --set editor /bin/nano
 	fi
 
-	#TODO → editor de texto, cliente de correo
-	#x-window-manager
+    #Editor de texto con GUI
+	if [ -f /usr/bin/gedit ]
+	then
+		echo -e "$verde Estableciendo Navegador WEB por defecto a$rojo Vim GTK3$gris"
+		sudo update-alternatives --set gnome-text-editor /usr/bin/gedit
+	elif [ -f /usr/bin/kate ]
+	then
+		echo -e "$verde Estableciendo Navegador WEB por defecto a$rojo Vim$gris"
+		sudo update-alternatives --set gnome-text-editor /usr/bin/kate
+	elif [ -f /usr/bin/leafpad ]
+	then
+		echo -e "$verde Estableciendo Navegador WEB por defecto a$rojo Nano$gris"
+		sudo update-alternatives --set gnome-text-editor /usr/bin/leafpad
+	fi
 }
 
 #Elegir intérprete de comandos
@@ -269,6 +284,7 @@ function configurar_gedit() {
 function instalar_configuraciones() {
   	agregar_conf_home
 	ohMyZSH
+    bashit
 	permisos
 	programas_default
 	terminal #Pregunta el terminal a usar

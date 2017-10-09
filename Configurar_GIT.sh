@@ -29,10 +29,12 @@ nombre_git=""
 usuario_git=""
 correo_git=""
 TOKEN=""
+TOKEN_GITLAB=""
 
 function datos_input() {
-    read -p "Introduce el usuario de GITHUB → " "usuario_git"
-    read -p "Introduce el correo electronico → " "correo_git"
+    #Se entiende que tiene el mismo usuario para GitHub y para GitLab
+    read -p "Introduce el usuario de GitHub y GitLab → " usuario_git
+    read -p "Introduce el correo electronico → " correo_git
 }
 
 #Configurar el usuario GIT local
@@ -54,10 +56,18 @@ function configurar_github() {
 	cd
     git config --global github.name "$nombre_git"
     git config --global github.user "$usuario_git"
-    #TOFIX →   github-oauth.github.com is not defined.
-	#composer config -g github-oauth.github.com
+    #TODO →   github-oauth.github.com is not defined.
+	#TODO → composer config -g github-oauth.github.com
 
 	cd $DIR_ACTUAL
+}
+
+#Configurar el usuario en gitlab
+function configurar_gitlab() {
+    cd
+    git config --global gitlab.name "$nombre_git"
+    git config --global gitlab.user "$usuario_git"
+    cd $DIR_ACTUAL
 }
 
 function configurar_netrc() {
@@ -71,29 +81,49 @@ function configurar_netrc() {
     echo "machine github.com" > ~/.netrc
     echo "  login $usuario_git" >> ~/.netrc
     echo "  password $TOKEN" >> ~/.netrc
+
     echo "machine api.github.com" >> ~/.netrc
     echo "  login $usuario_git" >> ~/.netrc
     echo "  password $TOKEN" >> ~/.netrc
 
-    #Plantear GitLab, si está vacío no crear
-    #echo "  login $usuario_git" >> ~/.netrc
-    #echo "  password $TOKEN" >> ~/.netrc
+    echo "machine gitlab.com" >> ~/.netrc
+    echo "  login $usuario_git" >> ~/.netrc
+    echo "  password $TOKEN_GITLAB" >> ~/.netrc
+
+    echo "machine api.gitlab.com" >> ~/.netrc
+    echo "  login $usuario_git" >> ~/.netrc
+    echo "  password $TOKEN_GITLAB" >> ~/.netrc
 }
 
 #Crear TOKEN
 function crear_token() {
 	cd
+    #Generando TOKEN para GitHub
 	xdg-open "https://github.com/settings/tokens/new?scopes=repo,gist&description=Nuevo_token" >/dev/null 2>&1
     echo -e "$verde Vete a$rojo $URL$verde para crear un token, pulsa en 'Generate token', cópialo y pégalo aquí"
-	echo -e "$verde Introduce el TOKEN generado, pulsa$amarillo INTRO$verde si no deseas usar ninguno$gris"
+	echo -e "$verde Introduce el TOKEN de GitHub generado, pulsa$amarillo INTRO$verde si no deseas usar ninguno$gris"
 	read -p " Token → " TOKEN
 
 	if [ -z $TOKEN ]
 	then
-		echo -e "$verde No se usará TOKEN$gris"
+		echo -e "$verde No se usará TOKEN para GitHub$gris"
 	else
-		echo -e "$verde El token →$rojo $TOKEN$verde se está agregando$gris"
+		echo -e "$verde El token →$rojo $TOKEN$verde para GitHub se está agregando$gris"
 		git config --global github.token $TOKEN
+	fi
+
+    #Generando TOKEN para GitLab
+	xdg-open "" >/dev/null 2>&1
+    echo -e "$verde Genera un nuevo token en la URL que se abrirá en el navegador"
+	echo -e "$verde Introduce el TOKEN de GitLab generado, pulsa$amarillo INTRO$verde si no deseas usar ninguno$gris"
+	read -p " Token → " TOKEN_GITLAB
+
+	if [ -z $TOKEN_GITLAB ]
+	then
+		echo -e "$verde No se usará TOKEN para GitLab$gris"
+	else
+		echo -e "$verde El token →$rojo $TOKEN_GITLAB$verde para GitLab se está agregando$gris"
+		git config --global gitlab.token $TOKEN_GITLAB
 	fi
 
 	cd $DIR_ACTUAL
@@ -131,6 +161,7 @@ function configuracion_git() {
 
     echo -e "$verde Configurar conexion con GITHUB"
     configurar_github
+    configurar_gitlab
 	crear_token
     configurar_netrc
 	crear_git_alias
