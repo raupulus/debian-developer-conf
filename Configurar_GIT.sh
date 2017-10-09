@@ -31,8 +31,9 @@ correo_git=""
 TOKEN=""
 
 function datos_input() {
-    read -p "Introduce el usuario de GITHUB → " "usuario_git"
-    read -p "Introduce el correo electronico → " "correo_git"
+    #Se entiende que tiene el mismo usuario para GitHub y para GitLab
+    read -p "Introduce el usuario de GitHub y GitLab → " usuario_git
+    read -p "Introduce el correo electronico → " correo_git
 }
 
 #Configurar el usuario GIT local
@@ -54,10 +55,18 @@ function configurar_github() {
 	cd
     git config --global github.name "$nombre_git"
     git config --global github.user "$usuario_git"
-    #TOFIX →   github-oauth.github.com is not defined.
-	#composer config -g github-oauth.github.com
+    #TODO →   github-oauth.github.com is not defined.
+	#TODO → composer config -g github-oauth.github.com
 
 	cd $DIR_ACTUAL
+}
+
+#Configurar el usuario en gitlab
+function configurar_gitlab() {
+    cd
+    git config --global gitlab.name "$nombre_git"
+    git config --global gitlab.user "$usuario_git"
+    cd $DIR_ACTUAL
 }
 
 function configurar_netrc() {
