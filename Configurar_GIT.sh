@@ -29,6 +29,7 @@ nombre_git=""
 usuario_git=""
 correo_git=""
 TOKEN=""
+TOKEN_GITLAB=""
 
 function datos_input() {
     #Se entiende que tiene el mismo usuario para GitHub y para GitLab
@@ -80,29 +81,49 @@ function configurar_netrc() {
     echo "machine github.com" > ~/.netrc
     echo "  login $usuario_git" >> ~/.netrc
     echo "  password $TOKEN" >> ~/.netrc
+
     echo "machine api.github.com" >> ~/.netrc
     echo "  login $usuario_git" >> ~/.netrc
     echo "  password $TOKEN" >> ~/.netrc
 
-    #Plantear GitLab, si está vacío no crear
-    #echo "  login $usuario_git" >> ~/.netrc
-    #echo "  password $TOKEN" >> ~/.netrc
+    echo "machine gitlab.com" >> ~/.netrc
+    echo "  login $usuario_git" >> ~/.netrc
+    echo "  password $TOKEN_GITLAB" >> ~/.netrc
+
+    echo "machine api.gitlab.com" >> ~/.netrc
+    echo "  login $usuario_git" >> ~/.netrc
+    echo "  password $TOKEN_GITLAB" >> ~/.netrc
 }
 
 #Crear TOKEN
 function crear_token() {
 	cd
+    #Generando TOKEN para GitHub
 	xdg-open "https://github.com/settings/tokens/new?scopes=repo,gist&description=Nuevo_token" >/dev/null 2>&1
     echo -e "$verde Vete a$rojo $URL$verde para crear un token, pulsa en 'Generate token', cópialo y pégalo aquí"
-	echo -e "$verde Introduce el TOKEN generado, pulsa$amarillo INTRO$verde si no deseas usar ninguno$gris"
+	echo -e "$verde Introduce el TOKEN de GitHub generado, pulsa$amarillo INTRO$verde si no deseas usar ninguno$gris"
 	read -p " Token → " TOKEN
 
 	if [ -z $TOKEN ]
 	then
-		echo -e "$verde No se usará TOKEN$gris"
+		echo -e "$verde No se usará TOKEN para GitHub$gris"
 	else
-		echo -e "$verde El token →$rojo $TOKEN$verde se está agregando$gris"
+		echo -e "$verde El token →$rojo $TOKEN$verde para GitHub se está agregando$gris"
 		git config --global github.token $TOKEN
+	fi
+
+    #Generando TOKEN para GitLab
+	xdg-open "" >/dev/null 2>&1
+    echo -e "$verde Genera un nuevo token en la URL que se abrirá en el navegador"
+	echo -e "$verde Introduce el TOKEN de GitLab generado, pulsa$amarillo INTRO$verde si no deseas usar ninguno$gris"
+	read -p " Token → " TOKEN_GITLAB
+
+	if [ -z $TOKEN_GITLAB ]
+	then
+		echo -e "$verde No se usará TOKEN para GitLab$gris"
+	else
+		echo -e "$verde El token →$rojo $TOKEN_GITLAB$verde para GitLab se está agregando$gris"
+		git config --global gitlab.token $TOKEN_GITLAB
 	fi
 
 	cd $DIR_ACTUAL
@@ -140,6 +161,7 @@ function configuracion_git() {
 
     echo -e "$verde Configurar conexion con GITHUB"
     configurar_github
+    configurar_gitlab
 	crear_token
     configurar_netrc
 	crear_git_alias
