@@ -41,6 +41,43 @@ function ohMyZSH() {
 	fi
 }
 
+function bashit() {
+    if [ -f ~/.bash_it/bash_it.sh ] #Comprobar si ya esta instalado
+	then
+		echo -e "$verde Ya esta$rojo Bash-It$verde instalado para este usuario, omitiendo paso$gris"
+	else
+		REINTENTOS=5
+
+		echo -e "$verde Descargando Bash-It$gris"
+		for (( i=1; i<=$REINTENTOS; i++ ))
+		do
+			rm -R ~/.bash_it 2>> /dev/null
+			git clone https://github.com/Bash-it/bash-it.git ~/.bash_it && ~/.bash_it/install.sh && break
+		done
+
+		echo -e "$verde Descargando nvm$gris"
+        for (( i=1; i<=$REINTENTOS; i++ ))
+		do
+			rm -R ~/.nvm 2>> /dev/null
+            git clone https://github.com/creationix/nvm.git ~/.nvm && ~/.nvm/install.sh && break
+		done
+
+		echo -e "$verde Descargando fasd$gris"
+        for (( i=1; i<=$REINTENTOS; i++ ))
+		do
+			rm -R ~/.fasd 2>> /dev/null
+            git clone https://github.com/clvv/fasd ~/.fasd && sudo make install -I ~/.fasd && break
+		done
+
+        sudo apt install rbenv
+        #Habilitar todos los plugins
+        bashit enable plugin all
+
+        #Deshabilitar plugins no usados o deprecated
+        bashit disable chrubi chruby-auto z z_autoenv
+	fi
+}
+
 #Funcion para configurar VIM con sus temas y complementos
 function configurar_vim() {
 	echo -e "$verde Configurando VIM"
@@ -80,7 +117,7 @@ function configurar_vim() {
 
 	#Funcion para instalar todos los plugins
 	function vim_plugins() {
-		plugins_vim=("powerline" "youcompleteme" "xmledit" "autopep8" "python-jedi" "python-indent" "utilsinps")
+		plugins_vim=("powerline" "youcompleteme" "xmledit" "autopep8" "python-jedi" "python-indent" "utilsinps" "utl")
 		for plugin in ${plugins_vim[*]}
 		do
 			echo -e "Activando el plugin  → $rojo $plugin$yellow" && sleep 2
@@ -220,6 +257,14 @@ function terminal() {
   done
 }
 
+function configurar_gedit() {
+    mkdir -p ~/.local/share/ 2>> /dev/null
+    cp -r ./gedit/.local/share/* ~/.local/share/
+
+    mkdir -p ~/.config/gedit/ 2>> /dev/null
+    cp -r ./gedit/.config/gedit/* ~/.config/gedit/
+}
+
 #Instalar Todas las configuraciones
 function instalar_configuraciones() {
   	agregar_conf_home
@@ -228,4 +273,7 @@ function instalar_configuraciones() {
 	programas_default
 	terminal #Pregunta el terminal a usar
 	configurar_vim
+    configurar_gedit
+
+    sudo update-command-not-found
 }
