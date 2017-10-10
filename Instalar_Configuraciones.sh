@@ -26,48 +26,48 @@ verde="\033[1;32m"
 
 #Instala el script de OhMyZSH
 function ohMyZSH() {
-	if [ -f ~/.oh-my-zsh/oh-my-zsh.sh ] #Comprobar si ya esta instalado
-	then
-		echo -e "$verde Ya esta$rojo OhMyZSH$verde instalado para este usuario, omitiendo paso$gris"
-	else
-		REINTENTOS=5
-		echo -e "$verde Descargando OhMyZSH$gris"
-		for (( i=1; i<=$REINTENTOS; i++ ))
-		do
+    if [ -f ~/.oh-my-zsh/oh-my-zsh.sh ] #Comprobar si ya esta instalado
+    then
+        echo -e "$verde Ya esta$rojo OhMyZSH$verde instalado para este usuario, omitiendo paso$gris"
+    else
+        REINTENTOS=5
+        echo -e "$verde Descargando OhMyZSH$gris"
+        for (( i=1; i<=$REINTENTOS; i++ ))
+        do
             ###TOFIX → Reparar script que sale mal: contraseña PAM y error (no continua por eso)
-			rm -R ~/.oh-my-zsh 2>> /dev/null
-			curl -L http://install.ohmyz.sh | sh && break || break
-		done
-	fi
+            rm -R ~/.oh-my-zsh 2>> /dev/null
+            curl -L http://install.ohmyz.sh | sh && break || break
+        done
+    fi
 }
 
 function bashit() {
     if [ -f ~/.bash_it/bash_it.sh ] #Comprobar si ya esta instalado
-	then
-		echo -e "$verde Ya esta$rojo Bash-It$verde instalado para este usuario, omitiendo paso$gris"
-	else
-		REINTENTOS=5
+    then
+        echo -e "$verde Ya esta$rojo Bash-It$verde instalado para este usuario, omitiendo paso$gris"
+    else
+        REINTENTOS=5
 
-		echo -e "$verde Descargando Bash-It$gris"
-		for (( i=1; i<=$REINTENTOS; i++ ))
-		do
-			rm -R ~/.bash_it 2>> /dev/null
-			git clone https://github.com/Bash-it/bash-it.git ~/.bash_it && ~/.bash_it/install.sh && break
-		done
-
-		echo -e "$verde Descargando nvm$gris"
+        echo -e "$verde Descargando Bash-It$gris"
         for (( i=1; i<=$REINTENTOS; i++ ))
-		do
-			rm -R ~/.nvm 2>> /dev/null
+        do
+            rm -R ~/.bash_it 2>> /dev/null
+            git clone https://github.com/Bash-it/bash-it.git ~/.bash_it && ~/.bash_it/install.sh --silent && break
+        done
+
+        echo -e "$verde Descargando nvm$gris"
+        for (( i=1; i<=$REINTENTOS; i++ ))
+        do
+            rm -R ~/.nvm 2>> /dev/null
             git clone https://github.com/creationix/nvm.git ~/.nvm && ~/.nvm/install.sh && break
-		done
+        done
 
-		echo -e "$verde Descargando fasd$gris"
+        echo -e "$verde Descargando fasd$gris"
         for (( i=1; i<=$REINTENTOS; i++ ))
-		do
-			rm -R ~/.fasd 2>> /dev/null
+        do
+            rm -R ~/.fasd 2>> /dev/null
             git clone https://github.com/clvv/fasd ~/.fasd && sudo make install -I ~/.fasd && break
-		done
+        done
 
         #Instalando dependencias
         sudo apt install rbenv
@@ -77,198 +77,198 @@ function bashit() {
 
         #Deshabilitar plugins no usados o deprecated
         bashit disable chrubi chruby-auto z z_autoenv
-	fi
+    fi
 }
 
 #Funcion para configurar VIM con sus temas y complementos
 function configurar_vim() {
-	echo -e "$verde Configurando VIM"
-	#Instalar Gestor de Plugins Vundle
-	echo -e "$verde Instalando gestor de plugins$rojo Vundle$gris" && sleep 2
-	if [ -f ~/.vim/bundle/Vundle.vim ]
-	then #Si existe solo actualiza plugins
-		echo | vim +PluginInstall +qall || rm -R ~/.vim/bundle/Vundle.vim #Si falla borra dir
-		if [ ! -f ~/.vim/bundle/Vundle.vim ] #Comprueba si se ha borrado para rehacer
-		then
-			for (( i=1; i<=3; i++ ))
-			do
-				git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
-				echo | vim +PluginInstall +qall && break;
-				if [ $i -eq 3 ]
-				then
-					rm -R ~/.vim/bundle/Vundle.vim
-					git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
-					echo | vim +PluginInstall +qall && break;
-				fi
-			done
-		fi
-	else #Instala plugins dentro de ~/.vimrc #Se intenta 3 veces
-		for (( i=1; i<=3; i++ ))
-		do
-			git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
-			echo | vim +PluginInstall +qall && break;
-			if [ $i -eq 3 ]
-			then
-				rm -R ~/.vim/bundle/Vundle.vim
-				git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
-				echo | vim +PluginInstall +qall && break;
-			fi
-		done
-	fi
-	cd $DIR_ACTUAL
+    echo -e "$verde Configurando VIM"
+    #Instalar Gestor de Plugins Vundle
+    echo -e "$verde Instalando gestor de plugins$rojo Vundle$gris" && sleep 2
+    if [ -f ~/.vim/bundle/Vundle.vim ]
+    then #Si existe solo actualiza plugins
+        echo | vim +PluginInstall +qall || rm -R ~/.vim/bundle/Vundle.vim #Si falla borra dir
+        if [ ! -f ~/.vim/bundle/Vundle.vim ] #Comprueba si se ha borrado para rehacer
+        then
+            for (( i=1; i<=3; i++ ))
+            do
+                git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
+                echo | vim +PluginInstall +qall && break;
+                if [ $i -eq 3 ]
+                then
+                    rm -R ~/.vim/bundle/Vundle.vim
+                    git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
+                    echo | vim +PluginInstall +qall && break;
+                fi
+            done
+        fi
+    else #Instala plugins dentro de ~/.vimrc #Se intenta 3 veces
+        for (( i=1; i<=3; i++ ))
+        do
+            git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
+            echo | vim +PluginInstall +qall && break;
+            if [ $i -eq 3 ]
+            then
+                rm -R ~/.vim/bundle/Vundle.vim
+                git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
+                echo | vim +PluginInstall +qall && break;
+            fi
+        done
+    fi
+    cd $DIR_ACTUAL
 
-	#Funcion para instalar todos los plugins
-	function vim_plugins() {
-		plugins_vim=("powerline" "youcompleteme" "xmledit" "autopep8" "python-jedi" "python-indent" "utilsinps" "utl")
-		for plugin in ${plugins_vim[*]}
-		do
-			echo -e "Activando el plugin  → $rojo $plugin$yellow" && sleep 2
-			vim-addon-manager install $plugin
-		done
-		echo -e "$verde Todos los plugins activados$gris"
-	}
+    #Funcion para instalar todos los plugins
+    function vim_plugins() {
+        plugins_vim=("powerline" "youcompleteme" "xmledit" "autopep8" "python-jedi" "python-indent" "utilsinps" "utl")
+        for plugin in ${plugins_vim[*]}
+        do
+            echo -e "Activando el plugin  → $rojo $plugin$yellow" && sleep 2
+            vim-addon-manager install $plugin
+        done
+        echo -e "$verde Todos los plugins activados$gris"
+    }
 
-	function vim_colores() {
-		mkdir -p ~/.vim/colors 2>> /dev/null
-		#Creando archivos de colores, por defecto usara "monokai"
-		echo -e "$verde Descargando colores para sintaxis$amarillo"
-		if [ ! -f "~/.vim/colors/wombat.vim" ]
-		then
-			wget http://www.vim.org/scripts/download_script.php?src_id=6657 -O ~/.vim/colors/wombat.vim
-		fi
+    function vim_colores() {
+        mkdir -p ~/.vim/colors 2>> /dev/null
+        #Creando archivos de colores, por defecto usara "monokai"
+        echo -e "$verde Descargando colores para sintaxis$amarillo"
+        if [ ! -f "~/.vim/colors/wombat.vim" ]
+        then
+            wget http://www.vim.org/scripts/download_script.php?src_id=6657 -O ~/.vim/colors/wombat.vim
+        fi
 
-		if [ ! -f "~/.vim/colors/monokai.vim" ]
-		then
-			wget https://raw.githubusercontent.com/lsdr/monokai/master/colors/monokai.vim -O ~/.vim/colors/monokai.vim
-		fi
-		echo -e "$verde Se ha concluido la instalacion de temas de colores$gris"
-	}
+        if [ ! -f "~/.vim/colors/monokai.vim" ]
+        then
+            wget https://raw.githubusercontent.com/lsdr/monokai/master/colors/monokai.vim -O ~/.vim/colors/monokai.vim
+        fi
+        echo -e "$verde Se ha concluido la instalacion de temas de colores$gris"
+    }
 
-	vim_plugins
-	vim_colores
+    vim_plugins
+    vim_colores
 }
 
 #Agregar Archivos de configuración al home
 function agregar_conf_home() {
-  	conf=$(ls -A ./home/)
-	echo -e "$verde Preparando para añadir archivos de configuración en el home de usuario$gris"
-	for c in $conf
-	do
-		if [ -f ~/$c ] || [ -d ~/$c ] #Si existe hago backup
-		then
-			if [ -f "~/$c.BACKUP" ] || [ -f "~/$c.BACKUP" ] #Contemplo que exista copia y no la borra
-			then
-				rm ~/$c 2>> /dev/null
-			else
-				echo -e "$verde Creando backup de ~/home/$(whoami)/$c $gris"
-				mv ~/$c ~/$c.BACKUP 2>> /dev/null
-			fi
-		fi
-		echo -e "$verde Generando configuración$gris"
-		cp -r ./home/$c ~/$c 2>> /dev/null
-	done
+      conf=$(ls -A ./home/)
+    echo -e "$verde Preparando para añadir archivos de configuración en el home de usuario$gris"
+    for c in $conf
+    do
+        if [ -f ~/$c ] || [ -d ~/$c ] #Si existe hago backup
+        then
+            if [ -f "~/$c.BACKUP" ] || [ -f "~/$c.BACKUP" ] #Contemplo que exista copia y no la borra
+            then
+                rm ~/$c 2>> /dev/null
+            else
+                echo -e "$verde Creando backup de ~/home/$(whoami)/$c $gris"
+                mv ~/$c ~/$c.BACKUP 2>> /dev/null
+            fi
+        fi
+        echo -e "$verde Generando configuración$gris"
+        cp -r ./home/$c ~/$c 2>> /dev/null
+    done
 }
 
 #Permisos
 function permisos() {
     sudo rm /bin/atom
-	echo -e "$verde Estableciendo permisos en el sistema$gris"
+    echo -e "$verde Estableciendo permisos en el sistema$gris"
 }
 
 #Establecer programas por defecto
 function programas_default() {
-	echo -e "$verde Estableciendo programas por defecto$gris"
+    echo -e "$verde Estableciendo programas por defecto$gris"
 
-	#TERMINAl
-	if [ -f /usr/bin/tilix ]
-	then
-		echo -e "$verde Estableciendo terminal por defecto a$rojo Tilix$gris"
-		sudo update-alternatives --install /usr/bin/tilix x-terminal-emulator /usr/bin/tilix 1
+    #TERMINAl
+    if [ -f /usr/bin/tilix ]
+    then
+        echo -e "$verde Estableciendo terminal por defecto a$rojo Tilix$gris"
+        sudo update-alternatives --install /usr/bin/tilix x-terminal-emulator /usr/bin/tilix 1
         sudo update-alternatives --set x-terminal-emulator /usr/bin/tilix
-	elif [ -f /usr/bin/terminator ]
-	then
-		echo -e "$verde Estableciendo terminal por defecto a$rojo Terminator$gris"
-		sudo update-alternatives --set x-terminal-emulator /usr/bin/terminator
-	elif [ -f /usr/bin/sakura ]
-	then
-		echo -e "$verde Estableciendo terminal por defecto a$rojo Sakura$gris"
-		sudo update-alternatives --set x-terminal-emulator /usr/bin/sakura
-	else
-		echo -e "$verde Estableciendo terminal por defecto a$rojo XTerm$gris"
-		sudo update-alternatives --set x-terminal-emulator /usr/bin/xterm
-	fi
+    elif [ -f /usr/bin/terminator ]
+    then
+        echo -e "$verde Estableciendo terminal por defecto a$rojo Terminator$gris"
+        sudo update-alternatives --set x-terminal-emulator /usr/bin/terminator
+    elif [ -f /usr/bin/sakura ]
+    then
+        echo -e "$verde Estableciendo terminal por defecto a$rojo Sakura$gris"
+        sudo update-alternatives --set x-terminal-emulator /usr/bin/sakura
+    else
+        echo -e "$verde Estableciendo terminal por defecto a$rojo XTerm$gris"
+        sudo update-alternatives --set x-terminal-emulator /usr/bin/xterm
+    fi
 
-	#Navegador
-	if [ -f /usr/bin/firefox-esr ]
-	then
-		echo -e "$verde Estableciendo Navegador WEB por defecto a$rojo Firefox-ESR$gris"
-		sudo update-alternatives --set x-www-browser /usr/bin/firefox-esr
-		sudo update-alternatives --set gnome-www-browser /user/bin/firefox-esr
-	elif [ -f /usr/bin/firefox ]
-	then
-		echo -e "$verde Estableciendo Navegador WEB por defecto a$rojo Firefox$gris"
-		sudo update-alternatives --set x-www-browser /usr/bin/firefox
-		sudo update-alternatives --set gnome-www-browser /user/bin/firefox
-	elif [ -f /usr/bin/chromium ]
-	then
-		echo -e "$verde Estableciendo Navegador WEB por defecto a$rojo Chromium$gris"
-		sudo update-alternatives --set x-www-browser /usr/bin/chromium
-		sudo update-alternatives --set gnome-www-browser /user/bin/chromium
-	elif [ -f /usr/bin/chrome ]
-	then
-		echo -e "$verde Estableciendo Navegador WEB por defecto a$rojo chrome$gris"
-		sudo update-alternatives --set x-www-browser /usr/bin/chrome
-		sudo update-alternatives --set gnome-www-browser /user/bin/chrome
-	fi
+    #Navegador
+    if [ -f /usr/bin/firefox-esr ]
+    then
+        echo -e "$verde Estableciendo Navegador WEB por defecto a$rojo Firefox-ESR$gris"
+        sudo update-alternatives --set x-www-browser /usr/bin/firefox-esr
+        sudo update-alternatives --set gnome-www-browser /user/bin/firefox-esr
+    elif [ -f /usr/bin/firefox ]
+    then
+        echo -e "$verde Estableciendo Navegador WEB por defecto a$rojo Firefox$gris"
+        sudo update-alternatives --set x-www-browser /usr/bin/firefox
+        sudo update-alternatives --set gnome-www-browser /user/bin/firefox
+    elif [ -f /usr/bin/chromium ]
+    then
+        echo -e "$verde Estableciendo Navegador WEB por defecto a$rojo Chromium$gris"
+        sudo update-alternatives --set x-www-browser /usr/bin/chromium
+        sudo update-alternatives --set gnome-www-browser /user/bin/chromium
+    elif [ -f /usr/bin/chrome ]
+    then
+        echo -e "$verde Estableciendo Navegador WEB por defecto a$rojo chrome$gris"
+        sudo update-alternatives --set x-www-browser /usr/bin/chrome
+        sudo update-alternatives --set gnome-www-browser /user/bin/chrome
+    fi
 
-	#Editor de texto terminal
-	if [ -f /usr/bin/vim.gtk3 ]
-	then
-		echo -e "$verde Estableciendo Navegador WEB por defecto a$rojo Vim GTK3$gris"
-		sudo update-alternatives --set editor /usr/bin/vim.gtk3
-	elif [ -f /usr/bin/vim ]
-	then
-		echo -e "$verde Estableciendo Navegador WEB por defecto a$rojo Vim$gris"
-		sudo update-alternatives --set editor /usr/bin/vim
-	elif [ -f /bin/nano ]
-	then
-		echo -e "$verde Estableciendo Navegador WEB por defecto a$rojo Nano$gris"
-		sudo update-alternatives --set editor /bin/nano
-	fi
+    #Editor de texto terminal
+    if [ -f /usr/bin/vim.gtk3 ]
+    then
+        echo -e "$verde Estableciendo Navegador WEB por defecto a$rojo Vim GTK3$gris"
+        sudo update-alternatives --set editor /usr/bin/vim.gtk3
+    elif [ -f /usr/bin/vim ]
+    then
+        echo -e "$verde Estableciendo Navegador WEB por defecto a$rojo Vim$gris"
+        sudo update-alternatives --set editor /usr/bin/vim
+    elif [ -f /bin/nano ]
+    then
+        echo -e "$verde Estableciendo Navegador WEB por defecto a$rojo Nano$gris"
+        sudo update-alternatives --set editor /bin/nano
+    fi
 
     #Editor de texto con GUI
-	if [ -f /usr/bin/gedit ]
-	then
-		echo -e "$verde Estableciendo Navegador WEB por defecto a$rojo Vim GTK3$gris"
-		sudo update-alternatives --set gnome-text-editor /usr/bin/gedit
-	elif [ -f /usr/bin/kate ]
-	then
-		echo -e "$verde Estableciendo Navegador WEB por defecto a$rojo Vim$gris"
-		sudo update-alternatives --set gnome-text-editor /usr/bin/kate
-	elif [ -f /usr/bin/leafpad ]
-	then
-		echo -e "$verde Estableciendo Navegador WEB por defecto a$rojo Nano$gris"
-		sudo update-alternatives --set gnome-text-editor /usr/bin/leafpad
-	fi
+    if [ -f /usr/bin/gedit ]
+    then
+        echo -e "$verde Estableciendo Navegador WEB por defecto a$rojo Vim GTK3$gris"
+        sudo update-alternatives --set gnome-text-editor /usr/bin/gedit
+    elif [ -f /usr/bin/kate ]
+    then
+        echo -e "$verde Estableciendo Navegador WEB por defecto a$rojo Vim$gris"
+        sudo update-alternatives --set gnome-text-editor /usr/bin/kate
+    elif [ -f /usr/bin/leafpad ]
+    then
+        echo -e "$verde Estableciendo Navegador WEB por defecto a$rojo Nano$gris"
+        sudo update-alternatives --set gnome-text-editor /usr/bin/leafpad
+    fi
 }
 
 #Elegir intérprete de comandos
 function terminal() {
   while true
   do
-  	echo -e "$verde 1) bash$gris"
-	echo -e "$verde 2) zsh$gris"
-  	read -p "Introduce el terminal → bash/zsh: " term
-  	case $term in
-		bash | 1)#Establecer bash como terminal
-			chsh -s /bin/bash
-			break;;
-		zsh | 2)#Establecer zsh como terminal
-			chsh -s /bin/zsh
-			break;;
-		*)#Opción errónea
-			echo -e "$rojo Opción no válida$gris"
-	esac
+      echo -e "$verde 1) bash$gris"
+    echo -e "$verde 2) zsh$gris"
+      read -p "Introduce el terminal → bash/zsh: " term
+      case $term in
+        bash | 1)#Establecer bash como terminal
+            chsh -s /bin/bash
+            break;;
+        zsh | 2)#Establecer zsh como terminal
+            chsh -s /bin/zsh
+            break;;
+        *)#Opción errónea
+            echo -e "$rojo Opción no válida$gris"
+    esac
   done
 }
 
@@ -282,13 +282,13 @@ function configurar_gedit() {
 
 #Instalar Todas las configuraciones
 function instalar_configuraciones() {
-  	agregar_conf_home
-	ohMyZSH
+      agregar_conf_home
+    ohMyZSH
     bashit
-	permisos
-	programas_default
-	terminal #Pregunta el terminal a usar
-	configurar_vim
+    permisos
+    programas_default
+    terminal #Pregunta el terminal a usar
+    configurar_vim
     configurar_gedit
 
     sudo update-command-not-found
