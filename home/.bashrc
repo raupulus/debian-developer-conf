@@ -180,7 +180,7 @@ export LESS_TERMCAP_us=$'\E[04;38;5;146m' # begin underline
 if [ -f ~/.bash_it/bash_it.sh ] #Comprobar si está instalado para el usuario
 then
     # Path to the bash it configuration
-    export BASH_IT="/home/fryntiz/.bash_it"
+    export BASH_IT="~/.bash_it"
 
     # Lock and Load a custom theme file
     # location /.bash_it/themes/
@@ -192,7 +192,7 @@ then
     # export BASH_IT_REMOTE='bash-it'
 
     # Your place for hosting Git repos. I use this for private repos.
-    export GIT_HOSTING='fryntiz@github.com'
+    export GIT_HOSTING='usuario@servidor.com'
 
     # Don't check mail when opening terminal.
     unset MAILCHECK
