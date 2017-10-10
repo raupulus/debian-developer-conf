@@ -23,3 +23,9 @@ verde="\033[1;32m"
 #############################
 ##   Variables Generales   ##
 #############################
+
+
+# Importa todas las variables al inicio del sistema
+function instalar_variables() {
+    echo -e "$verde Instalando variables globales al sistema$gris"
+}

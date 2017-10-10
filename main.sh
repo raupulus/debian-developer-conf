@@ -28,6 +28,7 @@ source ./Agregar_Repositorios.sh
 source ./Instalar_Software.sh
 source ./Tipografías.sh
 source ./Instalar_Configuraciones.sh
+source ./Variables_Entorno.sh
 source ./Configurar_GIT.sh
 source ./Personalización_GTK.sh
 source ./Servidores.sh
@@ -42,7 +43,7 @@ while :
 		echo -e "   $rojo 2)  $verde Agregar Tipografías$gris"
 		echo -e "   $rojo 3)  $verde Instalar Configuraciones$gris" #Configuración bash, zsh, variables entorno...
 		echo -e "   $rojo 4)  $verde Configurar GIT$gris"
-		echo -e "   $rojo 5)  $verde Personalizar Sistema y GTK$amarillo (No completado)$gris"
+		echo -e "   $rojo 5)  $verde Personalizar Sistema y GTK$gris"
 		echo -e "   $rojo 6)  $verde Instalar Servidores Apache → PHP → SQL$amarillo (No completado)$gris"
 		echo -e "   $rojo 7)  $verde Ejecutar todos los pasos anteriores$gris"
 
@@ -67,6 +68,7 @@ while :
 			clear
 			echo -e "$verde Instalar Configuraciones$gris"
 			instalar_configuraciones
+            instalar_variables
 			read -p "Pulsa una tecla para continuar";;
 
 		4)#Configurar GIT
@@ -97,6 +99,7 @@ while :
             configuracion_git
             personalizar
             instalar_servidores
+            instalar_variables
 			read -p "Pulsa una tecla para continuar";;
 
 		0)#SALIR

@@ -1,4 +1,7 @@
-# Version Modificada by |>Fryntiz<| → http://www.fryntiz.es && https://github.com/fryntiz
+# Versión Modificada by |>Fryntiz<| → http://www.fryntiz.es && https://github.com/fryntiz
+# ~/.bashrc: executed by bash(1) for non-login shells.
+# see /usr/share/doc/bash/examples/startup-files (in the package bash-doc)
+# for examples
 
 # If not running interactively, don't do anything
 case $- in
@@ -60,14 +63,17 @@ if [ "$color_prompt" = yes ]; then
     #La siguiente línea está modificada para que muestre la ruta en otra línea y solo el usuario actual
     PS1='\n\[\033[01;37m\]Estás en:\[\033[00m\] \[\033[01;33m\]\w\[\033[00m\]$(__git_ps1 " (%s)")\n\[\033[01;32m\]\u\[\033[00m\] \[\033[01;31m\]>>\[\033[00m\] '
 else
-    PS1='${debian_chroot:+($debian_chroot)}\u@\h:\w\$ '
+    #PS1='${debian_chroot:+($debian_chroot)}\u@\h:\w\$ '
+    PS1='bash;$(__git_ps1 " (%s))"'
 fi
 unset color_prompt force_color_prompt
 
 # If this is an xterm set the title to user@host:dir
 case "$TERM" in
 xterm*|rxvt*)
-    PS1="\[\e]0;${debian_chroot:+($debian_chroot)}\u@\h: \w\a\]$PS1"
+    #PS1="\[\e]0;${debian_chroot:+($debian_chroot)}\u@\h: \w\a\]$PS1"
+    #PS1='bash;$(__git_ps1 " (%s))"'
+    PS1='$(__git_ps1 " (%s))"'
     ;;
 *)
     ;;
@@ -79,6 +85,7 @@ if [ -x /usr/bin/dircolors ]; then
     alias ls='ls --color=auto'
     alias dir='dir --color=auto'
     alias vdir='vdir --color=auto'
+
     alias grep='grep --color=auto'
     alias fgrep='fgrep --color=auto'
     alias egrep='egrep --color=auto'
@@ -129,13 +136,13 @@ if [ $TILIX_ID ] || [ $VTE_VERSION ]; then
 	source /etc/profile.d/vte.sh
 fi
 
-#POWERLINE EN BASH
-if [ -f /usr/bin/powerline-daemon ]; then
-  /usr/share/powerline/bindings/bash/powerline.sh -q
-  POWERLINE_BASH_CONTINUATION=1
-  POWERLINE_BASH_SELECT=1
-  . /usr/share/powerline/bindings/bash/powerline.sh
-fi
+#POWERLINE EN BASH → DESCOMENTAR PARA USAR POWERLINE SIN BASHIT
+#if [ -f /usr/bin/powerline-daemon ]; then
+#  /usr/share/powerline/bindings/bash/powerline.sh -q
+#  POWERLINE_BASH_CONTINUATION=1
+#  POWERLINE_BASH_SELECT=1
+#  . /usr/share/powerline/bindings/bash/powerline.sh
+#fi
 
 ###################################
 ### Mensaje al iniciar terminal ###
@@ -166,3 +173,61 @@ export LESS_TERMCAP_se=$'\E[0m'           # end standout-mode
 export LESS_TERMCAP_so=$(tput bold; tput setaf 16; tput setab 4)
 export LESS_TERMCAP_ue=$'\E[0m'           # end underline
 export LESS_TERMCAP_us=$'\E[04;38;5;146m' # begin underline
+
+###################################
+###     Configurando Bash-it    ###
+###################################
+if [ -f ~/.bash_it/bash_it.sh ] #Comprobar si está instalado para el usuario
+then
+    # Path to the bash it configuration
+    export BASH_IT="~/.bash_it"
+
+    # Lock and Load a custom theme file
+    # location /.bash_it/themes/
+    #export BASH_IT_THEME='iterate'
+    export BASH_IT_THEME='powerline-multiline'
+
+    # (Advanced): Change this to the name of your remote repo if you
+    # cloned bash-it with a remote other than origin such as `bash-it`.
+    # export BASH_IT_REMOTE='bash-it'
+
+    # Your place for hosting Git repos. I use this for private repos.
+    export GIT_HOSTING='usuario@servidor.com'
+
+    # Don't check mail when opening terminal.
+    unset MAILCHECK
+
+    # Change this to your console based IRC client of choice.
+    export IRC_CLIENT='irssi'
+
+    # Set this to the command you use for todo.txt-cli
+    export TODO="t"
+
+    # Set this to false to turn off version control status checking within the prompt for all themes
+    export SCM_CHECK=true
+
+    # Set Xterm/screen/Tmux title with only a short hostname.
+    # Uncomment this (or set SHORT_HOSTNAME to something else),
+    # Will otherwise fall back on $HOSTNAME.
+    #export SHORT_HOSTNAME=$(hostname -s)
+
+    # Set Xterm/screen/Tmux title with only a short username.
+    # Uncomment this (or set SHORT_USER to something else),
+    # Will otherwise fall back on $USER.
+    #export SHORT_USER=${USER:0:8}
+
+    # Set Xterm/screen/Tmux title with shortened command and directory.
+    # Uncomment this to set.
+    export SHORT_TERM_LINE=true
+
+    # Set vcprompt executable path for scm advance info in prompt (demula theme)
+    # https://github.com/djl/vcprompt
+    #export VCPROMPT_EXECUTABLE=~/.vcprompt/bin/vcprompt
+
+    # (Advanced): Uncomment this to make Bash-it reload itself automatically
+    # after enabling or disabling aliases, plugins, and completions.
+    # export BASH_IT_AUTOMATIC_RELOAD_AFTER_CONFIG_CHANGE=1
+
+    # Load Bash It
+    source "$BASH_IT"/bash_it.sh
+fi
