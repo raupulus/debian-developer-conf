@@ -60,6 +60,9 @@ function configurar_grub() {
 
 function configurar_fondos {
     echo -e "$verde Configurando fondo de pantalla$gris"
+    sudo cp -r ./usr/share/desktop-base/softwaves-themes/* /usr/share/desktop-base/softwaves-theme/
+    echo -e "$verde Configurando plymouth$gris"
+    sudo cp -r ./usr/share/plymouth/themes/softwaves/* /usr/share/plymouth/themes/softwaves/
 }
 
 function personalizar() {
