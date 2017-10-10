@@ -26,11 +26,20 @@ verde="\033[1;32m"
 
 function configurar_iconos(){
     echo -e "$verde Configurando pack de iconos$gris"
-    # TODO → Controlar errores en la descarga o borrar y volver a descargar
-    #wget "https://snwh.org/paper/download.php?owner=snwh&ppa=pulp&pkg=paper-icon-theme,16.04" -O Paper_Icon.deb
-    # TODO → Instalar software si se ha descargado correctamente
-    # sudo dpkg -i Paper_Icon.deb
-    # sudo apt install -f
+    if [ -f "./Paper_Icon.deb" ]
+	then
+		echo -e "$verde Ya esta$rojo Paper_Icon.deb$verde descargado, omitiendo paso$gris"
+	else
+		REINTENTOS=5
+		echo -e "$verde Descargando$rojo Paper_Icon.deb$gris"
+		for (( i=1; i<=$REINTENTOS; i++ ))
+		do
+			rm ./Paper_Icon.deb 2>> /dev/null
+			wget "https://snwh.org/paper/download.php?owner=snwh&ppa=pulp&pkg=paper-icon-theme,16.04" -O Paper_Icon.deb && break
+		done
+		echo -e "$verde Preparando para instalar$rojo Iconos Paper_Icon$gris"
+		sudo dpkg -i Paper_Icon.deb && sudo apt install -f -y
+    fi
 }
 
 function configurar_cursores(){
