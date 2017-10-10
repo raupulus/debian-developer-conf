@@ -57,15 +57,15 @@ function brackets_install () {
 	then
 		echo -e "$verde Ya esta$rojo Brackets$verde instalado en el equipo, omitiendo paso$gris"
 	else
-		REINTENTOS=3
+		REINTENTOS=10
 		echo -e "$verde Descargando$rojo Brackets$gris"
 		for (( i=1; i<=$REINTENTOS; i++ ))
 		do
-			rm Brackets.Release.1.11.64-bit.deb 2>> /dev/null
-			wget https://github.com/adobe/brackets/releases/download/release-1.11/Brackets.Release.1.11.64-bit.deb && break
+			rm Brackets.Release.1.10.64-bit.deb 2>> /dev/null
+			wget https://github.com/adobe/brackets/releases/download/release-1.10/Brackets.Release.1.10.64-bit.deb && break
 		done
 		echo -e "$verde Preparando para instalar$rojo Brackets$gris"
-		sudo dpkg -i Brackets.Release.1.11.64-bit.deb && sudo apt install -f -y
+		sudo dpkg -i Brackets.Release.1.10.64-bit.deb && sudo apt install -f -y
 	fi
 }
 
