@@ -45,6 +45,10 @@ function configurar_temas(){
     # sudo dpkg -i Paper_Theme.deb
     # sudo apt install -f
 
+    #Instalar tema Flat-Plat
+    #curl -sL https://github.com/nana-4/Flat-Plat/archive/v20170605.tar.gz | tar xz
+    #cd Flat-Plat-20170605 && sudo ./install.sh
+
     echo -e "$verde Configurando temas QT$gris"
 }
 
