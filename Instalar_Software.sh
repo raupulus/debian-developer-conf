@@ -64,7 +64,15 @@ function brackets_install () {
 			rm Brackets.Release.1.10.64-bit.deb 2>> /dev/null
 			wget https://github.com/adobe/brackets/releases/download/release-1.10/Brackets.Release.1.10.64-bit.deb && break
 		done
+
+        for (( i=1; i<=$REINTENTOS; i++ ))
+		do
+			rm libgcrypt11_1.5.0-5+deb7u6_amd64.deb 2>> /dev/null
+			wget http://security.debian.org/debian-security/pool/updates/main/libg/libgcrypt11/libgcrypt11_1.5.0-5+deb7u6_amd64.deb && break
+		done
+
 		echo -e "$verde Preparando para instalar$rojo Brackets$gris"
+		sudo dpkg -i libgcrypt11_1.5.0-5+deb7u6_amd64.deb
 		sudo dpkg -i Brackets.Release.1.10.64-bit.deb && sudo apt install -f -y
 	fi
 }
