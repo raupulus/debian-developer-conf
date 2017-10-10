@@ -45,7 +45,7 @@ function configurar_iconos(){
 function configurar_cursores(){
     echo -e "$verde Configurando pack de cursores$gris"
     sudo apt install crystalcursors
-    #TODO → establecer cursor en la configuración
+    sudo update-alternatives --set x-cursor-theme /etc/X11/cursors/crystalblue.theme
 }
 
 function configurar_temas(){
