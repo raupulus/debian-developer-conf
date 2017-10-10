@@ -35,6 +35,8 @@ function configurar_iconos(){
 
 function configurar_cursores(){
     echo -e "$verde Configurando pack de cursores$gris"
+    sudo apt install crystalcursors
+    #TODO → establecer cursor en la configuración
 }
 
 function configurar_temas(){
