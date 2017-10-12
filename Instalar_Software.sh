@@ -109,7 +109,8 @@ function ninjaide_install() {
             wget http://ftp.es.debian.org/debian/pool/main/n/ninja-ide/ninja-ide_2.3-2_all.deb && break
         done
         echo -e "$verde Preparando para instalar$rojo Ninja IDE$gris"
-        sudo dpkg -i ninja-ide_2.3-2_all.deb && sudo apt install -f -y
+        sudo apt install -y python-qt4 >> /dev/null 2>> /dev/null && echo -e "$verde Se ha instalado$rojo python-qt4$gris" || echo -e "$verde No se ha instalado$rojo python-qt4$gris"
+        sudo dpkg -i -y ninja-ide_2.3-2_all.deb && sudo apt install -f -y
     fi
 
     #Resolviendo dependencia de libreria QtWebKit.so si no existe
