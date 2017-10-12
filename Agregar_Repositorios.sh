@@ -42,7 +42,7 @@ function agregar_llaves() {
 
     #Virtualbox Oficial
     echo -e "$verde Agregando clave para$rojo Virtualbox$gris"
-    curl -O https://www.virtualbox.org/download/oracle_vbox_2016.asc
+    wget https://www.virtualbox.org/download/oracle_vbox_2016.asc
     sudo apt-key add oracle_vbox_2016.asc
     sudo rm oracle_vbox_2016.asc
 
