@@ -68,9 +68,9 @@ function agregar_repositorios() {
     echo -e "$verde Repositorios Agregados$gris"
     sleep 3
 
-    echo -e "$verde Actualizando listas de repositorios$gris"
-    sudo apt update 2>> /dev/null
+    echo -e "$verde Actualizando listas de repositorios por segunda vez$gris"
+    sudo apt update >> /dev/null 2>> /dev/null
     agregar_llaves
-    echo -e "$verde Actualizando listas de repositorios$gris"
+    echo -e "$verde Actualizando listas de repositorios definitiva, comprueba que no hay$rojo errores$gris"
     sudo apt update
 }
