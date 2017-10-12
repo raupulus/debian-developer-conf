@@ -39,27 +39,27 @@ function datos_input() {
 
 #Configurar el usuario GIT local
 function configurar_git() {
-	cd #Cambio al directorio home para que no de problemas GIT
+    cd #Cambio al directorio home para que no de problemas GIT
     git config --global user.name "$nombre_git"
     git config --global user.email "$correo_git"
-	git config --global core.editor vim
-	git config --global color.ui true
+    git config --global core.editor vim
+    git config --global color.ui true
 
-	#Reparar finales de linea que mete la mierda de windows CRLF to LF
-	git config --global core.autocrlf input
+    #Reparar finales de linea que mete la mierda de windows CRLF to LF
+    git config --global core.autocrlf input
 
-	cd $DIR_ACTUAL
+    cd $DIR_ACTUAL
 }
 
 #Configura el usuario en GITHUB
 function configurar_github() {
-	cd
+    cd
     git config --global github.name "$nombre_git"
     git config --global github.user "$usuario_git"
     #TODO →   github-oauth.github.com is not defined.
-	#TODO → composer config -g github-oauth.github.com
+    #TODO → composer config -g github-oauth.github.com
 
-	cd $DIR_ACTUAL
+    cd $DIR_ACTUAL
 }
 
 #Configurar el usuario en gitlab
@@ -72,11 +72,11 @@ function configurar_gitlab() {
 
 function configurar_netrc() {
     if [ -f ~/.netrc ]
-	then
-		mv ~/.netrc ~/.netrc.BACKUP
-	else
-		touch ~/.netrc
-	fi
+    then
+        mv ~/.netrc ~/.netrc.BACKUP
+    else
+        touch ~/.netrc
+    fi
 
     echo "machine github.com" > ~/.netrc
     echo "  login $usuario_git" >> ~/.netrc
@@ -97,48 +97,48 @@ function configurar_netrc() {
 
 #Crear TOKEN
 function crear_token() {
-	cd
+    cd
     #Generando TOKEN para GitHub
-	xdg-open "https://github.com/settings/tokens/new?scopes=repo,gist&description=Nuevo_token" >/dev/null 2>&1
+    xdg-open "https://github.com/settings/tokens/new?scopes=repo,gist&description=Nuevo_token" >/dev/null 2>&1
     echo -e "$verde Vete a$rojo $URL$verde para crear un token, pulsa en 'Generate token', cópialo y pégalo aquí"
-	echo -e "$verde Introduce el TOKEN de GitHub generado, pulsa$amarillo INTRO$verde si no deseas usar ninguno$gris"
-	read -p " Token → " TOKEN
+    echo -e "$verde Introduce el TOKEN de GitHub generado, pulsa$amarillo INTRO$verde si no deseas usar ninguno$gris"
+    read -p " Token → " TOKEN
 
-	if [ -z $TOKEN ]
-	then
-		echo -e "$verde No se usará TOKEN para GitHub$gris"
-	else
-		echo -e "$verde El token →$rojo $TOKEN$verde para GitHub se está agregando$gris"
-		git config --global github.token $TOKEN
-	fi
+    if [ -z $TOKEN ]
+    then
+        echo -e "$verde No se usará TOKEN para GitHub$gris"
+    else
+        echo -e "$verde El token →$rojo $TOKEN$verde para GitHub se está agregando$gris"
+        git config --global github.token $TOKEN
+    fi
 
     #Generando TOKEN para GitLab
-	xdg-open "" >/dev/null 2>&1
+    xdg-open "" >/dev/null 2>&1
     echo -e "$verde Genera un nuevo token en la URL que se abrirá en el navegador"
-	echo -e "$verde Introduce el TOKEN de GitLab generado, pulsa$amarillo INTRO$verde si no deseas usar ninguno$gris"
-	read -p " Token → " TOKEN_GITLAB
+    echo -e "$verde Introduce el TOKEN de GitLab generado, pulsa$amarillo INTRO$verde si no deseas usar ninguno$gris"
+    read -p " Token → " TOKEN_GITLAB
 
-	if [ -z $TOKEN_GITLAB ]
-	then
-		echo -e "$verde No se usará TOKEN para GitLab$gris"
-	else
-		echo -e "$verde El token →$rojo $TOKEN_GITLAB$verde para GitLab se está agregando$gris"
-		git config --global gitlab.token $TOKEN_GITLAB
-	fi
+    if [ -z $TOKEN_GITLAB ]
+    then
+        echo -e "$verde No se usará TOKEN para GitLab$gris"
+    else
+        echo -e "$verde El token →$rojo $TOKEN_GITLAB$verde para GitLab se está agregando$gris"
+        git config --global gitlab.token $TOKEN_GITLAB
+    fi
 
-	cd $DIR_ACTUAL
+    cd $DIR_ACTUAL
 }
 
 #Crear Alias dentro de GIT
 function crear_git_alias() {
-	echo -e "$verde Alias para el comando$rojo git lg$gris"
-	git config --global alias.lg "log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit"
+    echo -e "$verde Alias para el comando$rojo git lg$gris"
+    git config --global alias.lg "log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit"
 
-	git config --global push.default simple
+    git config --global push.default simple
 }
 
 function configuracion_git() {
-	cd
+    cd
 
     echo -e "$verde Configurando GIT$gris"
     read -p "Introduce el nombre completo del programador → " nombre_git
@@ -162,9 +162,9 @@ function configuracion_git() {
     echo -e "$verde Configurar conexion con GITHUB"
     configurar_github
     configurar_gitlab
-	crear_token
+    crear_token
     configurar_netrc
-	crear_git_alias
+    crear_git_alias
 
-	cd $DIR_ACTUAL
+    cd $DIR_ACTUAL
 }
