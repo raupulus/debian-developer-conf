@@ -88,7 +88,7 @@ function configurar_vim() {
     if [ -f ~/.vim/bundle/Vundle.vim ]
     then #Si existe solo actualiza plugins
         echo | vim +PluginInstall +qall || rm -R ~/.vim/bundle/Vundle.vim #Si falla borra dir
-        if [ ! -f ~/.vim/bundle/Vundle.vim ] #Comprueba si se ha borrado para rehacer
+        if [ ! -d ~/.vim/bundle/Vundle.vim ] #Comprueba si se ha borrado para rehacer
         then
             for (( i=1; i<=3; i++ ))
             do
@@ -105,6 +105,7 @@ function configurar_vim() {
     else #Instala plugins dentro de ~/.vimrc #Se intenta 3 veces
         for (( i=1; i<=3; i++ ))
         do
+            rm -R ~/.vim/bundle/Vundle.vim 2>> /dev/null
             git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
             echo | vim +PluginInstall +qall && break;
             if [ $i -eq 3 ]
@@ -119,7 +120,7 @@ function configurar_vim() {
 
     #Funcion para instalar todos los plugins
     function vim_plugins() {
-        plugins_vim=("powerline" "youcompleteme" "xmledit" "autopep8" "python-jedi" "python-indent" "utilsinps" "utl")
+        plugins_vim=("powerline" "youcompleteme" "xmledit" "autopep8" "python-jedi" "python-indent" "utilsinps" "utl" "rails" "snippets" "fugitive" "ctrlp")
         for plugin in ${plugins_vim[*]}
         do
             echo -e "Activando el plugin  → $rojo $plugin$yellow" && sleep 2
