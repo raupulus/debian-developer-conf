@@ -57,9 +57,10 @@ function agregar_llaves() {
 
 #Añade Repositorios extras a Debian
 function agregar_repositorios() {
-    sudo apt update
-    sudo apt install apt-transport-https
-    sudo apt install dirmngr
+    echo -e "$verde Actualizando repositorios por primera vez$gris"
+    sudo apt update >> /dev/null 2>> /dev/null
+    sudo apt install apt-transport-https >> /dev/null && echo -e "$verde Instalado el paquete$rojo apt-transport-https$gris" || echo -e "$verde Error al instalar$rojo apt-transport-https$gris"
+    sudo apt install dirmngr >> /dev/null && echo -e "$verde Instalado el paquete$rojo dirmngr$gris" || echo -e "$verde Error al instalar$rojo dirmngr$gris"
     echo -e "$verde Agregando Repositorios$gris"
     sudo cp ./sources.list/sources.list.d/* /etc/apt/sources.list.d/ 2>> /dev/null
     sudo mv /etc/apt/sources.list /etc/apt/sources.list.BACKUP 2>> /dev/null
