@@ -27,65 +27,70 @@ verde="\033[1;32m"
 function configurar_iconos(){
     echo -e "$verde Configurando pack de iconos$gris"
     if [ -f "./Paper_Icon.deb" ]
-	then
-		echo -e "$verde Ya esta$rojo Paper_Icon.deb$verde descargado, omitiendo paso$gris"
-	else
-		REINTENTOS=5
-		echo -e "$verde Descargando$rojo Paper_Icon.deb$gris"
-		for (( i=1; i<=$REINTENTOS; i++ ))
-		do
-			rm ./Paper_Icon.deb 2>> /dev/null
-			wget "https://snwh.org/paper/download.php?owner=snwh&ppa=pulp&pkg=paper-icon-theme,16.04" -O Paper_Icon.deb && break
-		done
-		echo -e "$verde Preparando para instalar$rojo Iconos Paper_Icon$gris"
-		sudo dpkg -i Paper_Icon.deb && sudo apt install -f -y
+    then
+        echo -e "$verde Ya esta$rojo Paper_Icon.deb$verde descargado, omitiendo paso$gris"
+    else
+        REINTENTOS=5
+        echo -e "$verde Descargando$rojo Paper_Icon.deb$gris"
+        for (( i=1; i<=$REINTENTOS; i++ ))
+        do
+            rm ./Paper_Icon.deb 2>> /dev/null
+            wget "https://snwh.org/paper/download.php?owner=snwh&ppa=pulp&pkg=paper-icon-theme,16.04" -O Paper_Icon.deb && break
+        done
+        echo -e "$verde Preparando para instalar$rojo Iconos Paper_Icon$gris"
+        sudo dpkg -i Paper_Icon.deb && sudo apt install -f -y
     fi
+
+    #TODO → Establecer "Paper_Icon" como iconos activos
 }
 
 function configurar_cursores(){
     echo -e "$verde Configurando pack de cursores$gris"
-    sudo apt install crystalcursors
-    sudo update-alternatives --set x-cursor-theme /etc/X11/cursors/crystalblue.theme
+    sudo apt install -y crystalcursors
+    sudo update-alternatives --set x-cursor-theme /etc/X11/cursors/crystalblue.theme 2>> /dev/null
 }
 
 function configurar_temas(){
     echo -e "$verde Configurando temas GTK$gris"
 
     if [ -f "./Paper_Theme.deb" ]
-	then
-		echo -e "$verde Ya esta$rojo Paper_Theme.deb$verde descargado, omitiendo paso$gris"
-	else
-		REINTENTOS=5
-		echo -e "$verde Descargando$rojo Paper_Theme.deb$gris"
-		for (( i=1; i<=$REINTENTOS; i++ ))
-		do
-			rm ./Paper_Theme.deb 2>> /dev/null
-			wget "https://snwh.org/paper/download.php?owner=snwh&ppa=pulp&pkg=paper-gtk-theme,16.04" -O Paper_Theme.deb && break
-		done
-		echo -e "$verde Preparando para instalar$rojo Iconos Paper_Theme$gris"
-		sudo dpkg -i Paper_Theme.deb && sudo apt install -f -y
+    then
+        echo -e "$verde Ya esta$rojo Paper_Theme.deb$verde descargado, omitiendo paso$gris"
+    else
+        REINTENTOS=5
+        echo -e "$verde Descargando$rojo Paper_Theme.deb$gris"
+        for (( i=1; i<=$REINTENTOS; i++ ))
+        do
+            rm ./Paper_Theme.deb 2>> /dev/null
+            wget "https://snwh.org/paper/download.php?owner=snwh&ppa=pulp&pkg=paper-gtk-theme,16.04" -O Paper_Theme.deb && break
+        done
+        echo -e "$verde Preparando para instalar$rojo Iconos Paper_Theme$gris"
+        sudo dpkg -i Paper_Theme.deb && sudo apt install -f -y
     fi
 
     if [ -f "./Flat-Plat-20170605/install.sh" ]
-	then
-		echo -e "$verde Ya esta$rojo Flat-Plat$verde descargado, omitiendo paso$gris"
-	else
-		REINTENTOS=5
-		echo -e "$verde Descargando$rojo Flat-Plat$gris"
-		for (( i=1; i<=$REINTENTOS; i++ ))
-		do
-			rm -r ./Flat-Plat-20170605 2>> /dev/null
-			curl -sL https://github.com/nana-4/Flat-Plat/archive/v20170605.tar.gz | tar xz && break
-		done
-		echo -e "$verde Preparando para instalar$rojo Tema Flat-Plat$gris"
-		sudo ./Flat-Plat-20170605/install.sh
+    then
+        echo -e "$verde Ya esta$rojo Flat-Plat$verde descargado, omitiendo paso$gris"
+    else
+        REINTENTOS=5
+        echo -e "$verde Descargando$rojo Flat-Plat$gris"
+        for (( i=1; i<=$REINTENTOS; i++ ))
+        do
+            rm -r ./Flat-Plat-20170605 2>> /dev/null
+            curl -sL https://github.com/nana-4/Flat-Plat/archive/v20170605.tar.gz | tar xz && break
+        done
+        echo -e "$verde Preparando para instalar$rojo Tema Flat-Plat$gris"
+        sudo ./Flat-Plat-20170605/install.sh
     fi
+
+    #TODO → Establecer Flat-Plat como tema activos
 
     #echo -e "$verde Configurando temas QT$gris"
 }
 
 function configurar_grub() {
     echo -e "$verde Configurando fondo del grub$gris"
+    #Realmente se hace al copiar fondos en la función "configurar_fondos"
 }
 
 function configurar_fondos {
@@ -96,7 +101,7 @@ function configurar_fondos {
 }
 
 function personalizar() {
-    echo -e "$verde Iniciando configuracion de estetica general y GTK$gris"
+    echo -e "$verde Iniciando configuracion de estética general y GTK$gris"
     configurar_iconos
     configurar_cursores
     configurar_temas
