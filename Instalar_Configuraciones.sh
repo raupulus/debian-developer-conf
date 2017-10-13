@@ -87,15 +87,17 @@ function bashit() {
 
     #Instalando dependencias
     echo -e "$verde Instalando dependencias de$rojo Bashit$gris"
-    sudo apt install rbenv >> /dev/null 2>> /dev/null
+    sudo apt install -y rbenv >> /dev/null 2>> /dev/null
+
+    #TOFIX → Al habilitar da error, comprobar que la instalación de bashit se realiza correctamente y solo instalar plugins si se encuentra instalado.
 
     #Habilitar todos los plugins
     echo -e "$verde Habilitando todos los plugins para$rojo Bashit$gris"
-    bashit enable plugin all
+    #bashit enable plugin all
 
     #Deshabilitar plugins no usados o deprecated
     echo -e "$verde Deshabilitando plugins no usados en$rojo Bashit$gris"
-    bashit disable chrubi chruby-auto z z_autoenv
+    #bashit disable chrubi chruby-auto z z_autoenv
 }
 
 #Funcion para configurar VIM con sus temas y complementos
