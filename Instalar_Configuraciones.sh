@@ -55,34 +55,45 @@ function bashit() {
             rm -R ~/.bash_it 2>> /dev/null
             git clone https://github.com/Bash-it/bash-it.git ~/.bash_it && bash ~/.bash_it/install.sh --silent && break
         done
+    fi
 
+    if [ -f ~/.nvm/nvm.sh ] #Comprobar si ya esta instalado
+    then
+        echo -e "$verde Ya esta$rojo nvm$verde instalado para este usuario, omitiendo paso$gris"
+    else
+        REINTENTOS=5
         echo -e "$verde Descargando nvm$gris"
         for (( i=1; i<=$REINTENTOS; i++ ))
         do
             rm -R ~/.nvm 2>> /dev/null
             git clone https://github.com/creationix/nvm.git ~/.nvm && ~/.nvm/install.sh && break
         done
+    fi
 
-        echo -e "$verde Descargando fasd$gris"
-        for (( i=1; i<=$REINTENTOS; i++ ))
-        do
-            tmp=$pwd
-            cd
-            #TOFIX → Con sudo no obtiene bien la ruta, de todas formas falla desde cualquier ruta que no sea el interior
-            rm -Rf "~/.fasd" 2>> /dev/null
-            git clone https://github.com/clvv/fasd ~/.fasd && sudo make install -I ~/.fasd && break
-            cd $tmp
-        done
+    if [ -f ~/.bash_it/bash_it.sh ] #Comprobar si ya esta instalado
+        then
+            echo -e "$verde Ya esta$rojo fasd$verde instalado para este usuario, omitiendo paso$gris"
+        else
+            REINTENTOS=5
+
+            echo -e "$verde Descargando fasd$gris"
+            for (( i=1; i<=$REINTENTOS; i++ ))
+            do
+                tmp=$pwd
+                rm -Rf "~/fasd" 2>> /dev/null
+                git clone https://github.com/clvv/fasd ~/fasd && cd ~/fasd && sudo make install && break
+                cd $tmp
+            done
+    fi
 
         #Instalando dependencias
-        sudo apt install rbenv
+        sudo apt install rbenv >> /dev/null 2>> /dev/null
 
         #Habilitar todos los plugins
         bashit enable plugin all
 
         #Deshabilitar plugins no usados o deprecated
         bashit disable chrubi chruby-auto z z_autoenv
-    fi
 }
 
 #Funcion para configurar VIM con sus temas y complementos
