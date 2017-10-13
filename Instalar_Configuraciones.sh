@@ -53,7 +53,7 @@ function bashit() {
         for (( i=1; i<=$REINTENTOS; i++ ))
         do
             rm -R ~/.bash_it 2>> /dev/null
-            git clone https://github.com/Bash-it/bash-it.git ~/.bash_it && ~/.bash_it/install.sh --silent && break
+            git clone https://github.com/Bash-it/bash-it.git ~/.bash_it && bash ~/.bash_it/install.sh --silent && break
         done
 
         echo -e "$verde Descargando nvm$gris"
@@ -188,6 +188,7 @@ function programas_default() {
         echo -e "$verde Estableciendo terminal por defecto a$rojo Tilix$gris"
         #TOFIX → Mal formado → Enlace - nombre - ruta -prioridad
         #sudo update-alternatives --install /usr/bin/tilix x-terminal-emulator /usr/bin/tilix 1
+        sudo touch /etc/profile.d/vte.sh 2>> /dev/null
         sudo update-alternatives --set x-terminal-emulator /usr/bin/tilix
     elif [ -f /usr/bin/terminator ]
     then
