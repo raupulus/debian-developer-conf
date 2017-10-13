@@ -86,12 +86,15 @@ function bashit() {
     fi
 
     #Instalando dependencias
+    echo -e "$verde Instalando dependencias de$rojo Bashit$gris"
     sudo apt install rbenv >> /dev/null 2>> /dev/null
 
     #Habilitar todos los plugins
+    echo -e "$verde Habilitando todos los plugins para$rojo Bashit$gris"
     bashit enable plugin all
 
     #Deshabilitar plugins no usados o deprecated
+    echo -e "$verde Deshabilitando plugins no usados en$rojo Bashit$gris"
     bashit disable chrubi chruby-auto z z_autoenv
 }
 
