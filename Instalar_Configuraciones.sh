@@ -228,30 +228,30 @@ function programas_default() {
     #Editor de texto terminal
     if [ -f /usr/bin/vim.gtk3 ]
     then
-        echo -e "$verde Estableciendo Navegador WEB por defecto a$rojo Vim GTK3$gris"
+        echo -e "$verde Estableciendo Editor por defecto a$rojo Vim GTK3$gris"
         sudo update-alternatives --set editor /usr/bin/vim.gtk3
     elif [ -f /usr/bin/vim ]
     then
-        echo -e "$verde Estableciendo Navegador WEB por defecto a$rojo Vim$gris"
+        echo -e "$verde Estableciendo Editor WEB por defecto a$rojo Vim$gris"
         sudo update-alternatives --set editor /usr/bin/vim
     elif [ -f /bin/nano ]
     then
-        echo -e "$verde Estableciendo Navegador WEB por defecto a$rojo Nano$gris"
+        echo -e "$verde Estableciendo Editor WEB por defecto a$rojo Nano$gris"
         sudo update-alternatives --set editor /bin/nano
     fi
 
     #Editor de texto con GUI
     if [ -f /usr/bin/gedit ]
     then
-        echo -e "$verde Estableciendo Navegador WEB por defecto a$rojo Vim GTK3$gris"
+        echo -e "$verde Estableciendo Editor GUI por defecto a$rojo Gedit$gris"
         sudo update-alternatives --set gnome-text-editor /usr/bin/gedit
     elif [ -f /usr/bin/kate ]
     then
-        echo -e "$verde Estableciendo Navegador WEB por defecto a$rojo Vim$gris"
+        echo -e "$verde Estableciendo Editor GUI por defecto a$rojo Kate$gris"
         sudo update-alternatives --set gnome-text-editor /usr/bin/kate
     elif [ -f /usr/bin/leafpad ]
     then
-        echo -e "$verde Estableciendo Navegador WEB por defecto a$rojo Nano$gris"
+        echo -e "$verde Estableciendo Editor GUI por defecto a$rojo Leafpad$gris"
         sudo update-alternatives --set gnome-text-editor /usr/bin/leafpad
     fi
 }
