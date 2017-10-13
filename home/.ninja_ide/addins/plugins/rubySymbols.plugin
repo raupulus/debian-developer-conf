@@ -1,0 +1,8 @@
+{
+  "module": "ruby_symbols",
+  "class": "RubySymbols",
+  "authors": "Diego Sarmentero <diego.sarmentero@ninja-ide.org>",
+  "version": "0.1",
+  "url": "http://ninja-ide.org",
+  "description": "Show symbols and allow locator to work with Ruby symbols."
+}

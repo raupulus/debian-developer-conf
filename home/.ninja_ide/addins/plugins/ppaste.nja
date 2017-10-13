@@ -1,0 +1,21 @@
+{
+  "mainFile": "", 
+  "venv": "", 
+  "name": "ppaste", 
+  "license": "Other Open Source", 
+  "url": "", 
+  "pythonPath": "python", 
+  "programParams": "", 
+  "supported-extensions": [
+    ".py", 
+    ".html", 
+    ".jpg", 
+    ".png", 
+    ".ui", 
+    ".css", 
+    ".json", 
+    ".ini"
+  ], 
+  "project-type": "NINJA-Plugin-Project", 
+  "description": ""
+}

@@ -1,0 +1,8 @@
+{
+  "module": "setupy",
+  "class": "Main",
+  "authors": "Juan Carlos <JuanCarlosPaco@Ubuntu.com>",
+  "version": "0.6",
+  "url": "https://github.com/juancarlospaco",
+  "description": " Ninja Setup.py Creator "
+}

@@ -1,0 +1,8 @@
+{
+  "module": "diff",
+  "class": "Main",
+  "authors": "Juan Carlos <JuanCarlosPaco@Ubuntu.com>",
+  "version": "0.1",
+  "url": "https://github.com/juancarlospaco",
+  "description": " NINJA-IDE Diff and Patch plugin "
+}

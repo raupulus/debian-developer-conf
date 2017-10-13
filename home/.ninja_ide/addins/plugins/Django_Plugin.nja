@@ -1,0 +1,23 @@
+{
+  "mainFile": "", 
+  "venv": "/home/francis/Develop/hobby/ninja/virtualninja/bin/python", 
+  "name": "Django Plugin", 
+  "license": "GNU General Public License v3", 
+  "url": "", 
+  "pythonPath": "python", 
+  "preExecScript": "", 
+  "programParams": "", 
+  "supported-extensions": [
+    ".py", 
+    ".html", 
+    ".jpg", 
+    ".png", 
+    ".ui", 
+    ".css", 
+    ".json", 
+    ".ini"
+  ], 
+  "project-type": "NINJA-Plugin-Project", 
+  "postExecScript": "", 
+  "description": "A plugin to better handle django projects in ninja"
+}

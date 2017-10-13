@@ -1,0 +1,22 @@
+{
+  "mainFile": "", 
+  "venv": "", 
+  "name": "PluginProject", 
+  "license": "", 
+  "url": "", 
+  "pythonPath": "python", 
+  "programParams": "", 
+  "supported-extensions": [
+    ".py", 
+    ".html", 
+    ".jpg", 
+    ".png", 
+    ".ui", 
+    ".css", 
+    ".json", 
+    ".ini", 
+    ".plugin"
+  ], 
+  "project-type": "NINJA-Plugin-Project", 
+  "description": ""
+}
