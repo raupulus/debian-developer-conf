@@ -70,7 +70,7 @@ function bashit() {
         done
     fi
 
-    if [ -d ~/.fasd ] #Comprobar si ya esta instalado
+    if [ -d ~/fasd ] #Comprobar si ya esta instalado
     then
         echo -e "$verde Ya esta$rojo fasd$verde instalado para este usuario, omitiendo paso$gris"
     else
@@ -80,7 +80,7 @@ function bashit() {
         for (( i=1; i<=$REINTENTOS; i++ ))
         do
             tmp=$pwd
-            rm -Rf "~/fasd" 2>> /dev/null
+            rm -R -f "~/fasd" 2>> /dev/null
             git clone https://github.com/clvv/fasd ~/fasd && cd ~/fasd && sudo make install && break
             cd $tmp
         done
