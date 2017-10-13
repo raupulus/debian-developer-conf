@@ -42,7 +42,6 @@ function ohMyZSH() {
 }
 
 function bashit() {
-    #TOFIX → Comprobar cada directorio de forma independiente, no solo bashit
     if [ -f ~/.bash_it/bash_it.sh ] #Comprobar si ya esta instalado
     then
         echo -e "$verde Ya esta$rojo Bash-It$verde instalado para este usuario, omitiendo paso$gris"
@@ -70,7 +69,7 @@ function bashit() {
         done
     fi
 
-    if [ -d ~/fasd ] #Comprobar si ya esta instalado
+    if [ -d "$HOME/fasd" ] #Comprobar si ya esta instalado
     then
         echo -e "$verde Ya esta$rojo fasd$verde instalado para este usuario, omitiendo paso$gris"
     else
@@ -301,7 +300,7 @@ function configurar_gedit() {
 
 #Instalar Todas las configuraciones
 function instalar_configuraciones() {
-      agregar_conf_home
+    agregar_conf_home
     ohMyZSH
     bashit
     permisos
