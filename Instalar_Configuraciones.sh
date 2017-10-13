@@ -66,9 +66,12 @@ function bashit() {
         echo -e "$verde Descargando fasd$gris"
         for (( i=1; i<=$REINTENTOS; i++ ))
         do
+            tmp=$pwd
+            cd
             #TOFIX → Con sudo no obtiene bien la ruta, de todas formas falla desde cualquier ruta que no sea el interior
-            #rm -R "~/.fasd" 2>> /dev/null
-            #git clone https://github.com/clvv/fasd ~/.fasd && sudo make install -I ~/.fasd && break
+            rm -Rf "~/.fasd" 2>> /dev/null
+            git clone https://github.com/clvv/fasd ~/.fasd && sudo make install -I ~/.fasd && break
+            cd $tmp
         done
 
         #Instalando dependencias
