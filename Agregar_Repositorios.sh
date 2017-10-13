@@ -42,7 +42,7 @@ function agregar_llaves() {
 
     #Virtualbox Oficial
     echo -e "$verde Agregando clave para$rojo Virtualbox$gris"
-    curl -O https://www.virtualbox.org/download/oracle_vbox_2016.asc
+    wget https://www.virtualbox.org/download/oracle_vbox_2016.asc
     sudo apt-key add oracle_vbox_2016.asc
     sudo rm oracle_vbox_2016.asc
 
@@ -57,9 +57,10 @@ function agregar_llaves() {
 
 #Añade Repositorios extras a Debian
 function agregar_repositorios() {
-    sudo apt update
-    sudo apt install apt-transport-https
-    sudo apt install dirmngr
+    echo -e "$verde Actualizando repositorios por primera vez$gris"
+    sudo apt update >> /dev/null 2>> /dev/null
+    sudo apt install -y apt-transport-https >> /dev/null && echo -e "$verde Instalado el paquete$rojo apt-transport-https$gris" || echo -e "$verde Error al instalar$rojo apt-transport-https$gris"
+    sudo apt install -y dirmngr >> /dev/null && echo -e "$verde Instalado el paquete$rojo dirmngr$gris" || echo -e "$verde Error al instalar$rojo dirmngr$gris"
     echo -e "$verde Agregando Repositorios$gris"
     sudo cp ./sources.list/sources.list.d/* /etc/apt/sources.list.d/ 2>> /dev/null
     sudo mv /etc/apt/sources.list /etc/apt/sources.list.BACKUP 2>> /dev/null
@@ -67,9 +68,9 @@ function agregar_repositorios() {
     echo -e "$verde Repositorios Agregados$gris"
     sleep 3
 
-    echo -e "$verde Actualizando listas de repositorios$gris"
-    sudo apt update 2>> /dev/null
+    echo -e "$verde Actualizando listas de repositorios por segunda vez$gris"
+    sudo apt update >> /dev/null 2>> /dev/null
     agregar_llaves
-    echo -e "$verde Actualizando listas de repositorios$gris"
+    echo -e "$verde Actualizando listas de repositorios definitiva, comprueba que no hay$rojo errores$gris"
     sudo apt update
 }

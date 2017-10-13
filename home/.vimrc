@@ -16,24 +16,29 @@ set encoding=utf-8
 filetype plugin indent on
 set fdm=syntax
 set foldlevelstart=20
+
+let python_highlight_all=1
+let NERDTreeIgnore=['\.pyc$', '\~$'] "ignore files in NERDTree
+
 set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
 Plugin 'VundleVim/Vundle.vim'
+Plugin 'jistr/vim-nerdtree-tabs'
 Plugin 'vim-airline/vim-airline-themes'
+Plugin 'scrooloose/syntastic'
+Plugin 'nvie/vim-flake8'
+Plugin 'jnurmine/Zenburn'
+Plugin 'altercation/vim-colors-solarized'
 Plugin 'seebi/dircolors-solarized'
 Plugin 'terryma/vim-multiple-cursors'
 Plugin 'christoomey/vim-tmux-navigator'
 Plugin 'kien/ctrlp.vim'
 Plugin 'jiangmiao/auto-pairs'
 Plugin 'Lokaltog/vim-easymotion'
-Plugin 'ricpelo/solarized', {'rtp': 'vim-colors-solarized/'}
 Plugin 'scrooloose/nerdtree'
-Plugin 'honza/vim-snippets'
 Plugin 'xolox/vim-session'
 Plugin 'xolox/vim-misc'
-Plugin 'sirver/ultisnips'
 Plugin 'majutsushi/tagbar'
-Plugin 'tpope/vim-fugitive'
 Plugin 'airblade/vim-gitgutter'
 Plugin 'vim-ruby/vim-ruby'
 Plugin 'tpope/vim-endwise'

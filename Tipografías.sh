@@ -26,44 +26,44 @@ verde="\033[1;32m"
 
 #Agregar fuentes desde repositorio PowerLine
 function powerline() {
-	echo -e "$verde Comprobando descargas incompletas$gris"
-	#FIXME --> Puede no ser lo más eficiente, comprobar si es idéntico al original antes de borrar
-	if [ -d ./fonts/powerline ] #Borrar el directorio si ya existe
-	then
-		rm -r ./fonts/powerline
-	fi
+    echo -e "$verde Comprobando descargas incompletas$gris"
+    #FIXME --> Puede no ser lo más eficiente, comprobar si es idéntico al original antes de borrar
+    if [ -d ./fonts/powerline ] #Borrar el directorio si ya existe
+    then
+        rm -rf ./fonts/powerline
+    fi
 
-	echo -e "$verde Clonando Repositorio$rojo PowerLine$amarillo"
-	git clone https://github.com/powerline/fonts.git ./fonts/powerline
-	echo -e "$verde Se ha completado la descarga$gris"
+    echo -e "$verde Clonando Repositorio$rojo PowerLine$amarillo"
+    git clone https://github.com/powerline/fonts.git ./fonts/powerline
+    echo -e "$verde Se ha completado la descarga$gris"
 
-	echo -e "$verde Preparando fuentes para añadir$gris"
-	fuentes=$(ls ./fonts/powerline/)
-	for f in $fuentes
-	do
-		if [ -d ./fonts/powerline/$f ] #Si es un directorio añade las fuentes contenidas
-		then
-			echo -e "$verde Instalando fuente$magenta →$rojo $f $gris"
-			sleep 1
-			sudo cp -r ./fonts/powerline/$f/ /usr/local/share/fonts/
-			sleep 1
-		fi
-	done
+    echo -e "$verde Preparando fuentes para añadir$gris"
+    fuentes=$(ls ./fonts/powerline/)
+    for f in $fuentes
+    do
+        if [ -d ./fonts/powerline/$f ] #Si es un directorio añade las fuentes contenidas
+        then
+            echo -e "$verde Instalando fuente$magenta →$rojo $f $gris"
+            sleep 1
+            sudo cp -r ./fonts/powerline/$f/ /usr/local/share/fonts/
+            sleep 1
+        fi
+    done
 }
 
 function agregar_fuentes() {
-	echo "Añadiendo fuentes Tipográficas al sistema"
-	fuentes=$(ls ./fonts)
-	for f in $fuentes
-	do
-		if [ -d ./fonts/$f ] #Si es un directorio añade las fuentes contenidas
-		then
-			echo -e "$verde Instalando fuente$magenta →$rojo $f $gris"
-			sleep 1
-			sudo cp -r ./fonts/$f/ /usr/local/share/fonts/
-			sleep 1
-		fi
-	done
+    echo "Añadiendo fuentes Tipográficas al sistema"
+    fuentes=$(ls ./fonts)
+    for f in $fuentes
+    do
+        if [ -d ./fonts/$f ] #Si es un directorio añade las fuentes contenidas
+        then
+            echo -e "$verde Instalando fuente$magenta →$rojo $f $gris"
+            sleep 1
+            sudo cp -r ./fonts/$f/ /usr/local/share/fonts/
+            sleep 1
+        fi
+    done
 
-	powerline #Llama a la función powerline()
+    powerline #Llama a la función powerline()
 }

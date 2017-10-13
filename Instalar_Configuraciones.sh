@@ -42,6 +42,7 @@ function ohMyZSH() {
 }
 
 function bashit() {
+    #TOFIX → Comprobar cada directorio de forma independiente, no solo bashit
     if [ -f ~/.bash_it/bash_it.sh ] #Comprobar si ya esta instalado
     then
         echo -e "$verde Ya esta$rojo Bash-It$verde instalado para este usuario, omitiendo paso$gris"
@@ -65,8 +66,9 @@ function bashit() {
         echo -e "$verde Descargando fasd$gris"
         for (( i=1; i<=$REINTENTOS; i++ ))
         do
-            rm -R ~/.fasd 2>> /dev/null
-            git clone https://github.com/clvv/fasd ~/.fasd && sudo make install -I ~/.fasd && break
+            #TOFIX → Con sudo no obtiene bien la ruta, de todas formas falla desde cualquier ruta que no sea el interior
+            #rm -R "~/.fasd" 2>> /dev/null
+            #git clone https://github.com/clvv/fasd ~/.fasd && sudo make install -I ~/.fasd && break
         done
 
         #Instalando dependencias
@@ -88,7 +90,7 @@ function configurar_vim() {
     if [ -f ~/.vim/bundle/Vundle.vim ]
     then #Si existe solo actualiza plugins
         echo | vim +PluginInstall +qall || rm -R ~/.vim/bundle/Vundle.vim #Si falla borra dir
-        if [ ! -f ~/.vim/bundle/Vundle.vim ] #Comprueba si se ha borrado para rehacer
+        if [ ! -d ~/.vim/bundle/Vundle.vim ] #Comprueba si se ha borrado para rehacer
         then
             for (( i=1; i<=3; i++ ))
             do
@@ -105,6 +107,7 @@ function configurar_vim() {
     else #Instala plugins dentro de ~/.vimrc #Se intenta 3 veces
         for (( i=1; i<=3; i++ ))
         do
+            rm -R ~/.vim/bundle/Vundle.vim 2>> /dev/null
             git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
             echo | vim +PluginInstall +qall && break;
             if [ $i -eq 3 ]
@@ -119,7 +122,7 @@ function configurar_vim() {
 
     #Funcion para instalar todos los plugins
     function vim_plugins() {
-        plugins_vim=("powerline" "youcompleteme" "xmledit" "autopep8" "python-jedi" "python-indent" "utilsinps" "utl")
+        plugins_vim=("powerline" "youcompleteme" "xmledit" "autopep8" "python-jedi" "python-indent" "utilsinps" "utl" "rails" "snippets" "fugitive" "ctrlp")
         for plugin in ${plugins_vim[*]}
         do
             echo -e "Activando el plugin  → $rojo $plugin$yellow" && sleep 2
@@ -171,7 +174,7 @@ function agregar_conf_home() {
 
 #Permisos
 function permisos() {
-    sudo rm /bin/atom
+    #sudo rm /bin/atom #Parece que no se crea en las últimas versiones
     echo -e "$verde Estableciendo permisos en el sistema$gris"
 }
 
@@ -183,7 +186,8 @@ function programas_default() {
     if [ -f /usr/bin/tilix ]
     then
         echo -e "$verde Estableciendo terminal por defecto a$rojo Tilix$gris"
-        sudo update-alternatives --install /usr/bin/tilix x-terminal-emulator /usr/bin/tilix 1
+        #TOFIX → Mal formado → Enlace - nombre - ruta -prioridad
+        #sudo update-alternatives --install /usr/bin/tilix x-terminal-emulator /usr/bin/tilix 1
         sudo update-alternatives --set x-terminal-emulator /usr/bin/tilix
     elif [ -f /usr/bin/terminator ]
     then
@@ -203,22 +207,22 @@ function programas_default() {
     then
         echo -e "$verde Estableciendo Navegador WEB por defecto a$rojo Firefox-ESR$gris"
         sudo update-alternatives --set x-www-browser /usr/bin/firefox-esr
-        sudo update-alternatives --set gnome-www-browser /user/bin/firefox-esr
+        sudo update-alternatives --set gnome-www-browser /user/bin/firefox-esr 2>> /dev/null
     elif [ -f /usr/bin/firefox ]
     then
         echo -e "$verde Estableciendo Navegador WEB por defecto a$rojo Firefox$gris"
         sudo update-alternatives --set x-www-browser /usr/bin/firefox
-        sudo update-alternatives --set gnome-www-browser /user/bin/firefox
+        sudo update-alternatives --set gnome-www-browser /user/bin/firefox 2>> /dev/null
     elif [ -f /usr/bin/chromium ]
     then
         echo -e "$verde Estableciendo Navegador WEB por defecto a$rojo Chromium$gris"
         sudo update-alternatives --set x-www-browser /usr/bin/chromium
-        sudo update-alternatives --set gnome-www-browser /user/bin/chromium
+        sudo update-alternatives --set gnome-www-browser /user/bin/chromium 2>> /dev/null
     elif [ -f /usr/bin/chrome ]
     then
         echo -e "$verde Estableciendo Navegador WEB por defecto a$rojo chrome$gris"
         sudo update-alternatives --set x-www-browser /usr/bin/chrome
-        sudo update-alternatives --set gnome-www-browser /user/bin/chrome
+        sudo update-alternatives --set gnome-www-browser /user/bin/chrome 2>> /dev/null
     fi
 
     #Editor de texto terminal
