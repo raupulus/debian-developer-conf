@@ -69,7 +69,7 @@ function bashit() {
         done
     fi
 
-    if [ -d "$HOME/fasd" ] #Comprobar si ya esta instalado
+    if [ -f ~/fasd/fasd.1.md ] #Comprobar si ya esta instalado
     then
         echo -e "$verde Ya esta$rojo fasd$verde instalado para este usuario, omitiendo paso$gris"
     else
