@@ -104,9 +104,10 @@ function bashit() {
 function configurar_vim() {
     echo -e "$verde Configurando VIM"
     #Instalar Gestor de Plugins Vundle
-    echo -e "$verde Instalando gestor de plugins$rojo Vundle$gris" && sleep 2
-    if [ -f ~/.vim/bundle/Vundle.vim ]
+    echo -e "$verde Instalando gestor de plugins$rojo Vundle$verde (Puede tardar un poco)$gris"
+    if [ -d ~/.vim/bundle/Vundle.vim ]
     then #Si existe solo actualiza plugins
+        echo -e "$verde Vundle ya está instalado, instalando plugins nuevos$gris"
         echo | vim +PluginInstall +qall || rm -R ~/.vim/bundle/Vundle.vim #Si falla borra dir
         if [ ! -d ~/.vim/bundle/Vundle.vim ] #Comprueba si se ha borrado para rehacer
         then
@@ -123,6 +124,7 @@ function configurar_vim() {
             done
         fi
     else #Instala plugins dentro de ~/.vimrc #Se intenta 3 veces
+        echo -e "$verde Vundle no está instalado, comenzando descarga$gris"
         for (( i=1; i<=3; i++ ))
         do
             rm -R ~/.vim/bundle/Vundle.vim 2>> /dev/null
@@ -207,7 +209,8 @@ function programas_default() {
         #TOFIX → Mal formado → Enlace - nombre - ruta -prioridad
         #sudo update-alternatives --install /usr/bin/tilix x-terminal-emulator /usr/bin/tilix 1
         sudo touch /etc/profile.d/vte.sh 2>> /dev/null
-        sudo update-alternatives --set x-terminal-emulator /usr/bin/tilix
+        #TOFIX → No existe Tilix como alternativa, reparar primer paso
+        sudo update-alternatives --set x-terminal-emulator /usr/bin/tilix 2>> /dev/null
     elif [ -f /usr/bin/terminator ]
     then
         echo -e "$verde Estableciendo terminal por defecto a$rojo Terminator$gris"
