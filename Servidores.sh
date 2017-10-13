@@ -28,7 +28,7 @@ function server_apache() {
 
     function instalar_apache() {
     echo -e "$verde Instalando Apache 2$gris"
-        sudo apt install apache2
+        sudo apt install -y apache2
     }
 
     function configurar_apache() {
@@ -48,7 +48,7 @@ function server_php() {
 
     function instalar_php() {
     echo -e "$verde Instalando PHP 2$gris"
-        sudo apt install php libapache2-mod-php php-cli php-pgsql php-sqlite3 sqlite php-intl php-mbstring php-gd php-curl php-xml php-xdebug php-json
+        sudo apt install -y php libapache2-mod-php php-cli php-pgsql php-sqlite3 sqlite php-intl php-mbstring php-gd php-curl php-xml php-xdebug php-json
     }
 
     function configurar_php() {
@@ -69,7 +69,7 @@ function server_sql() {
 
     function instalar_sql() {
     echo -e "$verde Instalando SQL 2$gris"
-        sudo apt install postgresql postgresql-client postgresql-contrib postgresql-all
+        sudo apt install -y postgresql postgresql-client postgresql-contrib postgresql-all
     }
 
     function configurar_sql() {
