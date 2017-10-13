@@ -85,14 +85,14 @@ function bashit() {
         done
     fi
 
-        #Instalando dependencias
-        sudo apt install rbenv >> /dev/null 2>> /dev/null
+    #Instalando dependencias
+    sudo apt install rbenv >> /dev/null 2>> /dev/null
 
-        #Habilitar todos los plugins
-        bashit enable plugin all
+    #Habilitar todos los plugins
+    bashit enable plugin all
 
-        #Deshabilitar plugins no usados o deprecated
-        bashit disable chrubi chruby-auto z z_autoenv
+    #Deshabilitar plugins no usados o deprecated
+    bashit disable chrubi chruby-auto z z_autoenv
 }
 
 #Funcion para configurar VIM con sus temas y complementos
@@ -300,7 +300,6 @@ function configurar_gedit() {
 
 #Instalar Todas las configuraciones
 function instalar_configuraciones() {
-    agregar_conf_home
     ohMyZSH
     bashit
     permisos
@@ -308,6 +307,7 @@ function instalar_configuraciones() {
     terminal #Pregunta el terminal a usar
     configurar_vim
     configurar_gedit
+    agregar_conf_home
 
     sudo update-command-not-found
 }
