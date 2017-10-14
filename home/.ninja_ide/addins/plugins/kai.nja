@@ -1,0 +1,7 @@
+{
+  "venv": "", 
+  "project-type": "NINJA-Plugin-Project", 
+  "name": "kai", 
+  "license": "GNU General Public License v3", 
+  "description": "Auto-complete plugin for ninja-ide. "
+}

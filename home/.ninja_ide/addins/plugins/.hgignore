@@ -1,0 +1,31 @@
+
+syntax: regexp
+^\.project$
+syntax: regexp
+^\.pydevproject$
+syntax: regexp
+^.*[.](pyc|pyo)$
+syntax: regexp
+^python/dist$
+syntax: regexp
+^python/build$
+syntax: regexp
+^.*/?_ign_
+syntax: regexp
+^.*(.)orig$
+syntax: regexp
+^.*(.)pdf$
+syntax: regexp
+^\.settings$
+syntax: regexp
+^\build$
+syntax: regexp
+^\dist$
+syntax: regexp
+^.*(.)egg-info$
+syntax: regexp
+^.*[.]class$
+syntax: regexp
+^.*[.]nja
+syntax: regexp
+snippets_.*[.]zip

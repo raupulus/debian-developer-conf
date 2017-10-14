@@ -1,0 +1,37 @@
+(dp0
+S'custom'
+p1
+(dp2
+S'cls'
+p3
+S''
+p4
+sS'fnc'
+p5
+g4
+sS'mod'
+p6
+g4
+ssS'sphinx'
+p7
+(dp8
+g3
+S'.. codeauthor:: Firstname Lastname <firstname@example.com>'
+p9
+sg5
+S'.. codeauthor:: Firstname Lastname <firstname@example.com>\n\n:params: :types:\n\n:returns: \n\n:raise: '
+p10
+sg6
+S'Created on <date>\n\n.. moduleauthor:: Firstname Lastname <firstname@example.com>\n\n:synopsis:'
+p11
+ssS'general'
+p12
+(dp13
+S'doc_type'
+p14
+g7
+sS'keybinding'
+p15
+S'F8'
+p16
+ss.

@@ -1,0 +1,8 @@
+{
+  "url": "",
+  "version": "0.2",
+  "class": "HTMLBeautifier",
+  "module": "htmlbeautifier",
+  "authors": "Alexandre Lessard (Belug)",
+  "description" : "This plugin allow you to beautify your html files.\nIt's used with beautifulsoup and html.parser."
+}

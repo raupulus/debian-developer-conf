@@ -43,12 +43,20 @@ function atom_install() {
         sudo dpkg -i atom.deb && sudo apt install -f -y
     fi
 
+    # Si se ha instalado correctamente ATOM pues instalamos sus plugins
     echo -e "$verde Preparando instalación complementos$rojo Atom$gris"
-    for p in $atom
-    do
-        echo -e "$verde Instalando$rojo $p $amarillo"
-        apm install $p
-    done
+    if [ -f /usr/bin/atom ]
+    then
+        #En $HABILITADO se guarda "Not Disabled" cuando SI está habilitado
+        HABILITADO="`apm enable jumpy 2>> /dev/null | grep "^Not Disabled:" | cut -d':' -f1`"
+        #TOFIX → La siguiente comprobación no funciona → "bash: [: demasiados argumentos"
+        #if [ $HABILITADO = 'Not Disabled' ]; then  echo "Ya Instalado" ; fi
+        for p in $atom
+        do
+            echo -e "$verde Instalando$rojo $p $amarillo"
+            apm install $p
+        done
+    fi
 }
 
 #Instala complementos para Brackets IDE
@@ -120,6 +128,10 @@ function ninjaide_install() {
         sudo mkdir -p /usr/lib/python2.7/dist-packages/PyQt4/ 2>> /dev/null
         sudo cp ./LIB/usr/lib/python2.7/dist-packages/PyQt4/QtWebKit.so /usr/lib/python2.7/dist-packages/PyQt4/
     fi
+
+    #Resolviendo otras dependencia de plugins para Ninja IDE
+    echo -e "Resolviendo otras dependencias para plugins de Ninja IDE"
+    sudo apt install -y python-git python3-git 2>> /dev/null
 }
 
 #Recorrer "Software.lst" Instalando paquetes ahí descritos

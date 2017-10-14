@@ -1,0 +1,8 @@
+{
+  "module": "task_list",
+  "class": "TaskList",
+  "authors": "Martin Alderete <malderete@ninja-ide.org>",
+  "version": "0.4",
+  "description": "Organize your task(s)",
+  "url": "http://ninja-ide.org"
+}

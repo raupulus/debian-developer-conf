@@ -1,0 +1,7 @@
+{
+  "venv": "", 
+  "project-type": "NINJA-Plugin-Project", 
+  "name": "Ninja IPython Console", 
+  "license": "GNU General Public License v3", 
+  "description": ""
+}

@@ -1,0 +1,8 @@
+{
+  "module": "base_64",
+  "class": "Main",
+  "authors": "Juan Carlos <JuanCarlosPaco@Ubuntu.com>",
+  "version": "1.8",
+  "url": "https://github.com/juancarlospaco",
+  "description": " Ninja Base64 Data URI Encoder "
+}

@@ -42,10 +42,10 @@ function ohMyZSH() {
 }
 
 function bashit() {
-    #TOFIX → Comprobar cada directorio de forma independiente, no solo bashit
     if [ -f ~/.bash_it/bash_it.sh ] #Comprobar si ya esta instalado
     then
         echo -e "$verde Ya esta$rojo Bash-It$verde instalado para este usuario, omitiendo paso$gris"
+        bash ~/.bash_it/install.sh --silent 2>> /dev/null
     else
         REINTENTOS=5
 
@@ -53,32 +53,58 @@ function bashit() {
         for (( i=1; i<=$REINTENTOS; i++ ))
         do
             rm -R ~/.bash_it 2>> /dev/null
-            git clone https://github.com/Bash-it/bash-it.git ~/.bash_it && ~/.bash_it/install.sh --silent && break
+            git clone https://github.com/Bash-it/bash-it.git ~/.bash_it && bash ~/.bash_it/install.sh --silent && break
         done
+    fi
 
+    if [ -f ~/.nvm/nvm.sh ] #Comprobar si ya esta instalado
+    then
+        echo -e "$verde Ya esta$rojo nvm$verde instalado para este usuario, omitiendo paso$gris"
+    else
+        REINTENTOS=5
         echo -e "$verde Descargando nvm$gris"
         for (( i=1; i<=$REINTENTOS; i++ ))
         do
             rm -R ~/.nvm 2>> /dev/null
             git clone https://github.com/creationix/nvm.git ~/.nvm && ~/.nvm/install.sh && break
         done
+    fi
+
+    if [ -f ~/fasd/fasd.1.md ] #Comprobar si ya esta instalado
+    then
+        echo -e "$verde Ya esta$rojo fasd$verde instalado para este usuario, omitiendo paso$gris"
+    else
+        REINTENTOS=5
 
         echo -e "$verde Descargando fasd$gris"
         for (( i=1; i<=$REINTENTOS; i++ ))
         do
-            #TOFIX → Con sudo no obtiene bien la ruta, de todas formas falla desde cualquier ruta que no sea el interior
-            #rm -R "~/.fasd" 2>> /dev/null
-            #git clone https://github.com/clvv/fasd ~/.fasd && sudo make install -I ~/.fasd && break
+            tmp=$pwd
+            rm -R -f "~/fasd" 2>> /dev/null
+            git clone https://github.com/clvv/fasd ~/fasd && cd ~/fasd && sudo make install && break
+            cd $tmp
         done
+    fi
 
-        #Instalando dependencias
-        sudo apt install rbenv
+    #Instalando dependencias
+    echo -e "$verde Instalando dependencias de$rojo Bashit$gris"
+    sudo apt install -y rbenv >> /dev/null 2>> /dev/null
 
-        #Habilitar todos los plugins
-        bashit enable plugin all
-
+    #Habilitar todos los plugins
+    #TOFIX → ENTRA CUANDO NO TIENE QUE ENTRAR E INTENTA INSTALAR LO QUE NO TIENE QUE INSTALAR DANDO ERROR
+    #SIEMPRE ESTOY EN BASH.... tratar modo de que solo entre cuando estoy con perfil de bash cargado y bashit instalado
+    if [ -z $BASH ]
+    then
+        echo -e "$verde Para habilitar los$rojo plugins$verde ejecuta este scripts desde$rojo bash$gris"
+    elif [ -n $BASH ] && [ "$BASH" = '/bin/bash' ]
+    then
+        echo -e "$verde Habilitando todos los plugins para$rojo Bashit$gris"
+        bash-it enable plugin all
         #Deshabilitar plugins no usados o deprecated
-        bashit disable chrubi chruby-auto z z_autoenv
+        echo -e "$verde Deshabilitando plugins no usados en$rojo Bashit$gris"
+        bash-it disable chrubi chruby-auto z z_autoenv
+    else
+        echo -e "$verde Asegurate de ejecutar con$rojo bash$verde este$rojo script$verde para poder instalar plugins$gris"
     fi
 }
 
@@ -86,9 +112,10 @@ function bashit() {
 function configurar_vim() {
     echo -e "$verde Configurando VIM"
     #Instalar Gestor de Plugins Vundle
-    echo -e "$verde Instalando gestor de plugins$rojo Vundle$gris" && sleep 2
-    if [ -f ~/.vim/bundle/Vundle.vim ]
+    echo -e "$verde Instalando gestor de plugins$rojo Vundle$verde (Puede tardar un poco)$gris"
+    if [ -d ~/.vim/bundle/Vundle.vim ]
     then #Si existe solo actualiza plugins
+        echo -e "$verde Vundle ya está instalado, instalando plugins nuevos$gris"
         echo | vim +PluginInstall +qall || rm -R ~/.vim/bundle/Vundle.vim #Si falla borra dir
         if [ ! -d ~/.vim/bundle/Vundle.vim ] #Comprueba si se ha borrado para rehacer
         then
@@ -105,6 +132,7 @@ function configurar_vim() {
             done
         fi
     else #Instala plugins dentro de ~/.vimrc #Se intenta 3 veces
+        echo -e "$verde Vundle no está instalado, comenzando descarga$gris"
         for (( i=1; i<=3; i++ ))
         do
             rm -R ~/.vim/bundle/Vundle.vim 2>> /dev/null
@@ -122,11 +150,12 @@ function configurar_vim() {
 
     #Funcion para instalar todos los plugins
     function vim_plugins() {
-        plugins_vim=("powerline" "youcompleteme" "xmledit" "autopep8" "python-jedi" "python-indent" "utilsinps" "utl" "rails" "snippets" "fugitive" "ctrlp")
+        plugins_vim=("align" "closetag" "powerline" "youcompleteme" "xmledit" "autopep8" "python-jedi" "python-indent" "utilsinps" "utl" "rails" "snippets" "fugitive" "ctrlp")
         for plugin in ${plugins_vim[*]}
         do
-            echo -e "Activando el plugin  → $rojo $plugin$yellow" && sleep 2
-            vim-addon-manager install $plugin
+            echo -e "$verde Activando el plugin  → $rojo $plugin$yellow"
+            vim-addon-manager install $plugin >> /dev/null 2>> /dev/null
+            vim-addon-manager enable $plugin >> /dev/null 2>> /dev/null
         done
         echo -e "$verde Todos los plugins activados$gris"
     }
@@ -140,6 +169,7 @@ function configurar_vim() {
             wget http://www.vim.org/scripts/download_script.php?src_id=6657 -O ~/.vim/colors/wombat.vim
         fi
 
+        echo -e "$verde Descargando Tema$rojo Monokai$amarillo"
         if [ ! -f "~/.vim/colors/monokai.vim" ]
         then
             wget https://raw.githubusercontent.com/lsdr/monokai/master/colors/monokai.vim -O ~/.vim/colors/monokai.vim
@@ -188,7 +218,9 @@ function programas_default() {
         echo -e "$verde Estableciendo terminal por defecto a$rojo Tilix$gris"
         #TOFIX → Mal formado → Enlace - nombre - ruta -prioridad
         #sudo update-alternatives --install /usr/bin/tilix x-terminal-emulator /usr/bin/tilix 1
-        sudo update-alternatives --set x-terminal-emulator /usr/bin/tilix
+        sudo touch /etc/profile.d/vte.sh 2>> /dev/null
+        #TOFIX → No existe Tilix como alternativa, reparar primer paso
+        sudo update-alternatives --set x-terminal-emulator /usr/bin/tilix 2>> /dev/null
     elif [ -f /usr/bin/terminator ]
     then
         echo -e "$verde Estableciendo terminal por defecto a$rojo Terminator$gris"
@@ -228,52 +260,54 @@ function programas_default() {
     #Editor de texto terminal
     if [ -f /usr/bin/vim.gtk3 ]
     then
-        echo -e "$verde Estableciendo Navegador WEB por defecto a$rojo Vim GTK3$gris"
+        echo -e "$verde Estableciendo Editor por defecto a$rojo Vim GTK3$gris"
         sudo update-alternatives --set editor /usr/bin/vim.gtk3
     elif [ -f /usr/bin/vim ]
     then
-        echo -e "$verde Estableciendo Navegador WEB por defecto a$rojo Vim$gris"
+        echo -e "$verde Estableciendo Editor WEB por defecto a$rojo Vim$gris"
         sudo update-alternatives --set editor /usr/bin/vim
     elif [ -f /bin/nano ]
     then
-        echo -e "$verde Estableciendo Navegador WEB por defecto a$rojo Nano$gris"
+        echo -e "$verde Estableciendo Editor WEB por defecto a$rojo Nano$gris"
         sudo update-alternatives --set editor /bin/nano
     fi
 
     #Editor de texto con GUI
     if [ -f /usr/bin/gedit ]
     then
-        echo -e "$verde Estableciendo Navegador WEB por defecto a$rojo Vim GTK3$gris"
+        echo -e "$verde Estableciendo Editor GUI por defecto a$rojo Gedit$gris"
         sudo update-alternatives --set gnome-text-editor /usr/bin/gedit
     elif [ -f /usr/bin/kate ]
     then
-        echo -e "$verde Estableciendo Navegador WEB por defecto a$rojo Vim$gris"
+        echo -e "$verde Estableciendo Editor GUI por defecto a$rojo Kate$gris"
         sudo update-alternatives --set gnome-text-editor /usr/bin/kate
     elif [ -f /usr/bin/leafpad ]
     then
-        echo -e "$verde Estableciendo Navegador WEB por defecto a$rojo Nano$gris"
+        echo -e "$verde Estableciendo Editor GUI por defecto a$rojo Leafpad$gris"
         sudo update-alternatives --set gnome-text-editor /usr/bin/leafpad
     fi
 }
 
 #Elegir intérprete de comandos
 function terminal() {
-  while true
-  do
-      echo -e "$verde 1) bash$gris"
-    echo -e "$verde 2) zsh$gris"
-      read -p "Introduce el terminal → bash/zsh: " term
-      case $term in
-        bash | 1)#Establecer bash como terminal
-            chsh -s /bin/bash
-            break;;
-        zsh | 2)#Establecer zsh como terminal
-            chsh -s /bin/zsh
-            break;;
-        *)#Opción errónea
-            echo -e "$rojo Opción no válida$gris"
-    esac
-  done
+    while true
+    do
+        echo -e "$verde Selecciona a continuación el$rojo terminal$verde a usar$gris"
+        echo -e "$verde Tenga en cuenta que este script está optimizado para$rojo bash$gris"
+        echo -e "$verde 1) bash$gris"
+        echo -e "$verde 2) zsh$gris"
+        read -p "Introduce el terminal → bash/zsh: " term
+        case $term in
+            bash | 1)#Establecer bash como terminal
+                chsh -s /bin/bash
+                break;;
+            zsh | 2)#Establecer zsh como terminal
+                chsh -s /bin/zsh
+                break;;
+            *)#Opción errónea
+                echo -e "$rojo Opción no válida$gris"
+        esac
+    done
 }
 
 function configurar_gedit() {
@@ -286,14 +320,14 @@ function configurar_gedit() {
 
 #Instalar Todas las configuraciones
 function instalar_configuraciones() {
-      agregar_conf_home
-    ohMyZSH
     bashit
+    ohMyZSH
     permisos
     programas_default
-    terminal #Pregunta el terminal a usar
     configurar_vim
     configurar_gedit
+    agregar_conf_home
+    terminal #Pregunta el terminal a usar
 
     sudo update-command-not-found
 }
