@@ -94,7 +94,7 @@ function bashit() {
     if [ -z $BASH ]
     then
         echo -e "$verde Para habilitar los$rojo plugins$verde ejecuta este scripts desde$rojo bash$gris"
-    elif [ "$BASH" = "/bin/bash" ]
+    elif [ -n $BASH ] && [ "$BASH" = '/bin/bash' ]
     then
         echo -e "$verde Habilitando todos los plugins para$rojo Bashit$gris"
         bash-it enable plugin all
