@@ -90,14 +90,15 @@ function bashit() {
     echo -e "$verde Instalando dependencias de$rojo Bashit$gris"
     sudo apt install -y rbenv >> /dev/null 2>> /dev/null
 
+    #TOFIX → Mirar por que siempre entra en este condicional cuando se usa ZSH
     #Habilitar todos los plugins
     if [ -n $BASH ] && [ $BASH = '/bin/bash' ]
     then
         echo -e "$verde Habilitando todos los plugins para$rojo Bashit$gris"
-        bashit enable plugin all
+        bash-it enable plugin all
         #Deshabilitar plugins no usados o deprecated
         echo -e "$verde Deshabilitando plugins no usados en$rojo Bashit$gris"
-        bashit disable chrubi chruby-auto z z_autoenv
+        bash-it disable chrubi chruby-auto z z_autoenv
     else
         echo -e "$verde Para habilitar los$rojo plugins$verde ejecuta este scripts desde$rojo bash$gris"
     fi
