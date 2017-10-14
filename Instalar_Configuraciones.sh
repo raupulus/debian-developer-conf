@@ -90,12 +90,11 @@ function bashit() {
     echo -e "$verde Instalando dependencias de$rojo Bashit$gris"
     sudo apt install -y rbenv >> /dev/null 2>> /dev/null
 
-    #TOFIX → Mirar por que siempre entra en este condicional cuando se usa ZSH
     #Habilitar todos los plugins
-    if [ -z $(echo $BASH) ]
+    if [ -z $BASH ]
     then
         echo -e "$verde Para habilitar los$rojo plugins$verde ejecuta este scripts desde$rojo bash$gris"
-    elif [ $(echo $BASH) = "/bin/bash" ]
+    elif [ "$BASH" = "/bin/bash" ]
     then
         echo -e "$verde Habilitando todos los plugins para$rojo Bashit$gris"
         bash-it enable plugin all
