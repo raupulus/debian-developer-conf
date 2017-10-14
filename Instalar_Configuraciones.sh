@@ -91,13 +91,13 @@ function bashit() {
     sudo apt install -y rbenv >> /dev/null 2>> /dev/null
 
     #Habilitar todos los plugins
-    if [ ! -z $BASH ] && [ $BASH = '/bin/bash' ]
+    if [ -n $BASH ] && [ $BASH = '/bin/bash' ]
     then
         echo -e "$verde Habilitando todos los plugins para$rojo Bashit$gris"
         bashit enable plugin all
         #Deshabilitar plugins no usados o deprecated
         echo -e "$verde Deshabilitando plugins no usados en$rojo Bashit$gris"
-        bash-it disable chrubi chruby-auto z z_autoenv
+        bashit disable chrubi chruby-auto z z_autoenv
     else
         echo -e "$verde Para habilitar los$rojo plugins$verde ejecuta este scripts desde$rojo bash$gris"
     fi
@@ -145,11 +145,12 @@ function configurar_vim() {
 
     #Funcion para instalar todos los plugins
     function vim_plugins() {
-        plugins_vim=("powerline" "youcompleteme" "xmledit" "autopep8" "python-jedi" "python-indent" "utilsinps" "utl" "rails" "snippets" "fugitive" "ctrlp")
+        plugins_vim=("align" "closetag" "powerline" "youcompleteme" "xmledit" "autopep8" "python-jedi" "python-indent" "utilsinps" "utl" "rails" "snippets" "fugitive" "ctrlp")
         for plugin in ${plugins_vim[*]}
         do
-            echo -e "Activando el plugin  → $rojo $plugin$yellow" && sleep 2
-            vim-addon-manager install $plugin
+            echo -e "Activando el plugin  → $rojo $plugin$yellow"
+            vim-addon-manager install $plugin >> /dev/null 2>> /dev/null
+            vim-addon-manager enable $plugin >> /dev/null 2>> /dev/null
         done
         echo -e "$verde Todos los plugins activados$gris"
     }
