@@ -34,65 +34,65 @@ source ./Personalización_GTK.sh
 source ./Servidores.sh
 
 while :
-	do
-		sleep 1
-		clear
-		echo ""
-		echo -e "   $rojo 0)  $verde Salir$gris"
-		echo -e "   $rojo 1)  $verde Instalar Aplicaciones Básicas y agregar Repositorios$gris"
-		echo -e "   $rojo 2)  $verde Agregar Tipografías$gris"
-		echo -e "   $rojo 3)  $verde Instalar Configuraciones$gris" #Configuración bash, zsh, variables entorno...
-		echo -e "   $rojo 4)  $verde Configurar GIT$gris"
-		echo -e "   $rojo 5)  $verde Personalizar Sistema y GTK$gris"
-		echo -e "   $rojo 6)  $verde Instalar Servidores Apache → PHP → SQL$amarillo (No completado)$gris"
-		echo -e "   $rojo 7)  $verde Ejecutar todos los pasos anteriores$gris"
+    do
+        sleep 1
+        clear
+        echo ""
+        echo -e "   $rojo 0)  $verde Salir$gris"
+        echo -e "   $rojo 1)  $verde Instalar Aplicaciones Básicas y agregar Repositorios$gris"
+        echo -e "   $rojo 2)  $verde Agregar Tipografías$gris"
+        echo -e "   $rojo 3)  $verde Instalar Configuraciones$gris" #Configuración bash, zsh, variables entorno...
+        echo -e "   $rojo 4)  $verde Configurar GIT$gris"
+        echo -e "   $rojo 5)  $verde Personalizar Sistema y GTK$gris"
+        echo -e "   $rojo 6)  $verde Instalar Servidores Apache → PHP → SQL$amarillo (No completado)$gris"
+        echo -e "   $rojo 7)  $verde Ejecutar todos los pasos anteriores$gris"
 
 
-	read entrada
-	case $entrada in
+    read entrada
+    case $entrada in
 
-		1)#Instalar Aplicaciones Básicas
-			clear
-			echo -e "$verde Instalar Aplicaciones Básicas$gris"
-			agregar_repositorios
-			instalar_Software
-			read -p "Pulsa una tecla para continuar";;
+        1)#Instalar Aplicaciones Básicas
+            clear
+            echo -e "$verde Instalar Aplicaciones Básicas$gris"
+            agregar_repositorios
+            instalar_Software
+            read -p "Pulsa una tecla para continuar";;
 
-		2)#Agregar Tipografías
-			clear
-			echo -e "$verde Agregar Tipografías$gris"
-			agregar_fuentes
-			read -p "Pulsa una tecla para continuar";;
+        2)#Agregar Tipografías
+            clear
+            echo -e "$verde Agregar Tipografías$gris"
+            agregar_fuentes
+            read -p "Pulsa una tecla para continuar";;
 
-		3)#Instalar Configuraciones
-			clear
-			echo -e "$verde Instalar Configuraciones$gris"
-			instalar_configuraciones
+        3)#Instalar Configuraciones
+            clear
+            echo -e "$verde Instalar Configuraciones$gris"
+            instalar_configuraciones
             instalar_variables
-			read -p "Pulsa una tecla para continuar";;
+            read -p "Pulsa una tecla para continuar";;
 
-		4)#Configurar GIT
-			clear
-			echo -e "$verde Configurar GIT$gris"
-			configuracion_git
-			read -p "Pulsa una tecla para continuar";;
+        4)#Configurar GIT
+            clear
+            echo -e "$verde Configurar GIT$gris"
+            configuracion_git
+            read -p "Pulsa una tecla para continuar";;
 
         5)#Personalizar GTK
-			clear
-			echo -e "$verde Personalizar Entorno t GTK$gris"
-			personalizar
-			read -p "Pulsa una tecla para continuar";;
+            clear
+            echo -e "$verde Personalizar Entorno t GTK$gris"
+            personalizar
+            read -p "Pulsa una tecla para continuar";;
 
         6)#Servidores
-			clear
-			echo -e "$verde Instalando servidores Apache → PHP → SQL$gris"
-			instalar_servidores
-			read -p "Pulsa una tecla para continuar";;
+            clear
+            echo -e "$verde Instalando servidores Apache → PHP → SQL$gris"
+            instalar_servidores
+            read -p "Pulsa una tecla para continuar";;
 
         7)#Todas configuraciones
-			clear
-			echo -e "$verde Preparando para aplicar todas las configuraciones en serie$gris"
-			agregar_repositorios
+            clear
+            echo -e "$verde Preparando para aplicar todas las configuraciones en serie$gris"
+            agregar_repositorios
             instalar_Software
             agregar_fuentes
             instalar_configuraciones
@@ -100,17 +100,17 @@ while :
             personalizar
             instalar_servidores
             instalar_variables
-			read -p "Pulsa una tecla para continuar";;
+            read -p "Pulsa una tecla para continuar";;
 
-		0)#SALIR
-			clear
-			echo -e "$rojo Se sale del menú$gris"
-			echo ""
-			exit 0;;
+        0)#SALIR
+            clear
+            echo -e "$rojo Se sale del menú$gris"
+            echo ""
+            exit 0;;
 
-		*)#Opción no válida
-			clear
-			echo ""
-			echo -e "                      $rojo ATENCIÓN: Elección no válida$gris"
+        *)#Opción no válida
+            clear
+            echo ""
+            echo -e "                      $rojo ATENCIÓN: Elección no válida$gris"
     esac
 done
