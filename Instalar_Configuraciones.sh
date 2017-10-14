@@ -92,10 +92,10 @@ function bashit() {
 
     #TOFIX → Mirar por que siempre entra en este condicional cuando se usa ZSH
     #Habilitar todos los plugins
-    if [ -z $BASH ]
+    if [ -z $(echo $BASH) ]
     then
         echo -e "$verde Para habilitar los$rojo plugins$verde ejecuta este scripts desde$rojo bash$gris"
-    elif [ $BASH = "/bin/bash" ]
+    elif [ $(echo $BASH) = "/bin/bash" ]
     then
         echo -e "$verde Habilitando todos los plugins para$rojo Bashit$gris"
         bash-it enable plugin all
