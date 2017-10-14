@@ -45,6 +45,7 @@ function bashit() {
     if [ -f ~/.bash_it/bash_it.sh ] #Comprobar si ya esta instalado
     then
         echo -e "$verde Ya esta$rojo Bash-It$verde instalado para este usuario, omitiendo paso$gris"
+        bash ~/.bash_it/install.sh --silent 2>> /dev/null
     else
         REINTENTOS=5
 
@@ -89,15 +90,17 @@ function bashit() {
     echo -e "$verde Instalando dependencias de$rojo Bashit$gris"
     sudo apt install -y rbenv >> /dev/null 2>> /dev/null
 
-    #TOFIX → Al habilitar da error, comprobar que la instalación de bashit se realiza correctamente y solo instalar plugins si se encuentra instalado.
-
     #Habilitar todos los plugins
-    echo -e "$verde Habilitando todos los plugins para$rojo Bashit$gris"
-    #bashit enable plugin all
-
-    #Deshabilitar plugins no usados o deprecated
-    echo -e "$verde Deshabilitando plugins no usados en$rojo Bashit$gris"
-    #bashit disable chrubi chruby-auto z z_autoenv
+    if [ ! -z $BASH ] && [ $BASH = '/bin/bash' ]
+    then
+        echo -e "$verde Habilitando todos los plugins para$rojo Bashit$gris"
+        bashit enable plugin all
+        #Deshabilitar plugins no usados o deprecated
+        echo -e "$verde Deshabilitando plugins no usados en$rojo Bashit$gris"
+        bash-it disable chrubi chruby-auto z z_autoenv
+    else
+        echo -e "$verde Para habilitar los$rojo plugins$verde ejecuta este scripts desde$rojo bash$gris"
+    fi
 }
 
 #Funcion para configurar VIM con sus temas y complementos
@@ -280,22 +283,24 @@ function programas_default() {
 
 #Elegir intérprete de comandos
 function terminal() {
-  while true
-  do
-      echo -e "$verde 1) bash$gris"
-    echo -e "$verde 2) zsh$gris"
-      read -p "Introduce el terminal → bash/zsh: " term
-      case $term in
-        bash | 1)#Establecer bash como terminal
-            chsh -s /bin/bash
-            break;;
-        zsh | 2)#Establecer zsh como terminal
-            chsh -s /bin/zsh
-            break;;
-        *)#Opción errónea
-            echo -e "$rojo Opción no válida$gris"
-    esac
-  done
+    while true
+    do
+        echo -e "$verde Selecciona a continuación el$rojo terminal$verde a usar$gris"
+        echo -e "$verde Tenga en cuenta que este script está optimizado para$rojo bash$gris"
+        echo -e "$verde 1) bash$gris"
+        echo -e "$verde 2) zsh$gris"
+        read -p "Introduce el terminal → bash/zsh: " term
+        case $term in
+            bash | 1)#Establecer bash como terminal
+                chsh -s /bin/bash
+                break;;
+            zsh | 2)#Establecer zsh como terminal
+                chsh -s /bin/zsh
+                break;;
+            *)#Opción errónea
+                echo -e "$rojo Opción no válida$gris"
+        esac
+    done
 }
 
 function configurar_gedit() {
@@ -308,14 +313,14 @@ function configurar_gedit() {
 
 #Instalar Todas las configuraciones
 function instalar_configuraciones() {
-    ohMyZSH
     bashit
+    ohMyZSH
     permisos
     programas_default
-    terminal #Pregunta el terminal a usar
     configurar_vim
     configurar_gedit
     agregar_conf_home
+    terminal #Pregunta el terminal a usar
 
     sudo update-command-not-found
 }
