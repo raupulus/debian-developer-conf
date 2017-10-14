@@ -92,7 +92,10 @@ function bashit() {
 
     #TOFIX → Mirar por que siempre entra en este condicional cuando se usa ZSH
     #Habilitar todos los plugins
-    if [ -n $BASH ] && [ $BASH = '/bin/bash' ]
+    if [ -z $BASH ]
+    then
+        echo -e "$verde Para habilitar los$rojo plugins$verde ejecuta este scripts desde$rojo bash$gris"
+    elif [ $BASH = "/bin/bash" ]
     then
         echo -e "$verde Habilitando todos los plugins para$rojo Bashit$gris"
         bash-it enable plugin all
@@ -100,7 +103,7 @@ function bashit() {
         echo -e "$verde Deshabilitando plugins no usados en$rojo Bashit$gris"
         bash-it disable chrubi chruby-auto z z_autoenv
     else
-        echo -e "$verde Para habilitar los$rojo plugins$verde ejecuta este scripts desde$rojo bash$gris"
+        echo -e "$verde Asegurate de ejecutar con$rojo bash$verde este$rojo script$verde para poder instalar plugins$gris"
     fi
 }
 
@@ -149,7 +152,7 @@ function configurar_vim() {
         plugins_vim=("align" "closetag" "powerline" "youcompleteme" "xmledit" "autopep8" "python-jedi" "python-indent" "utilsinps" "utl" "rails" "snippets" "fugitive" "ctrlp")
         for plugin in ${plugins_vim[*]}
         do
-            echo -e "Activando el plugin  → $rojo $plugin$yellow"
+            echo -e "$verde Activando el plugin  → $rojo $plugin$yellow"
             vim-addon-manager install $plugin >> /dev/null 2>> /dev/null
             vim-addon-manager enable $plugin >> /dev/null 2>> /dev/null
         done
@@ -165,6 +168,7 @@ function configurar_vim() {
             wget http://www.vim.org/scripts/download_script.php?src_id=6657 -O ~/.vim/colors/wombat.vim
         fi
 
+        echo -e "$verde Descargando Tema$rojo Monokai$amarillo"
         if [ ! -f "~/.vim/colors/monokai.vim" ]
         then
             wget https://raw.githubusercontent.com/lsdr/monokai/master/colors/monokai.vim -O ~/.vim/colors/monokai.vim
