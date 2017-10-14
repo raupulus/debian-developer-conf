@@ -91,6 +91,8 @@ function bashit() {
     sudo apt install -y rbenv >> /dev/null 2>> /dev/null
 
     #Habilitar todos los plugins
+    #TOFIX → ENTRA CUANDO NO TIENE QUE ENTRAR E INTENTA INSTALAR LO QUE NO TIENE QUE INSTALAR DANDO ERROR
+    #SIEMPRE ESTOY EN BASH.... tratar modo de que solo entre cuando estoy con perfil de bash cargado y bashit instalado
     if [ -z $BASH ]
     then
         echo -e "$verde Para habilitar los$rojo plugins$verde ejecuta este scripts desde$rojo bash$gris"
