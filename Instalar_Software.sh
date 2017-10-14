@@ -43,12 +43,18 @@ function atom_install() {
         sudo dpkg -i atom.deb && sudo apt install -f -y
     fi
 
+    # Si se ha instalado correctamente ATOM pues instalamos sus plugins
     echo -e "$verde Preparando instalación complementos$rojo Atom$gris"
-    for p in $atom
-    do
-        echo -e "$verde Instalando$rojo $p $amarillo"
-        apm install $p
-    done
+    if [ -f /usr/bin/atom ]
+    then
+        #TEST → Comprobar si está instalado para no volver a instalar
+        #for x in `apm ls` ; do echo $x && sleep 3 ; done
+        for p in $atom
+        do
+            echo -e "$verde Instalando$rojo $p $amarillo"
+            apm install $p
+        done
+    fi
 }
 
 #Instala complementos para Brackets IDE
