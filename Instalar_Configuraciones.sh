@@ -102,7 +102,7 @@ function bashit() {
         bash-it enable plugin all
         #Deshabilitar plugins no usados o deprecated
         echo -e "$verde Deshabilitando plugins no usados en$rojo Bashit$gris"
-        bash-it disable chrubi chruby-auto z z_autoenv
+        bash-it disable plugin chruby chruby-auto z z_autoenv
     else
         echo -e "$verde Asegurate de ejecutar con$rojo bash$verde este$rojo script$verde para poder instalar plugins$gris"
     fi
