@@ -2,6 +2,8 @@
 Script para preparar entorno de programación, aplicaciones y repositorios en Debian.
 Basado en el script original de @ricpelo en https://github.com/ricpelo/conf
 
+Todas las configuraciones y elecciones se han establecido a mi gusto, puedes personalizar cualquier parte que decidas para este script.
+
 ## Estado
 Comenzado a usar sin problemas aparentes. Debido a la edad temprana y poca depuracion aun no recomiendo su uso
 
@@ -36,3 +38,16 @@ Entramos y ejecutamos el script principal
   cd preparar_entorno
   bash main.sh
 ```
+
+## Personalización estética
+Se han incorporados cambios en la personalización:
+- Fondo de pantalla
+- Grub
+- GDM
+
+Además también se añadieron iconos "paper", temas "flatpat" y la instalación de cursores "crystal"
+
+Todo esto se instalará de forma opcional eligiendo dicha opción en el menú
+
+## Servidores
+Se incorporan en la parte servidores instalación para apache2, php, postregsq, mariadb
