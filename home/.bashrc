@@ -179,7 +179,7 @@ export LESS_TERMCAP_us=$'\E[04;38;5;146m' # begin underline
 if [ -f ~/.bash_it/bash_it.sh ] #Comprobar si está instalado para el usuario
 then
     # Path to the bash it configuration
-    export BASH_IT="home/`whoami`/.bash_it"
+    export BASH_IT="/home/$(whoami)/.bash_it"
 
     # Lock and Load a custom theme file
     # location /.bash_it/themes/
