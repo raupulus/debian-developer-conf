@@ -65,3 +65,14 @@ Se incorporan en la parte servidores instalación para apache2, php, postregsq, 
 - LIB → Archivos de librerías del sistema contando desde la raíz
 - TMP → Directorio donde se descargan los archivos temporales
 - usr → Contiene archivos compartidos de usuarios
+
+# Scripts
+- Agregar_Repositorios.sh → Añade algunos repositorios útiles y sus llaves para seguridad
+- Configurar_GIT.sh → Scripts para configurar la integración de GIT, GitHub y GitLab
+- Instalar_Configuraciones → Genera todas las configuraciones de programas como Vim, Bashit, ohmyzsh y además añade configuraciones al sistema y el directorio home
+- Instalar_Software → Instala los programas indicados en la lista "Software.lst" y algunos extras
+- main.sh → Programa principal con menú para elegir paso a realizar
+- Personalización_GTK.sh → Genera fondos para grub, escritorio, gdm... y además iconos, temas y cursores
+- Servidores.sh → Instala servidores como apache2 php postregsql mariadb y los configura
+- Tipografías.sh → Instala fuentes tipográficas
+- Variables_Entorno.sh → Genera variables de entorno que seran globales en el sistema
