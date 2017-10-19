@@ -47,8 +47,13 @@ function server_apache() {
 function server_php() {
 
     function instalar_php() {
-    echo -e "$verde Instalando PHP 2$gris"
-        sudo apt install -y php libapache2-mod-php php-cli php-pgsql php-sqlite3 sqlite php-intl php-mbstring php-gd php-curl php-xml php-xdebug php-json
+        echo -e "$verde Instalando PHP$gris"
+        paquetes_basicos="php php-cli libapache2-mod-php"
+        sudo apt install -y $paquetes_basicos
+
+        echo -e "$verde Instalando paquetes extras$gris"
+        paquetes_extras="php-gd php-curl php-pgsql php-sqlite3 sqlite sqlite3 php-intl php-mbstring php-xml php-xdebug php-json"
+        sudo apt install -y $paquetes_extras
     }
 
     function configurar_php() {
