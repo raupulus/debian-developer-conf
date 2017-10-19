@@ -49,12 +49,12 @@ force_color_prompt=yes
 
 if [ -n "$force_color_prompt" ]; then
     if [ -x /usr/bin/tput ] && tput setaf 1 >&/dev/null; then
-	# We have color support; assume it's compliant with Ecma-48
-	# (ISO/IEC-6429). (Lack of such support is extremely rare, and such
-	# a case would tend to support setf rather than setaf.)
-	color_prompt=yes
+    # We have color support; assume it's compliant with Ecma-48
+    # (ISO/IEC-6429). (Lack of such support is extremely rare, and such
+    # a case would tend to support setf rather than setaf.)
+    color_prompt=yes
     else
-	color_prompt=
+    color_prompt=
     fi
 fi
 
@@ -71,8 +71,6 @@ unset color_prompt force_color_prompt
 # If this is an xterm set the title to user@host:dir
 case "$TERM" in
 xterm*|rxvt*)
-    #PS1="\[\e]0;${debian_chroot:+($debian_chroot)}\u@\h: \w\a\]$PS1"
-    #PS1='bash;$(__git_ps1 " (%s))"'
     PS1='$(__git_ps1 " (%s))"'
     ;;
 *)
@@ -116,6 +114,7 @@ alias gk='gitk --all&'
 alias gx='gitx --all'
 alias got='git '
 alias get='git '
+alias gp='git push'
 
 # Alias importados desde subdirectorio ~/.bash_aliases
 if [ -f ~/.bash_aliases ]; then
@@ -133,7 +132,7 @@ fi
 
 # Compatibilidad con terminal "Tilix"
 if [ $TILIX_ID ] || [ $VTE_VERSION ]; then
-	source /etc/profile.d/vte.sh
+    source /etc/profile.d/vte.sh
 fi
 
 #POWERLINE EN BASH → DESCOMENTAR PARA USAR POWERLINE SIN BASHIT
@@ -148,13 +147,13 @@ fi
 ### Mensaje al iniciar terminal ###
 ###################################
 if [ -f /usr/bin/neofetch ]; then
-	neofetch
+    neofetch
 elif [ -f /usr/bin/screenfetch ]; then
-	screenfetch
+    screenfetch
 fi
 
 if [ -f /usr/bin/fryntiz ]; then
-	echo -e "      \033[1;31m Para utilizar el menú interactivo usa el comando \033[1;32m\"fryntiz\" \033[1;00m"
+    echo -e "      \033[1;31m Para utilizar el menú interactivo usa el comando \033[1;32m\"fryntiz\" \033[1;00m"
 fi
 
 ###################################
@@ -180,7 +179,7 @@ export LESS_TERMCAP_us=$'\E[04;38;5;146m' # begin underline
 if [ -f ~/.bash_it/bash_it.sh ] #Comprobar si está instalado para el usuario
 then
     # Path to the bash it configuration
-    export BASH_IT="~/.bash_it"
+    export BASH_IT="/home/$(whoami)/.bash_it"
 
     # Lock and Load a custom theme file
     # location /.bash_it/themes/

@@ -47,17 +47,23 @@ function server_apache() {
 function server_php() {
 
     function instalar_php() {
-    echo -e "$verde Instalando PHP 2$gris"
-        sudo apt install -y php libapache2-mod-php php-cli php-pgsql php-sqlite3 sqlite php-intl php-mbstring php-gd php-curl php-xml php-xdebug php-json
+        echo -e "$verde Instalando PHP$gris"
+        paquetes_basicos="php php-cli libapache2-mod-php"
+        sudo apt install -y $paquetes_basicos
+
+        echo -e "$verde Instalando paquetes extras$gris"
+        paquetes_extras="php-gd php-curl php-pgsql php-sqlite3 sqlite sqlite3 php-intl php-mbstring php-xml php-xdebug php-json"
+        sudo apt install -y $paquetes_extras
     }
 
     function configurar_php() {
-    echo -e "$verde Preparando configuracion de PHP 2$gris"
+        echo -e "$verde Preparando configuracion de PHP$gris"
+        sudo apt install -y composer
         #composer global require --prefer-dist friendsofphp/php-cs-fixer squizlabs/php_codesniffer yiisoft/yii2-coding-standards phpmd/phpmd
     }
 
     function personalizar_php() {
-    echo -e "$verde Personalizando PHP 2$gris"
+        echo -e "$verde Personalizando PHP$gris"
     }
 
     instalar_php
@@ -68,16 +74,18 @@ function server_php() {
 function server_sql() {
 
     function instalar_sql() {
-    echo -e "$verde Instalando SQL 2$gris"
-        sudo apt install -y postgresql postgresql-client postgresql-contrib postgresql-all
+        echo -e "$verde Instalando PostgreSQL$gris"
+        sudo apt install -y postgresql postgresql-client
+        sudo apt install -y postgresql-contrib
+        sudo apt install -y postgresql-all 2>> /dev/null
     }
 
     function configurar_sql() {
-    echo -e "$verde Preparando configuracion de SQL 2$gris"
+    echo -e "$verde Preparando configuracion de SQL$gris"
     }
 
     function personalizar_sql() {
-    echo -e "$verde Personalizando SQL 2$gris"
+        echo -e "$verde Personalizando SQL$gris"
         #sudo -u postgres createdb basedatos #Crea la base de datos basedatos
         #sudo -u postgres createuser -P usuario #Crea el usuario usuario y pide que teclee su contraseña
     }
@@ -88,6 +96,7 @@ function server_sql() {
 }
 
 function instalar_servidores() {
+    sudo apt update
     server_apache
     server_php
     server_sql
