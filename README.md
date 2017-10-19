@@ -5,7 +5,13 @@ Basado en el script original de @ricpelo en https://github.com/ricpelo/conf
 Todas las configuraciones y elecciones se han establecido a mi gusto, puedes personalizar cualquier parte que decidas para este script.
 
 ## Estado
-Comenzado a usar sin problemas aparentes. Debido a la edad temprana y poca depuracion aun no recomiendo su uso
+Se han depurado la mayoría de los errores graves, todos los detectados hasta el momento están resueltos.
+
+Comenzado a usar sin problemas aparentes. Debido a la edad temprana y poca depuracion recomiendo su uso con prudencia.
+
+Se ha testeado mayormente en entornos virtuales y limpios sin poco uso el sistema por lo que no se garantiza que en un sistema con tiempo de uso y modificaciones pueda alterar el funcionamiento normal
+
+En los equipos de uso diario ya los ejecuto sin problemas hasta la fecha para incorporar mejoras desde la rama principal MASTER
 
 ## Objetivos
 Crear un entorno de trabajo personalizado para desarrollar aplicaciones web según las preferencias del autor.
