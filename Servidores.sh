@@ -57,12 +57,12 @@ function server_php() {
     }
 
     function configurar_php() {
-    echo -e "$verde Preparando configuracion de PHP 2$gris"
+        echo -e "$verde Preparando configuracion de PHP 2$gris"
         #composer global require --prefer-dist friendsofphp/php-cs-fixer squizlabs/php_codesniffer yiisoft/yii2-coding-standards phpmd/phpmd
     }
 
     function personalizar_php() {
-    echo -e "$verde Personalizando PHP 2$gris"
+        echo -e "$verde Personalizando PHP 2$gris"
     }
 
     instalar_php
@@ -73,16 +73,16 @@ function server_php() {
 function server_sql() {
 
     function instalar_sql() {
-    echo -e "$verde Instalando SQL 2$gris"
+        echo -e "$verde Instalando PostgreSQL$gris"
         sudo apt install -y postgresql postgresql-client postgresql-contrib postgresql-all
     }
 
     function configurar_sql() {
-    echo -e "$verde Preparando configuracion de SQL 2$gris"
+    echo -e "$verde Preparando configuracion de SQL$gris"
     }
 
     function personalizar_sql() {
-    echo -e "$verde Personalizando SQL 2$gris"
+        echo -e "$verde Personalizando SQL$gris"
         #sudo -u postgres createdb basedatos #Crea la base de datos basedatos
         #sudo -u postgres createuser -P usuario #Crea el usuario usuario y pide que teclee su contraseña
     }
@@ -93,6 +93,7 @@ function server_sql() {
 }
 
 function instalar_servidores() {
+    sudo apt update
     server_apache
     server_php
     server_sql
