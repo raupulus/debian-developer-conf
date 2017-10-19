@@ -12,8 +12,20 @@ Crear un entorno de trabajo personalizado para desarrollar aplicaciones web seg�
 
 Aún estando personalizado se ha procurado dejar de forma modular para poder hacer retoques sin demasiadas complicaciones.
 
+Estos son los principales objetivos
+
+- Configurar terminales, bash y zsh
+- Instalar tipografías
+- Instalar editores Brackets, Atom, ninja IDE y Vim con sus personalizaciones
+- Configurar sistema y variables globales
+- Ampliar repositorios desde fuentes estables y fiables
+- Instalar configuraciones y personalizaciones para el sistema y programas en el HOME
+- Instalar atajos y personalizaciones para trabajar con git, GitHub y GitLab
+
+En resumen dejar con un solo script todo el entorno adaptado a mis necesidades
+
 ## Distribución compatible
-Está destinado única y exclusivamente para Debian 9 (estable) y se irá actualizando con esta rama
+Está destinado única y exclusivamente para **Debian 9** (estable) y se irá actualizando con esta rama estable
 
 En otras ramas y distribuciones puede romper el sistema, para portarlo no hay demasiadas complicaciones y se deberá renombrar la instalación/nombre de paquetes si procede y establecer repositorios de acorde a la distribución. El resto de los pasos deberían ser idénticos.
 
