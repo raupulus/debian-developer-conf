@@ -57,12 +57,12 @@ function server_php() {
     }
 
     function configurar_php() {
-        echo -e "$verde Preparando configuracion de PHP 2$gris"
+        echo -e "$verde Preparando configuracion de PHP$gris"
         #composer global require --prefer-dist friendsofphp/php-cs-fixer squizlabs/php_codesniffer yiisoft/yii2-coding-standards phpmd/phpmd
     }
 
     function personalizar_php() {
-        echo -e "$verde Personalizando PHP 2$gris"
+        echo -e "$verde Personalizando PHP$gris"
     }
 
     instalar_php
@@ -74,7 +74,9 @@ function server_sql() {
 
     function instalar_sql() {
         echo -e "$verde Instalando PostgreSQL$gris"
-        sudo apt install -y postgresql postgresql-client postgresql-contrib postgresql-all
+        sudo apt install -y postgresql postgresql-client
+        sudo apt install -y postgresql-contrib
+        sudo apt install -y postgresql-all 2>> /dev/null
     }
 
     function configurar_sql() {
