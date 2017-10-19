@@ -58,6 +58,7 @@ function server_php() {
 
     function configurar_php() {
         echo -e "$verde Preparando configuracion de PHP$gris"
+        sudo apt install -y composer
         #composer global require --prefer-dist friendsofphp/php-cs-fixer squizlabs/php_codesniffer yiisoft/yii2-coding-standards phpmd/phpmd
     }
 
