@@ -23,6 +23,11 @@ Se ha intentado hacer modular de forma que apenas sea necesario tocar los script
 La idea es que el script pregunte ciertas cosas como shell a usar (bash o zsh) pero también podemos añadir fuentes simplemente copiándolas al directorio "fonts" o instalar aplicaciones simplemente añadiéndolas a la lista de aplicaciones para instalar "Software.lst"
 
 ## Ejecutar script
+Es importante realizar todos los pasos desde bash. Si usas **zsh** cambia a **bash** antes de ejecutarlo:
+```bash
+bash
+```
+
 Primero instalamos GIT
 ```debian
   sudo apt install git
