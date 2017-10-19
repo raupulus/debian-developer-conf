@@ -51,3 +51,12 @@ Todo esto se instalará de forma opcional eligiendo dicha opción en el menú
 
 ## Servidores
 Se incorporan en la parte servidores instalación para apache2, php, postregsq, mariadb
+
+
+## Directorios
+- fonts → Contiene un directorio por cada conjunto de fuentes similares
+- gedit → Contiene configuración específica para gedit
+- home → Contiene archivos de configuración o plantillas para generarlos
+- LIB → Archivos de librerías del sistema contando desde la raíz
+- TMP → Directorio donde se descargan los archivos temporales
+- usr → Contiene archivos compartidos de usuarios
