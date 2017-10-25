@@ -45,6 +45,8 @@ function server_apache() {
     instalar_apache
     configurar_apache
     personalizar_apache
+
+    sudo systemctl restart apache2
 }
 
 function server_php() {
