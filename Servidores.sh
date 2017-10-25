@@ -66,6 +66,12 @@ function server_php() {
 
         echo -e "$verde Estableciendo zona horaria por defecto para PHP$gris"
         sudo sed -r -i "s/^;?\s*date\.timezone\s*=.*$/date\.timezone = 'UTC'/" $PHPINI
+
+        echo -e "$verde Activando Mostrar errores → 'display_errors'$gris"
+        sudo sed -r -i "s/^;?\s*display_errors\s*=.*$/display_errors = On/" $PHPINI
+
+        echo -e "$verde Activando Mostrar errores al iniciar → 'display_startup_errors'$gris"
+        sudo sed -r -i "s/^;?\s*display_startup_errors\s*=.*$/display_startup_errors = On/" $PHPINI
     }
 
     function personalizar_php() {
@@ -75,6 +81,9 @@ function server_php() {
     instalar_php
     configurar_php
     personalizar_php
+
+    # Reiniciar apache2 para hacer efectivos los cambios
+    systemctl restart apache2
 }
 
 function server_sql() {
