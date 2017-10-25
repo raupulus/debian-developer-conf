@@ -97,6 +97,13 @@ function server_sql() {
 
     function configurar_sql() {
         echo -e "$verde Preparando configuracion de SQL$gris"
+        POSTGRESCONF="/etc/postgresql/9.6/main/postgresql.conf"  # Archivo de configuración para postgresql
+
+        echo -e "$verde Estableciendo intervalstyle = 'iso_8601'$gris"
+        sudo sed -r -i "s/^\s*#?intervalstyle\s*=/intervalstyle = 'iso_8601' #/" $POSTGRESCONF
+
+        echo -e "$verde Estableciendo timezone = 'UTC'$gris"
+        sudo sed -r -i "s/^\s*#?timezone\s*=/timezone = 'UTC' #/" $POSTGRESCONF
     }
 
     function personalizar_sql() {
