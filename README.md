@@ -27,6 +27,8 @@ Estos son los principales objetivos
 - Ampliar repositorios desde fuentes estables y fiables
 - Instalar configuraciones y personalizaciones para el sistema y programas en el HOME
 - Instalar atajos y personalizaciones para trabajar con git, GitHub y GitLab
+- Instalar servidores Apache2, PostgreSQL, MariaDB
+- Instalar lenguajes de programación, dependencias y librerías para → php, python, nodejs, ruby, bash, zsh
 
 En resumen dejar con un solo script todo el entorno adaptado a mis necesidades
 
@@ -70,7 +72,7 @@ Se han incorporados cambios en la personalización:
 
 Además también se añadieron iconos "paper", temas "flatpat" y la instalación de cursores "crystal"
 
-Todo esto se instalará de forma opcional eligiendo dicha opción en el menú
+Todo esto se instalará de forma opcional eligiendo dicha opción en el menú. Por ahora se instalan pero se han de activar manualmente.
 
 ## Servidores
 Se incorporan en la parte servidores instalación para apache2, php, postregsq, mariadb
