@@ -54,12 +54,18 @@ function server_php() {
         echo -e "$verde Instalando paquetes extras$gris"
         paquetes_extras="php-gd php-curl php-pgsql php-sqlite3 sqlite sqlite3 php-intl php-mbstring php-xml php-xdebug php-json"
         sudo apt install -y $paquetes_extras
+
+        echo -e "$verde Instalando librerías$gris"
+        sudo apt install -y composer
+        #composer global require --prefer-dist friendsofphp/php-cs-fixer squizlabs/php_codesniffer yiisoft/yii2-coding-standards phpmd/phpmd
     }
 
     function configurar_php() {
         echo -e "$verde Preparando configuracion de PHP$gris"
-        sudo apt install -y composer
-        #composer global require --prefer-dist friendsofphp/php-cs-fixer squizlabs/php_codesniffer yiisoft/yii2-coding-standards phpmd/phpmd
+        PHPINI='/etc/php/7.0/apache2/php.ini'  # Ruta al archivo de configuración de PHP con apache2
+
+        echo -e "$verde Estableciendo zona horaria por defecto para PHP$gris"
+        sudo sed -r -i "s/^;?\s*date\.timezone\s*=.*$/date\.timezone = 'UTC'/" $PHPINI
     }
 
     function personalizar_php() {
