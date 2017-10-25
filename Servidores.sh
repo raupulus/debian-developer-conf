@@ -46,12 +46,15 @@ function server_apache() {
     configurar_apache
     personalizar_apache
 
+    # Reiniciar servidor Apache para aplicar configuración
     sudo systemctl restart apache2
 }
 
 function server_php() {
 
     function instalar_php() {
+        V_PHP="7.0"  # Versión de PHP instalada en el sistema
+
         echo -e "$verde Instalando PHP$gris"
         paquetes_basicos="php php-cli libapache2-mod-php"
         sudo apt install -y $paquetes_basicos
@@ -67,8 +70,9 @@ function server_php() {
 
     function configurar_php() {
         echo -e "$verde Preparando configuracion de PHP$gris"
-        PHPINI='/etc/php/7.0/apache2/php.ini'  # Ruta al archivo de configuración de PHP con apache2
+        PHPINI="/etc/php/$V_PHP/apache2/php.ini"  # Ruta al archivo de configuración de PHP con apache2
 
+        # Modificar configuración
         echo -e "$verde Estableciendo zona horaria por defecto para PHP$gris"
         sudo sed -r -i "s/^;?\s*date\.timezone\s*=.*$/date\.timezone = 'UTC'/" $PHPINI
 
@@ -77,6 +81,10 @@ function server_php() {
 
         echo -e "$verde Activando Mostrar errores al iniciar → 'display_startup_errors'$gris"
         sudo sed -r -i "s/^;?\s*display_startup_errors\s*=.*$/display_startup_errors = On/" $PHPINI
+
+        # Activar módulos
+        echo -e "$verde Activando módulo → a2enmod php$V_PHP$gris"
+        a2enmod "php$V_PHP"
     }
 
     function personalizar_php() {
