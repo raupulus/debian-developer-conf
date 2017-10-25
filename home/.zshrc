@@ -125,18 +125,19 @@ bindkey "^[[6~" history-substring-search-down
 bindkey "^[[1~" beginning-of-line
 bindkey "^[[4~" end-of-line
 bindkey "^[[3~" delete-char
+bindkey -M vicmd "^[[3~" delete-char
 
 ###################################
 ### Mensaje al iniciar terminal ###
 ###################################
 if [ -f /usr/bin/neofetch ]; then
-	neofetch
+    neofetch
 elif [ -f /usr/bin/screenfetch ]; then
-	screenfetch
+    screenfetch
 fi
 
 if [ -f /usr/bin/fryntiz ]; then
-	echo -e "      \033[1;31m Para utilizar el menú interactivo usa el comando \033[1;32m\"fryntiz\" \033[1;00m"
+    echo -e "      \033[1;31m Para utilizar el menú interactivo usa el comando \033[1;32m\"fryntiz\" \033[1;00m"
 fi
 
 ###################################
