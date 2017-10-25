@@ -33,6 +33,9 @@ function server_apache() {
 
     function configurar_apache() {
     echo -e "$verde Preparando configuracion de Apache 2$gris"
+
+    echo -e "$verde Activando módulo rewrite$gris"
+    sudo a2enmod rewrite
     }
 
     function personalizar_apache() {
