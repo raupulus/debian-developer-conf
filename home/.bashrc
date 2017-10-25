@@ -92,16 +92,22 @@ fi
 # Colorear Errores y Advertencias de GCC
 export GCC_COLORS='error=01;31:warning=01;35:note=01;36:caret=01;32:locus=01:quote=01'
 
-# ALIAS
-alias ll='ls -l'
+############################
+##         ALIAS          ##
+############################
+# Comando ls
+alias ll='ls -hl'
 alias la='ls -A'
 alias l='ls -CF'
+
+# Comando cd
 alias ..="cd .."
 alias cd..="cd .."
-#alias rm="rm -i"
-#alias cp="cp -i"
-#alias mv="mv -i"
+alias ...='cd ../..'
+alias ....='cd ../../..'
+alias .....='cd ../../../..'
 
+# Git
 alias git="LANG=C git"
 alias glg="git lg"
 alias gs='git status '
@@ -115,6 +121,11 @@ alias gx='gitx --all'
 alias got='git '
 alias get='git '
 alias gp='git push'
+
+# Otros
+#alias rm="rm -i"
+#alias cp="cp -i"
+#alias mv="mv -i"
 
 # Alias importados desde subdirectorio ~/.bash_aliases
 if [ -f ~/.bash_aliases ]; then

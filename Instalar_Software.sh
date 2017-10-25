@@ -47,14 +47,16 @@ function atom_install() {
     echo -e "$verde Preparando instalación complementos$rojo Atom$gris"
     if [ -f /usr/bin/atom ]
     then
-        #En $HABILITADO se guarda "Not Disabled" cuando SI está habilitado
-        HABILITADO="`apm enable jumpy 2>> /dev/null | grep "^Not Disabled:" | cut -d':' -f1`"
-        #TOFIX → La siguiente comprobación no funciona → "bash: [: demasiados argumentos"
-        #if [ $HABILITADO = 'Not Disabled' ]; then  echo "Ya Instalado" ; fi
         for p in $atom
         do
-            echo -e "$verde Instalando$rojo $p $amarillo"
-            apm install $p
+            # Comprobación si existe instalado el complemento
+            if [ -d "$HOME/.atom/packages/$p"]
+            then
+                echo -e "$verde Ya se encuentra instalado → $p"
+            else
+                echo -e "$verde Instalando$rojo $p $amarillo"
+                apm install $p
+            fi
         done
     fi
 }

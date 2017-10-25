@@ -1,4 +1,19 @@
 "*":
+  "":
+    diff:
+      source:
+        editor:
+          tabLength: 4
+    html:
+      php:
+        text:
+          editor:
+            tabLength: 4
+  "atom-autocomplete-php":
+    binComposer: "/usr/bin/composer"
+  "atom-i18n":
+    customMenuI18nPath: "/home/fryntiz/.atom/packages/atom-i18n/def/custom_menu.cson"
+    locale: "es"
   "autoclose-html":
     legacyMode: true
   "autocomplete-plus":
@@ -8,11 +23,9 @@
     disabledPackages: [
       "language-clojure"
       "language-csharp"
-      "language-go"
       "language-java"
       "language-mustache"
       "language-objective-c"
-      "language-perl"
       "metrics"
       "linter-php"
     ]
@@ -21,8 +34,8 @@
     ]
     telemetryConsent: "no"
     themes: [
-      "one-light-ui"
-      "one-light-syntax"
+      "atom-dark-ui"
+      "monokai"
     ]
   editor:
     fontFamily: "Input"
@@ -32,6 +45,8 @@
     showIndentGuide: true
     softWrapAtPreferredLineLength: true
     tabLength: 4
+  "exception-reporting":
+    userId: "1dc8ebda-3216-4f8f-9e42-d1ce794d268d"
   "git-diff": {}
   "git-log":
     fontFamily: "Input, Inconsolata, Monaco, Consolas, 'Courier New', Courier"
@@ -52,7 +67,7 @@
       "**/tests/**"
     ]
   "linter-ui-default":
-    panelHeight: 166
+    panelHeight: 300
   "markdown-preview":
     useGitHubStyle: true
   minimap:
@@ -76,7 +91,10 @@
   "php-integrator-navigation":
     navigationRequireAltKey: false
     navigationRequireMetaKey: true
-  "php-integrator-symbol-viewer": {}
+  "spell-check":
+    locales: [
+      "es_ES.UTF-8"
+    ]
   "split-diff":
     diffWords: true
     ignoreWhitespace: true
@@ -89,9 +107,3 @@
     showOnStartup: false
   zentabs:
     neverCloseUnsaved: true
-".diff.source":
-  editor:
-    tabLength: 4
-".html.php.text":
-  editor:
-    tabLength: 4

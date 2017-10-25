@@ -52,9 +52,9 @@ export TERM=screen-256color
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git tmux command-not-found composer history-substring-search vi-mode zsh-syntax-highlighting dirhistory z)
+plugins=(git tmux command-not-found composer history-substring-search vi-mode zsh-syntax-highlighting z)
 
-# User configuration
+# Configuración de usuario
 
 export PATH="/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/bin/X11:/usr/games:/usr/local/games:$HOME/.local/bin"
 # export MANPATH="/usr/local/man:$MANPATH"
@@ -115,6 +115,7 @@ alias cd..="cd .."
 bindkey -v
 export KEYTIMEOUT=1
 
+bindkey "^R" history-incremental-search-backward
 bindkey '^K' history-substring-search-up
 bindkey '^J' history-substring-search-down
 bindkey -M vicmd 'k' history-substring-search-up
@@ -122,26 +123,22 @@ bindkey -M vicmd 'j' history-substring-search-down
 bindkey "^[[5~" history-substring-search-up
 bindkey "^[[6~" history-substring-search-down
 
-zle -N dirhistory_zle_dirhistory_back
-zle -N dirhistory_zle_dirhistory_future
-bindkey "^H" dirhistory_zle_dirhistory_back
-bindkey "^L" dirhistory_zle_dirhistory_future
-
 bindkey "^[[1~" beginning-of-line
 bindkey "^[[4~" end-of-line
 bindkey "^[[3~" delete-char
+bindkey -M vicmd "^[[3~" delete-char
 
 ###################################
 ### Mensaje al iniciar terminal ###
 ###################################
 if [ -f /usr/bin/neofetch ]; then
-	neofetch
+    neofetch
 elif [ -f /usr/bin/screenfetch ]; then
-	screenfetch
+    screenfetch
 fi
 
 if [ -f /usr/bin/fryntiz ]; then
-	echo -e "      \033[1;31m Para utilizar el menú interactivo usa el comando \033[1;32m\"fryntiz\" \033[1;00m"
+    echo -e "      \033[1;31m Para utilizar el menú interactivo usa el comando \033[1;32m\"fryntiz\" \033[1;00m"
 fi
 
 ###################################

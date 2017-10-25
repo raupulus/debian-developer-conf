@@ -33,6 +33,9 @@ function server_apache() {
 
     function configurar_apache() {
     echo -e "$verde Preparando configuracion de Apache 2$gris"
+
+    echo -e "$verde Activando módulo rewrite$gris"
+    sudo a2enmod rewrite
     }
 
     function personalizar_apache() {
@@ -42,11 +45,16 @@ function server_apache() {
     instalar_apache
     configurar_apache
     personalizar_apache
+
+    # Reiniciar servidor Apache para aplicar configuración
+    sudo systemctl restart apache2
 }
 
 function server_php() {
 
     function instalar_php() {
+        V_PHP="7.0"  # Versión de PHP instalada en el sistema
+
         echo -e "$verde Instalando PHP$gris"
         paquetes_basicos="php php-cli libapache2-mod-php"
         sudo apt install -y $paquetes_basicos
@@ -54,12 +62,29 @@ function server_php() {
         echo -e "$verde Instalando paquetes extras$gris"
         paquetes_extras="php-gd php-curl php-pgsql php-sqlite3 sqlite sqlite3 php-intl php-mbstring php-xml php-xdebug php-json"
         sudo apt install -y $paquetes_extras
+
+        echo -e "$verde Instalando librerías$gris"
+        sudo apt install -y composer
+        #composer global require --prefer-dist friendsofphp/php-cs-fixer squizlabs/php_codesniffer yiisoft/yii2-coding-standards phpmd/phpmd
     }
 
     function configurar_php() {
         echo -e "$verde Preparando configuracion de PHP$gris"
-        sudo apt install -y composer
-        #composer global require --prefer-dist friendsofphp/php-cs-fixer squizlabs/php_codesniffer yiisoft/yii2-coding-standards phpmd/phpmd
+        PHPINI="/etc/php/$V_PHP/apache2/php.ini"  # Ruta al archivo de configuración de PHP con apache2
+
+        # Modificar configuración
+        echo -e "$verde Estableciendo zona horaria por defecto para PHP$gris"
+        sudo sed -r -i "s/^;?\s*date\.timezone\s*=.*$/date\.timezone = 'UTC'/" $PHPINI
+
+        echo -e "$verde Activando Mostrar errores → 'display_errors'$gris"
+        sudo sed -r -i "s/^;?\s*display_errors\s*=.*$/display_errors = On/" $PHPINI
+
+        echo -e "$verde Activando Mostrar errores al iniciar → 'display_startup_errors'$gris"
+        sudo sed -r -i "s/^;?\s*display_startup_errors\s*=.*$/display_startup_errors = On/" $PHPINI
+
+        # Activar módulos
+        echo -e "$verde Activando módulo → a2enmod php$V_PHP$gris"
+        a2enmod "php$V_PHP"
     }
 
     function personalizar_php() {
@@ -69,6 +94,9 @@ function server_php() {
     instalar_php
     configurar_php
     personalizar_php
+
+    # Reiniciar apache2 para hacer efectivos los cambios
+    systemctl restart apache2
 }
 
 function server_sql() {
@@ -81,7 +109,14 @@ function server_sql() {
     }
 
     function configurar_sql() {
-    echo -e "$verde Preparando configuracion de SQL$gris"
+        echo -e "$verde Preparando configuracion de SQL$gris"
+        POSTGRESCONF="/etc/postgresql/9.6/main/postgresql.conf"  # Archivo de configuración para postgresql
+
+        echo -e "$verde Estableciendo intervalstyle = 'iso_8601'$gris"
+        sudo sed -r -i "s/^\s*#?intervalstyle\s*=/intervalstyle = 'iso_8601' #/" $POSTGRESCONF
+
+        echo -e "$verde Estableciendo timezone = 'UTC'$gris"
+        sudo sed -r -i "s/^\s*#?timezone\s*=/timezone = 'UTC' #/" $POSTGRESCONF
     }
 
     function personalizar_sql() {
@@ -93,6 +128,9 @@ function server_sql() {
     instalar_sql
     configurar_sql
     personalizar_sql
+
+    # Reiniciar servidor postgresql al terminar con la instalación y configuración
+    systemctl restart postgresql
 }
 
 function instalar_servidores() {
