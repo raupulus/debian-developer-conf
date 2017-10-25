@@ -115,6 +115,7 @@ alias cd..="cd .."
 bindkey -v
 export KEYTIMEOUT=1
 
+bindkey "^R" history-incremental-search-backward
 bindkey '^K' history-substring-search-up
 bindkey '^J' history-substring-search-down
 bindkey -M vicmd 'k' history-substring-search-up
