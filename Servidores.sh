@@ -96,7 +96,7 @@ function server_sql() {
     }
 
     function configurar_sql() {
-    echo -e "$verde Preparando configuracion de SQL$gris"
+        echo -e "$verde Preparando configuracion de SQL$gris"
     }
 
     function personalizar_sql() {
@@ -108,6 +108,9 @@ function server_sql() {
     instalar_sql
     configurar_sql
     personalizar_sql
+
+    # Reiniciar servidor postgresql al terminar con la instalación y configuración
+    systemctl restart postgresql
 }
 
 function instalar_servidores() {
