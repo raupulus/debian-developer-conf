@@ -50,7 +50,7 @@ function atom_install() {
         for p in $atom
         do
             # Comprobación si existe instalado el complemento
-            if [ -d "$HOME/.atom/packages/$p"]
+            if [ -d "$HOME/.atom/packages/$p" ]
             then
                 echo -e "$verde Ya se encuentra instalado → $p"
             else
