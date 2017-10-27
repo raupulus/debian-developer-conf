@@ -146,7 +146,7 @@ function haroopad_install() {
         for (( i=1; i<=$REINTENTOS; i++ ))
         do
             rm haroopad-v0.13.1-x64.deb 2>> /dev/null
-            wget https://bitbucket.org/rhiokim/haroopad-download/downloads/haroopad-v0.13.1-x64.deb && break
+            wget --show-progress https://bitbucket.org/rhiokim/haroopad-download/downloads/haroopad-v0.13.1-x64.deb && break
         done
         echo -e "$verde Preparando para instalar$rojo Haroopad$gris"
         sudo dpkg -i haroopad-v0.13.1-x64.deb && sudo apt install -f -y
@@ -154,7 +154,20 @@ function haroopad_install() {
 }
 
 function gitkraken_install() {
-
+    if [ -f /usr/bin/gitkraken ]
+    then
+        echo -e "$verde Ya esta$rojo Gitkraken$verde instalado en el equipo, omitiendo paso$gris"
+    else
+        REINTENTOS=3
+        echo -e "$verde Descargando$rojo Gitkraken$gris"
+        for (( i=1; i<=$REINTENTOS; i++ ))
+        do
+            rm gitkraken-amd64.deb 2>> /dev/null
+            wget --show-progress https://release.gitkraken.com/linux/gitkraken-amd64.deb && break
+        done
+        echo -e "$verde Preparando para instalar$rojo Gitkraken$gris"
+        sudo dpkg -i gitkraken-amd64.deb && sudo apt install -f -y
+    fi
 }
 
 #Recorrer "Software.lst" Instalando paquetes ahí descritos
