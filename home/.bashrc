@@ -166,7 +166,7 @@ if [ $TILIX_ID ] || [ $VTE_VERSION ]; then
     source /etc/profile.d/vte.sh
 fi
 
-#POWERLINE EN BASH → DESCOMENTAR PARA USAR POWERLINE SIN BASHIT
+#POWERLINE EN BASH
 #if [ -f /usr/bin/powerline-daemon ]; then
 #  /usr/share/powerline/bindings/bash/powerline.sh -q
 #  POWERLINE_BASH_CONTINUATION=1
@@ -210,7 +210,7 @@ export LESS_TERMCAP_us=$'\E[04;38;5;146m' # begin underline
 if [ -f ~/.bash_it/bash_it.sh ] #Comprobar si está instalado para el usuario
 then
     # Path to the bash it configuration
-    export BASH_IT="/home/$(whoami)/.bash_it"
+    export BASH_IT="/$HOME/.bash_it"
 
     # Lock and Load a custom theme file
     # location /.bash_it/themes/
@@ -222,7 +222,7 @@ then
     # export BASH_IT_REMOTE='bash-it'
 
     # Your place for hosting Git repos. I use this for private repos.
-    export GIT_HOSTING='usuario@servidor.com'
+    export GIT_HOSTING='usuario@servidor'
 
     # Don't check mail when opening terminal.
     unset MAILCHECK
