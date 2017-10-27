@@ -77,6 +77,25 @@ xterm*|rxvt*)
     ;;
 esac
 
+###################################
+###       Rutas a binarios      ###
+###################################
+if [ -d $HOME/bin ]; then
+    PATH=$PATH:$HOME/bin
+fi
+
+if [ -d $HOME/.local/bin ]; then
+    PATH=$PATH:$HOME/.local/bin
+fi
+
+if [ -d $HOME/.config/composer/vendor/bin ]; then
+    PATH=$PATH:$HOME/.config/composer/vendor/bin
+fi
+
+
+############################
+##         COLOR          ##
+############################
 # Habilita el soporte de color para "ls" y algunos alias
 if [ -x /usr/bin/dircolors ]; then
     test -r ~/.dircolors && eval "$(dircolors -b ~/.dircolors)" || eval "$(dircolors -b)"
@@ -91,6 +110,7 @@ fi
 
 # Colorear Errores y Advertencias de GCC
 export GCC_COLORS='error=01;31:warning=01;35:note=01;36:caret=01;32:locus=01:quote=01'
+
 
 ############################
 ##         ALIAS          ##
@@ -146,7 +166,7 @@ if [ $TILIX_ID ] || [ $VTE_VERSION ]; then
     source /etc/profile.d/vte.sh
 fi
 
-#POWERLINE EN BASH → DESCOMENTAR PARA USAR POWERLINE SIN BASHIT
+#POWERLINE EN BASH
 #if [ -f /usr/bin/powerline-daemon ]; then
 #  /usr/share/powerline/bindings/bash/powerline.sh -q
 #  POWERLINE_BASH_CONTINUATION=1
@@ -190,7 +210,7 @@ export LESS_TERMCAP_us=$'\E[04;38;5;146m' # begin underline
 if [ -f ~/.bash_it/bash_it.sh ] #Comprobar si está instalado para el usuario
 then
     # Path to the bash it configuration
-    export BASH_IT="/home/$(whoami)/.bash_it"
+    export BASH_IT="/$HOME/.bash_it"
 
     # Lock and Load a custom theme file
     # location /.bash_it/themes/
@@ -202,7 +222,7 @@ then
     # export BASH_IT_REMOTE='bash-it'
 
     # Your place for hosting Git repos. I use this for private repos.
-    export GIT_HOSTING='usuario@servidor.com'
+    export GIT_HOSTING='usuario@servidor'
 
     # Don't check mail when opening terminal.
     unset MAILCHECK

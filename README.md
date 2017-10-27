@@ -77,6 +77,41 @@ Todo esto se instalará de forma opcional eligiendo dicha opción en el menú. P
 ## Servidores
 Se incorporan en la parte servidores instalación para apache2, php, postregsq, mariadb
 
+### Apache 2
+
+### PHP
+En este script para seguir rigurosamente la filosofía Debian apostando por la seguridad que nos acostumbra y sobre todo la estabilidad la cual es bastante conocida, optamos a seguir siempre con la versión más alta de sus repositorios estables y oficiales libres.
+
+Se instalan los siguientes paquetes básicos desde repositorios:
+- php
+- php-cli
+- libapache2-mod-php
+
+Se instalan los siguientes paquetes extras desde repositorios
+- php-gd
+- php-curl
+- php-pgsql
+- php-sqlite3
+- sqlite
+- sqlite3
+- php-intl
+- php-mbstring
+- php-xml
+- php-xdebug
+- php-json
+
+Se instala Composer y algunos paquetes con este
+- composer
+
+
+
+Se instalan las siguientes herramientas de fuentes externas:
+- psysh → Un intérprete interactivo para aprender o hacer debug
+
+### PostgreSQL
+
+### MariaDB
+
 
 ## Directorios
 - fonts → Contiene un directorio por cada conjunto de fuentes similares
