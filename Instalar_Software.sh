@@ -174,21 +174,29 @@ function gitkraken_install() {
 function firefox_install() {
 
     # Firefox-Quantum Developer Edition
-    function firefox_developer
-    if [ -f /usr/bin/firefox-quantum ]
-    then
-        echo -e "$verde Ya esta$rojo Firefox Quantum Developer Edition$verde instalado en el equipo, omitiendo paso$gris"
-    else
-        REINTENTOS=3
-        echo -e "$verde Descargando$rojo Firefox Quantum Developer Edition$gris"
-        for (( i=1; i<=$REINTENTOS; i++ ))
-        do
-            rm ???? 2>> /dev/null
-            wget --show-progress ????? && break
-        done
-        echo -e "$verde Preparando para instalar$rojo Firefox Quantum Developer Edition$gris"
-        sudo dpkg -i ????.deb && sudo apt install -f -y
-    fi
+    function firefox_developer() {
+        if [ -f /usr/bin/firefox-quantum ]
+        then
+            echo -e "$verde Ya esta$rojo Firefox Quantum Developer Edition$verde instalado en el equipo, omitiendo paso$gris"
+        else
+            REINTENTOS=3
+            echo -e "$verde Descargando$rojo Firefox Quantum Developer Edition$gris"
+            for (( i=1; i<=$REINTENTOS; i++ ))
+            do
+                rm Debian-Developer_amd64.tar.bz2 2>> /dev/null
+                wget --show-progress -r -A tar.bz2 'https://download.mozilla.org/?product=firefox-devedition-latest-ssl&os=linux64&lang=es-ES' -O Debian-Developer_amd64.tar.bz2 && break
+            done
+            echo -e "$verde Preparando para instalar$rojo Firefox Quantum Developer Edition$gris"
+
+            # TODO → Desempaquetar Debian-Developer_amd64.tar.bz2
+            # TODO → Mover archivo extraido a su ubicación final
+            # TODO → Crear enlaces de usuario y permisos de ejecución
+            # TODO → Crear comando hacia la ruta: firefox-quantum
+        fi
+    }
+
+
+    firefox_developer
 }
 
 #Recorrer "Software.lst" Instalando paquetes ahí descritos
