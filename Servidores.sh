@@ -92,6 +92,11 @@ function server_php() {
 
     function personalizar_php() {
         echo -e "$verde Personalizando PHP$gris"
+
+        # Intérprete interactivo de PHP → psysh
+        echo -e "$verde Instalar Intérprete$rojo psysh $gris"
+        wget --show-progress https://git.io/psysh  -O ~/.local/bin/psysh
+        chmod +x ~/.local/bin/psysh
     }
 
     instalar_php
