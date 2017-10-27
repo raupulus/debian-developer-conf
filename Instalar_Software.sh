@@ -137,7 +137,20 @@ function ninjaide_install() {
 }
 
 function haroopad_install() {
-
+    if [ -f /usr/bin/haroopad ]
+    then
+        echo -e "$verde Ya esta$rojo Haroopad$verde instalado en el equipo, omitiendo paso$gris"
+    else
+        REINTENTOS=3
+        echo -e "$verde Descargando$rojo Haroopad$gris"
+        for (( i=1; i<=$REINTENTOS; i++ ))
+        do
+            rm haroopad-v0.13.1-x64.deb 2>> /dev/null
+            wget https://bitbucket.org/rhiokim/haroopad-download/downloads/haroopad-v0.13.1-x64.deb && break
+        done
+        echo -e "$verde Preparando para instalar$rojo Haroopad$gris"
+        sudo dpkg -i haroopad-v0.13.1-x64.deb && sudo apt install -f -y
+    fi
 }
 
 function gitkraken_install() {
