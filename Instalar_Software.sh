@@ -170,6 +170,27 @@ function gitkraken_install() {
     fi
 }
 
+# Instalar versiones de Firefox
+function firefox_install() {
+
+    # Firefox-Quantum Developer Edition
+    function firefox_developer
+    if [ -f /usr/bin/firefox-quantum ]
+    then
+        echo -e "$verde Ya esta$rojo Firefox Quantum Developer Edition$verde instalado en el equipo, omitiendo paso$gris"
+    else
+        REINTENTOS=3
+        echo -e "$verde Descargando$rojo Firefox Quantum Developer Edition$gris"
+        for (( i=1; i<=$REINTENTOS; i++ ))
+        do
+            rm ???? 2>> /dev/null
+            wget --show-progress ????? && break
+        done
+        echo -e "$verde Preparando para instalar$rojo Firefox Quantum Developer Edition$gris"
+        sudo dpkg -i ????.deb && sudo apt install -f -y
+    fi
+}
+
 #Recorrer "Software.lst" Instalando paquetes ahí descritos
 function instalar_Software() {
     echo -e "$verde Actualizando listas de$rojo Repositorios$verde (Paciencia)$gris"
