@@ -77,6 +77,25 @@ xterm*|rxvt*)
     ;;
 esac
 
+###################################
+###       Rutas a binarios      ###
+###################################
+if [ -d $HOME/bin ]; then
+    PATH=$PATH:$HOME/bin
+fi
+
+if [ -d $HOME/.local/bin ]; then
+    PATH=$PATH:$HOME/.local/bin
+fi
+
+if [ -d $HOME/.config/composer/vendor/bin ]; then
+    PATH=$PATH:$HOME/.config/composer/vendor/bin
+fi
+
+
+############################
+##         COLOR          ##
+############################
 # Habilita el soporte de color para "ls" y algunos alias
 if [ -x /usr/bin/dircolors ]; then
     test -r ~/.dircolors && eval "$(dircolors -b ~/.dircolors)" || eval "$(dircolors -b)"
@@ -91,6 +110,7 @@ fi
 
 # Colorear Errores y Advertencias de GCC
 export GCC_COLORS='error=01;31:warning=01;35:note=01;36:caret=01;32:locus=01:quote=01'
+
 
 ############################
 ##         ALIAS          ##
