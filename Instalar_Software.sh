@@ -136,6 +136,14 @@ function ninjaide_install() {
     sudo apt install -y python-git python3-git 2>> /dev/null
 }
 
+function haroopad_install() {
+
+}
+
+function gitkraken_install() {
+
+}
+
 #Recorrer "Software.lst" Instalando paquetes ahí descritos
 function instalar_Software() {
     echo -e "$verde Actualizando listas de$rojo Repositorios$verde (Paciencia)$gris"
@@ -154,6 +162,8 @@ function instalar_Software() {
     brackets_install
     dbeaver_install
     ninjaide_install
+    haroopad_install
+    gitkraken_install
 
     sudo apt --fix-broken install 2>> /dev/null
     sudo apt install -f -y 2>> /dev/null
