@@ -52,7 +52,7 @@ function atom_install() {
             # Comprobación si existe instalado el complemento
             if [ -d "$HOME/.atom/packages/$p" ]
             then
-                echo -e "$verde Ya se encuentra instalado → $p"
+                echo -e "$amarillo Ya se encuentra instalado →$rojo $p"
             else
                 echo -e "$verde Instalando$rojo $p $amarillo"
                 apm install $p
