@@ -281,7 +281,7 @@ function instalar_Software() {
     do
         # TODO → Mirar si se puede añadir al siguiente if algo similar a:
         # [ $s in lista_todos_paquetes ]
-        if || [ -f /bin/$s ] || [ -f /usr/bin/$s ]
+        if [ -f /bin/$s ] || [ -f /usr/bin/$s ]
         then
             echo -e "$rojo $s$verde ya estaba instalado"
         else
