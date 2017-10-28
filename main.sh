@@ -124,7 +124,7 @@ while :
             echo -e "$rojo Esto solo es útil ante situaciones donde fallan cosas$gris"
             echo -e "$rojo Hay riesgo de perder datos$gris"
             limpieza_con_fuerza
-            echo ""
+            echo "";;
 
         0)#SALIR
             clear
