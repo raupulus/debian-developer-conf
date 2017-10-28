@@ -170,7 +170,6 @@ function gitkraken_install() {
     fi
 }
 
-# TODO → Crear archivos DESKTOP para ejecutar desde icono los navegadores
 # TODO → Crear perfiles básicos, copiarlos a su ruta correspondiente y asignarlos a cada versión
 # Instalar versiones de Firefox
 function firefox_install() {
