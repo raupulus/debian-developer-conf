@@ -199,7 +199,7 @@ function firefox_install() {
             tar -xjvf Firefox-Quantum-Developer_amd64.tar.bz 2>> /dev/null
 
             # Mover archivo extraido a su ubicación final
-            mv -R firefox ~/.local/opt/Firefox_Quantum_Developer 2>> /dev/null
+            mv firefox ~/.local/opt/Firefox_Quantum_Developer 2>> /dev/null
 
             # Crear enlaces de usuario y permisos de ejecución
             ln -s ~/.local/opt/Firefox_Quantum_Developer/???????? ~/.local/bin/firefox-quantum
@@ -226,10 +226,10 @@ function firefox_install() {
             tar -xjvf Firefox-Nightly_amd64.tar.bz2 2>> /dev/null
 
             # Mover archivo extraido a su ubicación final
-            mv -R firefox ~/.local/opt/Firefox_Nightly 2>> /dev/null
+            mv firefox ~/.local/opt/Firefox_Nightly 2>> /dev/null
 
             # Crear enlaces de usuario y permisos de ejecución
-            ln -s ~/.local/opt/Firefox_Quantum_Developer/???????? ~/.local/bin/firefox-nightly
+            ln -s ~/.local/opt/Firefox_Nightly/???????? ~/.local/bin/firefox-nightly
             chmod +x ~/.local/bin/firefox-nightly
         fi
     }
