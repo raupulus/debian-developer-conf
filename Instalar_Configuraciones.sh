@@ -320,6 +320,16 @@ function configurar_gedit() {
 function configurar_hosts() {
     echo -e "$verde Configurar archivo$rojo /etc/hosts"
 
+    function hosts_backup() {
+        if [ ! -f /etc/hosts.BACKUP ]
+        then
+            sudo mv /etc/hosts /etc/hosts.BACKUP
+        else
+            mkdir -p TMP 2>> /dev/null
+            cat /etc/hosts > ./TMP/hosts
+            cat ./etc/hosts >> ./TMP/hosts
+            sudo cp ./TMP/hosts /etc/hosts
+    hosts_backup
 }
 
 #Instalar Todas las configuraciones
@@ -334,6 +344,7 @@ function instalar_configuraciones() {
 
     configurar_gedit
     agregar_conf_home
+    configurar_hosts
     terminal #Pregunta el terminal a usar
 
     sudo update-command-not-found
