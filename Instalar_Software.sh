@@ -175,10 +175,20 @@ function gitkraken_install() {
 # Instalar versiones de Firefox
 function firefox_install() {
 
-    # Si no existe el directorio se creará
+    # Si no existen los directorios se crearán
     if [ ! -d ~/.local/opt ]
     then
-        mkdir ~/.local/opt
+        mkdir -p ~/.local/opt
+    fi
+
+    if [ ! -d ~/.local/bin ]
+    then
+        mkdir -p ~/.local/bin
+    fi
+
+    if [ ! -d ~/.local/share/applications ]
+    then
+        mkdir -p ~/.local/share/applications
     fi
 
     # Firefox Quantum Developer Edition
