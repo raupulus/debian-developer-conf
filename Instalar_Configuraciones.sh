@@ -331,6 +331,9 @@ function instalar_configuraciones() {
     permisos
     programas_default
     configurar_vim
+
+    cd $DIR_SRCIPT
+
     configurar_gedit
     agregar_conf_home
     terminal #Pregunta el terminal a usar
