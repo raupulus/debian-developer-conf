@@ -118,14 +118,9 @@ function configurar_vim() {
 
     #Instalar Gestor de Plugins Vundle
     function vundle_descargar() {
-        rm -R ~/.vim/bundle/Vundle.vim 2>> /dev/null
-
         echo -e "$verde Descargando Vundle desde Repositorios"
-        git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
-
-        if [ ! -d ~/.vim/bundle/Vundle.vim ]
+        if [ ! -d ~/.vim/bundle/Vundle.vim ] # Se intenta descargar 10 veces
         then
-            # Se intenta descargar 10 veces, si falla se borra el directorio
             for (( i=1; i<=10; i++ ))
             do
                 if [ $i -eq 10 ]
@@ -136,17 +131,14 @@ function configurar_vim() {
                 git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
                 vundle_actualizar_plugins && break
             done
+        else
+            echo -e "$verde Vundle ya está instalado$gris"
         fi
     }
 
     # Instalar Vundle y actualizar Plugins
-    if [ -d ~/.vim/bundle/Vundle.vim ]
-    then
-        echo -e "$verde Vundle ya está instalado, instalando plugins nuevos$gris"
-        vundle_actualizar_plugins
-    else
-        vundle_descargar
-    fi
+    vundle_descargar
+    vundle_actualizar_plugins
 
     #Funcion para instalar todos los plugins
     function vim_plugins() {
