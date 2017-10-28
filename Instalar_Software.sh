@@ -259,7 +259,7 @@ function instalar_Software() {
     ninjaide_install
     haroopad_install
     gitkraken_install
-    #firefox_install
+    firefox_install
 
     sudo apt --fix-broken install 2>> /dev/null
     sudo apt install -f -y 2>> /dev/null
