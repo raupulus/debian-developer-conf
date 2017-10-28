@@ -202,7 +202,7 @@ function firefox_install() {
             mv firefox ~/.local/opt/Firefox_Quantum_Developer 2>> /dev/null
 
             # Crear enlaces de usuario y permisos de ejecución
-            ln -s ~/.local/opt/Firefox_Quantum_Developer/???????? ~/.local/bin/firefox-quantum
+            ln -s ~/.local/opt/Firefox_Quantum_Developer/firefox ~/.local/bin/firefox-quantum
             chmod + x ~/.local/bin/firefox-quantum
         fi
     }
@@ -229,7 +229,7 @@ function firefox_install() {
             mv firefox ~/.local/opt/Firefox_Nightly 2>> /dev/null
 
             # Crear enlaces de usuario y permisos de ejecución
-            ln -s ~/.local/opt/Firefox_Nightly/???????? ~/.local/bin/firefox-nightly
+            ln -s ~/.local/opt/Firefox_Nightly/firefox ~/.local/bin/firefox-nightly
             chmod +x ~/.local/bin/firefox-nightly
         fi
     }
