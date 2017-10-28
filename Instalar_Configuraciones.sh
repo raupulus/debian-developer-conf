@@ -316,6 +316,12 @@ function configurar_gedit() {
     cp -r ./gedit/.config/gedit/* ~/.config/gedit/
 }
 
+#Crea un archivo hosts muy completo que bloquea bastantes sitios malignos en la web
+function configurar_hosts() {
+    echo -e "$verde Configurar archivo$rojo /etc/hosts"
+
+}
+
 #Instalar Todas las configuraciones
 function instalar_configuraciones() {
     bashit
