@@ -171,6 +171,7 @@ function gitkraken_install() {
 }
 
 # TODO → Crear archivos DESKTOP para ejecutar desde icono los navegadores
+# TODO → Crear perfiles básicos, copiarlos a su ruta correspondiente y asignarlos a cada versión
 # Instalar versiones de Firefox
 function firefox_install() {
 
@@ -204,6 +205,12 @@ function firefox_install() {
             # Crear enlaces de usuario y permisos de ejecución
             ln -s ~/.local/opt/Firefox_Quantum_Developer/firefox ~/.local/bin/firefox-quantum
             chmod +x ~/.local/bin/firefox-quantum
+
+            # Pedir crear perfil
+            echo -e "$verde Para evitar conflictos entre distintas versiones crea un perfil"
+            echo -e "$verde Al pulsar una tecla se abrirá una ventana para ello"
+            echo -e "$verde El nombre convendrá que sea lógico como → Firefox-Quantum"
+            read x
         fi
     }
 
@@ -231,6 +238,12 @@ function firefox_install() {
             # Crear enlaces de usuario y permisos de ejecución
             ln -s ~/.local/opt/Firefox_Nightly/firefox ~/.local/bin/firefox-nightly
             chmod +x ~/.local/bin/firefox-nightly
+
+            # Pedir crear perfil
+            echo -e "$verde Para evitar conflictos entre distintas versiones crea un perfil"
+            echo -e "$verde Al pulsar una tecla se abrirá una ventana para ello"
+            echo -e "$verde El nombre convendrá que sea lógico como → Firefox-Nightly"
+            read x
         fi
     }
 
