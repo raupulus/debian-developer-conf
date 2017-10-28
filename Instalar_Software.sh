@@ -213,7 +213,7 @@ function firefox_install() {
             echo -e "$verde Al pulsar una tecla se abrirá una ventana para ello"
             echo -e "$verde El nombre convendrá que sea lógico como →$rojo Firefox-Quantum$amarillo"
             read -p "Pulsa una tecla para abrir el ProfileManager" x
-            . ~/.local/bin/firefox-quantum --ProfileManager
+            ~/.local/bin/firefox-quantum --ProfileManager
         }
 
 
@@ -261,7 +261,7 @@ function firefox_install() {
             echo -e "$verde Al pulsar una tecla se abrirá una ventana para ello"
             echo -e "$verde El nombre convendrá que sea lógico como →$rojo Firefox-Nightly$amarillo"
             read -p "Pulsa una tecla para abrir el ProfileManager" x
-            . ~/.local/bin/firefox-nightly --ProfileManager
+            ~/.local/bin/firefox-nightly --ProfileManager
         }
 
 
