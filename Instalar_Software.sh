@@ -170,6 +170,7 @@ function gitkraken_install() {
     fi
 }
 
+# TODO → Crear archivos DESKTOP para ejecutar desde icono los navegadores
 # Instalar versiones de Firefox
 function firefox_install() {
 
@@ -181,7 +182,7 @@ function firefox_install() {
 
     # Firefox Quantum Developer Edition
     function firefox_developer() {
-        if [ -f /usr/bin/firefox-quantum ]
+        if [ -f ~/.local/bin/firefox-quantum ]
         then
             echo -e "$verde Ya esta$rojo Firefox Quantum Developer Edition$verde instalado en el equipo, omitiendo paso$gris"
         else
@@ -189,21 +190,26 @@ function firefox_install() {
             echo -e "$verde Descargando$rojo Firefox Quantum Developer Edition$gris"
             for (( i=1; i<=$REINTENTOS; i++ ))
             do
-                rm Debian-Developer_amd64.tar.bz2 2>> /dev/null
-                wget --show-progress -r -A tar.bz2 'https://download.mozilla.org/?product=firefox-devedition-latest-ssl&os=linux64&lang=es-ES' -O Debian-Developer_amd64.tar.bz2 && break
+                rm Firefox-Quantum-Developer_amd64.tar.bz 2>> /dev/null
+                wget --show-progress -r -A tar.bz2 'https://download.mozilla.org/?product=firefox-devedition-latest-ssl&os=linux64&lang=es-ES' -O Firefox-Quantum-Developer_amd64.tar.bz2 && break
             done
             echo -e "$verde Preparando para instalar$rojo Firefox Quantum Developer Edition$gris"
 
-            # TODO → Desempaquetar Debian-Developer_amd64.tar.bz2
-            # TODO → Mover archivo extraido a su ubicación final
-            # TODO → Crear enlaces de usuario y permisos de ejecución
-            # TODO → Crear comando hacia la ruta: firefox-quantum
+            # Desempaquetar Firefox-Nightly_amd64.tar.bz2
+            tar -xjvf Firefox-Quantum-Developer_amd64.tar.bz 2>> /dev/null
+
+            # Mover archivo extraido a su ubicación final
+            mv -R firefox ~/.local/opt/Firefox_Quantum_Developer 2>> /dev/null
+
+            # Crear enlaces de usuario y permisos de ejecución
+            ln -s ~/.local/opt/Firefox_Quantum_Developer/???????? ~/.local/bin/firefox-quantum
+            chmod + x ~/.local/bin/firefox-quantum
         fi
     }
 
     # Firefox Nightly
     function firefox_nightly() {
-        if [ -f ~/.local/bin/firefox_nightly ]
+        if [ -f ~/.local/bin/firefox-nightly ]
         then
             echo -e "$verde Ya esta$rojo Firefox Nightly$verde instalado en el equipo, omitiendo paso$gris"
         else
@@ -216,14 +222,15 @@ function firefox_install() {
             done
             echo -e "$verde Preparando para instalar$rojo Firefox Nightly$gris"
 
-            # TODO → Desempaquetar Firefox-Nightly_amd64.tar.bz2
+            # Desempaquetar Firefox-Nightly_amd64.tar.bz2
             tar -xjvf Firefox-Nightly_amd64.tar.bz2 2>> /dev/null
 
-            # TODO → Mover archivo extraido a su ubicación final
+            # Mover archivo extraido a su ubicación final
             mv -R firefox ~/.local/opt/Firefox_Nightly 2>> /dev/null
 
-            # TODO → Crear enlaces de usuario y permisos de ejecución
-            # TODO → Crear comando hacia la ruta: firefox-quantum
+            # Crear enlaces de usuario y permisos de ejecución
+            ln -s ~/.local/opt/Firefox_Quantum_Developer/???????? ~/.local/bin/firefox-nightly
+            chmod +x ~/.local/bin/firefox-nightly
         fi
     }
 
