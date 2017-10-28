@@ -211,13 +211,17 @@ function firefox_install() {
             echo -e "$verde Descargando$rojo Firefox Nightly$gris"
             for (( i=1; i<=$REINTENTOS; i++ ))
             do
-                rm Debian-Nightly_amd64.tar.bz2 2>> /dev/null
-                wget --show-progress -r -A tar.bz2 'https://download.mozilla.org/?product=firefox-nightly-latest-l10n-ssl&os=linux64&lang=es-ES' -O Debian-Nightly_amd64.tar.bz2 && break
+                rm Firefox-Nightly_amd64.tar.bz2 2>> /dev/null
+                wget --show-progress -r -A tar.bz2 'https://download.mozilla.org/?product=firefox-nightly-latest-l10n-ssl&os=linux64&lang=es-ES' -O Firefox-Nightly_amd64.tar.bz2 && break
             done
             echo -e "$verde Preparando para instalar$rojo Firefox Nightly$gris"
 
-            # TODO → Desempaquetar Debian-Developer_amd64.tar.bz2
+            # TODO → Desempaquetar Firefox-Nightly_amd64.tar.bz2
+            tar -xjvf Firefox-Nightly_amd64.tar.bz2 2>> /dev/null
+
             # TODO → Mover archivo extraido a su ubicación final
+            mv -R firefox ~/.local/opt/Firefox_Nightly 2>> /dev/null
+
             # TODO → Crear enlaces de usuario y permisos de ejecución
             # TODO → Crear comando hacia la ruta: firefox-quantum
         fi
