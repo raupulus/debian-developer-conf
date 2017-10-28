@@ -1,0 +1,18 @@
+[Desktop Entry]
+Name=Firefox Quantum
+Name[es]=Firefox Quantum
+Comment=Browse the World Wide Web
+Comment[es]=Navegue por la web
+GenericName=Web Browser
+GenericName[es]=Navegador web
+X-GNOME-FullName=Firefox Quantum Web Browser
+X-GNOME-FullName[es]=Navegador web Firefox Quantum
+Exec=~/.local/bin/firefox-quantum/firefox-quantum %u
+Terminal=false
+X-MultipleArgs=false
+Type=Application
+Icon=firefox-trunk
+Categories=Network;WebBrowser;
+MimeType=text/html;text/xml;application/xhtml+xml;application/xml;application/vnd.mozilla.xul+xml;application/rss+xml;application/rdf+xml;image/gif;image/jpeg;image/png;x-scheme-handler/http;x-scheme-handler/https;
+StartupWMClass=Firefox-Quantum
+StartupNotify=true
