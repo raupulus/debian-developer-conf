@@ -300,9 +300,15 @@ function terminal() {
         case $term in
             bash | 1)#Establecer bash como terminal
                 chsh -s /bin/bash
+                # Cambiar enlace por defecto desde sh a bash
+                sudo rm /bin/sh
+                sudo ln -s /bin/bash /bin/sh
                 break;;
             zsh | 2)#Establecer zsh como terminal
                 chsh -s /bin/zsh
+                # Cambiar enlace por defecto desde sh a zsh
+                sudo rm /bin/sh
+                sudo ln -s /bin/zsh /bin/sh
                 break;;
             *)#Opción errónea
                 echo -e "$rojo Opción no válida$gris"
