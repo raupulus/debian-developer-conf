@@ -8,6 +8,13 @@
 # ###       www.fryntiz.es        ### #
 #######################################
 
+# Script principal
+# Desde aquí se llamaran a todos los demás scripts separando funciones para cada uno de ellos
+#
+# Ten en cuenta que este script hace modificaciones en el equipo a mi gusto
+# Puede no funcionar correctamente si usas software de repositorios externo
+# Probablemente no funcionará en otras distribuciones distintas a Debian rama Stable
+
 ############################
 ##   Constantes Colores   ##
 ############################
@@ -20,8 +27,9 @@ magenta="\033[1;35m"
 rojo="\033[1;31m"
 verde="\033[1;32m"
 
+
 #############################
-##   Variables Generales   ##
+##    Importar Fuentes     ##
 #############################
 
 source ./Agregar_Repositorios.sh
@@ -32,6 +40,12 @@ source ./Variables_Entorno.sh
 source ./Configurar_GIT.sh
 source ./Personalización_GTK.sh
 source ./Servidores.sh
+
+
+#############################
+##   Variables Generales   ##
+#############################
+
 
 while :
     do
@@ -44,7 +58,7 @@ while :
         echo -e "   $rojo 3)  $verde Instalar Configuraciones$gris" #Configuración bash, zsh, variables entorno...
         echo -e "   $rojo 4)  $verde Configurar GIT$gris"
         echo -e "   $rojo 5)  $verde Personalizar Sistema y GTK$gris"
-        echo -e "   $rojo 6)  $verde Instalar Servidores Apache → PHP → SQL$amarillo (No completado)$gris"
+        echo -e "   $rojo 6)  $verde Instalar Servidores Apache → PHP → SQL"
         echo -e "   $rojo 7)  $verde Ejecutar todos los pasos anteriores$gris"
 
 
