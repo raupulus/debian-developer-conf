@@ -272,7 +272,12 @@ function instalar_Software() {
     echo -e "$verde Instalando Software adicional$gris"
     for s in $software
     do
-        sudo apt install -y $s >> /dev/null 2>> /dev/null && echo -e "$rojo $s$verde instalado correctamente" || echo -e "$rojo $s$verde No se ha instalado"
+        if [ -f /bin/$s || -f /usr/bin/$s ]
+        then
+            echo -e "$rojo $s$verde ya estaba instalado"
+        else
+            sudo apt install -y $s >> /dev/null 2>> /dev/null && echo -e "$rojo $s$verde instalado correctamente" || echo -e "$rojo $s$amarillo No se ha instalado$gris"
+        fi
     done
 
     #Instalaciones de software independiente
