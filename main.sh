@@ -40,6 +40,7 @@ source ./Variables_Entorno.sh
 source ./Configurar_GIT.sh
 source ./Personalización_GTK.sh
 source ./Servidores.sh
+source ./limpiador.sh
 
 
 #############################
@@ -60,6 +61,7 @@ while :
         echo -e "   $rojo 5)  $verde Personalizar Sistema y GTK$gris"
         echo -e "   $rojo 6)  $verde Instalar Servidores Apache → PHP → SQL"
         echo -e "   $rojo 7)  $verde Ejecutar todos los pasos anteriores$gris"
+        echo -e "   $rojo BORRAR)  $amarillo Limpia$rojo TODO$amarillo rastro del script (peligroso) $gris"
 
 
     read entrada
@@ -115,6 +117,14 @@ while :
             instalar_servidores
             instalar_variables
             read -p "Pulsa una tecla para continuar";;
+
+        'BORRAR')  # Borrar todo rastro del script, es muy peligroso usarlo
+            clear
+            echo -e "$rojo Preparando para limpiar todo rastro$gris"
+            echo -e "$rojo Esto solo es útil ante situaciones donde fallan cosas$gris"
+            echo -e "$rojo Hay riesgo de perder datos$gris"
+            limpieza_con_fuerza
+            echo ""
 
         0)#SALIR
             clear
