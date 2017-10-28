@@ -206,6 +206,9 @@ function firefox_install() {
             ln -s ~/.local/opt/Firefox_Quantum_Developer/firefox ~/.local/bin/firefox-quantum
             chmod +x ~/.local/bin/firefox-quantum
 
+            # Copiar acceso directo
+            cp Accesos_Directos/firefox-quantum.desktop ~/.local/share/applications/
+
             # TODO → Autogenerar y asociar un perfil existente con el mismo nombre de la version
             # Pedir crear perfil
             echo -e "$verde Para evitar conflictos entre distintas versiones crea un perfil"
@@ -240,6 +243,9 @@ function firefox_install() {
             # Crear enlaces de usuario y permisos de ejecución
             ln -s ~/.local/opt/Firefox_Nightly/firefox ~/.local/bin/firefox-nightly
             chmod +x ~/.local/bin/firefox-nightly
+
+            # Copiar acceso directo
+            cp Accesos_Directos/firefox-nightly.desktop ~/.local/share/applications/
 
             # TODO → Autogenerar y asociar un perfil existente con el mismo nombre de la version
             # Pedir crear perfil
