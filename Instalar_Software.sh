@@ -262,19 +262,24 @@ function firefox_install() {
     firefox_nightly
 }
 
-#Recorrer "Software.lst" Instalando paquetes ahí descritos
+# Recorrer "Software.lst" Instalando paquetes ahí descritos
 function instalar_Software() {
+    # Actualizar LIstas
     echo -e "$verde Actualizando listas de$rojo Repositorios$verde (Paciencia)$gris"
     sudo apt update >> /dev/null 2>> /dev/null
+
+    # Repara errores de dependencias rotas que pudiesen haber
     echo -e "$verde Comprobando estado del$rojo Gestor de paquetes$verde (Paciencia)$gris"
-    sudo apt --fix-broken install 2>> /dev/null
-    sudo apt install -f -y 2>> /dev/null
+    sudo apt --fix-broken install -y >> /dev/null 2>> /dev/null
+    sudo apt install -f -y >> /dev/null 2>> /dev/null
+
+    # Instalando todo el software desde "Software.lst
     echo -e "$verde Instalando Software adicional$gris"
+    # La siguiente variable guarda toda la lista de paquetes desde DPKG
+    lista_todos_paquetes=${dpkg-query -W -f='${Installed-Size} ${Package}\n' | sort -n | cut -d" " -f2}
     for s in $software
     do
-        # TOFIX → Se tiene que mejorar este control de aplicaciones instaladas
-        # Esta parte debe aumentarse en velocidad para que no tarde tanto la segunda vez
-        if [ -f /bin/$s ] || [ -f /usr/bin/$s ]
+        if [ $s in lista_todos_paquetes ] || [ -f /bin/$s ] || [ -f /usr/bin/$s ]
         then
             echo -e "$rojo $s$verde ya estaba instalado"
         else
