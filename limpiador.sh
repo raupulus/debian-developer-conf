@@ -12,6 +12,8 @@
 # script. Normalmente se espera no necesitarse usar pero existirá.
 # El uso de este script puede ser perjudicial y debes asumir el riesgo
 
+# TOFIX → Restaurar archivos BACKUP creados con el script antes de eliminar!!!
+
 ############################
 ##   Constantes Colores   ##
 ############################
