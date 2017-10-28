@@ -46,7 +46,7 @@ source ./limpiador.sh
 #############################
 ##   Variables Generales   ##
 #############################
-
+DIR_SRCIPT=`echo $PWD`
 
 while :
     do
@@ -61,7 +61,7 @@ while :
         echo -e "   $rojo 5)  $verde Personalizar Sistema y GTK$gris"
         echo -e "   $rojo 6)  $verde Instalar Servidores Apache → PHP → SQL"
         echo -e "   $rojo 7)  $verde Ejecutar todos los pasos anteriores$gris"
-        echo -e "   $rojo BORRAR)  $amarillo Limpia$rojo TODO$amarillo rastro del script (peligroso) $gris"
+        echo -e "   $rojo 999)  $amarillo Limpia$rojo TODO$amarillo rastro del script (peligroso) $gris"
 
 
     read entrada
@@ -118,7 +118,7 @@ while :
             instalar_variables
             read -p "Pulsa una tecla para continuar";;
 
-        'BORRAR')  # Borrar todo rastro del script, es muy peligroso usarlo
+        999)  # Borrar todo rastro del script, es muy peligroso usarlo
             clear
             echo -e "$rojo Preparando para limpiar todo rastro$gris"
             echo -e "$rojo Esto solo es útil ante situaciones donde fallan cosas$gris"
