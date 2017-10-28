@@ -206,13 +206,13 @@ function firefox_install() {
             ln -s ~/.local/opt/Firefox_Quantum_Developer/firefox ~/.local/bin/firefox-quantum
             chmod +x ~/.local/bin/firefox-quantum
 
+            # TODO → Autogenerar y asociar un perfil existente con el mismo nombre de la version
             # Pedir crear perfil
             echo -e "$verde Para evitar conflictos entre distintas versiones crea un perfil"
             echo -e "$verde Al pulsar una tecla se abrirá una ventana para ello"
             echo -e "$verde El nombre convendrá que sea lógico como → Firefox-Quantum"
             read -p "$amarillo Pulsa una tecla para abrir el ProfileManager" x
             firefox-quantum --ProfileManager
-
         fi
     }
 
@@ -241,6 +241,7 @@ function firefox_install() {
             ln -s ~/.local/opt/Firefox_Nightly/firefox ~/.local/bin/firefox-nightly
             chmod +x ~/.local/bin/firefox-nightly
 
+            # TODO → Autogenerar y asociar un perfil existente con el mismo nombre de la version
             # Pedir crear perfil
             echo -e "$verde Para evitar conflictos entre distintas versiones crea un perfil"
             echo -e "$verde Al pulsar una tecla se abrirá una ventana para ello"
@@ -250,6 +251,7 @@ function firefox_install() {
         fi
     }
 
+    # Llamada a ejecución las funciones que instalan y configuran navegadores firefox
     firefox_developer
     firefox_nightly
 }
