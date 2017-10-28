@@ -197,7 +197,7 @@ function firefox_install() {
             echo -e "$verde Preparando para instalar$rojo Firefox Quantum Developer Edition$gris"
 
             # Desempaquetar Firefox-Nightly_amd64.tar.bz2
-            tar -xjvf Firefox-Quantum-Developer_amd64.tar.bz 2>> /dev/null
+            tar -xjvf Firefox-Quantum-Developer_amd64.tar.bz2 2>> /dev/null
 
             # Mover archivo extraido a su ubicación final
             mv firefox ~/.local/opt/Firefox_Quantum_Developer 2>> /dev/null
@@ -210,7 +210,9 @@ function firefox_install() {
             echo -e "$verde Para evitar conflictos entre distintas versiones crea un perfil"
             echo -e "$verde Al pulsar una tecla se abrirá una ventana para ello"
             echo -e "$verde El nombre convendrá que sea lógico como → Firefox-Quantum"
-            read x
+            read -p "$amarillo Pulsa una tecla para abrir el ProfileManager" x
+            firefox-quantum --ProfileManager
+
         fi
     }
 
@@ -243,10 +245,10 @@ function firefox_install() {
             echo -e "$verde Para evitar conflictos entre distintas versiones crea un perfil"
             echo -e "$verde Al pulsar una tecla se abrirá una ventana para ello"
             echo -e "$verde El nombre convendrá que sea lógico como → Firefox-Nightly"
-            read x
+            read -p "$amarillo Pulsa una tecla para abrir el ProfileManager" x
+            firefox-nightly --ProfileManager
         fi
     }
-
 
     firefox_developer
     firefox_nightly
