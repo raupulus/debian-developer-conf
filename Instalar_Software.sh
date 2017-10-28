@@ -192,21 +192,8 @@ function firefox_install() {
 
     # Firefox Quantum Developer Edition
     function firefox_developer() {
-        if [ -f ~/.local/bin/firefox-quantum ]
-        then
-            echo -e "$verde Ya esta$rojo Firefox Quantum Developer Edition$verde instalado en el equipo, omitiendo paso$gris"
-        # Comprueba que no está el archivo descargado en este directorio
-        elif [ ! -f ./Firefox-Quantum-Developer_amd64.tar.bz2 ]
-        then
-            REINTENTOS=3
-            echo -e "$verde Descargando$rojo Firefox Quantum Developer Edition$gris"
-            for (( i=1; i<=$REINTENTOS; i++ ))
-            do
-                rm Firefox-Quantum-Developer_amd64.tar.bz 2>> /dev/null
-                wget --show-progress -r -A tar.bz2 'https://download.mozilla.org/?product=firefox-devedition-latest-ssl&os=linux64&lang=es-ES' -O Firefox-Quantum-Developer_amd64.tar.bz2 && break
-            done
-            echo -e "$verde Preparando para instalar$rojo Firefox Quantum Developer Edition$gris"
 
+        function instalar() {
             # Desempaquetar Firefox-Nightly_amd64.tar.bz2
             tar -xjvf Firefox-Quantum-Developer_amd64.tar.bz2 2>> /dev/null
 
@@ -227,25 +214,35 @@ function firefox_install() {
             echo -e "$verde El nombre convendrá que sea lógico como →$rojo Firefox-Quantum$amarillo"
             read -p "Pulsa una tecla para abrir el ProfileManager" x
             firefox-quantum --ProfileManager
+        }
+
+
+        if [ -f ~/.local/bin/firefox-quantum ]
+        then
+            echo -e "$verde Ya esta$rojo Firefox Quantum Developer Edition$verde instalado en el equipo, omitiendo paso$gris"
+        # Comprueba que no está el archivo descargado en este directorio
+        elif [ ! -f ./Firefox-Quantum-Developer_amd64.tar.bz2 ]
+        then
+            REINTENTOS=3
+            echo -e "$verde Descargando$rojo Firefox Quantum Developer Edition$gris"
+            for (( i=1; i<=$REINTENTOS; i++ ))
+            do
+                rm Firefox-Quantum-Developer_amd64.tar.bz 2>> /dev/null
+                wget --show-progress -r -A tar.bz2 'https://download.mozilla.org/?product=firefox-devedition-latest-ssl&os=linux64&lang=es-ES' -O Firefox-Quantum-Developer_amd64.tar.bz2 && break
+            done
+            echo -e "$verde Preparando para instalar$rojo Firefox Quantum Developer Edition$gris"
+
+            instalar
+        else
+            instalar
         fi
     }
 
     # Firefox Nightly
     function firefox_nightly() {
-        if [ -f ~/.local/bin/firefox-nightly ]
-        then
-            echo -e "$verde Ya esta$rojo Firefox Nightly$verde instalado en el equipo, omitiendo paso$gris"
-        elif [ ! -f ./Firefox-Nightly_amd64.tar.bz2 ]
-            REINTENTOS=3
-            echo -e "$verde Descargando$rojo Firefox Nightly$gris"
-            for (( i=1; i<=$REINTENTOS; i++ ))
-            do
-                rm Firefox-Nightly_amd64.tar.bz2 2>> /dev/null
-                wget --show-progress -r -A tar.bz2 'https://download.mozilla.org/?product=firefox-nightly-latest-l10n-ssl&os=linux64&lang=es-ES' -O Firefox-Nightly_amd64.tar.bz2 && break
-            done
-            echo -e "$verde Preparando para instalar$rojo Firefox Nightly$gris"
 
-            # Desempaquetar Firefox-Nightly_amd64.tar.bz2
+        function instalar() {
+             # Desempaquetar Firefox-Nightly_amd64.tar.bz2
             tar -xjvf Firefox-Nightly_amd64.tar.bz2 2>> /dev/null
 
             # Mover archivo extraido a su ubicación final
@@ -265,6 +262,25 @@ function firefox_install() {
             echo -e "$verde El nombre convendrá que sea lógico como →$rojo Firefox-Nightly$amarillo"
             read -p "Pulsa una tecla para abrir el ProfileManager" x
             firefox-nightly --ProfileManager
+        }
+
+
+        if [ -f ~/.local/bin/firefox-nightly ]
+        then
+            echo -e "$verde Ya esta$rojo Firefox Nightly$verde instalado en el equipo, omitiendo paso$gris"
+        elif [ ! -f ./Firefox-Nightly_amd64.tar.bz2 ]
+            REINTENTOS=3
+            echo -e "$verde Descargando$rojo Firefox Nightly$gris"
+            for (( i=1; i<=$REINTENTOS; i++ ))
+            do
+                rm Firefox-Nightly_amd64.tar.bz2 2>> /dev/null
+                wget --show-progress -r -A tar.bz2 'https://download.mozilla.org/?product=firefox-nightly-latest-l10n-ssl&os=linux64&lang=es-ES' -O Firefox-Nightly_amd64.tar.bz2 && break
+            done
+            echo -e "$verde Preparando para instalar$rojo Firefox Nightly$gris"
+
+            instalar
+        else
+            instalar
         fi
     }
 
