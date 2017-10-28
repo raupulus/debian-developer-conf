@@ -272,6 +272,8 @@ function instalar_Software() {
     echo -e "$verde Instalando Software adicional$gris"
     for s in $software
     do
+        # TOFIX → Se tiene que mejorar este control de aplicaciones instaladas
+        # Esta parte debe aumentarse en velocidad para que no tarde tanto la segunda vez
         if [ -f /bin/$s || -f /usr/bin/$s ]
         then
             echo -e "$rojo $s$verde ya estaba instalado"
