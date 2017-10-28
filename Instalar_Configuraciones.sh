@@ -136,6 +136,7 @@ function configurar_vim() {
                 git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
                 vundle_actualizar_plugins && break
             done
+        fi
     }
 
     # Instalar Vundle y actualizar Plugins
