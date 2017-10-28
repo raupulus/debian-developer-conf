@@ -329,6 +329,7 @@ function configurar_hosts() {
             cat /etc/hosts > ./TMP/hosts
             cat ./etc/hosts >> ./TMP/hosts
             sudo cp ./TMP/hosts /etc/hosts
+    }
     hosts_backup
 }
 
