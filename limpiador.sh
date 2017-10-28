@@ -8,6 +8,10 @@
 # ###       www.fryntiz.es        ### #
 #######################################
 
+# Este archivo hace una limpieza agresiva de directorios conflictivos con el
+# script. Normalmente se espera no necesitarse usar pero existirá.
+# El uso de este script puede ser perjudicial y debes asumir el riesgo
+
 ############################
 ##   Constantes Colores   ##
 ############################
