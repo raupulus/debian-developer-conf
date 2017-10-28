@@ -279,7 +279,9 @@ function instalar_Software() {
     lista_todos_paquetes=${dpkg-query -W -f='${Installed-Size} ${Package}\n' | sort -n | cut -d" " -f2}
     for s in $software
     do
-        if [ $s in lista_todos_paquetes ] || [ -f /bin/$s ] || [ -f /usr/bin/$s ]
+        # TODO → Mirar si se puede añadir al siguiente if algo similar a:
+        # [ $s in lista_todos_paquetes ]
+        if || [ -f /bin/$s ] || [ -f /usr/bin/$s ]
         then
             echo -e "$rojo $s$verde ya estaba instalado"
         else
