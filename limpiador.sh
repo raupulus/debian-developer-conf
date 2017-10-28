@@ -38,7 +38,9 @@ function limpiar_con_fuerza() {
     rm -R -f ~/fasd 2>> /dev/null
     rm -R -f ~/.vim 2>> /dev/null
     rm -R -f ~/.local/opt/Firefox_Quantum_Developer 2>> /dev/null
+    rm -R -f ~/.local/bin/firefox-quantum 2>> /dev/null
     rm -R -f ~/.local/opt/Firefox_Nightly 2>> /dev/null
+    rm -R -f ~/.local/bin/firefox-nightly 2>> /dev/null
     rm -R -f ~/.atom /dev/null
     rm -R -f ~/.i3 /dev/null
     rm -R -f ~/.ninja-ide /dev/null
@@ -53,12 +55,3 @@ function limpiar_con_fuerza() {
     rm -R -f ~/.vimrc /dev/null
     rm -R -f ~/.zshrc /dev/null
 }
-limpiar_con_fuerza
-
-
-
-
-
-
-
-
