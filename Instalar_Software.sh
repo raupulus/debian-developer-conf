@@ -107,7 +107,7 @@ function dbeaver_install() {
 
 #Instala el editor de python Ninja IDE
 function ninjaide_install() {
-    if [ -f /usr/bin/ninja-ide ]
+    if [ -f /usr/bin/e ]
     then
         echo -e "$verde Ya esta$rojo Ninja IDE$verde instalado en el equipo, omitiendo paso$gris"
     else
@@ -195,7 +195,9 @@ function firefox_install() {
         if [ -f ~/.local/bin/firefox-quantum ]
         then
             echo -e "$verde Ya esta$rojo Firefox Quantum Developer Edition$verde instalado en el equipo, omitiendo paso$gris"
-        else
+        # Comprueba que no está el archivo descargado en este directorio
+        elif [ ! -f ./Firefox-Quantum-Developer_amd64.tar.bz2 ]
+        then
             REINTENTOS=3
             echo -e "$verde Descargando$rojo Firefox Quantum Developer Edition$gris"
             for (( i=1; i<=$REINTENTOS; i++ ))
@@ -233,7 +235,7 @@ function firefox_install() {
         if [ -f ~/.local/bin/firefox-nightly ]
         then
             echo -e "$verde Ya esta$rojo Firefox Nightly$verde instalado en el equipo, omitiendo paso$gris"
-        else
+        elif [ ! -f ./Firefox-Nightly_amd64.tar.bz2 ]
             REINTENTOS=3
             echo -e "$verde Descargando$rojo Firefox Nightly$gris"
             for (( i=1; i<=$REINTENTOS; i++ ))
