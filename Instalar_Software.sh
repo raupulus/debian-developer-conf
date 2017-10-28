@@ -173,7 +173,8 @@ function gitkraken_install() {
 # Instalar versiones de Firefox
 function firefox_install() {
 
-    # Firefox-Quantum Developer Edition
+
+    # Firefox Quantum Developer Edition
     function firefox_developer() {
         if [ -f /usr/bin/firefox-quantum ]
         then
@@ -195,8 +196,31 @@ function firefox_install() {
         fi
     }
 
+    # Firefox Nightly
+    function firefox_nightly() {
+        if [ -f ~/.local/bin/firefox_nightly ]
+        then
+            echo -e "$verde Ya esta$rojo Firefox Nightly$verde instalado en el equipo, omitiendo paso$gris"
+        else
+            REINTENTOS=3
+            echo -e "$verde Descargando$rojo Firefox Nightly$gris"
+            for (( i=1; i<=$REINTENTOS; i++ ))
+            do
+                rm Debian-Nightly_amd64.tar.bz2 2>> /dev/null
+                wget --show-progress -r -A tar.bz2 'https://download.mozilla.org/?product=firefox-nightly-latest-l10n-ssl&os=linux64&lang=es-ES' -O Debian-Nightly_amd64.tar.bz2 && break
+            done
+            echo -e "$verde Preparando para instalar$rojo Firefox Nightly$gris"
+
+            # TODO → Desempaquetar Debian-Developer_amd64.tar.bz2
+            # TODO → Mover archivo extraido a su ubicación final
+            # TODO → Crear enlaces de usuario y permisos de ejecución
+            # TODO → Crear comando hacia la ruta: firefox-quantum
+        fi
+    }
+
 
     firefox_developer
+    firefox_nightly
 }
 
 #Recorrer "Software.lst" Instalando paquetes ahí descritos
@@ -219,6 +243,7 @@ function instalar_Software() {
     ninjaide_install
     haroopad_install
     gitkraken_install
+    #firefox_install
 
     sudo apt --fix-broken install 2>> /dev/null
     sudo apt install -f -y 2>> /dev/null
