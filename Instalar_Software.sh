@@ -269,6 +269,7 @@ function firefox_install() {
         then
             echo -e "$verde Ya esta$rojo Firefox Nightly$verde instalado en el equipo, omitiendo paso$gris"
         elif [ ! -f ./Firefox-Nightly_amd64.tar.bz2 ]
+        then
             REINTENTOS=3
             echo -e "$verde Descargando$rojo Firefox Nightly$gris"
             for (( i=1; i<=$REINTENTOS; i++ ))
