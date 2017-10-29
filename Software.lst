@@ -17,7 +17,7 @@ python-pygments
 sakura
 terminator
 i3
-i3wm
+i3-wm
 nitrogen
 x11-xserver-utils
 xbase-clients

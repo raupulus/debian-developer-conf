@@ -111,42 +111,34 @@ function bashit() {
 #Funcion para configurar VIM con sus temas y complementos
 function configurar_vim() {
     echo -e "$verde Configurando VIM"
+
+    function vundle_actualizar_plugins() {
+        echo | vim +PluginInstall +qall
+    }
+
     #Instalar Gestor de Plugins Vundle
-    echo -e "$verde Instalando gestor de plugins$rojo Vundle$verde (Puede tardar un poco)$gris"
-    if [ -d ~/.vim/bundle/Vundle.vim ]
-    then #Si existe solo actualiza plugins
-        echo -e "$verde Vundle ya está instalado, instalando plugins nuevos$gris"
-        echo | vim +PluginInstall +qall || rm -R ~/.vim/bundle/Vundle.vim #Si falla borra dir
-        if [ ! -d ~/.vim/bundle/Vundle.vim ] #Comprueba si se ha borrado para rehacer
+    function vundle_descargar() {
+        echo -e "$verde Descargando Vundle desde Repositorios"
+        if [ ! -d ~/.vim/bundle/Vundle.vim ] # Se intenta descargar 10 veces
         then
-            for (( i=1; i<=3; i++ ))
+            for (( i=1; i<=10; i++ ))
             do
-                git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
-                echo | vim +PluginInstall +qall && break;
-                if [ $i -eq 3 ]
+                if [ $i -eq 10 ]
                 then
                     rm -R ~/.vim/bundle/Vundle.vim
-                    git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
-                    echo | vim +PluginInstall +qall && break;
+                    break
                 fi
-            done
-        fi
-    else #Instala plugins dentro de ~/.vimrc #Se intenta 3 veces
-        echo -e "$verde Vundle no está instalado, comenzando descarga$gris"
-        for (( i=1; i<=3; i++ ))
-        do
-            rm -R ~/.vim/bundle/Vundle.vim 2>> /dev/null
-            git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
-            echo | vim +PluginInstall +qall && break;
-            if [ $i -eq 3 ]
-            then
-                rm -R ~/.vim/bundle/Vundle.vim
                 git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
-                echo | vim +PluginInstall +qall && break;
-            fi
-        done
-    fi
-    cd $DIR_ACTUAL
+                vundle_actualizar_plugins && break
+            done
+        else
+            echo -e "$verde Vundle ya está instalado$gris"
+        fi
+    }
+
+    # Instalar Vundle y actualizar Plugins
+    vundle_descargar
+    vundle_actualizar_plugins
 
     #Funcion para instalar todos los plugins
     function vim_plugins() {
@@ -300,9 +292,15 @@ function terminal() {
         case $term in
             bash | 1)#Establecer bash como terminal
                 chsh -s /bin/bash
+                # Cambiar enlace por defecto desde sh a bash
+                sudo rm /bin/sh
+                sudo ln -s /bin/bash /bin/sh
                 break;;
             zsh | 2)#Establecer zsh como terminal
                 chsh -s /bin/zsh
+                # Cambiar enlace por defecto desde sh a zsh
+                sudo rm /bin/sh
+                sudo ln -s /bin/zsh /bin/sh
                 break;;
             *)#Opción errónea
                 echo -e "$rojo Opción no válida$gris"
@@ -318,6 +316,25 @@ function configurar_gedit() {
     cp -r ./gedit/.config/gedit/* ~/.config/gedit/
 }
 
+#Crea un archivo hosts muy completo que bloquea bastantes sitios malignos en la web
+function configurar_hosts() {
+    echo -e "$verde Configurar archivo$rojo /etc/hosts"
+
+    function hosts_backup() {
+        if [ ! -f /etc/hosts.BACKUP ]
+        then
+            sudo mv /etc/hosts /etc/hosts.BACKUP
+        else
+            mkdir -p TMP 2>> /dev/null
+            cat /etc/hosts > ./TMP/hosts
+            cat ./etc/hosts >> ./TMP/hosts
+            sudo cp ./TMP/hosts /etc/hosts
+        fi
+    }
+
+    hosts_backup
+}
+
 #Instalar Todas las configuraciones
 function instalar_configuraciones() {
     bashit
@@ -325,8 +342,12 @@ function instalar_configuraciones() {
     permisos
     programas_default
     configurar_vim
+
+    cd $DIR_SRCIPT
+
     configurar_gedit
     agregar_conf_home
+    configurar_hosts
     terminal #Pregunta el terminal a usar
 
     sudo update-command-not-found

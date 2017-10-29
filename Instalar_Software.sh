@@ -52,7 +52,7 @@ function atom_install() {
             # Comprobación si existe instalado el complemento
             if [ -d "$HOME/.atom/packages/$p" ]
             then
-                echo -e "$verde Ya se encuentra instalado → $p"
+                echo -e "$amarillo Ya se encuentra instalado →$rojo $p"
             else
                 echo -e "$verde Instalando$rojo $p $amarillo"
                 apm install $p
@@ -107,7 +107,7 @@ function dbeaver_install() {
 
 #Instala el editor de python Ninja IDE
 function ninjaide_install() {
-    if [ -f /usr/bin/ninja-ide ]
+    if [ -f /usr/bin/e ]
     then
         echo -e "$verde Ya esta$rojo Ninja IDE$verde instalado en el equipo, omitiendo paso$gris"
     else
@@ -120,7 +120,7 @@ function ninjaide_install() {
         done
         echo -e "$verde Preparando para instalar$rojo Ninja IDE$gris"
         sudo apt install -y python-qt4 >> /dev/null 2>> /dev/null && echo -e "$verde Se ha instalado$rojo python-qt4$gris" || echo -e "$verde No se ha instalado$rojo python-qt4$gris"
-        sudo dpkg -i -y ninja-ide_2.3-2_all.deb && sudo apt install -f -y
+        sudo dpkg -i ninja-ide_2.3-2_all.deb && sudo apt install -f -y
     fi
 
     #Resolviendo dependencia de libreria QtWebKit.so si no existe
@@ -136,17 +136,185 @@ function ninjaide_install() {
     sudo apt install -y python-git python3-git 2>> /dev/null
 }
 
-#Recorrer "Software.lst" Instalando paquetes ahí descritos
+function haroopad_install() {
+    if [ -f /usr/bin/haroopad ]
+    then
+        echo -e "$verde Ya esta$rojo Haroopad$verde instalado en el equipo, omitiendo paso$gris"
+    else
+        REINTENTOS=3
+        echo -e "$verde Descargando$rojo Haroopad$gris"
+        for (( i=1; i<=$REINTENTOS; i++ ))
+        do
+            rm haroopad-v0.13.1-x64.deb 2>> /dev/null
+            wget --show-progress https://bitbucket.org/rhiokim/haroopad-download/downloads/haroopad-v0.13.1-x64.deb && break
+        done
+        echo -e "$verde Preparando para instalar$rojo Haroopad$gris"
+        sudo dpkg -i haroopad-v0.13.1-x64.deb && sudo apt install -f -y
+    fi
+}
+
+function gitkraken_install() {
+    if [ -f /usr/bin/gitkraken ]
+    then
+        echo -e "$verde Ya esta$rojo Gitkraken$verde instalado en el equipo, omitiendo paso$gris"
+    else
+        REINTENTOS=3
+        echo -e "$verde Descargando$rojo Gitkraken$gris"
+        for (( i=1; i<=$REINTENTOS; i++ ))
+        do
+            rm gitkraken-amd64.deb 2>> /dev/null
+            wget --show-progress https://release.gitkraken.com/linux/gitkraken-amd64.deb && break
+        done
+        echo -e "$verde Preparando para instalar$rojo Gitkraken$gris"
+        sudo dpkg -i gitkraken-amd64.deb && sudo apt install -f -y
+    fi
+}
+
+# TODO → Crear perfiles básicos, copiarlos a su ruta correspondiente y asignarlos a cada versión
+# Instalar versiones de Firefox
+function firefox_install() {
+
+    # Si no existen los directorios se crearán
+    if [ ! -d ~/.local/opt ]
+    then
+        mkdir -p ~/.local/opt
+    fi
+
+    if [ ! -d ~/.local/bin ]
+    then
+        mkdir -p ~/.local/bin
+    fi
+
+    if [ ! -d ~/.local/share/applications ]
+    then
+        mkdir -p ~/.local/share/applications
+    fi
+
+    # Firefox Quantum Developer Edition
+    function firefox_developer() {
+
+        function instalar() {
+            # Desempaquetar Firefox-Nightly_amd64.tar.bz2
+            tar -xjvf Firefox-Quantum-Developer_amd64.tar.bz2 2>> /dev/null
+
+            # Mover archivo extraido a su ubicación final
+            mv firefox ~/.local/opt/Firefox_Quantum_Developer 2>> /dev/null
+
+            # Crear enlaces de usuario y permisos de ejecución
+            ln -s ~/.local/opt/Firefox_Quantum_Developer/firefox ~/.local/bin/firefox-quantum
+            chmod +x ~/.local/bin/firefox-quantum
+
+            # Copiar acceso directo
+            cp Accesos_Directos/firefox-quantum.desktop ~/.local/share/applications/
+
+            # TODO → Autogenerar y asociar un perfil existente con el mismo nombre de la version
+            # Pedir crear perfil
+            echo -e "$verde Para evitar conflictos entre distintas versiones crea un perfil"
+            echo -e "$verde Al pulsar una tecla se abrirá una ventana para ello"
+            echo -e "$verde El nombre convendrá que sea lógico como →$rojo Firefox-Quantum$amarillo"
+            read -p "Pulsa una tecla para abrir el ProfileManager" x
+            ~/.local/bin/firefox-quantum --ProfileManager
+        }
+
+
+        if [ -f ~/.local/bin/firefox-quantum ]
+        then
+            echo -e "$verde Ya esta$rojo Firefox Quantum Developer Edition$verde instalado en el equipo, omitiendo paso$gris"
+        # Comprueba que no está el archivo descargado en este directorio
+        elif [ ! -f ./Firefox-Quantum-Developer_amd64.tar.bz2 ]
+        then
+            REINTENTOS=3
+            echo -e "$verde Descargando$rojo Firefox Quantum Developer Edition$gris"
+            for (( i=1; i<=$REINTENTOS; i++ ))
+            do
+                rm Firefox-Quantum-Developer_amd64.tar.bz 2>> /dev/null
+                wget --show-progress -r -A tar.bz2 'https://download.mozilla.org/?product=firefox-devedition-latest-ssl&os=linux64&lang=es-ES' -O Firefox-Quantum-Developer_amd64.tar.bz2 && break
+            done
+            echo -e "$verde Preparando para instalar$rojo Firefox Quantum Developer Edition$gris"
+
+            instalar
+        else
+            instalar
+        fi
+    }
+
+    # Firefox Nightly
+    function firefox_nightly() {
+
+        function instalar() {
+             # Desempaquetar Firefox-Nightly_amd64.tar.bz2
+            tar -xjvf Firefox-Nightly_amd64.tar.bz2 2>> /dev/null
+
+            # Mover archivo extraido a su ubicación final
+            mv firefox ~/.local/opt/Firefox_Nightly 2>> /dev/null
+
+            # Crear enlaces de usuario y permisos de ejecución
+            ln -s ~/.local/opt/Firefox_Nightly/firefox ~/.local/bin/firefox-nightly
+            chmod +x ~/.local/bin/firefox-nightly
+
+            # Copiar acceso directo
+            cp Accesos_Directos/firefox-nightly.desktop ~/.local/share/applications/
+
+            # TODO → Autogenerar y asociar un perfil existente con el mismo nombre de la version
+            # Pedir crear perfil
+            echo -e "$verde Para evitar conflictos entre distintas versiones crea un perfil"
+            echo -e "$verde Al pulsar una tecla se abrirá una ventana para ello"
+            echo -e "$verde El nombre convendrá que sea lógico como →$rojo Firefox-Nightly$amarillo"
+            read -p "Pulsa una tecla para abrir el ProfileManager" x
+            ~/.local/bin/firefox-nightly --ProfileManager
+        }
+
+
+        if [ -f ~/.local/bin/firefox-nightly ]
+        then
+            echo -e "$verde Ya esta$rojo Firefox Nightly$verde instalado en el equipo, omitiendo paso$gris"
+        elif [ ! -f ./Firefox-Nightly_amd64.tar.bz2 ]
+        then
+            REINTENTOS=3
+            echo -e "$verde Descargando$rojo Firefox Nightly$gris"
+            for (( i=1; i<=$REINTENTOS; i++ ))
+            do
+                rm Firefox-Nightly_amd64.tar.bz2 2>> /dev/null
+                wget --show-progress -r -A tar.bz2 'https://download.mozilla.org/?product=firefox-nightly-latest-l10n-ssl&os=linux64&lang=es-ES' -O Firefox-Nightly_amd64.tar.bz2 && break
+            done
+            echo -e "$verde Preparando para instalar$rojo Firefox Nightly$gris"
+
+            instalar
+        else
+            instalar
+        fi
+    }
+
+    # Llamada a ejecución las funciones que instalan y configuran navegadores firefox
+    firefox_developer
+    firefox_nightly
+}
+
+# Recorrer "Software.lst" Instalando paquetes ahí descritos
 function instalar_Software() {
+    # Actualizar LIstas
     echo -e "$verde Actualizando listas de$rojo Repositorios$verde (Paciencia)$gris"
     sudo apt update >> /dev/null 2>> /dev/null
+
+    # Repara errores de dependencias rotas que pudiesen haber
     echo -e "$verde Comprobando estado del$rojo Gestor de paquetes$verde (Paciencia)$gris"
-    sudo apt --fix-broken install 2>> /dev/null
-    sudo apt install -f -y 2>> /dev/null
+    sudo apt --fix-broken install -y >> /dev/null 2>> /dev/null
+    sudo apt install -f -y >> /dev/null 2>> /dev/null
+
+    # Instalando todo el software desde "Software.lst
     echo -e "$verde Instalando Software adicional$gris"
+    # La siguiente variable guarda toda la lista de paquetes desde DPKG
+    lista_todos_paquetes=${dpkg-query -W -f='${Installed-Size} ${Package}\n' | sort -n | cut -d" " -f2}
     for s in $software
     do
-        sudo apt install -y $s >> /dev/null 2>> /dev/null && echo -e "$rojo $s$verde instalado correctamente" || echo -e "$rojo $s$verde No se ha instalado"
+        # TODO → Mirar si se puede añadir al siguiente if algo similar a:
+        # [ $s in lista_todos_paquetes ]
+        if [ -f /bin/$s ] || [ -f /usr/bin/$s ]
+        then
+            echo -e "$rojo $s$verde ya estaba instalado"
+        else
+            sudo apt install -y $s >> /dev/null 2>> /dev/null && echo -e "$rojo $s$verde instalado correctamente" || echo -e "$rojo $s$amarillo No se ha instalado$gris"
+        fi
     done
 
     #Instalaciones de software independiente
@@ -154,6 +322,9 @@ function instalar_Software() {
     brackets_install
     dbeaver_install
     ninjaide_install
+    haroopad_install
+    gitkraken_install
+    firefox_install
 
     sudo apt --fix-broken install 2>> /dev/null
     sudo apt install -f -y 2>> /dev/null
