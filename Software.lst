@@ -11,9 +11,6 @@ editorconfig
 erlang-base
 exuberant-ctags
 flake8
-fonts-freefont-ttf
-fonts-hack-ttf
-fonts-lmodern
 gedit
 gedit-plugins
 git
