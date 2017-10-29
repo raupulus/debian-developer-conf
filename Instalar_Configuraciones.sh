@@ -336,7 +336,7 @@ function configurar_hosts() {
     cat /etc/hosts.BACKUP > ./TMP/hosts
     cat ./etc/hosts >> ./TMP/hosts
     sudo cp ./TMP/hosts /etc/hosts
-1}
+}
 
 #Instalar Todas las configuraciones
 function instalar_configuraciones() {
