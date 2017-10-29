@@ -80,7 +80,7 @@ function configurar_temas(){
             curl -sL https://github.com/nana-4/Flat-Plat/archive/v20170605.tar.gz | tar xz && break
         done
         echo -e "$verde Preparando para instalar$rojo Tema Flat-Plat$gris"
-        sudo ./Flat-Plat-20170605/install.sh
+        sudo ./materia-theme-20170605/install.sh #2>> /dev/null
     fi
 
     #TODO → Establecer Flat-Plat como tema activos
