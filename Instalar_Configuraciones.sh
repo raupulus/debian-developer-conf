@@ -320,18 +320,16 @@ function configurar_gedit() {
 function configurar_hosts() {
     echo -e "$verde Configurar archivo$rojo /etc/hosts"
 
-    function hosts_backup() {
-        if [ ! -f /etc/hosts.BACKUP ]
-        then
-            sudo mv /etc/hosts /etc/hosts.BACKUP
-        else
-            mkdir -p TMP 2>> /dev/null
-            cat /etc/hosts > ./TMP/hosts
-            cat ./etc/hosts >> ./TMP/hosts
-            sudo cp ./TMP/hosts /etc/hosts
-        fi
-    }
+    # Crea copia del original para mantenerlo siempre
+    if [ ! -f /etc/hosts.BACKUP ]
+    then
+        sudo mv /etc/hosts /etc/hosts.BACKUP
+    fi
 
+    mkdir -p TMP 2>> /dev/null
+    cat /etc/hosts.BACKUP > ./TMP/hosts
+    cat ./etc/hosts >> ./TMP/hosts
+    sudo cp ./TMP/hosts /etc/hosts
     hosts_backup
 }
 
