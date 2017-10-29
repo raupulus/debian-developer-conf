@@ -91,20 +91,26 @@ function bashit() {
     sudo apt install -y rbenv >> /dev/null 2>> /dev/null
 
     #Habilitar todos los plugins
-    #TOFIX → ENTRA CUANDO NO TIENE QUE ENTRAR E INTENTA INSTALAR LO QUE NO TIENE QUE INSTALAR DANDO ERROR
-    #SIEMPRE ESTOY EN BASH.... tratar modo de que solo entre cuando estoy con perfil de bash cargado y bashit instalado
-    if [ -z $BASH ]
-    then
-        echo -e "$verde Para habilitar los$rojo plugins$verde ejecuta este scripts desde$rojo bash$gris"
-    elif [ -n $BASH ] && [ "$BASH" = '/bin/bash' ]
+    #TOFIX → Este paso solo puede hacerse correctamente cuando usamos /bin/bash
+    plugins_habilitar="alias-completion aws base battery edit-mode-vi explain extract fasd git gif hg java javascript latex less-pretty-cat node nvm postgres projects python rails ruby sshagent ssh subversion xterm dirs nginx plenv pyenv rbenv"
+
+    if [ -n $BASH ] && [ $BASH = '/bin/bash' ]
     then
         echo -e "$verde Habilitando todos los plugins para$rojo Bashit$gris"
-        bash-it enable plugin all
-        #Deshabilitar plugins no usados o deprecated
+
+        # Incorpora archivo de bashit
+        source ~/.bash_it/bash_it.sh
+
+        for p in $plugins_habilitar
+        do
+            bash-it enable plugin $p
+        done
+
+        #Asegurar que los plugins conflictivos estén deshabilitados:
         echo -e "$verde Deshabilitando plugins no usados en$rojo Bashit$gris"
-        bash-it disable plugin chruby chruby-auto z z_autoenv
+        bash-it disable plugin chruby chruby-auto z z_autoenv visual-studio-code gh
     else
-        echo -e "$verde Asegurate de ejecutar con$rojo bash$verde este$rojo script$verde para poder instalar plugins$gris"
+        echo -e "$verde Para habilitar los$rojo plugins de BASH$verde ejecuta este scripts desde$rojo bash$gris"
     fi
 }
 
@@ -330,8 +336,7 @@ function configurar_hosts() {
     cat /etc/hosts.BACKUP > ./TMP/hosts
     cat ./etc/hosts >> ./TMP/hosts
     sudo cp ./TMP/hosts /etc/hosts
-    hosts_backup
-}
+1}
 
 #Instalar Todas las configuraciones
 function instalar_configuraciones() {
