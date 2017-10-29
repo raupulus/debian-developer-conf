@@ -41,6 +41,10 @@ exuberant-ctags
 cmake
 python
 python-dev
+virtualenv
+python3-pip
+python3-virtualenv
+python-virtualenv
 composer
 tilix
 ninja-ide
