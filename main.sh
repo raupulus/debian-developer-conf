@@ -64,7 +64,10 @@ while :
         echo -e "   $rojo 999)  $amarillo Limpia$rojo TODO$amarillo rastro del script (peligroso) $gris"
 
 
-    read entrada
+    echo -e "$rojo"
+    read -p "\nAcción → " entrada
+    echo -e "$gris"
+
     case $entrada in
 
         1)#Instalar Aplicaciones Básicas
