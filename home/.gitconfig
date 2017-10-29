@@ -1,6 +1,6 @@
 [user]
-	name = 
-	email = 
+    name =
+    email =
 [alias]
     co = checkout
     ci = commit
@@ -10,4 +10,4 @@
     type = cat-file -t
     dump = cat-file -p
 [core]
-	editor = nano -wc
+    editor = nano -wc

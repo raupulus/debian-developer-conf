@@ -64,7 +64,10 @@ while :
         echo -e "   $rojo 999)  $amarillo Limpia$rojo TODO$amarillo rastro del script (peligroso) $gris"
 
 
-    read entrada
+    echo -e "$rojo"
+    read -p "    Acción → " entrada
+    echo -e "$gris"
+
     case $entrada in
 
         1)#Instalar Aplicaciones Básicas
@@ -123,7 +126,7 @@ while :
             echo -e "$rojo Preparando para limpiar todo rastro$gris"
             echo -e "$rojo Esto solo es útil ante situaciones donde fallan cosas$gris"
             echo -e "$rojo Hay riesgo de perder datos$gris"
-            limpieza_con_fuerza
+            limpiar_con_fuerza
             echo "";;
 
         0)#SALIR

@@ -91,20 +91,26 @@ function bashit() {
     sudo apt install -y rbenv >> /dev/null 2>> /dev/null
 
     #Habilitar todos los plugins
-    #TOFIX → ENTRA CUANDO NO TIENE QUE ENTRAR E INTENTA INSTALAR LO QUE NO TIENE QUE INSTALAR DANDO ERROR
-    #SIEMPRE ESTOY EN BASH.... tratar modo de que solo entre cuando estoy con perfil de bash cargado y bashit instalado
-    if [ -z $BASH ]
-    then
-        echo -e "$verde Para habilitar los$rojo plugins$verde ejecuta este scripts desde$rojo bash$gris"
-    elif [ -n $BASH ] && [ "$BASH" = '/bin/bash' ]
+    #TOFIX → Este paso solo puede hacerse correctamente cuando usamos /bin/bash
+    plugins_habilitar="alias-completion aws base battery edit-mode-vi explain extract fasd git gif hg java javascript latex less-pretty-cat node nvm postgres projects python rails ruby sshagent ssh subversion xterm dirs nginx plenv pyenv rbenv"
+
+    if [ -n $BASH ] && [ $BASH = '/bin/bash' ]
     then
         echo -e "$verde Habilitando todos los plugins para$rojo Bashit$gris"
-        bash-it enable plugin all
-        #Deshabilitar plugins no usados o deprecated
+
+        # Incorpora archivo de bashit
+        source ~/.bash_it/bash_it.sh
+
+        for p in $plugins_habilitar
+        do
+            bash-it enable plugin $p
+        done
+
+        #Asegurar que los plugins conflictivos estén deshabilitados:
         echo -e "$verde Deshabilitando plugins no usados en$rojo Bashit$gris"
-        bash-it disable plugin chruby chruby-auto z z_autoenv
+        bash-it disable plugin chruby chruby-auto z z_autoenv visual-studio-code gh
     else
-        echo -e "$verde Asegurate de ejecutar con$rojo bash$verde este$rojo script$verde para poder instalar plugins$gris"
+        echo -e "$verde Para habilitar los$rojo plugins de BASH$verde ejecuta este scripts desde$rojo bash$gris"
     fi
 }
 
@@ -142,8 +148,8 @@ function configurar_vim() {
 
     #Funcion para instalar todos los plugins
     function vim_plugins() {
-        plugins_vim=("align" "closetag" "powerline" "youcompleteme" "xmledit" "autopep8" "python-jedi" "python-indent" "utilsinps" "utl" "rails" "snippets" "fugitive" "ctrlp")
-        for plugin in ${plugins_vim[*]}
+        plugins_vim=("align closetag powerline youcompleteme xmledit autopep8 python-jedi python-indent utilsinps utl rails snippets fugitive ctrlp tlib tabular sintastic detectindent closetag align syntastic")
+        for plugin in $plugins_vim
         do
             echo -e "$verde Activando el plugin  → $rojo $plugin$yellow"
             vim-addon-manager install $plugin >> /dev/null 2>> /dev/null
@@ -156,15 +162,16 @@ function configurar_vim() {
         mkdir -p ~/.vim/colors 2>> /dev/null
         #Creando archivos de colores, por defecto usara "monokai"
         echo -e "$verde Descargando colores para sintaxis$amarillo"
+
         if [ ! -f "~/.vim/colors/wombat.vim" ]
         then
             wget http://www.vim.org/scripts/download_script.php?src_id=6657 -O ~/.vim/colors/wombat.vim
         fi
 
         echo -e "$verde Descargando Tema$rojo Monokai$amarillo"
-        if [ ! -f "~/.vim/colors/monokai.vim" ]
+        if [ ! -f "~/.vim/colors/monokai1.vim" ]
         then
-            wget https://raw.githubusercontent.com/lsdr/monokai/master/colors/monokai.vim -O ~/.vim/colors/monokai.vim
+            wget https://raw.githubusercontent.com/lsdr/monokai/master/colors/monokai.vim -O ~/.vim/colors/monokai_1.vim
         fi
         echo -e "$verde Se ha concluido la instalacion de temas de colores$gris"
     }
@@ -175,22 +182,21 @@ function configurar_vim() {
 
 #Agregar Archivos de configuración al home
 function agregar_conf_home() {
-      conf=$(ls -A ./home/)
+    conf=$(ls -A ./home/)
     echo -e "$verde Preparando para añadir archivos de configuración en el home de usuario$gris"
-    for c in $conf
+
+   for c in $conf
     do
-        if [ -f ~/$c ] || [ -d ~/$c ] #Si existe hago backup
+        # Crea backup del directorio o archivo si no tiene una anterior
+        if [ ! -f "~/$c.BACKUP" ] || [ ! -d "~/$c.BACKUP" ]
         then
-            if [ -f "~/$c.BACKUP" ] || [ -f "~/$c.BACKUP" ] #Contemplo que exista copia y no la borra
-            then
-                rm ~/$c 2>> /dev/null
-            else
-                echo -e "$verde Creando backup de ~/home/$(whoami)/$c $gris"
-                mv ~/$c ~/$c.BACKUP 2>> /dev/null
-            fi
+            echo -e "$verde Creando backup de ~/home/$(whoami)/$c $gris"
+            mv ~/$c ~/$c.BACKUP 2>> /dev/null
         fi
-        echo -e "$verde Generando configuración$gris"
-        cp -r ./home/$c ~/$c 2>> /dev/null
+
+        # Mover archivos al home
+        echo -e "$verde Generando configuración de$rojo $c$gris"
+        cp -R -f ./home/$c ~/$c 2>> /dev/null
     done
 }
 
@@ -320,19 +326,16 @@ function configurar_gedit() {
 function configurar_hosts() {
     echo -e "$verde Configurar archivo$rojo /etc/hosts"
 
-    function hosts_backup() {
-        if [ ! -f /etc/hosts.BACKUP ]
-        then
-            sudo mv /etc/hosts /etc/hosts.BACKUP
-        else
-            mkdir -p TMP 2>> /dev/null
-            cat /etc/hosts > ./TMP/hosts
-            cat ./etc/hosts >> ./TMP/hosts
-            sudo cp ./TMP/hosts /etc/hosts
-        fi
-    }
+    # Crea copia del original para mantenerlo siempre
+    if [ ! -f /etc/hosts.BACKUP ]
+    then
+        sudo mv /etc/hosts /etc/hosts.BACKUP
+    fi
 
-    hosts_backup
+    mkdir -p TMP 2>> /dev/null
+    cat /etc/hosts.BACKUP > ./TMP/hosts
+    cat ./etc/hosts >> ./TMP/hosts
+    sudo cp ./TMP/hosts /etc/hosts
 }
 
 #Instalar Todas las configuraciones
@@ -341,12 +344,12 @@ function instalar_configuraciones() {
     ohMyZSH
     permisos
     programas_default
-    configurar_vim
 
     cd $DIR_SRCIPT
 
     configurar_gedit
     agregar_conf_home
+    configurar_vim
     configurar_hosts
     terminal #Pregunta el terminal a usar
 

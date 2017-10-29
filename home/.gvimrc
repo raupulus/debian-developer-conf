@@ -1,3 +1,3 @@
 set background=light
-let g:molokai_original=1
-colorscheme molokai
+let g:monokai_original=1
+colorscheme monokai

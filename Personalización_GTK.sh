@@ -68,7 +68,8 @@ function configurar_temas(){
         sudo dpkg -i Paper_Theme.deb && sudo apt install -f -y
     fi
 
-    if [ -f "./Flat-Plat-20170605/install.sh" ]
+    # Instalar Flat-Plat
+    if [ -f "./materia-theme-20170605/install.sh" ]
     then
         echo -e "$verde Ya esta$rojo Flat-Plat$verde descargado, omitiendo paso$gris"
     else
@@ -76,11 +77,11 @@ function configurar_temas(){
         echo -e "$verde Descargando$rojo Flat-Plat$gris"
         for (( i=1; i<=$REINTENTOS; i++ ))
         do
-            rm -r ./Flat-Plat-20170605 2>> /dev/null
+            rm -r ./materia-theme-20170605 2>> /dev/null
             curl -sL https://github.com/nana-4/Flat-Plat/archive/v20170605.tar.gz | tar xz && break
         done
         echo -e "$verde Preparando para instalar$rojo Tema Flat-Plat$gris"
-        sudo ./Flat-Plat-20170605/install.sh
+        sudo ./materia-theme-20170605/install.sh #2>> /dev/null
     fi
 
     #TODO → Establecer Flat-Plat como tema activos
