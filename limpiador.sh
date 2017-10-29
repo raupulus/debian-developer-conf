@@ -49,11 +49,13 @@ function limpiar_con_fuerza() {
     for d in $DIRECTORIOS_BORRAR
     do
         rm -R -f $d 2>> /dev/null
+        mv $d.BACKUP $d 2>> /dev/null
     done
 
     for a in $ARCHIVOS_BORRAR
     do
         rm -f $a 2>> /dev/null
+        mv $a.BACKUP $a 2>> /dev/null
     done
 
 
