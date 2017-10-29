@@ -25,6 +25,7 @@ x11-xserver-utils
 xbase-clients
 xorg
 xdg-user-dirs
+locate
 tmux
 tmux-plugin-manager
 xcape
