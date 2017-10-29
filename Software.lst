@@ -9,6 +9,8 @@ powerline
 vim
 vim-nox
 curl
+python-ipython
+python3-ipython
 wget
 python-pip
 git
