@@ -148,7 +148,7 @@ function configurar_vim() {
 
     #Funcion para instalar todos los plugins
     function vim_plugins() {
-        plugins_vim=("align closetag powerline youcompleteme xmledit autopep8 python-jedi python-indent utilsinps utl rails snippets fugitive ctrlp tlib tabular sintastic detectindent closetag align")
+        plugins_vim=("align closetag powerline youcompleteme xmledit autopep8 python-jedi python-indent utilsinps utl rails snippets fugitive ctrlp tlib tabular sintastic detectindent closetag align syntastic")
         for plugin in $plugins_vim
         do
             echo -e "$verde Activando el plugin  → $rojo $plugin$yellow"
@@ -162,13 +162,14 @@ function configurar_vim() {
         mkdir -p ~/.vim/colors 2>> /dev/null
         #Creando archivos de colores, por defecto usara "monokai"
         echo -e "$verde Descargando colores para sintaxis$amarillo"
+
         if [ ! -f "~/.vim/colors/wombat.vim" ]
         then
             wget http://www.vim.org/scripts/download_script.php?src_id=6657 -O ~/.vim/colors/wombat.vim
         fi
 
         echo -e "$verde Descargando Tema$rojo Monokai$amarillo"
-        if [ ! -f "~/.vim/colors/monokai.vim" ]
+        if [ ! -f "~/.vim/colors/monokai1.vim" ]
         then
             wget https://raw.githubusercontent.com/lsdr/monokai/master/colors/monokai.vim -O ~/.vim/colors/monokai_1.vim
         fi
