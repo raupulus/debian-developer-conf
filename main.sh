@@ -65,7 +65,7 @@ while :
 
 
     echo -e "$rojo"
-    read -p "\nAcción → " entrada
+    read -p "    Acción → " entrada
     echo -e "$gris"
 
     case $entrada in
