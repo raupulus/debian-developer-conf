@@ -343,12 +343,12 @@ function instalar_configuraciones() {
     ohMyZSH
     permisos
     programas_default
-    configurar_vim
 
     cd $DIR_SRCIPT
 
     configurar_gedit
     agregar_conf_home
+    configurar_vim
     configurar_hosts
     terminal #Pregunta el terminal a usar
 
