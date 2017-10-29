@@ -181,22 +181,21 @@ function configurar_vim() {
 
 #Agregar Archivos de configuración al home
 function agregar_conf_home() {
-      conf=$(ls -A ./home/)
+    conf=$(ls -A ./home/)
     echo -e "$verde Preparando para añadir archivos de configuración en el home de usuario$gris"
-    for c in $conf
+
+   for c in $conf
     do
-        if [ -f ~/$c ] || [ -d ~/$c ] #Si existe hago backup
+        # Crea backup del directorio o archivo si no tiene una anterior
+        if [ ! -f "~/$c.BACKUP" ] || [ ! -d "~/$c.BACKUP" ]
         then
-            if [ -f "~/$c.BACKUP" ] || [ -d "~/$c.BACKUP" ] && [ ! '.vim' ]
-            then
-                rm -R ~/$c 2>> /dev/null
-            else
-                echo -e "$verde Creando backup de ~/home/$(whoami)/$c $gris"
-                mv ~/$c ~/$c.BACKUP 2>> /dev/null
-            fi
+            echo -e "$verde Creando backup de ~/home/$(whoami)/$c $gris"
+            mv ~/$c ~/$c.BACKUP 2>> /dev/null
         fi
-        echo -e "$verde Generando configuración$gris"
-        cp -r ./home/$c ~/$c 2>> /dev/null
+
+        # Mover archivos al home
+        echo -e "$verde Generando configuración de$rojo $c$gris"
+        cp -R -f ./home/$c ~/$c 2>> /dev/null
     done
 }
 
