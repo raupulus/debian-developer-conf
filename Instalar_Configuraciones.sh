@@ -187,7 +187,7 @@ function agregar_conf_home() {
     do
         if [ -f ~/$c ] || [ -d ~/$c ] #Si existe hago backup
         then
-            if [ -f "~/$c.BACKUP" ] || [ -d "~/$c.BACKUP" ]
+            if [ -f "~/$c.BACKUP" ] || [ -d "~/$c.BACKUP" ] && [ ! '.vim' ]
             then
                 rm -R ~/$c 2>> /dev/null
             else
