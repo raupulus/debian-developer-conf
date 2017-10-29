@@ -31,6 +31,11 @@ verde="\033[1;32m"
 #############################
 
 
+# Función para comprobar los archivos que están con BACKUP y restaurarlos
+function restaurar_Backups() {
+    echo -e "$verde Preparando para restaurar archivos$gris"
+}
+
 
 function limpiar_con_fuerza() {
     echo -e "$verde Este script es muy peligroso y borrara muchas cosas"
