@@ -107,7 +107,7 @@ function dbeaver_install() {
 
 #Instala el editor de python Ninja IDE
 function ninjaide_install() {
-    if [ -f /usr/bin/e ]
+    if [ -f /usr/bin/ninja-ide ]
     then
         echo -e "$verde Ya esta$rojo Ninja IDE$verde instalado en el equipo, omitiendo paso$gris"
     else
