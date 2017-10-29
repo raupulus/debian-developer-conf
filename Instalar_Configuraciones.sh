@@ -187,9 +187,9 @@ function agregar_conf_home() {
     do
         if [ -f ~/$c ] || [ -d ~/$c ] #Si existe hago backup
         then
-            if [ -f "~/$c.BACKUP" ] || [ -f "~/$c.BACKUP" ] #Contemplo que exista copia y no la borra
+            if [ -f "~/$c.BACKUP" ] || [ -d "~/$c.BACKUP" ]
             then
-                rm ~/$c 2>> /dev/null
+                rm -R ~/$c 2>> /dev/null
             else
                 echo -e "$verde Creando backup de ~/home/$(whoami)/$c $gris"
                 mv ~/$c ~/$c.BACKUP 2>> /dev/null
