@@ -30,10 +30,31 @@ verde="\033[1;32m"
 ##   Variables Generales   ##
 #############################
 
+
+
 function limpiar_con_fuerza() {
     echo -e "$verde Este script es muy peligroso y borrara muchas cosas"
     echo -e "$verde Asegúrate que es lo que necesitas hacer antes de ejecutarlo"
     read -p "Pulsa una tecla para destruir personalización generada por este script"
+
+    # TODO → Crear una lista con todos los directorios a borrar y otra con todos los archivos
+    DIRECTORIOS_BORRAR=""
+    ARCHIVOS_BORRAR=""
+
+    for d in $DIRECTORIOS_BORRAR
+    do
+        rm -R -f $d 2>> /dev/null
+    done
+
+    for a in $ARCHIVOS_BORRAR
+    do
+        rm -f $a 2>> /dev/null
+    done
+
+
+    # TODO → Pasar archivos y directorios a las listas anteriores
+    # para que sean borrados desde los bucles
+
     rm -R -f ~/.oh-my-zsh 2>> /dev/null
     rm -R -f ~/.bash_it 2>> /dev/null
     rm -R -f ~/.nvm 2>> /dev/null
@@ -43,17 +64,17 @@ function limpiar_con_fuerza() {
     rm -R -f ~/.local/bin/firefox-quantum 2>> /dev/null
     rm -R -f ~/.local/opt/Firefox_Nightly 2>> /dev/null
     rm -R -f ~/.local/bin/firefox-nightly 2>> /dev/null
-    rm -R -f ~/.atom /dev/null
-    rm -R -f ~/.i3 /dev/null
-    rm -R -f ~/.ninja-ide /dev/null
-    rm -R -f ~/dunst /dev/null
-    rm -R -f ~/powerline /dev/null
-    rm -R -f ~/sakura /dev/null
-    rm -R -f ~/.less /dev/null
-    rm -R -f ~/.lessfilter /dev/null
-    rm -R -f ~/.tmux.conf /dev/null
-    rm -R -f ~/.tmux.conf2 /dev/null
-    rm -R -f ~/.udisks-glue.conf /dev/null
-    rm -R -f ~/.vimrc /dev/null
-    rm -R -f ~/.zshrc /dev/null
+    rm -R -f ~/.atom 2>> /dev/null
+    rm -R -f ~/.i3 2>> /dev/null
+    rm -R -f ~/.ninja-ide 2>> /dev/null
+    rm -R -f ~/dunst 2>> /dev/null
+    rm -R -f ~/powerline 2>> /dev/null
+    rm -R -f ~/sakura 2>> /dev/null
+    rm -R -f ~/.less 2>> /dev/null
+    rm -R -f ~/.lessfilter 2>> /dev/null
+    rm -R -f ~/.tmux.conf 2>> /dev/null
+    rm -R -f ~/.tmux.conf2 2>> /dev/null
+    rm -R -f ~/.udisks-glue.conf 2>> /dev/null
+    rm -R -f ~/.vimrc 2>> /dev/null
+    rm -R -f ~/.zshrc 2>> /dev/null
 }
