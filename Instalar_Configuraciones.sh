@@ -195,8 +195,13 @@ function agregar_conf_home() {
         if [ ! -f ~/$c.BACKUP ] || [ ! -d ~/$c.BACKUP ]
         then
             echo -e "$verde Creando Backup de$rojo $c$gris"
-            cp -R -f ./home/$c ~/ 2>> /dev/null
-            mv ~/home/$c ~/$c.BACKUP 2>> /dev/null
+            if [ -f ~/$c ] || [ -d ~/$c ]
+            then
+                mv ~/$c ~/$c.BACKUP 2>> /dev/null
+            else
+                cp -R -f ./home/$c ~/$c.BACKUP 2>> /dev/null
+            fi
+
         fi
 
         # Mover archivos al home
