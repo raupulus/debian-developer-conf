@@ -99,7 +99,11 @@ function bashit() {
         echo -e "$verde Habilitando todos los plugins para$rojo Bashit$gris"
 
         # Incorpora archivo de bashit
-        source ~/.bash_it/bash_it.sh
+        export BASH_IT="/$HOME/.bash_it"
+        export BASH_IT_THEME='powerline-multiline'
+        export SCM_CHECK=true
+        export SHORT_TERM_LINE=true
+        source "$BASH_IT"/bash_it.sh
 
         for p in $plugins_habilitar
         do
