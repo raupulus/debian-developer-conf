@@ -124,6 +124,7 @@ function ninjaide_install() {
     fi
 
     #Resolviendo dependencia de libreria QtWebKit.so si no existe
+    sudo apt install libqtwebkit4 2>> /dev/null
     if [ ! -f /usr/lib/python2.7/dist-packages/PyQt4/QtWebKit.so ]
     then
         echo -e "$verde Añadiendo libreria$rojo QtWebKit$gris"
