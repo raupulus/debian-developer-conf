@@ -194,15 +194,7 @@ function agregar_conf_home() {
         # Crea backup del directorio o archivo si no tiene una anterior
         if [ ! -f ~/$c.BACKUP ] || [ ! -d ~/$c.BACKUP ]
         then
-            if [ -f $c ]
-            then
-                echo -e "$verde Creando backup del archivo ~/home/$(whoami)/$c $gris"
-                mv ~/$c ~/$c.BACKUP 2>> /dev/null || touch ~/$c.BACKUP 2>> /dev/null
-            elif [ -d $c ]
-            then
-                echo -e "$verde Creando backup del directorio ~/home/$(whoami)/$c $gris"
-                mv ~/$c ~/$c.BACKUP 2>> /dev/null || mkdir ~/$c.BACKUP 2>> /dev/null
-            fi
+            cp -R -f ./home/$c ~/$c.backup 2>> /dev/null
         fi
 
         # Mover archivos al home
