@@ -198,7 +198,7 @@ function agregar_conf_home() {
             then
                 echo -e "$verde Creando backup del archivo ~/home/$(whoami)/$c $gris"
                 mv ~/$c ~/$c.BACKUP 2>> /dev/null || touch ~/$c.BACKUP 2>> /dev/null
-            elif [ -f $c ]
+            elif [ -d $c ]
             then
                 echo -e "$verde Creando backup del directorio ~/home/$(whoami)/$c $gris"
                 mv ~/$c ~/$c.BACKUP 2>> /dev/null || mkdir ~/$c.BACKUP 2>> /dev/null
