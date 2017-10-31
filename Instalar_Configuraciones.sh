@@ -196,7 +196,7 @@ function agregar_conf_home() {
         then
             echo -e "$verde Creando Backup de$rojo $c$gris"
             cp -R -f ./home/$c ~/ 2>> /dev/null
-            mv ~/home/$c ~/$c.backup 2>> /dev/null
+            mv ~/home/$c ~/$c.BACKUP 2>> /dev/null
         fi
 
         # Mover archivos al home
