@@ -155,7 +155,7 @@ function configurar_vim() {
         plugins_vim=("align closetag powerline youcompleteme xmledit autopep8 python-jedi python-indent utilsinps utl rails snippets fugitive ctrlp tlib tabular sintastic detectindent closetag align syntastic")
         for plugin in $plugins_vim
         do
-            echo -e "$verde Activando el plugin  → $rojo $plugin$yellow"
+            echo -e "$verde Activando el plugin  → $rojo $plugin $yellow"
             vim-addon-manager install $plugin >> /dev/null 2>> /dev/null
             vim-addon-manager enable $plugin >> /dev/null 2>> /dev/null
         done
