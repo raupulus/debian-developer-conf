@@ -196,6 +196,7 @@ function agregar_conf_home() {
         then
             if [ ! -f ~/$c.BACKUP ]
             then
+                echo -e "$verde Creando Backup del archivo$rojo $c$gris"
                 if [ -f ~/$c ]
                 then
                     mv ~/$c ~/$c.BACKUP 2>> /dev/null
@@ -209,6 +210,7 @@ function agregar_conf_home() {
         then
             if [ ! -d ~/$c.BACKUP ]
             then
+                echo -e "$verde Creando Backup del directorio$rojo $c$gris"
                 if [ -d ~/$c ]
                 then
                     mv ~/$c ~/$c.BACKUP 2>> /dev/null
@@ -216,7 +218,7 @@ function agregar_conf_home() {
                     cp -R -f ./home/$c ~/$c.BACKUP 2>> /dev/null
                 fi
             fi
-            echo -e "$verde Generando configuración del archivo$rojo $c$gris"
+            echo -e "$verde Generando configuración del directorio$rojo $c$gris"
             cp -R -f ./home/$c ~/ 2>> /dev/null
         fi
     done
