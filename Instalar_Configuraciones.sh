@@ -194,7 +194,8 @@ function agregar_conf_home() {
         # Crea backup del directorio o archivo si no tiene una anterior
         if [ ! -f ~/$c.BACKUP ] || [ ! -d ~/$c.BACKUP ]
         then
-            cp -R -f ./home/$c ~/$c.backup 2>> /dev/null
+            cp -R -f ./home/$c ~/ 2>> /dev/null
+            mv ./home/$c ~/$c.backup 2>> /dev/null
         fi
 
         # Mover archivos al home
