@@ -238,10 +238,7 @@ function programas_default() {
     if [ -f /usr/bin/tilix ]
     then
         echo -e "$verde Estableciendo terminal por defecto a$rojo Tilix$gris"
-        #TOFIX → Mal formado → Enlace - nombre - ruta -prioridad
-        #sudo update-alternatives --install /usr/bin/tilix x-terminal-emulator /usr/bin/tilix 1
         sudo touch /etc/profile.d/vte.sh 2>> /dev/null
-        #TOFIX → No existe Tilix como alternativa, reparar primer paso
         sudo update-alternatives --set x-terminal-emulator /usr/bin/tilix.wrapper 2>> /dev/null
     elif [ -f /usr/bin/terminator ]
     then
