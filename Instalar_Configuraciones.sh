@@ -192,26 +192,31 @@ function agregar_conf_home() {
    for c in $conf
     do
         # Crea backup del directorio o archivo si no tiene una anterior
-        if [ ! -f ~/$c.BACKUP ] || [ ! -d ~/$c.BACKUP ]
+        if [ -f ./home/$c ]  # Si es un archivo
         then
-            echo -e "$verde Creando Backup de$rojo $c$gris"
-            if [ -f ~/$c ] || [ -d ~/$c ]
+            if [ ! -f ~/$c.BACKUP ]
             then
-                mv ~/$c ~/$c.BACKUP 2>> /dev/null
-            else
-                cp -R -f ./home/$c ~/$c.BACKUP 2>> /dev/null
+                if [ -f ~/$c ]
+                then
+                    mv ~/$c ~/$c.BACKUP 2>> /dev/null
+                else
+                    cp -R -f ./home/$c ~/$c.BACKUP 2>> /dev/null
+                fi
             fi
-
-        fi
-
-        # Mover archivos al home
-        if [ -f ./home/$c ]
-        then
             echo -e "$verde Generando configuración del archivo$rojo $c$gris"
             cp -R -f ./home/$c ~/$c 2>> /dev/null
-        elif  [ -d ./home/$c ]
+        elif [ -d ./home/$c ]  # Si es un directorio
         then
-            echo -e "$verde Generando configuración del directorio$rojo $c$gris"
+            if [ ! -d ~/$c.BACKUP ]
+            then
+                if [ -d ~/$c ]
+                then
+                    mv ~/$c ~/$c.BACKUP 2>> /dev/null
+                else
+                    cp -R -f ./home/$c ~/$c.BACKUP 2>> /dev/null
+                fi
+            fi
+            echo -e "$verde Generando configuración del archivo$rojo $c$gris"
             cp -R -f ./home/$c ~/ 2>> /dev/null
         fi
     done
