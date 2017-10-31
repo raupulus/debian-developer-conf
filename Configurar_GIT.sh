@@ -47,6 +47,9 @@ function configurar_git() {
 
     # Habilitar cifrado con el programa GPG
     # git config --global gpg.program gpg
+    # gpg --list-keys
+    # git config --global user.signingkey CLAVE_DE_GPG
+    # git config --global commit.gpgsign true  # Firmar commit por defecto
 
     #Reparar finales de linea que mete la mierda de windows CRLF to LF
     git config --global core.autocrlf input
