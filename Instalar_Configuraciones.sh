@@ -201,7 +201,7 @@ function agregar_conf_home() {
 
         # Mover archivos al home
         echo -e "$verde Generando configuración de$rojo $c$gris"
-        cp -R -f ./home/$c ~/$c 2>> /dev/null
+        cp -R -f ./home/$c ~/ 2>> /dev/null
     done
 }
 
