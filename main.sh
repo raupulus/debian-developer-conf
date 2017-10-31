@@ -8,6 +8,13 @@
 # ###       www.fryntiz.es        ### #
 #######################################
 
+# Script principal
+# Desde aquí se llamaran a todos los demás scripts separando funciones para cada uno de ellos
+#
+# Ten en cuenta que este script hace modificaciones en el equipo a mi gusto
+# Puede no funcionar correctamente si usas software de repositorios externo
+# Probablemente no funcionará en otras distribuciones distintas a Debian rama Stable
+
 ############################
 ##   Constantes Colores   ##
 ############################
@@ -20,8 +27,9 @@ magenta="\033[1;35m"
 rojo="\033[1;31m"
 verde="\033[1;32m"
 
+
 #############################
-##   Variables Generales   ##
+##    Importar Fuentes     ##
 #############################
 
 source ./Agregar_Repositorios.sh
@@ -32,6 +40,13 @@ source ./Variables_Entorno.sh
 source ./Configurar_GIT.sh
 source ./Personalización_GTK.sh
 source ./Servidores.sh
+source ./limpiador.sh
+
+
+#############################
+##   Variables Generales   ##
+#############################
+DIR_SRCIPT=`echo $PWD`
 
 while :
     do
@@ -44,11 +59,15 @@ while :
         echo -e "   $rojo 3)  $verde Instalar Configuraciones$gris" #Configuración bash, zsh, variables entorno...
         echo -e "   $rojo 4)  $verde Configurar GIT$gris"
         echo -e "   $rojo 5)  $verde Personalizar Sistema y GTK$gris"
-        echo -e "   $rojo 6)  $verde Instalar Servidores Apache → PHP → SQL$amarillo (No completado)$gris"
+        echo -e "   $rojo 6)  $verde Instalar Servidores Apache → PHP → SQL"
         echo -e "   $rojo 7)  $verde Ejecutar todos los pasos anteriores$gris"
+        echo -e "   $rojo 999)  $amarillo Limpia$rojo TODO$amarillo rastro del script (peligroso) $gris"
 
 
-    read entrada
+    echo -e "$rojo"
+    read -p "    Acción → " entrada
+    echo -e "$gris"
+
     case $entrada in
 
         1)#Instalar Aplicaciones Básicas
@@ -101,6 +120,14 @@ while :
             instalar_servidores
             instalar_variables
             read -p "Pulsa una tecla para continuar";;
+
+        999)  # Borrar todo rastro del script, es muy peligroso usarlo
+            clear
+            echo -e "$rojo Preparando para limpiar todo rastro$gris"
+            echo -e "$rojo Esto solo es útil ante situaciones donde fallan cosas$gris"
+            echo -e "$rojo Hay riesgo de perder datos$gris"
+            limpiar_con_fuerza
+            echo "";;
 
         0)#SALIR
             clear

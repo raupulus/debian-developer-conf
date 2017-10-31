@@ -93,6 +93,7 @@ function server_php() {
     function personalizar_php() {
         echo -e "$verde Personalizando PHP$gris"
 
+        # TODO → Implementar control si fallan las descargas en "psysh
         # Intérprete interactivo de PHP → psysh
         echo -e "$verde Instalar Intérprete$rojo psysh $gris"
         wget --show-progress https://git.io/psysh  -O ~/.local/bin/psysh

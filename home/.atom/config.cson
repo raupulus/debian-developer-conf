@@ -17,7 +17,7 @@
   "autoclose-html":
     legacyMode: true
   "autocomplete-plus":
-    autoActivationDelay: 1000
+    autoActivationDelay: 300
   core:
     autoHideMenuBar: true
     disabledPackages: [

@@ -13,6 +13,15 @@ Se ha testeado mayormente en entornos virtuales y limpios sin poco uso el sistem
 
 En los equipos de uso diario ya los ejecuto sin problemas hasta la fecha para incorporar mejoras desde la rama principal MASTER
 
+## Advertencias
+Puede dar problemas si no usas repositorios oficiales o usas repositorios mezclados con los oficiales.
+
+Este script está automatizado y puede cambiar configuración
+
+Se ha testeado todo lo posible en entornos virtuales y en el mio personal de forma real.
+
+Para evitar que sea interactivo y estar constantemente preguntando se establece "-y" como parámetro por defecto en **apt** lo cual puede instalar software en forma de dependencia y/o romper en casos muy extremos el sistema, aunque repito que con repositorios oficiales no debe ocurrir nada extraño y si es así puedes reportarlo para su corrección.
+
 ## Objetivos
 Crear un entorno de trabajo personalizado para desarrollar aplicaciones web según las preferencias del autor.
 

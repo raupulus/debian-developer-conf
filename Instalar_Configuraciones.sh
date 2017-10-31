@@ -53,7 +53,7 @@ function bashit() {
         for (( i=1; i<=$REINTENTOS; i++ ))
         do
             rm -R ~/.bash_it 2>> /dev/null
-            git clone https://github.com/Bash-it/bash-it.git ~/.bash_it && bash ~/.bash_it/install.sh --silent && break
+            git clone --depth=1 https://github.com/Bash-it/bash-it.git ~/.bash_it && bash ~/.bash_it/install.sh --silent && break
         done
     fi
 
@@ -91,69 +91,71 @@ function bashit() {
     sudo apt install -y rbenv >> /dev/null 2>> /dev/null
 
     #Habilitar todos los plugins
-    #TOFIX → ENTRA CUANDO NO TIENE QUE ENTRAR E INTENTA INSTALAR LO QUE NO TIENE QUE INSTALAR DANDO ERROR
-    #SIEMPRE ESTOY EN BASH.... tratar modo de que solo entre cuando estoy con perfil de bash cargado y bashit instalado
-    if [ -z $BASH ]
-    then
-        echo -e "$verde Para habilitar los$rojo plugins$verde ejecuta este scripts desde$rojo bash$gris"
-    elif [ -n $BASH ] && [ "$BASH" = '/bin/bash' ]
+    #TOFIX → Este paso solo puede hacerse correctamente cuando usamos /bin/bash
+    plugins_habilitar="alias-completion aws base battery edit-mode-vi explain extract fasd git gif hg java javascript latex less-pretty-cat node nvm postgres projects python rails ruby sshagent ssh subversion xterm dirs nginx plenv pyenv rbenv"
+
+    if [ -n $BASH ] && [ $BASH = '/bin/bash' ]
     then
         echo -e "$verde Habilitando todos los plugins para$rojo Bashit$gris"
-        bash-it enable plugin all
-        #Deshabilitar plugins no usados o deprecated
+
+        # Incorpora archivo de bashit
+        export BASH_IT="/$HOME/.bash_it"
+        export BASH_IT_THEME='powerline-multiline'
+        export SCM_CHECK=true
+        export SHORT_TERM_LINE=true
+        source "$BASH_IT"/bash_it.sh
+
+        for p in $plugins_habilitar
+        do
+            bash-it enable plugin $p
+        done
+
+        #Asegurar que los plugins conflictivos estén deshabilitados:
         echo -e "$verde Deshabilitando plugins no usados en$rojo Bashit$gris"
-        bash-it disable plugin chruby chruby-auto z z_autoenv
+        bash-it disable plugin chruby chruby-auto z z_autoenv visual-studio-code gh
     else
-        echo -e "$verde Asegurate de ejecutar con$rojo bash$verde este$rojo script$verde para poder instalar plugins$gris"
+        echo -e "$verde Para habilitar los$rojo plugins de BASH$verde ejecuta este scripts desde$rojo bash$gris"
     fi
 }
 
 #Funcion para configurar VIM con sus temas y complementos
 function configurar_vim() {
     echo -e "$verde Configurando VIM"
+
+    function vundle_actualizar_plugins() {
+        echo | vim +PluginInstall +qall
+    }
+
     #Instalar Gestor de Plugins Vundle
-    echo -e "$verde Instalando gestor de plugins$rojo Vundle$verde (Puede tardar un poco)$gris"
-    if [ -d ~/.vim/bundle/Vundle.vim ]
-    then #Si existe solo actualiza plugins
-        echo -e "$verde Vundle ya está instalado, instalando plugins nuevos$gris"
-        echo | vim +PluginInstall +qall || rm -R ~/.vim/bundle/Vundle.vim #Si falla borra dir
-        if [ ! -d ~/.vim/bundle/Vundle.vim ] #Comprueba si se ha borrado para rehacer
+    function vundle_descargar() {
+        echo -e "$verde Descargando Vundle desde Repositorios"
+        if [ ! -d ~/.vim/bundle/Vundle.vim ] # Se intenta descargar 10 veces
         then
-            for (( i=1; i<=3; i++ ))
+            for (( i=1; i<=10; i++ ))
             do
-                git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
-                echo | vim +PluginInstall +qall && break;
-                if [ $i -eq 3 ]
+                if [ $i -eq 10 ]
                 then
                     rm -R ~/.vim/bundle/Vundle.vim
-                    git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
-                    echo | vim +PluginInstall +qall && break;
+                    break
                 fi
-            done
-        fi
-    else #Instala plugins dentro de ~/.vimrc #Se intenta 3 veces
-        echo -e "$verde Vundle no está instalado, comenzando descarga$gris"
-        for (( i=1; i<=3; i++ ))
-        do
-            rm -R ~/.vim/bundle/Vundle.vim 2>> /dev/null
-            git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
-            echo | vim +PluginInstall +qall && break;
-            if [ $i -eq 3 ]
-            then
-                rm -R ~/.vim/bundle/Vundle.vim
                 git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
-                echo | vim +PluginInstall +qall && break;
-            fi
-        done
-    fi
-    cd $DIR_ACTUAL
+                vundle_actualizar_plugins && break
+            done
+        else
+            echo -e "$verde Vundle ya está instalado$gris"
+        fi
+    }
+
+    # Instalar Vundle y actualizar Plugins
+    vundle_descargar
+    vundle_actualizar_plugins
 
     #Funcion para instalar todos los plugins
     function vim_plugins() {
-        plugins_vim=("align" "closetag" "powerline" "youcompleteme" "xmledit" "autopep8" "python-jedi" "python-indent" "utilsinps" "utl" "rails" "snippets" "fugitive" "ctrlp")
-        for plugin in ${plugins_vim[*]}
+        plugins_vim=("align closetag powerline youcompleteme xmledit autopep8 python-jedi python-indent utilsinps utl rails snippets fugitive ctrlp tlib tabular sintastic detectindent closetag align syntastic")
+        for plugin in $plugins_vim
         do
-            echo -e "$verde Activando el plugin  → $rojo $plugin$yellow"
+            echo -e "$verde Activando el plugin  → $rojo $plugin $yellow"
             vim-addon-manager install $plugin >> /dev/null 2>> /dev/null
             vim-addon-manager enable $plugin >> /dev/null 2>> /dev/null
         done
@@ -164,15 +166,16 @@ function configurar_vim() {
         mkdir -p ~/.vim/colors 2>> /dev/null
         #Creando archivos de colores, por defecto usara "monokai"
         echo -e "$verde Descargando colores para sintaxis$amarillo"
+
         if [ ! -f "~/.vim/colors/wombat.vim" ]
         then
             wget http://www.vim.org/scripts/download_script.php?src_id=6657 -O ~/.vim/colors/wombat.vim
         fi
 
         echo -e "$verde Descargando Tema$rojo Monokai$amarillo"
-        if [ ! -f "~/.vim/colors/monokai.vim" ]
+        if [ ! -f "~/.vim/colors/monokai1.vim" ]
         then
-            wget https://raw.githubusercontent.com/lsdr/monokai/master/colors/monokai.vim -O ~/.vim/colors/monokai.vim
+            wget https://raw.githubusercontent.com/lsdr/monokai/master/colors/monokai.vim -O ~/.vim/colors/monokai_1.vim
         fi
         echo -e "$verde Se ha concluido la instalacion de temas de colores$gris"
     }
@@ -183,22 +186,41 @@ function configurar_vim() {
 
 #Agregar Archivos de configuración al home
 function agregar_conf_home() {
-      conf=$(ls -A ./home/)
+    conf=$(ls -A ./home/)
     echo -e "$verde Preparando para añadir archivos de configuración en el home de usuario$gris"
-    for c in $conf
+
+   for c in $conf
     do
-        if [ -f ~/$c ] || [ -d ~/$c ] #Si existe hago backup
+        # Crea backup del directorio o archivo si no tiene una anterior
+        if [ -f ./home/$c ]  # Si es un archivo
         then
-            if [ -f "~/$c.BACKUP" ] || [ -f "~/$c.BACKUP" ] #Contemplo que exista copia y no la borra
+            if [ ! -f ~/$c.BACKUP ]
             then
-                rm ~/$c 2>> /dev/null
-            else
-                echo -e "$verde Creando backup de ~/home/$(whoami)/$c $gris"
-                mv ~/$c ~/$c.BACKUP 2>> /dev/null
+                echo -e "$verde Creando Backup del archivo$rojo $c$gris"
+                if [ -f ~/$c ]
+                then
+                    mv ~/$c ~/$c.BACKUP 2>> /dev/null
+                else
+                    cp -R -f ./home/$c ~/$c.BACKUP 2>> /dev/null
+                fi
             fi
+            echo -e "$verde Generando configuración del archivo$rojo $c$gris"
+            cp -R -f ./home/$c ~/$c 2>> /dev/null
+        elif [ -d ./home/$c ]  # Si es un directorio
+        then
+            if [ ! -d ~/$c.BACKUP ]
+            then
+                echo -e "$verde Creando Backup del directorio$rojo $c$gris"
+                if [ -d ~/$c ]
+                then
+                    mv ~/$c ~/$c.BACKUP 2>> /dev/null
+                else
+                    cp -R -f ./home/$c ~/$c.BACKUP 2>> /dev/null
+                fi
+            fi
+            echo -e "$verde Generando configuración del directorio$rojo $c$gris"
+            cp -R -f ./home/$c ~/ 2>> /dev/null
         fi
-        echo -e "$verde Generando configuración$gris"
-        cp -r ./home/$c ~/$c 2>> /dev/null
     done
 }
 
@@ -300,9 +322,15 @@ function terminal() {
         case $term in
             bash | 1)#Establecer bash como terminal
                 chsh -s /bin/bash
+                # Cambiar enlace por defecto desde sh a bash
+                sudo rm /bin/sh
+                sudo ln -s /bin/bash /bin/sh
                 break;;
             zsh | 2)#Establecer zsh como terminal
                 chsh -s /bin/zsh
+                # Cambiar enlace por defecto desde sh a zsh
+                sudo rm /bin/sh
+                sudo ln -s /bin/zsh /bin/sh
                 break;;
             *)#Opción errónea
                 echo -e "$rojo Opción no válida$gris"
@@ -318,15 +346,35 @@ function configurar_gedit() {
     cp -r ./gedit/.config/gedit/* ~/.config/gedit/
 }
 
+#Crea un archivo hosts muy completo que bloquea bastantes sitios malignos en la web
+function configurar_hosts() {
+    echo -e "$verde Configurar archivo$rojo /etc/hosts"
+
+    # Crea copia del original para mantenerlo siempre
+    if [ ! -f /etc/hosts.BACKUP ]
+    then
+        sudo mv /etc/hosts /etc/hosts.BACKUP
+    fi
+
+    mkdir -p TMP 2>> /dev/null
+    cat /etc/hosts.BACKUP > ./TMP/hosts
+    cat ./etc/hosts >> ./TMP/hosts
+    sudo cp ./TMP/hosts /etc/hosts
+}
+
 #Instalar Todas las configuraciones
 function instalar_configuraciones() {
     bashit
     ohMyZSH
     permisos
     programas_default
-    configurar_vim
+
+    cd $DIR_SRCIPT
+
     configurar_gedit
     agregar_conf_home
+    configurar_vim
+    configurar_hosts
     terminal #Pregunta el terminal a usar
 
     sudo update-command-not-found

@@ -45,6 +45,18 @@ function configurar_git() {
     git config --global core.editor vim
     git config --global color.ui true
 
+    # TODO → Preguntar si se desea configurar GPG
+    # Listar claves actuales
+    # Preguntar si usar alguna de las que hay, si no hay saltar esto
+    # Introducir clave GPG o generarla
+    # Añadir configuración a .gitconfig
+
+    # Habilitar cifrado con el programa GPG
+    # git config --global gpg.program gpg
+    # gpg --list-keys
+    # git config --global user.signingkey CLAVE_DE_GPG
+    # git config --global commit.gpgsign true  # Firmar commit por defecto
+
     #Reparar finales de linea que mete la mierda de windows CRLF to LF
     git config --global core.autocrlf input
 
