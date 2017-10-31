@@ -53,7 +53,7 @@ function bashit() {
         for (( i=1; i<=$REINTENTOS; i++ ))
         do
             rm -R ~/.bash_it 2>> /dev/null
-            git clone https://github.com/Bash-it/bash-it.git ~/.bash_it && bash ~/.bash_it/install.sh --silent && break
+            git clone --depth=1 https://github.com/Bash-it/bash-it.git ~/.bash_it && bash ~/.bash_it/install.sh --silent && break
         done
     fi
 
@@ -99,7 +99,11 @@ function bashit() {
         echo -e "$verde Habilitando todos los plugins para$rojo Bashit$gris"
 
         # Incorpora archivo de bashit
-        source ~/.bash_it/bash_it.sh
+        export BASH_IT="/$HOME/.bash_it"
+        export BASH_IT_THEME='powerline-multiline'
+        export SCM_CHECK=true
+        export SHORT_TERM_LINE=true
+        source "$BASH_IT"/bash_it.sh
 
         for p in $plugins_habilitar
         do
@@ -151,7 +155,7 @@ function configurar_vim() {
         plugins_vim=("align closetag powerline youcompleteme xmledit autopep8 python-jedi python-indent utilsinps utl rails snippets fugitive ctrlp tlib tabular sintastic detectindent closetag align syntastic")
         for plugin in $plugins_vim
         do
-            echo -e "$verde Activando el plugin  → $rojo $plugin$yellow"
+            echo -e "$verde Activando el plugin  → $rojo $plugin $yellow"
             vim-addon-manager install $plugin >> /dev/null 2>> /dev/null
             vim-addon-manager enable $plugin >> /dev/null 2>> /dev/null
         done
@@ -188,15 +192,35 @@ function agregar_conf_home() {
    for c in $conf
     do
         # Crea backup del directorio o archivo si no tiene una anterior
-        if [ ! -f "~/$c.BACKUP" ] || [ ! -d "~/$c.BACKUP" ]
+        if [ -f ./home/$c ]  # Si es un archivo
         then
-            echo -e "$verde Creando backup de ~/home/$(whoami)/$c $gris"
-            mv ~/$c ~/$c.BACKUP 2>> /dev/null
+            if [ ! -f ~/$c.BACKUP ]
+            then
+                echo -e "$verde Creando Backup del archivo$rojo $c$gris"
+                if [ -f ~/$c ]
+                then
+                    mv ~/$c ~/$c.BACKUP 2>> /dev/null
+                else
+                    cp -R -f ./home/$c ~/$c.BACKUP 2>> /dev/null
+                fi
+            fi
+            echo -e "$verde Generando configuración del archivo$rojo $c$gris"
+            cp -R -f ./home/$c ~/$c 2>> /dev/null
+        elif [ -d ./home/$c ]  # Si es un directorio
+        then
+            if [ ! -d ~/$c.BACKUP ]
+            then
+                echo -e "$verde Creando Backup del directorio$rojo $c$gris"
+                if [ -d ~/$c ]
+                then
+                    mv ~/$c ~/$c.BACKUP 2>> /dev/null
+                else
+                    cp -R -f ./home/$c ~/$c.BACKUP 2>> /dev/null
+                fi
+            fi
+            echo -e "$verde Generando configuración del directorio$rojo $c$gris"
+            cp -R -f ./home/$c ~/ 2>> /dev/null
         fi
-
-        # Mover archivos al home
-        echo -e "$verde Generando configuración de$rojo $c$gris"
-        cp -R -f ./home/$c ~/$c 2>> /dev/null
     done
 }
 

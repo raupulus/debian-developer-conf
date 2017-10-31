@@ -45,6 +45,9 @@ function configurar_git() {
     git config --global core.editor vim
     git config --global color.ui true
 
+    # Habilitar cifrado con el programa GPG
+    # git config --global gpg.program gpg
+
     #Reparar finales de linea que mete la mierda de windows CRLF to LF
     git config --global core.autocrlf input
 
