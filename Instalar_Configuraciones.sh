@@ -193,10 +193,10 @@ function agregar_conf_home() {
     do
         # Crea backup del directorio o archivo si no tiene una anterior
         # TOFIX → Controlar mejor al crear BACKUP cuando no existe un directorio o archivo
-        if [ ! -f "~/$c.BACKUP" ] || [ ! -d "~/$c.BACKUP" ]
+        if [ ! -f ~/$c.BACKUP ] || [ ! -d ~/$c.BACKUP ]
         then
             echo -e "$verde Creando backup de ~/home/$(whoami)/$c $gris"
-            mv ~/$c ~/$c.BACKUP || mkdir ~/$c.BACKUP || touch ~/$c.BACKUP 2>> /dev/null
+            mv ~/$c ~/$c.BACKUP 2>> /dev/null || mkdir ~/$c.BACKUP 2>> /dev/null || touch ~/$c.BACKUP 2>> /dev/null
         fi
 
         # Mover archivos al home
