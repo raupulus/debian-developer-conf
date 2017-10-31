@@ -45,6 +45,12 @@ function configurar_git() {
     git config --global core.editor vim
     git config --global color.ui true
 
+    # TODO → Preguntar si se desea configurar GPG
+    # Listar claves actuales
+    # Preguntar si usar alguna de las que hay, si no hay saltar esto
+    # Introducir clave GPG o generarla
+    # Añadir configuración a .gitconfig
+
     # Habilitar cifrado con el programa GPG
     # git config --global gpg.program gpg
     # gpg --list-keys
