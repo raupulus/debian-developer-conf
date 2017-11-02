@@ -62,6 +62,11 @@ function atom_install() {
 
     function conf_atom() {
         echo -e "$verde Añadiendo configuraciones para Atom"
+
+        echo -e "$verde Deshabilitando complementos"
+        apm disable welcome
+        apm disable about
+
         # TODO → Añadir configuración de idiomas
         # echo '
         # "atom-i18n":
@@ -69,6 +74,8 @@ function atom_install() {
         #   locale: "es"
         # '
     }
+
+    conf_atom
 }
 
 #Instala complementos para Brackets IDE
