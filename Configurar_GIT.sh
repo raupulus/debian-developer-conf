@@ -37,6 +37,23 @@ function datos_input() {
     read -p "Introduce el correo electronico → " correo_git
 }
 
+function gpg_git() {
+  echo -e "$verde Configurando GPG para GIT$gris"
+
+  # Listar claves actuales
+  gpg --list-keys
+
+  # Preguntar si usar alguna de las que hay, si no hay saltar esto
+  # Introducir clave GPG o generarla
+  # Añadir configuración a .gitconfig
+
+  # Habilitar cifrado con el programa GPG
+  # git config --global gpg.program gpg
+  # gpg --list-keys
+  # git config --global user.signingkey CLAVE_DE_GPG
+  # git config --global commit.gpgsign true  # Firmar commit por defecto
+}
+
 #Configurar el usuario GIT local
 function configurar_git() {
     cd #Cambio al directorio home para que no de problemas GIT
@@ -46,16 +63,12 @@ function configurar_git() {
     git config --global color.ui true
 
     # TODO → Preguntar si se desea configurar GPG
-    # Listar claves actuales
-    # Preguntar si usar alguna de las que hay, si no hay saltar esto
-    # Introducir clave GPG o generarla
-    # Añadir configuración a .gitconfig
-
-    # Habilitar cifrado con el programa GPG
-    # git config --global gpg.program gpg
-    # gpg --list-keys
-    # git config --global user.signingkey CLAVE_DE_GPG
-    # git config --global commit.gpgsign true  # Firmar commit por defecto
+    echo -e "$verde ¿Quieres configurar una clave GPG para firmar?$yellow"
+    read -p 'Introduce una opción y/N → ' input
+    if ( -n $input )
+    then
+      gpg_git
+    fi
 
     #Reparar finales de linea que mete la mierda de windows CRLF to LF
     git config --global core.autocrlf input
