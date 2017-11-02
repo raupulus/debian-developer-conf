@@ -130,17 +130,19 @@ alias .....='cd ../../../..'
 # Git
 alias git="LANG=C git"
 alias glg="git lg"
+alias gl='git lg'
+alias gh='git hist'
 alias gs='git status '
 alias ga='git add '
 alias gb='git branch '
-alias gc='git commit'
-alias gd='git diff'
+alias gc='git commit '
+alias gd='git diff '
 alias go='git checkout '
 alias gk='gitk --all&'
 alias gx='gitx --all'
 alias got='git '
 alias get='git '
-alias gp='git push'
+alias gp='git push '
 
 # Otros
 #alias rm="rm -i"
@@ -191,11 +193,13 @@ fi
 ###     Exportando variables    ###
 ###################################
 #Exportar editor de terminal
-export EDITOR="nano -c"
+#export EDITOR="nano -c"
+export EDITOR="vim"
 export GIT_PS1_SHOWDIRTYSTATE=1
 export _JAVA_OPTIONS='-Dawt.useSystemAAFontSettings=on'
 
 # Less Colors for Man Pages
+export LESSCHARSET=UTF-8
 export LESS_TERMCAP_mb=$'\E[01;31m'       # begin blinking
 export LESS_TERMCAP_md=$'\E[01;38;5;74m'  # begin bold
 export LESS_TERMCAP_me=$'\E[0m'           # end mode
