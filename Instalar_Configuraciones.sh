@@ -366,7 +366,7 @@ function instalar_configuraciones() {
     permisos
     programas_default
 
-    cd $DIR_SRCIPT
+    cd $DIR_SCRIPT
 
     configurar_gedit
     agregar_conf_home

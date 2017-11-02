@@ -46,7 +46,7 @@ source ./limpiador.sh
 #############################
 ##   Variables Generales   ##
 #############################
-DIR_SRCIPT=`echo $PWD`
+DIR_SCRIPT=`echo $PWD`
 
 while :
     do
