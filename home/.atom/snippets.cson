@@ -1,0 +1,134 @@
+# Your snippets
+#
+# Atom snippets allow you to enter a simple prefix in the editor and hit tab to
+# expand the prefix into a larger code block with templated values.
+#
+# You can create a new snippet in this file by typing "snip" and then hitting
+# tab.
+#
+# An example CoffeeScript snippet to expand log to console.log:
+#
+# '.source.coffee':
+#   'Console log':
+#     'prefix': 'log'
+#     'body': 'console.log $1'
+#
+# Each scope (e.g. '.source.coffee' above) can only be declared once.
+#
+# This file uses CoffeeScript Object Notation (CSON).
+# If you are unfamiliar with CSON, you can read more about it in the
+# Atom Flight Manual:
+# http://flight-manual.atom.io/using-atom/sections/basic-customization/#_cson
+
+
+##############################################
+########             PHP           ###########
+##############################################
+
+# Comentario del autor
+'.text.html.php':
+  'Comentario de archivo':
+    'prefix': 'com'
+    'body': """
+      /**
+       * @author Raúl Caro Pastorino
+       * @copyright Copyright © 2017 Raúl Caro Pastorino
+       * @license https://wwww.gnu.org/licenses/gpl.txt
+       */
+    """
+
+
+# Comparar Cadenas de texto
+'.text.html.php':
+  'Comparar Cadenas de texto':
+    'prefix': 'comparacadenas'
+    'body': """
+      $a = 'cadena1';
+      $b = 'cadena2';
+
+      // Contador de diferencias
+      $contador = 0;
+
+      // Longitud de la cadena $a
+      $longitud = mb_strlen($a);
+
+      // Comparar cada carácter distinto y sumar contador
+      for ($i=0; $i < $longitud; $i++) {
+          if ((mb_substr($a, $i, 1)) !== (mb_substr($b, $i, 1))) {
+            $contador++;
+          }
+      }
+    """
+
+
+
+
+
+
+
+
+
+
+
+##############################################
+########            HTML            ##########
+##############################################
+# Comentario del autor
+'.text.html.basic':
+  'Comentario de archivo':
+    'prefix': 'com'
+    'body': """
+      /**
+       * @author Raúl Caro Pastorino
+       * @copyright Copyright © 2017 Raúl Caro Pastorino
+       * @license https://wwww.gnu.org/licenses/gpl.txt
+       */
+    """
+
+
+
+
+
+
+
+
+
+
+##############################################
+########             JS             ##########
+##############################################
+# Comentario del autor
+'.source.js':
+  'Comentario de archivo':
+    'prefix': 'com'
+    'body': """
+      /**
+       * @author Raúl Caro Pastorino
+       * @copyright Copyright © 2017 Raúl Caro Pastorino
+       * @license https://wwww.gnu.org/licenses/gpl.txt
+       */
+    """
+
+
+
+
+
+
+
+
+
+
+##############################################
+########           PYTHON           ##########
+##############################################
+# Comentario del autor
+'.source.python':
+  'Comentario de archivo':
+    'prefix': 'com'
+    'body': """
+      /**
+       * @author Raúl Caro Pastorino
+       * @copyright Copyright © 2017 Raúl Caro Pastorino
+       * @license https://wwww.gnu.org/licenses/gpl.txt
+       */
+    """
