@@ -54,13 +54,14 @@ while :
         clear
         echo ""
         echo -e "   $rojo 0)  $verde Salir$gris"
-        echo -e "   $rojo 1)  $verde Instalar Aplicaciones Básicas y agregar Repositorios$gris"
-        echo -e "   $rojo 2)  $verde Agregar Tipografías$gris"
-        echo -e "   $rojo 3)  $verde Instalar Configuraciones$gris" #Configuración bash, zsh, variables entorno...
-        echo -e "   $rojo 4)  $verde Configurar GIT$gris"
-        echo -e "   $rojo 5)  $verde Personalizar Sistema y GTK$gris"
-        echo -e "   $rojo 6)  $verde Instalar Servidores Apache → PHP → SQL"
-        echo -e "   $rojo 7)  $verde Ejecutar todos los pasos anteriores$gris"
+        echo -e "   $rojo 1)  $verde Instalar Configuraciones$gris" #Configuración bash, zsh, variables entorno...
+        echo -e "   $rojo 2)  $verde Agregar Repositorios$gris"
+        echo -e "   $rojo 3)  $verde Instalar Aplicaciones Básicas$gris"
+        echo -e "   $rojo 4)  $verde Agregar Tipografías$gris"
+        echo -e "   $rojo 5)  $verde Configurar GIT$gris"
+        echo -e "   $rojo 6)  $verde Personalizar Sistema y GTK$gris"
+        echo -e "   $rojo 7)  $verde Instalar Servidores Apache → PHP → SQL"
+        echo -e "   $rojo 8)  $verde Ejecutar todos los pasos anteriores$gris"
         echo -e "   $rojo 999)  $amarillo Limpia$rojo TODO$amarillo rastro del script (peligroso) $gris"
 
 
@@ -70,51 +71,56 @@ while :
 
     case $entrada in
 
-        1)#Instalar Aplicaciones Básicas
-            clear
-            echo -e "$verde Instalar Aplicaciones Básicas$gris"
-            agregar_repositorios
-            instalar_Software
-            read -p "Pulsa una tecla para continuar";;
-
-        2)#Agregar Tipografías
-            clear
-            echo -e "$verde Agregar Tipografías$gris"
-            agregar_fuentes
-            read -p "Pulsa una tecla para continuar";;
-
-        3)#Instalar Configuraciones
+        1)#Instalar Configuraciones
             clear
             echo -e "$verde Instalar Configuraciones$gris"
             instalar_configuraciones
             instalar_variables
             read -p "Pulsa una tecla para continuar";;
 
-        4)#Configurar GIT
+        2)#Agregar Repositorios
+            clear
+            echo -e "$verde Agregando Repositorios Debian Stable$gris"
+            agregar_repositorios
+            read -p "Pulsa una tecla para continuar";;
+
+        3)#Instalar Aplicaciones Básicas
+            clear
+            echo -e "$verde Instalar Aplicaciones Básicas$gris"
+            instalar_Software
+            read -p "Pulsa una tecla para continuar";;
+
+        4)#Agregar Tipografías
+            clear
+            echo -e "$verde Agregar Tipografías$gris"
+            agregar_fuentes
+            read -p "Pulsa una tecla para continuar";;
+
+        5)#Configurar GIT
             clear
             echo -e "$verde Configurar GIT$gris"
             configuracion_git
             read -p "Pulsa una tecla para continuar";;
 
-        5)#Personalizar GTK
+        6)#Personalizar GTK
             clear
             echo -e "$verde Personalizar Entorno t GTK$gris"
             personalizar
             read -p "Pulsa una tecla para continuar";;
 
-        6)#Servidores
+        7)#Servidores
             clear
             echo -e "$verde Instalando servidores Apache → PHP → SQL$gris"
             instalar_servidores
             read -p "Pulsa una tecla para continuar";;
 
-        7)#Todas configuraciones
+        8)#Todas configuraciones
             clear
             echo -e "$verde Preparando para aplicar todas las configuraciones en serie$gris"
             agregar_repositorios
+            instalar_configuraciones
             instalar_Software
             agregar_fuentes
-            instalar_configuraciones
             configuracion_git
             personalizar
             instalar_servidores
