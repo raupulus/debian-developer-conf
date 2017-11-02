@@ -59,10 +59,20 @@ function atom_install() {
             fi
         done
     fi
+
+    function conf_atom() {
+        echo -e "$verde Añadiendo configuraciones para Atom"
+        # TODO → Añadir configuración de idiomas
+        # echo '
+        # "atom-i18n":
+        #   customMenuI18nPath: "$HOME/.atom/packages/atom-i18n/def/custom_menu.cson"
+        #   locale: "es"
+        # '
+    }
 }
 
 #Instala complementos para Brackets IDE
-function brackets_install () {
+function brackets_install() {
     if [ -f /usr/bin/brackets ]
     then
         echo -e "$verde Ya esta$rojo Brackets$verde instalado en el equipo, omitiendo paso$gris"
