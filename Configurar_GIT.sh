@@ -44,6 +44,7 @@ function configurar_git() {
     git config --global user.email "$correo_git"
     git config --global core.editor vim
     git config --global color.ui true
+    git config --global gui.encoding utf-8
 
     # TODO → Preguntar si se desea configurar GPG
     # Listar claves actuales
