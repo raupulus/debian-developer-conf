@@ -11,9 +11,6 @@
             tabLength: 4
   "atom-autocomplete-php":
     binComposer: "/usr/bin/composer"
-  "atom-i18n":
-    customMenuI18nPath: "/home/fryntiz/.atom/packages/atom-i18n/def/custom_menu.cson"
-    locale: "es"
   "autoclose-html":
     legacyMode: true
   "autocomplete-plus":
