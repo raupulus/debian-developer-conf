@@ -15,7 +15,6 @@ gedit
 gedit-plugins
 git
 gocode
-gocode
 golang-go
 gpick
 gvfs-bin
@@ -67,7 +66,6 @@ python-jedi
 python-openssl
 python-pep8
 python-pip
-python-pip
 python-powerline
 python-powerline-taskwarrior
 python-pyasn1
@@ -91,7 +89,6 @@ tk
 tmux
 tmux-plugin-manager
 vim
-vim
 vim-addon-manager
 vim-addon-mw-utils
 vim-asciidoc
@@ -112,7 +109,6 @@ vim-khuno
 vim-lastplace
 vim-latexsuite
 vim-migemo
-vim-nox
 vim-nox
 vim-pathogen
 vim-python-jedi
