@@ -31,12 +31,12 @@ function atom_preconfiguracion() {
     echo -e "$verde Se va a instalar$rojo Atom IDE$gris"
     echo -e "$verde Puedes añadir configuraciones$amarillo"
     read -p '¿Quieres configuraciones? y/N → ' input
-    if [ $input == 's' ] || [ $input == 'S' ] || [ $input == 'y' ] || [ $input == 'Y' ]
+    if [ $input = 's' ] || [ $input = 'S' ] || [ $input = 'y' ] || [ $input = 'Y' ]
     then
         echo -e "$verde Creando Backup de ~/.atom$gris"
-        cp $HOME/.atom $HOME/.atom.BACKUP 2>> /dev/null
+        cp -R $HOME/.atom $HOME/.atom.BACKUP 2>> /dev/null
         echo -e "$verde Añadiendo configuración nueva"
-        cp .atom $HOME/
+        cp -R $DIR_SCRIPT/Apps/.atom $HOME/
     fi
 }
 
