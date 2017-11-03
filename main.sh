@@ -60,9 +60,9 @@ while :
         clear
         echo ""
         echo -e "   $rojo 0)  $verde Salir$gris"
-        echo -e "   $rojo 1)  $verde Instalar Configuraciones$gris" #Configuración bash, zsh, variables entorno...
-        echo -e "   $rojo 2)  $verde Agregar Repositorios$gris"
-        echo -e "   $rojo 3)  $verde Instalar Aplicaciones Básicas$gris"
+        echo -e "   $rojo 1)  $verde Agregar Repositorios$gris"
+        echo -e "   $rojo 2)  $verde Instalar Aplicaciones Básicas$gris"
+        echo -e "   $rojo 3)  $verde Instalar Configuraciones$gris" #Configuración bash, zsh, variables entorno...
         echo -e "   $rojo 4)  $verde Agregar Tipografías$gris"
         echo -e "   $rojo 5)  $verde Configurar GIT$gris"
         echo -e "   $rojo 6)  $verde Personalizar Sistema y GTK$gris"
@@ -77,23 +77,23 @@ while :
 
     case $entrada in
 
-        1)#Instalar Configuraciones
-            clear
-            echo -e "$verde Instalar Configuraciones$gris"
-            instalar_configuraciones
-            instalar_variables
-            read -p "Pulsa una tecla para continuar";;
-
-        2)#Agregar Repositorios
+        1)#Agregar Repositorios
             clear
             echo -e "$verde Agregando Repositorios Debian Stable$gris"
             agregar_repositorios
             read -p "Pulsa una tecla para continuar";;
 
-        3)#Instalar Aplicaciones Básicas
+        2)#Instalar Aplicaciones Básicas
             clear
             echo -e "$verde Instalar Aplicaciones Básicas$gris"
             instalar_Software
+            read -p "Pulsa una tecla para continuar";;
+
+        3)#Instalar Configuraciones
+            clear
+            echo -e "$verde Instalar Configuraciones$gris"
+            instalar_configuraciones
+            instalar_variables
             read -p "Pulsa una tecla para continuar";;
 
         4)#Agregar Tipografías
