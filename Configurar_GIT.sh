@@ -31,6 +31,11 @@ correo_git=""
 TOKEN=""
 TOKEN_GITLAB=""
 
+# TODO → Refactorizar y dejar configuración independiente para github y gitlab
+# TODO → Plantear integración con Bitbucket en el archivo git y su token
+# TODO → Plantear firma GPG y preguntar si configurar
+# TODO → Archivo ~/.netrc modificar con "sed"
+
 function datos_input() {
     #Se entiende que tiene el mismo usuario para GitHub y para GitLab
     read -p "Introduce el usuario de GitHub y GitLab → " usuario_git
