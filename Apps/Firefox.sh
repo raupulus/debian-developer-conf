@@ -25,7 +25,6 @@ verde="\033[1;32m"
 #############################
 DIR_SCRIPT=`echo $PWD`
 
-# TODO → Crear perfiles básicos, copiarlos a su ruta correspondiente y asignarlos a cada versión
 # Instalar versiones de Firefox
 function firefox_install() {
 
@@ -71,7 +70,6 @@ function firefox_install() {
             # Copiar acceso directo
             cp Accesos_Directos/firefox-quantum.desktop ~/.local/share/applications/ 2>> /dev/null
 
-            # TODO → Autogenerar y asociar un perfil existente con el mismo nombre de la version
             # Pedir crear perfil
             # echo -e "$verde Para evitar conflictos entre distintas versiones crea un perfil"
             # echo -e "$verde Al pulsar una tecla se abrirá una ventana para ello"
@@ -128,7 +126,6 @@ function firefox_install() {
             # Copiar acceso directo
             cp -R Accesos_Directos/firefox-nightly.desktop ~/.local/share/applications/
 
-            # TODO → Autogenerar y asociar un perfil existente con el mismo nombre de la version
             # Pedir crear perfil
             # echo -e "$verde Para evitar conflictos entre distintas versiones crea un perfil"
             # echo -e "$verde Al pulsar una tecla se abrirá una ventana para ello"
@@ -158,7 +155,7 @@ function firefox_install() {
         fi
     }
 
-    # Llamada a ejecución las funciones que instalan y configuran navegadores firefox
+    # Instalar Versiones de Firefox
     firefox_developer
     firefox_nightly
 }
