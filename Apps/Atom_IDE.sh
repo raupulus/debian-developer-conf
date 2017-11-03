@@ -30,11 +30,11 @@ function atom_preconfiguracion() {
     echo ""
     echo -e "$verde Se va a instalar$rojo Atom IDE$gris"
     echo -e "$verde Puedes añadir configuraciones$amarillo"
-    read -p '¿Quieres configuraciones? s/N → ' input
-    if [ $input == s ] || [ $input == S ]
+    read -p '¿Quieres configuraciones? y/N → ' input
+    if [ $input == 's' ] || [ $input == 'S' ] || [ $input == 'y' ] || [ $input == 'Y' ]
     then
         echo -e "$verde Creando Backup de ~/.atom$gris"
-        mv $HOME/.atom $HOME/.atom.BACKUP
+        mv $HOME/.atom $HOME/.atom.BACKUP 2>> /dev/null
         echo -e "$verde Añadiendo configuración nueva"
         cp .atom $HOME/
     fi
@@ -74,11 +74,11 @@ function atom_install() {
         echo -e "$verde Descargando$rojo ATOM$gris"
         for (( i=1; i<=$REINTENTOS; i++ ))
         do
-            rm deb atom.deb 2>> /dev/null
+            rm $DIR_SCRIPT/TMP/atom.deb 2>> /dev/null
             wget https://atom.io/download/deb -O $DIR_SCRIPT/TMP/atom.deb && break
         done
         echo -e "$verde Instalando$rojo Atom $gris"
-        sudo dpkg -i atom.deb && sudo apt install -f -y
+        sudo dpkg -i $DIR_SCRIPT/TMP/atom.deb && sudo apt install -f -y
     }
 
     # Comprueba si está instalado
