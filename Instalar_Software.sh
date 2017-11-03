@@ -26,6 +26,7 @@ verde="\033[1;32m"
 software=$(cat Software.lst) #Instala software del S.O.
 
 source Apps/Atom_IDE.sh
+source Apps/Firefox.sh
 
 #Instala complementos para Brackets IDE
 function brackets_install() {
@@ -135,126 +136,6 @@ function gitkraken_install() {
         echo -e "$verde Preparando para instalar$rojo Gitkraken$gris"
         sudo dpkg -i gitkraken-amd64.deb && sudo apt install -f -y
     fi
-}
-
-# TODO → Crear perfiles básicos, copiarlos a su ruta correspondiente y asignarlos a cada versión
-# Instalar versiones de Firefox
-function firefox_install() {
-
-    # Si no existen los directorios se crearán
-    if [ ! -d ~/.local/opt ]
-    then
-        mkdir -p ~/.local/opt
-    fi
-
-    if [ ! -d ~/.local/bin ]
-    then
-        mkdir -p ~/.local/bin
-    fi
-
-    if [ ! -d ~/.local/share/applications ]
-    then
-        mkdir -p ~/.local/share/applications
-    fi
-
-    # Firefox Quantum Developer Edition
-    function firefox_developer() {
-
-        function instalar() {
-            # Desempaquetar Firefox-Nightly_amd64.tar.bz2
-            tar -xjvf Firefox-Quantum-Developer_amd64.tar.bz2 2>> /dev/null
-
-            # Mover archivo extraido a su ubicación final
-            mv firefox ~/.local/opt/Firefox_Quantum_Developer 2>> /dev/null
-
-            # Crear enlaces de usuario y permisos de ejecución
-            ln -s ~/.local/opt/Firefox_Quantum_Developer/firefox ~/.local/bin/firefox-quantum
-            chmod +x ~/.local/bin/firefox-quantum
-
-            # Copiar acceso directo
-            cp Accesos_Directos/firefox-quantum.desktop ~/.local/share/applications/
-
-            # TODO → Autogenerar y asociar un perfil existente con el mismo nombre de la version
-            # Pedir crear perfil
-            echo -e "$verde Para evitar conflictos entre distintas versiones crea un perfil"
-            echo -e "$verde Al pulsar una tecla se abrirá una ventana para ello"
-            echo -e "$verde El nombre convendrá que sea lógico como →$rojo Firefox-Quantum$amarillo"
-            read -p "Pulsa una tecla para abrir el ProfileManager" x
-            ~/.local/bin/firefox-quantum --ProfileManager
-        }
-
-
-        if [ -f ~/.local/bin/firefox-quantum ]
-        then
-            echo -e "$verde Ya esta$rojo Firefox Quantum Developer Edition$verde instalado en el equipo, omitiendo paso$gris"
-        # Comprueba que no está el archivo descargado en este directorio
-        elif [ ! -f ./Firefox-Quantum-Developer_amd64.tar.bz2 ]
-        then
-            REINTENTOS=3
-            echo -e "$verde Descargando$rojo Firefox Quantum Developer Edition$gris"
-            for (( i=1; i<=$REINTENTOS; i++ ))
-            do
-                rm Firefox-Quantum-Developer_amd64.tar.bz 2>> /dev/null
-                wget --show-progress -r -A tar.bz2 'https://download.mozilla.org/?product=firefox-devedition-latest-ssl&os=linux64&lang=es-ES' -O Firefox-Quantum-Developer_amd64.tar.bz2 && break
-            done
-            echo -e "$verde Preparando para instalar$rojo Firefox Quantum Developer Edition$gris"
-
-            instalar
-        else
-            instalar
-        fi
-    }
-
-    # Firefox Nightly
-    function firefox_nightly() {
-
-        function instalar() {
-             # Desempaquetar Firefox-Nightly_amd64.tar.bz2
-            tar -xjvf Firefox-Nightly_amd64.tar.bz2 2>> /dev/null
-
-            # Mover archivo extraido a su ubicación final
-            mv firefox ~/.local/opt/Firefox_Nightly 2>> /dev/null
-
-            # Crear enlaces de usuario y permisos de ejecución
-            ln -s ~/.local/opt/Firefox_Nightly/firefox ~/.local/bin/firefox-nightly
-            chmod +x ~/.local/bin/firefox-nightly
-
-            # Copiar acceso directo
-            cp Accesos_Directos/firefox-nightly.desktop ~/.local/share/applications/
-
-            # TODO → Autogenerar y asociar un perfil existente con el mismo nombre de la version
-            # Pedir crear perfil
-            echo -e "$verde Para evitar conflictos entre distintas versiones crea un perfil"
-            echo -e "$verde Al pulsar una tecla se abrirá una ventana para ello"
-            echo -e "$verde El nombre convendrá que sea lógico como →$rojo Firefox-Nightly$amarillo"
-            read -p "Pulsa una tecla para abrir el ProfileManager" x
-            ~/.local/bin/firefox-nightly --ProfileManager
-        }
-
-
-        if [ -f ~/.local/bin/firefox-nightly ]
-        then
-            echo -e "$verde Ya esta$rojo Firefox Nightly$verde instalado en el equipo, omitiendo paso$gris"
-        elif [ ! -f ./Firefox-Nightly_amd64.tar.bz2 ]
-        then
-            REINTENTOS=3
-            echo -e "$verde Descargando$rojo Firefox Nightly$gris"
-            for (( i=1; i<=$REINTENTOS; i++ ))
-            do
-                rm Firefox-Nightly_amd64.tar.bz2 2>> /dev/null
-                wget --show-progress -r -A tar.bz2 'https://download.mozilla.org/?product=firefox-nightly-latest-l10n-ssl&os=linux64&lang=es-ES' -O Firefox-Nightly_amd64.tar.bz2 && break
-            done
-            echo -e "$verde Preparando para instalar$rojo Firefox Nightly$gris"
-
-            instalar
-        else
-            instalar
-        fi
-    }
-
-    # Llamada a ejecución las funciones que instalan y configuran navegadores firefox
-    firefox_developer
-    firefox_nightly
 }
 
 # Recorrer "Software.lst" Instalando paquetes ahí descritos
