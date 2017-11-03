@@ -55,16 +55,20 @@ function firefox_install() {
             # Mover archivo extraido a su ubicación final
             mv $DIR_SCRIPT/TMP/Firefox-Quantum-Developer_amd64/firefox ~/.local/opt/Firefox_Quantum_Developer 2>> /dev/null
 
+            # Crear perfil para Firefox-Quantum
+            firefox-quantum -createprofile Firefox-Quantum
+
             # Desempaquetar Perfil y moverlo
-            if [ ! -d ~/.mozilla/firefox/i5727yjx.Firefox-Quantum ]
-            then
-                mkdir $DIR_SCRIPT/Apps/Perfiles_Firefox/i5727yjx.Firefox-Quantum 2>> /dev/null
-                tar -xJvf $DIR_SCRIPT/Apps/Perfiles_Firefox/i5727yjx.Firefox-Quantum.tar.xz -C $DIR_SCRIPT/Apps/Perfiles_Firefox/i5727yjx.Firefox-Quantum 2>> /dev/null
-                mv $DIR_SCRIPT/Apps/Perfiles_Firefox/i5727yjx.Firefox-Quantum/* ~/.mozilla/firefox/ 2>> /dev/null
-            fi
+            # if [ ! -d ~/.mozilla/firefox/i5727yjx.Firefox-Quantum ]
+            # then
+            #     mkdir $DIR_SCRIPT/Apps/Perfiles_Firefox/i5727yjx.Firefox-Quantum 2>> /dev/null
+            #     tar -xJvf $DIR_SCRIPT/Apps/Perfiles_Firefox/i5727yjx.Firefox-Quantum.tar.xz -C $DIR_SCRIPT/Apps/Perfiles_Firefox/i5727yjx.Firefox-Quantum 2>> /dev/null
+            #     mv $DIR_SCRIPT/Apps/Perfiles_Firefox/i5727yjx.Firefox-Quantum/* ~/.mozilla/firefox/ 2>> /dev/null
+            # fi
 
             # Crear enlaces de usuario y permisos de ejecución
-            ln -s ~/.local/opt/Firefox_Quantum_Developer/firefox ~/.local/bin/firefox-quantum 2>> /dev/null
+            cat ~/.local/opt/Firefox_Quantum_Developer/firefox - P Firefox-Quantum > ~/.local/bin/firefox-quantum
+            # ln -s ~/.local/opt/Firefox_Quantum_Developer/firefox ~/.local/bin/firefox-quantum 2>> /dev/null
             chmod +x ~/.local/bin/firefox-quantum
 
             # Copiar acceso directo
@@ -111,16 +115,21 @@ function firefox_install() {
             # Mover archivo extraido a su ubicación final
             mv $DIR_SCRIPT/TMP/Firefox-Nightly_amd64/firefox ~/.local/opt/Firefox_Nightly 2>> /dev/null
 
+            # Crear perfil para Firefox-Nightly
+            firefox-quantum -createprofile Firefox-Nightly
+
             # Desempaquetar Perfil y moverlo
-            if [ ! -d ~/.mozilla/firefox/fw493le3.Firefox-Nightly ]
-            then
-                mkdir $DIR_SCRIPT/Apps/Perfiles_Firefox/fw493le3.Firefox-Nightly 2>> /dev/null
-                tar -xJvf $DIR_SCRIPT/Apps/Perfiles_Firefox/fw493le3.Firefox-Nightly.tar.xz -C $DIR_SCRIPT/Apps/Perfiles_Firefox/fw493le3.Firefox-Nightly 2>> /dev/null
-                mv $DIR_SCRIPT/Apps/Perfiles_Firefox/fw493le3.Firefox-Nightly/* ~/.mozilla/firefox 2>> /dev/null
-            fi
+            # if [ ! -d ~/.mozilla/firefox/fw493le3.Firefox-Nightly ]
+            # then
+            #     mkdir $DIR_SCRIPT/Apps/Perfiles_Firefox/fw493le3.Firefox-Nightly 2>> /dev/null
+            #     tar -xJvf $DIR_SCRIPT/Apps/Perfiles_Firefox/fw493le3.Firefox-Nightly.tar.xz -C $DIR_SCRIPT/Apps/Perfiles_Firefox/fw493le3.Firefox-Nightly 2>> /dev/null
+            #     mv $DIR_SCRIPT/Apps/Perfiles_Firefox/fw493le3.Firefox-Nightly/* ~/.mozilla/firefox 2>> /dev/null
+            # fi
 
             # Crear enlaces de usuario y permisos de ejecución
-            ln -s ~/.local/opt/Firefox_Nightly/firefox ~/.local/bin/firefox-nightly 2>> /dev/null
+            cat ~/.local/opt/Firefox_Nightly/firefox - P Firefox-Nightly > ~/.local/bin/firefox-nightly
+            # ln -s ~/.local/opt/Firefox_Nightly/firefox ~/.local/bin/firefox-nightly 2>> /dev/null
+
             chmod +x ~/.local/bin/firefox-nightly 2>> /dev/null
 
             # Copiar acceso directo
