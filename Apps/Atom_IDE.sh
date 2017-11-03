@@ -34,7 +34,7 @@ function atom_preconfiguracion() {
     if [ $input == 's' ] || [ $input == 'S' ] || [ $input == 'y' ] || [ $input == 'Y' ]
     then
         echo -e "$verde Creando Backup de ~/.atom$gris"
-        mv $HOME/.atom $HOME/.atom.BACKUP 2>> /dev/null
+        cp $HOME/.atom $HOME/.atom.BACKUP 2>> /dev/null
         echo -e "$verde Añadiendo configuración nueva"
         cp .atom $HOME/
     fi
