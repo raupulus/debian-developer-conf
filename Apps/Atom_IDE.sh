@@ -24,6 +24,7 @@ verde="\033[1;32m"
 ##   Variables Generales   ##
 #############################
 atom=$(cat $PWD/Apps/Atom_Paquetes.lst) #Instala Paquetes de Atom
+DIR_SCRIPT=`echo $PWD`
 
 function atom_preconfiguracion() {
     echo ""
@@ -77,7 +78,14 @@ function atom_install() {
         if [ -f $DIR_SCRIPT/TMP/atom.deb ]
         then
             echo -e "$verde Instalando$rojo Atom $gris"
-            sudo dpkg -i atom.deb && sudo apt install -f -y
+            sudo dpkg -i $DIR_SCRIPT/TMP/atom.deb && sudo apt install -f -y
+
+            # Si falla la instalación se rellama la función tras limpiar
+            if [ ! -f /usr/bin/atom ]
+            then
+                rm -f $DIR_SCRIPT/TMP/atom.deb
+                atom_install
+            fi
         else
             REINTENTOS=5
             echo -e "$verde Descargando$rojo ATOM$gris"
