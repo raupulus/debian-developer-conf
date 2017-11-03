@@ -49,11 +49,18 @@ function firefox_install() {
     function firefox_developer() {
 
         function instalar() {
-            # Desempaquetar Firefox-Nightly_amd64.tar.bz2
+            # Desempaquetar Firefox-Quantum_amd64.tar.bz2
             tar -xjvf $DIR_SCRIPT/TMP/Firefox-Quantum-Developer_amd64.tar.bz2 2>> /dev/null
 
             # Mover archivo extraido a su ubicación final
-            mv firefox ~/.local/opt/Firefox_Quantum_Developer 2>> /dev/null
+            mv $DIR_SCRIPT/TMP/firefox ~/.local/opt/Firefox_Quantum_Developer 2>> /dev/null
+
+            # Desempaquetar Perfil y moverlo
+            if [ ! -d ~/.mozilla/firefox/i5727yjx.Firefox-Quantum ]
+            then
+                tar -xJvf $DIR_SCRIPT/Apps/Perfiles_Firefox/i5727yjx.Firefox-Quantum.tar.xz 2>> /dev/null
+                mv $DIR_SCRIPT/TMP/Apps/Perfiles_Firefox/i5727yjx.Firefox-Quantum ~/.mozilla/firefox 2>> /dev/null
+            fi
 
             # Crear enlaces de usuario y permisos de ejecución
             ln -s ~/.local/opt/Firefox_Quantum_Developer/firefox ~/.local/bin/firefox-quantum
@@ -102,6 +109,13 @@ function firefox_install() {
 
             # Mover archivo extraido a su ubicación final
             mv firefox ~/.local/opt/Firefox_Nightly 2>> /dev/null
+
+            # Desempaquetar Perfil y moverlo
+            if [ ! -d ~/.mozilla/firefox/fw493le3.Firefox-Nightly ]
+            then
+                tar -xJvf $DIR_SCRIPT/Apps/Perfiles_Firefox/fw493le3.Firefox-Nightly.tar.xz 2>> /dev/null
+                mv $DIR_SCRIPT/TMP/Apps/Perfiles_Firefox/fw493le3.Firefox-Nightly ~/.mozilla/firefox 2>> /dev/null
+            fi
 
             # Crear enlaces de usuario y permisos de ejecución
             ln -s ~/.local/opt/Firefox_Nightly/firefox ~/.local/bin/firefox-nightly
