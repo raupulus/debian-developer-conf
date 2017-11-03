@@ -23,7 +23,7 @@ verde="\033[1;32m"
 #############################
 ##   Variables Generales   ##
 #############################
-atom=$(cat $PWD/Apps/Atom_Paquetes.lst) #Instala Paquetes de Atom
+atom=$(cat $PWD/Apps/Atom_Paquetes.lst) # Instala Paquetes de Atom
 DIR_SCRIPT=`echo $PWD`
 
 function atom_preconfiguracion() {
@@ -33,7 +33,9 @@ function atom_preconfiguracion() {
     read -p '¿Quieres configuraciones? s/N → ' input
     if [ $input == s ] || [ $input == S ]
     then
+        echo -e "$verde Creando Backup de ~/.atom$gris"
         mv $HOME/.atom $HOME/.atom.BACKUP
+        echo -e "$verde Añadiendo configuración nueva"
         cp .atom $HOME/
     fi
 }
@@ -65,8 +67,21 @@ function atom_plugins() {
     fi
 }
 
-#Instala complementos para Atom IDE
+# Instala complementos para Atom IDE
 function atom_install() {
+    function instalar() {
+        REINTENTOS=5
+        echo -e "$verde Descargando$rojo ATOM$gris"
+        for (( i=1; i<=$REINTENTOS; i++ ))
+        do
+            rm deb atom.deb 2>> /dev/null
+            wget https://atom.io/download/deb -O $DIR_SCRIPT/TMP/atom.deb && break
+        done
+        echo -e "$verde Instalando$rojo Atom $gris"
+        sudo dpkg -i atom.deb && sudo apt install -f -y
+    }
+
+    # Comprueba si está instalado
     if [ -f /usr/bin/atom ]
     then
         echo -e "$verde Ya esta$rojo ATOM$verde instalado en el equipo, omitiendo paso$gris"
@@ -74,7 +89,7 @@ function atom_install() {
         # Preparando configuración de Atom
         atom_preconfiguracion
 
-        # Comprobar si está decho -e "$verde Instalando$rojo Atom $gris"escargado o descargar
+        # Comprobar si está descargado o descargar
         if [ -f $DIR_SCRIPT/TMP/atom.deb ]
         then
             echo -e "$verde Instalando$rojo Atom $gris"
@@ -84,18 +99,10 @@ function atom_install() {
             if [ ! -f /usr/bin/atom ]
             then
                 rm -f $DIR_SCRIPT/TMP/atom.deb
-                atom_install
+                instalar
             fi
         else
-            REINTENTOS=5
-            echo -e "$verde Descargando$rojo ATOM$gris"
-            for (( i=1; i<=$REINTENTOS; i++ ))
-            do
-                rm deb atom.deb 2>> /dev/null
-                wget https://atom.io/download/deb -O $DIR_SCRIPT/TMP/atom.deb && break
-            done
-            echo -e "$verde Instalando$rojo Atom $gris"
-            sudo dpkg -i atom.deb && sudo apt install -f -y
+            instalar
         fi
     fi
 
