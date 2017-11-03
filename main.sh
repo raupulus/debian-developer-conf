@@ -124,8 +124,8 @@ while :
             clear
             echo -e "$verde Preparando para aplicar todas las configuraciones en serie$gris"
             agregar_repositorios
-            instalar_configuraciones
             instalar_Software
+            instalar_configuraciones
             agregar_fuentes
             configuracion_git
             personalizar
