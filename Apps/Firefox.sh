@@ -50,7 +50,7 @@ function firefox_install() {
 
         function instalar() {
             # Desempaquetar Firefox-Quantum_amd64.tar.bz2
-            mkdir $DIR_SCRIPT/TMP/Firefox-Quantum-Developer_amd64
+            mkdir $DIR_SCRIPT/TMP/Firefox-Quantum-Developer_amd64 2>> /dev/null
             tar -xjvf $DIR_SCRIPT/TMP/Firefox-Quantum-Developer_amd64.tar.bz2 -C $DIR_SCRIPT/TMP/Firefox-Quantum-Developer_amd64 2>> /dev/null
 
             # Mover archivo extraido a su ubicación final
@@ -65,11 +65,11 @@ function firefox_install() {
             fi
 
             # Crear enlaces de usuario y permisos de ejecución
-            ln -s ~/.local/opt/Firefox_Quantum_Developer/firefox ~/.local/bin/firefox-quantum
+            ln -s ~/.local/opt/Firefox_Quantum_Developer/firefox ~/.local/bin/firefox-quantum 2>> /dev/null
             chmod +x ~/.local/bin/firefox-quantum
 
             # Copiar acceso directo
-            cp Accesos_Directos/firefox-quantum.desktop ~/.local/share/applications/
+            cp Accesos_Directos/firefox-quantum.desktop ~/.local/share/applications/ 2>> /dev/null
 
             # TODO → Autogenerar y asociar un perfil existente con el mismo nombre de la version
             # Pedir crear perfil
@@ -107,7 +107,7 @@ function firefox_install() {
 
         function instalar() {
              # Desempaquetar Firefox-Nightly_amd64.tar.bz2
-            mkdir $DIR_SCRIPT/TMP/Firefox-Nightly_amd64
+            mkdir $DIR_SCRIPT/TMP/Firefox-Nightly_amd64 2>> /dev/null
             tar -xjvf $DIR_SCRIPT/TMP/Firefox-Nightly_amd64.tar.bz2 -C $DIR_SCRIPT/TMP/Firefox-Nightly_amd64 2>> /dev/null
 
             # Mover archivo extraido a su ubicación final
@@ -122,11 +122,11 @@ function firefox_install() {
             fi
 
             # Crear enlaces de usuario y permisos de ejecución
-            ln -s ~/.local/opt/Firefox_Nightly/firefox ~/.local/bin/firefox-nightly
-            chmod +x ~/.local/bin/firefox-nightly
+            ln -s ~/.local/opt/Firefox_Nightly/firefox ~/.local/bin/firefox-nightly 2>> /dev/null
+            chmod +x ~/.local/bin/firefox-nightly 2>> /dev/null
 
             # Copiar acceso directo
-            cp Accesos_Directos/firefox-nightly.desktop ~/.local/share/applications/
+            cp -R Accesos_Directos/firefox-nightly.desktop ~/.local/share/applications/
 
             # TODO → Autogenerar y asociar un perfil existente con el mismo nombre de la version
             # Pedir crear perfil
