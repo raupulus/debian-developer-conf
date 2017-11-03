@@ -126,7 +126,7 @@ function crear_token() {
     fi
 
     #Generando TOKEN para GitLab
-    xdg-open "" >/dev/null 2>&1
+    xdg-open "https://gitlab.com/profile/account" >/dev/null 2>&1
     echo -e "$verde Genera un nuevo token en la URL que se abrirá en el navegador"
     echo -e "$verde Introduce el TOKEN de GitLab generado, pulsa$amarillo INTRO$verde si no deseas usar ninguno$gris"
     read -p " Token → " TOKEN_GITLAB
