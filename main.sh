@@ -48,6 +48,12 @@ source ./limpiador.sh
 #############################
 DIR_SCRIPT=`echo $PWD`
 
+if [ ! -d 'TMP' ]
+then
+    mkdir TMP
+fi
+
+
 while :
     do
         sleep 1
@@ -118,8 +124,8 @@ while :
             clear
             echo -e "$verde Preparando para aplicar todas las configuraciones en serie$gris"
             agregar_repositorios
-            instalar_configuraciones
             instalar_Software
+            instalar_configuraciones
             agregar_fuentes
             configuracion_git
             personalizar

@@ -31,6 +31,12 @@ correo_git=""
 TOKEN=""
 TOKEN_GITLAB=""
 
+# TODO → Refactorizar y dejar configuración independiente para github y gitlab
+# TODO → Plantear integración con Bitbucket en el archivo git y su token
+# TODO → Plantear firma GPG y preguntar si configurar
+# TODO → Archivo ~/.netrc modificar con "sed"
+# TODO → Preguntar si firmar por defecto los commits
+
 function datos_input() {
     #Se entiende que tiene el mismo usuario para GitHub y para GitLab
     read -p "Introduce el usuario de GitHub y GitLab → " usuario_git
@@ -61,6 +67,7 @@ function configurar_git() {
     git config --global user.email "$correo_git"
     git config --global core.editor vim
     git config --global color.ui true
+    git config --global gui.encoding utf-8
 
     # TODO → Preguntar si se desea configurar GPG
     echo -e "$verde ¿Quieres configurar una clave GPG para firmar?$yellow"
@@ -138,7 +145,7 @@ function crear_token() {
     fi
 
     #Generando TOKEN para GitLab
-    xdg-open "" >/dev/null 2>&1
+    xdg-open "https://gitlab.com/profile/account" >/dev/null 2>&1
     echo -e "$verde Genera un nuevo token en la URL que se abrirá en el navegador"
     echo -e "$verde Introduce el TOKEN de GitLab generado, pulsa$amarillo INTRO$verde si no deseas usar ninguno$gris"
     read -p " Token → " TOKEN_GITLAB
@@ -158,7 +165,13 @@ function crear_token() {
 function crear_git_alias() {
     echo -e "$verde Alias para el comando$rojo git lg$gris"
     git config --global alias.lg "log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit"
+    
+    echo -e "$verde Alias para el comando$rojo git hist$gris"
+    git config --global alias.hist "log --graph --date-order --date=short --pretty=format:'%C(bold blue)%h%d %C(bold red)(%cd) %C(bold yellow)%s %C(bold blue)%ce %C(reset)%C(green)%cr'"
 
+    echo -e "$verde Alias para el comando$rojo git his$gris"
+    git config --global alias.his "log --pretty=format:\"%h %ad | %s%d [%an]\" --graph --date=short"
+    
     git config --global push.default simple
 }
 
