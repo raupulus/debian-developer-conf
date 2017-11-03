@@ -12,7 +12,7 @@ linter-jshint
 linter-php
 linter-python
 linter-python-pep8
-linter-tidy
+linter-htmlhint
 linter-ui-default
 open-html-in-browser
 monokai
