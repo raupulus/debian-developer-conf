@@ -35,6 +35,7 @@ TOKEN_GITLAB=""
 # TODO → Plantear integración con Bitbucket en el archivo git y su token
 # TODO → Plantear firma GPG y preguntar si configurar
 # TODO → Archivo ~/.netrc modificar con "sed"
+# TODO → Preguntar si firmar por defecto los commits
 
 function datos_input() {
     #Se entiende que tiene el mismo usuario para GitHub y para GitLab
