@@ -135,7 +135,7 @@ function configurar_vim() {
             do
                 if [ $i -eq 10 ]
                 then
-                    rm -R ~/.vim/bundle/Vundle.vim
+                    rm -R ~/.vim/bundle/Vundle.vim 2>> /dev/null
                     break
                 fi
                 git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
