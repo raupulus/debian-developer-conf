@@ -13,19 +13,22 @@
 #############################
 atom=$(cat Atom_Paquetes.lst) #Instala Paquetes de Atom
 
+function personalizar() {
+    echo -e "$verde Añadir configuración$amarillo"
+    read -p '¿Quieres configuraciones? s/N → ' input
+    if [ $input == s ] || [ input == S]
+    then
+        mv $HOME/.atom $HOME/.atom.BACKUP
+        cp .atom $HOME/
+    fi
+}
+
 function configurar_atom() {
     echo -e "$verde Añadiendo configuraciones para Atom"
 
     echo -e "$verde Deshabilitando complementos"
     apm disable welcome
     apm disable about
-
-    # TODO → Añadir configuración de idiomas
-    # echo '
-    # "atom-i18n":
-    #   customMenuI18nPath: "$HOME/.atom/packages/atom-i18n/def/custom_menu.cson"
-    #   locale: "es"
-    # '
 }
 
 #Instala complementos para Atom IDE
