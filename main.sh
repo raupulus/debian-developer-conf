@@ -48,6 +48,12 @@ source ./limpiador.sh
 #############################
 DIR_SCRIPT=`echo $PWD`
 
+if [ ! -d 'TMP' ]
+then
+    mkdir TMP
+fi
+
+
 while :
     do
         sleep 1
