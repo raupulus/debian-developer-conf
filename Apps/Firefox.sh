@@ -55,9 +55,6 @@ function firefox_install() {
             # Mover archivo extraido a su ubicación final
             mv $DIR_SCRIPT/TMP/Firefox-Quantum-Developer_amd64/firefox ~/.local/opt/Firefox_Quantum_Developer 2>> /dev/null
 
-            # Crear perfil para Firefox-Quantum
-            firefox-quantum -createprofile Firefox-Quantum
-
             # Desempaquetar Perfil y moverlo
             # if [ ! -d ~/.mozilla/firefox/i5727yjx.Firefox-Quantum ]
             # then
@@ -80,6 +77,12 @@ function firefox_install() {
             # echo -e "$verde El nombre convendrá que sea lógico como →$rojo Firefox-Quantum$amarillo"
             # read -p "Pulsa una tecla para abrir el ProfileManager" x
             # ~/.local/bin/firefox-quantum --ProfileManager
+
+            if [ -f ~/.local/bin/firefox-quantum ]
+            then
+                # Crear perfil para Firefox-Quantum
+                firefox-quantum -createprofile Firefox-Quantum
+            fi
         }
 
 
@@ -115,9 +118,6 @@ function firefox_install() {
             # Mover archivo extraido a su ubicación final
             mv $DIR_SCRIPT/TMP/Firefox-Nightly_amd64/firefox ~/.local/opt/Firefox_Nightly 2>> /dev/null
 
-            # Crear perfil para Firefox-Nightly
-            firefox-quantum -createprofile Firefox-Nightly
-
             # Desempaquetar Perfil y moverlo
             # if [ ! -d ~/.mozilla/firefox/fw493le3.Firefox-Nightly ]
             # then
@@ -141,6 +141,12 @@ function firefox_install() {
             # echo -e "$verde El nombre convendrá que sea lógico como →$rojo Firefox-Nightly$amarillo"
             # read -p "Pulsa una tecla para abrir el ProfileManager" x
             # ~/.local/bin/firefox-nightly --ProfileManager
+
+            if [ -f ~/.local/bin/firefox-nightly ]
+            then
+                # Crear perfil para Firefox-Nightly
+                firefox-nightly -createprofile Firefox-Nightly
+            fi
         }
 
 
