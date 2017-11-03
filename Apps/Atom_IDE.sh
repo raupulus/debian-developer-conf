@@ -11,19 +11,19 @@
 #############################
 ##   Variables Generales   ##
 #############################
-atom=$(cat Atom_Paquetes.lst) #Instala Paquetes de Atom
+atom=$(cat $DIR_SCRIPT/Apps/Atom_Paquetes.lst) #Instala Paquetes de Atom
 
-function personalizar() {
+function atom_preconfiguracion() {
     echo -e "$verde Añadir configuración$amarillo"
     read -p '¿Quieres configuraciones? s/N → ' input
-    if [ $input == s ] || [ input == S]
+    if [ $input == s ] || [ $input == S]
     then
         mv $HOME/.atom $HOME/.atom.BACKUP
         cp .atom $HOME/
     fi
 }
 
-function configurar_atom() {
+function atom_postconfiguracion() {
     echo -e "$verde Añadiendo configuraciones para Atom"
 
     echo -e "$verde Deshabilitando complementos"
@@ -31,23 +31,7 @@ function configurar_atom() {
     apm disable about
 }
 
-#Instala complementos para Atom IDE
-function atom_install() {
-    if [ -f /usr/bin/atom ]
-    then
-        echo -e "$verde Ya esta$rojo ATOM$verde instalado en el equipo, omitiendo paso$gris"
-    else
-        REINTENTOS=3
-        echo -e "$verde Descargando$rojo ATOM$gris"
-        for (( i=1; i<=$REINTENTOS; i++ ))
-        do
-            rm deb atom.deb 2>> /dev/null
-            wget https://atom.io/download/deb && mv deb atom.deb && break
-        done
-        echo -e "$verde Instalando$rojo Atom $gris"
-        sudo dpkg -i atom.deb && sudo apt install -f -y
-    fi
-
+function atom_plugins() {
     # Si se ha instalado correctamente ATOM pues instalamos sus plugins
     echo -e "$verde Preparando instalación complementos$rojo Atom$gris"
     if [ -f /usr/bin/atom ]
@@ -64,6 +48,38 @@ function atom_install() {
             fi
         done
     fi
+}
 
-    configurar_atom
+#Instala complementos para Atom IDE
+function atom_install() {
+    if [ -f /usr/bin/atom ]
+    then
+        echo -e "$verde Ya esta$rojo ATOM$verde instalado en el equipo, omitiendo paso$gris"
+    else
+        # Preparando configuración de Atom
+        atom_preconfiguracion
+
+        # Comprobar si está decho -e "$verde Instalando$rojo Atom $gris"escargado o descargar
+        if [ -f $DIR_SCRIPT/TMP/atom.deb ]
+        then
+            echo -e "$verde Instalando$rojo Atom $gris"
+            sudo dpkg -i atom.deb && sudo apt install -f -y
+        else
+            REINTENTOS=5
+            echo -e "$verde Descargando$rojo ATOM$gris"
+            for (( i=1; i<=$REINTENTOS; i++ ))
+            do
+                rm deb atom.deb 2>> /dev/null
+                wget https://atom.io/download/deb -O $DIR_SCRIPT/TMP/atom.deb && break
+            done
+            echo -e "$verde Instalando$rojo Atom $gris"
+            sudo dpkg -i atom.deb && sudo apt install -f -y
+        fi
+    fi
+
+    # Instalar Plugins
+    atom_plugins
+
+    # Añadir Configuraciones tras instalar
+    atom_postconfiguracion
 }
