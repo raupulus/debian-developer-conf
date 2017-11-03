@@ -14,7 +14,7 @@ linter-python
 linter-python-pep8
 linter-tidy
 linter-ui-default
-open-html-in-browse
+open-html-in-browser
 monokai
 pigments
 python-indent
