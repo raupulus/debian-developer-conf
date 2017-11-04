@@ -33,9 +33,7 @@ TOKEN_GITLAB=""
 
 # TODO → Refactorizar y dejar configuración independiente para github y gitlab
 # TODO → Plantear integración con Bitbucket en el archivo git y su token
-# TODO → Plantear firma GPG y preguntar si configurar
 # TODO → Archivo ~/.netrc modificar con "sed"
-# TODO → Preguntar si firmar por defecto los commits
 
 function datos_input() {
     #Se entiende que tiene el mismo usuario para GitHub y para GitLab
@@ -44,20 +42,36 @@ function datos_input() {
 }
 
 function gpg_git() {
-  echo -e "$verde Configurando GPG para GIT$gris"
+    echo -e "$verde Configurando GPG para GIT$gris"
 
-  # Listar claves actuales
-  gpg --list-keys
+    # Listar claves actuales, si hubiera instaladas en el equipo
+    echo -e "$verde Las claves instaladas en el equipo son las siguientes:$amarillo"
+    gpg --list-keys
 
-  # Preguntar si usar alguna de las que hay, si no hay saltar esto
-  # Introducir clave GPG o generarla
-  # Añadir configuración a .gitconfig
+    # Usar clave o crear una
+    echo -e "$verde ¿Usar una clave existente?$rojo"
+    read -p '  s/N  → ' input
 
-  # Habilitar cifrado con el programa GPG
-  # git config --global gpg.program gpg
-  # gpg --list-keys
-  # git config --global user.signingkey CLAVE_DE_GPG
-  # git config --global commit.gpgsign true  # Firmar commit por defecto
+    #if [ $input = 's' ] || [ $input = 'S' ] || [ $input = 'y' ] || [ $input = 'Y' ]
+    #then
+    #echo -e "$verde Se creará una clave GPG única nueva:"
+    # TODO → [comando] → Crear clave GPG fuerte
+    #echo -e "$verde Copia y pega la clave GPG en la siguiente entrada$rojo"
+    #read -p '  s/N  → ' CLAVE_GPG
+    #git config --global user.signingkey CLAVE_GPG
+    #fi
+
+    # Habilitar GPG en GIT
+    git config --global gpg.program gpg
+
+
+    # Firmar commits por defecto
+    #echo -e "$verde ¿Quieres firmar commits automáticamente por defecto?$amarillo"
+    #read -p '  s/N  → ' input
+    #if [ $input = 's' ] || [ $input = 'S' ] || [ $input = 'y' ] || [ $input = 'Y' ]
+    #then
+    #git config --global commit.gpgsign true  # Firmar commit por defecto
+    fi
 }
 
 #Configurar el usuario GIT local
@@ -69,12 +83,13 @@ function configurar_git() {
     git config --global color.ui true
     git config --global gui.encoding utf-8
 
-    # TODO → Preguntar si se desea configurar GPG
+    # Preguntar si se desea configurar GPG
     echo -e "$verde ¿Quieres configurar una clave GPG para firmar?$yellow"
     read -p 'Introduce una opción y/N → ' input
     if [ -n $input ] || [ $input = 'n' ] || [ $input = 'N' ]
     then
-      gpg_git
+        # LLamada a la función para configurar GPG
+        gpg_git
     fi
 
     #Reparar finales de linea que mete la mierda de windows CRLF to LF
