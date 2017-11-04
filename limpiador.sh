@@ -87,4 +87,10 @@ function limpiar_con_fuerza() {
     rm -R -f ~/.udisks-glue.conf 2>> /dev/null
     rm -R -f ~/.vimrc 2>> /dev/null
     rm -R -f ~/.zshrc 2>> /dev/null
+
+
+
+
+    sudo apt purge vim
+    sudo apt purge atom
 }
