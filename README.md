@@ -2,6 +2,8 @@
 Script para preparar entorno de programación, aplicaciones y repositorios en Debian.
 Basado en el script original de @ricpelo en https://github.com/ricpelo/conf
 
+Con la colaboración de un testeo constante por parte de @mavalro
+
 Todas las configuraciones y elecciones se han establecido a mi gusto, puedes personalizar cualquier parte que decidas para este script.
 
 ## Estado
