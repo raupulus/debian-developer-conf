@@ -104,7 +104,7 @@ function firefox_install() {
             cp -R Accesos_Directos/firefox-nightly.desktop ~/.local/share/applications/
 
             # Crear Perfil para Firefox
-            if [ -f ~/.local/opt/firefox-nightly/firefox ]
+            if [ -f ~/.local/opt/Firefox_Nightly/firefox ]
             then
                 # Crear perfil para Firefox-Quantum
                 ~/.local/opt/Firefox_Nightly/firefox -createprofile Firefox-Quantum
