@@ -72,7 +72,7 @@ function configurar_git() {
     # TODO → Preguntar si se desea configurar GPG
     echo -e "$verde ¿Quieres configurar una clave GPG para firmar?$yellow"
     read -p 'Introduce una opción y/N → ' input
-    if ( -n $input )
+    if [ -n $input ] || [ $input = 'n' ] || [ $input = 'N' ]
     then
       gpg_git
     fi
@@ -165,13 +165,13 @@ function crear_token() {
 function crear_git_alias() {
     echo -e "$verde Alias para el comando$rojo git lg$gris"
     git config --global alias.lg "log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit"
-    
+
     echo -e "$verde Alias para el comando$rojo git hist$gris"
     git config --global alias.hist "log --graph --date-order --date=short --pretty=format:'%C(bold blue)%h%d %C(bold red)(%cd) %C(bold yellow)%s %C(bold blue)%ce %C(reset)%C(green)%cr'"
 
     echo -e "$verde Alias para el comando$rojo git his$gris"
     git config --global alias.his "log --pretty=format:\"%h %ad | %s%d [%an]\" --graph --date=short"
-    
+
     git config --global push.default simple
 }
 
