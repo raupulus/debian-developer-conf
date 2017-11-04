@@ -350,13 +350,12 @@ function configurar_hosts() {
     # Crea copia del original para mantenerlo siempre
     if [ ! -f /etc/hosts.BACKUP ]
     then
-        sudo mv /etc/hosts /etc/hosts.BACKUP
+        sudo mv /etc/hosts /etc/hosts.BACKUP 2>> /dev/null
     fi
 
-    mkdir -p TMP 2>> /dev/null
-    cat /etc/hosts.BACKUP > ./TMP/hosts
-    cat ./etc/hosts >> ./TMP/hosts
-    sudo cp ./TMP/hosts /etc/hosts
+    cat /etc/hosts.BACKUP > ./TMP/hosts 2>> /dev/null
+    cat ./etc/hosts >> ./TMP/hosts 2>> /dev/null
+    sudo cp ./TMP/hosts /etc/hosts 2>> /dev/null
 }
 
 #Instalar Todas las configuraciones
@@ -374,5 +373,5 @@ function instalar_configuraciones() {
     configurar_hosts
     terminal #Pregunta el terminal a usar
 
-    sudo update-command-not-found
+    sudo update-command-not-found >> /dev/null 2>> /dev/null
 }
