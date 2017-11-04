@@ -91,10 +91,10 @@ function limpiar_con_fuerza() {
 
 
 
-    sudo apt purge vim
-    sudo apt purge atom
-    sudo apt purge ninja-ide
-    sudo apt purge dbeaver
-    sudo apt purge brackets
-    sudo apt purge haroopad
+    sudo apt purge -y vim
+    sudo apt purge -y atom
+    sudo apt purge -y ninja-ide
+    sudo apt purge -y dbeaver
+    sudo apt purge -y brackets
+    sudo apt purge -y haroopad
 }
