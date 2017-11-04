@@ -71,7 +71,7 @@ function gpg_git() {
     #if [ $input = 's' ] || [ $input = 'S' ] || [ $input = 'y' ] || [ $input = 'Y' ]
     #then
     #git config --global commit.gpgsign true  # Firmar commit por defecto
-    fi
+    #fi
 }
 
 #Configurar el usuario GIT local
