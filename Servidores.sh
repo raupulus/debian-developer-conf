@@ -95,9 +95,20 @@ function server_php() {
 
         # TODO → Implementar control si fallan las descargas en "psysh
         # Intérprete interactivo de PHP → psysh
-        echo -e "$verde Instalar Intérprete$rojo psysh $gris"
-        wget --show-progress https://git.io/psysh  -O ~/.local/bin/psysh
-        chmod +x ~/.local/bin/psysh
+        if [ ! -f ~/.local/bin/psysh ]
+        then
+            echo -e "$verde Instalando Intérprete$rojo PsySH$amarillo"
+            wget --show-progress https://git.io/psysh  -O ~/.local/bin/psysh
+            chmod +x ~/.local/bin/psysh
+        fi
+
+        # Instalar manual para psysh funciona así → doc nombre_función
+        if [ ! -f ~/local/share/psysh/php_manual.sqlite ]
+        then
+            echo -e "$verde Instalando manual para$rojo PsySH$amarillo"
+            mkdir -p ~/.local/share/psysh 2>> /dev/null
+            wget --show-progress -q http://psysh.org/manual/es/php_manual.sqlite -O ~/.local/share/psysh/php_manual.sqlite
+        fi
     }
 
     instalar_php
