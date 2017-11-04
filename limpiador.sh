@@ -69,8 +69,11 @@ function limpiar_con_fuerza() {
     rm -R -f ~/.vim 2>> /dev/null
     rm -R -f ~/.local/opt/Firefox_Quantum_Developer 2>> /dev/null
     rm -R -f ~/.local/bin/firefox-quantum 2>> /dev/null
+    rm -R -f ~/.local/share/applications/firefox-quantum.desktop 2>> /dev/null
     rm -R -f ~/.local/opt/Firefox_Nightly 2>> /dev/null
     rm -R -f ~/.local/bin/firefox-nightly 2>> /dev/null
+    rm -R -f ~/.local/share/applications/firefox-nightly.desktop 2>> /dev/null
+    rm -R -f ~/.local/bin/psysh 2>> /dev/null
     rm -R -f ~/.atom 2>> /dev/null
     rm -R -f ~/.i3 2>> /dev/null
     rm -R -f ~/.ninja-ide 2>> /dev/null
@@ -84,4 +87,14 @@ function limpiar_con_fuerza() {
     rm -R -f ~/.udisks-glue.conf 2>> /dev/null
     rm -R -f ~/.vimrc 2>> /dev/null
     rm -R -f ~/.zshrc 2>> /dev/null
+
+
+
+
+    sudo apt purge -y vim
+    sudo apt purge -y atom
+    sudo apt purge -y ninja-ide
+    sudo apt purge -y dbeaver
+    sudo apt purge -y brackets
+    sudo apt purge -y haroopad
 }

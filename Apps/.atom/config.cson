@@ -9,17 +9,15 @@
         text:
           editor:
             tabLength: 4
+  "atom-i18n":
+    locale: "es"
   "atom-autocomplete-php":
     binComposer: "/usr/bin/composer"
-  "atom-i18n":
-    customMenuI18nPath: "/home/fryntiz/.atom/packages/atom-i18n/def/custom_menu.cson"
-    locale: "es"
   "autoclose-html":
     legacyMode: true
   "autocomplete-plus":
     autoActivationDelay: 300
   core:
-    autoHideMenuBar: true
     disabledPackages: [
       "language-clojure"
       "language-csharp"
@@ -27,26 +25,29 @@
       "language-mustache"
       "language-objective-c"
       "metrics"
-      "linter-php"
+      "about"
+      "welcome"
     ]
     packagesWithKeymapsDisabled: [
       "multi-cursor"
     ]
     telemetryConsent: "no"
     themes: [
-      "atom-dark-ui"
+      "one-dark-ui"
       "monokai"
     ]
+  docblockr: {}
   editor:
     fontFamily: "Input"
     fontSize: 18
     scrollPastEnd: true
     scrollSensitivity: 50
+    invisibles: {}
     showIndentGuide: true
+    showInvisibles: true
     softWrapAtPreferredLineLength: true
     tabLength: 4
-  "exception-reporting":
-    userId: "1dc8ebda-3216-4f8f-9e42-d1ce794d268d"
+    tabType: "soft"
   "git-diff": {}
   "git-log":
     fontFamily: "Input, Inconsolata, Monaco, Consolas, 'Courier New', Courier"
@@ -107,3 +108,7 @@
     showOnStartup: false
   zentabs:
     neverCloseUnsaved: true
+  tabs:
+    enableVcsColoring: true
+  whitespace:
+    ignoreWhitespaceOnCurrentLine: false

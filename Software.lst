@@ -6,15 +6,17 @@ bundler
 cmake
 command-not-found
 composer
+chromium
 curl
 editorconfig
 erlang-base
 exuberant-ctags
+firefox
+firefox-esr
 flake8
 gedit
 gedit-plugins
 git
-gocode
 gocode
 golang-go
 gpick
@@ -25,6 +27,7 @@ libnotify-bin
 libxml-writer-perl
 locate
 mono-xbuild
+neofetch
 network-manager-gnome
 ninja-ide
 nitrogen
@@ -67,7 +70,6 @@ python-jedi
 python-openssl
 python-pep8
 python-pip
-python-pip
 python-powerline
 python-powerline-taskwarrior
 python-pyasn1
@@ -91,7 +93,6 @@ tk
 tmux
 tmux-plugin-manager
 vim
-vim
 vim-addon-manager
 vim-addon-mw-utils
 vim-asciidoc
@@ -112,7 +113,6 @@ vim-khuno
 vim-lastplace
 vim-latexsuite
 vim-migemo
-vim-nox
 vim-nox
 vim-pathogen
 vim-python-jedi

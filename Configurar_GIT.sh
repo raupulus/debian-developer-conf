@@ -31,10 +31,47 @@ correo_git=""
 TOKEN=""
 TOKEN_GITLAB=""
 
+# TODO → Refactorizar y dejar configuración independiente para github y gitlab
+# TODO → Plantear integración con Bitbucket en el archivo git y su token
+# TODO → Archivo ~/.netrc modificar con "sed"
+
 function datos_input() {
     #Se entiende que tiene el mismo usuario para GitHub y para GitLab
     read -p "Introduce el usuario de GitHub y GitLab → " usuario_git
     read -p "Introduce el correo electronico → " correo_git
+}
+
+function gpg_git() {
+    echo -e "$verde Configurando GPG para GIT$gris"
+
+    # Listar claves actuales, si hubiera instaladas en el equipo
+    echo -e "$verde Las claves instaladas en el equipo son las siguientes:$amarillo"
+    gpg --list-keys
+
+    # Usar clave o crear una
+    echo -e "$verde ¿Usar una clave existente?$rojo"
+    read -p '  s/N  → ' input
+
+    #if [ $input = 's' ] || [ $input = 'S' ] || [ $input = 'y' ] || [ $input = 'Y' ]
+    #then
+    #echo -e "$verde Se creará una clave GPG única nueva:"
+    # TODO → [comando] → Crear clave GPG fuerte
+    #echo -e "$verde Copia y pega la clave GPG en la siguiente entrada$rojo"
+    #read -p '  s/N  → ' CLAVE_GPG
+    #git config --global user.signingkey CLAVE_GPG
+    #fi
+
+    # Habilitar GPG en GIT
+    git config --global gpg.program gpg
+
+
+    # Firmar commits por defecto
+    #echo -e "$verde ¿Quieres firmar commits automáticamente por defecto?$amarillo"
+    #read -p '  s/N  → ' input
+    #if [ $input = 's' ] || [ $input = 'S' ] || [ $input = 'y' ] || [ $input = 'Y' ]
+    #then
+    #git config --global commit.gpgsign true  # Firmar commit por defecto
+    #fi
 }
 
 #Configurar el usuario GIT local
@@ -44,9 +81,16 @@ function configurar_git() {
     git config --global user.email "$correo_git"
     git config --global core.editor vim
     git config --global color.ui true
+    git config --global gui.encoding utf-8
 
-    # Habilitar cifrado con el programa GPG
-    # git config --global gpg.program gpg
+    # Preguntar si se desea configurar GPG
+    echo -e "$verde ¿Quieres configurar una clave GPG para firmar?$yellow"
+    read -p 'Introduce una opción y/N → ' input
+    if [ -n $input ] || [ $input = 'n' ] || [ $input = 'N' ]
+    then
+        # LLamada a la función para configurar GPG
+        gpg_git
+    fi
 
     #Reparar finales de linea que mete la mierda de windows CRLF to LF
     git config --global core.autocrlf input
@@ -116,7 +160,7 @@ function crear_token() {
     fi
 
     #Generando TOKEN para GitLab
-    xdg-open "" >/dev/null 2>&1
+    xdg-open "https://gitlab.com/profile/account" >/dev/null 2>&1
     echo -e "$verde Genera un nuevo token en la URL que se abrirá en el navegador"
     echo -e "$verde Introduce el TOKEN de GitLab generado, pulsa$amarillo INTRO$verde si no deseas usar ninguno$gris"
     read -p " Token → " TOKEN_GITLAB
@@ -136,6 +180,12 @@ function crear_token() {
 function crear_git_alias() {
     echo -e "$verde Alias para el comando$rojo git lg$gris"
     git config --global alias.lg "log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit"
+
+    echo -e "$verde Alias para el comando$rojo git hist$gris"
+    git config --global alias.hist "log --graph --date-order --date=short --pretty=format:'%C(bold blue)%h%d %C(bold red)(%cd) %C(bold yellow)%s %C(bold blue)%ce %C(reset)%C(green)%cr'"
+
+    echo -e "$verde Alias para el comando$rojo git his$gris"
+    git config --global alias.his "log --pretty=format:\"%h %ad | %s%d [%an]\" --graph --date=short"
 
     git config --global push.default simple
 }

@@ -135,7 +135,7 @@ function configurar_vim() {
             do
                 if [ $i -eq 10 ]
                 then
-                    rm -R ~/.vim/bundle/Vundle.vim
+                    rm -R ~/.vim/bundle/Vundle.vim 2>> /dev/null
                     break
                 fi
                 git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
@@ -238,11 +238,8 @@ function programas_default() {
     if [ -f /usr/bin/tilix ]
     then
         echo -e "$verde Estableciendo terminal por defecto a$rojo Tilix$gris"
-        #TOFIX → Mal formado → Enlace - nombre - ruta -prioridad
-        #sudo update-alternatives --install /usr/bin/tilix x-terminal-emulator /usr/bin/tilix 1
         sudo touch /etc/profile.d/vte.sh 2>> /dev/null
-        #TOFIX → No existe Tilix como alternativa, reparar primer paso
-        sudo update-alternatives --set x-terminal-emulator /usr/bin/tilix 2>> /dev/null
+        sudo update-alternatives --set x-terminal-emulator /usr/bin/tilix.wrapper 2>> /dev/null
     elif [ -f /usr/bin/terminator ]
     then
         echo -e "$verde Estableciendo terminal por defecto a$rojo Terminator$gris"
@@ -353,13 +350,12 @@ function configurar_hosts() {
     # Crea copia del original para mantenerlo siempre
     if [ ! -f /etc/hosts.BACKUP ]
     then
-        sudo mv /etc/hosts /etc/hosts.BACKUP
+        sudo mv /etc/hosts /etc/hosts.BACKUP 2>> /dev/null
     fi
 
-    mkdir -p TMP 2>> /dev/null
-    cat /etc/hosts.BACKUP > ./TMP/hosts
-    cat ./etc/hosts >> ./TMP/hosts
-    sudo cp ./TMP/hosts /etc/hosts
+    cat /etc/hosts.BACKUP > ./TMP/hosts 2>> /dev/null
+    cat ./etc/hosts >> ./TMP/hosts 2>> /dev/null
+    sudo cp ./TMP/hosts /etc/hosts 2>> /dev/null
 }
 
 #Instalar Todas las configuraciones
@@ -369,7 +365,7 @@ function instalar_configuraciones() {
     permisos
     programas_default
 
-    cd $DIR_SRCIPT
+    cd $DIR_SCRIPT
 
     configurar_gedit
     agregar_conf_home
@@ -377,5 +373,5 @@ function instalar_configuraciones() {
     configurar_hosts
     terminal #Pregunta el terminal a usar
 
-    sudo update-command-not-found
+    sudo update-command-not-found >> /dev/null 2>> /dev/null
 }
