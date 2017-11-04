@@ -7,6 +7,8 @@ Todas las configuraciones y elecciones se han establecido a mi gusto, puedes per
 ## Estado
 Se han depurado la mayoría de los errores graves, todos los detectados hasta el momento están resueltos.
 
+Si encuentras algún fallo o detectas que algo podría funcionar mejora añade un **Issue** al que estaré encantado de atender y valorar, también puedes colaborar con los PR que creas oportuno siempre que vaya en la línea del script y no sea necesario darle la vuelta a todo el proyecto.
+
 Comenzado a usar sin problemas aparentes. Debido a la edad temprana y poca depuracion recomiendo su uso con prudencia.
 
 Se ha testeado mayormente en entornos virtuales y limpios sin poco uso el sistema por lo que no se garantiza que en un sistema con tiempo de uso y modificaciones pueda alterar el funcionamiento normal
@@ -14,13 +16,15 @@ Se ha testeado mayormente en entornos virtuales y limpios sin poco uso el sistem
 En los equipos de uso diario ya los ejecuto sin problemas hasta la fecha para incorporar mejoras desde la rama principal MASTER
 
 ## Advertencias
-Puede dar problemas si no usas repositorios oficiales o usas repositorios mezclados con los oficiales.
+Puede dar problemas si no usas **repositorios oficiales** o usas repositorios mezclados con los oficiales.
 
 Este script está automatizado y puede cambiar configuración
 
 Se ha testeado todo lo posible en entornos virtuales y en el mio personal de forma real.
 
 Para evitar que sea interactivo y estar constantemente preguntando se establece "-y" como parámetro por defecto en **apt** lo cual puede instalar software en forma de dependencia y/o romper en casos muy extremos el sistema, aunque repito que con repositorios oficiales no debe ocurrir nada extraño y si es así puedes reportarlo para su corrección.
+
+En **ningún caso** me hago responsable de pérdidas de datos con el uso de esta herramienta ya que se ha diseñado en función a mis necesidades y la comparto para que puedas aprovechar parte o por completo la misma (Respetando la licencia GPLv3 que le he asignado).
 
 ## Objetivos
 Crear un entorno de trabajo personalizado para desarrollar aplicaciones web según las preferencias del autor.
@@ -38,6 +42,8 @@ Estos son los principales objetivos
 - Instalar atajos y personalizaciones para trabajar con git, GitHub y GitLab
 - Instalar servidores Apache2, PostgreSQL, MariaDB
 - Instalar lenguajes de programación, dependencias y librerías para → php, python, nodejs, ruby, bash, zsh
+- Instalar Navegadores WEB para desarrolladores como Firefox Quantum y Firefox Nightly
+- Instalar herramientas para ayudar a debug
 
 En resumen dejar con un solo script todo el entorno adaptado a mis necesidades
 
@@ -50,6 +56,8 @@ En otras ramas y distribuciones puede romper el sistema, para portarlo no hay de
 Se ha intentado hacer modular de forma que apenas sea necesario tocar los scripts para añadir/quitar funciones.
 
 La idea es que el script pregunte ciertas cosas como shell a usar (bash o zsh) pero también podemos añadir fuentes simplemente copiándolas al directorio "fonts" o instalar aplicaciones simplemente añadiéndolas a la lista de aplicaciones para instalar "Software.lst"
+
+En las próximas versiones se plantea una Refactorización que permita manejar el script de forma aún más sencilla y además permita utilizar listas.lst donde el usuario introducirá un valor por línea para su configuración personalizada.
 
 ## Ejecutar script
 Es importante realizar todos los pasos desde bash. Si usas **zsh** cambia a **bash** antes de ejecutarlo:
@@ -70,7 +78,7 @@ Clonamos el repositorio actual en nuestro equipo
 Entramos y ejecutamos el script principal
 ```bash
   cd preparar_entorno
-  bash main.sh
+  ./main.sh
 ```
 
 ## Personalización estética
@@ -78,6 +86,7 @@ Se han incorporados cambios en la personalización:
 - Fondo de pantalla
 - Grub
 - GDM
+- Iconos crystalblue
 
 Además también se añadieron iconos "paper", temas "flatpat" y la instalación de cursores "crystal"
 
@@ -89,7 +98,7 @@ Se incorporan en la parte servidores instalación para apache2, php, postregsq, 
 ### Apache 2
 
 ### PHP
-En este script para seguir rigurosamente la filosofía Debian apostando por la seguridad que nos acostumbra y sobre todo la estabilidad la cual es bastante conocida, optamos a seguir siempre con la versión más alta de sus repositorios estables y oficiales libres.
+En este script para seguir rigurosamente la filosofía **Debian** apostando por la seguridad que nos acostumbra y sobre todo la estabilidad la cual es bastante conocida, optamos a seguir siempre con la versión más alta de sus repositorios estables y oficiales libres.
 
 Se instalan los siguientes paquetes básicos desde repositorios:
 - php
@@ -115,7 +124,7 @@ Se instala Composer y algunos paquetes con este
 
 
 Se instalan las siguientes herramientas de fuentes externas:
-- psysh → Un intérprete interactivo para aprender o hacer debug
+- psysh → Un intérprete interactivo para aprender o hacer debug, incluyendo su documentación accesible una vez dentro del mismo intérprete usando la palabra reservada **doc** seguido de la función que solicitamos ayuda/información.
 
 ### PostgreSQL
 
@@ -123,20 +132,27 @@ Se instalan las siguientes herramientas de fuentes externas:
 
 
 ## Directorios
+- Accesos_Direcots → Contiene los accesos directos individuales para usuario que van en ~/.local/share/applications
 - fonts → Contiene un directorio por cada conjunto de fuentes similares
 - gedit → Contiene configuración específica para gedit
 - home → Contiene archivos de configuración o plantillas para generarlos
 - LIB → Archivos de librerías del sistema contando desde la raíz
 - TMP → Directorio donde se descargan los archivos temporales
 - usr → Contiene archivos compartidos de usuarios
+- Apps → Contiene scripts y configuraciones especiales para ciertas aplicaciones
 
 # Scripts
 - Agregar_Repositorios.sh → Añade algunos repositorios útiles y sus llaves para seguridad
 - Configurar_GIT.sh → Scripts para configurar la integración de GIT, GitHub y GitLab
 - Instalar_Configuraciones → Genera todas las configuraciones de programas como Vim, Bashit, ohmyzsh y además añade configuraciones al sistema y el directorio home
 - Instalar_Software → Instala los programas indicados en la lista "Software.lst" y algunos extras
+- Limpiador.sh → Este script limpia los directorios y archivos que pueden causar más problemas en algún momento, esto existe para depurar principalmente y su uso se desaconseja por ser áltamente arriesgado a perder datos.
 - main.sh → Programa principal con menú para elegir paso a realizar
 - Personalización_GTK.sh → Genera fondos para grub, escritorio, gdm... y además iconos, temas y cursores
 - Servidores.sh → Instala servidores como apache2 php postregsql mariadb y los configura
 - Tipografías.sh → Instala fuentes tipográficas
 - Variables_Entorno.sh → Genera variables de entorno que seran globales en el sistema
+
+Dentro de Apps/
+- Atom_IDE.sh → Instala el editor ATOM con su configuración y complementos
+- Firefox.sh → Instala la versión para desarrolladores **Quantum** y la versión en desarrollo principal **Nightly**
