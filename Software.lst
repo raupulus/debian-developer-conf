@@ -6,10 +6,13 @@ bundler
 cmake
 command-not-found
 composer
+chromium
 curl
 editorconfig
 erlang-base
 exuberant-ctags
+firefox
+firefox-esr
 flake8
 gedit
 gedit-plugins
