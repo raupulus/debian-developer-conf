@@ -2,6 +2,7 @@ atom-autocomplete-php
 atom-bash-snippets
 atom-i18n
 atom-monokai
+atom-overtype-mode
 atom-yii
 autocomplete
 autocomplete-awk
