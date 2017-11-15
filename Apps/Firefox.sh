@@ -70,7 +70,7 @@ function firefox_install() {
         # Comprueba que no está el archivo descargado en este directorio
     elif [ ! -f $DIR_SCRIPT/TMP/Firefox-Quantum-Developer_amd64.tar.bz2 ]
         then
-            REINTENTOS=50 actualizados, 0 nuevos se instalarán, 0 para eliminar y 4
+            REINTENTOS=50
             echo -e "$verde Descargando$rojo Firefox Quantum Developer Edition$gris"
             for (( i=1; i<=$REINTENTOS; i++ ))
             do
