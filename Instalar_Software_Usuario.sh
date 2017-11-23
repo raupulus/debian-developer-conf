@@ -23,3 +23,9 @@ verde="\033[1;32m"
 #############################
 ##   Variables Generales   ##
 #############################
+# Añadir entrada al menú principal para separar aplicaciones que solo se
+# instalan por usuario y no en general.
+# - Configuración de Atom
+# - Navegadores Firefox developer
+# - ¿Bashit?
+# - ¿psysh? → Probablemente sea mejor mover a global /opt
