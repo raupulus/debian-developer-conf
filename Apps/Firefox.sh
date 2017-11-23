@@ -56,15 +56,15 @@ function firefox_install() {
             mv $DIR_SCRIPT/TMP/Firefox-Quantum-Developer_amd64/firefox ~/.local/opt/Firefox_Quantum_Developer 2>> /dev/null
 
             # Crear enlaces de usuario y permisos de ejecución
-            echo "$HOME/.local/opt/Firefox_Quantum_Developer/firefox - P Firefox-Quantum" > ~/.local/bin/firefox-quantum
+            echo "$HOME/.local/opt/Firefox_Quantum_Developer/firefox - P Firefox-Quantum" > ~/.local/bin/firefox-developer
             # ln -s ~/.local/opt/Firefox_Quantum_Developer/firefox ~/.local/bin/firefox-quantum 2>> /dev/null
-            chmod +x ~/.local/bin/firefox-quantum
+            chmod +x ~/.local/bin/firefox-developer
 
             # Copiar acceso directo
             cp Accesos_Directos/firefox-quantum.desktop ~/.local/share/applications/ 2>> /dev/null
         }
 
-        if [ -f ~/.local/bin/firefox-quantum ]
+        if [ -f ~/.local/bin/firefox-developer ]
         then
             echo -e "$verde Ya esta$rojo Firefox Quantum Developer Edition$verde instalado en el equipo, omitiendo paso$gris"
         # Comprueba que no está el archivo descargado en este directorio
