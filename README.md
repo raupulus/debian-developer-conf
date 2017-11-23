@@ -44,8 +44,8 @@ Estos son los principales objetivos
 - Instalar atajos y personalizaciones para trabajar con git, GitHub y GitLab
 - Instalar servidores Apache2, PostgreSQL, MariaDB
 - Instalar lenguajes de programación, dependencias y librerías para → php, python, nodejs, ruby, bash, zsh
-- Instalar Navegadores WEB para desarrolladores como Firefox Quantum y Firefox Nightly
-- Instalar herramientas para ayudar a debug
+- Instalar Navegadores WEB para desarrolladores como Firefox Developer y Firefox Nightly
+- Instalar herramientas para ayudar a debug en lenguajes web
 
 En resumen dejar con un solo script todo el entorno adaptado a mis necesidades
 

@@ -347,6 +347,26 @@ function configurar_gedit() {
 # Configurar editor de terminal, nano
 function configurar_nano() {
     echo -e "$verde Configurando editor nano$gris"
+
+    if [ -d ~/.nano ]
+    then
+        mv ~/.nano ~/.nanoBACKUP
+    fi
+
+    # Clona el repositorio o actualizarlo si ya existe
+    if [ -d ~/.nano/.git ]
+    then
+        # Actualizar Repositorio con git pull
+        dir_actual=`echo $PWD`
+        cd ~/.nano
+        git pull
+        cd $dir_actual
+    else
+        git clone https://github.com/scopatz/nanorc.git ~/.nano
+    fi
+
+    # Habilita syntaxis para el usuario
+    cat ~/.nano/nanorc >> ~/.nanorc
 }
 
 #Crea un archivo hosts muy completo que bloquea bastantes sitios malignos en la web
@@ -359,7 +379,7 @@ function configurar_hosts() {
         sudo mv /etc/hosts /etc/hosts.BACKUP 2>> /dev/null
     fi
 
-    cat /etc/hosts.BACKUP > ./TMP/hosts 2>> /dev/null
+    sudo cat /etc/hosts.BACKUP > ./TMP/hosts 2>> /dev/null
     cat ./etc/hosts >> ./TMP/hosts 2>> /dev/null
     sudo cp ./TMP/hosts /etc/hosts 2>> /dev/null
 }
@@ -374,6 +394,7 @@ function instalar_configuraciones() {
     cd $DIR_SCRIPT
 
     configurar_gedit
+    configurar_nano
     agregar_conf_home
     configurar_vim
     configurar_hosts
