@@ -87,7 +87,7 @@ function server_php() {
 
         # Activar módulos
         echo -e "$verde Activando módulo → a2enmod php$V_PHP$gris"
-        a2enmod "php$V_PHP"
+        sudo a2enmod "php$V_PHP"
     }
 
     function personalizar_php() {
@@ -116,7 +116,7 @@ function server_php() {
     personalizar_php
 
     # Reiniciar apache2 para hacer efectivos los cambios
-    systemctl restart apache2
+    sudo systemctl restart apache2
 }
 
 function server_sql() {
