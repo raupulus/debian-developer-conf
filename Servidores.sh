@@ -150,7 +150,7 @@ function server_sql() {
     personalizar_sql
 
     # Reiniciar servidor postgresql al terminar con la instalación y configuración
-    systemctl restart postgresql
+    sudo systemctl restart postgresql
 }
 
 function instalar_servidores() {
