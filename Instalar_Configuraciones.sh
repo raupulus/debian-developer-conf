@@ -379,7 +379,7 @@ function configurar_hosts() {
         sudo mv /etc/hosts /etc/hosts.BACKUP 2>> /dev/null
     fi
 
-    cat /etc/hosts.BACKUP > ./TMP/hosts 2>> /dev/null
+    sudo cat /etc/hosts.BACKUP > ./TMP/hosts 2>> /dev/null
     cat ./etc/hosts >> ./TMP/hosts 2>> /dev/null
     sudo cp ./TMP/hosts /etc/hosts 2>> /dev/null
 }
