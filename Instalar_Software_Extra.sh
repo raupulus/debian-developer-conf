@@ -23,3 +23,6 @@ verde="\033[1;32m"
 #############################
 ##   Variables Generales   ##
 #############################
+
+# Añadir entrada al menú principal para separar aplicaciones básicas de las
+# aplicaciones de las extras como firefox-developer, gitkraken etc etc...
