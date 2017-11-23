@@ -335,12 +335,18 @@ function terminal() {
     done
 }
 
+# Configurar editor de gnome, gedit
 function configurar_gedit() {
     mkdir -p ~/.local/share/ 2>> /dev/null
     cp -r ./gedit/.local/share/* ~/.local/share/
 
     mkdir -p ~/.config/gedit/ 2>> /dev/null
     cp -r ./gedit/.config/gedit/* ~/.config/gedit/
+}
+
+# Configurar editor de terminal, nano
+function configurar_nano() {
+    echo -e "$verde Configurando editor nano$gris"
 }
 
 #Crea un archivo hosts muy completo que bloquea bastantes sitios malignos en la web

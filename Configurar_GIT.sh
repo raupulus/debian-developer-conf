@@ -46,7 +46,8 @@ function gpg_git() {
 
     # Listar claves actuales, si hubiera instaladas en el equipo
     echo -e "$verde Las claves instaladas en el equipo son las siguientes:$amarillo"
-    gpg --list-keys
+    #gpg --list-keys
+    gpg --list-secret-keys --keyid-format LONG
 
     # Usar clave o crear una
     echo -e "$verde ¿Usar una clave existente?$rojo"
@@ -54,11 +55,14 @@ function gpg_git() {
 
     #if [ $input = 's' ] || [ $input = 'S' ] || [ $input = 'y' ] || [ $input = 'Y' ]
     #then
+    
     #echo -e "$verde Se creará una clave GPG única nueva:"
-    # TODO → [comando] → Crear clave GPG fuerte
+    #gpg --gen-key
+    
     #echo -e "$verde Copia y pega la clave GPG en la siguiente entrada$rojo"
     #read -p '  s/N  → ' CLAVE_GPG
-    #git config --global user.signingkey CLAVE_GPG
+    #git config --global user.signingkey $CLAVE_GPG
+    
     #fi
 
     # Habilitar GPG en GIT
@@ -72,6 +76,11 @@ function gpg_git() {
     #then
     #git config --global commit.gpgsign true  # Firmar commit por defecto
     #fi
+    
+    
+    #echo -e "$verde Asegúrate de incluir esta clave GPG en gitHuB$gris"
+    #echo -e "$verde A continuación se muestra la clave GPG para que la pegues en github$gris"
+    #gpg --armor --export $CLAVE_GPG
 }
 
 #Configurar el usuario GIT local
