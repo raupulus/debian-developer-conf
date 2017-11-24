@@ -109,7 +109,7 @@ function gitkraken_install() {
 
 function instalar_Software_Extra() {
     echo -e "$verde Preparando para instalar software Extra$gris"
-    atom_install
+    atom_instalador
     brackets_install
     dbeaver_install
     ninjaide_instalador

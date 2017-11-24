@@ -68,7 +68,7 @@ function atom_plugins() {
 }
 
 # Instala complementos para Atom IDE
-function atom_install() {
+function atom_instalador() {
     function instalar() {
         REINTENTOS=5
         echo -e "$verde Descargando$rojo ATOM$gris"
