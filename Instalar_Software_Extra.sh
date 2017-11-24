@@ -48,23 +48,6 @@ function haroopad_install() {
     fi
 }
 
-function gitkraken_install() {
-    if [ -f /usr/bin/gitkraken ]
-    then
-        echo -e "$verde Ya esta$rojo Gitkraken$verde instalado en el equipo, omitiendo paso$gris"
-    else
-        REINTENTOS=3
-        echo -e "$verde Descargando$rojo Gitkraken$gris"
-        for (( i=1; i<=$REINTENTOS; i++ ))
-        do
-            rm gitkraken-amd64.deb 2>> /dev/null
-            wget --show-progress https://release.gitkraken.com/linux/gitkraken-amd64.deb && break
-        done
-        echo -e "$verde Preparando para instalar$rojo Gitkraken$gris"
-        sudo dpkg -i gitkraken-amd64.deb && sudo apt install -f -y
-    fi
-}
-
 function instalar_Software_Extra() {
     echo -e "$verde Preparando para instalar software Extra$gris"
     atom_instalador
@@ -72,5 +55,5 @@ function instalar_Software_Extra() {
     dbeaver_instalador
     ninjaide_instalador
     haroopad_install
-    gitkraken_install
+    gitkraken_instalador
 }
