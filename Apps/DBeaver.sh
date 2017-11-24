@@ -23,3 +23,23 @@ verde="\033[1;32m"
 #############################
 ##   Variables Generales   ##
 #############################
+
+function dbeaver_descargar() {
+    echo -e "$verde Descargando$rojo DBeaver$gris"
+}
+
+function dbeaver_preconfiguracion() {
+    echo -e "$verde Generando Pre-Configuraciones de$rojo DBeaver$gris"
+}
+
+function dbeaver_instalar() {
+    echo -e "$verde Instalando$rojo DBeaver$gris"
+}
+
+function dbeaver_postconfiguracion() {
+    echo -e "$verde Generando Post-Configuraciones$rojo DBeaver$gris"
+}
+
+function dbeaver_instalador() {
+    echo -e "$verde Comenzando instalación de$rojo DBeaver$gris"
+}
