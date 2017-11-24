@@ -29,3 +29,10 @@ verde="\033[1;32m"
 # - Navegadores Firefox developer
 # - ¿Bashit?
 # - ¿psysh? → Probablemente sea mejor mover a global /opt
+
+source Apps/Firefox.sh
+
+function instalar_Software_Usuario() {
+    echo -e "$verde Preparando para instalar aplicaciones para el usuario"
+    firefox_install
+}

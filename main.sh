@@ -34,6 +34,8 @@ verde="\033[1;32m"
 
 source ./Agregar_Repositorios.sh
 source ./Instalar_Software.sh
+source ./Instalar_Software_Extra.sh
+source ./Instalar_Software_Usuario.sh
 source ./Tipografías.sh
 source ./Instalar_Configuraciones.sh
 source ./Variables_Entorno.sh
@@ -62,13 +64,15 @@ while :
         echo -e "   $rojo 0)  $verde Salir$gris"
         echo -e "   $rojo 1)  $verde Agregar Repositorios$gris"
         echo -e "   $rojo 2)  $verde Instalar Aplicaciones Básicas$gris"
-        echo -e "   $rojo 3)  $verde Instalar Configuraciones$gris" #Configuración bash, zsh, variables entorno...
-        echo -e "   $rojo 4)  $verde Agregar Tipografías$gris"
-        echo -e "   $rojo 5)  $verde Configurar GIT$gris"
-        echo -e "   $rojo 6)  $verde Personalizar Sistema y GTK$gris"
-        echo -e "   $rojo 7)  $verde Instalar Servidores Apache → PHP → SQL"
-        echo -e "   $rojo 8)  $verde Ejecutar todos los pasos anteriores$gris"
-        echo -e "   $rojo 999)  $amarillo Limpia$rojo TODO$amarillo rastro del script (peligroso) $gris"
+        echo -e "   $rojo 3)  $verde Instalar Aplicaciones Extras$gris"
+        echo -e "   $rojo 4)  $verde Instalar Aplicaciones de Usuario$gris"
+        echo -e "   $rojo 5)  $verde Instalar Configuraciones$gris" #Configuración bash, zsh, variables entorno...
+        echo -e "   $rojo 6)  $verde Agregar Tipografías$gris"
+        echo -e "   $rojo 7)  $verde Configurar GIT$gris"
+        echo -e "   $rojo 8)  $verde Personalizar Sistema y GTK$gris"
+        echo -e "   $rojo 9)  $verde Instalar Servidores Apache → PHP → SQL"
+        echo -e "   $rojo all)  $verde Ejecutar todos los pasos anteriores$gris"
+        echo -e "   $rojo CLEAN)  $amarillo Limpia$rojo TODO$amarillo rastro del script (peligroso) $gris"
 
 
     echo -e "$rojo"
@@ -89,42 +93,56 @@ while :
             instalar_Software
             read -p "Pulsa una tecla para continuar";;
 
-        3)#Instalar Configuraciones
+        3)#Instalar Aplicaciones Extras
+            clear
+            echo -e "$verde Instalar Aplicaciones Extras$gris"
+            instalar_Software_Extra
+            read -p "Pulsa una tecla para continuar";;
+
+        4)#Instalar Aplicaciones de Usuario
+            clear
+            echo -e "$verde Instalar Aplicaciones de Usuario$gris"
+            instalar_Software_Usuario
+            read -p "Pulsa una tecla para continuar";;
+
+        5)#Instalar Configuraciones
             clear
             echo -e "$verde Instalar Configuraciones$gris"
             instalar_configuraciones
             instalar_variables
             read -p "Pulsa una tecla para continuar";;
 
-        4)#Agregar Tipografías
+        6)#Agregar Tipografías
             clear
             echo -e "$verde Agregar Tipografías$gris"
             agregar_fuentes
             read -p "Pulsa una tecla para continuar";;
 
-        5)#Configurar GIT
+        7)#Configurar GIT
             clear
             echo -e "$verde Configurar GIT$gris"
             configuracion_git
             read -p "Pulsa una tecla para continuar";;
 
-        6)#Personalizar GTK
+        8)#Personalizar GTK
             clear
             echo -e "$verde Personalizar Entorno t GTK$gris"
             personalizar
             read -p "Pulsa una tecla para continuar";;
 
-        7)#Servidores
+        9)#Servidores
             clear
             echo -e "$verde Instalando servidores Apache → PHP → SQL$gris"
             instalar_servidores
             read -p "Pulsa una tecla para continuar";;
 
-        8)#Todas configuraciones
+        all | ALL)#Todas configuraciones
             clear
             echo -e "$verde Preparando para aplicar todas las configuraciones en serie$gris"
             agregar_repositorios
             instalar_Software
+            instalar_Software_Extra
+            instalar_Software_Usuario
             instalar_configuraciones
             agregar_fuentes
             configuracion_git
@@ -133,7 +151,7 @@ while :
             instalar_variables
             read -p "Pulsa una tecla para continuar";;
 
-        999)  # Borrar todo rastro del script, es muy peligroso usarlo
+        celan | CLEAN)  # Borrar todo rastro del script, es muy peligroso usarlo
             clear
             echo -e "$rojo Preparando para limpiar todo rastro$gris"
             echo -e "$rojo Esto solo es útil ante situaciones donde fallan cosas$gris"

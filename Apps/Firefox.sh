@@ -44,40 +44,39 @@ function firefox_install() {
         mkdir -p ~/.local/share/applications
     fi
 
-    # Firefox Quantum Developer Edition
+    # Firefox Developer
     function firefox_developer() {
 
         function instalar() {
-            # Desempaquetar Firefox-Quantum_amd64.tar.bz2
-            mkdir -p $DIR_SCRIPT/TMP/Firefox-Quantum-Developer_amd64 2>> /dev/null
-            tar -xjvf $DIR_SCRIPT/TMP/Firefox-Quantum-Developer_amd64.tar.bz2 -C $DIR_SCRIPT/TMP/Firefox-Quantum-Developer_amd64 2>> /dev/null
+            # Desempaquetar Firefox-Developer_amd64.tar.bz2
+            mkdir -p $DIR_SCRIPT/TMP/Firefox-Developer_amd64 2>> /dev/null
+            tar -xjvf $DIR_SCRIPT/TMP/Firefox-Developer_amd64.tar.bz2 -C $DIR_SCRIPT/TMP/Firefox-Developer_amd64 2>> /dev/null
 
             # Mover archivo extraido a su ubicación final
-            mv $DIR_SCRIPT/TMP/Firefox-Quantum-Developer_amd64/firefox ~/.local/opt/Firefox_Quantum_Developer 2>> /dev/null
+            mv $DIR_SCRIPT/TMP/Firefox-Developer_amd64/firefox ~/.local/opt/Firefox_Developer 2>> /dev/null
 
             # Crear enlaces de usuario y permisos de ejecución
-            echo "$HOME/.local/opt/Firefox_Quantum_Developer/firefox - P Firefox-Quantum" > ~/.local/bin/firefox-developer
-            # ln -s ~/.local/opt/Firefox_Quantum_Developer/firefox ~/.local/bin/firefox-quantum 2>> /dev/null
+            echo "$HOME/.local/opt/Firefox_Developer/firefox - P Firefox-Developer" > ~/.local/bin/firefox-developer
             chmod +x ~/.local/bin/firefox-developer
 
             # Copiar acceso directo
-            cp Accesos_Directos/firefox-quantum.desktop ~/.local/share/applications/ 2>> /dev/null
+            cp Accesos_Directos/firefox-developer.desktop ~/.local/share/applications/ 2>> /dev/null
         }
 
         if [ -f ~/.local/bin/firefox-developer ]
         then
-            echo -e "$verde Ya esta$rojo Firefox Quantum Developer Edition$verde instalado en el equipo, omitiendo paso$gris"
+            echo -e "$verde Ya esta$rojo Firefox Developer$verde instalado en el equipo, omitiendo paso$gris"
         # Comprueba que no está el archivo descargado en este directorio
-    elif [ ! -f $DIR_SCRIPT/TMP/Firefox-Quantum-Developer_amd64.tar.bz2 ]
+    elif [ ! -f $DIR_SCRIPT/TMP/Firefox-Developer_amd64.tar.bz2 ]
         then
             REINTENTOS=50
-            echo -e "$verde Descargando$rojo Firefox Quantum Developer Edition$gris"
+            echo -e "$verde Descargando$rojo Firefox Developer$gris"
             for (( i=1; i<=$REINTENTOS; i++ ))
             do
-                rm $DIR_SCRIPT/TMP/Firefox-Quantum-Developer_amd64.tar.bz 2>> /dev/null
-                wget --show-progress -r -A tar.bz2 'https://download.mozilla.org/?product=firefox-devedition-latest-ssl&os=linux64&lang=es-ES' -O $DIR_SCRIPT/TMP/Firefox-Quantum-Developer_amd64.tar.bz2 && break
+                rm $DIR_SCRIPT/TMP/Firefox-Developer_amd64.tar.bz 2>> /dev/null
+                wget --show-progress -r -A tar.bz2 'https://download.mozilla.org/?product=firefox-devedition-latest-ssl&os=linux64&lang=es-ES' -O $DIR_SCRIPT/TMP/Firefox-Developer_amd64.tar.bz2 && break
             done
-            echo -e "$verde Preparando para instalar$rojo Firefox Quantum Developer Edition$gris"
+            echo -e "$verde Preparando para instalar$rojo Firefox Developer Edition$gris"
 
             instalar
         else
@@ -106,7 +105,7 @@ function firefox_install() {
             # Crear Perfil para Firefox
             if [ -f ~/.local/opt/Firefox_Nightly/firefox ]
             then
-                # Crear perfil para Firefox-Quantum
+                # Crear perfil para Firefox-Developer
                 ~/.local/opt/Firefox_Nightly/firefox -createprofile Firefox-Developer
                 # Crear perfil para Firefox-Nightly
                 ~/.local/opt/Firefox_Nightly/firefox -createprofile Firefox-Nightly
