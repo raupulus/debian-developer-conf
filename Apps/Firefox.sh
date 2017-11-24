@@ -107,7 +107,7 @@ function firefox_install() {
             if [ -f ~/.local/opt/Firefox_Nightly/firefox ]
             then
                 # Crear perfil para Firefox-Quantum
-                ~/.local/opt/Firefox_Nightly/firefox -createprofile Firefox-Quantum
+                ~/.local/opt/Firefox_Nightly/firefox -createprofile Firefox-Developer
                 # Crear perfil para Firefox-Nightly
                 ~/.local/opt/Firefox_Nightly/firefox -createprofile Firefox-Nightly
             fi
