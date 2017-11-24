@@ -42,6 +42,7 @@ function datos_input() {
 }
 
 function gpg_git() {
+    clear
     echo -e "$verde Configurando GPG para GIT$gris"
 
     # Listar claves actuales, si hubiera instaladas en el equipo
@@ -53,34 +54,37 @@ function gpg_git() {
     echo -e "$verde ¿Usar una clave existente?$rojo"
     read -p '  s/N  → ' input
 
-    #if [ $input = 's' ] || [ $input = 'S' ] || [ $input = 'y' ] || [ $input = 'Y' ]
-    #then
-    
-    #echo -e "$verde Se creará una clave GPG única nueva:"
-    #gpg --gen-key
-    
-    #echo -e "$verde Copia y pega la clave GPG en la siguiente entrada$rojo"
-    #read -p '  s/N  → ' CLAVE_GPG
-    #git config --global user.signingkey $CLAVE_GPG
-    
-    #fi
+    if [ $input = 's' ] || [ $input = 'S' ] || [ $input = 'y' ] || [ $input = 'Y' ]
+    then
+        clear
+        gpg --list-secret-keys --keyid-format LONG
+    else
+        echo -e "$verde Se creará una clave GPG única nueva:"
+        gpg --gen-key
+    fi
+
+    echo -e "$verde Copia y pega la clave GPG en la siguiente entrada$rojo"
+    read -p '  CLAVE GPG  → ' CLAVE_GPG
+
+    # Establece la clave introducida para firmar
+    git config --global user.signingkey $CLAVE_GPG
 
     # Habilitar GPG en GIT
     git config --global gpg.program gpg
 
 
     # Firmar commits por defecto
-    #echo -e "$verde ¿Quieres firmar commits automáticamente por defecto?$amarillo"
-    #read -p '  s/N  → ' input
-    #if [ $input = 's' ] || [ $input = 'S' ] || [ $input = 'y' ] || [ $input = 'Y' ]
-    #then
-    #git config --global commit.gpgsign true  # Firmar commit por defecto
-    #fi
-    
-    
-    #echo -e "$verde Asegúrate de incluir esta clave GPG en gitHuB$gris"
-    #echo -e "$verde A continuación se muestra la clave GPG para que la pegues en github$gris"
-    #gpg --armor --export $CLAVE_GPG
+    echo -e "$verde ¿Quieres firmar commits automáticamente por defecto?$amarillo"
+    read -p '  s/N  → ' input
+
+    if [ $input = 's' ] || [ $input = 'S' ] || [ $input = 'y' ] || [ $input = 'Y' ]
+    then
+        git config --global commit.gpgsign true  # Firmar commit por defecto
+    fi
+
+    echo -e "$verde Mostrando clave GPG:$rojo"
+    gpg --armor --export $CLAVE_GPG
+    echo -e "$verde Asegúrate de incluir esta clave GPG en gitHuB$gris"
 }
 
 #Configurar el usuario GIT local
@@ -114,6 +118,10 @@ function configurar_github() {
     git config --global github.user "$usuario_git"
     #TODO →   github-oauth.github.com is not defined.
     #TODO → composer config -g github-oauth.github.com
+
+    # GHI → Git Hub Issues
+    echo -e "$verde Establece https a$rojo hub.protocol$gris"
+    git config --global hub.protocol https
 
     cd $DIR_ACTUAL
 }
@@ -166,6 +174,9 @@ function crear_token() {
     else
         echo -e "$verde El token →$rojo $TOKEN$verde para GitHub se está agregando$gris"
         git config --global github.token $TOKEN
+
+        # Agrega el token para GHI → Git Hub Issues
+        git config --global ghi.token $TOKEN
     fi
 
     #Generando TOKEN para GitLab

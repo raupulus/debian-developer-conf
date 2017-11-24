@@ -16,6 +16,7 @@ firefox-esr
 flake8
 gedit
 gedit-plugins
+ghi
 git
 gocode
 golang-go
