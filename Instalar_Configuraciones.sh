@@ -409,8 +409,8 @@ function instalar_configuraciones() {
     agregar_conf_home
     configurar_vim
     configurar_hosts
-    terminal #Pregunta el terminal a usar
     agregar_plantillas
+    terminal #Pregunta el terminal a usar
 
     sudo update-command-not-found >> /dev/null 2>> /dev/null
 }
