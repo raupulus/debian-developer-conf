@@ -29,24 +29,7 @@ verde="\033[1;32m"
 source Apps/Atom_IDE.sh
 source Apps/Ninja-IDE.sh
 source Apps/Brackets.sh
-
-#Instala el editor de Base de Datos Dbeaver
-function dbeaver_install() {
-    if [ -f /usr/bin/dbeaver ]
-    then
-        echo -e "$verde Ya esta$rojo Dbeaver$verde instalado en el equipo, omitiendo paso$gris"
-    else
-        REINTENTOS=3
-        echo -e "$verde Descargando$rojo Dbeaver$gris"
-        for (( i=1; i<=$REINTENTOS; i++ ))
-        do
-            rm dbeaver-ce_latest_amd64.deb 2>> /dev/null
-            wget https://dbeaver.jkiss.org/files/dbeaver-ce_latest_amd64.deb && break
-        done
-        echo -e "$verde Preparando para instalar$rojo Dbeaver$gris"
-        sudo dpkg -i dbeaver-ce_latest_amd64.deb && sudo apt install -f -y
-    fi
-}
+source Apps/DBeaver.sh
 
 function haroopad_install() {
     if [ -f /usr/bin/haroopad ]
@@ -86,7 +69,7 @@ function instalar_Software_Extra() {
     echo -e "$verde Preparando para instalar software Extra$gris"
     atom_instalador
     brackets_instalador
-    dbeaver_install
+    dbeaver_instalador
     ninjaide_instalador
     haroopad_install
     gitkraken_install
