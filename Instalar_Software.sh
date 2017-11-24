@@ -153,14 +153,24 @@ function instalar_Software() {
     echo -e "$verde Instalando Software adicional$gris"
     # La siguiente variable guarda toda la lista de paquetes desde DPKG
     lista_todos_paquetes=${dpkg-query -W -f='${Installed-Size} ${Package}\n' | sort -n | cut -d" " -f2}
+
+    # Comprueba si el software está instalado y en caso contrario instala
     for s in $software
     do
-        # TODO → Mirar si se puede añadir al siguiente if algo similar a:
-        # [ $s in lista_todos_paquetes ]
-        if [ -f /bin/$s ] || [ -f /usr/bin/$s ]
+        tmp=true  # Comprueba si necesita instalarse (true)
+
+        for x in $lista_todos_paquetes
+        do
+            if [ $s == $x ]
+            then
+                echo -e "$rojo $s$verde ya estaba instalado"
+                tmp=false
+                break
+            fi
+        done
+
+        if [ $tmp == "true" ]
         then
-            echo -e "$rojo $s$verde ya estaba instalado"
-        else
             sudo apt install -y $s >> /dev/null 2>> /dev/null && echo -e "$rojo $s$verde instalado correctamente" || echo -e "$rojo $s$amarillo No se ha instalado$gris"
         fi
     done
