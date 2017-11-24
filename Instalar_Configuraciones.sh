@@ -395,6 +395,18 @@ function agregar_plantillas() {
     fi
 }
 
+function tilix_personalizar() {
+    # TODO → Comprobar si existe instalado cada tema
+    mkdir -p /home/alumno/.config/tilix/schemes/ 2>> /dev/null
+    wget -qO $HOME"/.config/tilix/schemes/3024-night.json" https://git.io/v7QVY
+    wget -qO $HOME"/.config/tilix/schemes/dimmed-monokai.json" https://git.io/v7QaJ
+    wget -qO $HOME"/.config/tilix/schemes/monokai.json" https://git.io/v7Qad
+    wget -qO $HOME"/.config/tilix/schemes/monokai-soda.json" https://git.io/v7Qao
+    wget -qO $HOME"/.config/tilix/schemes/molokai.json" https://git.io/v7QVE
+    wget -qO $HOME"/.config/tilix/schemes/cobalt2.json" https://git.io/v7Qav
+    wget -qO $HOME"/.config/tilix/schemes/dracula.json" https://git.io/v7QaT
+}
+
 # Instalar Todas las configuraciones
 function instalar_configuraciones() {
     bashit
