@@ -23,9 +23,16 @@ verde="\033[1;32m"
 #############################
 ##   Variables Generales   ##
 #############################
+DIR_SCRIPT=`echo $PWD`
 
 function ninjaide_descargar() {
-    echo -e "$verde Descargando"
+    echo -e "$verde Descargando$rojo Ninja IDE$gris"
+    REINTENTOS=5
+    for (( i=1; i<=$REINTENTOS; i++ ))
+    do
+        rm $DIR_SCRIPT/TMP/ninja-ide_2.3-2_all.deb 2>> /dev/null
+        wget http://ftp.es.debian.org/debian/pool/main/n/ninja-ide/ninja-ide_2.3-2_all.deb -O $DIR_SCRIPT/TMP/ninja-ide_2.3-2_all.deb && break
+    done
 }
 
 function ninjaide_preconfiguracion() {
@@ -33,35 +40,13 @@ function ninjaide_preconfiguracion() {
 }
 
 function ninjaide_instalar() {
-    echo -e "$verde Instalando"
+    echo -e "$verde Preparando para instalar$rojo Ninja IDE$gris"
+    sudo apt install -y python-qt4 >> /dev/null 2>> /dev/null && echo -e "$verde Se ha instalado$rojo python-qt4$gris" || echo -e "$verde No se ha instalado$rojo python-qt4$gris"
+    sudo dpkg -i $DIR_SCRIPT/TMP/ninja-ide_2.3-2_all.deb && sudo apt install -f -y
 }
 
 function ninjaide_postconfiguracion() {
     echo -e "$verde Generando Post-Configuraciones"
-}
-
-#Instala el editor de python Ninja IDE
-function ninjaide_instalador() {
-    ninjaide_descargar
-    ninjaide_preconfiguracion
-    ninjaide_instalar
-    ninjaide_postconfiguracion
-
-    if [ -f /usr/bin/ninja-ide ]
-    then
-        echo -e "$verde Ya esta$rojo Ninja IDE$verde instalado en el equipo, omitiendo paso$gris"
-    else
-        REINTENTOS=3
-        echo -e "$verde Descargando$rojo Ninja IDE$gris"
-        for (( i=1; i<=$REINTENTOS; i++ ))
-        do
-            rm ninja-ide_2.3-2_all.deb 2>> /dev/null
-            wget http://ftp.es.debian.org/debian/pool/main/n/ninja-ide/ninja-ide_2.3-2_all.deb && break
-        done
-        echo -e "$verde Preparando para instalar$rojo Ninja IDE$gris"
-        sudo apt install -y python-qt4 >> /dev/null 2>> /dev/null && echo -e "$verde Se ha instalado$rojo python-qt4$gris" || echo -e "$verde No se ha instalado$rojo python-qt4$gris"
-        sudo dpkg -i ninja-ide_2.3-2_all.deb && sudo apt install -f -y
-    fi
 
     #Resolviendo dependencia de libreria QtWebKit.so si no existe
     sudo apt install libqtwebkit4 2>> /dev/null
@@ -75,4 +60,32 @@ function ninjaide_instalador() {
     #Resolviendo otras dependencia de plugins para Ninja IDE
     echo -e "Resolviendo otras dependencias para plugins de Ninja IDE"
     sudo apt install -y python-git python3-git 2>> /dev/null
+}
+
+#Instala el editor de python Ninja IDE
+function ninjaide_instalador() {
+    ninjaide_preconfiguracion
+
+    if [ -f /usr/bin/ninja-ide ]
+    then
+        echo -e "$verde Ya esta$rojo Ninja IDE$verde instalado en el equipo, omitiendo paso$gris"
+    else
+        if [ -f $DIR_SCRIPT/TMP/ninja-ide_2.3-2_all.deb ]
+        then
+            ninjaide_instalar
+        else
+            ninjaide_descargar
+            ninjaide_instalar
+        fi
+
+        # Si falla la instalación se rellama la función tras limpiar
+        if [ ! -f /usr/bin/ninja-ide ]
+        then
+            rm -f $DIR_SCRIPT/TMP/ninja-ide_2.3-2_all.deb
+            ninjaide_descargar
+            ninjaide_instalar
+        fi
+    fi
+
+    ninjaide_postconfiguracion
 }
