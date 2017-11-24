@@ -24,8 +24,29 @@ verde="\033[1;32m"
 ##   Variables Generales   ##
 #############################
 
+function ninjaide_descargar() {
+    #statements
+}
+
+function ninjaide_preconfiguracion() {
+    #statements
+}
+
+function ninjaide_instalacion() {
+    #statements
+}
+
+function ninjaide_postconfiguracion() {
+    #statements
+}
+
 #Instala el editor de python Ninja IDE
 function ninjaide_install() {
+    ninjaide_descargar
+    ninjaide_preconfiguracion
+    ninjaide_instalacion
+    ninjaide_postconfiguracion
+
     if [ -f /usr/bin/ninja-ide ]
     then
         echo -e "$verde Ya esta$rojo Ninja IDE$verde instalado en el equipo, omitiendo paso$gris"
