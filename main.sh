@@ -34,6 +34,8 @@ verde="\033[1;32m"
 
 source ./Agregar_Repositorios.sh
 source ./Instalar_Software.sh
+source ./Instalar_Software_Extra.sh
+source ./Instalar_Software_Usuario.sh
 source ./Tipografías.sh
 source ./Instalar_Configuraciones.sh
 source ./Variables_Entorno.sh
