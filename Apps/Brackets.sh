@@ -37,7 +37,7 @@ function brackets_descargar() {
 
     for (( i=1; i<=$REINTENTOS; i++ ))
     do
-        rm libgcrypt11_1.5.0-5+deb7u6_amd64.deb 2>> /dev/null
+        rm $DIR_SCRIPT/TMP/libgcrypt11_1.5.0-5+deb7u6_amd64.deb 2>> /dev/null
         wget http://security.debian.org/debian-security/pool/updates/main/libg/libgcrypt11/libgcrypt11_1.5.0-5+deb7u6_amd64.deb -O $DIR_SCRIPT/TMP/libgcrypt11_1.5.0-5+deb7u6_amd64.deb && break
     done
 }
