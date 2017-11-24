@@ -25,23 +25,23 @@ verde="\033[1;32m"
 #############################
 
 function ninjaide_descargar() {
-    #statements
+    echo -e "$verde Descargando"
 }
 
 function ninjaide_preconfiguracion() {
-    #statements
+    echo -e "$verde Generando Pre-Configuraciones"
 }
 
 function ninjaide_instalacion() {
-    #statements
+    echo -e "$verde Instalando"
 }
 
 function ninjaide_postconfiguracion() {
-    #statements
+    echo -e "$verde Generando Post-Configuraciones"
 }
 
 #Instala el editor de python Ninja IDE
-function ninjaide_install() {
+function ninjaide_instalador() {
     ninjaide_descargar
     ninjaide_preconfiguracion
     ninjaide_instalacion

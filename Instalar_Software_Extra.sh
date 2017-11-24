@@ -112,7 +112,7 @@ function instalar_Software_Extra() {
     atom_install
     brackets_install
     dbeaver_install
-    ninjaide_install
+    ninjaide_instalador
     haroopad_install
     gitkraken_install
 }
