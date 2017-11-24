@@ -1,4 +1,5 @@
 atom-i18n
+atom-ide-ui
 autoclose-html
 autocomplete-bash-builtins
 browser-plus
@@ -6,7 +7,9 @@ busy-signal
 color-picker
 docblockr
 file-icons
+ide-php
 intentions
+jumpy
 linter
 linter-jshint
 linter-php
@@ -18,5 +21,8 @@ open-html-in-browser
 monokai
 pigments
 python-indent
+php-debug
+symbols-list
 toggle-quotes
 template-generator
+toogle-quotes
