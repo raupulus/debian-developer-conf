@@ -23,3 +23,23 @@ verde="\033[1;32m"
 #############################
 ##   Variables Generales   ##
 #############################
+
+function haroopad_descargar() {
+    echo -e "$verde Descargando$rojo Haroopad$gris"
+}
+
+function haroopad_preconfiguracion() {
+    echo -e "$verde Generando Pre-Configuraciones de$rojo Haroopad$gris"
+}
+
+function haroopad_instalar() {
+    echo -e "$verde Instalando$rojo Haroopad$gris"
+}
+
+function haroopad_postconfiguracion() {
+    echo -e "$verde Generando Post-Configuraciones$rojo Haroopad$gris"
+}
+
+function haroopad_instalador() {
+    echo -e "$verde Comenzando instalación de$rojo Haroopad$gris"
+}
