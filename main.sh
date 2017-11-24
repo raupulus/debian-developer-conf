@@ -96,13 +96,13 @@ while :
         3)#Instalar Aplicaciones Extras
             clear
             echo -e "$verde Instalar Aplicaciones Extras$gris"
-            instalar_Software_extra
+            instalar_Software_Extra
             read -p "Pulsa una tecla para continuar";;
 
         4)#Instalar Aplicaciones de Usuario
             clear
             echo -e "$verde Instalar Aplicaciones de Usuario$gris"
-            instalar_Software_usuario
+            instalar_Software_Usuario
             read -p "Pulsa una tecla para continuar";;
 
         5)#Instalar Configuraciones
@@ -141,6 +141,8 @@ while :
             echo -e "$verde Preparando para aplicar todas las configuraciones en serie$gris"
             agregar_repositorios
             instalar_Software
+            instalar_Software_Extra
+            instalar_Software_Usuario
             instalar_configuraciones
             agregar_fuentes
             configuracion_git

@@ -27,6 +27,6 @@ verde="\033[1;32m"
 # Añadir entrada al menú principal para separar aplicaciones básicas de las
 # aplicaciones de las extras como firefox-developer, gitkraken etc etc...
 
-function instalar_software_extra() {
+function instalar_Software_Extra() {
     echo "soft extra"
 }
