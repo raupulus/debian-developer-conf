@@ -170,6 +170,9 @@ function crear_token() {
     else
         echo -e "$verde El token →$rojo $TOKEN$verde para GitHub se está agregando$gris"
         git config --global github.token $TOKEN
+
+        # Agrega el token para GHI → Git Hub Issues
+        git config --global ghi.token $TOKEN
     fi
 
     #Generando TOKEN para GitLab
