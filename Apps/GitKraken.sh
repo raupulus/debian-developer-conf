@@ -25,19 +25,19 @@ verde="\033[1;32m"
 #############################
 
 function gitkraken_descargar() {
-    echo -e "$verde Descargando GitKraken"
+    echo -e "$verde Descargando$rojo GitKraken$gris"
 }
 
 function gitkraken_preconfiguracion() {
-    echo -e "$verde Generando Pre-Configuraciones de GitKraken"
+    echo -e "$verde Generando Pre-Configuraciones de$rojo GitKraken$gris"
 }
 
 function gitkraken_instalar() {
-    echo -e "$verde Instalando GitKraken"
+    echo -e "$verde Instalando$rojo GitKraken$gris"
 }
 
 function gitkraken_postconfiguracion() {
-    echo -e "$verde Generando Post-Configuraciones GitKraken"
+    echo -e "$verde Generando Post-Configuraciones$rojo GitKraken$gris"
 }
 
 function gitkraken_instalador() {
