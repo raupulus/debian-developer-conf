@@ -29,3 +29,7 @@ verde="\033[1;32m"
 # - Navegadores Firefox developer
 # - ¿Bashit?
 # - ¿psysh? → Probablemente sea mejor mover a global /opt
+
+function instalar_software_extra() {
+    echo "soft usuario"
+}
