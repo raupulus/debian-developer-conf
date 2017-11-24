@@ -32,7 +32,7 @@ function ninjaide_preconfiguracion() {
     echo -e "$verde Generando Pre-Configuraciones"
 }
 
-function ninjaide_instalacion() {
+function ninjaide_instalar() {
     echo -e "$verde Instalando"
 }
 
@@ -44,7 +44,7 @@ function ninjaide_postconfiguracion() {
 function ninjaide_instalador() {
     ninjaide_descargar
     ninjaide_preconfiguracion
-    ninjaide_instalacion
+    ninjaide_instalar
     ninjaide_postconfiguracion
 
     if [ -f /usr/bin/ninja-ide ]
