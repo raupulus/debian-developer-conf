@@ -8,6 +8,8 @@
 # ###       www.fryntiz.es        ### #
 #######################################
 
+# Este script contiene aplicaciones que son opcionales como editores
+
 ############################
 ##   Constantes Colores   ##
 ############################
@@ -24,14 +26,13 @@ verde="\033[1;32m"
 ##   Variables Generales   ##
 #############################
 
-# Este script contiene aplicaciones que son opcionales como editores
-
 source Apps/Atom_IDE.sh
 source Apps/Ninja-IDE.sh
 source Apps/Brackets.sh
 source Apps/DBeaver.sh
 source Apps/GitKraken.sh
 source Apps/Haroopad.sh
+source Apps/Pencil-Project.sh
 
 function instalar_Software_Extra() {
     echo -e "$verde Preparando para instalar software Extra$gris"
