@@ -59,7 +59,7 @@ function haroopad_instalador() {
     else
         if [ -f $DIR_SCRIPT/TMP/haroopad-v0.13.1-x64.deb ]
         then
-            brackets_instalar
+            haroopad_instalar
         else
             haroopad_descargar
             haroopad_instalar
