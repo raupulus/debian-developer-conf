@@ -28,32 +28,7 @@ verde="\033[1;32m"
 
 source Apps/Atom_IDE.sh
 source Apps/Ninja-IDE.sh
-
-#Instala complementos para Brackets IDE
-function brackets_install() {
-    if [ -f /usr/bin/brackets ]
-    then
-        echo -e "$verde Ya esta$rojo Brackets$verde instalado en el equipo, omitiendo paso$gris"
-    else
-        REINTENTOS=10
-        echo -e "$verde Descargando$rojo Brackets$gris"
-        for (( i=1; i<=$REINTENTOS; i++ ))
-        do
-            rm Brackets.Release.1.10.64-bit.deb 2>> /dev/null
-            wget https://github.com/adobe/brackets/releases/download/release-1.10/Brackets.Release.1.10.64-bit.deb && break
-        done
-
-        for (( i=1; i<=$REINTENTOS; i++ ))
-        do
-            rm libgcrypt11_1.5.0-5+deb7u6_amd64.deb 2>> /dev/null
-            wget http://security.debian.org/debian-security/pool/updates/main/libg/libgcrypt11/libgcrypt11_1.5.0-5+deb7u6_amd64.deb && break
-        done
-
-        echo -e "$verde Preparando para instalar$rojo Brackets$gris"
-        sudo dpkg -i libgcrypt11_1.5.0-5+deb7u6_amd64.deb
-        sudo dpkg -i Brackets.Release.1.10.64-bit.deb && sudo apt install -f -y
-    fi
-}
+source Apps/Brackets.sh
 
 #Instala el editor de Base de Datos Dbeaver
 function dbeaver_install() {
@@ -110,7 +85,7 @@ function gitkraken_install() {
 function instalar_Software_Extra() {
     echo -e "$verde Preparando para instalar software Extra$gris"
     atom_instalador
-    brackets_install
+    brackets_instalador
     dbeaver_install
     ninjaide_instalador
     haroopad_install
