@@ -395,6 +395,11 @@ function agregar_plantillas() {
     fi
 }
 
+function tilix_personalizar() {
+    mkdir -p /home/alumno/.config/tilix/schemes/ 2>> /dev/null
+    wget -qO $HOME"/.config/tilix/schemes/3024-night.json" https://git.io/v7QVY
+}
+
 # Instalar Todas las configuraciones
 function instalar_configuraciones() {
     bashit
