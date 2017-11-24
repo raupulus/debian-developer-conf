@@ -30,6 +30,8 @@ source Apps/Atom_IDE.sh
 source Apps/Ninja-IDE.sh
 source Apps/Brackets.sh
 source Apps/DBeaver.sh
+source Apps/GitKraken.sh
+source Apps/Haroopad.sh
 
 function instalar_Software_Extra() {
     echo -e "$verde Preparando para instalar software Extra$gris"
@@ -37,6 +39,6 @@ function instalar_Software_Extra() {
     brackets_instalador
     dbeaver_instalador
     ninjaide_instalador
-    haroopad_install
+    haroopad_instalador
     gitkraken_instalador
 }
