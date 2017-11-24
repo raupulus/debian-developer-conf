@@ -34,8 +34,8 @@ function dbeaver_descargar() {
     echo -e "$verde Descargando$rojo Dbeaver$gris"
     for (( i=1; i<=$REINTENTOS; i++ ))
     do
-        rm dbeaver-ce_latest_amd64.deb 2>> /dev/null
-        wget https://dbeaver.jkiss.org/files/dbeaver-ce_latest_amd64.deb && break
+        rm $DIR_SCRIPT/TMP/dbeaver-ce_latest_amd64.deb 2>> /dev/null
+        wget https://dbeaver.jkiss.org/files/dbeaver-ce_latest_amd64.deb -O $DIR_SCRIPT/TMP/dbeaver-ce_latest_amd64.deb && break
     done
 }
 
@@ -45,7 +45,7 @@ function dbeaver_preconfiguracion() {
 
 function dbeaver_instalar() {
     echo -e "$verde Instalando$rojo DBeaver$gris"
-    sudo dpkg -i dbeaver-ce_latest_amd64.deb && sudo apt install -f -y
+    sudo dpkg -i $DIR_SCRIPT/TMP/dbeaver-ce_latest_amd64.deb && sudo apt install -f -y
 }
 
 function dbeaver_postconfiguracion() {
