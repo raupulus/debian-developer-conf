@@ -384,7 +384,18 @@ function configurar_hosts() {
     sudo cp ./TMP/hosts /etc/hosts 2>> /dev/null
 }
 
-#Instalar Todas las configuraciones
+# Añadir plantillas
+function agregar_plantillas() {
+    if [ -d ~/Plantillas ]
+    then
+        cp -R ./Plantillas/* ~/Plantillas/
+    else
+        mkdir ~/Plantillas
+        cp -R ./Plantillas/* ~/Plantillas/
+    fi
+}
+
+# Instalar Todas las configuraciones
 function instalar_configuraciones() {
     bashit
     ohMyZSH
@@ -398,6 +409,7 @@ function instalar_configuraciones() {
     agregar_conf_home
     configurar_vim
     configurar_hosts
+    agregar_plantillas
     terminal #Pregunta el terminal a usar
 
     sudo update-command-not-found >> /dev/null 2>> /dev/null

@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+***********************
+** Raúl Caro Pastorino **
+***********************
+-->
+
+<!-- DTD INTERNA
+<!DOCTYPE root [
+<!ELEMENT root ()*>
+]>
+-->
+
+<!-- DTD EXTERNA
+<!DOCTYPE root SYSTEM "esquema.dtd">
+]>
+-->
+
+<!-- XSD EXTERNO
+<root
+xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+xsi:noNamespaceSchemaLocation="esquema.xsd" >
+
+CONTENIDO XML AQUÍ
+
+</root>
+-->
