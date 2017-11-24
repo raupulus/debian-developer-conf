@@ -24,10 +24,10 @@ verde="\033[1;32m"
 ##   Variables Generales   ##
 #############################
 
-# Añadir entrada al menú principal para separar aplicaciones básicas de las
-# aplicaciones de las extras como firefox-developer, gitkraken etc etc...
+# Este script contiene aplicaciones que son opcionales como editores
 
 source Apps/Atom_IDE.sh
+source Apps/Ninja-IDE.sh
 
 #Instala complementos para Brackets IDE
 function brackets_install() {
@@ -71,38 +71,6 @@ function dbeaver_install() {
         echo -e "$verde Preparando para instalar$rojo Dbeaver$gris"
         sudo dpkg -i dbeaver-ce_latest_amd64.deb && sudo apt install -f -y
     fi
-}
-
-#Instala el editor de python Ninja IDE
-function ninjaide_install() {
-    if [ -f /usr/bin/ninja-ide ]
-    then
-        echo -e "$verde Ya esta$rojo Ninja IDE$verde instalado en el equipo, omitiendo paso$gris"
-    else
-        REINTENTOS=3
-        echo -e "$verde Descargando$rojo Ninja IDE$gris"
-        for (( i=1; i<=$REINTENTOS; i++ ))
-        do
-            rm ninja-ide_2.3-2_all.deb 2>> /dev/null
-            wget http://ftp.es.debian.org/debian/pool/main/n/ninja-ide/ninja-ide_2.3-2_all.deb && break
-        done
-        echo -e "$verde Preparando para instalar$rojo Ninja IDE$gris"
-        sudo apt install -y python-qt4 >> /dev/null 2>> /dev/null && echo -e "$verde Se ha instalado$rojo python-qt4$gris" || echo -e "$verde No se ha instalado$rojo python-qt4$gris"
-        sudo dpkg -i ninja-ide_2.3-2_all.deb && sudo apt install -f -y
-    fi
-
-    #Resolviendo dependencia de libreria QtWebKit.so si no existe
-    sudo apt install libqtwebkit4 2>> /dev/null
-    if [ ! -f /usr/lib/python2.7/dist-packages/PyQt4/QtWebKit.so ]
-    then
-        echo -e "$verde Añadiendo libreria$rojo QtWebKit$gris"
-        sudo mkdir -p /usr/lib/python2.7/dist-packages/PyQt4/ 2>> /dev/null
-        sudo cp ./LIB/usr/lib/python2.7/dist-packages/PyQt4/QtWebKit.so /usr/lib/python2.7/dist-packages/PyQt4/
-    fi
-
-    #Resolviendo otras dependencia de plugins para Ninja IDE
-    echo -e "Resolviendo otras dependencias para plugins de Ninja IDE"
-    sudo apt install -y python-git python3-git 2>> /dev/null
 }
 
 function haroopad_install() {
