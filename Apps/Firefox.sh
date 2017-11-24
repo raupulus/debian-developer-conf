@@ -44,11 +44,11 @@ function firefox_install() {
         mkdir -p ~/.local/share/applications
     fi
 
-    # Firefox Quantum Developer Edition
+    # Firefox Developer
     function firefox_developer() {
 
         function instalar() {
-            # Desempaquetar Firefox-Quantum_amd64.tar.bz2
+            # Desempaquetar Firefox-Developer_amd64.tar.bz2
             mkdir -p $DIR_SCRIPT/TMP/Firefox-Developer_amd64 2>> /dev/null
             tar -xjvf $DIR_SCRIPT/TMP/Firefox-Developer_amd64.tar.bz2 -C $DIR_SCRIPT/TMP/Firefox-Developer_amd64 2>> /dev/null
 
@@ -56,8 +56,7 @@ function firefox_install() {
             mv $DIR_SCRIPT/TMP/Firefox-Developer_amd64/firefox ~/.local/opt/Firefox_Developer 2>> /dev/null
 
             # Crear enlaces de usuario y permisos de ejecución
-            echo "$HOME/.local/opt/Firefox_Quantum_Developer/firefox - P Firefox-Quantum" > ~/.local/bin/firefox-developer
-            # ln -s ~/.local/opt/Firefox_Quantum_Developer/firefox ~/.local/bin/firefox-quantum 2>> /dev/null
+            echo "$HOME/.local/opt/Firefox_Developer/firefox - P Firefox-Developer" > ~/.local/bin/firefox-developer
             chmod +x ~/.local/bin/firefox-developer
 
             # Copiar acceso directo
@@ -106,7 +105,7 @@ function firefox_install() {
             # Crear Perfil para Firefox
             if [ -f ~/.local/opt/Firefox_Nightly/firefox ]
             then
-                # Crear perfil para Firefox-Quantum
+                # Crear perfil para Firefox-Developer
                 ~/.local/opt/Firefox_Nightly/firefox -createprofile Firefox-Developer
                 # Crear perfil para Firefox-Nightly
                 ~/.local/opt/Firefox_Nightly/firefox -createprofile Firefox-Nightly
