@@ -23,3 +23,23 @@ verde="\033[1;32m"
 #############################
 ##   Variables Generales   ##
 #############################
+
+function brackets_descargar() {
+    echo -e "$verde Descargando$rojo Brackets$gris"
+}
+
+function brackets_preconfiguracion() {
+    echo -e "$verde Generando Pre-Configuraciones de$rojo Brackets$gris"
+}
+
+function brackets_instalar() {
+    echo -e "$verde Instalando$rojo Brackets$gris"
+}
+
+function brackets_postconfiguracion() {
+    echo -e "$verde Generando Post-Configuraciones$rojo Brackets$gris"
+}
+
+function brackets_instalador() {
+    echo -e "$verde Comenzando instalación de$rojo Brackets$gris"
+}
