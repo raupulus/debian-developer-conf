@@ -171,7 +171,7 @@ function instalar_Software() {
 
         if [ $tmp == "true" ]
         then
-            sudo apt install -y $s >> /dev/null 2>> /dev/null && echo -e "$rojo $s$verde instalado correctamente" || echo -e "$rojo $s$amarillo No se ha instalado$gris"
+            sudo apt install -y $s >> /dev/null 2>> /dev/null && echo -e "$rojo $s$verde instalado correctamente" || echo -e "$rojo $s$amarillo No se ha instalado (o no existe con este nombre)$gris"
         fi
     done
 
