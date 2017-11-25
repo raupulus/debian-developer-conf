@@ -13,7 +13,7 @@
         <meta name="description" content="Cambiar imagen según el día de la semana"/>
         <meta name="keywords" content="imagen, cambiar imagen, programa, script, php, ejemplo, plantilla, programación, Raúl Caro Pastorino, Fryntiz"/>
         <meta name="author" content="Raúl Caro Pastorino"/>
-        <link rel="shortcut icon" href="./favicon.png"/>
+        <link rel="shortcut icon" href="./favicon.ico"/>
         <link rel="stylesheet" href="./styles.css"/>
         <script src="./scripts.js"></script>
     </head>
