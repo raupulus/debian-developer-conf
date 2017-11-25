@@ -27,22 +27,22 @@ verde="\033[1;32m"
 function server_apache() {
 
     function instalar_apache() {
-    echo -e "$verde Instalando Apache 2$gris"
+        echo -e "$verde Instalando Apache 2$gris"
         sudo apt install -y apache2
     }
 
     function configurar_apache() {
-    echo -e "$verde Preparando configuracion de Apache 2$gris"
+        echo -e "$verde Preparando configuracion de Apache 2$gris"
 
-    echo -e "$verde Activando módulos$gris"
-    sudo a2enmod rewrite
+        echo -e "$verde Activando módulos$gris"
+        sudo a2enmod rewrite
 
-    echo -e "$verde Desactivando módulos"
+        echo -e "$verde Desactivando módulos"
 
     }
 
     function personalizar_apache() {
-    echo -e "$verde Personalizando Apache 2$gris"
+        echo -e "$verde Personalizando Apache 2$gris"
     }
 
     instalar_apache
