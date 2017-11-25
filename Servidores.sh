@@ -45,9 +45,43 @@ function server_apache() {
         clear
         echo -e "$verde Personalizando$rojo Apache 2$gris"
         function generar_www() {
-            #Copia todo el contenido WEB a /var/www
-            echo -e '$verde Copiando contenido dentro de /var/www$'
-            sudo cp -R www/* /var/www/
+            # ¿Borrar contenido de /var/www?
+
+            # Copia todo el contenido WEB a /var/www
+            echo -e "$verde Copiando contenido dentro de /var/www"
+            sudo cp -R ./Apache2/www/* /var/www/html
+
+            # Copia todo el contenido de configuración a /etc/apache2
+            echo -e "$verde Copiando archivos de configuración dentro de /etc/apache2"
+            sudo cp -R ./Apache2/etc/apache2/* /etc/apache2/
+
+            # Crear archivo de usuarios con permisos para directorios restringidos
+            echo -e "$verde Creando usuarios con permisos en apache"
+            sudo rm /var/www/.htpasswd 2>> /dev/null
+            while [ -z $input_user ]
+            do
+                read -p "Introduce el nombre de usuario para el sitio privado → " input_user
+            done
+            echo -e "$verde Introduce la contraseña para el sitio privado:$rojo"
+            sudo htpasswd -c /var/www/.htpasswd $input_user
+
+            # Cambia el dueño
+            echo -e "$verde Asignando dueños$gris"
+            sudo chown www-data:www-data -R /var/www
+            sudo chown root:root /etc/apache2/ports.conf
+
+            # Cambia los permisos
+            echo -e "$verde Asignando permisos"
+            sudo chmod 775 -R /var/www/*
+            sudo chmod 700 /var/www/.htpasswd
+            sudo chmod 700 /var/www/html/.htaccess
+            sudo chmod 755 /etc/apache2/ports.conf /etc/apache2/
+            sudo chmod 755 -R /etc/apache2/sites-available /etc/apache2/sites-enabled
+
+            # Agrega al usuario al grupo www-data
+            echo -e "$verde Añadiendo el usuario al grupo$rojo www-data"
+            mi_usuario=`whoami`
+            sudo adduser $mi_usuario www-data
         }
 
         echo -e "$verde Es posible generar una estructura dentro de /var/www"
@@ -58,6 +92,15 @@ function server_apache() {
         then
             generar_www
         fi
+
+        # Generar enlaces (desde ~/web a /var/www)
+        function enlaces() {
+            echo -e "$verde Puedes generar un enlace en tu home hacia /var/www/"
+            read -p " ¿Quieres generar el enlace? s/N → " input
+        }
+
+
+
     }
 
     instalar_apache
