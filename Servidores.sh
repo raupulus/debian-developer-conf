@@ -27,12 +27,12 @@ verde="\033[1;32m"
 function server_apache() {
 
     function instalar_apache() {
-        echo -e "$verde Instalando Apache 2$gris"
+        echo -e "$verde Instalando Apache$rojo 2$gris"
         sudo apt install -y apache2
     }
 
     function configurar_apache() {
-        echo -e "$verde Preparando configuracion de Apache 2$gris"
+        echo -e "$verde Preparando configuracion de$rojo Apache 2$gris"
 
         echo -e "$verde Activando módulos$gris"
         sudo a2enmod rewrite
@@ -42,7 +42,22 @@ function server_apache() {
     }
 
     function personalizar_apache() {
-        echo -e "$verde Personalizando Apache 2$gris"
+        clear
+        echo -e "$verde Personalizando$rojo Apache 2$gris"
+        function generar_www() {
+            #Copia todo el contenido WEB a /var/www
+            echo -e '$verde Copiando contenido dentro de /var/www$'
+            sudo cp -R www/* /var/www/
+        }
+
+        echo -e "$verde Es posible generar una estructura dentro de /var/www"
+        echo -e "$verde Ten en cuenta que esto borrará el contenido actual"
+        echo -e "$verde También se modificarán archivos en /etc/apache2/*$red"
+        read -p " ¿Quieres Generar la estructura y habilitarla? s/N → " input
+        if [ $input = 's' ] || [ $input = 'S' ]
+        then
+            generar_www
+        fi
     }
 
     instalar_apache
