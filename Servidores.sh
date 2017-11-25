@@ -119,6 +119,17 @@ function server_php() {
         fi
     }
 
+    # Preparar archivo con parámetros para xdebug
+    echo 'zend_extension=xdebug.so
+    xdebug.remote_enable=1
+    xdebug.remote_host=127.0.0.1
+    #xdebug.remote_connect_back=1    # Not safe for production servers
+    xdebug.remote_port=9000
+    xdebug.remote_handler=dbgp
+    xdebug.remote_mode=req
+    xdebug.remote_autostart=true
+    ' | sudo tee /etc/php/$V_PHP/apache2/conf.d/20-xdebug.ini
+
     instalar_php
     configurar_php
     personalizar_php
