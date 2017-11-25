@@ -34,8 +34,11 @@ function server_apache() {
     function configurar_apache() {
     echo -e "$verde Preparando configuracion de Apache 2$gris"
 
-    echo -e "$verde Activando módulo rewrite$gris"
+    echo -e "$verde Activando módulos$gris"
     sudo a2enmod rewrite
+
+    echo -e "$verde Desactivando módulos"
+
     }
 
     function personalizar_apache() {
@@ -86,8 +89,13 @@ function server_php() {
         sudo sed -r -i "s/^;?\s*display_startup_errors\s*=.*$/display_startup_errors = On/" $PHPINI
 
         # Activar módulos
-        echo -e "$verde Activando módulo → a2enmod php$V_PHP$gris"
+        echo -e "$verde Activando módulos$gris"
         sudo a2enmod "php$V_PHP"
+        sudo phpenmod -s apache2 xdebug
+
+        echo -e "$verde Desactivando Módulos"
+        # xdebug para PHP CLI no tiene sentido y ralentiza
+        sudo phpdismod -s cli xdebug
     }
 
     function personalizar_php() {
@@ -110,6 +118,17 @@ function server_php() {
             wget --show-progress -q http://psysh.org/manual/es/php_manual.sqlite -O ~/.local/share/psysh/php_manual.sqlite
         fi
     }
+
+    # Preparar archivo con parámetros para xdebug
+    echo 'zend_extension=xdebug.so
+    xdebug.remote_enable=1
+    xdebug.remote_host=127.0.0.1
+    #xdebug.remote_connect_back=1    # Not safe for production servers
+    xdebug.remote_port=9000
+    xdebug.remote_handler=dbgp
+    xdebug.remote_mode=req
+    xdebug.remote_autostart=true
+    ' | sudo tee /etc/php/$V_PHP/apache2/conf.d/20-xdebug.ini
 
     instalar_php
     configurar_php
