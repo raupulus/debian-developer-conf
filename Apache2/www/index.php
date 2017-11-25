@@ -24,10 +24,24 @@
             <h2 id="subtitulo">Elige a que lugar del servidor acceder</h2>
         </div>
 
-        </div>
-
         <div id="cajacontenido">
+            <ul>
+                <li>
+                    <a href="
+                    <?= 'http://'.$_SERVER['SERVER_ADDR'].'Publico'; ?>"
+                     title="Sitio Público">
+                        Sitio Público
+                    </a>
+                 </li>
 
+                 <li>
+                    <a href="
+                    <?= 'http://'.$_SERVER['SERVER_ADDR'].'Privado'; ?>"
+                    title="Sitio Privado">
+                        Sitio Privado
+                    </a>
+                </li>
+            </ul>
         </div>
 
 
