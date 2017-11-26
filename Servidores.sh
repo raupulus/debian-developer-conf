@@ -143,20 +143,19 @@ function server_apache() {
 }
 
 function server_php() {
-
-    function instalar_php() {
         V_PHP="7.0"  # Versión de PHP instalada en el sistema
 
+    function instalar_php() {
         echo -e "$verde Instalando PHP$gris"
         paquetes_basicos="php php-cli libapache2-mod-php"
-        sudo apt install -y $paquetes_basicos
+        sudo apt install -y $paquetes_basicos >> /dev/null 2>> /dev/null
 
-        echo -e "$verde Instalando paquetes extras$gris"
+        echo -e "$verde Instalando paquetes extras$yellow"
         paquetes_extras="php-gd php-curl php-pgsql php-sqlite3 sqlite sqlite3 php-intl php-mbstring php-xml php-xdebug php-json"
-        sudo apt install -y $paquetes_extras
+        sudo apt install -y $paquetes_extras >> /dev/null 2>> /dev/null
 
-        echo -e "$verde Instalando librerías$gris"
-        sudo apt install -y composer
+        echo -e "$verde Instalando librerías$yellow"
+        sudo apt install -y composer >> /dev/null 2>> /dev/null
         #composer global require --prefer-dist friendsofphp/php-cs-fixer squizlabs/php_codesniffer yiisoft/yii2-coding-standards phpmd/phpmd
     }
 
