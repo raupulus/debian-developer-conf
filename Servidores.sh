@@ -23,6 +23,7 @@ verde="\033[1;32m"
 #############################
 ##   Variables Generales   ##
 #############################
+DIR_SCRIPT=`echo $PWD`
 
 function server_apache() {
 
@@ -188,6 +189,49 @@ function server_php() {
 
     function personalizar_php() {
         echo -e "$verde Personalizando PHP$gris"
+
+        function psysh() {
+            function descargar_psysh() {
+                echo -e "$verde Descargando Intérprete$rojo PsySH$amarillo"
+
+                REINTENTOS=10
+                for (( i=1; i<=$REINTENTOS; i++ ))
+                do
+                    rm $DIR_SCRIPT/TMP/psysh 2>> /dev/null
+                    wget --show-progress https://git.io/psysh -O $DIR_SCRIPT/TMP/psysh && break
+                done
+
+
+                wget --show-progress https://git.io/psysh -O $DIR_SCRIPT/TMP/psysh
+            }
+
+            function instalar_psysh() {
+                echo -e "$verde Instalando Intérprete$rojo PsySH$amarillo"
+                cp $DIR_SCRIPT/TMP/psysh ~/.local/bin/psysh
+                chmod +x ~/.local/bin/psysh
+            }
+        }
+        if [ -f ~/.local/bin/psysh ]
+        then
+            echo -e "$verde Ya esta$rojo psysh$verde instalado en el equipo, omitiendo paso$gris"
+        else
+            if [ -f $DIR_SCRIPT/TMP/psysh ]
+            then
+                instalar_psysh
+            else
+                descargar_psysh
+                instalar_psysh
+            fi
+
+            # Si falla la instalación se rellama la función tras limpiar
+            if [ ! -f ~/.local/bin/psysh ]
+            then
+                rm -f $DIR_SCRIPT/TMP/psysh
+                descargar_psysh
+                instalar_psysh
+            fi
+        fi
+
 
         # TODO → Implementar control si fallan las descargas en "psysh
         # Intérprete interactivo de PHP → psysh
