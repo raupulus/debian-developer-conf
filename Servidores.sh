@@ -112,7 +112,7 @@ function server_apache() {
                 mkdir ~/GIT 2>> /dev/null && echo -e "$verde Se ha creado el directorio ~/GIT" || echo -e "$verde No se ha creado el directorio ~/GIT"
                 sudo ln -s /home/$mi_usuario/GIT /var/www/Publico/GIT
                 sudo chown -R $mi_usuario:www-data /home/$mi_usuario/GIT
-            fi
+            fi 2>> /dev/null
         }
 
         enlaces
@@ -142,6 +142,12 @@ function server_apache() {
             echo "127.0.0.1 publico" | sudo tee -a /etc/hosts
             echo "127.0.0.1 publico.local" | sudo tee -a /etc/hosts
         }
+
+        read -p " ¿Quieres añadir sitios virtuales a /etc/hosts? s/N → " input
+        if [ $input = 's' ] || [ $input = 'S' ]
+        then
+            activar_hosts
+        fi 2>> /dev/null
     }
 
     instalar_apache
