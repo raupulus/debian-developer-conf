@@ -156,6 +156,7 @@ function server_apache() {
     personalizar_apache
 
     # Reiniciar servidor Apache para aplicar configuración
+    sudo systemctl start apache2
     sudo systemctl restart apache2
 }
 
