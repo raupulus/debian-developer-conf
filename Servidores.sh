@@ -230,9 +230,9 @@ function server_sql() {
 
     function instalar_sql() {
         echo -e "$verde Instalando PostgreSQL$gris"
-        sudo apt install -y postgresql postgresql-client
-        sudo apt install -y postgresql-contrib
-        sudo apt install -y postgresql-all 2>> /dev/null
+        sudo apt install -y postgresql postgresql-client >> /dev/null 2>> /dev/null
+        sudo apt install -y postgresql-contrib >> /dev/null 2>> /dev/null
+        sudo apt install -y postgresql-all >> /dev/null 2>> /dev/null
     }
 
     function configurar_sql() {
