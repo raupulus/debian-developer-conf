@@ -25,7 +25,13 @@
             <h2 id="subtitulo">Elige a que lugar del servidor acceder</h2>
         </div>
 
-<?php $direccion = $_SERVER['SERVER_ADDR'] ?? 'localhost'; ?>
+<?php
+    if ($_SERVER['SERVER_ADDR'] == '::1') {
+        $direccion = 'localhost';
+    } else {
+        $direccion = $_SERVER['SERVER_ADDR'] ?? 'localhost';
+    }
+?>
 
         <div id="cajacontenido">
             <ul>
