@@ -104,7 +104,7 @@ function server_apache() {
             clear
             echo -e "$verde Puedes crear un directorio para repositorios GIT en tu directorio personal"
             echo -e "$verde Una vez creado se añadirá un enlace al servidor web"
-            echo -e "$verde Este será desde el servidor /var/www/html/GIT a ~/GIT$rojo"
+            echo -e "$verde Este será desde el servidor /var/www/GIT a ~/GIT$rojo"
             read -p " ¿Quieres crear el directorio y generar el enlace? s/N → " input
             if [ $input = 's' ] || [ $input = 'S' ]
             then
