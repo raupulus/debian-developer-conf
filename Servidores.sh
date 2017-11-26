@@ -78,7 +78,7 @@ function server_apache() {
             sudo chown www-data:www-data -R /var/www
             sudo chown root:root /etc/apache2/ports.conf
 
-            # Agrega al usuario al grupo www-data
+            # Agrega el usuario al grupo www-data
             echo -e "$verde Añadiendo el usuario al grupo$rojo www-data"
             sudo adduser $mi_usuario www-data
         }
@@ -90,18 +90,22 @@ function server_apache() {
         if [ $input = 's' ] || [ $input = 'S' ]
         then
             generar_www
-        fi 2>> /dev/null
+        else
+            echo -e "$verde No se genera la estructura predefinida y automática"
+        fi
 
         # Generar enlaces (desde ~/web a /var/www)
         function enlaces() {
             clear
-            echo -e "$verde Puedes generar un enlace en tu home ~/web hacia /var/www/"
+            echo -e "$verde Puedes generar un enlace en tu home ~/web hacia /var/www/html"
             read -p " ¿Quieres generar el enlace? s/N → " input
             if [ $input = 's' ] || [ $input = 'S' ]
             then
-                sudo ln -s /var/www/ /home/$mi_usuario/web
+                sudo ln -s /var/www/html/ /home/$mi_usuario/web
                 sudo chown -R $mi_usuario:www-data /home/$mi_usuario/web
-            fi 2>> /dev/null
+            else
+                echo -e "$verde No se crea enlace desde ~/web a /var/www/html"
+            fi
 
             clear
             echo -e "$verde Puedes crear un directorio para repositorios GIT en tu directorio personal"
@@ -111,9 +115,11 @@ function server_apache() {
             if [ $input = 's' ] || [ $input = 'S' ]
             then
                 mkdir ~/GIT 2>> /dev/null && echo -e "$verde Se ha creado el directorio ~/GIT" || echo -e "$verde No se ha creado el directorio ~/GIT"
-                sudo ln -s /home/$mi_usuario/GIT /var/www/Publico/GIT
+                sudo ln -s /home/$mi_usuario/GIT /var/www/html/Publico/GIT
                 sudo chown -R $mi_usuario:www-data /home/$mi_usuario/GIT
-            fi 2>> /dev/null
+            else
+                echo -e "$verde No se crea enlaces ni directorio ~/GIT"
+            fi
         }
 
         enlaces
@@ -122,9 +128,9 @@ function server_apache() {
         echo -e "$verde Asignando permisos"
         sudo chmod 775 -R /var/www/*
         sudo chmod 700 /var/www/.htpasswd
-        sudo chmod 700 /var/www/Privado/.htaccess
-        sudo chmod 700 /var/www/Publico/.htaccess
-        sudo chmod 700 /var/www/Privado/CMS/.htaccess
+        sudo chmod 700 /var/www/html/Privado/.htaccess
+        sudo chmod 700 /var/www/html/Publico/.htaccess
+        sudo chmod 700 /var/www/html/Privado/CMS/.htaccess
         sudo chmod 755 /etc/apache2/ports.conf /etc/apache2/
         sudo chmod 755 -R /etc/apache2/sites-available /etc/apache2/sites-enabled
 
@@ -148,7 +154,9 @@ function server_apache() {
         if [ $input = 's' ] || [ $input = 'S' ]
         then
             activar_hosts
-        fi 2>> /dev/null
+        else
+            echo -e "$verde No se añade nada a /etc/hosts"
+        fi
     }
 
     instalar_apache
