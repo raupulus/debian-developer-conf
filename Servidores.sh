@@ -62,8 +62,8 @@ function server_apache() {
             echo -e "$verde Copiando archivos de configuración dentro de /etc/apache2"
             sudo cp -R ./Apache2/etc/apache2/* /etc/apache2/
 
-            # Crear archivo de usuarios con permisos para directorios restringidos
-            echo -e "$verde Creando usuarios con permisos en apache"
+            # Crear archivo de usuario con permisos para directorios restringidos
+            echo -e "$verde Creando usuario con permisos en apache"
             sudo rm /var/www/.htpasswd 2>> /dev/null
             while [ -z $input_user ]
             do
