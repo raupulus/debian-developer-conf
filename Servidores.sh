@@ -28,19 +28,19 @@ function server_apache() {
 
     function instalar_apache() {
         echo -e "$verde Instalando Apache$rojo 2$gris"
-        sudo apt install -y apache2
-        sudo apt install -y libapache2-mod-perl2
-        sudo apt install -y libapache2-mod-php
-        sudo apt install -y libapache2-mod-python
+        sudo apt install -y apache2 >> /dev/null 2>> /dev/null
+        sudo apt install -y libapache2-mod-perl2 >> /dev/null 2>> /dev/null
+        sudo apt install -y libapache2-mod-php >> /dev/null 2>> /dev/null
+        sudo apt install -y libapache2-mod-python >> /dev/null 2>> /dev/null
     }
 
     function configurar_apache() {
         echo -e "$verde Preparando configuracion de$rojo Apache 2$gris"
 
-        echo -e "$verde Activando módulos$gris"
+        echo -e "$verde Activando módulos$red"
         sudo a2enmod rewrite
 
-        echo -e "$verde Desactivando módulos"
+        echo -e "$verde Desactivando módulos$red"
 
     }
 
