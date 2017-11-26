@@ -49,7 +49,10 @@ function server_apache() {
         echo -e "$verde Personalizando$rojo Apache 2$gris"
         function generar_www() {
             mi_usuario=`whoami`
+
             # ¿Borrar contenido de /var/www?
+            sudo rm -R /var/www
+            sudmo mkdir -p /var/www/html
 
             # Copia todo el contenido WEB a /var/www
             echo -e "$verde Copiando contenido dentro de /var/www"
