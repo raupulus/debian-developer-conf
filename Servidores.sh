@@ -41,7 +41,7 @@ function server_apache() {
         sudo a2enmod rewrite
 
         echo -e "$verde Desactivando módulos$red"
-
+        sudo a2dismod php5
     }
 
     function personalizar_apache() {
