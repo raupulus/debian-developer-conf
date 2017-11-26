@@ -135,6 +135,7 @@ function server_apache() {
         sudo chmod 755 -R /etc/apache2/sites-available /etc/apache2/sites-enabled
 
         # Habilita Sitios Virtuales (VirtualHost)
+        sudo a2ensite default.conf
         sudo a2ensite publico.conf
         sudo a2ensite privado.conf
 
