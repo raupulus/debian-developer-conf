@@ -28,7 +28,7 @@
             <ul>
                 <li>
                     <a href="
-                    <?= 'http://'.$_SERVER['SERVER_ADDR'].'Publico'; ?>"
+                    <?= 'http://publico.local'; ?>"
                      title="Sitio Público">
                         Sitio Público
                     </a>
@@ -36,7 +36,7 @@
 
                  <li>
                     <a href="
-                    <?= 'http://'.$_SERVER['SERVER_ADDR'].'Privado'; ?>"
+                    <?= 'http://privado.local'; ?>"
                     title="Sitio Privado">
                         Sitio Privado
                     </a>
