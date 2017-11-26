@@ -10,8 +10,8 @@
     <head>
         <meta charset="utf-8">
         <title>Servidor WEB Apache2 en localhost</title>
-        <meta name="description" content="Cambiar imagen según el día de la semana"/>
-        <meta name="keywords" content="imagen, cambiar imagen, programa, script, php, ejemplo, plantilla, programación, Raúl Caro Pastorino, Fryntiz"/>
+        <meta name="description" content="Servidor WEB Apache2 en localhost"/>
+        <meta name="keywords" content="programa, script, php, programación, Raúl Caro Pastorino, Fryntiz"/>
         <meta name="author" content="Raúl Caro Pastorino"/>
         <link rel="shortcut icon" href="./favicon.ico"/>
         <link rel="stylesheet" href="./styles.css"/>
