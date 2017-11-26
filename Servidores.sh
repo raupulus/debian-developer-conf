@@ -125,6 +125,13 @@ function server_apache() {
         sudo chmod 700 /var/www/Privado/CMS/.htaccess
         sudo chmod 755 /etc/apache2/ports.conf /etc/apache2/
         sudo chmod 755 -R /etc/apache2/sites-available /etc/apache2/sites-enabled
+
+        # Habilita Sitios Virtuales (VirtualHost)
+        sudo a2ensite publico.conf
+        sudo a2ensite privado.conf
+
+        # Deshabilita Sitios Virtuales (VirtualHost)
+        sudo a2dissite 000-default.conf
     }
 
     instalar_apache
