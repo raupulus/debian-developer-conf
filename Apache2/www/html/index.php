@@ -14,6 +14,7 @@
         <meta name="keywords" content="programa, script, php, programación, Raúl Caro Pastorino, Fryntiz"/>
         <meta name="author" content="Raúl Caro Pastorino"/>
         <link rel="shortcut icon" href="./favicon.ico"/>
+        <link rel="shortcut icon" href="./favicon.png"/>
         <link rel="stylesheet" href="./styles.css"/>
         <script src="./scripts.js"></script>
     </head>
