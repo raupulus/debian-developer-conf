@@ -74,14 +74,6 @@ function server_apache() {
             sudo chown www-data:www-data -R /var/www
             sudo chown root:root /etc/apache2/ports.conf
 
-            # Cambia los permisos
-            echo -e "$verde Asignando permisos"
-            sudo chmod 775 -R /var/www/*
-            sudo chmod 700 /var/www/.htpasswd
-            sudo chmod 700 /var/www/html/.htaccess
-            sudo chmod 755 /etc/apache2/ports.conf /etc/apache2/
-            sudo chmod 755 -R /etc/apache2/sites-available /etc/apache2/sites-enabled
-
             # Agrega al usuario al grupo www-data
             echo -e "$verde Añadiendo el usuario al grupo$rojo www-data"
             sudo adduser $mi_usuario www-data
@@ -104,6 +96,7 @@ function server_apache() {
             if [ $input = 's' ] || [ $input = 'S' ]
             then
                 ln -s /var/www/html ~/web
+                sudo chown -R $mi_usuario:www-data /home/$mi_usuario/web
             fi
 
             clear
@@ -114,11 +107,22 @@ function server_apache() {
             if [ $input = 's' ] || [ $input = 'S' ]
             then
                 mkdir ~/GIT 2>> /dev/null && echo -e "$verde Se ha creado el directorio ~/GIT" || echo -e "$verde No se ha creado el directorio ~/GIT"
-                ln -s ~/GIT /var/www/html/Publico/GIT
+                sudo ln -s ~/GIT /var/www/html/Publico/GIT
+                sudo chown -R $mi_usuario:www-data /home/$mi_usuario/GIT
             fi
         }
 
         enlaces
+
+        # Cambia los permisos
+        echo -e "$verde Asignando permisos"
+        sudo chmod 775 -R /var/www/*
+        sudo chmod 700 /var/www/.htpasswd
+        sudo chmod 700 /var/www/html/Privado/.htaccess
+        sudo chmod 700 /var/www/html/Publico/.htaccess
+        sudo chmod 700 /var/www/html/Privado/CMS/.htaccess
+        sudo chmod 755 /etc/apache2/ports.conf /etc/apache2/
+        sudo chmod 755 -R /etc/apache2/sites-available /etc/apache2/sites-enabled
     }
 
     instalar_apache
