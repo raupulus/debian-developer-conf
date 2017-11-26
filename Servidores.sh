@@ -89,7 +89,7 @@ function server_apache() {
         if [ $input = 's' ] || [ $input = 'S' ]
         then
             generar_www
-        fi
+        fi 2>> /dev/null
 
         # Generar enlaces (desde ~/web a /var/www)
         function enlaces() {
@@ -100,7 +100,7 @@ function server_apache() {
             then
                 sudo ln -s /var/www/ /home/$mi_usuario/web
                 sudo chown -R $mi_usuario:www-data /home/$mi_usuario/web
-            fi
+            fi 2>> /dev/null
 
             clear
             echo -e "$verde Puedes crear un directorio para repositorios GIT en tu directorio personal"
@@ -216,8 +216,12 @@ function server_php() {
                     wget --show-progress https://git.io/psysh -O $DIR_SCRIPT/TMP/psysh && break
                 done
 
+                for (( i=1; i<=$REINTENTOS; i++ ))
+                do
+                    rm $DIR_SCRIPT/TMP/ 2>> /dev/null
+                     && break
+                done
 
-                wget --show-progress https://git.io/psysh -O $DIR_SCRIPT/TMP/psysh
             }
 
             function instalar_psysh() {
