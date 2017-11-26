@@ -27,17 +27,13 @@
         <div id="cajacontenido">
             <ul>
                 <li>
-                    <a href="
-                    <?= 'http://publico.local'; ?>"
-                     title="Sitio Público">
+                    <a href="http://publico.local" title="Sitio Público">
                         Sitio Público
                     </a>
                  </li>
 
                  <li>
-                    <a href="
-                    <?= 'http://privado.local'; ?>"
-                    title="Sitio Privado">
+                    <a href="http://privado.local" title="Sitio Privado">
                         Sitio Privado
                     </a>
                 </li>
