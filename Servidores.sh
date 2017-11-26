@@ -29,6 +29,9 @@ function server_apache() {
     function instalar_apache() {
         echo -e "$verde Instalando Apache$rojo 2$gris"
         sudo apt install -y apache2
+        sudo apt install -y libapache2-mod-perl2
+        sudo apt install -y libapache2-mod-php
+        sudo apt install -y libapache2-mod-python
     }
 
     function configurar_apache() {
@@ -45,6 +48,7 @@ function server_apache() {
         clear
         echo -e "$verde Personalizando$rojo Apache 2$gris"
         function generar_www() {
+            mi_usuario=`whoami`
             # ¿Borrar contenido de /var/www?
 
             # Copia todo el contenido WEB a /var/www
@@ -60,7 +64,7 @@ function server_apache() {
             sudo rm /var/www/.htpasswd 2>> /dev/null
             while [ -z $input_user ]
             do
-                read -p "Introduce el nombre de usuario para el sitio privado → " input_user
+                read -p "Nombre de usuario para acceder al sitio web privado → " input_user
             done
             echo -e "$verde Introduce la contraseña para el sitio privado:$rojo"
             sudo htpasswd -c /var/www/.htpasswd $input_user
@@ -80,7 +84,6 @@ function server_apache() {
 
             # Agrega al usuario al grupo www-data
             echo -e "$verde Añadiendo el usuario al grupo$rojo www-data"
-            mi_usuario=`whoami`
             sudo adduser $mi_usuario www-data
         }
 
@@ -95,12 +98,27 @@ function server_apache() {
 
         # Generar enlaces (desde ~/web a /var/www)
         function enlaces() {
-            echo -e "$verde Puedes generar un enlace en tu home hacia /var/www/"
+            clear
+            echo -e "$verde Puedes generar un enlace en tu home ~/web hacia /var/www/"
             read -p " ¿Quieres generar el enlace? s/N → " input
+            if [ $input = 's' ] || [ $input = 'S' ]
+            then
+                ln -s /var/www/html ~/web
+            fi
+
+            clear
+            echo -e "$verde Puedes crear un directorio para repositorios GIT en tu directorio personal"
+            echo -e "$verde Una vez creado se añadirá un enlace al servidor web"
+            echo -e "$verde Este será desde el servidor /var/www/html/GIT a ~/GIT$rojo"
+            read -p " ¿Quieres crear el directorio y generar el enlace? s/N → " input
+            if [ $input = 's' ] || [ $input = 'S' ]
+            then
+                mkdir ~/GIT 2>> /dev/null && echo -e "$verde Se ha creado el directorio ~/GIT" || echo -e "$verde No se ha creado el directorio ~/GIT"
+                ln -s ~/GIT /var/www/html/Publico/GIT
+            fi
         }
 
-
-
+        enlaces
     }
 
     instalar_apache
