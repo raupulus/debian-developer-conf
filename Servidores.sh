@@ -51,9 +51,16 @@ function server_apache() {
         function generar_www() {
             mi_usuario=`whoami`
 
-            # ¿Borrar contenido de /var/www?
+            # Borrar contenido de /var/www
             sudo systemctl stop apache2
-            sudo rm -R /var/www/*
+            echo -e "$verde Cuidado, esto puede$rojo BORRAR$verde algo valioso"
+            read -p " ¿Quieres borrar todo el directorio /var/www/? s/N → " input
+            if [ $input = 's' ] || [ $input = 'S' ]
+            then
+                sudo rm -R /var/www/*
+            else
+                echo -e "$verde No se borra /var/www$amarillo"
+            fi
 
             # Copia todo el contenido WEB a /var/www
             echo -e "$verde Copiando contenido dentro de /var/www"
