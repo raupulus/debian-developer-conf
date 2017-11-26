@@ -51,12 +51,11 @@ function server_apache() {
             mi_usuario=`whoami`
 
             # ¿Borrar contenido de /var/www?
-            sudo rm -R /var/www
-            sudmo mkdir -p /var/www/html
+            sudo rm -R /var/www/*
 
             # Copia todo el contenido WEB a /var/www
             echo -e "$verde Copiando contenido dentro de /var/www"
-            sudo cp -R ./Apache2/www/* /var/www/html
+            sudo cp -R ./Apache2/www/* /var/www/
 
             # Copia todo el contenido de configuración a /etc/apache2
             echo -e "$verde Copiando archivos de configuración dentro de /etc/apache2"
@@ -98,7 +97,7 @@ function server_apache() {
             read -p " ¿Quieres generar el enlace? s/N → " input
             if [ $input = 's' ] || [ $input = 'S' ]
             then
-                sudo ln -s /var/www/html /home/$mi_usuario/web
+                sudo ln -s /var/www/ /home/$mi_usuario/web
                 sudo chown -R $mi_usuario:www-data /home/$mi_usuario/web
             fi
 
@@ -110,7 +109,7 @@ function server_apache() {
             if [ $input = 's' ] || [ $input = 'S' ]
             then
                 mkdir ~/GIT 2>> /dev/null && echo -e "$verde Se ha creado el directorio ~/GIT" || echo -e "$verde No se ha creado el directorio ~/GIT"
-                sudo ln -s /home/$mi_usuario/GIT /var/www/html/Publico/GIT
+                sudo ln -s /home/$mi_usuario/GIT /var/www/Publico/GIT
                 sudo chown -R $mi_usuario:www-data /home/$mi_usuario/GIT
             fi
         }
@@ -121,9 +120,9 @@ function server_apache() {
         echo -e "$verde Asignando permisos"
         sudo chmod 775 -R /var/www/*
         sudo chmod 700 /var/www/.htpasswd
-        sudo chmod 700 /var/www/html/Privado/.htaccess
-        sudo chmod 700 /var/www/html/Publico/.htaccess
-        sudo chmod 700 /var/www/html/Privado/CMS/.htaccess
+        sudo chmod 700 /var/www/Privado/.htaccess
+        sudo chmod 700 /var/www/Publico/.htaccess
+        sudo chmod 700 /var/www/Privado/CMS/.htaccess
         sudo chmod 755 /etc/apache2/ports.conf /etc/apache2/
         sudo chmod 755 -R /etc/apache2/sites-available /etc/apache2/sites-enabled
     }
