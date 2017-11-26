@@ -216,18 +216,23 @@ function server_php() {
                     wget --show-progress https://git.io/psysh -O $DIR_SCRIPT/TMP/psysh && break
                 done
 
+                # Manual
                 for (( i=1; i<=$REINTENTOS; i++ ))
                 do
-                    rm $DIR_SCRIPT/TMP/ 2>> /dev/null
-                     && break
+                    rm $DIR_SCRIPT/TMP/php_manual.sqlite 2>> /dev/null
+                    wget --show-progress -q http://psysh.org/manual/es/php_manual.sqlite -O $DIR_SCRIPT/TMP/psysh/php_manual.sqlite && break
                 done
-
             }
 
             function instalar_psysh() {
                 echo -e "$verde Instalando Intérprete$rojo PsySH$amarillo"
                 cp $DIR_SCRIPT/TMP/psysh ~/.local/bin/psysh
                 chmod +x ~/.local/bin/psysh
+
+                # Manual
+                echo -e "$verde Instalando manual para$rojo PsySH$amarillo"
+                mkdir -p ~/.local/share/psysh 2>> /dev/null
+                cp $DIR_SCRIPT/TMP/php_manual.sqlite ~/.local/share/psysh/php_manual.sqlite
             }
 
             if [ -f ~/.local/bin/psysh ]
