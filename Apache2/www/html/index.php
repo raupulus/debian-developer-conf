@@ -25,16 +25,22 @@
             <h2 id="subtitulo">Elige a que lugar del servidor acceder</h2>
         </div>
 
+<?php $direccion = $_SERVER['SERVER_ADDR'] ?? 'localhost'; ?>
+
         <div id="cajacontenido">
             <ul>
                 <li>
-                    <a href="http://publico.local" title="Sitio Público">
+                    <a href="
+                    <?= 'http://'.$direccion.'/Publico'; ?>"
+                     title="Sitio Público">
                         Sitio Público
                     </a>
                  </li>
 
                  <li>
-                    <a href="http://privado.local" title="Sitio Privado">
+                    <a href="
+                    <?= 'http://'.$direccion.'/Privado'; ?>"
+                    title="Sitio Privado">
                         Sitio Privado
                     </a>
                 </li>
