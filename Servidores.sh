@@ -210,47 +210,31 @@ function server_php() {
                 cp $DIR_SCRIPT/TMP/psysh ~/.local/bin/psysh
                 chmod +x ~/.local/bin/psysh
             }
-        }
-        if [ -f ~/.local/bin/psysh ]
-        then
-            echo -e "$verde Ya esta$rojo psysh$verde instalado en el equipo, omitiendo paso$gris"
-        else
-            if [ -f $DIR_SCRIPT/TMP/psysh ]
+
+            if [ -f ~/.local/bin/psysh ]
             then
-                instalar_psysh
+                echo -e "$verde Ya esta$rojo psysh$verde instalado en el equipo, omitiendo paso$gris"
             else
-                descargar_psysh
-                instalar_psysh
+                if [ -f $DIR_SCRIPT/TMP/psysh ]
+                then
+                    instalar_psysh
+                else
+                    descargar_psysh
+                    instalar_psysh
+                fi
+
+                # Si falla la instalación se rellama la función tras limpiar
+                if [ ! -f ~/.local/bin/psysh ]
+                then
+                    rm -f $DIR_SCRIPT/TMP/psysh
+                    descargar_psysh
+                    instalar_psysh
+                fi
             fi
+        }
 
-            # Si falla la instalación se rellama la función tras limpiar
-            if [ ! -f ~/.local/bin/psysh ]
-            then
-                rm -f $DIR_SCRIPT/TMP/psysh
-                descargar_psysh
-                instalar_psysh
-            fi
-        fi
-
-
-        # TODO → Implementar control si fallan las descargas en "psysh
-        # Intérprete interactivo de PHP → psysh
-        if [ ! -f ~/.local/bin/psysh ]
-        then
-            echo -e "$verde Instalando Intérprete$rojo PsySH$amarillo"
-            wget --show-progress https://git.io/psysh  -O ~/.local/bin/psysh
-            chmod +x ~/.local/bin/psysh
-        fi
-
-        # Instalar manual para psysh funciona así → doc nombre_función
-        if [ ! -f ~/local/share/psysh/php_manual.sqlite ]
-        then
-            echo -e "$verde Instalando manual para$rojo PsySH$amarillo"
-            mkdir -p ~/.local/share/psysh 2>> /dev/null
-            wget --show-progress -q http://psysh.org/manual/es/php_manual.sqlite -O ~/.local/share/psysh/php_manual.sqlite
-        fi
+        psysh
     }
-
     # Preparar archivo con parámetros para xdebug
     echo 'zend_extension=xdebug.so
     xdebug.remote_enable=1
