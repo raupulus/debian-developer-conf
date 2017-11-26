@@ -313,7 +313,8 @@ function server_sql() {
 }
 
 function instalar_servidores() {
-    sudo apt update
+    echo -e "$verde Se actualizará primero las listas de repositorios"
+    sudo apt update >> /dev/null 2>> /dev/null
     server_apache
     server_php
     server_sql
