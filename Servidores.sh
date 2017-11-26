@@ -133,6 +133,15 @@ function server_apache() {
 
         # Deshabilita Sitios Virtuales (VirtualHost)
         sudo a2dissite 000-default.conf
+
+        function activar_hosts() {
+            echo -e "$verde Añadiendo Sitios Virtuales$amarillo"
+            echo "127.0.0.1 privado" | sudo tee -a /etc/hosts
+            echo "127.0.0.1 privado.local" | sudo tee -a /etc/hosts
+            echo "127.0.0.1 p.local" | sudo tee -a /etc/hosts
+            echo "127.0.0.1 publico" | sudo tee -a /etc/hosts
+            echo "127.0.0.1 publico.local" | sudo tee -a /etc/hosts
+        }
     }
 
     instalar_apache
