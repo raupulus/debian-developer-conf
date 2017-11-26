@@ -28,7 +28,7 @@ DIR_SCRIPT=`echo $PWD`
 function server_apache() {
 
     function instalar_apache() {
-        echo -e "$verde Instalando Apache$rojo 2$gris"
+        echo -e "$verde Instalando$rojo Apache2$gris"
         sudo apt install -y apache2 >> /dev/null 2>> /dev/null
         sudo apt install -y libapache2-mod-perl2 >> /dev/null 2>> /dev/null
         sudo apt install -y libapache2-mod-php >> /dev/null 2>> /dev/null
@@ -36,7 +36,7 @@ function server_apache() {
     }
 
     function configurar_apache() {
-        echo -e "$verde Preparando configuracion de$rojo Apache 2$gris"
+        echo -e "$verde Preparando configuracion de$rojo Apache2$gris"
 
         echo -e "$verde Activando módulos$red"
         sudo a2enmod rewrite
@@ -47,11 +47,12 @@ function server_apache() {
 
     function personalizar_apache() {
         clear
-        echo -e "$verde Personalizando$rojo Apache 2$gris"
+        echo -e "$verde Personalizando$rojo Apache2$gris"
         function generar_www() {
             mi_usuario=`whoami`
 
             # ¿Borrar contenido de /var/www?
+            sudo systemctl stop apache2
             sudo rm -R /var/www/*
 
             # Copia todo el contenido WEB a /var/www
