@@ -98,6 +98,13 @@ Todo esto se instalará de forma opcional eligiendo dicha opción en el menú. P
 Se incorporan en la parte servidores instalación para apache2, php, postregsq, mariadb
 
 ### Apache 2
+Se crean 3 servidores virtuales:
+
+- Por defecto escuchando todo, con ruta /var/www/html
+- Público como publico.local, con ruta /var/www/html/Publico
+- Privado como privado.local, con ruta /var/www/html/Privado y contraseña creada/generada en /var/www/.htpasswd
+
+Todos por el puerto estándar, 80
 
 ### PHP
 En este script para seguir rigurosamente la filosofía **Debian** apostando por la seguridad que nos acostumbra y sobre todo la estabilidad la cual es bastante conocida, optamos a seguir siempre con la versión más alta de sus repositorios estables y oficiales libres.
