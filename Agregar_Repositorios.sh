@@ -50,6 +50,10 @@ function agregar_llaves() {
     echo -e "$verde Agregando clave para$rojo Docker$gris"
     sudo apt-key adv --keyserver hkp://p80.pool.sks-keyservers.net:80 --recv-keys F76221572C52609D
 
+    ## Heroku
+    echo -e "$verde Agregando clave para$rojo Heroku$gris"
+    curl -L https://cli-assets.heroku.com/apt/release.key | sudo apt-key add -
+
     # Mi propio repositorio en launchpad
     echo -e "$verde Agregando clave para$rojo Fryntiz Repositorio$gris"
     gpg --keyserver keyserver.ubuntu.com --recv-key B5C6D9592512B8CD && gpg -a --export $PUBKRY | sudo apt-key add -

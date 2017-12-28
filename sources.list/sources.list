@@ -61,6 +61,12 @@ deb http://download.virtualbox.org/virtualbox/debian stretch contrib
 deb https://apt.dockerproject.org/repo debian-stretch main
 
 ########################################################
+##                      HEROKU                        ##
+########################################################
+####curl -L https://cli-assets.heroku.com/apt/release.key | sudo apt-key add -
+sudo add-apt-repository "deb https://cli-assets.heroku.com/branches/stable/apt ./"
+
+########################################################
 ##                     FRYNTIZ                        ##
 ########################################################
 ### Mi propio repositorio en Launchpad
