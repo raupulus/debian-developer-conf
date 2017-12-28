@@ -32,7 +32,13 @@ verde="\033[1;32m"
 
 source Apps/Firefox.sh
 
+configurar_heroku() {
+    echo "Se va a configurar Heroku"
+    heroku login
+}
+
 function instalar_Software_Usuario() {
     echo -e "$verde Preparando para instalar aplicaciones para el usuario"
     firefox_install
+    configurar_heroku
 }
