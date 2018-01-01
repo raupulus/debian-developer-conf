@@ -42,6 +42,9 @@ source "$WORKSCRIPT/apps/vim.sh"
 ###########################
 ##       FUNCIONES       ##
 ###########################
+aplicaciones_usuarios() {
+    echo -e "$VE Instalando Aplicaciones específicas para el usuario $USER$CL"
+}
 
 ###########################
 ##       EJECUCIÓN       ##
