@@ -52,6 +52,7 @@ menuAplicaciones() {
             3)  aplicaciones_usuarios;;  ## Aplicaciones de Usuario
 
             4)  ## Todas las aplicaciones
+                clear
                 echo -e "$VE Instalando todas las aplicaciones$CL"
                 aplicaciones_basicas
                 aplicaciones_extras
