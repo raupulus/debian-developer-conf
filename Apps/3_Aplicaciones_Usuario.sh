@@ -33,13 +33,13 @@ source "$WORKSCRIPT/apps/Firefox.sh"
 ##       FUNCIONES       ##
 ###########################
 configurar_heroku() {
-    echo "Se va a configurar Heroku"
+    echo -e "$VE Se va a configurar Heroku$CL"
     instalarSoftware 'heroku'
     heroku login
 }
 
 aplicaciones_usuarios() {
-    echo -e "$VE Instalando Aplicaciones específicas para el usuario $USER$CL"
+    echo -e "$VE Instalando Aplicaciones específicas para el usuario$RO $USER$CL"
     configurar_heroku
     firefox_instalador
 }
