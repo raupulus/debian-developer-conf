@@ -64,7 +64,7 @@ aplicaciones_basicas() {
         done
 
         if [[ $tmp == true ]]; then
-            instalar_software $s
+            instalarSoftware $s
         fi
     done
 
