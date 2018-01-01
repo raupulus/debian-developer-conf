@@ -31,6 +31,19 @@
 ###########################
 ##       FUNCIONES       ##
 ###########################
+aplicaciones_extras() {
+    echo -e "$VE Instalando Aplicaciones Extras$CL"
+    atom_instalador
+    brackets_instalador
+    dbeaver_instalador
+    firefox_instalador
+    gitkraken_instalador
+    haroopad_instalador
+    ninjaide_instalador
+    pencilProject_instalador
+    vim_Instalador
+    bashit_Instalador
+}
 
 ###########################
 ##       EJECUCIÓN       ##
