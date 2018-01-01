@@ -31,8 +31,47 @@
 ###########################
 ##       FUNCIONES       ##
 ###########################
+software=$(cat Software.lst) #Instala software del S.O.
+
 aplicaciones_basicas() {
     echo -e "$VE Instalando aplicaciones básicas$CL"
+    # Actualizar LIstas
+    echo -e "$VE Actualizando listas de$RO Repositorios$VE (Paciencia)$CL"
+    sudo apt update >> /dev/null 2>> /dev/null
+
+    # Repara errores de dependencias rotas que pudiesen haber
+    echo -e "$VE Comprobando estado del$RO Gestor de paquetes$VE (Paciencia)$CL"
+    sudo apt --fix-broken install -y >> /dev/null 2>> /dev/null
+    sudo apt install -f -y >> /dev/null 2>> /dev/null
+
+    # Instalando todo el software desde "Software.lst
+    echo -e "$VE Instalando Software adicional$CL"
+    # La siguiente variable guarda toda la lista de paquetes desde DPKG
+    lista_todos_paquetes=${dpkg-query -W -f='${Installed-Size} ${Package}\n' | sort -n | cut -d" " -f2}
+
+    # Comprueba si el software está instalado y en caso contrario instala
+    for s in $software
+    do
+        tmp=true  # Comprueba si necesita instalarse (true)
+
+        for x in $lista_todos_paquetes
+        do
+            if [ $s == $x ]
+            then
+                echo -e "$RO $s$VE ya estaba instalado"
+                tmp=false
+                break
+            fi
+        done
+
+        if [ $tmp == "true" ]
+        then
+            sudo apt install -y $s >> /dev/null 2>> /dev/null && echo -e "$RO $s$VE instalado correctamente" || echo -e "$RO $s$amarillo No se ha instalado (o no existe con este nombre)$CL"
+        fi
+    done
+
+    sudo apt --fix-broken install 2>> /dev/null
+    sudo apt install -f -y 2>> /dev/null
 }
 
 ###########################
