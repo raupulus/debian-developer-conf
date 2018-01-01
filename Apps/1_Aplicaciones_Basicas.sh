@@ -31,6 +31,9 @@
 ###########################
 ##       FUNCIONES       ##
 ###########################
+aplicaciones_basicas() {
+    echo -e "$VE Instalando aplicaciones básicas$CL"
+}
 
 ###########################
 ##       EJECUCIÓN       ##
