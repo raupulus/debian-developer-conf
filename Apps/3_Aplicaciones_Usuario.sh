@@ -19,17 +19,7 @@
 ############################
 ##     IMPORTACIONES      ##
 ############################
-source "$WORKSCRIPT/apps/Atom_IDE.sh"
-source "$WORKSCRIPT/apps/bashit.sh"
-source "$WORKSCRIPT/apps/Brackets.sh"
-source "$WORKSCRIPT/apps/DBeaver.sh"
 source "$WORKSCRIPT/apps/Firefox.sh"
-source "$WORKSCRIPT/apps/GitKraken.sh"
-source "$WORKSCRIPT/apps/Haroopad.sh"
-source "$WORKSCRIPT/apps/i3wm.sh"
-source "$WORKSCRIPT/apps/Ninja-IDE.sh"
-source "$WORKSCRIPT/apps/Pencil-Project.sh"
-source "$WORKSCRIPT/apps/vim.sh"
 
 ############################
 ##       CONSTANTES       ##
@@ -42,8 +32,16 @@ source "$WORKSCRIPT/apps/vim.sh"
 ###########################
 ##       FUNCIONES       ##
 ###########################
+configurar_heroku() {
+    echo "Se va a configurar Heroku"
+    instalarSoftware 'heroku'
+    heroku login
+}
+
 aplicaciones_usuarios() {
     echo -e "$VE Instalando Aplicaciones específicas para el usuario $USER$CL"
+    configurar_heroku
+    firefox_instalador
 }
 
 ###########################
