@@ -60,7 +60,7 @@ opciones() {
 ##
 instalarSoftware() {
     for programa in $*; do
-        sudo dnf install -y "$programa"
+        sudo apt install -y "$programa"
     done
 }
 
