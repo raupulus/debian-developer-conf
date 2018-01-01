@@ -47,26 +47,15 @@ menuAplicaciones() {
 
         case $entrada in
 
-            1)  ## Aplicaciones Básicas
-                echo "";;
-
-            2)  ## Aplicaciones Extras
-                i3wm_Instalador;;
-
-            3)  ## Aplicaciones de Usuario
-                atom_instalador
-                brackets_instalador
-                dbeaver_instalador
-                firefox_instalador
-                gitkraken_instalador
-                haroopad_instalador
-                ninjaide_instalador
-                pencilProject_instalador
-                vim_Instalador
-                bashit_Instalador;;
+            1)  aplicaciones_basicas;;   ## Aplicaciones Básicas
+            2)  aplicaciones_extras;;    ## Aplicaciones Extras
+            3)  aplicaciones_usuarios;;  ## Aplicaciones de Usuario
 
             4)  ## Todas las aplicaciones
-                echo "";;
+                echo -e "$VE Instalando todas las aplicaciones$CL"
+                aplicaciones_basicas
+                aplicaciones_extras
+                aplicaciones_usuarios;;
 
             0)  ## SALIR
                 clear
