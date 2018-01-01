@@ -44,15 +44,12 @@ USER=$(whoami)   ## Usuario que ejecuta el script
 ############################
 ##     IMPORTACIONES      ##
 ############################
-source 'funciones.sh'
-source 'apps/0_Main.sh'
+source '$WORKSCRIPT/funciones.sh'
+source '$WORKSCRIPT/Apps/0_Main.sh'
 #source 'conf/0_Main.sh'
 #source 'servers/0_Main.sh'
 #source 'Personalizar/0_Main.sh'
 #source ./Agregar_Repositorios.sh
-#source ./Instalar_Software.sh
-#source ./Instalar_Software_Extra.sh
-#source ./Instalar_Software_Usuario.sh
 #source ./Tipografías.sh
 #source ./Instalar_Configuraciones.sh
 #source ./Variables_Entorno.sh
@@ -60,8 +57,6 @@ source 'apps/0_Main.sh'
 #source ./Personalización_GTK.sh
 #source ./Servidores.sh
 #source ./limpiador.sh
-
-
 
 ###########################
 ##       VARIABLES       ##
