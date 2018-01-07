@@ -27,13 +27,7 @@
 
 function brackets_descargar() {
     echo -e "$VE Descargando$RO Brackets$CL"
-
-    REINTENTOS=10
-    for (( i=1; i<=$REINTENTOS; i++ ))
-    do
-        rm "$WORKSCRIPT/TMP/Brackets.deb" 2>> /dev/null
-        wget https://github.com/adobe/brackets/releases/download/release-1.10/Brackets.Release.1.10.64-bit.deb -O $WORKSCRIPT/TMP/Brackets.Release.1.10.64-bit.deb && break
-    done
+    descargar 'Brackets.deb' "https://github.com/adobe/brackets/releases/download/release-1.10/Brackets.Release.1.10.64-bit.deb"
 
     for (( i=1; i<=$REINTENTOS; i++ ))
     do
