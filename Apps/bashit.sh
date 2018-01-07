@@ -42,12 +42,7 @@ bashit_instalador() {
     if [[ -f "$HOME/.nvm/nvm.sh" ]]; then ## Comprobar si ya esta instalado
         echo -e "$VE Ya esta$RO nvm$VE instalado para este usuario, omitiendo paso$CL"
     else
-        REINTENTOS=5
-        echo -e "$VE Descargando nvm$CL"
-        for (( i=1; i<=$REINTENTOS; i++ )); do
-            rm -R ~/.nvm 2>> /dev/null
-            git clone "https://github.com/creationix/nvm.git" "$HOME/.nvm" && "$HOME/.nvm/install.sh" && break
-        done
+        descargarGIT 'Nvm' "https://github.com/creationix/nvm.git" "$HOME/.nvm" && "$HOME/.nvm/install.sh"
     fi
 
     if [[ -f "$HOME/fasd/fasd.1.md" ]]; then  ## Comprobar si ya esta instalado
