@@ -25,51 +25,49 @@
 ##       FUNCIONES       ##
 ###########################
 
-DIR_SCRIPT=`echo $PWD`
-
 function brackets_descargar() {
-    echo -e "$verde Descargando$rojo Brackets$gris"
+    echo -e "$VE Descargando$RO Brackets$CL"
 
     REINTENTOS=10
     for (( i=1; i<=$REINTENTOS; i++ ))
     do
-        rm $DIR_SCRIPT/TMP/Brackets.Release.1.10.64-bit.deb 2>> /dev/null
-        wget https://github.com/adobe/brackets/releases/download/release-1.10/Brackets.Release.1.10.64-bit.deb -O $DIR_SCRIPT/TMP/Brackets.Release.1.10.64-bit.deb && break
+        rm "$WORKSCRIPT/TMP/Brackets.deb" 2>> /dev/null
+        wget https://github.com/adobe/brackets/releases/download/release-1.10/Brackets.Release.1.10.64-bit.deb -O $WORKSCRIPT/TMP/Brackets.Release.1.10.64-bit.deb && break
     done
 
     for (( i=1; i<=$REINTENTOS; i++ ))
     do
-        rm $DIR_SCRIPT/TMP/libgcrypt11_1.5.0-5+deb7u6_amd64.deb 2>> /dev/null
-        wget http://security.debian.org/debian-security/pool/updates/main/libg/libgcrypt11/libgcrypt11_1.5.0-5+deb7u6_amd64.deb -O $DIR_SCRIPT/TMP/libgcrypt11_1.5.0-5+deb7u6_amd64.deb && break
+        rm $WORKSCRIPT/TMP/libgcrypt11_1.5.0-5+deb7u6_amd64.deb 2>> /dev/null
+        wget http://security.debian.org/debian-security/pool/updates/main/libg/libgcrypt11/libgcrypt11_1.5.0-5+deb7u6_amd64.deb -O $WORKSCRIPT/TMP/libgcrypt11_1.5.0-5+deb7u6_amd64.deb && break
     done
 }
 
 function brackets_preconfiguracion() {
-    echo -e "$verde Generando Pre-Configuraciones de$rojo Brackets$gris"
+    echo -e "$VE Generando Pre-Configuraciones de$RO Brackets$CL"
 }
 
 function brackets_instalar() {
-    echo -e "$verde Preparando para instalar$rojo Brackets$gris"
-    sudo dpkg -i $DIR_SCRIPT/TMP/libgcrypt11_1.5.0-5+deb7u6_amd64.deb
+    echo -e "$VE Preparando para instalar$RO Brackets$CL"
+    sudo dpkg -i $WORKSCRIPT/TMP/libgcrypt11_1.5.0-5+deb7u6_amd64.deb
 
-    echo -e "$verde Instalando$rojo Brackets$gris"
-    sudo dpkg -i $DIR_SCRIPT/TMP/Brackets.Release.1.10.64-bit.deb && sudo apt install -f -y
+    echo -e "$VE Instalando$RO Brackets$CL"
+    sudo dpkg -i $WORKSCRIPT/TMP/Brackets.Release.1.10.64-bit.deb && sudo apt install -f -y
 }
 
 function brackets_postconfiguracion() {
-    echo -e "$verde Generando Post-Configuraciones$rojo Brackets$gris"
+    echo -e "$VE Generando Post-Configuraciones$RO Brackets$CL"
 }
 
 function brackets_instalador() {
-    echo -e "$verde Comenzando instalación de$rojo Brackets$gris"
+    echo -e "$VE Comenzando instalación de$RO Brackets$CL"
 
     brackets_preconfiguracion
 
     if [ -f /usr/bin/brackets ]
     then
-        echo -e "$verde Ya esta$rojo Brackets$verde instalado en el equipo, omitiendo paso$gris"
+        echo -e "$VE Ya esta$RO Brackets$VE instalado en el equipo, omitiendo paso$CL"
     else
-        if [ -f $DIR_SCRIPT/TMP/Brackets.Release.1.10.64-bit.deb ]
+        if [ -f $WORKSCRIPT/TMP/Brackets.Release.1.10.64-bit.deb ]
         then
             brackets_instalar
         else
@@ -80,7 +78,7 @@ function brackets_instalador() {
         # Si falla la instalación se rellama la función tras limpiar
         if [ ! -f /usr/bin/brackets ]
         then
-            rm -f $DIR_SCRIPT/TMP/Brackets.Release.1.10.64-bit.deb
+            rm -f $WORKSCRIPT/TMP/Brackets.Release.1.10.64-bit.deb
             brackets_descargar
             brackets_instalar
         fi
