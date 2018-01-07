@@ -26,7 +26,10 @@
 ###########################
 
 bashit_instalador() {
-    if [[ -f "$HOME/.bash_it/bash_it.sh" ]]; then  ## Comprobar si ya esta instalado
+    local paquetes_dependencias = 'rbenv'
+
+    ## Instalar script bash-it desde github solo si no está instalado
+    if [[ -f "$HOME/.bash_it/bash_it.sh" ]]; then
         echo -e "$VE Ya esta$RO Bash-It$VE instalado para este usuario, omitiendo paso$CL"
         bash "$HOME/.bash_it/install.sh" --silent 2>> /dev/null
     else
@@ -58,11 +61,12 @@ bashit_instalador() {
 
     ## Instalando dependencias
     echo -e "$VE Instalando dependencias de$RO Bashit$CL"
-    sudo apt install -y rbenv >> /dev/null 2>> /dev/null
+    instalarSoftware "$paquetes_dependencias"
 
     ## Habilitar todos los plugins
-    ## TOFIX → Este paso solo puede hacerse correctamente cuando usamos /bin/bash
-    plugins_habilitar="alias-completion aws base battery edit-mode-vi explain extract fasd git gif hg java javascript latex less-pretty-cat node nvm postgres projects python rails ruby sshagent ssh subversion xterm dirs nginx plenv pyenv rbenv"
+    local plugins_habilitar="alias-completion aws base battery edit-mode-vi explain extract fasd git gif hg java javascript latex less-pretty-cat node nvm postgres projects python rails ruby sshagent ssh subversion xterm dirs nginx plenv pyenv rbenv"
+
+    local plugins_deshabilitar="chruby chruby-auto z z_autoenv visual-studio-code gh"
 
     if [[ -n "$BASH" ]] && [[ "$BASH" = '/bin/bash' ]]; then
         echo -e "$VE Habilitando todos los plugins para$RO Bashit$CL"
@@ -80,7 +84,9 @@ bashit_instalador() {
 
         ## Asegurar que los plugins conflictivos estén deshabilitados:
         echo -e "$VE Deshabilitando plugins no usados en$RO Bashit$CL"
-        bash-it disable plugin chruby chruby-auto z z_autoenv visual-studio-code gh
+        for p in $plugins_deshabilitar; do
+            bash-it disable plugin "$p"
+        done
     else
         echo -e "$VE Para habilitar los$RO plugins de BASH$VE ejecuta este scripts desde$RO bash$CL"
     fi
