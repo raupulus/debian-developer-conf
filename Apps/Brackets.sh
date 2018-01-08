@@ -26,14 +26,9 @@
 ###########################
 
 function brackets_descargar() {
-    echo -e "$VE Descargando$RO Brackets$CL"
     descargar 'Brackets.deb' "https://github.com/adobe/brackets/releases/download/release-1.10/Brackets.Release.1.10.64-bit.deb"
 
-    for (( i=1; i<=$REINTENTOS; i++ ))
-    do
-        rm $WORKSCRIPT/TMP/libgcrypt11_1.5.0-5+deb7u6_amd64.deb 2>> /dev/null
-        wget http://security.debian.org/debian-security/pool/updates/main/libg/libgcrypt11/libgcrypt11_1.5.0-5+deb7u6_amd64.deb -O $WORKSCRIPT/TMP/libgcrypt11_1.5.0-5+deb7u6_amd64.deb && break
-    done
+    descargar 'libgcrypt.deb' "http://security.debian.org/debian-security/pool/updates/main/libg/libgcrypt11/libgcrypt11_1.5.0-5+deb7u6_amd64.deb"
 }
 
 function brackets_preconfiguracion() {
