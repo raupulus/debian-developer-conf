@@ -37,10 +37,10 @@ function brackets_preconfiguracion() {
 
 function brackets_instalar() {
     echo -e "$VE Preparando para instalar$RO Brackets$CL"
-    sudo dpkg -i $WORKSCRIPT/TMP/libgcrypt11_1.5.0-5+deb7u6_amd64.deb
+    sudo dpkg -i "$WORKSCRIPT/tmp/libgcrypt.deb"
 
     echo -e "$VE Instalando$RO Brackets$CL"
-    sudo dpkg -i $WORKSCRIPT/TMP/Brackets.Release.1.10.64-bit.deb && sudo apt install -f -y
+    sudo dpkg -i "$WORKSCRIPT/tmp/Brackets.deb" && sudo apt install -f -y
 }
 
 function brackets_postconfiguracion() {
@@ -52,22 +52,12 @@ function brackets_instalador() {
 
     brackets_preconfiguracion
 
-    if [ -f /usr/bin/brackets ]
-    then
+    if [[ -f '/usr/bin/brackets' ]]; then
         echo -e "$VE Ya esta$RO Brackets$VE instalado en el equipo, omitiendo paso$CL"
     else
-        if [ -f $WORKSCRIPT/TMP/Brackets.Release.1.10.64-bit.deb ]
-        then
+        if [[ -f "$WORKSCRIPT/tmp/Brackets.deb" ]]; then
             brackets_instalar
         else
-            brackets_descargar
-            brackets_instalar
-        fi
-
-        # Si falla la instalación se rellama la función tras limpiar
-        if [ ! -f /usr/bin/brackets ]
-        then
-            rm -f $WORKSCRIPT/TMP/Brackets.Release.1.10.64-bit.deb
             brackets_descargar
             brackets_instalar
         fi
