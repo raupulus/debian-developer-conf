@@ -36,6 +36,7 @@ nitrogen
 nkf
 nodejs
 node-typescript
+pandoc
 pasystray
 pavucontrol
 pep8
