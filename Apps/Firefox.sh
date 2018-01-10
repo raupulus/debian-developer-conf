@@ -26,28 +26,25 @@
 ###########################
 
 # Instalar versiones de Firefox
-function firefox_install() {
+firefox_install() {
 
-    # Si no existen los directorios se crearán
-    if [ ! -d ~/.local/opt ]
-    then
-        mkdir -p ~/.local/opt
+    # Si no existen los directorios dentro del usuario, se crearán
+    if [[ ! -d "$HOME/.local/opt" ]]; then
+        mkdir -p "$HOME/.local/opt"
     fi
 
-    if [ ! -d ~/.local/bin ]
-    then
-        mkdir -p ~/.local/bin
+    if [[ ! -d "$HOME/.local/bin" ]]; then
+        mkdir -p "$HOME/.local/bin"
     fi
 
-    if [ ! -d ~/.local/share/applications ]
-    then
-        mkdir -p ~/.local/share/applications
+    if [[ ! -d "$HOME/.local/share/applications" ]]; then
+        mkdir -p "$HOME/.local/share/applications"
     fi
 
     # Firefox Developer
-    function firefox_developer() {
+    firefox_developer() {
 
-        function instalar() {
+        instalar() {
             # Desempaquetar Firefox-Developer_amd64.tar.bz2
             mkdir -p $DIR_SCRIPT/TMP/Firefox-Developer_amd64 2>> /dev/null
             tar -xjvf $DIR_SCRIPT/TMP/Firefox-Developer_amd64.tar.bz2 -C $DIR_SCRIPT/TMP/Firefox-Developer_amd64 2>> /dev/null
