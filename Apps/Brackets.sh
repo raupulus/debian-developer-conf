@@ -25,17 +25,17 @@
 ##       FUNCIONES       ##
 ###########################
 
-function brackets_descargar() {
+brackets_descargar() {
     descargar 'Brackets.deb' "https://github.com/adobe/brackets/releases/download/release-1.10/Brackets.Release.1.10.64-bit.deb"
 
     descargar 'libgcrypt.deb' "http://security.debian.org/debian-security/pool/updates/main/libg/libgcrypt11/libgcrypt11_1.5.0-5+deb7u6_amd64.deb"
 }
 
-function brackets_preconfiguracion() {
+brackets_preconfiguracion() {
     echo -e "$VE Generando Pre-Configuraciones de$RO Brackets$CL"
 }
 
-function brackets_instalar() {
+brackets_instalar() {
     echo -e "$VE Preparando para instalar$RO Brackets$CL"
     sudo dpkg -i "$WORKSCRIPT/tmp/libgcrypt.deb"
 
@@ -43,11 +43,11 @@ function brackets_instalar() {
     sudo dpkg -i "$WORKSCRIPT/tmp/Brackets.deb" && sudo apt install -f -y
 }
 
-function brackets_postconfiguracion() {
+brackets_postconfiguracion() {
     echo -e "$VE Generando Post-Configuraciones$RO Brackets$CL"
 }
 
-function brackets_instalador() {
+brackets_instalador() {
     echo -e "$VE Comenzando instalación de$RO Brackets$CL"
 
     brackets_preconfiguracion
