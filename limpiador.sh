@@ -1,48 +1,63 @@
-#!/bin/bash
+RO#!/usr/bin/env bash
 # -*- ENCODING: UTF-8 -*-
-#######################################
-# ###     Raúl Caro Pastorino     ### #
-## ##                             ## ##
-### # https://github.com/fryntiz/ # ###
-## ##                             ## ##
-# ###       www.fryntiz.es        ### #
-#######################################
-
-# Este archivo hace una limpieza agresiva de directorios conflictivos con el
-# script. Normalmente se espera no necesitarse usar pero existirá.
-# El uso de este script puede ser perjudicial y debes asumir el riesgo
-
-# TOFIX → Restaurar archivos BACKUP creados con el script antes de eliminar!!!
+##
+## @author     Raúl Caro Pastorino
+## @copyright  Copyright © 2017 Raúl Caro Pastorino
+## @license    https://wwww.gnu.org/licenses/gpl.txt
+## @email      tecnico@fryntiz.es
+## @web        www.fryntiz.es
+## @github     https://github.com/fryntiz
+## @gitlab     https://gitlab.com/fryntiz
+## @twitter    https://twitter.com/fryntiz
+##
+##             Guía de estilos aplicada:
+## @style      https://github.com/fryntiz/Bash_Style_Guide
 
 ############################
-##   Constantes Colores   ##
+##     INSTRUCCIONES      ##
 ############################
-amarillo="\033[1;33m"
-azul="\033[1;34m"
-blanco="\033[1;37m"
-cyan="\033[1;36m"
-gris="\033[0;37m"
-magenta="\033[1;35m"
-rojo="\033[1;31m"
-verde="\033[1;32m"
+## Este archivo hace una limpieza agresiva de directorios conflictivos con el
+## script. Normalmente se espera no necesitarse usar pero existirá.
+## El uso de este script puede ser perjudicial y debes asumir el riesgo
+
+## TOFIX → Restaurar archivos BACKUP creados con el script antes de eliminar!!!
+
+############################
+##       CONSTANTES       ##
+############################
+AM="\033[1;33m"  ## Color Amarillo
+AZ="\033[1;34m"  ## Color Azul
+BL="\033[1;37m"  ## Color Blanco
+CY="\033[1;36m"  ## Color Cyan
+GR="\033[0;37m"  ## Color Gris
+MA="\033[1;35m"  ## Color Magenta
+RO="\033[1;31m"  ## Color Rojo
+VE="\033[1;32m"  ## Color VE
+CL="\e[0m"       ## Limpiar colores
 
 #############################
 ##   Variables Generales   ##
 #############################
 
+############################
+##     IMPORTACIONES      ##
+############################
 
-# Función para comprobar los archivos que están con BACKUP y restaurarlos
-function restaurar_Backups() {
-    echo -e "$verde Preparando para restaurar archivos$gris"
+###########################
+##       FUNCIONES       ##
+###########################
+## Función para comprobar los archivos que están con BACKUP y restaurarlos
+restaurar_Backups() {
+    echo -e "$VE Preparando para restaurar archivos$CL"
 }
 
 
-function limpiar_con_fuerza() {
-    echo -e "$verde Este script es muy peligroso y borrara muchas cosas"
-    echo -e "$verde Asegúrate que es lo que necesitas hacer antes de ejecutarlo"
+limpiar_con_fuerza() {
+    echo -e "$VE Este script es muy peligroso y borrara muchas cosas"
+    echo -e "$VE Asegúrate que es lo que necesitas hacer antes de ejecutarlo"
     read -p "Pulsa una tecla para destruir personalización generada por este script"
 
-    # TODO → Crear una lista con todos los directorios a borrar y otra con todos los archivos
+    ## TODO → Crear una lista con todos los directorios a borrar y otra con todos los archivos
     DIRECTORIOS_BORRAR=""
     ARCHIVOS_BORRAR=""
 
@@ -89,12 +104,6 @@ function limpiar_con_fuerza() {
     rm -R -f ~/.zshrc 2>> /dev/null
 
 
-
-
-    sudo apt purge -y vim
-    sudo apt purge -y atom
-    sudo apt purge -y ninja-ide
-    sudo apt purge -y dbeaver
-    sudo apt purge -y brackets
-    sudo apt purge -y haroopad
+    local paquetes_borrar="vim atom ninja-ide dbeaver brackets haroopad"
+    desinstalar_paquetes "$paquetes_borrar"
 }
