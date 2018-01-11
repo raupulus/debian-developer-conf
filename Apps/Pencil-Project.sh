@@ -24,44 +24,32 @@
 ###########################
 ##       FUNCIONES       ##
 ###########################
-
-
-DIR_SCRIPT=`echo $PWD`
-
-function pencilProject_descargar() {
-    echo -e "$verde Descargando$rojo Pencil Project$gris"
-    REINTENTOS=10
-    for (( i=1; i<=$REINTENTOS; i++ ))
-    do
-        rm $DIR_SCRIPT/TMP/Pencil_Project.deb 2>> /dev/null
-        wget --show-progress http://pencil.evolus.vn/dl/V3.0.4/Pencil_3.0.4_amd64.deb -O $DIR_SCRIPT/TMP/Pencil_Project.deb && break
-    done
+pencilProject_descargar() {
+    descargar 'Pencil_Project.deb' 'http://pencil.evolus.vn/dl/V3.0.4/Pencil_3.0.4_amd64.deb'
 }
 
-function pencilProject_preconfiguracion() {
-    echo -e "$verde Generando Pre-Configuraciones de$rojo Pencil Project$gris"
+pencilProject_preconfiguracion() {
+    echo -e "$VE Generando Pre-Configuraciones de$RO Pencil Project$CL"
 }
 
-function pencilProject_instalar() {
-    echo -e "$verde Instalando$rojo Pencil Project$gris"
-    sudo dpkg -i $DIR_SCRIPT/TMP/Pencil_Project.deb && sudo apt install -f -y
+pencilProject_instalar() {
+    echo -e "$VE Instalando$RO Pencil Project$CL"
+    sudo dpkg -i "$WORKSCRIPT/tmp/Pencil_Project.deb" && sudo apt install -f -y
 }
 
-function pencilProject_postconfiguracion() {
-    echo -e "$verde Generando Post-Configuraciones$rojo Pencil Project$gris"
+pencilProject_postconfiguracion() {
+    echo -e "$VE Generando Post-Configuraciones$RO Pencil Project$CL"
 }
 
-function pencilProject_instalador() {
-    echo -e "$verde Comenzando instalación de$rojo Pencil Project$gris"
+pencilProject_instalador() {
+    echo -e "$VE Comenzando instalación de$RO Pencil Project$CL"
 
     pencilProject_preconfiguracion
 
-    if [ -f /usr/bin/pencil ]
-    then
-        echo -e "$verde Ya esta$rojo Pencil Project$verde instalado en el equipo, omitiendo paso$gris"
+    if [[ -f '/usr/bin/pencil' ]]; then
+        echo -e "$VE Ya esta$RO Pencil Project$VE instalado en el equipo, omitiendo paso$CL"
     else
-        if [ -f $DIR_SCRIPT/TMP/Pencil_Project.deb ]
-        then
+        if [[ -f "$WORKSCRIPT/tmp/Pencil_Project.deb" ]]; then
             pencilProject_instalar
         else
             pencilProject_descargar
@@ -69,9 +57,8 @@ function pencilProject_instalador() {
         fi
 
         # Si falla la instalación se rellama la función tras limpiar
-        if [ ! -f /usr/bin/pencil ]
-        then
-            rm -f $DIR_SCRIPT/TMP/Pencil_Project.deb
+        if [[ ! -f '/usr/bin/pencil' ]]; then
+            rm -f "$WORKSCRIPT/tmp/Pencil_Project.deb"
             pencilProject_descargar
             pencilProject_instalar
         fi
