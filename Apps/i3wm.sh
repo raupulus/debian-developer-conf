@@ -24,3 +24,32 @@
 ###########################
 ##       FUNCIONES       ##
 ###########################
+vim_descargar() {
+    echo ""
+}
+
+vim_preconfiguracion() {
+    echo -e "$VE Generando Pre-Configuraciones de$RO Vim$CL"
+}
+
+vim_instalar() {
+    echo -e "$VE Preparando para instalar$RO Vim$CL"
+}
+
+vim_postconfiguracion() {
+    echo -e "$VE Generando Post-Configuraciones$RO Vim$CL"
+}
+
+vim_instalador() {
+    echo -e "$VE Comenzando instalación de$RO Vim$CL"
+
+    vim_preconfiguracion
+
+    if [[ -f '/usr/bin/vim' ]] || ; then
+        echo -e "$VE Ya esta$RO Vim$VE instalado en el equipo, omitiendo paso$CL"
+    else
+        vim_instalar
+    fi
+
+    vim_postconfiguracion
+}
