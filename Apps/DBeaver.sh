@@ -26,24 +26,24 @@
 ##       FUNCIONES       ##
 ###########################
 
-function dbeaver_descargar() {
+dbeaver_descargar() {
     descargar 'dbeaver.deb' 'https://dbeaver.jkiss.org/files/dbeaver-ce_latest_amd64.deb'
 }
 
-function dbeaver_preconfiguracion() {
+dbeaver_preconfiguracion() {
     echo -e "$VE Generando Pre-Configuraciones de$RO DBeaver$CL"
 }
 
-function dbeaver_instalar() {
+dbeaver_instalar() {
     echo -e "$VE Instalando$RO DBeaver$CL"
     sudo dpkg -i "$WORKSCRIPT/tmp/dbeaver.deb" && sudo apt install -f -y
 }
 
-function dbeaver_postconfiguracion() {
+dbeaver_postconfiguracion() {
     echo -e "$VE Generando Post-Configuraciones$RO DBeaver$CL"
 }
 
-function dbeaver_instalador() {
+dbeaver_instalador() {
     echo -e "$VE Comenzando instalación de$RO DBeaver$CL"
 
     dbeaver_preconfiguracion
