@@ -142,3 +142,14 @@ enlazarHome() {
         ln -s "$WORKSCRIPT/conf/home/$x" "$HOME/$x"
     done
 }
+
+##
+## Recibe uno o más paquetes para eliminarse con dpkg mediante "apt purge -y"
+## @param $* Recibe los paquetes que necesite y los borra
+##
+desinstalar_paquetes() {
+    for x in $*; do
+        echo -e "$rojoBorrando x$gris"
+        sudo apt purge -y x
+    done
+}
