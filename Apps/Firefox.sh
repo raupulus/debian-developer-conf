@@ -61,17 +61,17 @@ firefox_install() {
         }
 
         if [[ -f "$HOME/.local/bin/firefox-developer" ]]; then
-            echo -e "$verde Ya esta$rojo Firefox Developer$verde instalado en el equipo, omitiendo paso$gris"
+            echo -e "$VE Ya esta$RO Firefox Developer$VE instalado en el equipo, omitiendo paso$CL"
         ## Comprueba que no está el archivo descargado en este directorio
         elif [[ ! -f "$WORKSCRIPT/tmp/Firefox-Developer.tar.bz2" ]]; then
             local REINTENTOS=20
 
-            echo -e "$verde Descargando$rojo Firefox Developer$gris"
+            echo -e "$VE Descargando$RO Firefox Developer$CL"
             for (( i=1; i<=$REINTENTOS; i++ )); do
                 rm "$WORKSCRIPT/tmp/Firefox-Developer.tar.bz" 2>> /dev/null
                 wget --show-progress -r -A tar.bz2 'https://download.mozilla.org/?product=firefox-devedition-latest-ssl&os=linux64&lang=es-ES' -O "$WORKSCRIPT/TMP/Firefox-Developer.tar.bz2" && break
             done
-            echo -e "$verde Preparando para instalar$rojo Firefox Developer Edition$gris"
+            echo -e "$VE Preparando para instalar$RO Firefox Developer Edition$CL"
 
             instalar
         else
@@ -79,48 +79,45 @@ firefox_install() {
         fi
     }
 
-    # Firefox Nightly
-    function firefox_nightly() {
+    ## Firefox Nightly
+    firefox_nightly() {
 
-        function instalar() {
-             # Desempaquetar Firefox-Nightly_amd64.tar.bz2
-            mkdir -p $WORKSCRIPT/TMP/Firefox-Nightly_amd64 2>> /dev/null
-            tar -xjvf $WORKSCRIPT/TMP/Firefox-Nightly_amd64.tar.bz2 -C $WORKSCRIPT/TMP/Firefox-Nightly_amd64 2>> /dev/null
+        instalar() {
+            ## Desempaquetar Firefox-Nightly.tar.bz2
+            mkdir -p "$WORKSCRIPT/tmp/Firefox-Nightly" 2>> /dev/null
+            tar -xjvf "$WORKSCRIPT/tmp/Firefox-Nightly.tar.bz2" -C "$WORKSCRIPT/tmp/Firefox-Nightly" 2>> /dev/null
 
-            # Mover archivo extraido a su ubicación final
-            mv $WORKSCRIPT/TMP/Firefox-Nightly_amd64/firefox ~/.local/opt/Firefox_Nightly 2>> /dev/null
+            ## Mover archivo extraido a su ubicación final
+            mv "$WORKSCRIPT/tmp/Firefox-Nightly_amd64/firefox" "$HOME/.local/opt/Firefox_Nightly" 2>> /dev/null
 
-            # Crear enlaces de usuario y permisos de ejecución
-            echo "~/.local/opt/Firefox_Nightly/firefox - P Firefox-Nightly" > ~/.local/bin/firefox-nightly
-            chmod +x ~/.local/bin/firefox-nightly 2>> /dev/null
+            ## Crear enlaces de usuario y permisos de ejecución
+            echo "$HOME/.local/opt/Firefox_Nightly/firefox - P Firefox-Nightly" > "$HOME/.local/bin/firefox-nightly"
+            chmod +x "$HOME/.local/bin/firefox-nightly" 2>> /dev/null
 
-            # Acceso directo Desktop
-            cp -R Accesos_Directos/firefox-nightly.desktop ~/.local/share/applications/
+            ## Acceso directo Desktop
+            cp -R "$WORKSCRIPT/Accesos_Directos/firefox-nightly.desktop" "$HOME/.local/share/applications/"
 
-            # Crear Perfil para Firefox
-            if [ -f ~/.local/opt/Firefox_Nightly/firefox ]
-            then
-                # Crear perfil para Firefox-Developer
-                ~/.local/opt/Firefox_Nightly/firefox -createprofile Firefox-Developer
-                # Crear perfil para Firefox-Nightly
-                ~/.local/opt/Firefox_Nightly/firefox -createprofile Firefox-Nightly
+            ## Crear Perfil para Firefox
+            if [[ -f "$HOME/.local/opt/Firefox_Nightly/firefox" ]]; then
+                ## Crear perfil para Firefox-Developer
+                "$HOME/.local/opt/Firefox_Nightly/firefox" -createprofile 'Firefox-Developer'
+                ## Crear perfil para Firefox-Nightly
+                "$HOME/.local/opt/Firefox_Nightly/firefox" -createprofile 'Firefox-Nightly'
             fi
         }
 
 
-        if [ -f ~/.local/bin/firefox-nightly ]
-        then
-            echo -e "$verde Ya esta$rojo Firefox Nightly$verde instalado en el equipo, omitiendo paso$gris"
-        elif [ ! -f $WORKSCRIPT/TMP/Firefox-Nightly_amd64.tar.bz2 ]
-        then
-            REINTENTOS=3
-            echo -e "$verde Descargando$rojo Firefox Nightly$gris"
-            for (( i=1; i<=$REINTENTOS; i++ ))
-            do
-                rm $WORKSCRIPT/TMP/Firefox-Nightly_amd64.tar.bz2 2>> /dev/null
-                wget --show-progress -r -A tar.bz2 'https://download.mozilla.org/?product=firefox-nightly-latest-l10n-ssl&os=linux64&lang=es-ES' -O $WORKSCRIPT/TMP/Firefox-Nightly_amd64.tar.bz2 && break
+        if [[ -f "$HOME/.local/bin/firefox-nightly" ]]; then
+            echo -e "$VE Ya esta$RO Firefox Nightly$VE instalado en el equipo, omitiendo paso$CL"
+        elif [[ ! -f "$WORKSCRIPT/tmp/Firefox-Nightly.tar.bz2" ]]; then
+            local REINTENTOS=10
+
+            echo -e "$VE Descargando$RO Firefox Nightly$CL"
+            for (( i=1; i<=$REINTENTOS; i++ )); do
+                rm "$WORKSCRIPT/tmp/Firefox-Nightly.tar.bz2" 2>> /dev/null
+                wget --show-progress -r -A tar.bz2 'https://download.mozilla.org/?product=firefox-nightly-latest-l10n-ssl&os=linux64&lang=es-ES' -O "$WORKSCRIPT/tmp/Firefox-Nightly.tar.bz2" && break
             done
-            echo -e "$verde Preparando para instalar$rojo Firefox Nightly$gris"
+            echo -e "$VE Preparando para instalar$RO Firefox Nightly$CL"
 
             instalar
         else
@@ -128,7 +125,7 @@ firefox_install() {
         fi
     }
 
-    # Instalar Versiones de Firefox
+    ## Instalar Versiones de Firefox
     firefox_developer
     firefox_nightly
 }
