@@ -1,76 +1,64 @@
-#!/bin/bash
+#!/usr/bin/env bash
 # -*- ENCODING: UTF-8 -*-
-#######################################
-# ###     Raúl Caro Pastorino     ### #
-## ##                             ## ##
-### # https://github.com/fryntiz/ # ###
-## ##                             ## ##
-# ###       www.fryntiz.es        ### #
-#######################################
+##
+## @author     Raúl Caro Pastorino
+## @copyright  Copyright © 2017 Raúl Caro Pastorino
+## @license    https://wwww.gnu.org/licenses/gpl.txt
+## @email      tecnico@fryntiz.es
+## @web        www.fryntiz.es
+## @github     https://github.com/fryntiz
+## @gitlab     https://gitlab.com/fryntiz
+## @twitter    https://twitter.com/fryntiz
+##
+##             Guía de estilos aplicada:
+## @style      https://github.com/fryntiz/Bash_Style_Guide
 
 ############################
-##   Constantes Colores   ##
+##     INSTRUCCIONES      ##
 ############################
-amarillo="\033[1;33m"
-azul="\033[1;34m"
-blanco="\033[1;37m"
-cyan="\033[1;36m"
-gris="\033[0;37m"
-magenta="\033[1;35m"
-rojo="\033[1;31m"
-verde="\033[1;32m"
 
-#############################
-##   Variables Generales   ##
-#############################
-DIR_SCRIPT=`echo $PWD`
+############################
+##     IMPORTACIONES      ##
+############################
 
-function gitkraken_descargar() {
-    echo -e "$verde Descargando$rojo GitKraken$gris"
-
-    REINTENTOS=10
-    echo -e "$verde Descargando$rojo Gitkraken$gris"
-    for (( i=1; i<=$REINTENTOS; i++ ))
-    do
-        rm $DIR_SCRIPT/TMP/gitkraken-amd64.deb 2>> /dev/null
-        wget --show-progress https://release.gitkraken.com/linux/gitkraken-amd64.deb -O $DIR_SCRIPT/TMP/gitkraken-amd64.deb && break
-    done
+###########################
+##       FUNCIONES       ##
+###########################
+gitkraken_descargar() {
+    descargar "gitkraken.deb" "https://release.gitkraken.com/linux/gitkraken-amd64.deb"
 }
 
-function gitkraken_preconfiguracion() {
-    echo -e "$verde Generando Pre-Configuraciones de$rojo GitKraken$gris"
+gitkraken_preconfiguracion() {
+    echo -e "$VE Generando Pre-Configuraciones de$RO GitKraken$CL"
 }
 
-function gitkraken_instalar() {
-    echo -e "$verde Instalando$rojo GitKraken$gris"
-    sudo dpkg -i $DIR_SCRIPT/TMP/gitkraken-amd64.deb && sudo apt install -f -y
+gitkraken_instalar() {
+    echo -e "$VE Instalando$RO GitKraken$CL"
+    sudo dpkg -i "$WORKSCRIPT/tmp/gitkraken.deb" && sudo apt install -f -y
 }
 
-function gitkraken_postconfiguracion() {
-    echo -e "$verde Generando Post-Configuraciones$rojo GitKraken$gris"
+gitkraken_postconfiguracion() {
+    echo -e "$VE Generando Post-Configuraciones$RO GitKraken$CL"
 }
 
-function gitkraken_instalador() {
-    echo -e "$verde Comenzando instalación de$rojo GitKraken$gris"
+gitkraken_instalador() {
+    echo -e "$VE Comenzando instalación de$RO GitKraken$CL"
 
     gitkraken_preconfiguracion
 
-    if [ -f /usr/bin/gitkraken ]
-    then
-        echo -e "$verde Ya esta$rojo Gitkraken$verde instalado en el equipo, omitiendo paso$gris"
+    if [[ -f '/usr/bin/gitkraken' ]]; then
+        echo -e "$VE Ya esta$RO Gitkraken$VE instalado en el equipo, omitiendo paso$CL"
     else
-        if [ -f $DIR_SCRIPT/TMP/gitkraken-amd64.deb ]
-        then
+        if [[ -f "$WORKSCRIPT/tmp/gitkraken.deb" ]]; then
             gitkraken_instalar
         else
             gitkraken_descargar
             gitkraken_instalar
         fi
 
-        # Si falla la instalación se rellama la función tras limpiar
-        if [ ! -f /usr/bin/gitkraken ]
-        then
-            rm -f $DIR_SCRIPT/TMP/gitkraken-amd64.deb
+        ## Si falla la instalación se rellama la función tras limpiar
+        if [[ ! -f '/usr/bin/gitkraken' ]]; then
+            rm -f "$WORKSCRIPT/tmp/gitkraken.deb"
             gitkraken_descargar
             gitkraken_instalar
         fi
