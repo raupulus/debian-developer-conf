@@ -24,32 +24,32 @@
 ###########################
 ##       FUNCIONES       ##
 ###########################
-vim_descargar() {
+i3wm_descargar() {
     echo ""
 }
 
-vim_preconfiguracion() {
-    echo -e "$VE Generando Pre-Configuraciones de$RO Vim$CL"
+i3wm_preconfiguracion() {
+    echo -e "$VE Generando Pre-Configuraciones de$RO i3wm$CL"
 }
 
-vim_instalar() {
-    echo -e "$VE Preparando para instalar$RO Vim$CL"
+i3wm_instalar() {
+    echo -e "$VE Preparando para instalar$RO i3wm$CL"
 }
 
-vim_postconfiguracion() {
-    echo -e "$VE Generando Post-Configuraciones$RO Vim$CL"
+i3wm_postconfiguracion() {
+    echo -e "$VE Generando Post-Configuraciones$RO i3wm$CL"
 }
 
-vim_instalador() {
-    echo -e "$VE Comenzando instalación de$RO Vim$CL"
+i3wm_instalador() {
+    echo -e "$VE Comenzando instalación de$RO i3wm$CL"
 
-    vim_preconfiguracion
+    i3wm_preconfiguracion
 
-    if [[ -f '/usr/bin/vim' ]] || ; then
-        echo -e "$VE Ya esta$RO Vim$VE instalado en el equipo, omitiendo paso$CL"
+    if [[ -f '/usr/bin/i3wm' ]] || ; then
+        echo -e "$VE Ya esta$RO i3wm$VE instalado en el equipo, omitiendo paso$CL"
     else
-        vim_instalar
+        i3wm_instalar
     fi
 
-    vim_postconfiguracion
+    i3wm_postconfiguracion
 }
