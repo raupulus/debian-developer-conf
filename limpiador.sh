@@ -1,4 +1,4 @@
-RO#!/usr/bin/env bash
+#!/usr/bin/env bash
 # -*- ENCODING: UTF-8 -*-
 ##
 ## @author     Raúl Caro Pastorino
