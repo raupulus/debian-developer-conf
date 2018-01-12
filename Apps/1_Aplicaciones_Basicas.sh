@@ -49,19 +49,16 @@ aplicaciones_basicas() {
 
     ## Comprueba si el software está instalado y en caso contrario instala
     for s in "$WORKSCRIPT/Software.lst"; do
-        local tmp=true  ## Comprueba si necesita instalarse (true)
-
-        for x in $lista_todos_paquetes; do
+        for x in "$lista_todos_paquetes"; do
             if [[ $s = $x ]]; then
                 echo -e "$RO $s$VE ya estaba instalado$CL"
                 tmp=false
                 break
+            else
+                instalarSoftware "$s"
+                break
             fi
         done
-
-        if [[ $tmp = true ]]; then
-            instalarSoftware $s
-        fi
     done
 
     sudo apt --fix-broken install 2>> /dev/null

@@ -19,16 +19,16 @@
 ############################
 ##     IMPORTACIONES      ##
 ############################
-source "$WORKSCRIPT/apps/Atom_IDE.sh"
-source "$WORKSCRIPT/apps/bashit.sh"
-source "$WORKSCRIPT/apps/Brackets.sh"
-source "$WORKSCRIPT/apps/DBeaver.sh"
-source "$WORKSCRIPT/apps/GitKraken.sh"
-source "$WORKSCRIPT/apps/Haroopad.sh"
-source "$WORKSCRIPT/apps/i3wm.sh"
-source "$WORKSCRIPT/apps/Ninja-IDE.sh"
-source "$WORKSCRIPT/apps/Pencil-Project.sh"
-source "$WORKSCRIPT/apps/vim.sh"
+source "$WORKSCRIPT/Apps/Atom_IDE.sh"
+source "$WORKSCRIPT/Apps/bashit.sh"
+source "$WORKSCRIPT/Apps/Brackets.sh"
+source "$WORKSCRIPT/Apps/DBeaver.sh"
+source "$WORKSCRIPT/Apps/GitKraken.sh"
+source "$WORKSCRIPT/Apps/Haroopad.sh"
+source "$WORKSCRIPT/Apps/i3wm.sh"
+source "$WORKSCRIPT/Apps/Ninja-IDE.sh"
+source "$WORKSCRIPT/Apps/Pencil-Project.sh"
+source "$WORKSCRIPT/Apps/vim.sh"
 
 ############################
 ##       CONSTANTES       ##
@@ -42,7 +42,7 @@ source "$WORKSCRIPT/apps/vim.sh"
 ##       FUNCIONES       ##
 ###########################
 aplicaciones_extras() {
-    echo -e "$VE Instalando Aplicaciones Extras$CL"
+    echo -e "$VE Instalando Aplicaciones$RO Extras$CL"
     atom_instalador
     brackets_instalador
     dbeaver_instalador
