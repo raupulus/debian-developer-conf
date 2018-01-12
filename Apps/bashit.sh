@@ -24,23 +24,27 @@
 ###########################
 ##       FUNCIONES       ##
 ###########################
+bashit_descargar() {
+    local REINTENTOS=5
 
-bashit_instalador() {
+    echo -e "$VE Descargando$RO Bash-It$CL"
+    for (( i=1; i<=$REINTENTOS; i++ )); do
+        rm -R ~/.bash_it 2>> /dev/null
+        git clone --depth=1 "https://github.com/Bash-it/bash-it.git" "$HOME/.bash_it" && bash "$HOME/.bash_it/install.sh" --silent && break
+    done
+}
+
+bashit_preconfiguracion() {
     local paquetes_dependencias = 'rbenv'
 
-    ## Instalar script bash-it desde github solo si no está instalado
-    if [[ -f "$HOME/.bash_it/bash_it.sh" ]]; then
-        echo -e "$VE Ya esta$RO Bash-It$VE instalado para este usuario, omitiendo paso$CL"
-        bash "$HOME/.bash_it/install.sh" --silent 2>> /dev/null
-    else
-        REINTENTOS=5
+    ## Instalando dependencias
+    echo -e "$VE Instalando dependencias de$RO Bashit$CL"
+    instalarSoftware "$paquetes_dependencias"
+}
 
-        echo -e "$VE Descargando Bash-It$CL"
-        for (( i=1; i<=$REINTENTOS; i++ )); do
-            rm -R ~/.bash_it 2>> /dev/null
-            git clone --depth=1 "https://github.com/Bash-it/bash-it.git" "$HOME/.bash_it" && bash "$HOME/.bash_it/install.sh" --silent && break
-        done
-    fi
+bashit_instalar() {
+    ## Instalar Bash-It
+    bash "$HOME/.bash_it/install.sh" --silent 2>> /dev/null
 
     ## Instalar "nvm"
     if [[ -f "$HOME/.nvm/nvm.sh" ]]; then ## Comprobar si ya esta instalado
@@ -58,11 +62,9 @@ bashit_instalador() {
         descargarGIT 'fasd' "https://github.com/clvv/fasd" "$HOME/fasd" && cd "$HOME/fasd" && sudo make install
         cd "$WORKSCRIPT"
     fi
+}
 
-    ## Instalando dependencias
-    echo -e "$VE Instalando dependencias de$RO Bashit$CL"
-    instalarSoftware "$paquetes_dependencias"
-
+bashit_postconfiguracion() {
     ## Habilitar todos los plugins
     local plugins_habilitar="alias-completion aws base battery edit-mode-vi explain extract fasd git gif hg java javascript latex less-pretty-cat node nvm postgres projects python rails ruby sshagent ssh subversion xterm dirs nginx plenv pyenv rbenv"
 
@@ -90,4 +92,17 @@ bashit_instalador() {
     else
         echo -e "$VE Para habilitar los$RO plugins de BASH$VE ejecuta este scripts desde$RO bash$CL"
     fi
+}
+
+bashit_instalador() {
+    ## Instalar script bash-it desde github solo si no está instalado
+    if [[ -f "$HOME/.bash_it/bash_it.sh" ]]; then
+        echo -e "$VE Ya esta$RO Bash-It$VE instalado para este usuario, omitiendo paso$CL"
+    else
+        bashit_preconfiguracion
+        bashit_descargar
+        bashit_instalar
+    fi
+
+    bashit_postconfiguracion
 }
