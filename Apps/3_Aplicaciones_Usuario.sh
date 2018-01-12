@@ -19,7 +19,7 @@
 ############################
 ##     IMPORTACIONES      ##
 ############################
-source "$WORKSCRIPT/apps/Firefox.sh"
+source "$WORKSCRIPT/Apps/Firefox.sh"
 
 ############################
 ##       CONSTANTES       ##
@@ -33,7 +33,7 @@ source "$WORKSCRIPT/apps/Firefox.sh"
 ##       FUNCIONES       ##
 ###########################
 configurar_heroku() {
-    echo -e "$VE Se va a configurar Heroku$CL"
+    echo -e "$VE Se va a configurar$RO Heroku$CL"
     instalarSoftware 'heroku'
     heroku login
 }

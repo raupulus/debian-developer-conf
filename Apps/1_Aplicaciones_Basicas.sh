@@ -31,11 +31,7 @@
 ###########################
 ##       FUNCIONES       ##
 ###########################
-
-
 aplicaciones_basicas() {
-    local software=$(cat Software.lst)  ## Instala software del S.O.
-
     echo -e "$VE Instalando aplicaciones básicas$CL"
     ## Actualizar Listas
     echo -e "$VE Actualizando listas de$RO Repositorios$VE (Paciencia)$CL"
@@ -49,10 +45,10 @@ aplicaciones_basicas() {
     ## Instalando todo el software desde "Software.lst
     echo -e "$VE Instalando Software adicional$CL"
     ## La siguiente variable guarda toda la lista de paquetes desde DPKG
-    lista_todos_paquetes=${dpkg-query -W -f='${Installed-Size} ${Package}\n' | sort -n | cut -d" " -f2}
+    local lista_todos_paquetes=${dpkg-query -W -f='${Installed-Size} ${Package}\n' | sort -n | cut -d" " -f2}
 
     ## Comprueba si el software está instalado y en caso contrario instala
-    for s in $software; do
+    for s in "$WORKSCRIPT/Software.lst"; do
         local tmp=true  ## Comprueba si necesita instalarse (true)
 
         for x in $lista_todos_paquetes; do
@@ -63,7 +59,7 @@ aplicaciones_basicas() {
             fi
         done
 
-        if [[ $tmp == true ]]; then
+        if [[ $tmp = true ]]; then
             instalarSoftware $s
         fi
     done

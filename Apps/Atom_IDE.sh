@@ -29,7 +29,7 @@ atom_preconfiguracion() {
     echo ''
     echo -e "$VE Se va a instalar$rojo Atom IDE$CL"
     echo -e "$VE Puedes añadir configuraciones$AM"
-    read -p '¿Quieres configuraciones? y/N → ' input
+    read -p '¿Quieres configuraciones? s/N → ' input
     if [[ $input = 's' ]] ||
        [[ $input = 'S' ]] ||
        [[ $input = 'y' ]] ||
@@ -44,7 +44,7 @@ atom_preconfiguracion() {
 }
 
 atom_postconfiguracion() {
-    echo -e "$VE Añadiendo configuraciones para Atom$CL"
+    echo -e "$VE Añadiendo configuraciones para$RO Atom$CL"
 
     echo -e "$VE Deshabilitando complementos$CL"
     apm disable welcome
