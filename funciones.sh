@@ -65,6 +65,16 @@ instalarSoftware() {
 }
 
 ##
+## Recibe uno o más parámetros con el nombre de los paquetes a instalar
+## @param  $*  String  Nombre de paquetes a instalar
+##
+instalarSoftwareDPKG() {
+    for programa in $*; do
+        sudo dpkg -i "$programa"
+    done
+}
+
+##
 ## Descarga desde el lugar pasado como segundo parámetro y lo guarda con el
 ## nombre del primer parámetro dentro del directorio temporal "tmp" de este
 ## repositorio, quedando excluido del mismo control de versiones.
