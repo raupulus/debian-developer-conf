@@ -92,6 +92,12 @@ bashit_postconfiguracion() {
     else
         echo -e "$VE Para habilitar los$RO plugins de BASH$VE ejecuta este scripts desde$RO bash$CL"
     fi
+
+    ## Crear Backup
+    crearBackup '.bashrc'
+
+    ## Enlazar archivos de este repo
+    enlazarHome '.bashrc'
 }
 
 bashit_instalador() {
