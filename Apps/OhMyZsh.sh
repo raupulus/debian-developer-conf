@@ -46,7 +46,7 @@ ohmyzsh_instalar() {
 ohmyzsh_postconfiguracion() {
     echo -e "$VE Generando Post-Configuraciones$RO ohmyzsh$CL"
 
-    local archivosConfiguracion='.zshrc .tmux.conf'
+    local archivosConfiguracion='.zshrc .tmux.conf powerline dunst'
 
     ## Crear Backup
     crearBackup "$archivosConfiguracion"
