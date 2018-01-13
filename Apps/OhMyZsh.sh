@@ -24,25 +24,14 @@
 ###########################
 ##       FUNCIONES       ##
 ###########################
-
-ohMyZSH() {
-    if [ -f ~/.oh-my-zsh/oh-my-zsh.sh ] #Comprobar si ya esta instalado
-    then
-        echo -e "$verde Ya esta$rojo OhMyZSH$verde instalado para este usuario, omitiendo paso$gris"
-    else
-        REINTENTOS=5
-        echo -e "$verde Descargando OhMyZSH$gris"
-        for (( i=1; i<=$REINTENTOS; i++ ))
-        do
-            ###TOFIX → Reparar script que sale mal: contraseña PAM y error (no continua por eso)
-            rm -R ~/.oh-my-zsh 2>> /dev/null
-            curl -L http://install.ohmyz.sh | sh && break || break
-        done
-    fi
-}
-
 ohmyzsh_descargar() {
-    echo ""
+    local REINTENTOS=5
+    echo -e "$VE Descargando OhMyZSH$CL"
+    for (( i=1; i<=$REINTENTOS; i++ )); do
+        ###TOFIX → Reparar script que sale mal: contraseña PAM y error (no continua por eso), por ello temporalmente siempre hay "break"
+        rm -R "$HOME/.oh-my-zsh" 2>> /dev/null
+        curl -L 'http://install.ohmyz.sh' | sh && break || break
+    done
 }
 
 ohmyzsh_preconfiguracion() {
@@ -51,6 +40,7 @@ ohmyzsh_preconfiguracion() {
 
 ohmyzsh_instalar() {
     echo -e "$VE Preparando para instalar$RO ohmyzsh$CL"
+    ## La instalación en este caso se hace al mismo tiempo de la descarga.
 }
 
 ohmyzsh_postconfiguracion() {
@@ -63,6 +53,11 @@ ohmyzsh_postconfiguracion() {
 
     ## Enlazar archivos de este repo
     enlazarHome "$archivosConfiguracion"
+
+    ## Actualizando repositorio para OhMyZsh
+    cd "$HOME/.oh-my-zsh/"
+    git pull 2>> /dev/null
+    cd "$WORKSCRIPT"
 }
 
 ohmyzsh_instalador() {
@@ -73,6 +68,7 @@ ohmyzsh_instalador() {
     if [[ -f '$HOME/.oh-my-zsh/oh-my-zsh.sh' ]]; then
         echo -e "$VE Ya esta$RO ohmyzsh$VE instalado en el equipo, omitiendo paso$CL"
     else
+        ohmyzsh_descargar
         ohmyzsh_instalar
     fi
 
