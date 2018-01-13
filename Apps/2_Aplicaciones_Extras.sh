@@ -52,6 +52,7 @@ aplicaciones_extras() {
     pencilProject_instalador
     vim_Instalador
     bashit_Instalador
+    ohmyzsh_Instalador
 }
 
 ###########################
