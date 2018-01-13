@@ -40,3 +40,41 @@ ohMyZSH() {
         done
     fi
 }
+
+ohmyzsh_descargar() {
+    echo ""
+}
+
+ohmyzsh_preconfiguracion() {
+    echo -e "$VE Generando Pre-Configuraciones de$RO ohmyzsh$CL"
+}
+
+ohmyzsh_instalar() {
+    echo -e "$VE Preparando para instalar$RO ohmyzsh$CL"
+}
+
+ohmyzsh_postconfiguracion() {
+    echo -e "$VE Generando Post-Configuraciones$RO ohmyzsh$CL"
+
+    local archivosConfiguracion='.zshrc .tmux.conf'
+
+    ## Crear Backup
+    crearBackup "$archivosConfiguracion"
+
+    ## Enlazar archivos de este repo
+    enlazarHome "$archivosConfiguracion"
+}
+
+ohmyzsh_instalador() {
+    echo -e "$VE Comenzando instalación de$RO ohmyzsh$CL"
+
+    ohmyzsh_preconfiguracion
+
+    if [[ -f '$HOME/.oh-my-zsh/oh-my-zsh.sh' ]]; then
+        echo -e "$VE Ya esta$RO ohmyzsh$VE instalado en el equipo, omitiendo paso$CL"
+    else
+        ohmyzsh_instalar
+    fi
+
+    ohmyzsh_postconfiguracion
+}
