@@ -100,6 +100,11 @@ bashit_postconfiguracion() {
 
     ## Enlazar archivos de este repo
     enlazarHome "$archivosConfiguracion"
+
+    ## Actualizando repositorio para Bash-It
+    cd "$HOME/.bash_it/"
+    git pull 2>> /dev/null
+    cd "$WORKSCRIPT"
 }
 
 bashit_instalador() {
