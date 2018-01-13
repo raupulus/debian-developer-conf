@@ -38,6 +38,14 @@ i3wm_instalar() {
 
 i3wm_postconfiguracion() {
     echo -e "$VE Generando Post-Configuraciones$RO i3wm$CL"
+
+    local archivosConfiguracion='.i3'
+
+    ## Crear Backup
+    crearBackup "$archivosConfiguracion"
+
+    ## Enlazar archivos de este repo
+    enlazarHome "$archivosConfiguracion"
 }
 
 i3wm_instalador() {
