@@ -65,6 +65,13 @@ vim_instalar() {
 
 vim_postconfiguracion() {
     echo -e "$VE Generando Post-Configuraciones$RO Vim$CL"
+    local archivosConfiguracion='.vim .vimrc .gvimrc'
+
+    ## Crear Backup
+    crearBackup "$archivosConfiguracion"
+
+    ## Enlazar archivos de este repo
+    enlazarHome "$archivosConfiguracion"
 }
 
 vim_instalador() {
