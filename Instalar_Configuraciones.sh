@@ -24,24 +24,6 @@
 ###########################
 ##       FUNCIONES       ##
 ###########################
-
-#Instala el script de OhMyZSH
-function ohMyZSH() {
-    if [ -f ~/.oh-my-zsh/oh-my-zsh.sh ] #Comprobar si ya esta instalado
-    then
-        echo -e "$verde Ya esta$rojo OhMyZSH$verde instalado para este usuario, omitiendo paso$gris"
-    else
-        REINTENTOS=5
-        echo -e "$verde Descargando OhMyZSH$gris"
-        for (( i=1; i<=$REINTENTOS; i++ ))
-        do
-            ###TOFIX → Reparar script que sale mal: contraseña PAM y error (no continua por eso)
-            rm -R ~/.oh-my-zsh 2>> /dev/null
-            curl -L http://install.ohmyz.sh | sh && break || break
-        done
-    fi
-}
-
 #Funcion para configurar VIM con sus temas y complementos
 function configurar_vim() {
     echo -e "$verde Configurando VIM"
@@ -333,8 +315,6 @@ function tilix_personalizar() {
 
 # Instalar Todas las configuraciones
 function instalar_configuraciones() {
-    bashit
-    ohMyZSH
     permisos
     programas_default
 
