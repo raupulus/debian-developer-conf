@@ -53,7 +53,7 @@ i3wm_instalador() {
 
     i3wm_preconfiguracion
 
-    if [[ -f '/usr/bin/i3wm' ]] || ; then
+    if [[ -f '/usr/bin/i3wm' ]]; then
         echo -e "$VE Ya esta$RO i3wm$VE instalado en el equipo, omitiendo paso$CL"
     else
         i3wm_instalar
