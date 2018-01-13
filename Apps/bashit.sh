@@ -93,11 +93,13 @@ bashit_postconfiguracion() {
         echo -e "$VE Para habilitar los$RO plugins de BASH$VE ejecuta este scripts desde$RO bash$CL"
     fi
 
+    local archivosConfiguracion='.bashrc powerline dunst .dircolors .less .lessfilter .tmux.conf'
+
     ## Crear Backup
-    crearBackup '.bashrc'
+    crearBackup "$archivosConfiguracion"
 
     ## Enlazar archivos de este repo
-    enlazarHome '.bashrc'
+    enlazarHome "$archivosConfiguracion"
 }
 
 bashit_instalador() {
