@@ -39,7 +39,7 @@ atom_preconfiguracion() {
         crearBackup "$HOME/.atom"
 
         echo -e "$VE Añadiendo configuración nueva$CL"
-        enlazarHome "$WORKSCRIPT/conf/home/.atom"
+        enlazarHome ".atom"
     fi
 }
 
