@@ -42,13 +42,13 @@ CL="\e[0m"       ## Limpiar colores
 ##       FUNCIONES       ##
 ###########################
 function agregar_fuentes() {
-    echo "Añadiendo fuentes Tipográficas al sistema"
+    echo -e "$VEAñadiendo$RO fuentes Tipográficas$VE al sistema$CL"
 
     fuentes_repositorios="fonts-powerline fonts-freefont-ttf fonts-hack-ttf fonts-lmodern"
 
     for f in $fuentes_repositorios
     do
-        echo -e "$verde Instalando fuente$magenta →$rojo $f $gris"
+        echo -e "$VE Instalando fuente$magenta →$RO $f $CL"
         sudo apt install -y $f
     done
 
@@ -57,7 +57,7 @@ function agregar_fuentes() {
     do
         if [ -d ./fonts/$f ]
         then
-            echo -e "$verde Instalando fuente$magenta →$rojo $f $gris"
+            echo -e "$VE Instalando fuente$magenta →$RO $f $CL"
             sudo cp -r ./fonts/$f/ /usr/local/share/fonts/
         fi
     done
