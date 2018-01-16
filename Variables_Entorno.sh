@@ -43,5 +43,5 @@ CL="\e[0m"       ## Limpiar colores
 ###########################
 # Importa todas las variables al inicio del sistema Operativo
 function instalar_variables() {
-    echo -e "$verde Instalando variables globales al sistema$gris"
+    echo -e "$VE Instalando$RO Variables Globales$VE al sistema$CL"
 }
