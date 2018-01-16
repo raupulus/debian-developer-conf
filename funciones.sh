@@ -72,6 +72,10 @@ instalarSoftwareDPKG() {
     for programa in $*; do
         sudo dpkg -i "$programa"
     done
+
+    ## Intenta reparar el gestor de paquetes tras instalar, por si hubiese
+    ## habido errores en el proceso de instalación ya que son paquetes externos.
+    sudo apt install -f -y
 }
 
 ##
