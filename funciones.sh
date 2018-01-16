@@ -29,7 +29,7 @@
 crearBackup() {
     ## Crear directorio Backups si no existiera
     if [[ ! -d "$WORKSCRIPT/Backups" ]]; then
-        mkdir $WORKSCRIPT/Backups
+        mkdir "$WORKSCRIPT/Backups"
     fi
 
     for salvando in $*; do
@@ -84,7 +84,7 @@ instalarSoftwareDPKG() {
 descargar() {
     ## Crear directorio Temporal si no existiera
     if [[ ! -d "$WORKSCRIPT/tmp" ]]; then
-        mkdir $WORKSCRIPT/tmp
+        mkdir "$WORKSCRIPT/tmp"
     fi
 
     echo -e "$VE Descargando$RO $1 $CL"
