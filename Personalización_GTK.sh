@@ -41,11 +41,9 @@ CL="\e[0m"       ## Limpiar colores
 ###########################
 ##       FUNCIONES       ##
 ###########################
-
-function configurar_iconos(){
+configurar_iconos() {
     echo -e "$VE Configurando pack de iconos$CL"
-    if [ -f "./Paper_Icon.deb" ]
-    then
+    if [[ -f "$WORKSCRIPT/Paper_Icon.deb" ]];then
         echo -e "$VE Ya esta$RO Paper_Icon.deb$VE descargado, omitiendo paso$CL"
     else
         REINTENTOS=5
@@ -71,45 +69,18 @@ function configurar_cursores(){
 function configurar_temas(){
     echo -e "$VE Configurando temas GTK$CL"
 
-    if [ -f "./Paper_Theme.deb" ]
-    then
-        echo -e "$VE Ya esta$RO Paper_Theme.deb$VE descargado, omitiendo paso$CL"
-    else
-        REINTENTOS=5
-        echo -e "$VE Descargando$RO Paper_Theme.deb$CL"
-        for (( i=1; i<=$REINTENTOS; i++ ))
-        do
-            rm ./Paper_Theme.deb 2>> /dev/null
-            wget "https://snwh.org/paper/download.php?owner=snwh&ppa=pulp&pkg=paper-gtk-theme,16.04" -O Paper_Theme.deb && break
-        done
-        echo -e "$VE Preparando para instalar$RO Iconos Paper_Theme$CL"
-        sudo dpkg -i Paper_Theme.deb && sudo apt install -f -y
-    fi
 
-    # Instalar Flat-Plat
-    if [ -f "./materia-theme-20170605/install.sh" ]
-    then
-        echo -e "$VE Ya esta$RO Flat-Plat$VE descargado, omitiendo paso$CL"
-    else
-        REINTENTOS=5
-        echo -e "$VE Descargando$RO Flat-Plat$CL"
-        for (( i=1; i<=$REINTENTOS; i++ ))
-        do
-            rm -r ./materia-theme-20170605 2>> /dev/null
-            curl -sL https://github.com/nana-4/Flat-Plat/archive/v20170605.tar.gz | tar xz && break
-        done
-        echo -e "$VE Preparando para instalar$RO Tema Flat-Plat$CL"
-        sudo ./materia-theme-20170605/install.sh #2>> /dev/null
-    fi
 
-    #TODO → Establecer Flat-Plat como tema activos
+
+
+    ## TODO → Establecer Flat-Plat como tema activo por defecto
 
     #echo -e "$VE Configurando temas QT$CL"
 }
 
 function configurar_grub() {
     echo -e "$VE Configurando fondo del grub$CL"
-    #Realmente se hace al copiar fondos en la función "configurar_fondos"
+    ## Realmente se hace al copiar fondos en la función "configurar_fondos"
 }
 
 function configurar_fondos {
@@ -119,8 +90,44 @@ function configurar_fondos {
     sudo cp -r ./usr/share/plymouth/themes/softwaves/* /usr/share/plymouth/themes/softwaves/
 }
 
-function personalizar() {
+
+
+instalar_flatplat() {
+    ## Instalar Flat-Plat
+    if [[ -f "$WORKSCRIPT/tmp/Materia_Theme_Flat-Plat/install.sh" ]]; then
+        echo -e "$VE Ya esta$RO Flat-Plat$VE descargado, omitiendo paso$CL"
+
+        ## Actualizar repositorio para Flat-Plat
+        echo -e "$VE Actualizando Repositorio antes de$RO actualizar$CL"
+        cd "$WORKSCRIPT/tmp/Materia_Theme_Flat-Plat/"
+        git pull
+        cd "$WORKSCRIPT"
+    else
+        ## Descargar desde repositorio
+        descargarGIT 'Flat-Plat' 'https://github.com/nana-4/materia-theme.git' "$WORKSCRIPT/tmp/Materia_Theme_Flat-Plat"
+    fi
+
+    ## Instalar Flat-Plat, en este punto debe existir instalador
+    if [[ -f "$WORKSCRIPT/tmp/Materia_Theme_Flat-Plat/install.sh" ]]; then
+        echo -e "$VE Preparando para instalar$RO Tema Flat-Plat$CL"
+        sudo './materia-theme-20170605/install.sh'
+    fi
+}
+
+descargar_material() {
+    descargar 'Paper_Theme.deb' 'https://snwh.org/paper/download.php?owner=snwh&ppa=pulp&pkg=paper-gtk-theme,16.04'
+
+    echo -e "$VE Preparando para instalar$RO Iconos Paper_Theme$CL"
+    instalarSoftwareDPKG 'Paper_Theme.deb'
+}
+
+personalizar() {
     echo -e "$VE Iniciando configuracion de estética general y GTK$CL"
+    descargar_material
+    instalar_flatplat
+
+
+
     configurar_iconos
     configurar_cursores
     configurar_temas
