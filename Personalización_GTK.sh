@@ -41,56 +41,31 @@ CL="\e[0m"       ## Limpiar colores
 ###########################
 ##       FUNCIONES       ##
 ###########################
-configurar_iconos() {
-    echo -e "$VE Configurando pack de iconos$CL"
-    if [[ -f "$WORKSCRIPT/Paper_Icon.deb" ]];then
-        echo -e "$VE Ya esta$RO Paper_Icon.deb$VE descargado, omitiendo paso$CL"
-    else
-        REINTENTOS=5
-        echo -e "$VE Descargando$RO Paper_Icon.deb$CL"
-        for (( i=1; i<=$REINTENTOS; i++ ))
-        do
-            rm ./Paper_Icon.deb 2>> /dev/null
-            wget "https://snwh.org/paper/download.php?owner=snwh&ppa=pulp&pkg=paper-icon-theme,16.04" -O Paper_Icon.deb && break
-        done
-        echo -e "$VE Preparando para instalar$RO Iconos Paper_Icon$CL"
-        sudo dpkg -i Paper_Icon.deb && sudo apt install -f -y
-    fi
-
-    #TODO → Establecer "Paper_Icon" como iconos activos
-}
-
-function configurar_cursores(){
+configurar_cursores() {
     echo -e "$VE Configurando pack de cursores$CL"
-    sudo apt install -y crystalcursors
+    instalarSoftware 'crystalcursors'
+
     sudo update-alternatives --set x-cursor-theme /etc/X11/cursors/crystalblue.theme 2>> /dev/null
 }
 
-function configurar_temas(){
+configurar_temas() {
     echo -e "$VE Configurando temas GTK$CL"
-
-
-
-
-
     ## TODO → Establecer Flat-Plat como tema activo por defecto
 
     #echo -e "$VE Configurando temas QT$CL"
 }
 
-function configurar_grub() {
+configurar_grub() {
     echo -e "$VE Configurando fondo del grub$CL"
     ## Realmente se hace al copiar fondos en la función "configurar_fondos"
 }
 
-function configurar_fondos {
-    echo -e "$VE Configurando fondo de pantalla$CL"
-    sudo cp -r ./usr/share/desktop-base/softwaves-themes/* /usr/share/desktop-base/softwaves-theme/
+configurar_fondos() {
+    echo -e "$VE Configurando$RO fondo de pantalla$CL"
+    sudo cp -r $WORKSCRIPT/usr/share/desktop-base/softwaves-themes/* '/usr/share/desktop-base/softwaves-theme/'
     echo -e "$VE Configurando plymouth$CL"
-    sudo cp -r ./usr/share/plymouth/themes/softwaves/* /usr/share/plymouth/themes/softwaves/
+    sudo cp -r $WORKSCRIPT/usr/share/plymouth/themes/softwaves/* '/usr/share/plymouth/themes/softwaves/'
 }
-
-
 
 instalar_flatplat() {
     ## Instalar Flat-Plat
@@ -114,7 +89,7 @@ instalar_flatplat() {
     fi
 }
 
-descargar_material() {
+configurar_iconos() {
     descargar 'Paper_Theme.deb' 'https://snwh.org/paper/download.php?owner=snwh&ppa=pulp&pkg=paper-gtk-theme,16.04'
 
     echo -e "$VE Preparando para instalar$RO Iconos Paper_Theme$CL"
@@ -123,11 +98,7 @@ descargar_material() {
 
 personalizar() {
     echo -e "$VE Iniciando configuracion de estética general y GTK$CL"
-    descargar_material
     instalar_flatplat
-
-
-
     configurar_iconos
     configurar_cursores
     configurar_temas
