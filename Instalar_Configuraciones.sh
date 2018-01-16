@@ -26,7 +26,7 @@
 ###########################
 #Funcion para configurar VIM con sus temas y complementos
 function configurar_vim() {
-    echo -e "$verde Configurando VIM"
+    echo -e "$VE Configurando VIM"
 
     function vundle_actualizar_plugins() {
         echo | vim +PluginInstall +qall
@@ -34,7 +34,7 @@ function configurar_vim() {
 
     #Instalar Gestor de Plugins Vundle
     function vundle_descargar() {
-        echo -e "$verde Descargando Vundle desde Repositorios"
+        echo -e "$VE Descargando Vundle desde Repositorios"
         if [ ! -d ~/.vim/bundle/Vundle.vim ] # Se intenta descargar 10 veces
         then
             for (( i=1; i<=10; i++ ))
@@ -48,7 +48,7 @@ function configurar_vim() {
                 vundle_actualizar_plugins && break
             done
         else
-            echo -e "$verde Vundle ya está instalado$gris"
+            echo -e "$VE Vundle ya está instalado$CL"
         fi
     }
 
@@ -61,29 +61,29 @@ function configurar_vim() {
         plugins_vim=("align closetag powerline youcompleteme xmledit autopep8 python-jedi python-indent utilsinps utl rails snippets fugitive ctrlp tlib tabular sintastic detectindent closetag align syntastic")
         for plugin in $plugins_vim
         do
-            echo -e "$verde Activando el plugin  → $rojo $plugin $yellow"
+            echo -e "$VE Activando el plugin  → $RO $plugin $AM"
             vim-addon-manager install $plugin >> /dev/null 2>> /dev/null
             vim-addon-manager enable $plugin >> /dev/null 2>> /dev/null
         done
-        echo -e "$verde Todos los plugins activados$gris"
+        echo -e "$VE Todos los plugins activados$CL"
     }
 
     function vim_colores() {
         mkdir -p ~/.vim/colors 2>> /dev/null
         #Creando archivos de colores, por defecto usara "monokai"
-        echo -e "$verde Descargando colores para sintaxis$amarillo"
+        echo -e "$VE Descargando colores para sintaxis$AM"
 
         if [ ! -f "~/.vim/colors/wombat.vim" ]
         then
             wget http://www.vim.org/scripts/download_script.php?src_id=6657 -O ~/.vim/colors/wombat.vim
         fi
 
-        echo -e "$verde Descargando Tema$rojo Monokai$amarillo"
+        echo -e "$VE Descargando Tema$RO Monokai$AM"
         if [ ! -f "~/.vim/colors/monokai1.vim" ]
         then
             wget https://raw.githubusercontent.com/lsdr/monokai/master/colors/monokai.vim -O ~/.vim/colors/monokai_1.vim
         fi
-        echo -e "$verde Se ha concluido la instalacion de temas de colores$gris"
+        echo -e "$VE Se ha concluido la instalacion de temas de colores$CL"
     }
 
     vim_plugins
@@ -93,7 +93,7 @@ function configurar_vim() {
 #Agregar Archivos de configuración al home
 function agregar_conf_home() {
     conf=$(ls -A ./home/)
-    echo -e "$verde Preparando para añadir archivos de configuración en el home de usuario$gris"
+    echo -e "$VE Preparando para añadir archivos de configuración en el home de usuario$CL"
 
    for c in $conf
     do
@@ -102,7 +102,7 @@ function agregar_conf_home() {
         then
             if [ ! -f ~/$c.BACKUP ]
             then
-                echo -e "$verde Creando Backup del archivo$rojo $c$gris"
+                echo -e "$VE Creando Backup del archivo$RO $c$CL"
                 if [ -f ~/$c ]
                 then
                     mv ~/$c ~/$c.BACKUP 2>> /dev/null
@@ -110,13 +110,13 @@ function agregar_conf_home() {
                     cp -R -f ./home/$c ~/$c.BACKUP 2>> /dev/null
                 fi
             fi
-            echo -e "$verde Generando configuración del archivo$rojo $c$gris"
+            echo -e "$VE Generando configuración del archivo$RO $c$CL"
             cp -R -f ./home/$c ~/$c 2>> /dev/null
         elif [ -d ./home/$c ]  # Si es un directorio
         then
             if [ ! -d ~/$c.BACKUP ]
             then
-                echo -e "$verde Creando Backup del directorio$rojo $c$gris"
+                echo -e "$VE Creando Backup del directorio$RO $c$CL"
                 if [ -d ~/$c ]
                 then
                     mv ~/$c ~/$c.BACKUP 2>> /dev/null
@@ -124,7 +124,7 @@ function agregar_conf_home() {
                     cp -R -f ./home/$c ~/$c.BACKUP 2>> /dev/null
                 fi
             fi
-            echo -e "$verde Generando configuración del directorio$rojo $c$gris"
+            echo -e "$VE Generando configuración del directorio$RO $c$CL"
             cp -R -f ./home/$c ~/ 2>> /dev/null
         fi
     done
@@ -133,51 +133,51 @@ function agregar_conf_home() {
 #Permisos
 function permisos() {
     #sudo rm /bin/atom #Parece que no se crea en las últimas versiones
-    echo -e "$verde Estableciendo permisos en el sistema$gris"
+    echo -e "$VE Estableciendo permisos en el sistema$CL"
 }
 
 #Establecer programas por defecto
 function programas_default() {
-    echo -e "$verde Estableciendo programas por defecto$gris"
+    echo -e "$VE Estableciendo programas por defecto$CL"
 
     #TERMINAl
     if [ -f /usr/bin/tilix ]
     then
-        echo -e "$verde Estableciendo terminal por defecto a$rojo Tilix$gris"
+        echo -e "$VE Estableciendo terminal por defecto a$RO Tilix$CL"
         sudo touch /etc/profile.d/vte.sh 2>> /dev/null
         sudo update-alternatives --set x-terminal-emulator /usr/bin/tilix.wrapper 2>> /dev/null
     elif [ -f /usr/bin/terminator ]
     then
-        echo -e "$verde Estableciendo terminal por defecto a$rojo Terminator$gris"
+        echo -e "$VE Estableciendo terminal por defecto a$RO Terminator$CL"
         sudo update-alternatives --set x-terminal-emulator /usr/bin/terminator
     elif [ -f /usr/bin/sakura ]
     then
-        echo -e "$verde Estableciendo terminal por defecto a$rojo Sakura$gris"
+        echo -e "$VE Estableciendo terminal por defecto a$RO Sakura$CL"
         sudo update-alternatives --set x-terminal-emulator /usr/bin/sakura
     else
-        echo -e "$verde Estableciendo terminal por defecto a$rojo XTerm$gris"
+        echo -e "$VE Estableciendo terminal por defecto a$RO XTerm$CL"
         sudo update-alternatives --set x-terminal-emulator /usr/bin/xterm
     fi
 
     #Navegador
     if [ -f /usr/bin/firefox-esr ]
     then
-        echo -e "$verde Estableciendo Navegador WEB por defecto a$rojo Firefox-ESR$gris"
+        echo -e "$VE Estableciendo Navegador WEB por defecto a$RO Firefox-ESR$CL"
         sudo update-alternatives --set x-www-browser /usr/bin/firefox-esr
         sudo update-alternatives --set gnome-www-browser /user/bin/firefox-esr 2>> /dev/null
     elif [ -f /usr/bin/firefox ]
     then
-        echo -e "$verde Estableciendo Navegador WEB por defecto a$rojo Firefox$gris"
+        echo -e "$VE Estableciendo Navegador WEB por defecto a$RO Firefox$CL"
         sudo update-alternatives --set x-www-browser /usr/bin/firefox
         sudo update-alternatives --set gnome-www-browser /user/bin/firefox 2>> /dev/null
     elif [ -f /usr/bin/chromium ]
     then
-        echo -e "$verde Estableciendo Navegador WEB por defecto a$rojo Chromium$gris"
+        echo -e "$VE Estableciendo Navegador WEB por defecto a$RO Chromium$CL"
         sudo update-alternatives --set x-www-browser /usr/bin/chromium
         sudo update-alternatives --set gnome-www-browser /user/bin/chromium 2>> /dev/null
     elif [ -f /usr/bin/chrome ]
     then
-        echo -e "$verde Estableciendo Navegador WEB por defecto a$rojo chrome$gris"
+        echo -e "$VE Estableciendo Navegador WEB por defecto a$RO chrome$CL"
         sudo update-alternatives --set x-www-browser /usr/bin/chrome
         sudo update-alternatives --set gnome-www-browser /user/bin/chrome 2>> /dev/null
     fi
@@ -185,30 +185,30 @@ function programas_default() {
     #Editor de texto terminal
     if [ -f /usr/bin/vim.gtk3 ]
     then
-        echo -e "$verde Estableciendo Editor por defecto a$rojo Vim GTK3$gris"
+        echo -e "$VE Estableciendo Editor por defecto a$RO Vim GTK3$CL"
         sudo update-alternatives --set editor /usr/bin/vim.gtk3
     elif [ -f /usr/bin/vim ]
     then
-        echo -e "$verde Estableciendo Editor WEB por defecto a$rojo Vim$gris"
+        echo -e "$VE Estableciendo Editor WEB por defecto a$RO Vim$CL"
         sudo update-alternatives --set editor /usr/bin/vim
     elif [ -f /bin/nano ]
     then
-        echo -e "$verde Estableciendo Editor WEB por defecto a$rojo Nano$gris"
+        echo -e "$VE Estableciendo Editor WEB por defecto a$RO Nano$CL"
         sudo update-alternatives --set editor /bin/nano
     fi
 
     #Editor de texto con GUI
     if [ -f /usr/bin/gedit ]
     then
-        echo -e "$verde Estableciendo Editor GUI por defecto a$rojo Gedit$gris"
+        echo -e "$VE Estableciendo Editor GUI por defecto a$RO Gedit$CL"
         sudo update-alternatives --set gnome-text-editor /usr/bin/gedit
     elif [ -f /usr/bin/kate ]
     then
-        echo -e "$verde Estableciendo Editor GUI por defecto a$rojo Kate$gris"
+        echo -e "$VE Estableciendo Editor GUI por defecto a$RO Kate$CL"
         sudo update-alternatives --set gnome-text-editor /usr/bin/kate
     elif [ -f /usr/bin/leafpad ]
     then
-        echo -e "$verde Estableciendo Editor GUI por defecto a$rojo Leafpad$gris"
+        echo -e "$VE Estableciendo Editor GUI por defecto a$RO Leafpad$CL"
         sudo update-alternatives --set gnome-text-editor /usr/bin/leafpad
     fi
 }
@@ -217,10 +217,10 @@ function programas_default() {
 function terminal() {
     while true
     do
-        echo -e "$verde Selecciona a continuación el$rojo terminal$verde a usar$gris"
-        echo -e "$verde Tenga en cuenta que este script está optimizado para$rojo bash$gris"
-        echo -e "$verde 1) bash$gris"
-        echo -e "$verde 2) zsh$gris"
+        echo -e "$VE Selecciona a continuación el$RO terminal$VE a usar$CL"
+        echo -e "$VE Tenga en cuenta que este script está optimizado para$RO bash$CL"
+        echo -e "$VE 1) bash$CL"
+        echo -e "$VE 2) zsh$CL"
         read -p "Introduce el terminal → bash/zsh: " term
         case $term in
             bash | 1)#Establecer bash como terminal
@@ -236,7 +236,7 @@ function terminal() {
                 sudo ln -s /bin/zsh /bin/sh
                 break;;
             *)#Opción errónea
-                echo -e "$rojo Opción no válida$gris"
+                echo -e "$RO Opción no válida$CL"
         esac
     done
 }
@@ -252,7 +252,7 @@ function configurar_gedit() {
 
 # Configurar editor de terminal, nano
 function configurar_nano() {
-    echo -e "$verde Configurando editor nano$gris"
+    echo -e "$VE Configurando editor nano$CL"
 
     if [ -d ~/.nano ]
     then
@@ -277,7 +277,7 @@ function configurar_nano() {
 
 #Crea un archivo hosts muy completo que bloquea bastantes sitios malignos en la web
 function configurar_hosts() {
-    echo -e "$verde Configurar archivo$rojo /etc/hosts"
+    echo -e "$VE Configurar archivo$RO /etc/hosts"
 
     # Crea copia del original para mantenerlo siempre
     if [ ! -f /etc/hosts.BACKUP ]
