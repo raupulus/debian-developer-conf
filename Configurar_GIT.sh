@@ -70,10 +70,10 @@ gpg_git() {
     echo -e "$VE ¿Usar una clave existente?$RO"
     read -p '  s/N  → ' input
 
-    if [ $input = 's' ] ||
-       [ $input = 'S' ] ||
-       [ $input = 'y' ] ||
-       [ $input = 'Y' ]
+    if [[ $input = 's' ]] ||
+       [[ $input = 'S' ]] ||
+       [[ $input = 'y' ]] ||
+       [[ $input = 'Y' ]]
     then
         clear
         gpg --list-secret-keys --keyid-format LONG
@@ -95,10 +95,10 @@ gpg_git() {
     echo -e "$VE ¿Quieres$RO firmar commits$VE automáticamente por defecto?$AM"
     read -p '  s/N  → ' input
 
-    if [ $input = 's' ] ||
-       [ $input = 'S' ] ||
-       [ $input = 'y' ] ||
-       [ $input = 'Y' ]
+    if [[ $input = 's' ]] ||
+       [[ $input = 'S' ]] ||
+       [[ $input = 'y' ]] ||
+       [[ $input = 'Y' ]]
     then
         ## Firmar commit por defecto
         git config --global commit.gpgsign true
@@ -121,9 +121,9 @@ configurar_git() {
     ## Preguntar si se desea configurar GPG
     echo -e "$VE ¿Quieres configurar una clave$RO GPG$VE para firmar?$yellow"
     read -p 'Introduce una opción y/N → ' input
-    if [ -n $input ] ||
-       [ $input = 'n' ] ||
-       [ $input = 'N' ]
+    if [[ -n $input ]] ||
+       [[ $input = 'n' ]] ||
+       [[ $input = 'N' ]]
     then
         ## LLamada a la función para configurar GPG
         gpg_git
