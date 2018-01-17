@@ -167,3 +167,14 @@ desinstalar_paquetes() {
         sudo apt purge -y x
     done
 }
+
+##
+## Recibe uno o más nombres de servicios para reiniciarlos
+## @param $* Recibe los servicios que necesite reiniciar
+##
+reiniciarServicio() {
+    for x in $*; do
+        echo -e "$ROBorrando x$$CL"
+        sudo systemctl restart "$x"
+    done
+}
