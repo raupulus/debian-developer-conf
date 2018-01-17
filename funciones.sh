@@ -178,3 +178,12 @@ reiniciarServicio() {
         sudo systemctl restart "$x"
     done
 }
+
+##
+## Actualiza la lista de repositorios y repara fallos en el si los hubiese
+##
+prepararInstalador() {
+    echo -e "$VE Se actualizarán las$RO listas de repositorios$CL"
+    sudo apt update
+    sudo apt install -f -y
+}
