@@ -101,7 +101,6 @@ vim_instalar() {
     local dependencias="vim vim-addon-manager vim-addon-mw-utils vim-asciidoc vim-athena vim-autopep8 vim-command-t vim-conque vim-ctrlp vim-editorconfig vim-fugitive vim-gnome vim-gocomplete vim-gtk vim-gtk3 vim-haproxy vim-icinga2 vim-khuno vim-lastplace vim-latexsuite vim-migemo vim-nox vim-pathogen vim-python-jedi vim-rails vim-runtime vim-scripts vim-snipmate vim-snippets vim-syntastic vim-syntax-gtk vim-tabular vim-tjp vim-tlib vim-ultisnips vim-vimerl vim-vimerl-syntax vim-vimoutliner vim-voom vim-youcompleteme"
 
     instalarSoftware "$dependencias"
-
 }
 
 vim_postconfiguracion() {
@@ -112,7 +111,8 @@ vim_postconfiguracion() {
 
     ## Funcion para instalar todos los plugins
     vim_plugins() {
-        plugins_vim=("align closetag powerline youcompleteme xmledit autopep8 python-jedi python-indent utilsinps utl rails snippets fugitive ctrlp tlib tabular sintastic detectindent closetag align syntastic")
+        local plugins_vim=("align closetag powerline youcompleteme xmledit autopep8 python-jedi python-indent utilsinps utl rails snippets fugitive ctrlp tlib tabular sintastic detectindent closetag align syntastic")
+
         for plugin in "$plugins_vim"; do
             echo -e "$VE Activando el plugin$MA →$RO $plugin $AM"
             vim-addon-manager install "$plugin"
