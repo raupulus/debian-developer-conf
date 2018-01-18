@@ -24,57 +24,22 @@
 ###########################
 ##       FUNCIONES       ##
 ###########################
-#Agregar Archivos de configuración al home
-function agregar_conf_home() {
-    conf=$(ls -A ./home/)
+## Agregar Archivos de configuración al home
+agregar_conf_home() {
     echo -e "$VE Preparando para añadir archivos de configuración en el home de usuario$CL"
-
-   for c in $conf
-    do
-        # Crea backup del directorio o archivo si no tiene una anterior
-        if [ -f ./home/$c ]  # Si es un archivo
-        then
-            if [ ! -f ~/$c.BACKUP ]
-            then
-                echo -e "$VE Creando Backup del archivo$RO $c$CL"
-                if [ -f ~/$c ]
-                then
-                    mv ~/$c ~/$c.BACKUP 2>> /dev/null
-                else
-                    cp -R -f ./home/$c ~/$c.BACKUP 2>> /dev/null
-                fi
-            fi
-            echo -e "$VE Generando configuración del archivo$RO $c$CL"
-            cp -R -f ./home/$c ~/$c 2>> /dev/null
-        elif [ -d ./home/$c ]  # Si es un directorio
-        then
-            if [ ! -d ~/$c.BACKUP ]
-            then
-                echo -e "$VE Creando Backup del directorio$RO $c$CL"
-                if [ -d ~/$c ]
-                then
-                    mv ~/$c ~/$c.BACKUP 2>> /dev/null
-                else
-                    cp -R -f ./home/$c ~/$c.BACKUP 2>> /dev/null
-                fi
-            fi
-            echo -e "$VE Generando configuración del directorio$RO $c$CL"
-            cp -R -f ./home/$c ~/ 2>> /dev/null
-        fi
-    done
 }
 
-#Permisos
-function permisos() {
-    #sudo rm /bin/atom #Parece que no se crea en las últimas versiones
+## Permisos
+permisos() {
     echo -e "$VE Estableciendo permisos en el sistema$CL"
+    ## TODO → Permisos en home de usuario poco permisivos
 }
 
-#Establecer programas por defecto
-function programas_default() {
+## Establecer programas por defecto
+programas_default() {
     echo -e "$VE Estableciendo programas por defecto$CL"
 
-    #TERMINAl
+    ## TERMINAl
     if [ -f /usr/bin/tilix ]
     then
         echo -e "$VE Estableciendo terminal por defecto a$RO Tilix$CL"
