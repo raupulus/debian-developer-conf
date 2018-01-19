@@ -46,29 +46,6 @@ crearBackup() {
 }
 
 ##
-## Crea un backup de elementos dentro del directorio de usuario
-## @param  $*  Nombre del elemento dentro del directorio $HOME
-##
-crearBackupHome() {
-    ## Crear directorio Backups si no existiera
-    if [[ ! -d "$WORKSCRIPT/Backups" ]]; then
-        mkdir "$WORKSCRIPT/Backups"
-    fi
-
-    for salvando in $*; do
-        if [[ -f $salvando ]]; then
-            echo "Creando Backup del archivo $salvando"
-            cp "$HOME/$salvando" "$WORKSCRIPT/Backups/"
-        elif [[ -d $salvando ]]; then
-            echo "Creando Backup del directorio $salvando"
-            cp -R "$HOME/$salvando" "$WORKSCRIPT/Backups/"
-        else
-            echo "No se encuentra $salvando"
-        fi
-    done
-}
-
-##
 ## Muestra el texto recibido como parámetro formateado por pantalla
 ## @param  $1  String  Recibe la cadena a pintar
 ##

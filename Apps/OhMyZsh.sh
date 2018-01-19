@@ -48,10 +48,7 @@ ohmyzsh_postconfiguracion() {
 
     local archivosConfiguracion='.zshrc .tmux.conf powerline dunst'
 
-    ## Crear Backup
-    crearBackupHome "$archivosConfiguracion"
-
-    ## Enlazar archivos de este repo
+    ## Crea el backup y enlazar archivos de este repo
     enlazarHome "$archivosConfiguracion"
 
     ## Actualizando repositorio para OhMyZsh
