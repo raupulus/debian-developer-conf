@@ -68,7 +68,7 @@ bashit_postconfiguracion() {
     local archivosConfiguracion='.bashrc powerline dunst .dircolors .less .lessfilter .tmux.conf'
 
     ## Crea el backup y enlazar archivos de este repo
-    enlazarHome $archivosConfiguracion
+    enlazarHome .bashrc powerline dunst .dircolors .less .lessfilter .tmux.conf
 
     ## Actualizando repositorio para Bash-It
     cd "$HOME/.bash_it/"
