@@ -96,7 +96,7 @@ bashit_postconfiguracion() {
     local archivosConfiguracion='.bashrc powerline dunst .dircolors .less .lessfilter .tmux.conf'
 
     ## Crear Backup
-    crearBackup "$archivosConfiguracion"
+    crearBackupHome "$archivosConfiguracion"
 
     ## Enlazar archivos de este repo
     enlazarHome "$archivosConfiguracion"
