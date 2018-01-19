@@ -86,12 +86,12 @@ menuPrincipal() {
 
         case $entrada in
 
-            1) echo "";;              ## Menú de Repositorios
-            2) menuAplicaciones;;     ## Menú de Aplicaciones
-            3) menuConfiguraciones;;  ## Menú de Configuraciones
-            4) menuPersonalizacion;;  ## Menú de Personalización
-            5) menuServidores;;       ## Menú de Servidores
-            6) echo "";;              ## Todos los pasos anteriores
+            1) agregar_repositorios;;  ## Menú de Repositorios
+            2) menuAplicaciones;;      ## Menú de Aplicaciones
+            3) menuConfiguraciones;;   ## Menú de Configuraciones
+            4) menuPersonalizacion;;   ## Menú de Personalización
+            5) menuServidores;;        ## Menú de Servidores
+            6) echo "";;               ## Todos los pasos anteriores
 
             0)  ## SALIR
                 clear

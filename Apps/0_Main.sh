@@ -23,9 +23,9 @@
 ############################
 ##     IMPORTACIONES      ##
 ############################
-source "$WORKSCRIPT/apps/1_Aplicaciones_Basicas.sh"
-source "$WORKSCRIPT/apps/2_Aplicaciones_Extras.sh"
-source "$WORKSCRIPT/apps/3_Aplicaciones_Usuario.sh"
+source "$WORKSCRIPT/Apps/1_Aplicaciones_Basicas.sh"
+source "$WORKSCRIPT/Apps/2_Aplicaciones_Extras.sh"
+source "$WORKSCRIPT/Apps/3_Aplicaciones_Usuario.sh"
 
 ###########################
 ##       FUNCIONES       ##
