@@ -47,7 +47,7 @@ pencilProject_instalador() {
     pencilProject_preconfiguracion
 
     if [[ -f '/usr/bin/pencil' ]] ||
-       [[ ! -f '/usr/local/bin/pencil' ]]; then
+       [[ -f '/usr/local/bin/pencil' ]]; then
         echo -e "$VE Ya esta$RO Pencil Project$VE instalado en el equipo, omitiendo paso$CL"
     else
         if [[ -f "$WORKSCRIPT/tmp/Pencil_Project.deb" ]]; then
