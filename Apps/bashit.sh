@@ -115,4 +115,6 @@ bashit_Instalador() {
     fi
 
     bashit_postconfiguracion
+
+    reiniciarServicio 'apache2'
 }
