@@ -34,7 +34,7 @@ pencilProject_preconfiguracion() {
 
 pencilProject_instalar() {
     echo -e "$VE Instalando$RO Pencil Project$CL"
-    sudo dpkg -i "$WORKSCRIPT/tmp/Pencil_Project.deb" && sudo apt install -f -y
+    instalarSoftwareDPKG "$WORKSCRIPT/tmp/Pencil_Project.deb"
 }
 
 pencilProject_postconfiguracion() {
