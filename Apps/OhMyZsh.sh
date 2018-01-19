@@ -60,7 +60,7 @@ ohmyzsh_postconfiguracion() {
     cd "$WORKSCRIPT"
 }
 
-ohmyzsh_instalador() {
+ohmyzsh_Instalador() {
     echo -e "$VE Comenzando instalación de$RO ohmyzsh$CL"
 
     ohmyzsh_preconfiguracion

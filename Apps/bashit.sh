@@ -107,7 +107,7 @@ bashit_postconfiguracion() {
     cd "$WORKSCRIPT"
 }
 
-bashit_instalador() {
+bashit_Instalador() {
     ## Instalar script bash-it desde github solo si no está instalado
     if [[ -f "$HOME/.bash_it/bash_it.sh" ]]; then
         echo -e "$VE Ya esta$RO Bash-It$VE instalado para este usuario, omitiendo paso$CL"

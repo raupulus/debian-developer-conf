@@ -124,7 +124,7 @@ vim_postconfiguracion() {
     vim_plugins
 }
 
-vim_instalador() {
+vim_Instalador() {
     echo -e "$VE Comenzando instalación de$RO Vim$CL"
 
     vim_preconfiguracion
