@@ -149,27 +149,8 @@ descargarGIT() {
 ## @param  $*  String  Nombre del archivo o directorio dentro del home del user
 ##
 enlazarHome() {
-    for x in $*; do
-        echo -e "$VE Creando enlace de$RO $x$CL"
-
-        if [[ -h "$HOME/$x" ]]; then  ## Si es un enlace
-            echo -e "$VE Limpiando enlace anterior para$RO $x$CL"
-            rm "$HOME/$x"
-        elif [[ -f "$HOME/$x" ]] &&   ## Si es un archivo y no tiene backup
-             [[ ! -f "$WORKSCRIPT/Backups/$x" ]]; then
-            echo -e "$VE Creando enlace para el archivo$RO $HOME$x$CL"
-            crearBackup "$HOME/$x" && rm "$HOME/$x"
-        elif [[ -d "$HOME/$x" ]] &&   ## Si es un directorio y no tiene backup
-             [[ ! -d "$WORKSCRIPT/Backups/$x" ]]; then
-            echo -e "$VE Creando enlace para el directorio$RO $HOME$x$CL"
-            crearBackup "$HOME/$x" && rm -R "$HOME/$x"
-        else
-            echo -e "$VE Eliminando $RO$HOME/$x$VE, ya existe$RO Backup$CL"
-            rm "$HOME/$x"
-        fi
-
-        ln -s "$WORKSCRIPT/conf/home/$x" "$HOME/$x"
-    done
+    echo "siiiiiiiiiiii"
+    sleep 20
 }
 
 ##
