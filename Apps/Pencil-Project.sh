@@ -56,7 +56,7 @@ pencilProject_instalador() {
             pencilProject_instalar
         fi
 
-        # Si falla la instalación se rellama la función tras limpiar
+        ## Si falla la instalación se rellama la función tras limpiar
         if [[ ! -f '/usr/bin/pencil' ]]; then
             rm -f "$WORKSCRIPT/tmp/Pencil_Project.deb"
             pencilProject_descargar
