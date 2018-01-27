@@ -17,19 +17,21 @@
 ##     INSTRUCCIONES      ##
 ############################
 
-############################
-##     IMPORTACIONES      ##
-############################
-
 ###########################
 ##       FUNCIONES       ##
 ###########################
+##
 ## Agregar Archivos de configuración al home
+##
 agregar_conf_home() {
-    echo -e "$VE Preparando para añadir archivos de configuración en el home de usuario$CL"
+    echo -e "$VE Preparando para añadir$RO archivos de configuración$VE en el home de usuario$CL"
 }
 
-## Permisos
+##
+## Asigna permisos en el home de usuario poco permisivos donde el propietario
+## tiene todos los permisos, el grupo lectura y ejecución y otros nada.
+## Además asigna la máscara (umask) para esto por defecto.
+##
 permisos() {
     echo -e "$VE Estableciendo permisos en el sistema$CL"
     ## TODO → Permisos en home de usuario poco permisivos
