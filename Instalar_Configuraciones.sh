@@ -37,7 +37,9 @@ permisos() {
     ## TODO → Permisos en home de usuario poco permisivos
 }
 
+##
 ## Establecer programas por defecto
+##
 programas_default() {
     echo -e "$VE Estableciendo programas por defecto$CL"
 
@@ -101,8 +103,11 @@ programas_default() {
     fi
 }
 
-## Elegir intérprete de comandos
+##
+## Elegir intérprete de comandos entre los actuales instalados del sistema
+##
 terminal() {
+    ## TODO → Comprobar si solo está bash instalado, no pregunta.
     while true; do
         echo -e "$VE Selecciona a continuación el$RO terminal$VE a usar$CL"
         echo -e "$VE Tenga en cuenta que este script está optimizado para$RO bash$CL"
@@ -128,7 +133,9 @@ terminal() {
     done
 }
 
+##
 ## Configurar editor de gnome, gedit
+##
 configurar_gedit() {
     if [[! -d "$HOME/.local/share" ]]; then
         mkdir -p "$HOME/.local/share/" 2>> /dev/null
@@ -140,7 +147,9 @@ configurar_gedit() {
     cp -r ./gedit/.config/gedit/* "$HOME/.config/gedit/"
 }
 
+##
 ## Configurar editor de terminal, nano
+##
 configurar_nano() {
     echo -e "$VE Configurando editor$RO nano$CL"
 
@@ -162,7 +171,10 @@ configurar_nano() {
     cat "$HOME/.nano/nanorc" >> "$HOME/.nanorc"
 }
 
-## Crea un archivo hosts muy completo que bloquea bastantes sitios malignos en la web
+##
+## Crea un archivo hosts muy completo que bloquea bastantes
+## sitios malignos en la web evitando riesgos y mejorando navegabilidad
+##
 configurar_hosts() {
     echo -e "$VE Configurar archivo$RO /etc/hosts$CL"
 
@@ -176,7 +188,9 @@ configurar_hosts() {
     sudo cp './tmp/hosts' '/etc/hosts'
 }
 
+##
 ## Añadir plantillas
+##
 agregar_plantillas() {
     if [[ -d "$HOME/Plantillas" ]]; then
         cp -R './Plantillas/*' "$HOME/Plantillas/"
@@ -186,6 +200,9 @@ agregar_plantillas() {
     fi
 }
 
+##
+## Personaliza terminal tilix
+##
 tilix_personalizar() {
     ## TODO → Comprobar si existe instalado cada tema
     mkdir -p "$HOME/.config/tilix/schemes/" 2>> /dev/null
@@ -198,7 +215,10 @@ tilix_personalizar() {
     wget -qO $HOME"/.config/tilix/schemes/dracula.json" https://git.io/v7QaT
 }
 
+##
+##
 ## Instalar Todas las configuraciones
+##
 instalar_configuraciones() {
     permisos
     programas_default
