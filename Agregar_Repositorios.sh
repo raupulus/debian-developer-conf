@@ -67,9 +67,13 @@ agregar_repositorios() {
     sudo apt install -y dirmngr >> /dev/null && echo -e "$VE Instalado el paquete$RO dirmngr$CL" || echo -e "$VE Error al instalar$RO dirmngr$CL"
     echo -e "$VE Agregando Repositorios$CL"
 
-    sudo cp $WORKSCRIPT/sources.list/sources.list.d/* /etc/apt/sources.list.d/ 2>> /dev/null
-    sudo mv /etc/apt/sources.list /etc/apt/sources.list.BACKUP 2>> /dev/null
-    sudo cp "$WORKSCRIPT/sources.list/sources.list" "$WORKSCRIPT/etc/apt/sources.list" 2>> /dev/null
+    sudo cp $WORKSCRIPT/sources.list/sources.list.d/* /etc/apt/sources.list.d/
+
+    #sudo mv /etc/apt/sources.list /etc/apt/sources.list.BACKUP 2>> /dev/null
+    crearBackup '/etc/apt/sources.list' '/etc/apt/sources.list.d/'
+
+    sudo cp "$WORKSCRIPT/sources.list/sources.list" "/etc/apt/sources.list"
+
     echo -e "$VE Repositorios Agregados$CL"
     sleep 3
 
