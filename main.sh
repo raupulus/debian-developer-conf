@@ -81,7 +81,7 @@ menuPrincipal() {
         opciones "$descripcion"
 
         echo -e "$RO"
-        read -p "    Acción → " entrada
+        read -p '    Acción → ' entrada
         echo -e "$CL"
 
         case $entrada in
