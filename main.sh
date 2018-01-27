@@ -45,21 +45,6 @@ VERSION='0.4.1'  ## Versión en desarrollo
 ############################
 ##     IMPORTACIONES      ##
 ############################
-<<<<<<< HEAD
-source "$WORKSCRIPT/Agregar_Repositorios.sh"
-source "$WORKSCRIPT/funciones.sh"
-source "$WORKSCRIPT/Apps/0_Main.sh"
-#source 'conf/0_Main.sh'
-#source 'servers/0_Main.sh'
-#source 'Personalizar/0_Main.sh'
-#source ./Tipografías.sh
-#source ./Instalar_Configuraciones.sh
-#source ./Variables_Entorno.sh
-#source ./Configurar_GIT.sh
-#source ./Personalización_GTK.sh
-#source ./Servidores.sh
-#source ./limpiador.sh
-=======
 source "$WORKSCRIPT/funciones.sh"
 source "$WORKSCRIPT/Agregar_Repositorios.sh"
 source "$WORKSCRIPT/Instalar_Configuraciones.sh"
@@ -70,7 +55,6 @@ source "$WORKSCRIPT/Apps/0_Main.sh"
 #source 'servers/0_Main.sh'
 #source 'Personalizar/0_Main.sh'
 
->>>>>>> de276599169a9e59f4d1adf0546b5bcb24705ab4
 
 ###########################
 ##       VARIABLES       ##
@@ -102,21 +86,12 @@ menuPrincipal() {
 
         case $entrada in
 
-<<<<<<< HEAD
-            1) agregar_repositorios;; ## Menú de Repositorios
-            2) menuAplicaciones;;     ## Menú de Aplicaciones
-            3) menuConfiguraciones;;  ## Menú de Configuraciones
-            4) menuPersonalizacion;;  ## Menú de Personalización
-            5) menuServidores;;       ## Menú de Servidores
-            6) echo "";;              ## Todos los pasos anteriores
-=======
             1) agregar_repositorios;;  ## Menú de Repositorios
             2) menuAplicaciones;;      ## Menú de Aplicaciones
             3) menuConfiguraciones;;   ## Menú de Configuraciones
             4) menuPersonalizacion;;   ## Menú de Personalización
             5) menuServidores;;        ## Menú de Servidores
             6) echo "";;               ## Todos los pasos anteriores
->>>>>>> de276599169a9e59f4d1adf0546b5bcb24705ab4
 
             0)  ## SALIR
                 clear
