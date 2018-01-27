@@ -205,7 +205,12 @@ agregar_plantillas() {
 ##
 tilix_personalizar() {
     ## TODO → Comprobar si existe instalado cada tema
-    mkdir -p "$HOME/.config/tilix/schemes/" 2>> /dev/null
+
+    if [[ ! -d "$HOME/.config/tilix/schemes/" ]]; then
+        echo -e "$VE Creando directorio $HOME/.config/tilix/schemes/$CL"
+        mkdir -p "$HOME/.config/tilix/schemes/"
+    fi
+    
     wget -qO $HOME"/.config/tilix/schemes/3024-night.json" https://git.io/v7QVY
     wget -qO $HOME"/.config/tilix/schemes/dimmed-monokai.json" https://git.io/v7QaJ
     wget -qO $HOME"/.config/tilix/schemes/monokai.json" https://git.io/v7Qad
@@ -215,7 +220,6 @@ tilix_personalizar() {
     wget -qO $HOME"/.config/tilix/schemes/dracula.json" https://git.io/v7QaT
 }
 
-##
 ##
 ## Instalar Todas las configuraciones
 ##
