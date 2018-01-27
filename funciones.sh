@@ -100,6 +100,21 @@ descargar() {
 }
 
 ##
+## Descarga desde la web indicada con el primer parámetro para guardarlo en
+## el lugar indicado con el segundo parámetro. Incluye el elemento y su ruta
+## @param  $1  String  Origen de la descarga (Desde donde descargar)
+## @param  $2  String  Destino donde será guardada la descarga
+##
+descargarTo() {
+    local REINTENTOS=10
+    for (( i=1; i<=$REINTENTOS; i++ )); do
+        rm "$WORKSCRIPT/tmp/$2" 2>> /dev/null
+        wget --show-progress "$1" -O "$2" && break
+    done
+    }
+}
+
+##
 ## Recibe un nombre, el repositorio de origen y el directorio destino para
 ## descargar el repositorio controlando errores y reintentando cuando falle.
 ## @param  $1  String  Nombre, es más para informar y registrar log
@@ -166,4 +181,24 @@ desinstalar_paquetes() {
         echo -e "$rojoBorrando x$gris"
         sudo apt purge -y x
     done
+}
+
+##
+## Recibe uno o más nombres de servicios para reiniciarlos
+## @param $* Recibe los servicios que necesite reiniciar
+##
+reiniciarServicio() {
+    for x in $*; do
+        echo -e "$ROBorrando x$$CL"
+        sudo systemctl restart "$x"
+    done
+}
+
+##
+## Actualiza la lista de repositorios y repara fallos en el si los hubiese
+##
+prepararInstalador() {
+    echo -e "$VE Se actualizarán las$RO listas de repositorios$CL"
+    sudo apt update
+    sudo apt install -f -y
 }

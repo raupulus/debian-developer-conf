@@ -65,6 +65,16 @@ bashit_instalar() {
 }
 
 bashit_postconfiguracion() {
+    local archivosConfiguracion='.bashrc powerline dunst .dircolors .less .lessfilter .tmux.conf'
+
+    ## Crea el backup y enlazar archivos de este repo
+    enlazarHome $archivosConfiguracion
+
+    ## Actualizando repositorio para Bash-It
+    cd "$HOME/.bash_it/"
+    git pull 2>> /dev/null
+    cd "$WORKSCRIPT"
+
     ## Habilitar todos los plugins
     local plugins_habilitar="alias-completion aws base battery edit-mode-vi explain extract fasd git gif hg java javascript latex less-pretty-cat node nvm postgres projects python rails ruby sshagent ssh subversion xterm dirs nginx plenv pyenv rbenv"
 
@@ -92,22 +102,9 @@ bashit_postconfiguracion() {
     else
         echo -e "$VE Para habilitar los$RO plugins de BASH$VE ejecuta este scripts desde$RO bash$CL"
     fi
-
-    local archivosConfiguracion='.bashrc powerline dunst .dircolors .less .lessfilter .tmux.conf'
-
-    ## Crear Backup
-    crearBackup "$archivosConfiguracion"
-
-    ## Enlazar archivos de este repo
-    enlazarHome "$archivosConfiguracion"
-
-    ## Actualizando repositorio para Bash-It
-    cd "$HOME/.bash_it/"
-    git pull 2>> /dev/null
-    cd "$WORKSCRIPT"
 }
 
-bashit_instalador() {
+bashit_Instalador() {
     ## Instalar script bash-it desde github solo si no está instalado
     if [[ -f "$HOME/.bash_it/bash_it.sh" ]]; then
         echo -e "$VE Ya esta$RO Bash-It$VE instalado para este usuario, omitiendo paso$CL"

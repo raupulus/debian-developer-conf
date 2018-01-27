@@ -48,10 +48,7 @@ ohmyzsh_postconfiguracion() {
 
     local archivosConfiguracion='.zshrc .tmux.conf powerline dunst'
 
-    ## Crear Backup
-    crearBackup "$archivosConfiguracion"
-
-    ## Enlazar archivos de este repo
+    ## Crea el backup y enlazar archivos de este repo
     enlazarHome "$archivosConfiguracion"
 
     ## Actualizando repositorio para OhMyZsh
@@ -60,7 +57,7 @@ ohmyzsh_postconfiguracion() {
     cd "$WORKSCRIPT"
 }
 
-ohmyzsh_instalador() {
+ohmyzsh_Instalador() {
     echo -e "$VE Comenzando instalación de$RO ohmyzsh$CL"
 
     ohmyzsh_preconfiguracion

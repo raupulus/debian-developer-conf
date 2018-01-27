@@ -24,134 +24,30 @@
 ###########################
 ##       FUNCIONES       ##
 ###########################
-#Funcion para configurar VIM con sus temas y complementos
-function configurar_vim() {
-    echo -e "$VE Configurando VIM"
-
-    function vundle_actualizar_plugins() {
-        echo | vim +PluginInstall +qall
-    }
-
-    #Instalar Gestor de Plugins Vundle
-    function vundle_descargar() {
-        echo -e "$VE Descargando Vundle desde Repositorios"
-        if [ ! -d ~/.vim/bundle/Vundle.vim ] # Se intenta descargar 10 veces
-        then
-            for (( i=1; i<=10; i++ ))
-            do
-                if [ $i -eq 10 ]
-                then
-                    rm -R ~/.vim/bundle/Vundle.vim 2>> /dev/null
-                    break
-                fi
-                git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
-                vundle_actualizar_plugins && break
-            done
-        else
-            echo -e "$VE Vundle ya está instalado$CL"
-        fi
-    }
-
-    # Instalar Vundle y actualizar Plugins
-    vundle_descargar
-    vundle_actualizar_plugins
-
-    #Funcion para instalar todos los plugins
-    function vim_plugins() {
-        plugins_vim=("align closetag powerline youcompleteme xmledit autopep8 python-jedi python-indent utilsinps utl rails snippets fugitive ctrlp tlib tabular sintastic detectindent closetag align syntastic")
-        for plugin in $plugins_vim
-        do
-            echo -e "$VE Activando el plugin  → $RO $plugin $AM"
-            vim-addon-manager install $plugin >> /dev/null 2>> /dev/null
-            vim-addon-manager enable $plugin >> /dev/null 2>> /dev/null
-        done
-        echo -e "$VE Todos los plugins activados$CL"
-    }
-
-    function vim_colores() {
-        mkdir -p ~/.vim/colors 2>> /dev/null
-        #Creando archivos de colores, por defecto usara "monokai"
-        echo -e "$VE Descargando colores para sintaxis$AM"
-
-        if [ ! -f "~/.vim/colors/wombat.vim" ]
-        then
-            wget http://www.vim.org/scripts/download_script.php?src_id=6657 -O ~/.vim/colors/wombat.vim
-        fi
-
-        echo -e "$VE Descargando Tema$RO Monokai$AM"
-        if [ ! -f "~/.vim/colors/monokai1.vim" ]
-        then
-            wget https://raw.githubusercontent.com/lsdr/monokai/master/colors/monokai.vim -O ~/.vim/colors/monokai_1.vim
-        fi
-        echo -e "$VE Se ha concluido la instalacion de temas de colores$CL"
-    }
-
-    vim_plugins
-    vim_colores
-}
-
-#Agregar Archivos de configuración al home
-function agregar_conf_home() {
-    conf=$(ls -A ./home/)
+## Agregar Archivos de configuración al home
+agregar_conf_home() {
     echo -e "$VE Preparando para añadir archivos de configuración en el home de usuario$CL"
-
-   for c in $conf
-    do
-        # Crea backup del directorio o archivo si no tiene una anterior
-        if [ -f ./home/$c ]  # Si es un archivo
-        then
-            if [ ! -f ~/$c.BACKUP ]
-            then
-                echo -e "$VE Creando Backup del archivo$RO $c$CL"
-                if [ -f ~/$c ]
-                then
-                    mv ~/$c ~/$c.BACKUP 2>> /dev/null
-                else
-                    cp -R -f ./home/$c ~/$c.BACKUP 2>> /dev/null
-                fi
-            fi
-            echo -e "$VE Generando configuración del archivo$RO $c$CL"
-            cp -R -f ./home/$c ~/$c 2>> /dev/null
-        elif [ -d ./home/$c ]  # Si es un directorio
-        then
-            if [ ! -d ~/$c.BACKUP ]
-            then
-                echo -e "$VE Creando Backup del directorio$RO $c$CL"
-                if [ -d ~/$c ]
-                then
-                    mv ~/$c ~/$c.BACKUP 2>> /dev/null
-                else
-                    cp -R -f ./home/$c ~/$c.BACKUP 2>> /dev/null
-                fi
-            fi
-            echo -e "$VE Generando configuración del directorio$RO $c$CL"
-            cp -R -f ./home/$c ~/ 2>> /dev/null
-        fi
-    done
 }
 
-#Permisos
-function permisos() {
-    #sudo rm /bin/atom #Parece que no se crea en las últimas versiones
+## Permisos
+permisos() {
     echo -e "$VE Estableciendo permisos en el sistema$CL"
+    ## TODO → Permisos en home de usuario poco permisivos
 }
 
-#Establecer programas por defecto
-function programas_default() {
+## Establecer programas por defecto
+programas_default() {
     echo -e "$VE Estableciendo programas por defecto$CL"
 
-    #TERMINAl
-    if [ -f /usr/bin/tilix ]
-    then
+    ## TERMINAL
+    if [[ -f /usr/bin/tilix ]]; then
         echo -e "$VE Estableciendo terminal por defecto a$RO Tilix$CL"
         sudo touch /etc/profile.d/vte.sh 2>> /dev/null
         sudo update-alternatives --set x-terminal-emulator /usr/bin/tilix.wrapper 2>> /dev/null
-    elif [ -f /usr/bin/terminator ]
-    then
+    elif [[ -f '/usr/bin/terminator' ]]; then
         echo -e "$VE Estableciendo terminal por defecto a$RO Terminator$CL"
         sudo update-alternatives --set x-terminal-emulator /usr/bin/terminator
-    elif [ -f /usr/bin/sakura ]
-    then
+    elif [[ -f '/usr/bin/sakura' ]]; then
         echo -e "$VE Estableciendo terminal por defecto a$RO Sakura$CL"
         sudo update-alternatives --set x-terminal-emulator /usr/bin/sakura
     else
@@ -159,151 +55,138 @@ function programas_default() {
         sudo update-alternatives --set x-terminal-emulator /usr/bin/xterm
     fi
 
-    #Navegador
-    if [ -f /usr/bin/firefox-esr ]
-    then
+    ## Navegador
+    if [[ -f '/usr/bin/firefox-esr' ]]; then
         echo -e "$VE Estableciendo Navegador WEB por defecto a$RO Firefox-ESR$CL"
         sudo update-alternatives --set x-www-browser /usr/bin/firefox-esr
         sudo update-alternatives --set gnome-www-browser /user/bin/firefox-esr 2>> /dev/null
-    elif [ -f /usr/bin/firefox ]
-    then
+    elif [[ -f '/usr/bin/firefox' ]]; then
         echo -e "$VE Estableciendo Navegador WEB por defecto a$RO Firefox$CL"
         sudo update-alternatives --set x-www-browser /usr/bin/firefox
         sudo update-alternatives --set gnome-www-browser /user/bin/firefox 2>> /dev/null
-    elif [ -f /usr/bin/chromium ]
-    then
+    elif [[ -f '/usr/bin/chromium' ]]; then
         echo -e "$VE Estableciendo Navegador WEB por defecto a$RO Chromium$CL"
         sudo update-alternatives --set x-www-browser /usr/bin/chromium
         sudo update-alternatives --set gnome-www-browser /user/bin/chromium 2>> /dev/null
-    elif [ -f /usr/bin/chrome ]
-    then
+    elif [[ -f '/usr/bin/chrome' ]]; then
         echo -e "$VE Estableciendo Navegador WEB por defecto a$RO chrome$CL"
         sudo update-alternatives --set x-www-browser /usr/bin/chrome
         sudo update-alternatives --set gnome-www-browser /user/bin/chrome 2>> /dev/null
     fi
 
-    #Editor de texto terminal
-    if [ -f /usr/bin/vim.gtk3 ]
-    then
+    ## Editor de texto terminal
+    if [[ -f '/usr/bin/vim.gtk3' ]]; then
         echo -e "$VE Estableciendo Editor por defecto a$RO Vim GTK3$CL"
         sudo update-alternatives --set editor /usr/bin/vim.gtk3
-    elif [ -f /usr/bin/vim ]
-    then
+    elif [[ -f '/usr/bin/vim' ]]; then
         echo -e "$VE Estableciendo Editor WEB por defecto a$RO Vim$CL"
         sudo update-alternatives --set editor /usr/bin/vim
-    elif [ -f /bin/nano ]
-    then
+    elif [[ -f '/bin/nano' ]]; then
         echo -e "$VE Estableciendo Editor WEB por defecto a$RO Nano$CL"
         sudo update-alternatives --set editor /bin/nano
     fi
 
-    #Editor de texto con GUI
-    if [ -f /usr/bin/gedit ]
-    then
+    ## Editor de texto con GUI
+    if [[ -f '/usr/bin/gedit' ]]; then
         echo -e "$VE Estableciendo Editor GUI por defecto a$RO Gedit$CL"
         sudo update-alternatives --set gnome-text-editor /usr/bin/gedit
-    elif [ -f /usr/bin/kate ]
-    then
+    elif [[ -f '/usr/bin/kate' ]]; then
         echo -e "$VE Estableciendo Editor GUI por defecto a$RO Kate$CL"
         sudo update-alternatives --set gnome-text-editor /usr/bin/kate
-    elif [ -f /usr/bin/leafpad ]
-    then
+    elif [[ -f '/usr/bin/leafpad' ]]; then
         echo -e "$VE Estableciendo Editor GUI por defecto a$RO Leafpad$CL"
         sudo update-alternatives --set gnome-text-editor /usr/bin/leafpad
     fi
 }
 
-#Elegir intérprete de comandos
-function terminal() {
-    while true
-    do
+## Elegir intérprete de comandos
+terminal() {
+    while true; do
         echo -e "$VE Selecciona a continuación el$RO terminal$VE a usar$CL"
         echo -e "$VE Tenga en cuenta que este script está optimizado para$RO bash$CL"
-        echo -e "$VE 1) bash$CL"
-        echo -e "$VE 2) zsh$CL"
+        echo -e "$RO 1)$VE bash$CL"
+        echo -e "$RO 2)$VE zsh$CL"
         read -p "Introduce el terminal → bash/zsh: " term
-        case $term in
-            bash | 1)#Establecer bash como terminal
+        case "$term" in
+            bash | 1)  ## Establecer bash como terminal
                 chsh -s /bin/bash
-                # Cambiar enlace por defecto desde sh a bash
+                ## Cambiar enlace por defecto desde sh a bash
                 sudo rm /bin/sh
                 sudo ln -s /bin/bash /bin/sh
                 break;;
-            zsh | 2)#Establecer zsh como terminal
+            zsh | 2)  ## Establecer zsh como terminal
                 chsh -s /bin/zsh
-                # Cambiar enlace por defecto desde sh a zsh
+                ## Cambiar enlace por defecto desde sh a zsh
                 sudo rm /bin/sh
                 sudo ln -s /bin/zsh /bin/sh
                 break;;
-            *)#Opción errónea
+            *)  ## Opción errónea
                 echo -e "$RO Opción no válida$CL"
         esac
     done
 }
 
-# Configurar editor de gnome, gedit
-function configurar_gedit() {
-    mkdir -p ~/.local/share/ 2>> /dev/null
-    cp -r ./gedit/.local/share/* ~/.local/share/
-
-    mkdir -p ~/.config/gedit/ 2>> /dev/null
-    cp -r ./gedit/.config/gedit/* ~/.config/gedit/
-}
-
-# Configurar editor de terminal, nano
-function configurar_nano() {
-    echo -e "$VE Configurando editor nano$CL"
-
-    if [ -d ~/.nano ]
-    then
-        mv ~/.nano ~/.nanoBACKUP
+## Configurar editor de gnome, gedit
+configurar_gedit() {
+    if [[! -d "$HOME/.local/share" ]]; then
+        mkdir -p "$HOME/.local/share/" 2>> /dev/null
     fi
 
-    # Clona el repositorio o actualizarlo si ya existe
-    if [ -d ~/.nano/.git ]
-    then
-        # Actualizar Repositorio con git pull
-        dir_actual=`echo $PWD`
-        cd ~/.nano
+    cp -r ./gedit/.local/share/* "$HOME/.local/share/"
+
+    mkdir -p "$HOME/.config/gedit/" 2>> /dev/null
+    cp -r ./gedit/.config/gedit/* "$HOME/.config/gedit/"
+}
+
+## Configurar editor de terminal, nano
+configurar_nano() {
+    echo -e "$VE Configurando editor$RO nano$CL"
+
+    if [[ -d "$HOME/.nano" ]]; then
+        crearBackup '.nano'
+    fi
+
+    ## Clona el repositorio o actualizarlo si ya existe
+    if [[ -d "$HOME/.nano/.git" ]]; then
+        ## Actualizar Repositorio con git pull
+        cd "$HOME/.nano"
         git pull
-        cd $dir_actual
+        cd "$WORKSCRIPT"
     else
-        git clone https://github.com/scopatz/nanorc.git ~/.nano
+        git clone 'https://github.com/scopatz/nanorc.git' "$HOME/.nano"
     fi
 
-    # Habilita syntaxis para el usuario
-    cat ~/.nano/nanorc >> ~/.nanorc
+    ## Habilita syntaxis para el usuario
+    cat "$HOME/.nano/nanorc" >> "$HOME/.nanorc"
 }
 
-#Crea un archivo hosts muy completo que bloquea bastantes sitios malignos en la web
-function configurar_hosts() {
-    echo -e "$VE Configurar archivo$RO /etc/hosts"
+## Crea un archivo hosts muy completo que bloquea bastantes sitios malignos en la web
+configurar_hosts() {
+    echo -e "$VE Configurar archivo$RO /etc/hosts$CL"
 
-    # Crea copia del original para mantenerlo siempre
-    if [ ! -f /etc/hosts.BACKUP ]
-    then
-        sudo mv /etc/hosts /etc/hosts.BACKUP 2>> /dev/null
+    ## Crea copia del original para mantenerlo siempre
+    if [[ ! -f '/etc/hosts.BACKUP' ]]; then
+        sudo mv '/etc/hosts' '/etc/hosts.BACKUP'
     fi
 
-    sudo cat /etc/hosts.BACKUP > ./TMP/hosts 2>> /dev/null
-    cat ./etc/hosts >> ./TMP/hosts 2>> /dev/null
-    sudo cp ./TMP/hosts /etc/hosts 2>> /dev/null
+    sudo cat '/etc/hosts.BACKUP' > './tmp/hosts'
+    cat './etc/hosts' >> './TMP/hosts'
+    sudo cp './tmp/hosts' '/etc/hosts'
 }
 
-# Añadir plantillas
-function agregar_plantillas() {
-    if [ -d ~/Plantillas ]
-    then
-        cp -R ./Plantillas/* ~/Plantillas/
+## Añadir plantillas
+agregar_plantillas() {
+    if [[ -d "$HOME/Plantillas" ]]; then
+        cp -R './Plantillas/*' "$HOME/Plantillas/"
     else
-        mkdir ~/Plantillas
-        cp -R ./Plantillas/* ~/Plantillas/
+        mkdir "$HOME/Plantillas"
+        cp -R './Plantillas/*' "$HOME/Plantillas/"
     fi
 }
 
-function tilix_personalizar() {
-    # TODO → Comprobar si existe instalado cada tema
-    mkdir -p /home/alumno/.config/tilix/schemes/ 2>> /dev/null
+tilix_personalizar() {
+    ## TODO → Comprobar si existe instalado cada tema
+    mkdir -p "$HOME/.config/tilix/schemes/" 2>> /dev/null
     wget -qO $HOME"/.config/tilix/schemes/3024-night.json" https://git.io/v7QVY
     wget -qO $HOME"/.config/tilix/schemes/dimmed-monokai.json" https://git.io/v7QaJ
     wget -qO $HOME"/.config/tilix/schemes/monokai.json" https://git.io/v7Qad
@@ -313,12 +196,12 @@ function tilix_personalizar() {
     wget -qO $HOME"/.config/tilix/schemes/dracula.json" https://git.io/v7QaT
 }
 
-# Instalar Todas las configuraciones
-function instalar_configuraciones() {
+## Instalar Todas las configuraciones
+instalar_configuraciones() {
     permisos
     programas_default
 
-    cd $DIR_SCRIPT
+    cd "$WORKSCRIPT"
 
     configurar_gedit
     configurar_nano
@@ -326,7 +209,7 @@ function instalar_configuraciones() {
     configurar_vim
     configurar_hosts
     agregar_plantillas
-    terminal #Pregunta el terminal a usar
+    terminal ## Pregunta el terminal a usar
 
     sudo update-command-not-found >> /dev/null 2>> /dev/null
 }
