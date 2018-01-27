@@ -111,11 +111,16 @@ server_apache() {
                     mkdir "$HOME/GIT"
                 fi
 
-                ## TOFIX:
-                ## Comprobar si existen enlaces antes de hacer el siguiente paso
-                sudo ln -s "$HOME/GIT" '/var/www/html/Publico/GIT'
-                sudo ln -s "$HOME/GIT" "$HOME/git"
-                sudo chown -R "$USER:www-data" '/home/$USER/GIT'
+                ## Creando enlaces en el directorio Home
+                if [[ ! -h '/var/www/html/Publico/GIT' ]]; then
+                    sudo ln -s "$HOME/GIT" '/var/www/html/Publico/GIT'
+                    sudo chown -R "www-data:www-data" "/home/$USER/GIT"
+                    sudo chmod g+s "/home/$USER/GIT"
+                fi
+
+                if [[ ! -h "$HOME/git" ]] && [[ -h "$HOME/GIT" ]]; then
+                    sudo ln -s "$HOME/GIT" "$HOME/git"
+                fi
             else
                 echo -e "$VE No se crea enlaces ni directorio ~/GIT"
             fi
