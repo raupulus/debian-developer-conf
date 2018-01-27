@@ -58,14 +58,8 @@ agregar_llaves() {
     wget --quiet -O - https://www.postgresql.org/media/keys/ACCC4CF8.asc | sudo apt-key add -
 }
 
-## Añade Repositorios extras a Debian
-agregar_repositorios() {
-    echo -e "$VE Actualizando repositorios por primera vez$CL"
-    sudo apt update >> /dev/null 2>> /dev/null
-    sudo apt install -y apt-transport-https >> /dev/null && echo -e "$VE Instalado el paquete$RO apt-transport-https$CL" || echo -e "$VE Error al instalar$RO apt-transport-https$CL"
-
-    sudo apt install -y dirmngr >> /dev/null && echo -e "$VE Instalado el paquete$RO dirmngr$CL" || echo -e "$VE Error al instalar$RO dirmngr$CL"
-    echo -e "$VE Agregando Repositorios$CL"
+sources_repositorios() {
+    echo -e "$VE Añadido$RO sources.list$VE y$RO sources.list.d/$VE Agregados$CL"
 
     sudo cp $WORKSCRIPT/sources.list/sources.list.d/* /etc/apt/sources.list.d/
 
@@ -73,9 +67,21 @@ agregar_repositorios() {
     crearBackup '/etc/apt/sources.list' '/etc/apt/sources.list.d/'
 
     sudo cp "$WORKSCRIPT/sources.list/sources.list" "/etc/apt/sources.list"
+}
 
-    echo -e "$VE Repositorios Agregados$CL"
-    sleep 3
+preparar_repositorios() {
+    echo -e "$VE Actualizando repositorios por primera vez$CL"
+    sudo apt update >> /dev/null 2>> /dev/null
+    sudo apt install -y apt-transport-https >> /dev/null && echo -e "$VE Instalado el paquete$RO apt-transport-https$CL" || echo -e "$VE Error al instalar$RO apt-transport-https$CL"
+
+    sudo apt install -y dirmngr >> /dev/null && echo -e "$VE Instalado el paquete$RO dirmngr$CL" || echo -e "$VE Error al instalar$RO dirmngr$CL"
+    echo -e "$VE Agregando Repositorios$CL"
+}
+
+## Añade Repositorios extras a Debian
+agregar_repositorios() {
+    sources_repositorios
+    preparar_repositorios
 
     echo -e "$VE Actualizando listas de$RO repositorios$VE por segunda vez$CL"
     sudo apt update >> /dev/null 2>> /dev/null
