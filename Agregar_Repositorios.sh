@@ -20,6 +20,9 @@
 ###########################
 ##       FUNCIONES       ##
 ###########################
+##
+## Añade llaves oficiales para cada repositorio
+##
 agregar_llaves() {
     echo -e "$VE Instalando llaves de repositorios$CL"
 
@@ -58,6 +61,9 @@ agregar_llaves() {
     wget --quiet -O - https://www.postgresql.org/media/keys/ACCC4CF8.asc | sudo apt-key add -
 }
 
+##
+## Crea Backups de repositorios y añade nuevas listas
+##
 sources_repositorios() {
     echo -e "$VE Añadido$RO sources.list$VE y$RO sources.list.d/$VE Agregados$CL"
 
@@ -69,6 +75,9 @@ sources_repositorios() {
     sudo cp "$WORKSCRIPT/sources.list/sources.list" "/etc/apt/sources.list"
 }
 
+##
+## Instala dependencias para actualizar repositorios e instalar
+##
 preparar_repositorios() {
     echo -e "$VE Actualizando repositorios por primera vez$CL"
     sudo apt update >> /dev/null 2>> /dev/null
@@ -78,14 +87,18 @@ preparar_repositorios() {
     echo -e "$VE Agregando Repositorios$CL"
 }
 
+##
 ## Añade Repositorios extras a Debian
+##
 agregar_repositorios() {
-    sources_repositorios
     preparar_repositorios
+    sources_repositorios
 
     echo -e "$VE Actualizando listas de$RO repositorios$VE por segunda vez$CL"
-    sudo apt update >> /dev/null 2>> /dev/null
+    sudo apt update
+
     agregar_llaves
+
     echo -e "$VE Actualizando listas de repositorios definitiva, comprueba que no hay$RO errores$CL"
     sudo apt update
 }
