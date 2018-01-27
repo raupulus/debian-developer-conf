@@ -45,8 +45,8 @@ VERSION='0.4.1'  ## Versión en desarrollo
 ############################
 ##     IMPORTACIONES      ##
 ############################
-source "$WORKSCRIPT/funciones.sh"
 source "$WORKSCRIPT/Agregar_Repositorios.sh"
+source "$WORKSCRIPT/funciones.sh"
 source "$WORKSCRIPT/Instalar_Configuraciones.sh"
 source "$WORKSCRIPT/limpiador.sh"
 source "$WORKSCRIPT/Servidores.sh"
@@ -86,23 +86,23 @@ menuPrincipal() {
 
         case $entrada in
 
-            1) agregar_repositorios;;  ## Menú de Repositorios
-            2) menuAplicaciones;;      ## Menú de Aplicaciones
-            3) menuConfiguraciones;;   ## Menú de Configuraciones
-            4) menuPersonalizacion;;   ## Menú de Personalización
-            5) menuServidores;;        ## Menú de Servidores
-            6) echo "";;               ## Todos los pasos anteriores
+            1) agregar_repositorios;;     ## Menú de Repositorios
+            2) menuAplicaciones;;         ## Menú de Aplicaciones
+            3) instalar_configuraciones;; ## Menú de Configuraciones
+            4) menuPersonalizacion;;      ## Menú de Personalización
+            5) menuServidores;;           ## Menú de Servidores
+            6) echo "";;                  ## Todos los pasos anteriores
 
             0)  ## SALIR
-                clear
-                echo -e "$RO Se sale del menú$CL"
-                echo ''
-                exit 0;;
+              clear
+              echo -e "$RO Se sale del menú$CL"
+              echo ''
+              exit 0;;
 
             *)  ## Acción ante entrada no válida
-                clear
-                echo ""
-                echo -e "                      $RO ATENCIÓN: Elección no válida$CL";;
+              clear
+              echo ""
+              echo -e "                      $RO ATENCIÓN: Elección no válida$CL";;
         esac
     done
 }
