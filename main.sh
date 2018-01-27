@@ -72,7 +72,7 @@ menuPrincipal() {
         clear
 
         local descripcion='Menú Principal
-            1) Repositorios
+            1) Agregar Repositorios
             2) Aplicaciones
             3) Configuraciones
             4) Personalización
@@ -89,7 +89,7 @@ menuPrincipal() {
 
         case $entrada in
 
-            1) echo "";;              ## Menú de Repositorios
+            1) agregar_repositorios;; ## Menú de Repositorios
             2) menuAplicaciones;;     ## Menú de Aplicaciones
             3) menuConfiguraciones;;  ## Menú de Configuraciones
             4) menuPersonalizacion;;  ## Menú de Personalización
