@@ -45,12 +45,12 @@ VERSION='0.4.1'  ## Versión en desarrollo
 ############################
 ##     IMPORTACIONES      ##
 ############################
-source '$WORKSCRIPT/funciones.sh'
-source '$WORKSCRIPT/Apps/0_Main.sh'
+source "$WORKSCRIPT/Agregar_Repositorios.sh"
+source "$WORKSCRIPT/funciones.sh"
+source "$WORKSCRIPT/Apps/0_Main.sh"
 #source 'conf/0_Main.sh'
 #source 'servers/0_Main.sh'
 #source 'Personalizar/0_Main.sh'
-#source ./Agregar_Repositorios.sh
 #source ./Tipografías.sh
 #source ./Instalar_Configuraciones.sh
 #source ./Variables_Entorno.sh
