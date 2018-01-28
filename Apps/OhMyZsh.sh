@@ -25,7 +25,7 @@ ohmyzsh_descargar() {
     echo -e "$VE Descargando OhMyZSH$CL"
     for (( i=1; i<=$REINTENTOS; i++ )); do
         if [[ -d "$HOME/.oh-my-zsh" ]]; then
-            rm -Ryf "$HOME/.oh-my-zsh"
+            rm -Rf "$HOME/.oh-my-zsh"
         fi
 
         ###TOFIX → Reparar script que sale mal: contraseña PAM y error (no continua por eso), por ello temporalmente siempre hay "break"
