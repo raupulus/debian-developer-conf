@@ -41,6 +41,8 @@ CL="\e[0m"       ## Limpiar colores
 WORKSCRIPT=$PWD  ## Directorio principal del script
 USER=$(whoami)   ## Usuario que ejecuta el script
 VERSION='0.4.5'  ## Versión en desarrollo
+LOGERROR="$WORKSCRIPT/errores.log"  ## Archivo donde almacenar errores
+DEBUG=false      ## Establece si está el script en modo depuración
 
 ############################
 ##     IMPORTACIONES      ##

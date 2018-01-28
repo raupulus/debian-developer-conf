@@ -16,3 +16,5 @@ conf/home/.vim/colors/wombat.vim
 conf/home/.vim/bundle/*
 /conf/home/.vim/sessions/*
 conf/home/.vim/sessions/*
+errores.log
+/errores.log
