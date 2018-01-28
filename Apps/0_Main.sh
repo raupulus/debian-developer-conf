@@ -32,7 +32,7 @@ source "$WORKSCRIPT/Apps/3_Aplicaciones_Usuario.sh"
 ###########################
 menuAplicaciones() {
     while true :; do
-        #clear
+        clear
         local descripcion='Menú de aplicaciones
             1) Aplicaciones Básicas
             2) Aplicaciones Extras
@@ -54,20 +54,19 @@ menuAplicaciones() {
             3)  aplicaciones_usuarios;;  ## Aplicaciones de Usuario
 
             4)  ## Todas las aplicaciones
-                #clear
+                clear
                 echo -e "$VE Instalando todas las aplicaciones$CL"
                 aplicaciones_basicas
                 aplicaciones_extras
                 aplicaciones_usuarios;;
 
             0)  ## SALIR
-                #clear
+                clear
                 echo -e "$RO Se sale del menú$CL"
                 echo ''
                 break;;
 
             *)  ## Acción ante entrada no válida
-                #clear
                 echo ""
                 echo -e "                      $RO ATENCIÓN: Elección no válida$CL";;
         esac
