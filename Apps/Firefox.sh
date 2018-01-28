@@ -26,8 +26,7 @@
 ###########################
 
 ## Instalar versiones de Firefox
-firefox_install() {
-
+firefox_instalador() {
     # Si no existen los directorios dentro del usuario, se crearán
     if [[ ! -d "$HOME/.local/opt" ]]; then
         mkdir -p "$HOME/.local/opt"
