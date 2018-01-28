@@ -202,10 +202,10 @@ configurar_hosts() {
 ##
 agregar_plantillas() {
     if [[ -d "$HOME/Plantillas" ]]; then
-        cp -R "$WORKSCRIPT/Plantillas/*" "$HOME/Plantillas/"
+        cp -R $WORKSCRIPT/Plantillas/* "$HOME/Plantillas/"
     else
         mkdir "$HOME/Plantillas"
-        cp -R "$WORKSCRIPT/Plantillas/*" "$HOME/Plantillas/"
+        cp -R $WORKSCRIPT/Plantillas/* "$HOME/Plantillas/"
     fi
 }
 
