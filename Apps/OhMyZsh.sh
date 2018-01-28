@@ -61,7 +61,7 @@ ohmyzsh_Instalador() {
 
     ohmyzsh_preconfiguracion
 
-    if [[ -f '$HOME/.oh-my-zsh/oh-my-zsh.sh' ]]; then
+    if [[ -f "$HOME/.oh-my-zsh/oh-my-zsh.sh" ]]; then
         echo -e "$VE Ya esta$RO ohmyzsh$VE instalado en el equipo, omitiendo paso$CL"
     else
         ohmyzsh_descargar
