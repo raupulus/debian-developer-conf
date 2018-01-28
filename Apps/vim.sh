@@ -95,11 +95,6 @@ vim_Instalador() {
 
     vim_preconfiguracion
 
-    if [[ -f '/usr/bin/vim' ]]; then
-        echo -e "$VE Ya esta$RO Vim$VE instalado en el equipo, omitiendo paso$CL"
-    else
-        vim_instalar
-    fi
-
+    vim_instalar
     vim_postconfiguracion
 }
