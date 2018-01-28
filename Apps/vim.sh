@@ -24,9 +24,6 @@ vim_preconfiguracion() {
     echo -e "$VE Generando Pre-Configuraciones de$RO Vim$CL"
     local archivosConfiguracion='.vim .vimrc .gvimrc'
 
-    ## Crear Backup
-    crearBackup "$archivosConfiguracion"
-
     ## Enlazar archivos de este repo
     enlazarHome "$archivosConfiguracion"
 
