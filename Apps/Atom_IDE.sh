@@ -23,6 +23,11 @@
 
 atom_preconfiguracion() {
     echo -e "$VE Se va a instalar$RO Atom IDE$CL"
+
+    if [[ ! -d "$HOME/.atom" ]]; {
+        mkdir "$HOME/.atom"
+    }
+
     if [[ ! -h "$HOME/.atom/config.cson" ]]; then
         enlazarHome '.atom/config.cson'
     fi
