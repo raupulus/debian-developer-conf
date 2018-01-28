@@ -85,6 +85,8 @@ preparar_repositorios() {
 
     instalarSoftware dirmngr && echo -e "$VE Instalado el paquete$RO dirmngr$CL" || echo -e "$VE Error al instalar$RO dirmngr$CL"
     echo -e "$VE Agregando Repositorios$CL"
+
+    instalarSoftware 'curl'
 }
 
 ##
