@@ -96,7 +96,12 @@ menuPrincipal() {
             1) agregar_repositorios;;     ## Menú de Repositorios
             2) menuAplicaciones;;         ## Menú de Aplicaciones
             3) instalar_configuraciones;; ## Menú de Configuraciones
-            4) menuPersonalizacion;;      ## Menú de Personalización
+            4) #menuPersonalizacion;;     ## Menú de Personalización
+               ## TOFIX → Las siguientes funciones deben quedar en Personalizar/
+               configuracion_git
+               personalizar
+               agregar_fuentes
+               instalar_variables;;
             5) menuServidores;;           ## Menú de Servidores
             6) echo "";;                  ## Todos los pasos anteriores
 
