@@ -27,11 +27,12 @@ atom_preconfiguracion() {
     echo -e "$VE Puedes limpiar$RO Atom Completamente$AM"
     read -p '¿Quieres borrar toda la configuración existente? s/N → ' input
     if [[ $input = 's' ]] || [[ $input = 'S' ]]; then
-        echo -e "$VE Añadiendo configuración nueva$CL"
+        echo -e "$RO →Borrando configuración vieja←$CL"
         rm -R "$HOME/.atom"
     fi
 
     if [[ ! -d "$HOME/.atom" ]]; then
+        echo -e "$VE Se crea directorio $HOME/.atom$CL"
         mkdir "$HOME/.atom"
     fi
 
