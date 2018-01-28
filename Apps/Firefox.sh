@@ -46,7 +46,7 @@ firefox_instalador() {
         instalar() {
             ## Desempaquetar Firefox-Developer_amd64.tar.bz2
             mkdir -p "$WORKSCRIPT/tmp/Firefox-Developer" 2>> /dev/null
-            tar -xjvf "$WORKSCRIPT/tmp/Firefox-Developer.tar.bz2" -C "$WORKSCRIPT/tmp/Firefox-Developer_amd64" 2>> /dev/null
+            tar -xjvf "$WORKSCRIPT/tmp/Firefox-Developer.tar.bz2" -C "$WORKSCRIPT/tmp/Firefox-Developer" 2>> /dev/null
 
             ## Limpia destinos
             rm -Rf "$HOME/.local/opt/Firefox_Developer"
@@ -54,7 +54,7 @@ firefox_instalador() {
             rm -Rf "$HOME/.local/share/applications/firefox-developer.desktop"
 
             ## Mover archivo extraido a su ubicación final
-            mv "$WORKSCRIPT/tmp/Firefox-Developer_amd64/firefox" "$HOME/.local/opt/Firefox_Developer" 2>> /dev/null
+            mv "$WORKSCRIPT/tmp/Firefox-Developer/firefox" "$HOME/.local/opt/Firefox_Developer" 2>> /dev/null
 
             ## Crear enlaces de usuario y permisos de ejecución
             echo "$HOME/.local/opt/Firefox_Developer/firefox - P Firefox-Developer" > "$HOME/.local/bin/firefox-developer"
@@ -64,7 +64,10 @@ firefox_instalador() {
             cp "$WORKSCRIPT/Accesos_Directos/firefox-developer.desktop" "$HOME/.local/share/applications/" 2>> /dev/null
         }
 
-        if [[ -f "$HOME/.local/bin/firefox-developer" ]]; then
+        if [[ -f "$HOME/.local/opt/Firefox_Developer/firefox" ]] &&
+           [[ -f "$HOME/.local/bin/firefox-developer" ]] &&
+           [[ -f "$HOME/.local/share/applications/firefox-developer.desktop" ]]
+        then
             echo -e "$VE Ya esta$RO Firefox Developer$VE instalado en el equipo, omitiendo paso$CL"
         ## Comprueba que no está el archivo descargado en este directorio
         elif [[ ! -f "$WORKSCRIPT/tmp/Firefox-Developer.tar.bz2" ]]; then
@@ -115,7 +118,10 @@ firefox_instalador() {
             fi
         }
 
-        if [[ -f "$HOME/.local/bin/firefox-nightly" ]]; then
+        if [[ -f "$HOME/.local/opt/Firefox_Nightly/firefox" ]] &&
+           [[ -f "$HOME/.local/bin/firefox-nightly" ]] &&
+           [[ -f "$HOME/.local/share/applications/firefox-nightly.desktop" ]]
+        then
             echo -e "$VE Ya esta$RO Firefox Nightly$VE instalado en el equipo, omitiendo paso$CL"
         elif [[ ! -f "$WORKSCRIPT/tmp/Firefox-Nightly.tar.bz2" ]]; then
             local REINTENTOS=10
