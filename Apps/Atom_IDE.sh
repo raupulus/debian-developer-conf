@@ -30,16 +30,9 @@ atom_preconfiguracion() {
     echo -e "$VE Se va a instalar$rojo Atom IDE$CL"
     echo -e "$VE Puedes añadir configuraciones$AM"
     read -p '¿Quieres configuraciones? s/N → ' input
-    if [[ $input = 's' ]] ||
-       [[ $input = 'S' ]] ||
-       [[ $input = 'y' ]] ||
-       [[ $input = 'Y' ]]
-    then
-        echo -e "$VE Creando Backup de ~/.atom$CL"
-        crearBackup "$HOME/.atom"
-
+    if [[ $input = 's' ]] || [[ $input = 'S' ]]; then
         echo -e "$VE Añadiendo configuración nueva$CL"
-        enlazarHome ".atom"
+        enlazarHome '.atom'
     fi
 }
 
@@ -57,7 +50,7 @@ atom_plugins() {
 
     ## Si se ha instalado correctamente ATOM, instalamos sus plugins
     echo -e "$VE Preparando instalación complementos$rojo Atom$CL"
-    if [[ -f /usr/bin/atom ]]; then
+    if [[ -f '/usr/bin/atom' ]]; then
         for p in $atom; do
             ## Comprobación si existe instalado el complemento
             if [[ -d "$HOME/.atom/packages/$p" ]]; then
@@ -74,12 +67,12 @@ atom_plugins() {
 atom_instalador() {
     instalar() {
         descargar "atom.deb" "https://atom.io/download/deb"
-        sudo dpkg -i $WORKSCRIPT/tmp/atom.deb && sudo apt install -f -y
+        instalarSoftwareDPKG "$WORKSCRIPT/tmp/atom.deb"
     }
 
     ## Comprueba si está Atom instalado
-    if [[ -f /usr/bin/atom ]]; then
-        echo -e "$VE Ya esta$ROO ATOM$VE instalado en el equipo, omitiendo paso$CL"
+    if [[ -f '/usr/bin/atom' ]]; then
+        echo -e "$VE Ya esta$RO ATOM$VE instalado en el equipo, omitiendo paso$CL"
     else
         ## Preparando configuración de Atom
         atom_preconfiguracion
@@ -87,10 +80,10 @@ atom_instalador() {
         ## Comprobar si está descargado o descargar
         if [[ -f "$WORKSCRIPT/tmp/atom.deb" ]]; then
             echo -e "$VE Instalando$rojo Atom $CL"
-            sudo dpkg -i "$WORKSCRIPT/tmp/atom.deb" && sudo apt install -f -y
+            instalarSoftwareDPKG "$WORKSCRIPT/tmp/atom.deb"
 
             ## Si falla la instalación se rellama la función tras limpiar
-            if [[ ! -f /usr/bin/atom ]]; then
+            if [[ ! -f '/usr/bin/atom' ]]; then
                 rm -f "$WORKSCRIPT/tmp/atom.deb"
                 instalar
             fi

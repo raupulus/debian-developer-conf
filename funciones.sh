@@ -22,6 +22,9 @@
 ###########################
 ##       FUNCIONES       ##
 ###########################
+test() {
+    echo 'si llega a funciones'
+}
 ##
 ## Crea un respaldo del archivo o directorio pasado como parámetro
 ## @param  $*  Recibe una serie de elementos a los que crearle un backup
@@ -165,7 +168,7 @@ enlazarHome() {
             crearBackup "$HOME/$x" && rm -R "$HOME/$x"
         else
             echo -e "$VE Eliminando $RO$HOME/$x$VE, ya existe$RO Backup$CL"
-            rm "$HOME/$x"
+            rm "$HOME/$x" 2>> /dev/null
         fi
 
         ln -s "$WORKSCRIPT/conf/home/$x" "$HOME/$x"
