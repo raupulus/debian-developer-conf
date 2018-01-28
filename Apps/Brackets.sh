@@ -1,84 +1,63 @@
-#!/bin/bash
+#!/usr/bin/env bash
 # -*- ENCODING: UTF-8 -*-
-#######################################
-# ###     Raúl Caro Pastorino     ### #
-## ##                             ## ##
-### # https://github.com/fryntiz/ # ###
-## ##                             ## ##
-# ###       www.fryntiz.es        ### #
-#######################################
+##
+## @author     Raúl Caro Pastorino
+## @copyright  Copyright © 2017 Raúl Caro Pastorino
+## @license    https://wwww.gnu.org/licenses/gpl.txt
+## @email      tecnico@fryntiz.es
+## @web        www.fryntiz.es
+## @github     https://github.com/fryntiz
+## @gitlab     https://gitlab.com/fryntiz
+## @twitter    https://twitter.com/fryntiz
+##
+##             Guía de estilos aplicada:
+## @style      https://github.com/fryntiz/Bash_Style_Guide
 
 ############################
-##   Constantes Colores   ##
+##     INSTRUCCIONES      ##
 ############################
-amarillo="\033[1;33m"
-azul="\033[1;34m"
-blanco="\033[1;37m"
-cyan="\033[1;36m"
-gris="\033[0;37m"
-magenta="\033[1;35m"
-rojo="\033[1;31m"
-verde="\033[1;32m"
 
-#############################
-##   Variables Generales   ##
-#############################
-DIR_SCRIPT=`echo $PWD`
+############################
+##     IMPORTACIONES      ##
+############################
 
-function brackets_descargar() {
-    echo -e "$verde Descargando$rojo Brackets$gris"
+###########################
+##       FUNCIONES       ##
+###########################
 
-    REINTENTOS=10
-    for (( i=1; i<=$REINTENTOS; i++ ))
-    do
-        rm $DIR_SCRIPT/TMP/Brackets.Release.1.10.64-bit.deb 2>> /dev/null
-        wget https://github.com/adobe/brackets/releases/download/release-1.10/Brackets.Release.1.10.64-bit.deb -O $DIR_SCRIPT/TMP/Brackets.Release.1.10.64-bit.deb && break
-    done
+brackets_descargar() {
+    descargar 'Brackets.deb' "https://github.com/adobe/brackets/releases/download/release-1.10/Brackets.Release.1.10.64-bit.deb"
 
-    for (( i=1; i<=$REINTENTOS; i++ ))
-    do
-        rm $DIR_SCRIPT/TMP/libgcrypt11_1.5.0-5+deb7u6_amd64.deb 2>> /dev/null
-        wget http://security.debian.org/debian-security/pool/updates/main/libg/libgcrypt11/libgcrypt11_1.5.0-5+deb7u6_amd64.deb -O $DIR_SCRIPT/TMP/libgcrypt11_1.5.0-5+deb7u6_amd64.deb && break
-    done
+    descargar 'libgcrypt.deb' "http://security.debian.org/debian-security/pool/updates/main/libg/libgcrypt11/libgcrypt11_1.5.0-5+deb7u6_amd64.deb"
 }
 
-function brackets_preconfiguracion() {
-    echo -e "$verde Generando Pre-Configuraciones de$rojo Brackets$gris"
+brackets_preconfiguracion() {
+    echo -e "$VE Generando Pre-Configuraciones de$RO Brackets$CL"
 }
 
-function brackets_instalar() {
-    echo -e "$verde Preparando para instalar$rojo Brackets$gris"
-    sudo dpkg -i $DIR_SCRIPT/TMP/libgcrypt11_1.5.0-5+deb7u6_amd64.deb
+brackets_instalar() {
+    echo -e "$VE Preparando para instalar$RO Brackets$CL"
+    sudo dpkg -i "$WORKSCRIPT/tmp/libgcrypt.deb"
 
-    echo -e "$verde Instalando$rojo Brackets$gris"
-    sudo dpkg -i $DIR_SCRIPT/TMP/Brackets.Release.1.10.64-bit.deb && sudo apt install -f -y
+    echo -e "$VE Instalando$RO Brackets$CL"
+    sudo dpkg -i "$WORKSCRIPT/tmp/Brackets.deb" && sudo apt install -f -y
 }
 
-function brackets_postconfiguracion() {
-    echo -e "$verde Generando Post-Configuraciones$rojo Brackets$gris"
+brackets_postconfiguracion() {
+    echo -e "$VE Generando Post-Configuraciones$RO Brackets$CL"
 }
 
-function brackets_instalador() {
-    echo -e "$verde Comenzando instalación de$rojo Brackets$gris"
+brackets_instalador() {
+    echo -e "$VE Comenzando instalación de$RO Brackets$CL"
 
     brackets_preconfiguracion
 
-    if [ -f /usr/bin/brackets ]
-    then
-        echo -e "$verde Ya esta$rojo Brackets$verde instalado en el equipo, omitiendo paso$gris"
+    if [[ -f '/usr/bin/brackets' ]]; then
+        echo -e "$VE Ya esta$RO Brackets$VE instalado en el equipo, omitiendo paso$CL"
     else
-        if [ -f $DIR_SCRIPT/TMP/Brackets.Release.1.10.64-bit.deb ]
-        then
+        if [[ -f "$WORKSCRIPT/tmp/Brackets.deb" ]]; then
             brackets_instalar
         else
-            brackets_descargar
-            brackets_instalar
-        fi
-
-        # Si falla la instalación se rellama la función tras limpiar
-        if [ ! -f /usr/bin/brackets ]
-        then
-            rm -f $DIR_SCRIPT/TMP/Brackets.Release.1.10.64-bit.deb
             brackets_descargar
             brackets_instalar
         fi

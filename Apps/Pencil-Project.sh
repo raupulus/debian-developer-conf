@@ -1,76 +1,66 @@
-#!/bin/bash
+#!/usr/bin/env bash
 # -*- ENCODING: UTF-8 -*-
-#######################################
-# ###     Raúl Caro Pastorino     ### #
-## ##                             ## ##
-### # https://github.com/fryntiz/ # ###
-## ##                             ## ##
-# ###       www.fryntiz.es        ### #
-#######################################
+##
+## @author     Raúl Caro Pastorino
+## @copyright  Copyright © 2017 Raúl Caro Pastorino
+## @license    https://wwww.gnu.org/licenses/gpl.txt
+## @email      tecnico@fryntiz.es
+## @web        www.fryntiz.es
+## @github     https://github.com/fryntiz
+## @gitlab     https://gitlab.com/fryntiz
+## @twitter    https://twitter.com/fryntiz
+##
+##             Guía de estilos aplicada:
+## @style      https://github.com/fryntiz/Bash_Style_Guide
 
 ############################
-##   Constantes Colores   ##
+##     INSTRUCCIONES      ##
 ############################
-amarillo="\033[1;33m"
-azul="\033[1;34m"
-blanco="\033[1;37m"
-cyan="\033[1;36m"
-gris="\033[0;37m"
-magenta="\033[1;35m"
-rojo="\033[1;31m"
-verde="\033[1;32m"
 
-#############################
-##   Variables Generales   ##
-#############################
+############################
+##     IMPORTACIONES      ##
+############################
 
-
-DIR_SCRIPT=`echo $PWD`
-
-function pencilProject_descargar() {
-    echo -e "$verde Descargando$rojo Pencil Project$gris"
-    REINTENTOS=10
-    for (( i=1; i<=$REINTENTOS; i++ ))
-    do
-        rm $DIR_SCRIPT/TMP/Pencil_Project.deb 2>> /dev/null
-        wget --show-progress http://pencil.evolus.vn/dl/V3.0.4/Pencil_3.0.4_amd64.deb -O $DIR_SCRIPT/TMP/Pencil_Project.deb && break
-    done
+###########################
+##       FUNCIONES       ##
+###########################
+pencilProject_descargar() {
+    descargar 'Pencil_Project.deb' 'http://pencil.evolus.vn/dl/V3.0.4/Pencil_3.0.4_amd64.deb'
 }
 
-function pencilProject_preconfiguracion() {
-    echo -e "$verde Generando Pre-Configuraciones de$rojo Pencil Project$gris"
+pencilProject_preconfiguracion() {
+    echo -e "$VE Generando Pre-Configuraciones de$RO Pencil Project$CL"
 }
 
-function pencilProject_instalar() {
-    echo -e "$verde Instalando$rojo Pencil Project$gris"
-    sudo dpkg -i $DIR_SCRIPT/TMP/Pencil_Project.deb && sudo apt install -f -y
+pencilProject_instalar() {
+    echo -e "$VE Instalando$RO Pencil Project$CL"
+    instalarSoftwareDPKG "$WORKSCRIPT/tmp/Pencil_Project.deb"
 }
 
-function pencilProject_postconfiguracion() {
-    echo -e "$verde Generando Post-Configuraciones$rojo Pencil Project$gris"
+pencilProject_postconfiguracion() {
+    echo -e "$VE Generando Post-Configuraciones$RO Pencil Project$CL"
 }
 
-function pencilProject_instalador() {
-    echo -e "$verde Comenzando instalación de$rojo Pencil Project$gris"
+pencilProject_instalador() {
+    echo -e "$VE Comenzando instalación de$RO Pencil Project$CL"
 
     pencilProject_preconfiguracion
 
-    if [ -f /usr/bin/pencil ]
-    then
-        echo -e "$verde Ya esta$rojo Pencil Project$verde instalado en el equipo, omitiendo paso$gris"
+    if [[ -f '/usr/bin/pencil' ]] ||
+       [[ -f '/usr/local/bin/pencil' ]]; then
+        echo -e "$VE Ya esta$RO Pencil Project$VE instalado en el equipo, omitiendo paso$CL"
     else
-        if [ -f $DIR_SCRIPT/TMP/Pencil_Project.deb ]
-        then
+        if [[ -f "$WORKSCRIPT/tmp/Pencil_Project.deb" ]]; then
             pencilProject_instalar
         else
             pencilProject_descargar
             pencilProject_instalar
         fi
 
-        # Si falla la instalación se rellama la función tras limpiar
-        if [ ! -f /usr/bin/pencil ]
-        then
-            rm -f $DIR_SCRIPT/TMP/Pencil_Project.deb
+        ## Si falla la instalación se rellama la función tras limpiar
+        if [[ ! -f '/usr/bin/pencil' ]] ||
+           [[ ! -f '/usr/local/bin/pencil' ]]; then
+            rm -f "$WORKSCRIPT/tmp/Pencil_Project.deb"
             pencilProject_descargar
             pencilProject_instalar
         fi

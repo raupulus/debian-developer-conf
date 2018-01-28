@@ -1,173 +1,139 @@
-#!/bin/bash
+#!/usr/bin/env bash
 # -*- ENCODING: UTF-8 -*-
-#######################################
-# ###     Raúl Caro Pastorino     ### #
-## ##                             ## ##
-### # https://github.com/fryntiz/ # ###
-## ##                             ## ##
-# ###       www.fryntiz.es        ### #
-#######################################
-
-# Script principal
-# Desde aquí se llamaran a todos los demás scripts separando funciones para cada uno de ellos
-#
-# Ten en cuenta que este script hace modificaciones en el equipo a mi gusto
-# Puede no funcionar correctamente si usas software de repositorios externo
-# Probablemente no funcionará en otras distribuciones distintas a Debian rama Stable
+##
+## @author     Raúl Caro Pastorino
+## @copyright  Copyright © 2017 Raúl Caro Pastorino
+## @license    https://wwww.gnu.org/licenses/gpl.txt
+## @email      tecnico@fryntiz.es
+## @web        www.fryntiz.es
+## @github     https://github.com/fryntiz
+## @gitlab     https://gitlab.com/fryntiz
+## @twitter    https://twitter.com/fryntiz
+##
+##             Guía de estilos aplicada:
+## @style      https://github.com/fryntiz/Bash_Style_Guide
 
 ############################
-##   Constantes Colores   ##
+##     INSTRUCCIONES      ##
 ############################
-amarillo="\033[1;33m"
-azul="\033[1;34m"
-blanco="\033[1;37m"
-cyan="\033[1;36m"
-gris="\033[0;37m"
-magenta="\033[1;35m"
-rojo="\033[1;31m"
-verde="\033[1;32m"
+## Script principal
+## Desde aquí se llamaran a todos los demás scripts separando
+## funciones para cada uno de ellos.
+##
+## Ten en cuenta que este script hace modificaciones en el equipo a mi gusto
+## Puede no funcionar correctamente si usas software de repositorios externo
+## Probablemente no funcionará en otras distribuciones distintas
+## a Debian rama Stable.
+
+############################
+##       CONSTANTES       ##
+############################
+AM="\033[1;33m"  ## Color Amarillo
+AZ="\033[1;34m"  ## Color Azul
+BL="\033[1;37m"  ## Color Blanco
+CY="\033[1;36m"  ## Color Cyan
+GR="\033[0;37m"  ## Color Gris
+MA="\033[1;35m"  ## Color Magenta
+RO="\033[1;31m"  ## Color Rojo
+VE="\033[1;32m"  ## Color Verde
+CL="\e[0m"       ## Limpiar colores
+
+WORKSCRIPT=$PWD  ## Directorio principal del script
+USER=$(whoami)   ## Usuario que ejecuta el script
+VERSION='0.5.0'  ## Versión en desarrollo
+LOGERROR="$WORKSCRIPT/errores.log"  ## Archivo donde almacenar errores
+DEBUG=false      ## Establece si está el script en modo depuración
+
+############################
+##     IMPORTACIONES      ##
+############################
+source "$WORKSCRIPT/Agregar_Repositorios.sh"
+source "$WORKSCRIPT/funciones.sh"
+source "$WORKSCRIPT/Instalar_Configuraciones.sh"
+source "$WORKSCRIPT/limpiador.sh"
+source "$WORKSCRIPT/Servidores.sh"
+
+source "$WORKSCRIPT/Apps/0_Main.sh"
+source "$WORKSCRIPT/Personalizar/Configurar_GIT.sh"
+source "$WORKSCRIPT/Personalizar/Personalización_GTK.sh"
+source "$WORKSCRIPT/Personalizar/Tipografías.sh"
+source "$WORKSCRIPT/Personalizar/Variables_Entorno.sh"
+
+## TOFIX → Refactorizar servidores en subdirectorio con menú propio
+## TOFIX → Refactorizar Personalización en subdirectorio añadiendo menú propio
+#source 'Servidores/0_Main.sh'
+#source 'Personalizar/0_Main.sh'
 
 
-#############################
-##    Importar Fuentes     ##
-#############################
+###########################
+##       VARIABLES       ##
+###########################
+errores=()
 
-source ./Agregar_Repositorios.sh
-source ./Instalar_Software.sh
-source ./Instalar_Software_Extra.sh
-source ./Instalar_Software_Usuario.sh
-source ./Tipografías.sh
-source ./Instalar_Configuraciones.sh
-source ./Variables_Entorno.sh
-source ./Configurar_GIT.sh
-source ./Personalización_GTK.sh
-source ./Servidores.sh
-source ./limpiador.sh
-
-
-#############################
-##   Variables Generales   ##
-#############################
-DIR_SCRIPT=`echo $PWD`
-
-if [ ! -d 'TMP' ]
-then
-    mkdir TMP
-fi
-
-
-while :
-    do
-        sleep 1
+###########################
+##       FUNCIONES       ##
+###########################
+menuPrincipal() {
+    while true :; do
         clear
-        echo ""
-        echo -e "   $rojo 0)  $verde Salir$gris"
-        echo -e "   $rojo 1)  $verde Agregar Repositorios$gris"
-        echo -e "   $rojo 2)  $verde Instalar Aplicaciones Básicas$gris"
-        echo -e "   $rojo 3)  $verde Instalar Aplicaciones Extras$gris"
-        echo -e "   $rojo 4)  $verde Instalar Aplicaciones de Usuario$gris"
-        echo -e "   $rojo 5)  $verde Instalar Configuraciones$gris" #Configuración bash, zsh, variables entorno...
-        echo -e "   $rojo 6)  $verde Agregar Tipografías$gris"
-        echo -e "   $rojo 7)  $verde Configurar GIT$gris"
-        echo -e "   $rojo 8)  $verde Personalizar Sistema y GTK$gris"
-        echo -e "   $rojo 9)  $verde Instalar Servidores Apache → PHP → SQL"
-        echo -e "   $rojo all)  $verde Ejecutar todos los pasos anteriores$gris"
-        echo -e "   $rojo CLEAN)  $amarillo Limpia$rojo TODO$amarillo rastro del script (peligroso) $gris"
 
+        local descripcion='Menú Principal
+            1) Agregar Repositorios
+            2) Aplicaciones
+            3) Configuraciones
+            4) Personalización
+            5) Servidores
+            6) Todos los pasos anteriores a la vez
 
-    echo -e "$rojo"
-    read -p "    Acción → " entrada
-    echo -e "$gris"
+            0) Salir
+        '
+        echo -e "$AZ Versión del script →$RO $VERSION$CL"
+        opciones "$descripcion"
 
-    case $entrada in
+        echo -e "$RO"
+        read -p '    Acción → ' entrada
+        echo -e "$CL"
 
-        1)#Agregar Repositorios
-            clear
-            echo -e "$verde Agregando Repositorios Debian Stable$gris"
-            agregar_repositorios
-            read -p "Pulsa una tecla para continuar";;
+        case $entrada in
 
-        2)#Instalar Aplicaciones Básicas
-            clear
-            echo -e "$verde Instalar Aplicaciones Básicas$gris"
-            instalar_Software
-            read -p "Pulsa una tecla para continuar";;
+            1) agregar_repositorios;;     ## Menú de Repositorios
+            2) menuAplicaciones;;         ## Menú de Aplicaciones
+            3) instalar_configuraciones;; ## Menú de Configuraciones
+            4) #menuPersonalizacion;;     ## Menú de Personalización
+               ## TOFIX → Las siguientes funciones deben quedar en Personalizar/
+               configuracion_git
+               personalizar
+               agregar_fuentes
+               instalar_variables;;
+            5) #menuServidores;;          ## Menú de Servidores
+               ## TOFIX → Refactorizar dentro de Servidores/0_Main.sh
+               instalar_servidores;;
+            6) agregar_repositorios       ## Todos los pasos anteriores
+               ## TOFIX → Llamar directamente una función en cada submenú que
+               ## automáticamente ejecute todos los pasos sin preguntar nada
+               menuAplicaciones -a  ## Indica con "-a" que ejecute todas
+               instalar_configuraciones
+               configuracion_git
+               personalizar
+               agregar_fuentes
+               instalar_variables
+               instalar_servidores;;
 
-        3)#Instalar Aplicaciones Extras
-            clear
-            echo -e "$verde Instalar Aplicaciones Extras$gris"
-            instalar_Software_Extra
-            read -p "Pulsa una tecla para continuar";;
+            0)  ## SALIR
+              clear
+              echo -e "$RO Se sale del menú$CL"
+              echo ''
+              exit 0;;
 
-        4)#Instalar Aplicaciones de Usuario
-            clear
-            echo -e "$verde Instalar Aplicaciones de Usuario$gris"
-            instalar_Software_Usuario
-            read -p "Pulsa una tecla para continuar";;
+            *)  ## Acción ante entrada no válida
+              clear
+              echo ""
+              echo -e "                      $RO ATENCIÓN: Elección no válida$CL";;
+        esac
+    done
+}
 
-        5)#Instalar Configuraciones
-            clear
-            echo -e "$verde Instalar Configuraciones$gris"
-            instalar_configuraciones
-            instalar_variables
-            read -p "Pulsa una tecla para continuar";;
-
-        6)#Agregar Tipografías
-            clear
-            echo -e "$verde Agregar Tipografías$gris"
-            agregar_fuentes
-            read -p "Pulsa una tecla para continuar";;
-
-        7)#Configurar GIT
-            clear
-            echo -e "$verde Configurar GIT$gris"
-            configuracion_git
-            read -p "Pulsa una tecla para continuar";;
-
-        8)#Personalizar GTK
-            clear
-            echo -e "$verde Personalizar Entorno t GTK$gris"
-            personalizar
-            read -p "Pulsa una tecla para continuar";;
-
-        9)#Servidores
-            clear
-            echo -e "$verde Instalando servidores Apache → PHP → SQL$gris"
-            instalar_servidores
-            read -p "Pulsa una tecla para continuar";;
-
-        all | ALL)#Todas configuraciones
-            clear
-            echo -e "$verde Preparando para aplicar todas las configuraciones en serie$gris"
-            agregar_repositorios
-            instalar_Software
-            instalar_Software_Extra
-            instalar_Software_Usuario
-            instalar_configuraciones
-            agregar_fuentes
-            configuracion_git
-            personalizar
-            instalar_servidores
-            instalar_variables
-            read -p "Pulsa una tecla para continuar";;
-
-        celan | CLEAN)  # Borrar todo rastro del script, es muy peligroso usarlo
-            clear
-            echo -e "$rojo Preparando para limpiar todo rastro$gris"
-            echo -e "$rojo Esto solo es útil ante situaciones donde fallan cosas$gris"
-            echo -e "$rojo Hay riesgo de perder datos$gris"
-            limpiar_con_fuerza
-            echo "";;
-
-        0)#SALIR
-            clear
-            echo -e "$rojo Se sale del menú$gris"
-            echo ""
-            exit 0;;
-
-        *)#Opción no válida
-            clear
-            echo ""
-            echo -e "                      $rojo ATENCIÓN: Elección no válida$gris"
-    esac
-done
+###########################
+##       EJECUCIÓN       ##
+###########################
+menuPrincipal
