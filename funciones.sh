@@ -114,7 +114,6 @@ descargarTo() {
         rm "$WORKSCRIPT/tmp/$2" 2>> /dev/null
         wget --show-progress "$1" -O "$2" && break
     done
-    }
 }
 
 ##

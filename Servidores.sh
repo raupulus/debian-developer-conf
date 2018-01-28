@@ -157,7 +157,7 @@ server_apache() {
         }
 
         read -p " ¿Quieres añadir sitios virtuales a /etc/hosts? s/N → " input
-        if [[ "$input" = 's' ]] || [[ "$input" = 'S' ]; then
+        if [[ "$input" = 's' ]] || [[ "$input" = 'S' ]]; then
             activar_hosts
         else
             echo -e "$VE No se añade nada a$RO /etc/hosts$CL"
