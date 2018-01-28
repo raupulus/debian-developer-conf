@@ -189,7 +189,7 @@ configurar_hosts() {
 
     if [[ -f '/etc/hosts.BACKUP' ]]; then
         sudo cat '/etc/hosts.BACKUP' > "$WORKSCRIPT/tmp/hosts"
-        cat "$WORKSCRIPT/etc/hosts" >> "$WORKSCRIPT/tmp/hosts"
+        cat "$WORKSCRIPT/conf/etc/hosts" >> "$WORKSCRIPT/tmp/hosts"
         sudo cp "$WORKSCRIPT/tmp/hosts" '/etc/hosts'
     else
         echo -e "$VE Existe algún problema con el archivo$RO /etc/hosts$CL"
