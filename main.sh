@@ -105,7 +105,16 @@ menuPrincipal() {
             5) #menuServidores;;          ## Menú de Servidores
                ## TOFIX → Refactorizar dentro de Servidores/0_Main.sh
                instalar_servidores;;
-            6) echo "";;                  ## Todos los pasos anteriores
+            6) agregar_repositorios       ## Todos los pasos anteriores
+               ## TOFIX → Llamar directamente una función en cada submenú que
+               ## automáticamente ejecute todos los pasos sin preguntar nada
+               menuAplicaciones
+               instalar_configuraciones
+               configuracion_git
+               personalizar
+               agregar_fuentes
+               instalar_variables
+               instalar_servidores;;
 
             0)  ## SALIR
               clear
