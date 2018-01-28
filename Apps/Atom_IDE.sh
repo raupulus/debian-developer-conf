@@ -23,17 +23,18 @@
 
 atom_preconfiguracion() {
     echo -e "$VE Se va a instalar$RO Atom IDE$CL"
-    echo -e "$AM    ----------------------------$CL"
-    echo -e "$VE Puedes limpiar$RO Atom Completamente$AM"
-    read -p '¿Quieres borrar toda la configuración existente? s/N → ' input
-    if [[ $input = 's' ]] || [[ $input = 'S' ]]; then
-        echo -e "$RO →Borrando configuración vieja←$CL"
-        rm -R "$HOME/.atom"
-    fi
-
     if [[ ! -d "$HOME/.atom" ]]; then
         echo -e "$VE Se crea directorio $HOME/.atom$CL"
         mkdir "$HOME/.atom"
+    else
+        echo -e "$AM    ----------------------------$CL"
+        echo -e "$VE Puedes limpiar$RO Atom Completamente$AM"
+        read -p '¿Quieres borrar toda la configuración existente? s/N → ' input
+        if [[ $input = 's' ]] || [[ $input = 'S' ]]; then
+            echo -e "$RO →Borrando configuración vieja←$CL"
+            rm -R "$HOME/.atom"
+            mkdir "$HOME/.atom"
+        fi
     fi
 
     if [[ ! -h "$HOME/.atom/config.cson" ]]; then
