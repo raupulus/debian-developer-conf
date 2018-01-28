@@ -109,7 +109,7 @@ menuPrincipal() {
             6) agregar_repositorios       ## Todos los pasos anteriores
                ## TOFIX → Llamar directamente una función en cada submenú que
                ## automáticamente ejecute todos los pasos sin preguntar nada
-               menuAplicaciones
+               menuAplicaciones -a  ## Indica con "-a" que ejecute todas
                instalar_configuraciones
                configuracion_git
                personalizar

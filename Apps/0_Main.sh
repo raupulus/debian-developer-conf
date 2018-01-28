@@ -30,45 +30,57 @@ source "$WORKSCRIPT/Apps/3_Aplicaciones_Usuario.sh"
 ###########################
 ##       FUNCIONES       ##
 ###########################
+##
+## Menú para elegir las aplicaciones a instalar
+## @param $1 -a Si recibe este parámetro ejecutará todos los scripts
+##
 menuAplicaciones() {
-    while true :; do
+    todas_aplicaciones() {
         clear
-        local descripcion='Menú de aplicaciones
-            1) Aplicaciones Básicas
-            2) Aplicaciones Extras
-            3) Aplicaciones de Usuario
-            4) Todos los pasos anteriores
+        echo -e "$VE Instalando todas las aplicaciones$CL"
+        aplicaciones_basicas
+        aplicaciones_extras
+        aplicaciones_usuarios
+    }
 
-            0) Atrás
-        '
-        opciones "$descripcion"
+    ## Si la función recibe "-a" indica que ejecute todas las aplicaciones
+    if [[ "$1" = '-a' ]]; then
+        todas_aplicaciones
+    else
+        while true :; do
+            clear
+            local descripcion='Menú de aplicaciones
+                1) Aplicaciones Básicas
+                2) Aplicaciones Extras
+                3) Aplicaciones de Usuario
+                4) Todos los pasos anteriores
 
-        echo -e "$RO"
-        read -p "    Acción → " entrada
-        echo -e "$CL"
+                0) Atrás
+            '
+            opciones "$descripcion"
 
-        case $entrada in
+            echo -e "$RO"
+            read -p "    Acción → " entrada
+            echo -e "$CL"
 
-            1)  aplicaciones_basicas;;   ## Aplicaciones Básicas
-            2)  aplicaciones_extras;;    ## Aplicaciones Extras
-            3)  aplicaciones_usuarios;;  ## Aplicaciones de Usuario
+            case $entrada in
 
-            4)  ## Todas las aplicaciones
-                clear
-                echo -e "$VE Instalando todas las aplicaciones$CL"
-                aplicaciones_basicas
-                aplicaciones_extras
-                aplicaciones_usuarios;;
+                1)  aplicaciones_basicas;;   ## Aplicaciones Básicas
+                2)  aplicaciones_extras;;    ## Aplicaciones Extras
+                3)  aplicaciones_usuarios;;  ## Aplicaciones de Usuario
+                4)  todas_aplicaciones       ## Todas las aplicaciones
+                    break;;
 
-            0)  ## SALIR
-                clear
-                echo -e "$RO Se sale del menú$CL"
-                echo ''
-                break;;
+                0)  ## SALIR
+                    clear
+                    echo -e "$RO Se sale del menú$CL"
+                    echo ''
+                    break;;
 
-            *)  ## Acción ante entrada no válida
-                echo ""
-                echo -e "                      $RO ATENCIÓN: Elección no válida$CL";;
-        esac
-    done
+                *)  ## Acción ante entrada no válida
+                    echo ""
+                    echo -e "                      $RO ATENCIÓN: Elección no válida$CL";;
+            esac
+        done
+    fi
 }
