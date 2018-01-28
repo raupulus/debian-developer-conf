@@ -49,7 +49,7 @@ firefox_instalador() {
             tar -xjvf "$WORKSCRIPT/tmp/Firefox-Developer.tar.bz2" -C "$WORKSCRIPT/tmp/Firefox-Developer_amd64" 2>> /dev/null
 
             ## Mover archivo extraido a su ubicación final
-            mv $WORKSCRIPT/TMP/Firefox-Developer_amd64/firefox ~/.local/opt/Firefox_Developer 2>> /dev/null
+            mv "$WORKSCRIPT/tmp/Firefox-Developer_amd64/firefox" ~/.local/opt/Firefox_Developer 2>> /dev/null
 
             ## Crear enlaces de usuario y permisos de ejecución
             echo "$HOME/.local/opt/Firefox_Developer/firefox - P Firefox-Developer" > "$HOME/.local/bin/firefox-developer"
@@ -68,7 +68,7 @@ firefox_instalador() {
             echo -e "$VE Descargando$RO Firefox Developer$CL"
             for (( i=1; i<=$REINTENTOS; i++ )); do
                 rm "$WORKSCRIPT/tmp/Firefox-Developer.tar.bz" 2>> /dev/null
-                wget --show-progress -r -A tar.bz2 'https://download.mozilla.org/?product=firefox-devedition-latest-ssl&os=linux64&lang=es-ES' -O "$WORKSCRIPT/TMP/Firefox-Developer.tar.bz2" && break
+                wget --show-progress -r -A tar.bz2 'https://download.mozilla.org/?product=firefox-devedition-latest-ssl&os=linux64&lang=es-ES' -O "$WORKSCRIPT/tmp/Firefox-Developer.tar.bz2" && break
             done
             echo -e "$VE Preparando para instalar$RO Firefox Developer Edition$CL"
 
