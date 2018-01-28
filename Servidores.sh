@@ -264,37 +264,44 @@ server_php() {
         ' | sudo tee "/etc/php/$1/apache2/conf.d/20-xdebug.ini"
     }
 
+    ## Añade a un array todas las versiones de PHP encontradas en /etc/php
+    local ALL_PHP=(`ls /etc/php/`)
+
     ## Configura todas las versiones de php existentes
-    for V_PHP in '/etc/php/'; do
+    for V_PHP in "${ALL_PHP[@]}"); do
         instalar_php "$V_PHP"
         configurar_php "$V_PHP"
         personalizar_php "$V_PHP"
         xdebug "$V_PHP"
     done
 
-
-    ## Pide introducir la versión de PHP para configurar con apache
-    while true :; do
-        echo -e "$VE Introduce la versión de$RO PHP$VE a utilizar$RO"
-        read -p "    → " input
-        for V_PHP in '/etc/php/'; do
-            if [[ $input = $V_PHP ]]; then
-                sudo a2enmod "php$V_PHP"
-                break
-            fi
+    ## Si solo hay una versión de PHP la configura, en otro caso pregunta
+    if [[ 1 = ${#ALL_PHP[@]} ]]; then
+        sudo a2enmod "php${ALL_PHP[0]}"
+    else
+        ## Pide introducir la versión de PHP para configurar con apache
+        while true :; do
+            clear
+            echo -e "$VE Introduce la versión de$RO PHP$VE a utilizar$CL"
+            echo -e "$AZ ${ALL_PHP[@]} $RO"  ## Pinta versiones para elegirla
+            read -p "    → " input
+            for V_PHP in "${ALL_PHP[@]}"; do
+                if [[ $input = $V_PHP ]]; then
+                    sudo a2enmod "php$V_PHP"
+                    break
+                fi
+            done
+            echo -e "AM No es válida la opción, introduce correctamente un valor$CL"
         done
-        echo -e "AM No es válida la opción, introduce correctamente un valor$CL"
-    done
+    fi
 
     ## Activar módulos
     echo -e "$VE Activando módulos$CL"
-
     sudo phpenmod -s apache2 xdebug
 
     echo -e "$VE Desactivando Módulos"
     ## Xdebug para PHP CLI no tiene sentido y ralentiza
     sudo phpdismod -s cli xdebug
-
 
     ## Reiniciar apache2 para hacer efectivos los cambios
     reiniciarServicio apache2
