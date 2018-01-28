@@ -23,15 +23,15 @@
 
 atom_preconfiguracion() {
     echo -e "$VE Se va a instalar$RO Atom IDE$CL"
-    if [[! -h "$HOME/.atom/config.cson" ]]; then
+    if [[ ! -h "$HOME/.atom/config.cson" ]]; then
         enlazarHome '.atom/config.cson'
     fi
 
-    if [[! -h "$HOME/.atom/keymap.cson" ]]; then
+    if [[ ! -h "$HOME/.atom/keymap.cson" ]]; then
         enlazarHome '.atom/keymap.cson'
     fi
 
-    if [[! -h "$HOME/.atom/snippets.cson" ]]; then
+    if [[ ! -h "$HOME/.atom/snippets.cson" ]]; then
         enlazarHome '.atom/snippets.cson'
     fi
 
