@@ -38,7 +38,7 @@ ohmyzsh_preconfiguracion() {
 }
 
 ohmyzsh_instalar() {
-    echo -e "$VE Preparando para instalar$RO ohmyzsh$CL"
+    echo -e "$VE Instalar$RO OhMyZsh$CL"
     ## La instalación en este caso se hace al mismo tiempo de la descarga.
 }
 
@@ -52,7 +52,7 @@ ohmyzsh_postconfiguracion() {
 
     ## Actualizando repositorio para OhMyZsh
     cd "$HOME/.oh-my-zsh/"
-    git pull 2>> /dev/null
+    git pull
     cd "$WORKSCRIPT"
 }
 
