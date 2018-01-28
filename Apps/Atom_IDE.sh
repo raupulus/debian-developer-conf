@@ -62,7 +62,6 @@ atom_plugins() {
 
 ## Instala complementos para Atom IDE
 atom_instalador() {
-    testear
     instalar() {
         descargar "atom.deb" "https://atom.io/download/deb"
         instalarSoftwareDPKG "$WORKSCRIPT/tmp/atom.deb"
