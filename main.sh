@@ -85,6 +85,7 @@ menuPrincipal() {
 
             0) Salir
         '
+        echo -e "$AZ Versión del script →$RO $VERSION$CL"
         opciones "$descripcion"
 
         echo -e "$RO"
