@@ -79,7 +79,7 @@ vim_postconfiguracion() {
     vim_plugins() {
         local plugins_vim=("align closetag powerline youcompleteme xmledit autopep8 python-jedi python-indent utilsinps utl rails snippets fugitive ctrlp tlib tabular sintastic detectindent closetag align syntastic")
 
-        for plugin in "$plugins_vim"; do
+        for plugin in "${plugins_vim[@]}"; do
             echo -e "$VE Activando el plugin$MA →$RO $plugin $AM"
             vim-addon-manager install "$plugin"
             vim-addon-manager enable "$plugin"
