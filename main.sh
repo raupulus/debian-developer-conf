@@ -52,7 +52,14 @@ source "$WORKSCRIPT/limpiador.sh"
 source "$WORKSCRIPT/Servidores.sh"
 
 source "$WORKSCRIPT/Apps/0_Main.sh"
-#source 'servers/0_Main.sh'
+source "$WORKSCRIPT/Personalizar/Configurar_GIT.sh"
+source "$WORKSCRIPT/Personalizar/Personalización_GTK.sh"
+source "$WORKSCRIPT/Personalizar/Tipografías.sh"
+source "$WORKSCRIPT/Personalizar/Variables_Entorno.sh"
+
+## TOFIX → Refactorizar servidores en subdirectorio con menú propio
+## TOFIX → Refactorizar Personalización en subdirectorio añadiendo menú propio
+#source 'Servidores/0_Main.sh'
 #source 'Personalizar/0_Main.sh'
 
 
