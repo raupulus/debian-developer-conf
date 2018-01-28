@@ -22,9 +22,6 @@
 ###########################
 ##       FUNCIONES       ##
 ###########################
-testear() {
-    echo 'si llega a funciones'
-}
 ##
 ## Crea un respaldo del archivo o directorio pasado como parámetro
 ## @param  $*  Recibe una serie de elementos a los que crearle un backup
