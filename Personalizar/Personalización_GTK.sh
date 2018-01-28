@@ -52,7 +52,7 @@ instalar_flatplat() {
         echo -e "$VE Ya esta$RO Flat-Plat$VE descargado, omitiendo paso$CL"
 
         ## Actualizar repositorio para Flat-Plat
-        echo -e "$VE Actualizando Repositorio antes de$RO actualizar$CL"
+        echo -e "$VE Actualizando Repositorio de$RO Flat-Plat$CL"
         cd "$WORKSCRIPT/tmp/Materia_Theme_Flat-Plat/"
         git pull
         cd "$WORKSCRIPT"
@@ -64,7 +64,7 @@ instalar_flatplat() {
     ## Instalar Flat-Plat, en este punto debe existir instalador
     if [[ -f "$WORKSCRIPT/tmp/Materia_Theme_Flat-Plat/install.sh" ]]; then
         echo -e "$VE Preparando para instalar$RO Tema Flat-Plat$CL"
-        sudo "./$WORKSCRIPT/tmp/materia-theme-20170605/install.sh"
+        sudo "./$WORKSCRIPT/tmp/Materia_Theme_Flat-Plat/install.sh"
     fi
 }
 
@@ -72,7 +72,7 @@ configurar_iconos() {
     descargar 'Paper_Theme.deb' 'https://snwh.org/paper/download.php?owner=snwh&ppa=pulp&pkg=paper-gtk-theme,16.04'
 
     echo -e "$VE Preparando para instalar$RO Iconos Paper_Theme$CL"
-    instalarSoftwareDPKG 'Paper_Theme.deb'
+    instalarSoftwareDPKG "$WORKSCRIPT/tmp/Paper_Theme.deb"
 }
 
 personalizar() {
