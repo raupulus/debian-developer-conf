@@ -40,7 +40,7 @@ CL="\e[0m"       ## Limpiar colores
 
 WORKSCRIPT=$PWD  ## Directorio principal del script
 USER=$(whoami)   ## Usuario que ejecuta el script
-VERSION='0.4.2'  ## Versión en desarrollo
+VERSION='0.4.3'  ## Versión en desarrollo
 
 ############################
 ##     IMPORTACIONES      ##
