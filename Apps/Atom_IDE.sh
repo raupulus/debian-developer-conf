@@ -40,6 +40,7 @@ atom_preconfiguracion() {
     if [[ $input = 's' ]] || [[ $input = 'S' ]]; then
         echo -e "$VE Añadiendo configuración nueva$CL"
         rm -R "$HOME/.atom"
+        mkdir "$HOME/.atom"
         enlazarHome '.atom/config.cson'
         enlazarHome '.atom/keymap.cson'
         enlazarHome '.atom/snippets.cson'
