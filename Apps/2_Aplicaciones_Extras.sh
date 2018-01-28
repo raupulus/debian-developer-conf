@@ -27,6 +27,7 @@ source "$WORKSCRIPT/Apps/GitKraken.sh"
 source "$WORKSCRIPT/Apps/Haroopad.sh"
 source "$WORKSCRIPT/Apps/i3wm.sh"
 source "$WORKSCRIPT/Apps/Ninja-IDE.sh"
+source "$WORKSCRIPT/Apps/OhMyZsh.sh"
 source "$WORKSCRIPT/Apps/Pencil-Project.sh"
 source "$WORKSCRIPT/Apps/vim.sh"
 
