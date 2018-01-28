@@ -268,7 +268,7 @@ server_php() {
     local ALL_PHP=(`ls /etc/php/`)
 
     ## Configura todas las versiones de php existentes
-    for V_PHP in "${ALL_PHP[@]}"); do
+    for V_PHP in "${ALL_PHP[@]}"; do
         instalar_php "$V_PHP"
         configurar_php "$V_PHP"
         personalizar_php "$V_PHP"
