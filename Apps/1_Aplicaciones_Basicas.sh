@@ -45,11 +45,12 @@ aplicaciones_basicas() {
     ## Instalando todo el software desde "Software.lst
     echo -e "$VE Instalando Software adicional$CL"
     ## La siguiente variable guarda toda la lista de paquetes desde DPKG
-    local lista_todos_paquetes=${dpkg-query -W -f='${Installed-Size} ${Package}\n' | sort -n | cut -d" " -f2}
+    local lista_todos_paquetes=(${dpkg-query -W -f='${Installed-Size} ${Package}\n' | sort -n | cut -d" " -f2})
 
     ## Comprueba si el software está instalado y en caso contrario instala
-    for s in "$WORKSCRIPT/Software.lst"; do
-        for x in "$lista_todos_paquetes"; do
+    local lista_Software=(`cat $WORKSCRIPT/Software.lst`)
+    for s in "${lista_Software[@]}"; do
+        for x in "${lista_todos_paquetes[@]}"; do
             if [[ $s = $x ]]; then
                 echo -e "$RO $s$VE ya estaba instalado$CL"
                 tmp=false
