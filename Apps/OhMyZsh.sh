@@ -25,7 +25,9 @@ ohmyzsh_descargar() {
     echo -e "$VE Descargando OhMyZSH$CL"
     for (( i=1; i<=$REINTENTOS; i++ )); do
         ###TOFIX → Reparar script que sale mal: contraseña PAM y error (no continua por eso), por ello temporalmente siempre hay "break"
-        rm -R "$HOME/.oh-my-zsh" 2>> /dev/null
+        if [[ -d "$HOME/.oh-my-zsh" ]]; then
+            rm -R "$HOME/.oh-my-zsh"
+        fi
         curl -L 'http://install.ohmyz.sh' | sh && break || break
     done
 }
