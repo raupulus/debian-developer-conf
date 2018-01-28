@@ -17,27 +17,6 @@
 ##     INSTRUCCIONES      ##
 ############################
 
-############################
-##       CONSTANTES       ##
-############################
-AM="\033[1;33m"  ## Color Amarillo
-AZ="\033[1;34m"  ## Color Azul
-BL="\033[1;37m"  ## Color Blanco
-CY="\033[1;36m"  ## Color Cyan
-GR="\033[0;37m"  ## Color Gris
-MA="\033[1;35m"  ## Color Magenta
-RO="\033[1;31m"  ## Color Rojo
-VE="\033[1;32m"  ## Color Verde
-CL="\e[0m"       ## Limpiar colores
-
-#############################
-##   Variables Generales   ##
-#############################
-
-############################
-##     IMPORTACIONES      ##
-############################
-
 ###########################
 ##       FUNCIONES       ##
 ###########################
