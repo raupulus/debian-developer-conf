@@ -1,104 +1,104 @@
-#!/bin/bash
+#!/usr/bin/env bash
 # -*- ENCODING: UTF-8 -*-
-#######################################
-# ###     Raúl Caro Pastorino     ### #
-## ##                             ## ##
-### # https://github.com/fryntiz/ # ###
-## ##                             ## ##
-# ###       www.fryntiz.es        ### #
-#######################################
+##
+## @author     Raúl Caro Pastorino
+## @copyright  Copyright © 2017 Raúl Caro Pastorino
+## @license    https://wwww.gnu.org/licenses/gpl.txt
+## @email      tecnico@fryntiz.es
+## @web        www.fryntiz.es
+## @github     https://github.com/fryntiz
+## @gitlab     https://gitlab.com/fryntiz
+## @twitter    https://twitter.com/fryntiz
+##
+##             Guía de estilos aplicada:
+## @style      https://github.com/fryntiz/Bash_Style_Guide
 
 ############################
-##   Constantes Colores   ##
+##     INSTRUCCIONES      ##
 ############################
-amarillo="\033[1;33m"
-azul="\033[1;34m"
-blanco="\033[1;37m"
-cyan="\033[1;36m"
-gris="\033[0;37m"
-magenta="\033[1;35m"
-rojo="\033[1;31m"
-verde="\033[1;32m"
 
-#############################
-##   Variables Generales   ##
-#############################
-atom=$(cat $PWD/Apps/Atom_Paquetes.lst) # Instala Paquetes de Atom
-DIR_SCRIPT=`echo $PWD`
+###########################
+##       FUNCIONES       ##
+###########################
 
-function atom_preconfiguracion() {
-    echo ""
-    echo -e "$verde Se va a instalar$rojo Atom IDE$gris"
-    echo -e "$verde Puedes añadir configuraciones$amarillo"
-    read -p '¿Quieres configuraciones? y/N → ' input
-    if [ $input = 's' ] || [ $input = 'S' ] || [ $input = 'y' ] || [ $input = 'Y' ]
-    then
-        echo -e "$verde Creando Backup de ~/.atom$gris"
-        cp -R $HOME/.atom $HOME/.atom.BACKUP 2>> /dev/null
-        echo -e "$verde Añadiendo configuración nueva"
-        cp -R $DIR_SCRIPT/Apps/.atom $HOME/
+atom_preconfiguracion() {
+    echo -e "$VE Se va a instalar$RO Atom IDE$CL"
+    if [[ ! -d "$HOME/.atom" ]]; then
+        echo -e "$VE Se crea directorio $HOME/.atom$CL"
+        mkdir "$HOME/.atom"
+    else
+        echo -e "$AM    ----------------------------$CL"
+        echo -e "$VE Puedes limpiar$RO Atom Completamente$AM"
+        read -p '¿Quieres borrar toda la configuración existente? s/N → ' input
+        if [[ $input = 's' ]] || [[ $input = 'S' ]]; then
+            echo -e "$RO →Borrando configuración vieja←$CL"
+            rm -R "$HOME/.atom"
+            mkdir "$HOME/.atom"
+        fi
+    fi
+
+    if [[ ! -h "$HOME/.atom/config.cson" ]]; then
+        enlazarHome '.atom/config.cson'
+    fi
+
+    if [[ ! -h "$HOME/.atom/keymap.cson" ]]; then
+        enlazarHome '.atom/keymap.cson'
+    fi
+
+    if [[ ! -h "$HOME/.atom/snippets.cson" ]]; then
+        enlazarHome '.atom/snippets.cson'
     fi
 }
 
-function atom_postconfiguracion() {
-    echo -e "$verde Añadiendo configuraciones para Atom"
+atom_postconfiguracion() {
+    echo -e "$VE Añadiendo Post-Configuraciones para$RO Atom$CL"
 
-    echo -e "$verde Deshabilitando complementos"
+    echo -e "$VE Deshabilitando complementos$CL"
     apm disable welcome
     apm disable about
 }
 
-function atom_plugins() {
-    # Si se ha instalado correctamente ATOM pues instalamos sus plugins
-    echo -e "$verde Preparando instalación complementos$rojo Atom$gris"
-    if [ -f /usr/bin/atom ]
-    then
-        for p in $atom
-        do
-            # Comprobación si existe instalado el complemento
-            if [ -d "$HOME/.atom/packages/$p" ]
-            then
-                echo -e "$amarillo Ya se encuentra instalado →$rojo $p"
+atom_plugins() {
+    ## Lista con paquetes ATOM
+    local atom=$(cat $WORKSCRIPT/Apps/Atom_Paquetes.lst)
+
+    ## Si se ha instalado correctamente ATOM, instalamos sus plugins
+    echo -e "$VE Preparando instalación complementos$RO Atom$CL"
+    if [[ -f '/usr/bin/atom' ]]; then
+        for p in $atom; do
+            ## Comprobación si existe instalado el complemento
+            if [[ -d "$HOME/.atom/packages/$p" ]]; then
+                echo -e "$AM Ya se encuentra instalado →$RO $p"
             else
-                echo -e "$verde Instalando$rojo $p $amarillo"
+                echo -e "$VE Instalando$RO $p $AM"
                 apm install $p
             fi
         done
     fi
 }
 
-# Instala complementos para Atom IDE
-function atom_instalador() {
-    function instalar() {
-        REINTENTOS=5
-        echo -e "$verde Descargando$rojo ATOM$gris"
-        for (( i=1; i<=$REINTENTOS; i++ ))
-        do
-            rm $DIR_SCRIPT/TMP/atom.deb 2>> /dev/null
-            wget https://atom.io/download/deb -O $DIR_SCRIPT/TMP/atom.deb && break
-        done
-        echo -e "$verde Instalando$rojo Atom $gris"
-        sudo dpkg -i $DIR_SCRIPT/TMP/atom.deb && sudo apt install -f -y
+## Instala complementos para Atom IDE
+atom_instalador() {
+    instalar() {
+        descargar "atom.deb" "https://atom.io/download/deb"
+        instalarSoftwareDPKG "$WORKSCRIPT/tmp/atom.deb"
     }
 
-    # Comprueba si está instalado
-    if [ -f /usr/bin/atom ]
-    then
-        echo -e "$verde Ya esta$rojo ATOM$verde instalado en el equipo, omitiendo paso$gris"
+    ## Preparando configuración de Atom
+    atom_preconfiguracion
+
+    ## Comprueba si está Atom instalado
+    if [[ -f '/usr/bin/atom' ]]; then
+        echo -e "$VE Ya esta$RO ATOM$VE instalado en el equipo, omitiendo paso$CL"
     else
-        # Preparando configuración de Atom
-        atom_preconfiguracion
+        ## Comprobar si está descargado o descargar
+        if [[ -f "$WORKSCRIPT/tmp/atom.deb" ]]; then
+            echo -e "$VE Instalando$RO Atom $CL"
+            instalarSoftwareDPKG "$WORKSCRIPT/tmp/atom.deb"
 
-        # Comprobar si está descargado o descargar
-        if [ -f $DIR_SCRIPT/TMP/atom.deb ]
-        then
-            echo -e "$verde Instalando$rojo Atom $gris"
-            sudo dpkg -i $DIR_SCRIPT/TMP/atom.deb && sudo apt install -f -y
-
-            # Si falla la instalación se rellama la función tras limpiar
-            if [ ! -f /usr/bin/atom ]
-            then
-                rm -f $DIR_SCRIPT/TMP/atom.deb
+            ## Si falla la instalación se rellama la función tras limpiar
+            if [[ ! -f '/usr/bin/atom' ]]; then
+                rm -f "$WORKSCRIPT/tmp/atom.deb"
                 instalar
             fi
         else
@@ -106,9 +106,9 @@ function atom_instalador() {
         fi
     fi
 
-    # Instalar Plugins
+    ## Instalar Plugins
     atom_plugins
 
-    # Añadir Configuraciones tras instalar
+    ## Añadir Configuraciones tras instalar
     atom_postconfiguracion
 }
