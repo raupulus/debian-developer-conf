@@ -38,6 +38,8 @@ menuAplicaciones() {
             2) Aplicaciones Extras
             3) Aplicaciones de Usuario
             4) Todos los pasos anteriores
+
+            0) Atrás
         '
         opciones "$descripcion"
 
