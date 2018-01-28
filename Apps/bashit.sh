@@ -50,6 +50,7 @@ bashit_instalar() {
     fi
 
     ## Instalar "fasd"
+    ## TOFIX → Mandar a $HOME/.local/src=? ya que compila y no se vuelve a usar
     if [[ -f "$HOME/fasd/fasd.1.md" ]]; then
         echo -e "$VE Ya esta$RO fasd$VE instalado para este usuario, omitiendo paso$CL"
     else
