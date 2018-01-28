@@ -23,6 +23,13 @@
 
 atom_preconfiguracion() {
     echo -e "$VE Se va a instalar$RO Atom IDE$CL"
+    echo -e "$AM    ----------------------------$CL"
+    echo -e "$VE Puedes limpiar$RO Atom Completamente$AM"
+    read -p '¿Quieres borrar toda la configuración existente? s/N → ' input
+    if [[ $input = 's' ]] || [[ $input = 'S' ]]; then
+        echo -e "$VE Añadiendo configuración nueva$CL"
+        rm -R "$HOME/.atom"
+    fi
 
     if [[ ! -d "$HOME/.atom" ]]; then
         mkdir "$HOME/.atom"
@@ -37,17 +44,6 @@ atom_preconfiguracion() {
     fi
 
     if [[ ! -h "$HOME/.atom/snippets.cson" ]]; then
-        enlazarHome '.atom/snippets.cson'
-    fi
-
-    echo -e "$VE Puedes limpiar$RO Atom Completamente$AM"
-    read -p '¿Quieres borrar toda la configuración existente? s/N → ' input
-    if [[ $input = 's' ]] || [[ $input = 'S' ]]; then
-        echo -e "$VE Añadiendo configuración nueva$CL"
-        rm -R "$HOME/.atom"
-        mkdir "$HOME/.atom"
-        enlazarHome '.atom/config.cson'
-        enlazarHome '.atom/keymap.cson'
         enlazarHome '.atom/snippets.cson'
     fi
 }
