@@ -48,8 +48,13 @@ firefox_instalador() {
             mkdir -p "$WORKSCRIPT/tmp/Firefox-Developer" 2>> /dev/null
             tar -xjvf "$WORKSCRIPT/tmp/Firefox-Developer.tar.bz2" -C "$WORKSCRIPT/tmp/Firefox-Developer_amd64" 2>> /dev/null
 
+            ## Limpia destinos
+            rm -Rf "$HOME/.local/opt/Firefox_Developer"
+            rm -Rf "$HOME/.local/bin/firefox-developer"
+            rm -Rf "$HOME/.local/share/applications/firefox-developer.desktop"
+
             ## Mover archivo extraido a su ubicación final
-            mv "$WORKSCRIPT/tmp/Firefox-Developer_amd64/firefox" ~/.local/opt/Firefox_Developer 2>> /dev/null
+            mv "$WORKSCRIPT/tmp/Firefox-Developer_amd64/firefox" "$HOME/.local/opt/Firefox_Developer" 2>> /dev/null
 
             ## Crear enlaces de usuario y permisos de ejecución
             echo "$HOME/.local/opt/Firefox_Developer/firefox - P Firefox-Developer" > "$HOME/.local/bin/firefox-developer"
@@ -86,8 +91,13 @@ firefox_instalador() {
             mkdir -p "$WORKSCRIPT/tmp/Firefox-Nightly" 2>> /dev/null
             tar -xjvf "$WORKSCRIPT/tmp/Firefox-Nightly.tar.bz2" -C "$WORKSCRIPT/tmp/Firefox-Nightly" 2>> /dev/null
 
+            ## Limpia destinos
+            rm -Rf "$HOME/.local/opt/Firefox-Nightly"
+            rm -Rf "$HOME/.local/bin/firefox-nightly"
+            rm -Rf "$HOME/.local/share/applications/firefox-nightly.desktop"
+
             ## Mover archivo extraido a su ubicación final
-            mv "$WORKSCRIPT/tmp/Firefox-Nightly_amd64/firefox" "$HOME/.local/opt/Firefox_Nightly" 2>> /dev/null
+            mv "$WORKSCRIPT/tmp/Firefox-Nightly/firefox" "$HOME/.local/opt/Firefox_Nightly" 2>> /dev/null
 
             ## Crear enlaces de usuario y permisos de ejecución
             echo "$HOME/.local/opt/Firefox_Nightly/firefox - P Firefox-Nightly" > "$HOME/.local/bin/firefox-nightly"
@@ -104,7 +114,6 @@ firefox_instalador() {
                 "$HOME/.local/opt/Firefox_Nightly/firefox" -createprofile 'Firefox-Nightly'
             fi
         }
-
 
         if [[ -f "$HOME/.local/bin/firefox-nightly" ]]; then
             echo -e "$VE Ya esta$RO Firefox Nightly$VE instalado en el equipo, omitiendo paso$CL"
