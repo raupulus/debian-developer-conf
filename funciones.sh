@@ -178,7 +178,7 @@ enlazarHome() {
 ##
 desinstalar_paquetes() {
     for x in $*; do
-        echo -e "$rojoBorrando x$gris"
+        echo -e "$RO Borrando x$CL"
         sudo apt purge -y x
     done
 }
@@ -189,7 +189,7 @@ desinstalar_paquetes() {
 ##
 reiniciarServicio() {
     for x in $*; do
-        echo -e "$ROBorrando x$$CL"
+        echo -e "$ROReiniciando x$$CL"
         sudo systemctl restart "$x"
     done
 }
