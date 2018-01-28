@@ -22,7 +22,7 @@
 ###########################
 ##       FUNCIONES       ##
 ###########################
-test() {
+testear() {
     echo 'si llega a funciones'
 }
 ##
