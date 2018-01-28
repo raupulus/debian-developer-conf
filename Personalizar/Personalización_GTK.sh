@@ -64,7 +64,7 @@ instalar_flatplat() {
     ## Instalar Flat-Plat, en este punto debe existir instalador
     if [[ -f "$WORKSCRIPT/tmp/Materia_Theme_Flat-Plat/install.sh" ]]; then
         echo -e "$VE Preparando para instalar$RO Tema Flat-Plat$CL"
-        sudo sh '$WORKSCRIPT/tmp/materia-theme-20170605/install.sh'
+        sudo "./$WORKSCRIPT/tmp/materia-theme-20170605/install.sh"
     fi
 }
 
