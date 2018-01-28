@@ -137,7 +137,7 @@ terminal() {
 ## Configurar editor de gnome, gedit
 ##
 configurar_gedit() {
-    if [[! -d "$HOME/.local/share" ]]; then
+    if [[ ! -d "$HOME/.local/share" ]]; then
         mkdir -p "$HOME/.local/share/" 2>> /dev/null
     fi
 
@@ -184,7 +184,7 @@ configurar_hosts() {
     fi
 
     sudo cat '/etc/hosts.BACKUP' > './tmp/hosts'
-    cat './etc/hosts' >> './TMP/hosts'
+    cat './etc/hosts' >> './tmp/hosts'
     sudo cp './tmp/hosts' '/etc/hosts'
 }
 
@@ -193,10 +193,10 @@ configurar_hosts() {
 ##
 agregar_plantillas() {
     if [[ -d "$HOME/Plantillas" ]]; then
-        cp -R './Plantillas/*' "$HOME/Plantillas/"
+        cp -R "$WORKSCRIPT/Plantillas/*" "$HOME/Plantillas/"
     else
         mkdir "$HOME/Plantillas"
-        cp -R './Plantillas/*' "$HOME/Plantillas/"
+        cp -R "$WORKSCRIPT/Plantillas/*" "$HOME/Plantillas/"
     fi
 }
 
@@ -210,7 +210,7 @@ tilix_personalizar() {
         echo -e "$VE Creando directorio $HOME/.config/tilix/schemes/$CL"
         mkdir -p "$HOME/.config/tilix/schemes/"
     fi
-    
+
     wget -qO $HOME"/.config/tilix/schemes/3024-night.json" https://git.io/v7QVY
     wget -qO $HOME"/.config/tilix/schemes/dimmed-monokai.json" https://git.io/v7QaJ
     wget -qO $HOME"/.config/tilix/schemes/monokai.json" https://git.io/v7Qad
@@ -232,7 +232,6 @@ instalar_configuraciones() {
     configurar_gedit
     configurar_nano
     agregar_conf_home
-    configurar_vim
     configurar_hosts
     agregar_plantillas
     terminal ## Pregunta el terminal a usar
