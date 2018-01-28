@@ -164,6 +164,7 @@ configurar_nano() {
     if [[ -d "$HOME/.nano/.git" ]]; then
         ## Actualizar Repositorio con git pull
         cd "$HOME/.nano"
+        echo -e "$VE Actualizando repositorios$RO $HOME/.nano/.git$CL"
         git pull
         cd "$WORKSCRIPT"
     else
@@ -186,9 +187,14 @@ configurar_hosts() {
         sudo mv '/etc/hosts' '/etc/hosts.BACKUP'
     fi
 
-    sudo cat '/etc/hosts.BACKUP' > './tmp/hosts'
-    cat './etc/hosts' >> './tmp/hosts'
-    sudo cp './tmp/hosts' '/etc/hosts'
+    if [[ -f '/etc/hosts.BACKUP' ]]; then
+        sudo cat '/etc/hosts.BACKUP' > "$WORKSCRIPT/tmp/hosts"
+        cat "$WORKSCRIPT/etc/hosts" >> "$WORKSCRIPT/tmp/hosts"
+        sudo cp "$WORKSCRIPT/tmp/hosts" '/etc/hosts'
+    else
+        echo -e "$VE Existe algún problema con el archivo$RO /etc/hosts$CL"
+        echo -e "$VE Te recomiendo revisar esto manualmente$CL"
+    fi
 }
 
 ##
