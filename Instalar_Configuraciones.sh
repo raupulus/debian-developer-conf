@@ -153,8 +153,11 @@ configurar_gedit() {
 configurar_nano() {
     echo -e "$VE Configurando editor$RO nano$CL"
 
-    if [[ -d "$HOME/.nano" ]]; then
+    if [[ -d "$HOME/.nano" ]] &&
+       [[ ! -d "$HOME/.nano/.git" ]]
+    then
         crearBackup '.nano'
+        rm -Rf "$HOME/.nano"
     fi
 
     ## Clona el repositorio o actualizarlo si ya existe
