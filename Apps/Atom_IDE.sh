@@ -39,7 +39,7 @@ atom_preconfiguracion() {
     read -p '¿Quieres borrar toda la configuración existente? s/N → ' input
     if [[ $input = 's' ]] || [[ $input = 'S' ]]; then
         echo -e "$VE Añadiendo configuración nueva$CL"
-        rmdir -R "$HOME/.atom"
+        rm -R "$HOME/.atom"
         enlazarHome '.atom/config.cson'
         enlazarHome '.atom/keymap.cson'
         enlazarHome '.atom/snippets.cson'
