@@ -28,7 +28,8 @@ atom_preconfiguracion() {
     read -p '¿Quieres configuraciones? s/N → ' input
     if [[ $input = 's' ]] || [[ $input = 'S' ]]; then
         echo -e "$VE Añadiendo configuración nueva$CL"
-        enlazarHome '.atom'
+        enlazarHome '.atom/snippets.cson'
+        enlazarHome '.atom/keymap.cson'
     fi
 }
 
