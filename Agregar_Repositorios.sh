@@ -81,9 +81,9 @@ sources_repositorios() {
 preparar_repositorios() {
     echo -e "$VE Actualizando repositorios por primera vez$CL"
     sudo apt update >> /dev/null 2>> /dev/null
-    sudo apt install -y apt-transport-https >> /dev/null && echo -e "$VE Instalado el paquete$RO apt-transport-https$CL" || echo -e "$VE Error al instalar$RO apt-transport-https$CL"
+    instalarSoftware apt-transport-https && echo -e "$VE Instalado el paquete$RO apt-transport-https$CL" || echo -e "$VE Error al instalar$RO apt-transport-https$CL"
 
-    sudo apt install -y dirmngr >> /dev/null && echo -e "$VE Instalado el paquete$RO dirmngr$CL" || echo -e "$VE Error al instalar$RO dirmngr$CL"
+    instalarSoftware dirmngr && echo -e "$VE Instalado el paquete$RO dirmngr$CL" || echo -e "$VE Error al instalar$RO dirmngr$CL"
     echo -e "$VE Agregando Repositorios$CL"
 }
 
