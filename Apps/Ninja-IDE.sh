@@ -26,19 +26,20 @@ ninjaide_descargar() {
 
 ninjaide_preconfiguracion() {
     echo -e "$VE Generando Pre-Configuraciones"
+    enlazarHome '.ninja_ide'
 }
 
 ninjaide_instalar() {
     echo -e "$VE Preparando para instalar$RO Ninja IDE$CL"
-    sudo apt install -y python-qt4 >> /dev/null 2>> /dev/null && echo -e "$VE Se ha instalado$RO python-qt4$CL" || echo -e "$VE No se ha instalado$RO python-qt4$CL"
-    sudo dpkg -i "$WORKSCRIPT/tmp/ninja-ide_2.3-2_all.deb" && sudo apt install -f -y
+    instalarSoftware python-qt4 >> /dev/null 2>> /dev/null && echo -e "$VE Se ha instalado$RO python-qt4$CL" || echo -e "$VE No se ha instalado$RO python-qt4$CL"
+    instalarSoftwareDPKG "$WORKSCRIPT/tmp/ninja-ide_2.3-2_all.deb"
 }
 
 ninjaide_postconfiguracion() {
     echo -e "$VE Generando Post-Configuraciones"
 
     ## Resolviendo dependencia de libreria QtWebKit.so si no existe
-    sudo apt install 'libqtwebkit4' 2>> /dev/null
+    instalarSoftware 'libqtwebkit4' 2>> /dev/null
     if [[ ! -f '/usr/lib/python2.7/dist-packages/PyQt4/QtWebKit.so' ]]; then
         echo -e "$VE Añadiendo libreria$RO QtWebKit$CL"
         sudo mkdir -p '/usr/lib/python2.7/dist-packages/PyQt4/' 2>> /dev/null
@@ -47,7 +48,7 @@ ninjaide_postconfiguracion() {
 
     ## Resolviendo otras dependencia de plugins para Ninja IDE
     echo -e "$VEResolviendo$RO dependencias$VE para plugins de Ninja IDE$CL"
-    sudo apt install -y 'python-git' 'python3-git' 2>> /dev/null
+    instalarSoftware 'python-git' 'python3-git'
 }
 
 ## Instala el editor de python Ninja IDE
@@ -66,7 +67,7 @@ ninjaide_instalador() {
 
         ## Si falla la instalación se rellama la función tras limpiar
         if [[ ! -f '/usr/bin/ninja-ide' ]]; then
-            rm -f $WORKSCRIPT/TMP/ninja-ide_2.3-2_all.deb
+            rm -f "$WORKSCRIPT/tmp/ninja-ide_2.3-2_all.deb"
             ninjaide_descargar
             ninjaide_instalar
         fi
