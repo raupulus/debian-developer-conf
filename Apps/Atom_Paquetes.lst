@@ -1,5 +1,4 @@
 atom-bootstrap3
-atom-ide-ui
 atom-ternjs
 atom-yii2
 auto-detect-indentation
@@ -17,6 +16,7 @@ dash
 docblockr
 emmet
 file-icons
+hyperclick
 ide-css
 ide-json
 ide-php
@@ -26,8 +26,11 @@ javascript-snippets
 jumpy
 language-pgsql
 language-sql
+language-todo
 open-html-in-browser
 markdown-preview
+minimap
+minimap-autohider
 monokai
 nuclide
 nuclide-format-js
@@ -45,7 +48,13 @@ php-debug
 project-manager
 project-manager-ide
 symbols-list
+tabs-to-spaces
+teletype
+todo-show
 toggle-quotes
+tool-bar
 template-generator
 toggle-quotes
+whitespace
 wrap-guide
+zentabs
