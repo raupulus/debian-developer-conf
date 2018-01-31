@@ -24,13 +24,9 @@ ide-python
 intentions
 javascript-snippets
 jumpy
-language-pgsql
-language-perl
-language-html
-language-css
-language-javascript
 language-json
 language-go
+language-pgsql
 language-ruby
 language-ruby-on-rails
 language-shellscript
