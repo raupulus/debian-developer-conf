@@ -219,32 +219,38 @@ crear_git_alias() {
 }
 
 configuracion_git() {
-    cd
+    ## Pregunta si configurar GIT
+    echo -e "$VE ¿Quieres configurar$RO git$VE y sus plataformas?$AM"
+    read -p '  s/N  → ' input
 
-    echo -e "$VE Configurando GIT$CL"
-    read -p "Introduce el nombre completo del programador → " nombre_git
+    if [[ $input = 's' ]] || [[ $input = 'S' ]]; then
+        cd
 
-    datos_input
+        echo -e "$VE Configurando GIT$CL"
+        read -p "Introduce el nombre completo del programador → " nombre_git
 
-    while :
-    do
-        if [[ -z "$usuario_git" ]] || [[ -z "$correo_git" ]]; then
-            echo -e "$VE No puede estar vacio el usuario y el correo$CL"
-            datos_input
-        else
-            break
-        fi
-    done
+        datos_input
 
-    echo -e "$VE Configurando GIT local$CL"
-    configurar_git
+        while :
+        do
+            if [[ -z "$usuario_git" ]] || [[ -z "$correo_git" ]]; then
+                echo -e "$VE No puede estar vacio el usuario y el correo$CL"
+                datos_input
+            else
+                break
+            fi
+        done
 
-    echo -e "$VE Configurar conexion con GITHUB"
-    configurar_github
-    configurar_gitlab
-    crear_token
-    configurar_netrc
-    crear_git_alias
+        echo -e "$VE Configurando GIT local$CL"
+        configurar_git
 
-    cd "$WORKSCRIPT"
+        echo -e "$VE Configurar conexion con GITHUB$CL"
+        configurar_github
+        configurar_gitlab
+        crear_token
+        configurar_netrc
+        crear_git_alias
+
+        cd "$WORKSCRIPT"
+    fi
 }
