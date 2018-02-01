@@ -48,6 +48,10 @@ atom_preconfiguracion() {
     if [[ ! -h "$HOME/.atom/snippets.cson" ]]; then
         enlazarHome '.atom/snippets.cson'
     fi
+
+    if [[ ! -d "$HOME/.atom/Diccionarios" ]]; then
+        descargarGIT 'Diccionarios' 'git://github.com/titoBouzout/Dictionaries.git' "$HOME/.atom/Diccionarios"
+    fi
 }
 
 atom_postconfiguracion() {
