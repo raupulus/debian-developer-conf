@@ -18,3 +18,4 @@ conf/home/.vim/bundle/*
 conf/home/.vim/sessions/*
 errores.log
 /errores.log
+/conf/home/.atom/Diccionarios
