@@ -26,9 +26,9 @@
 ##############################################
 
 # Comentario del autor
-'.text.html.php':
-  'Comentario de archivo':
-    'prefix': 'comen'
+'.php':
+  'Autor de archivo':
+    'prefix': 'autor'
     'body': """
       /**
        * @author Raúl Caro Pastorino
@@ -64,13 +64,13 @@
 '.js':
   ## Comentario del autor
   'Comentario de archivo':
-    'prefix': 'com'
+    'prefix': 'autor'
     'body': """
       /**
        * @author Raúl Caro Pastorino
        * @copyright Copyright © 2017 Raúl Caro Pastorino
        * @license https://wwww.gnu.org/licenses/gpl.txt
-       */
+      **/
     """
 
   ## Nueva Clase
@@ -491,20 +491,77 @@
     """
 
 
+
+
+##############################################
+########          jQuery            ##########
+##############################################
+  ## Crea estructura básica para un plugin
+  'Estructura básica de plugins':
+    'prefix': 'plugin'
+    'body': """
+      $.fn.nombre = function(opciones) {
+              var configuracion = {
+                  dato1: '',
+              };
+
+              $.extend(configuracion, opciones);
+
+              this.each(function() {
+
+              });
+
+              return this;
+          };
+      })(jQuery);
+    """
+
+
+
 ##############################################
 ########            HTML            ##########
 ##############################################
 # Comentario del autor
-'.html.htm':
-  'Comentario de archivo':
-    'prefix': 'com'
+'.html':
+  'Autor del archivo':
+    'prefix': 'autor'
     'body': """
-      /**
+      <!--
        * @author Raúl Caro Pastorino
        * @copyright Copyright © 2017 Raúl Caro Pastorino
        * @license https://wwww.gnu.org/licenses/gpl.txt
-       */
+      -->
     """
+
+  'Estructura Incial':
+    'prefix': 'com'
+    'body': """
+      <!DOCTYPE html>
+      <!--
+       * @author Raúl Caro Pastorino
+       * @copyright Copyright © 2017 Raúl Caro Pastorino
+       * @license https://wwww.gnu.org/licenses/gpl.txt
+      -->
+      <html lang="es">
+      <head>
+          <meta charset="UTF-8">
+          <title>Título</title>
+          <style>
+
+          </style>
+          <script type="text/javascript">
+
+          </script>
+      </head>
+
+      <body>
+
+      </body>
+      </html>
+    """
+
+
+
 
 ##############################################
 ########            CSS             ##########
@@ -516,8 +573,8 @@
 ##############################################
 # Comentario del autor
 '.python':
-  'Comentario de archivo':
-    'prefix': 'com'
+  'Autor de archivo':
+    'prefix': 'autor'
     'body': """
       /**
        * @author Raúl Caro Pastorino
@@ -531,8 +588,8 @@
 ########            BASH            ##########
 ##############################################
 '.sh.bash':
-  'Comentario de archivo':
-    'prefix': 'com'
+  'Autor de archivo':
+    'prefix': 'autor'
     'body': """
       ##
       ## @author Raúl Caro Pastorino
