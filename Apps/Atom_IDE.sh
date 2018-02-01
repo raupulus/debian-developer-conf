@@ -59,7 +59,6 @@ atom_postconfiguracion() {
 
     echo -e "$VE Deshabilitando complementos$CL"
     apm disable welcome
-    apm disable about
 }
 
 atom_plugins() {
