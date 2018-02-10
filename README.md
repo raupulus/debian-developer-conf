@@ -5,7 +5,7 @@ Este script prepará completamente el entorno de programación, aplicaciones, se
 
 ![Imagen de previsualización](doc/preview.png)
 
-Con la colaboración de un testeo constante por parte de @mavalro (https://github.com/mavalro).
+Con la colaboración de un testeo constante por parte de @mavalroot (https://github.com/mavalroot).
 
 Basado en el script original para otro Sistema Operativo de @ricpelo en esta dirección https://github.com/ricpelo/conf
 
