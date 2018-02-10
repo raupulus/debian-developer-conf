@@ -166,17 +166,13 @@ También instala desde **npm** bower y los siguientes paquetes globales:
 - sources.list → Contiene las listas (la mayoría de ellas) de repositorios que se añadiran al sistema cuando se elige la opción de agregar repositorios.
 - usr → Contiene archivos compartidos de usuarios (temporalmente, se añadirá en el futuro dentro de conf)
 
-# Scripts (Información Obsoleta o incompleta)
+# Scripts (La estructura está pendiente de completar Refactorización)
 - Agregar_Repositorios.sh → Añade algunos repositorios útiles y sus llaves para seguridad
-- Configurar_GIT.sh → Scripts para configurar la integración de GIT, GitHub y GitLab
+- funciones.sh →
 - Instalar_Configuraciones → Genera todas las configuraciones de programas como Vim, Bashit, ohmyzsh y además añade configuraciones al sistema y el directorio home
-- Instalar_Software → Instala los programas indicados en la lista "Software.lst" y algunos extras
 - Limpiador.sh → Este script limpia los directorios y archivos que pueden causar más problemas en algún momento, esto existe para depurar principalmente y su uso se desaconseja por ser áltamente arriesgado a perder datos.
 - main.sh → Programa principal con menú para elegir paso a realizar
-- Personalización_GTK.sh → Genera fondos para grub, escritorio, gdm... y además iconos, temas y cursores
 - Servidores.sh → Instala servidores como apache2 php postregsql mariadb y los configura
-- Tipografías.sh → Instala fuentes tipográficas
-- Variables_Entorno.sh → Genera variables de entorno que seran globales en el sistema
 
 Dentro de Apps/
 - Atom_IDE.sh → Instala el editor ATOM con su configuración y complementos
@@ -191,3 +187,10 @@ Dentro de Apps/
 - OhMyZsh.sh → Instala y configura OhMyZsh
 - Pencil-Project.sh → Instala y configura Pencil Project
 - vim.sh → Instala y configura Vim
+
+Estructura pendiente de ordenar, alguna información extra:
+- Configurar_GIT.sh → Scripts para configurar la integración de GIT, GitHub y GitLab
+- Instalar_Software → Instala los programas indicados en la lista "Software.lst" y algunos extras
+- Personalización_GTK.sh → Genera fondos para grub, escritorio, gdm... y además iconos, temas y cursores
+- Tipografías.sh → Instala fuentes tipográficas
+- Variables_Entorno.sh → Genera variables de entorno que seran globales en el sistema
