@@ -59,6 +59,9 @@ agregar_llaves() {
 
     ## Repositorio de PostgreSQL Oficial
     wget --quiet -O - https://www.postgresql.org/media/keys/ACCC4CF8.asc | sudo apt-key add -
+
+    ## Repositorio de NodeJS Oficial
+    curl -sL https://deb.nodesource.com/setup_9.x | sudo -E bash -
 }
 
 ##

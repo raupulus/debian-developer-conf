@@ -26,20 +26,18 @@
 ##############################################
 
 # Comentario del autor
-'.text.html.php':
-  'Comentario de archivo':
-    'prefix': 'com'
+'.php':
+  'Autor de archivo':
+    'prefix': 'autor'
     'body': """
       /**
        * @author Raúl Caro Pastorino
        * @copyright Copyright © 2017 Raúl Caro Pastorino
-       * @license https://wwww.gnu.org/licenses/gpl.txt
+       * @license https://www.gnu.org/licenses/gpl-3.0-standalone.html
        */
     """
 
-
-# Comparar Cadenas de texto
-'.text.html.php':
+  # Comparar Cadenas de texto
   'Comparar Cadenas de texto':
     'prefix': 'comparacadenas'
     'body': """
@@ -60,13 +58,463 @@
       }
     """
 
+##############################################
+########             JS            ###########
+##############################################
+'.js':
+  ## Comentario del autor
+  'Comentario de archivo':
+    'prefix': 'autor'
+    'body': """
+      /**
+       * @author Raúl Caro Pastorino
+       * @copyright Copyright © 2017 Raúl Caro Pastorino
+       * @license https://wwww.gnu.org/licenses/gpl.txt
+      **/
+    """
+
+  ## Nueva Clase
+  'Clases':
+    'prefix': 'clase'
+    'body': """
+      class A extends B {
+          constructor(var1, var2) {
+              // Constructor del padre
+              super(var2);
+
+              // Propiedades de la propia clase
+              this.var1 = var1;
+          }
+
+          get var1() {
+              return this.var1;
+          }
+
+          set var1(var1) {
+              this.var1 = var1;
+          }
+      }
+    """
+
+  ## Generar Aleatorios
+  'Generar Aleatorio':
+    'prefix': 'aleatorio'
+    'body': """
+      /**
+       * Genera un número aleatoriamente entre los valores de mínimo y máximo.
+       * @param  {Integer} [minimo=0]  Valor mínimo.
+       * @param  {Integer} [maximo=10] Valor máximo.
+       * @return {Integer}             Devuelve un entero entre el mínimo y máximo.
+       */
+      function generarAleatorio(minimo = 0, maximo = 10) {
+          var x = 0;
+
+          while (true) {
+              x = parseInt((Math.random()+0.01) * maximo);
+
+              if ((x >= minimo) && (x <= maximo)) {
+                  return x;
+              }
+          }
+      }
+    """
+
+  ## Generar números aleatorios y devolver array
+   'Generar Aleatorios':
+    'prefix': 'aleatorios'
+    'body': """
+      /**
+       * Genera números aleatoriamente y los devuelve en un array
+       * @param  {Integer}  cantidad  Cantidad de números generados
+       * @return {Array}              Array con todos los números generados
+       */
+      function generarAleatorios(cantidad) {
+          var aleatorios = [];
+          for (let i=1; i<=cantidad; i++) {
+              aleatorios.push(parseInt((Math.random()+0.01)*20));
+          }
+          return aleatorios;
+      }
+    """
+
+  ## Redondea un número float con tantos decimales como sea necesario
+  'Redondear Decimales':
+    'prefix': 'redondear'
+    'body': """
+      /**
+       * Recibe un número y la cantidad de decimales a los que redondeará
+       * @param  {Float}    numero     Número a redondear
+       * @param  {Integer}  decimales  Cantidad de decimales
+       * @return {Float}               Número redondeado
+       */
+      function redondearDecimales(numero, decimales) {
+          return numero.toFixed(4);
+      }
+    """
+
+  ## Abrir una Ventana
+  'Abrir una Ventana':
+    'prefix': 'abrirVentana'
+    'body': """
+      /**
+       * Crea una nueva instancia de una ventana con los parámetros pasados
+       * @param  {String}   origen  Ruta al documento HTML para abrir
+       * @param  {String}   titulo  Nombre de la ventana
+       * @param  {Integer}  ancho   Ancho de la ventana
+       * @param  {Integer}  alto    Altura de la ventana
+       * @param  {Integer}  top     Separación respecto la parte superior
+       * @param  {Integer}  left    Separación respecto la parte izquierda
+       * @return {window}           Devuelve la nueva ventana
+       */
+      function abrirVentana(origen, titulo, ancho, alto, top, left) {
+          ventana = window.open(
+              origen,
+              titulo,
+              'width='+ancho+
+              ',height='+alto+
+              ',top='+top+
+              ',left='+left+
+              ',menubar=yes,resizable=yes,location=yes,scrollbars=yes,status=yes,toolbar=yes');
+
+          return ventana;
+      }
+    """
+
+  ## Tamaño de la Ventana
+  'Tamaño de la Ventana':
+    'prefix': 'sizeVentana'
+    'body': """
+      /**
+       * Devuelve  el tamaño de la ventana en un array, la posición 0 es
+       * el ancho y en la posición 1 está el alto.
+       * @param  {window}  ventana  Recibe la ventana como parámetro
+       * @return {Array}            Devuelve un array con ancho y alto
+       */
+      function sizeVentana(ventana) {
+          return [ventana.innerWidth, ventana.innerHeight];
+      }
+    """
+
+  ## Posición de la ventana en la pantalla
+  'Posición de la ventana en la pantalla':
+    'prefix': 'posicionVentana'
+    'body': """
+      /**
+       * Devuelve la posición de la ventana en una array, la posición 0 es la
+       * separación desde el borde izquierdo y la posición 1 sobre la parte superior
+       * @param  {window}  ventana  Recibe el objeto Window para dar su posición
+       * @return {Array}            Array que contiene la posición de la ventana
+       */
+      function posicionVentana(ventana) {
+          return [ventana.screenX, ventana.screenY];
+      }
+    """
+
+  ## Mover ventana
+  'Mover ventana':
+    'prefix': 'moverVentana'
+    'body': """
+      /**
+       * Mueve una ventana pasada como parámetro los píxeles pasados como segundo
+       * parámetro, desde arriba y desde la izquierda.
+       * @param  {window}   ventana    Ventana a la que se aplicará
+       * @param  {Integer}  arriba     Número de píxeles desde la parte superior
+       * @param  {Integer}  izquierda  Número de píxeles desde la parte izquierda
+       */
+      function moverVentana(ventana, arriba, izquierda) {
+          ventana.moveBy(arriba, izquierda);
+      }
+    """
+
+  ## Mueve la Ventana a un punto
+  'Mueve la Ventana a un punto':
+    'prefix': 'moverVentanaTo'
+    'body': """
+      /**
+       * Mueve una ventana a un lugar concreto de la pantalla
+       * @param  {window}   ventana    Ventana a la que se aplicará
+       * @param  {Integer}  arriba     Distancia desde la parte superior
+       * @param  {Integer}  izquierda  Distancia desde la parte izquierda
+       */
+      function moverVentanaTo(ventana, arriba, izquierda) {
+          ventana.moveTo(arriba, izquierda);
+      }
+    """
+
+  ## Cierra todas las Ventanas pasadas como parámetros
+  'Cierra todas las Ventanas':
+    'prefix': 'cerrarVentanas'
+    'body': """
+      /**
+       * Cierra todas las ventanas pasadas en la llamada
+       * @param  {array}  ventanas  Todos los parámetros que recibe los convierte en
+       *                            una lista iterable
+       */
+      function cerrarVentanas(...ventanas) {
+          for (ventana of ventanas) {
+              ventana.close();
+          }
+      }
+    """
+
+  ## Validar una Cadena
+  'Validar una Cadena':
+    'prefix': 'validarCadena'
+    'body': """
+      function validarCadena(cadena) {
+          var patron = new RegExp("^[a-záéíóúñ]+", "i");
+          return patron.test(cadena);
+      }
+    """
+
+  ## Validar cadenas con Espacios
+  'Validar cadenas con Espacios':
+    'prefix': 'validarCadenas'
+    'body': """
+      function validarCadenas(cadena) {
+          var patron = new RegExp("^[a-záéíóúñ]+(( [a-záéíóúñ]+)+)?$", "i");
+          return patron.test(cadena);
+      }
+    """
+
+  ## Validar Nombre
+  'validar Nombre':
+    'prefix': 'validarNombre'
+    'body': """
+      function validarNombre(nombre) {
+          var patron = new RegExp("^[a-záéíóúñ]+", "i");
+          return patron.test(nombre);
+      }
+    """
+
+  ## Validar Email
+  'Validar Email':
+    'prefix': 'validarEmail'
+    'body': """
+      function validarEmail(email) {
+          var patron = new RegExp("^(http(s)?:\/\/)?([w]{3}[\.])?[a-z0-9]+[\.][a-z]{2,3}$");
+          return patron.test(email);
+      }
+    """
+
+  ## Validar Edad
+  'Validar Edad':
+    'prefix': 'validarEdad'
+    'body': """
+      function validarEdad(edad) {
+          var patron = new RegExp("^[0-9]{1,3}$", "i");
+          return patron.test(edad);
+      }
+    """
+
+  ## Validar Telefono
+  'Validar Telefono':
+    'prefix': 'validarTelefono'
+    'body': """
+      function validarTelefono(telefono) {
+          var patron = new RegExp("^[0-9]{9}$");
+          return patron.test(telefono);
+      }
+    """
+
+  ## Validar Web
+  'Validar Web':
+    'prefix': 'validarWeb'
+    'body': """
+      function validarWeb(web) {
+          var patron = new RegExp("^(http(s)?:\/\/)+([w]{3}[\.])+[a-z0-9]+[\.][a-z]{2,3}$");
+          return patron.test(web);
+      }
+    """
+
+  ## Validar Password
+  'Validar Password':
+    'prefix': 'validarPassword'
+    'body': """
+      function validarPassword(password) {
+          var patron = new RegExp("^[0-9a-zA-Z\,\._-]+$");
+          return patron.test(password);
+      }
+    """
+
+  ## Validar DNI
+  'Validar DNI':
+    'prefix': 'validarDNI'
+    'body': """
+      function validarDNI(dni) {
+          var patron = new RegExp("^[0-9]{2}\.[0-9]{3}\.[0-9]{3}-[a-zA-Z]$");
+          return patron.test(dni);
+      }
+    """
+
+  ## Calcular Edad Milisegundos
+  'Calcular Edad Milisegundos':
+    'prefix': 'calcularEdad'
+    'body': """
+      var hoy = new Date();
+      var nacimiento = new Date('1989, 8, 5');
+
+      var dias = ((((hoy-nacimiento)/1000)/60)/60)/24;
+      var meses = parseInt((dias%365)/30);
+      var anios = parseInt(dias/365);
+      dias = parseInt((dias%365)%30);
+
+      document.write("Hoy es → " + hoy);
+      document.write("<br />Fecha de nacimiento → " + nacimiento);
+      document.write("<br /> " + anios + " años, " + meses + " meses, " + dias + " días.");
+    """
+
+  ## Validar un Rango Numérico
+  'Validar un Rango Numérico':
+    'prefix': 'validarRango'
+    'body': """
+    /**
+     * Valida si un número se encuentra en un rango numérico
+     * @param {Numeric} numero El número a comprobar
+     * @param {Numeric} inicio El valor inicial del rango
+     * @param {Numeric} fin    El valor final del rango
+     */
+    function validarRango(numero, inicio, fin) {
+        if ((inicio === '') || (fin === '')) || (numero === '') {
+            return false;
+        } else if (isNaN(Number(numero)) === NaN) {
+            return false;
+        } else if (isNaN(Number(inicio)) === NaN) {
+            return false;
+        } else if (isNaN(Number(fin)) === NaN) {
+            return false;
+        } else if (fin >= inicio) {
+            return false;
+        } else if ((numero <= inicio) || (numero >= fin)) {
+            return false;
+        }
+        return true;
+    }
+    """
+
+  ## Eliminar Eventos de teclas
+  'Eliminar Eventos de teclas':
+    'prefix': 'eliminarEventos'
+    'body': """
+        function eliminarEventos() {
+            window.addEventListener('keydown', function(e) {e.preventDefault();}, true);
+            window.addEventListener('keypress', function(e) {e.preventDefault();}, true);
+            window.addEventListener('keyup', function(e) {e.preventDefault();}, true);
+        }
+    """
+
+  ## Crear Nodo Nuevo
+  'Crear Nodo Nuevo':
+    'prefix': 'crearNodo'
+    'body': """
+      /**
+       * Crea un nuevo nodo y le asigna una clase.
+       * @param  {String} elemento Etiqueta HTML para crear el nodo.
+       * @param  {String} clase    Clase para asignar a la etiqueta creada
+       * @param  {String} texto    Texto para incluir en el nodo texto.
+       * @return {Node}            Devuelve el nodo creado.
+       */
+      function crearNodo(elemento, clase, texto = '') {
+          var nuevoNodo = document.createElement(elemento);
+          nuevoNodo.setAttribute('class', clase);
+
+          var nodoTexto = document.createTextNode(texto);
+          nuevoNodo.appendChild(nodoTexto);
+          return nuevoNodo;
+      }
+    """
+
+  ## Crear Nodo con Id nuevo
+  'Crear Nodo con Id nuevo':
+    'prefix': 'crearNodoId'
+    'body': """
+      /**
+       * Crea un nuevo nodo y le asigna un id.
+       * @param  {String} elemento Etiqueta HTML para crear el nodo.
+       * @param  {String} id       Id para asignar a la etiqueta creada
+       * @param  {String} texto    Texto para incluir en el nodo texto.
+       * @return {Node}            Devuelve el nodo creado.
+       */
+      function crearNodoId(elemento, id, texto) {
+          var nuevoNodo = document.createElement(elemento);
+          nuevoNodo.setAttribute('id', id);
+
+          var nodoTexto = document.createTextNode(texto);
+          nuevoNodo.appendChild(nodoTexto);
+          return nuevoNodo;
+      }
+    """
+
+  ## Eliminar Nodos por Clase
+  'Eliminar Nodos por Clase':
+    'prefix': 'eliminarNodosClase'
+    'body': """
+      /**
+       * Elimina todos los nodos de la clase pasada.
+       * @param  {String} clase Clase por la que filtrar para eliminar nodo.
+       */
+      function eliminarNodosClase(clase) {
+          var nodosBorrar = document.getElementsByClassName(clase);
+          for (nodo of nodosBorrar) {
+              document.removeChild(nodosBorrar);
+          }
+      }
+    """
+
+  ## Eliminar Nodo por Id
+  'Eliminar Nodo por Id':
+    'prefix': 'eliminarNodoId'
+    'body': """
+      /**
+       * Elimina todos los nodos del id pasada.
+       * @param  {String} id El id por la que filtrar para eliminar nodo.
+       */
+      function eliminarNodoId(id) {
+          var nodoBorrar = document.getElementById(id);
+          document.removeChild(nodoBorrar);
+      }
+    """
+
+  ## Reemplazar Nodo por Id
+  'Reemplazar Nodo por Id':
+    'prefix': 'reemplazarNodoId'
+    'body': """
+      /**
+       * Reemplaza un nodo por ID
+       * @param  {[type]} id        Id del nodo a reemplzar
+       * @param  {[type]} nodoNuevo Nodo que poner en su lugar
+       */
+      function reemplazarNodoId(id, nodoNuevo) {
+          var nodoViejo = document.getElementById(id);
+          document.replaceChild(nodoViejo, nodoNuevo);
+      }
+    """
 
 
 
 
+##############################################
+########          jQuery            ##########
+##############################################
+  ## Crea estructura básica para un plugin
+  'Estructura básica de plugins':
+    'prefix': 'plugin'
+    'body': """
+      $.fn.nombre = function(opciones) {
+              var configuracion = {
+                  dato1: '',
+              };
 
+              $.extend(configuracion, opciones);
 
+              this.each(function() {
 
+              });
+
+              return this;
+          };
+      })(jQuery);
+    """
 
 
 
@@ -74,61 +522,78 @@
 ########            HTML            ##########
 ##############################################
 # Comentario del autor
-'.text.html.basic':
-  'Comentario de archivo':
-    'prefix': 'com'
+'.html':
+  'Autor del archivo':
+    'prefix': 'autor'
     'body': """
-      /**
+      <!--
        * @author Raúl Caro Pastorino
        * @copyright Copyright © 2017 Raúl Caro Pastorino
        * @license https://wwww.gnu.org/licenses/gpl.txt
-       */
+      -->
+    """
+
+  'Estructura Incial':
+    'prefix': 'com'
+    'body': """
+      <!DOCTYPE html>
+      <!--
+       * @author Raúl Caro Pastorino
+       * @copyright Copyright © 2017 Raúl Caro Pastorino
+       * @license https://wwww.gnu.org/licenses/gpl.txt
+      -->
+      <html lang="es">
+      <head>
+          <meta charset="UTF-8">
+          <title>Título</title>
+          <style>
+
+          </style>
+          <script type="text/javascript">
+
+          </script>
+      </head>
+
+      <body>
+
+      </body>
+      </html>
     """
 
 
 
 
-
-
-
-
-
-
 ##############################################
-########             JS             ##########
+########            CSS             ##########
 ##############################################
-# Comentario del autor
-'.source.js':
-  'Comentario de archivo':
-    'prefix': 'com'
-    'body': """
-      /**
-       * @author Raúl Caro Pastorino
-       * @copyright Copyright © 2017 Raúl Caro Pastorino
-       * @license https://wwww.gnu.org/licenses/gpl.txt
-       */
-    """
-
-
-
-
-
-
-
-
 
 
 ##############################################
 ########           PYTHON           ##########
 ##############################################
 # Comentario del autor
-'.source.python':
-  'Comentario de archivo':
-    'prefix': 'com'
+'.python':
+  'Autor de archivo':
+    'prefix': 'autor'
     'body': """
       /**
        * @author Raúl Caro Pastorino
        * @copyright Copyright © 2017 Raúl Caro Pastorino
        * @license https://wwww.gnu.org/licenses/gpl.txt
        */
+    """
+
+
+##############################################
+########            BASH            ##########
+##############################################
+'.sh.bash':
+  'Autor de archivo':
+    'prefix': 'autor'
+    'body': """
+      ##
+      ## @author Raúl Caro Pastorino
+      ## @copyright Copyright © 2017 Raúl Caro Pastorino
+      ## @license https://wwww.gnu.org/licenses/gpl.txt
+      ##
     """

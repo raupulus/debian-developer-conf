@@ -179,11 +179,11 @@ server_php() {
         local paquetes_basicos="php php-cli libapache2-mod-php"
         instalarSoftware "$paquetes_basicos"
 
-        echo -e "$VE Instalando$RO paquetes extras$AM"
+        echo -e "$VE Instalando$RO paquetes extras$CL"
         local paquetes_extras="php-gd php-curl php-pgsql php-sqlite3 sqlite sqlite3 php-intl php-mbstring php-xml php-xdebug php-json"
         instalarSoftware "$paquetes_extras"
 
-        echo -e "$VE Instalando librerías$AM"
+        echo -e "$VE Instalando librerías$CL"
         instalarSoftware composer
     }
 
@@ -334,7 +334,7 @@ server_sql() {
     }
 
     personalizar_sql() {
-        echo -e "$VE Personalizando SQL$CL"
+        echo -e "$VE Personalizando$RO SQL$CL"
         #sudo -u postgres createdb basedatos #Crea la base de datos basedatos
         #sudo -u postgres createuser -P usuario #Crea el usuario usuario y pide que teclee su contraseña
     }
@@ -347,12 +347,75 @@ server_sql() {
     reiniciarServicio 'postgresql'
 }
 
+server_python() {
+    instalar_python() {
+        echo -e "$VE Instalando$RO Python y Django$CL"
+        ## Instalar python y gestor de paquetes
+        instalarSoftware python python3 python-pip python3-pip
+    }
+
+    configurar_python2() {
+        echo -e "$VE Preparando configuracion de$RO Python2$CL"
+    }
+
+    configurar_python3() {
+        echo -e "$VE Preparando configuracion de$RO Python3$CL"
+    }
+
+    personalizar_python2() {
+        echo -e "$VE Personalizando$RO Python y Django$CL"
+        ## Closure linter
+        pip install https://github.com/google/closure-linter/zipball/master
+    }
+
+    personalizar_python3() {
+        echo -e "$VE Personalizando$RO Python3$CL"
+        ## Closure linter
+        pip3 install https://github.com/google/closure-linter/zipball/master
+    }
+
+    instalar_python
+    configurar_python2
+    configurar_python3
+    personalizar_python2
+    personalizar_python3
+}
+
+server_nodejs() {
+    instalar_nodejs() {
+        echo -e "$VE Instalando$RO NodeJS$CL"
+        instalarSoftware nodejs
+        actualizarSoftware nodejs
+    }
+
+    configurar_nodejs() {
+        echo -e "$VE Preparando configuracion de$RO NodeJS$CL"
+    }
+
+    personalizar_nodejs() {
+        echo -e "$VE Personalizando$RO NodeJS$CL"
+        ## Instalando paquetes globales
+        sudo npm install -g eslint
+        sudo npm install -g jscs
+        sudo npm install -g bower
+        sudo npm install -g compass
+        sudo npm install -g stylelint
+        sudo npm install -g bundled
+    }
+
+    instalar_nodejs
+    configurar_nodejs
+    personalizar_nodejs
+}
+
 instalar_servidores() {
     prepararInstalador
 
     server_apache
     server_php
     server_sql
+    server_python
+    server_nodejs
 
     echo -e "$VE Se ha completado la instalacion, configuracion y personalizacion de servidores"
 }

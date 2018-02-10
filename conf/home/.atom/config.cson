@@ -1,64 +1,91 @@
 "*":
-  "":
-    diff:
-      source:
-        editor:
-          tabLength: 4
-    html:
-      php:
-        text:
-          editor:
-            tabLength: 4
+  "atom-autocomplete-php":
+    binComposer: "composer"
   "atom-i18n":
     locale: "es"
-  "atom-autocomplete-php":
-    binComposer: "/usr/bin/composer"
-  "autoclose-html":
-    legacyMode: true
-  "autocomplete-plus":
-    autoActivationDelay: 300
+  "atom-ternjs":
+    excludeLowerPriorityProviders: true
+    inlineFnCompletionDocumentation: true
+    snippetsFirst: true
+    useSnippets: true
+  "atom-toolbar": {}
+  "autocomplete-python": {}
   core:
+    customFileTypes:
+      "source.ini": [
+        ".buckconfig"
+        ".hgrc"
+        ".flowconfig"
+      ]
+      "source.json": [
+        "BUCK.autodeps"
+      ]
+      "source.python": [
+        "BUCK"
+      ]
     disabledPackages: [
-      "language-clojure"
+      "welcome"
+      "linter-pycodestyle"
+      "remote-edit"
+      "script"
+      "open-bash-git"
+      "merge-conflicts"
+      "linter-ui-default"
+      "linter-sass-lint"
+      "linter-php"
+      "linter-js-blyss"
+      "language-unix-shell"
+      "intentions"
+      "highlight-selected"
+      "goto-definition"
+      "git-time-machine"
+      "git-plus-toolbar"
+      "git-plus"
+      "git-control"
+      "git-commit"
+      "expose"
+      "busy-signal"
+      "atom-sass"
+      "atom-jade"
+      "Atom-Bash-Snippets"
+      "vim-mode-plus"
+      "about"
+      "linter"
+      "atom-i18n"
+      "linter-tidy"
+      "linter-csslint"
+      "linter-eslint"
+      "linter-htmlhint"
+      "linter-jshint"
+      "linter-phpcs"
+      "linter-python"
+      "linter-python-pep8"
+      "linter-spell-shellscript"
+      "atom-ide-ui"
+      "atom-toolbar"
+      "panel-boss"
       "language-csharp"
       "language-java"
-      "language-mustache"
-      "language-objective-c"
-      "metrics"
-      "about"
-      "welcome"
+      "symbols-list"
+      "tree-view"
     ]
-    packagesWithKeymapsDisabled: [
-      "multi-cursor"
-    ]
+    projectHome: "$HOME/1_GIT/"
     telemetryConsent: "no"
     themes: [
-      "one-dark-ui"
+      "nucleus-dark-ui"
       "monokai"
     ]
-  docblockr: {}
   editor:
-    fontFamily: "Input"
-    fontSize: 18
-    scrollPastEnd: true
-    scrollSensitivity: 50
+    fontFamily: "Fira Code"
+    fontSize: 15
     invisibles: {}
     showIndentGuide: true
     showInvisibles: true
+    softWrap: true
     softWrapAtPreferredLineLength: true
     tabLength: 4
     tabType: "soft"
-  "git-diff": {}
-  "git-log":
-    fontFamily: "Input, Inconsolata, Monaco, Consolas, 'Courier New', Courier"
-    fontScale: 0.8
-  "highlight-line":
-    enableBackgroundColor: false
-    enableUnderline: true
-    underline: "dotted"
-  jumpy:
-    highContrast: true
-  "linter-php": {}
+  "file-icons": {}
   "linter-phpcs":
     autoExecutableSearch: false
     codeStandardOrConfigFile: "/opt/composer/vendor/yiisoft/yii2-coding-standards/Yii2"
@@ -69,6 +96,7 @@
     ]
   "linter-ui-default":
     panelHeight: 300
+    showPanel: true
   "markdown-preview":
     useGitHubStyle: true
   minimap:
@@ -76,10 +104,13 @@
     plugins:
       "minimap-autohider": true
       "minimap-autohiderDecorationsZIndex": 0
-  "one-dark-ui":
-    fontSize: 14
-  "one-light-ui":
-    fontSize: 14
+  nuclide:
+    "atom-ide-code-format":
+      formatOnSave: true
+    "atom-ide-diagnostics-ui": {}
+    "atom-ide-outline-view": {}
+    "nuclide-home":
+      showHome: false
   "php-cs-fixer":
     executablePath: "/opt/composer/vendor/bin/php-cs-fixer"
     executeOnSave: true
@@ -87,14 +118,32 @@
   "php-debug":
     AutoExpandLocals: true
     currentPanelMode: "bottom"
-  "php-integrator-autocomplete-plus": {}
-  "php-integrator-base:confirmed-upgrade-message": true
-  "php-integrator-navigation":
-    navigationRequireAltKey: false
-    navigationRequireMetaKey: true
   "spell-check":
+    addKnownWords: true
+    grammars: [
+      "source.asciidoc"
+      "source.gfm"
+      "text.git-commit"
+      "text.plain"
+      "text.plain.null-grammar"
+      "text.html"
+      "text.php"
+      "text.python"
+      "text.js"
+    ]
+    localePaths: [
+      "$HOME/.atom/Diccionarios"
+    ]
     locales: [
+      "es-ES"
+      "es_ES"
       "es_ES.UTF-8"
+      "en-EN"
+      "en_EN"
+      "en_EN.UTF-8"
+      "Spanish"
+      "English"
+      "English (American)"
     ]
   "split-diff":
     diffWords: true
@@ -104,11 +153,17 @@
     syncHorizontalScroll: true
   "symbols-list":
     hideOnEmptyList: true
+  "tool-bar":
+    position: "Left"
+  "vim-mode-plus": {}
   welcome:
     showOnStartup: false
-  zentabs:
-    neverCloseUnsaved: true
-  tabs:
-    enableVcsColoring: true
-  whitespace:
-    ignoreWhitespaceOnCurrentLine: false
+".ansi.text":
+  editor:
+    softWrapHangingIndent: 4
+".hack.html.text":
+  editor:
+    softWrapHangingIndent: 4
+".python.source":
+  editor:
+    autoIndentOnPaste: true

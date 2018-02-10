@@ -65,6 +65,17 @@ instalarSoftware() {
 }
 
 ##
+## Recibe uno o más parámetros con el nombre de los programas y los actualiza
+## de versión en el caso de que exista una superior en el repositorio
+## @param  $*  String  Nombres de programas para ser actualizados
+##
+actualizarSoftware() {
+    for programa in $*; do
+        sudo apt upgrade -y "$programa"
+    done
+}
+
+##
 ## Recibe uno o más parámetros con el nombre de los paquetes a instalar
 ## @param  $*  String  Nombre de paquetes a instalar
 ##
@@ -94,7 +105,7 @@ descargar() {
     echo -e "$VE Descargando$RO $1 $CL"
     local REINTENTOS=10
     for (( i=1; i<=$REINTENTOS; i++ )); do
-        rm "$WORKSCRIPT/tmp/$1" 2>> /dev/null
+        rm -f "$WORKSCRIPT/tmp/$1" 2>> /dev/null
         wget --show-progress "$2" -O "$WORKSCRIPT/tmp/$1" && break
     done
 }
@@ -108,7 +119,7 @@ descargar() {
 descargarTo() {
     local REINTENTOS=10
     for (( i=1; i<=$REINTENTOS; i++ )); do
-        rm "$WORKSCRIPT/tmp/$2" 2>> /dev/null
+        rm -f "$WORKSCRIPT/tmp/$2" 2>> /dev/null
         wget --show-progress "$1" -O "$2" && break
     done
 }
@@ -127,11 +138,11 @@ descargarGIT() {
         for (( i=1; i<=$reintentos; i++ )); do
             echo -e "$VE Descargando$RO $1$VE, intento$RO $i$CL"
             if [[ $i -eq $reintentos ]]; then
-                rm -R "$3" 2>> /dev/null
+                rm -Rf "$3" 2>> /dev/null
                 break
             fi
             git clone "$2" "$3" && break
-            rm -R "$3" 2>> /dev/null
+            rm -Rf "$3" 2>> /dev/null
         done
     else
         echo -e "$RO$1$VE ya está instalado$CL"
@@ -153,18 +164,18 @@ enlazarHome() {
 
         if [[ -h "$HOME/$x" ]]; then  ## Si es un enlace
             echo -e "$VE Limpiando enlace anterior para$RO $x$CL"
-            rm "$HOME/$x"
+            rm -f "$HOME/$x"
         elif [[ -f "$HOME/$x" ]] &&   ## Si es un archivo y no tiene backup
              [[ ! -f "$WORKSCRIPT/Backups/$x" ]]; then
             echo -e "$VE Creando enlace para el archivo$RO $HOME$x$CL"
-            crearBackup "$HOME/$x" && rm "$HOME/$x"
+            crearBackup "$HOME/$x" && rm -f "$HOME/$x"
         elif [[ -d "$HOME/$x" ]] &&   ## Si es un directorio y no tiene backup
              [[ ! -d "$WORKSCRIPT/Backups/$x" ]]; then
             echo -e "$VE Creando enlace para el directorio$RO $HOME$x$CL"
-            crearBackup "$HOME/$x" && rm -R "$HOME/$x"
+            crearBackup "$HOME/$x" && rm -Rf "$HOME/$x"
         else
             echo -e "$VE Eliminando $RO$HOME/$x$VE, ya existe$RO Backup$CL"
-            rm "$HOME/$x" 2>> /dev/null
+            rm -f "$HOME/$x" 2>> /dev/null
         fi
 
         ln -s "$WORKSCRIPT/conf/home/$x" "$HOME/$x"

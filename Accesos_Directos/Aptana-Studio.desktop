@@ -1,0 +1,16 @@
+[Desktop Entry]
+Name=Aptana Studio 3
+Comment=IDE para programar en lenguajes WEBS
+GenericName=Aptana Studio 3
+X-GNOME-FullName=Aptana Studio 3
+Exec=.local/opt/Aptana_Studio/AptanaStudio3
+Terminal=false
+X-MultipleArgs=false
+Type=Application
+Icon=/usr/share/icons/fryntiz/AptanaStudio.png
+Categories=Developer;Desarrollo;
+MimeType=text/html;text/xml;application/xhtml+xml;application/xml;application/vnd.mozilla.xul+xml;application/rss+xml;application/rdf+xml;image/gif;image/jpeg;image/png;x-scheme-handler/http;x-scheme-handler/https;
+StartupWMClass=Aptana Studio 3
+StartupNotify=true
+Name[es_ES]=Aptana-Studio
+Comment[es_ES.UTF-8]=Aptana Studio 3 es un IDE para programar en lenguajes WEBS
