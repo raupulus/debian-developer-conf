@@ -334,7 +334,7 @@ server_sql() {
     }
 
     personalizar_sql() {
-        echo -e "$VE Personalizando SQL$CL"
+        echo -e "$VE Personalizando$RO SQL$CL"
         #sudo -u postgres createdb basedatos #Crea la base de datos basedatos
         #sudo -u postgres createuser -P usuario #Crea el usuario usuario y pide que teclee su contraseña
     }
@@ -347,12 +347,39 @@ server_sql() {
     reiniciarServicio 'postgresql'
 }
 
+server_nodejs() {
+    instalar_nodejs() {
+        echo -e "$VE Instalando$RO NodeJS$CL"
+        sudo apt-get install -y nodejs
+    }
+
+    configurar_nodejs() {
+        echo -e "$VE Preparando configuracion de$RO NodeJS$CL"
+    }
+
+    personalizar_nodejs() {
+        echo -e "$VE Personalizando$RO NodeJS$CL"
+        ## Instalando paquetes globales
+        sudo npm install -g eslint
+        sudo npm install -g jscs
+        sudo npm install -g bower
+        sudo npm install -g compass
+        sudo npm install -g stylelint
+        sudo npm install -g bundled
+    }
+
+    instalar_nodejs
+    configurar_nodejs
+    personalizar_nodejs
+}
+
 instalar_servidores() {
     prepararInstalador
 
     server_apache
     server_php
     server_sql
+    server_nodejs
 
     echo -e "$VE Se ha completado la instalacion, configuracion y personalizacion de servidores"
 }
