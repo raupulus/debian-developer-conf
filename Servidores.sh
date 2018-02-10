@@ -347,6 +347,28 @@ server_sql() {
     reiniciarServicio 'postgresql'
 }
 
+server_python() {
+    instalar_python() {
+        echo -e "$VE Instalando$RO Python y Django$CL"
+        ## Instalar python y gestor de paquetes
+        sudo apt install python python3 python-pip python3-pip
+    }
+
+    configurar_python() {
+        echo -e "$VE Preparando configuracion de$RO Python y Django$CL"
+    }
+
+    personalizar_python() {
+        echo -e "$VE Personalizando$RO Python y Django$CL"
+        ## Closure linter
+        pip install https://github.com/google/closure-linter/zipball/master
+    }
+
+    instalar_python
+    configurar_python
+    personalizar_python
+}
+
 server_nodejs() {
     instalar_nodejs() {
         echo -e "$VE Instalando$RO NodeJS$CL"
@@ -379,6 +401,7 @@ instalar_servidores() {
     server_apache
     server_php
     server_sql
+    server_python
     server_nodejs
 
     echo -e "$VE Se ha completado la instalacion, configuracion y personalizacion de servidores"
