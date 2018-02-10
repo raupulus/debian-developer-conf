@@ -139,6 +139,18 @@ Se instalan las siguientes herramientas de fuentes externas:
 
 ### MariaDB
 
+### Python
+Contempla la instalación de Python2 y Python3 con sus gestores de paquetes **pip** para cada uno de ellos.
+
+### NodeJS
+Instala NodeJS (tienen que estar los repositorios agregados) y además contempla la instalación de algunos paquetes como ámbito global para poder corregir sintaxis javascript en algunos IDE's y/o desde terminal.
+
+También instala desde **npm** bower y los siguientes paquetes globales:
+- eslint
+- jscs
+- compass
+- stylelint
+- bundled
 
 ## Directorios
 - Accesos_Direcots → Contiene los accesos directos individuales para usuario que van en ~/.local/share/applications
