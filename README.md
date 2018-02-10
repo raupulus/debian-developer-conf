@@ -153,14 +153,15 @@ También instala desde **npm** bower y los siguientes paquetes globales:
 - bundled
 
 ## Directorios
-- Accesos_Direcots → Contiene los accesos directos individuales para usuario que van en ~/.local/share/applications
+- Accesos_Directos → Contiene los accesos directos individuales para usuario que van en ~/.local/share/applications
+- Apache2 → Contenido para apache
+- Apps → Contiene scripts y configuraciones especiales para ciertas aplicaciones
 - fonts → Contiene un directorio por cada conjunto de fuentes similares
 - gedit → Contiene configuración específica para gedit
-- home → Contiene archivos de configuración o plantillas para generarlos
-- LIB → Archivos de librerías del sistema contando desde la raíz
-- TMP → Directorio donde se descargan los archivos temporales
-- usr → Contiene archivos compartidos de usuarios
-- Apps → Contiene scripts y configuraciones especiales para ciertas aplicaciones
+- conf → Contiene archivos de configuración o plantillas para generarlos
+- tmp → Directorio donde se descargan los archivos temporales, se crea al iniciar el script.
+- sources.list → Contiene las listas (la mayoría de ellas) de repositorios que se añadiran al sistema cuando se elige la opción de agregar repositorios.
+- usr → Contiene archivos compartidos de usuarios (temporalmente, se añadirá en el futuro dentro de conf)
 
 # Scripts
 - Agregar_Repositorios.sh → Añade algunos repositorios útiles y sus llaves para seguridad
