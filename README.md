@@ -7,15 +7,13 @@ Con la colaboración de un testeo constante por parte de @mavalro
 Todas las configuraciones y elecciones se han establecido a mi gusto, puedes personalizar cualquier parte que decidas para este script.
 
 ## Estado
-Se han depurado la mayoría de los errores graves, todos los detectados hasta el momento están resueltos.
+Este repositorio lo uso habitualmente a modo configuración personal y lo actualizo y actualizaré en el futuro.
 
-Si encuentras algún fallo o detectas que algo podría funcionar mejora añade un **Issue** al que estaré encantado de atender y valorar, también puedes colaborar con los PR que creas oportuno siempre que vaya en la línea del script y no sea necesario darle la vuelta a todo el proyecto.
+Si encuentras algún fallo o detectas que algo podría funcionar mejor, añade un **Issue** al que estaré encantado de atender y valorar.
 
-Comenzado a usar sin problemas aparentes. Debido a la edad temprana y poca depuracion recomiendo su uso con prudencia.
+También puedes colaborar con los PR que creas oportuno siempre que vaya en la línea del script y no sea necesario darle la vuelta a todo el proyecto.
 
-Se ha testeado mayormente en entornos virtuales y limpios sin poco uso el sistema por lo que no se garantiza que en un sistema con tiempo de uso y modificaciones pueda alterar el funcionamiento normal
-
-En los equipos de uso diario ya los ejecuto sin problemas hasta la fecha para incorporar mejoras desde la rama principal MASTER
+En todo caso recomiendo usar la rama **Master** y si quieres colaborar crea un **fork** y haz **PR** sobre la rama **dev**
 
 ## Advertencias
 Puede dar problemas si no usas **repositorios oficiales** o usas repositorios mezclados con los oficiales.
@@ -33,7 +31,7 @@ Crear un entorno de trabajo personalizado para desarrollar aplicaciones web seg�
 
 Aún estando personalizado se ha procurado dejar de forma modular para poder hacer retoques sin demasiadas complicaciones.
 
-Estos son los principales objetivos
+Estos son los principales objetivos:
 
 - Configurar terminales, bash y zsh
 - Instalar tipografías
@@ -50,7 +48,7 @@ Estos son los principales objetivos
 En resumen dejar con un solo script todo el entorno adaptado a mis necesidades
 
 ## Distribución compatible
-Está destinado única y exclusivamente para **Debian 9** (estable) y se irá actualizando con esta rama estable
+Está destinado única y exclusivamente para **Debian 9** (estable) y se irá actualizando con esta rama estable.
 
 En otras ramas y distribuciones puede romper el sistema, para portarlo no hay demasiadas complicaciones y se deberá renombrar la instalación/nombre de paquetes si procede y establecer repositorios de acorde a la distribución. El resto de los pasos deberían ser idénticos.
 
@@ -163,7 +161,7 @@ También instala desde **npm** bower y los siguientes paquetes globales:
 - sources.list → Contiene las listas (la mayoría de ellas) de repositorios que se añadiran al sistema cuando se elige la opción de agregar repositorios.
 - usr → Contiene archivos compartidos de usuarios (temporalmente, se añadirá en el futuro dentro de conf)
 
-# Scripts
+# Scripts (Información Obsoleta o incompleta)
 - Agregar_Repositorios.sh → Añade algunos repositorios útiles y sus llaves para seguridad
 - Configurar_GIT.sh → Scripts para configurar la integración de GIT, GitHub y GitLab
 - Instalar_Configuraciones → Genera todas las configuraciones de programas como Vim, Bashit, ohmyzsh y además añade configuraciones al sistema y el directorio home
