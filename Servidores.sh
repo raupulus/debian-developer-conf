@@ -351,22 +351,34 @@ server_python() {
     instalar_python() {
         echo -e "$VE Instalando$RO Python y Django$CL"
         ## Instalar python y gestor de paquetes
-        sudo apt install python python3 python-pip python3-pip
+        instalarSoftware python python3 python-pip python3-pip
     }
 
-    configurar_python() {
-        echo -e "$VE Preparando configuracion de$RO Python y Django$CL"
+    configurar_python2() {
+        echo -e "$VE Preparando configuracion de$RO Python2$CL"
     }
 
-    personalizar_python() {
+    configurar_python3() {
+        echo -e "$VE Preparando configuracion de$RO Python3$CL"
+    }
+
+    personalizar_python2() {
         echo -e "$VE Personalizando$RO Python y Django$CL"
         ## Closure linter
         pip install https://github.com/google/closure-linter/zipball/master
     }
 
+    personalizar_python3() {
+        echo -e "$VE Personalizando$RO Python3$CL"
+        ## Closure linter
+        pip3 install https://github.com/google/closure-linter/zipball/master
+    }
+
     instalar_python
-    configurar_python
-    personalizar_python
+    configurar_python2
+    configurar_python3
+    personalizar_python2
+    personalizar_python3
 }
 
 server_nodejs() {
