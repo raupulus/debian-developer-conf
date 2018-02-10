@@ -1,8 +1,11 @@
 # Script para Preparar Entorno de Programación en Debian
-Script para preparar entorno de programación, aplicaciones y repositorios en Debian.
-Basado en el script original de @ricpelo en https://github.com/ricpelo/conf
+Este script surge de la necesidad como desarrollador web para tener un entorno funcional en poco tiempo y además existir una concordancia entre las configuraciones de distintos dispositivos con los que trabajo.
 
-Con la colaboración de un testeo constante por parte de @mavalro
+Este script prepará completamente el entorno de programación, aplicaciones, servidores, plantillas y repositorios en Debian Stable.
+
+Con la colaboración de un testeo constante por parte de @mavalro (https://github.com/mavalro).
+
+Basado en el script original para otro Sistema Operativo de @ricpelo en esta dirección https://github.com/ricpelo/conf
 
 Todas las configuraciones y elecciones se han establecido a mi gusto, puedes personalizar cualquier parte que decidas para este script.
 
