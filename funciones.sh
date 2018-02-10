@@ -65,6 +65,17 @@ instalarSoftware() {
 }
 
 ##
+## Recibe uno o más parámetros con el nombre de los programas y los actualiza
+## de versión en el caso de que exista una superior en el repositorio
+## @param  $*  String  Nombres de programas para ser actualizados
+##
+actualizarSoftware() {
+    for programa in $*; do
+        sudo apt upgrade -y "$programa"
+    done
+}
+
+##
 ## Recibe uno o más parámetros con el nombre de los paquetes a instalar
 ## @param  $*  String  Nombre de paquetes a instalar
 ##
