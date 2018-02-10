@@ -179,11 +179,11 @@ server_php() {
         local paquetes_basicos="php php-cli libapache2-mod-php"
         instalarSoftware "$paquetes_basicos"
 
-        echo -e "$VE Instalando$RO paquetes extras$AM"
+        echo -e "$VE Instalando$RO paquetes extras$CL"
         local paquetes_extras="php-gd php-curl php-pgsql php-sqlite3 sqlite sqlite3 php-intl php-mbstring php-xml php-xdebug php-json"
         instalarSoftware "$paquetes_extras"
 
-        echo -e "$VE Instalando librerías$AM"
+        echo -e "$VE Instalando librerías$CL"
         instalarSoftware composer
     }
 
