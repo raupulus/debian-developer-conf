@@ -12,6 +12,8 @@ Todas las configuraciones y elecciones se han establecido a mi gusto, puedes per
 ## Estado
 Este repositorio lo uso habitualmente a modo configuración personal y lo actualizo y actualizaré en el futuro.
 
+En este momento tiene cierta estabilidad y la mayoría de los objetivos programados los cumple adecuadamente sin errores (aparentes claro está).
+
 Si encuentras algún fallo o detectas que algo podría funcionar mejor, añade un **Issue** al que estaré encantado de atender y valorar.
 
 También puedes colaborar con los PR que creas oportuno siempre que vaya en la línea del script y no sea necesario darle la vuelta a todo el proyecto.
@@ -19,11 +21,11 @@ También puedes colaborar con los PR que creas oportuno siempre que vaya en la l
 En todo caso recomiendo usar la rama **Master** y si quieres colaborar crea un **fork** y haz **PR** sobre la rama **dev**
 
 ## Advertencias
-Puede dar problemas si no usas **repositorios oficiales** o usas repositorios mezclados con los oficiales.
+Si no usas **repositorios oficiales** o usas repositorios mezclados con los oficiales usar este script es un **experimento** ya que no lo he probado ni tengo interés en ello. Podría funcionar bien (o no) así que úsalo bajo tu riesgo.
 
-Este script está automatizado y puede cambiar configuración
+Este script está automatizado y puede cambiar configuración sin que te pregunte.
 
-Se ha testeado todo lo posible en entornos virtuales y en el mio personal de forma real.
+Una buena idea sería que lo ejecutaras tras hacer una copia de seguridad o en una máquina virtual hasta ver que el script completo se adapta a tus necesidades o modificar la parte que prefieras diferente. Trabajo en la modularidad para que puedas ejecutar solo una parte que te interese.
 
 Para evitar que sea interactivo y estar constantemente preguntando se establece "-y" como parámetro por defecto en **apt** lo cual puede instalar software en forma de dependencia y/o romper en casos muy extremos el sistema, aunque repito que con repositorios oficiales no debe ocurrir nada extraño y si es así puedes reportarlo para su corrección.
 
