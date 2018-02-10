@@ -384,7 +384,8 @@ server_python() {
 server_nodejs() {
     instalar_nodejs() {
         echo -e "$VE Instalando$RO NodeJS$CL"
-        sudo apt-get install -y nodejs
+        instalarSoftware nodejs
+        actualizarSoftware nodejs
     }
 
     configurar_nodejs() {
