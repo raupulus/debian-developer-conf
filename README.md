@@ -32,9 +32,9 @@ Para evitar que sea interactivo y estar constantemente preguntando se establece 
 En **ningún caso** me hago responsable de pérdidas de datos con el uso de esta herramienta ya que se ha diseñado en función a mis necesidades y la comparto para que puedas aprovechar parte o por completo la misma (Respetando la licencia GPLv3 que le he asignado).
 
 ## Objetivos
-Crear un entorno de trabajo personalizado para desarrollar aplicaciones web según las preferencias del autor.
+Crear un entorno de trabajo personalizado para desarrollar aplicaciones web según las preferencias del autor (https://github.com/fryntiz).
 
-Aún estando personalizado se ha procurado dejar de forma modular para poder hacer retoques sin demasiadas complicaciones.
+Se plantea lo más modular que me ha sido posible para que en algunos casos no sea necesario ejecutar el script completo y solo la parte que realmente necesitas (si fuese el caso).
 
 Estos son los principales objetivos:
 
@@ -50,12 +50,12 @@ Estos son los principales objetivos:
 - Instalar Navegadores WEB para desarrolladores como Firefox Developer y Firefox Nightly
 - Instalar herramientas para ayudar a debug en lenguajes web
 
-En resumen dejar con un solo script todo el entorno adaptado a mis necesidades
-
 ## Distribución compatible
 Está destinado única y exclusivamente para **Debian 9** (estable) y se irá actualizando con esta rama estable.
 
 En otras ramas y distribuciones puede romper el sistema, para portarlo no hay demasiadas complicaciones y se deberá renombrar la instalación/nombre de paquetes si procede y establecer repositorios de acorde a la distribución. El resto de los pasos deberían ser idénticos.
+
+Todo el script se basa en funciones.sh por lo que editando este archivo y adaptándolo a tu distribución podrás conseguir un cierto nivel de compatibilidad.
 
 ## Modularidad
 Se ha intentado hacer modular de forma que apenas sea necesario tocar los scripts para añadir/quitar funciones.
@@ -67,23 +67,23 @@ En las próximas versiones se plantea una Refactorización que permita manejar e
 ## Ejecutar script
 Es importante realizar todos los pasos desde bash. Si usas **zsh** cambia a **bash** antes de ejecutarlo:
 ```bash
-bash
+    bash
 ```
 
 Primero instalamos GIT
 ```debian
-  sudo apt install git
+    sudo apt install git
 ```
 
 Clonamos el repositorio actual en nuestro equipo
 ```GIT
-  git clone https://github.com/fryntiz/preparar_entorno
+    git clone https://github.com/fryntiz/preparar_entorno
 ```
 
 Entramos y ejecutamos el script principal
 ```bash
-  cd preparar_entorno
-  ./main.sh
+    cd preparar_entorno
+    ./main.sh
 ```
 
 ## Personalización estética
@@ -180,4 +180,14 @@ También instala desde **npm** bower y los siguientes paquetes globales:
 
 Dentro de Apps/
 - Atom_IDE.sh → Instala el editor ATOM con su configuración y complementos
+- bashit.sh → Instala y configura Bash-it
+- Brackets.sh → Instala y configura Brackets
+- DBeaver.sh → Instala y configura DBeaver
 - Firefox.sh → Instala la versión para desarrolladores **Quantum** y la versión en desarrollo principal **Nightly**
+- GitKraken.sh → Instala y configura GitKraken
+- Haroopad.sh → Instala y configura Haroopad
+- i3wm.sh → Instala y configura gestor de ventanas i3wm
+- Ninja-IDE.sh → Instala y configura Ninja IDE
+- OhMyZsh.sh → Instala y configura OhMyZsh
+- Pencil-Project.sh → Instala y configura Pencil Project
+- vim.sh → Instala y configura Vim
