@@ -3,11 +3,15 @@ Este script surge de la necesidad como desarrollador web para tener un entorno f
 
 Este script prepará completamente el entorno de programación, aplicaciones, servidores, plantillas y repositorios en Debian Stable.
 
+![Imagen de previsualización](doc/preview.png)
+
 Con la colaboración de un testeo constante por parte de @mavalro (https://github.com/mavalro).
 
 Basado en el script original para otro Sistema Operativo de @ricpelo en esta dirección https://github.com/ricpelo/conf
 
 Todas las configuraciones y elecciones se han establecido a mi gusto, puedes personalizar cualquier parte que decidas para este script.
+
+![Imagen de previsualización 1](doc/preview1.png)
 
 ## Estado
 Este repositorio lo uso habitualmente a modo configuración personal y lo actualizo y actualizaré en el futuro.
