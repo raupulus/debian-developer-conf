@@ -45,6 +45,9 @@ brackets_instalar() {
 
 brackets_postconfiguracion() {
     echo -e "$VE Generando Post-Configuraciones$RO Brackets$CL"
+
+    echo -e "$VE Generando acceso directo$CL"
+    cp "$WORKSCRIPT/Accesos_Directos/brackets.desktop" "$HOME/.local/share/applications/"
 }
 
 brackets_instalador() {
