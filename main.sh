@@ -58,6 +58,7 @@ source "$WORKSCRIPT/Personalizar/Configurar_GIT.sh"
 source "$WORKSCRIPT/Personalizar/Personalización_GTK.sh"
 source "$WORKSCRIPT/Personalizar/Tipografías.sh"
 source "$WORKSCRIPT/Personalizar/Variables_Entorno.sh"
+source "$WORKSCRIPT/variables.sh"
 
 ## TOFIX → Refactorizar servidores en subdirectorio con menú propio
 ## TOFIX → Refactorizar Personalización en subdirectorio añadiendo menú propio
