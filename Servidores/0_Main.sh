@@ -23,7 +23,11 @@
 ############################
 ##     IMPORTACIONES      ##
 ############################
-source "$WORKSCRIPT/Servidores/??.sh"
+source "$WORKSCRIPT/Servidores/apache.sh"
+source "$WORKSCRIPT/Servidores/nodejs.sh"
+source "$WORKSCRIPT/Servidores/php.sh"
+source "$WORKSCRIPT/Servidores/python.sh"
+source "$WORKSCRIPT/Servidores/sql.sh"
 
 ###########################
 ##       FUNCIONES       ##
@@ -45,7 +49,11 @@ menuServidores() {
         while true :; do
             clear
             local descripcion='Menú de aplicaciones
-                1)
+                1) Apache
+                2) PHP
+                3) SQL
+                3) Python
+                4) NodeJS
                 x) Todos los pasos anteriores
 
                 0) Atrás
