@@ -409,8 +409,6 @@ server_nodejs() {
 }
 
 instalar_servidores() {
-    prepararInstalador
-
     server_apache
     server_php
     server_sql

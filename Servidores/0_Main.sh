@@ -24,10 +24,11 @@
 ##     IMPORTACIONES      ##
 ############################
 source "$WORKSCRIPT/Servidores/apache.sh"
+source "$WORKSCRIPT/Servidores/mariaDB.sh"
 source "$WORKSCRIPT/Servidores/nodejs.sh"
 source "$WORKSCRIPT/Servidores/php.sh"
+source "$WORKSCRIPT/Servidores/postgreSQL.sh"
 source "$WORKSCRIPT/Servidores/python.sh"
-source "$WORKSCRIPT/Servidores/sql.sh"
 
 ###########################
 ##       FUNCIONES       ##
@@ -39,12 +40,13 @@ source "$WORKSCRIPT/Servidores/sql.sh"
 menuServidores() {
     todos_servidores() {
         clear
-        echo -e "$VE Instalando todas las aplicaciones$CL"
+        echo -e "$VE Instalando todos los servidores$CL"
         apache2_instalador
-        php_instalador
-        sql_instalador
-        python_instalador
+        mariadb_instalador
         nodejs_instalador
+        php_instalador
+        postgresql_instalador
+        python_instalador
     }
 
     ## Si la función recibe "-a" indica que instale todos los servidores
@@ -55,11 +57,12 @@ menuServidores() {
             clear
             local descripcion='Menú de aplicaciones
                 1) Apache
-                2) PHP
-                3) SQL
-                4) Python
-                5) NodeJS
-                6) Todos los pasos anteriores
+                2) MariaDB
+                3) NodeJS
+                4) PHP
+                5) PostgreSQL
+                6) Python
+                7) Todos los pasos anteriores
 
                 0) Atrás
             '
@@ -71,12 +74,13 @@ menuServidores() {
 
             case $entrada in
 
-                1)  apache2_instalador;;   ## Instala servidor Apache2
-                2)  php_instalador;;       ## Instala PHP
-                3)  sql_instalador;;       ## Instala servidores SQL
-                4)  python_instalador;;   ## Instala Python
-                5)  nodejs_instalador;;   ## Instala servidor NodeJS
-                6)  todos_servidores       ## Todas las aplicaciones
+                1)  apache2_instalador;;     ## Instala servidor Apache2
+                2)  mariadb_instalador;;     ## Instala PHP
+                3)  nodejs_instalador;;      ## Instala servidores SQL
+                4)  php_instalador;;         ## Instala Python
+                5)  postgresql_instalador;;  ## Instala servidor NodeJS
+                6)  python_instalador;;      ## Instala servidor NodeJS
+                7)  todos_servidores         ## Todas las aplicaciones
                     break;;
 
                 0)  ## SALIR
