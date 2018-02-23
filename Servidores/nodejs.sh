@@ -39,40 +39,15 @@ nodejs_postconfiguracion() {
     echo -e "$VE Generando Post-Configuraciones de NodeJS$CL"
 
     ## Instalando paquetes globales
-    ## TODO → Crear función general para instalar paquetes con npm
-    sudo npm install -g eslint
-    sudo npm install -g jscs
-    sudo npm install -g bower
-    sudo npm install -g compass
-    sudo npm install -g stylelint
-    sudo npm install -g bundled
-}
+    ## FIXME → Crear array para la variable:
+    local paquetes='eslint jscs bower compass stylelint bundled'
 
+    instalarNpm paquetes
+}
 
 nodejs_instalador() {
     nodejs_descargar
     nodejs_preconfiguracion
     nodejs_instalar
     nodejs_postconfiguracion
-}
-
-
-
-server_nodejs() {
-
-
-    personalizar_nodejs() {
-        echo -e "$VE Personalizando$RO NodeJS$CL"
-        ## Instalando paquetes globales
-        sudo npm install -g eslint
-        sudo npm install -g jscs
-        sudo npm install -g bower
-        sudo npm install -g compass
-        sudo npm install -g stylelint
-        sudo npm install -g bundled
-    }
-
-    instalar_nodejs
-    configurar_nodejs
-    personalizar_nodejs
 }
