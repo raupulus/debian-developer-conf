@@ -17,6 +17,30 @@
 ##     INSTRUCCIONES      ##
 ############################
 
-###########################
-##       FUNCIONES       ##
-###########################
+############################
+##        FUNCIONES       ##
+############################
+
+nodejs_descargar() {
+    echo "$VE Descargando$RO nodejs$CL"
+}
+
+nodejs_preconfiguracion() {
+    echo -e "$VE Generando Pre-Configuraciones de$RO nodejs"
+}
+
+nodejs_instalar() {
+    echo -e "$VE Instalando$RO nodejs$CL"
+}
+
+nodejs_postconfiguracion() {
+    echo -e "$VE Generando Post-Configuraciones de nodejs"
+}
+
+
+nodejs_instalador() {
+    nodejs_descargar
+    nodejs_preconfiguracion
+    nodejs_instalar
+    nodejs_postconfiguracion
+}
