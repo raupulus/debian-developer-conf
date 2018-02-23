@@ -26,15 +26,46 @@ postgresql_descargar() {
 }
 
 postgresql_preconfiguracion() {
-    echo -e "$VE Generando Pre-Configuraciones de$RO postgresql"
+    echo -e "$VE Generando Pre-Configuraciones de$RO postgreSQL"
 }
 
 postgresql_instalar() {
-    echo -e "$VE Instalando$RO postgresql$CL"
+    echo -e "$VE Instalando$RO PostgreSQL$CL"
+    ## TODO → Convertir en array:
+    local dependencias="postgresql postgresql-client postgresql-contrib postgresql-all"
+
+    ## Instalando dependencias
+    instalarSoftware "$dependencias"
 }
 
 postgresql_postconfiguracion() {
-    echo -e "$VE Generando Post-Configuraciones de postgresql"
+    echo -e "$VE Generando Post-Configuraciones de postgreSQL"
+
+    configurar_postgresql() {
+        echo -e "$VE Preparando configuracion de$RO postgreSQL$CL"
+        ## FIXME → Detectar todas las versionesde postgresql y aplicar cambios por cada versión encontrada en el sistema.
+
+        ## Versión de PostgreSQL
+        local V_PSQL='9.6'
+
+        ## Archivo de configuración para postgresql
+        local POSTGRESCONF="/etc/postgresql/$V_PSQL/main/postgresql.conf"
+
+        echo -e "$VE Estableciendo intervalstyle = 'iso_8601'$CL"
+        sudo sed -r -i "s/^\s*#?intervalstyle\s*=/intervalstyle = 'iso_8601' #/" "$POSTGRESCONF"
+
+        echo -e "$VE Estableciendo timezone = 'UTC'$CL"
+        sudo sed -r -i "s/^\s*#?timezone\s*=/timezone = 'UTC' #/" "$POSTGRESCONF"
+    }
+
+    personalizar_postgresql() {
+        echo -e "$VE Personalizando$RO postgreSQL$CL"
+        #sudo -u postgres createdb basedatos #Crea la base de datos basedatos
+        #sudo -u postgres createuser -P usuario #Crea el usuario usuario y pide que teclee su contraseña
+    }
+
+    configurar_postgresql
+    personalizar_postgresql
 }
 
 
@@ -43,4 +74,7 @@ postgresql_instalador() {
     postgresql_preconfiguracion
     postgresql_instalar
     postgresql_postconfiguracion
+
+    ## Reiniciar servidor postgresql al terminar con la instalación y configuración
+    reiniciarServicio 'postgresql'
 }
