@@ -21,26 +21,26 @@
 ##        FUNCIONES       ##
 ############################
 
-apache2_descargar() {
-    echo "$VE Descargando$RO Apache2$CL"
+mariadb_descargar() {
+    echo "$VE Descargando$RO mariadb$CL"
 }
 
-apache2_preconfiguracion() {
-    echo -e "$VE Generando Pre-Configuraciones de$RO Apache2"
+mariadb_preconfiguracion() {
+    echo -e "$VE Generando Pre-Configuraciones de$RO mariadb"
 }
 
-apache2_instalar() {
-    echo -e "$VE Instalando$RO Apache2$CL"
+mariadb_instalar() {
+    echo -e "$VE Instalando$RO mariadb$CL"
 }
 
-apache2_postconfiguracion() {
-    echo -e "$VE Generando Post-Configuraciones de Apache2"
+mariadb_postconfiguracion() {
+    echo -e "$VE Generando Post-Configuraciones de mariadb"
 }
 
 
-apache2_instalador() {
-    apache2_descargar
-    apache2_preconfiguracion
-    apache2_instalar
-    apache2_postconfiguracion
+mariadb_instalador() {
+    mariadb_descargar
+    mariadb_preconfiguracion
+    mariadb_instalar
+    mariadb_postconfiguracion
 }
