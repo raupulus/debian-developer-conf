@@ -17,6 +17,30 @@
 ##     INSTRUCCIONES      ##
 ############################
 
-###########################
-##       FUNCIONES       ##
-###########################
+############################
+##        FUNCIONES       ##
+############################
+
+python_descargar() {
+    echo "$VE Descargando$RO python$CL"
+}
+
+python_preconfiguracion() {
+    echo -e "$VE Generando Pre-Configuraciones de$RO python"
+}
+
+python_instalar() {
+    echo -e "$VE Instalando$RO python$CL"
+}
+
+python_postconfiguracion() {
+    echo -e "$VE Generando Post-Configuraciones de python"
+}
+
+
+python_instalador() {
+    python_descargar
+    python_preconfiguracion
+    python_instalar
+    python_postconfiguracion
+}
