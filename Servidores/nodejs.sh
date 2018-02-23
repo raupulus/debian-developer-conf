@@ -22,19 +22,30 @@
 ############################
 
 nodejs_descargar() {
-    echo "$VE Descargando$RO nodejs$CL"
+    echo -e "$VE Descargando$RO NodeJS$CL"
 }
 
 nodejs_preconfiguracion() {
-    echo -e "$VE Generando Pre-Configuraciones de$RO nodejs"
+    echo -e "$VE Generando Pre-Configuraciones de$RO NodeJS$CL"
 }
 
 nodejs_instalar() {
-    echo -e "$VE Instalando$RO nodejs$CL"
+    echo -e "$VE Instalando$RO NodeJS$CL"
+    instalarSoftware nodejs
+    actualizarSoftware nodejs
 }
 
 nodejs_postconfiguracion() {
-    echo -e "$VE Generando Post-Configuraciones de nodejs"
+    echo -e "$VE Generando Post-Configuraciones de NodeJS$CL"
+
+    ## Instalando paquetes globales
+    ## TODO → Crear función general para instalar paquetes con npm
+    sudo npm install -g eslint
+    sudo npm install -g jscs
+    sudo npm install -g bower
+    sudo npm install -g compass
+    sudo npm install -g stylelint
+    sudo npm install -g bundled
 }
 
 
@@ -43,4 +54,25 @@ nodejs_instalador() {
     nodejs_preconfiguracion
     nodejs_instalar
     nodejs_postconfiguracion
+}
+
+
+
+server_nodejs() {
+
+
+    personalizar_nodejs() {
+        echo -e "$VE Personalizando$RO NodeJS$CL"
+        ## Instalando paquetes globales
+        sudo npm install -g eslint
+        sudo npm install -g jscs
+        sudo npm install -g bower
+        sudo npm install -g compass
+        sudo npm install -g stylelint
+        sudo npm install -g bundled
+    }
+
+    instalar_nodejs
+    configurar_nodejs
+    personalizar_nodejs
 }
