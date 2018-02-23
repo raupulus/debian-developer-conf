@@ -95,7 +95,7 @@ menuPrincipal() {
         read -p '    Acción → ' entrada
         echo -e "$CL"
 
-        case $entrada in
+        case ${entrada} in
 
             1) agregar_repositorios;;     ## Menú de Repositorios
             2) menuAplicaciones;;         ## Menú de Aplicaciones
