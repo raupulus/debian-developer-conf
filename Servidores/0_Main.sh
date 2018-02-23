@@ -40,6 +40,11 @@ menuServidores() {
     todos_servidores() {
         clear
         echo -e "$VE Instalando todas las aplicaciones$CL"
+        apache2_instalador
+        php_instalador
+        sql_instalador
+        python_instalador
+        nodejs_instalador
     }
 
     ## Si la función recibe "-a" indica que instale todos los servidores
@@ -52,9 +57,9 @@ menuServidores() {
                 1) Apache
                 2) PHP
                 3) SQL
-                3) Python
-                4) NodeJS
-                x) Todos los pasos anteriores
+                4) Python
+                5) NodeJS
+                6) Todos los pasos anteriores
 
                 0) Atrás
             '
@@ -66,9 +71,13 @@ menuServidores() {
 
             case $entrada in
 
-                1)  ?;;   ## ?
-                x)  todos_servidores       ## Todas las aplicaciones
-                break;;
+                1)  apache2_instalador;;   ## Instala servidor Apache2
+                2)  php_instalador;;       ## Instala PHP
+                3)  sql_instalador;;       ## Instala servidores SQL
+                4)  python_instalador;;   ## Instala Python
+                5)  nodejs_instalador;;   ## Instala servidor NodeJS
+                6)  todos_servidores       ## Todas las aplicaciones
+                    break;;
 
                 0)  ## SALIR
                     clear
