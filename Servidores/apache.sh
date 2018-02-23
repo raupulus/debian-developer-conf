@@ -17,6 +17,32 @@
 ##     INSTRUCCIONES      ##
 ############################
 
-###########################
-##       FUNCIONES       ##
-###########################
+############################
+##        FUNCIONES       ##
+############################
+
+apache2_descargar() {
+    echo "$VE Descargando$RO Apache2$CL"
+}
+
+apache2_preconfiguracion() {
+    echo -e "$VE Generando Pre-Configuraciones de$RO Apache2"
+}
+
+apache2_instalar() {
+    echo -e "$VE Instalando$RO Apache2$CL"
+    local dependencias="apache2 libapache2-mod-perl2 libapache2-mod-php libapache2-mod-python"
+    instalarSoftware "$dependencias"
+}
+
+apache2_postconfiguracion() {
+    echo -e "$VE Generando Post-Configuraciones de Apache2"
+}
+
+
+apache2_instalador() {
+    apache2_descargar
+    apache2_preconfiguracion
+    apache2_instalar
+    apache2_postconfiguracion
+}
