@@ -37,3 +37,4 @@ errores.log
 /conf/home/.vim/spec
 /conf/home/.vim/syntax_checkers
 /conf/home/.vim/test
+/.idea

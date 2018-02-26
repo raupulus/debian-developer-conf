@@ -26,7 +26,7 @@
 ###########################
 
 brackets_descargar() {
-    descargar 'Brackets.deb' "https://github.com/adobe/brackets/releases/download/release-1.10/Brackets.Release.1.10.64-bit.deb"
+    descargar 'Brackets.deb' "https://github.com/adobe/brackets/releases/download/release-1.12/Brackets.Release.1.12.64-bit.deb"
 
     descargar 'libgcrypt.deb' "http://security.debian.org/debian-security/pool/updates/main/libg/libgcrypt11/libgcrypt11_1.5.0-5+deb7u6_amd64.deb"
 }
@@ -45,6 +45,9 @@ brackets_instalar() {
 
 brackets_postconfiguracion() {
     echo -e "$VE Generando Post-Configuraciones$RO Brackets$CL"
+
+    echo -e "$VE Generando acceso directo$CL"
+    cp "$WORKSCRIPT/Accesos_Directos/brackets.desktop" "$HOME/.local/share/applications/"
 }
 
 brackets_instalador() {

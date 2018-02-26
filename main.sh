@@ -40,7 +40,7 @@ CL="\e[0m"       ## Limpiar colores
 
 WORKSCRIPT=$PWD  ## Directorio principal del script
 USER=$(whoami)   ## Usuario que ejecuta el script
-VERSION='0.5.2'  ## Versión en desarrollo
+VERSION='0.5.3'  ## Versión en desarrollo
 LOGERROR="$WORKSCRIPT/errores.log"  ## Archivo donde almacenar errores
 DEBUG=false      ## Establece si está el script en modo depuración
 
@@ -51,13 +51,14 @@ source "$WORKSCRIPT/Agregar_Repositorios.sh"
 source "$WORKSCRIPT/funciones.sh"
 source "$WORKSCRIPT/Instalar_Configuraciones.sh"
 source "$WORKSCRIPT/limpiador.sh"
-source "$WORKSCRIPT/Servidores.sh"
 
 source "$WORKSCRIPT/Apps/0_Main.sh"
 source "$WORKSCRIPT/Personalizar/Configurar_GIT.sh"
 source "$WORKSCRIPT/Personalizar/Personalización_GTK.sh"
 source "$WORKSCRIPT/Personalizar/Tipografías.sh"
 source "$WORKSCRIPT/Personalizar/Variables_Entorno.sh"
+source "$WORKSCRIPT/Servidores/0_Main.sh"
+source "$WORKSCRIPT/variables.sh"
 
 ## TOFIX → Refactorizar servidores en subdirectorio con menú propio
 ## TOFIX → Refactorizar Personalización en subdirectorio añadiendo menú propio
@@ -94,7 +95,7 @@ menuPrincipal() {
         read -p '    Acción → ' entrada
         echo -e "$CL"
 
-        case $entrada in
+        case ${entrada} in
 
             1) agregar_repositorios;;     ## Menú de Repositorios
             2) menuAplicaciones;;         ## Menú de Aplicaciones
@@ -105,21 +106,18 @@ menuPrincipal() {
                personalizar
                agregar_fuentes
                instalar_variables;;
-            5) #menuServidores;;          ## Menú de Servidores
-               ## TOFIX → Refactorizar dentro de Servidores/0_Main.sh
-               instalar_servidores;;
+            5) menuServidores;;           ## Menú de Servidores
             6) agregar_repositorios       ## Todos los pasos anteriores
-               ## TOFIX → Llamar directamente una función en cada submenú que
-               ## automáticamente ejecute todos los pasos sin preguntar nada
-               menuAplicaciones -a  ## Indica con "-a" que ejecute todas
+               menuAplicaciones -a        ## Indica con "-a" que ejecute todas
                instalar_configuraciones
                configuracion_git
                personalizar
                agregar_fuentes
                instalar_variables
-               instalar_servidores;;
+               menuServidores -a;;        ## Indica con "-a" que ejecute todas
 
-            0)  ## SALIR
+
+            0) ## SALIR
               clear
               echo -e "$RO Se sale del menú$CL"
               echo ''

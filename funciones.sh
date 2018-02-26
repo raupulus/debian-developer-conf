@@ -199,7 +199,7 @@ desinstalar_paquetes() {
 ##
 reiniciarServicio() {
     for x in $*; do
-        echo -e "$ROReiniciando x$$CL"
+        echo -e "$RO Reiniciando $x$CL"
         sudo systemctl restart "$x"
     done
 }
@@ -211,4 +211,17 @@ prepararInstalador() {
     echo -e "$VE Se actualizarán las$RO listas de repositorios$CL"
     sudo apt update
     sudo apt install -f -y
+}
+
+##
+## Instala los paquetes recibidos con "npm" el gestor de paquetes de NodeJS.
+## De esta forma serán instalado los paquetes de forma global, no para un
+## proyecto concreto como dependencia.
+## @param $* Recibe los paquetes que se van a instalar
+##
+instalarNpm() {
+    for x in $*; do
+        echo -e "$RO Instalando $x$CL"
+        sudo npm install -g "$x"
+    done
 }
