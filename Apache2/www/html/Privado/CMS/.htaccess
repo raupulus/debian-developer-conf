@@ -1,13 +1,13 @@
 #Bloquear descarga del htaccess
 <Files .htaccess>
-Order allow,deny
-Deny from all
+    Order allow,deny
+    Deny from all
 </Files>
 
 #Bloquear descarga del htpasswd
 <Files .htpasswd>
-Order allow,deny
-Deny from all
+    Order allow,deny
+    Deny from all
 </Files>
 
 #Permitir mostrar directorios
@@ -17,4 +17,4 @@ Options +Indexes
 IndexOptions -FancyIndexing
 
 AuthType Basic
-AuthName "Zona Pública"
+AuthName "Zona Privada CMS"
