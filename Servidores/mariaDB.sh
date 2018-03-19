@@ -30,13 +30,17 @@ mariadb_preconfiguracion() {
 }
 
 mariadb_instalar() {
-    echo -e "$VE Instalando$RO mariadb$CL"
+    echo -e "$VE Instalando$RO mariadb$VE y Complementos$CL"
+    local software_servidor='mariadb-client mariadb-plugin-connect mariadb-server'
+    local software_extra='phpmyadmin libreoffice-mysql-connector'
+
+    instalarSoftware "$software_servidor" "$software_extra"
 }
 
 mariadb_postconfiguracion() {
-    echo -e "$VE Generando Post-Configuraciones de mariadb"
+    echo -e "$VE Generando Post-Configuraciones de$RO MariaDB$CL"
+    
 }
-
 
 mariadb_instalador() {
     mariadb_descargar
