@@ -39,7 +39,17 @@ mariadb_instalar() {
 
 mariadb_postconfiguracion() {
     echo -e "$VE Generando Post-Configuraciones de$RO MariaDB$CL"
-    
+    echo -e "$VE Creando usuario Desarrollador$RO dev$CL"
+    sudo mysql -e "CREATE USER 'dev'@'localhost' IDENTIFIED BY 'dev';"
+
+    echo -e "$VE Asignando permisos en todas la bases de dato$CL"
+    mysql -e "GRANT ALL PRIVILEGES ON * . * TO 'dev'@'localhost';"
+
+    echo -e "$VE Refrescando privilegios$CL"
+    mysql -e "FLUSH PRIVILEGES;"
+
+    echo -e "$VE Reiniciar servidor$RO MariaDB$CL"
+    reiniciarServicio 'mariadb'
 }
 
 mariadb_instalador() {
