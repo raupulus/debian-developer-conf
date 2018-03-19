@@ -22,7 +22,7 @@
 ############################
 
 mariadb_descargar() {
-    echo "$VE Descargando$RO mariadb$CL"
+    echo -e "$VE Descargando$RO mariadb$CL"
 }
 
 mariadb_preconfiguracion() {
@@ -47,11 +47,11 @@ mariadb_postconfiguracion() {
             echo -e "$VE Creando usuario Desarrollador$RO dev$CL"
             sudo mysql -e "CREATE USER 'dev'@'localhost' IDENTIFIED BY 'dev';"
 
-            echo -e "$VE Asignando permisos en todas la bases de dato$CL"
-            mysql -e "GRANT ALL PRIVILEGES ON * . * TO 'dev'@'localhost';"
+            echo -e "$VE Asignando permisos en todas la bases de datos$CL"
+            sudo mysql -e "GRANT ALL PRIVILEGES ON * . * TO 'dev'@'localhost';"
 
             echo -e "$VE Refrescando privilegios$CL"
-            mysql -e "FLUSH PRIVILEGES;"
+            sudo mysql -e "FLUSH PRIVILEGES;"
 
             echo -e "$VE Reiniciar servidor$RO MariaDB$CL"
             reiniciarServicio 'mariadb'
