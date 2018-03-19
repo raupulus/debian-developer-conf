@@ -39,17 +39,28 @@ mariadb_instalar() {
 
 mariadb_postconfiguracion() {
     echo -e "$VE Generando Post-Configuraciones de$RO MariaDB$CL"
-    echo -e "$VE Creando usuario Desarrollador$RO dev$CL"
-    sudo mysql -e "CREATE USER 'dev'@'localhost' IDENTIFIED BY 'dev';"
 
-    echo -e "$VE Asignando permisos en todas la bases de dato$CL"
-    mysql -e "GRANT ALL PRIVILEGES ON * . * TO 'dev'@'localhost';"
+    ## Plantea la creación de un usuario llamado "dev" para desarrollar
+    crearUsuario() {
+        read -p " ¿Quieres crear el usuario desarrollador: dev? s/N → " input
+        if [[ "$input" = 's' ]] || [[ "$input" = 'S' ]]; then
+            echo -e "$VE Creando usuario Desarrollador$RO dev$CL"
+            sudo mysql -e "CREATE USER 'dev'@'localhost' IDENTIFIED BY 'dev';"
 
-    echo -e "$VE Refrescando privilegios$CL"
-    mysql -e "FLUSH PRIVILEGES;"
+            echo -e "$VE Asignando permisos en todas la bases de dato$CL"
+            mysql -e "GRANT ALL PRIVILEGES ON * . * TO 'dev'@'localhost';"
 
-    echo -e "$VE Reiniciar servidor$RO MariaDB$CL"
-    reiniciarServicio 'mariadb'
+            echo -e "$VE Refrescando privilegios$CL"
+            mysql -e "FLUSH PRIVILEGES;"
+
+            echo -e "$VE Reiniciar servidor$RO MariaDB$CL"
+            reiniciarServicio 'mariadb'
+        else
+            echo -e "$VE No se crea usuario$CL"
+        fi
+    }
+
+    crearUsuario
 }
 
 mariadb_instalador() {
