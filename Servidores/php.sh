@@ -70,6 +70,9 @@ php_postconfiguracion() {
         echo -e "$VE Tiempo máximo de ejecución 3 minutos → 'max_execution_time'$CL"
         sudo sed -r -i "s/^;?\s*max_execution_time\s*=.*$/max_execution_time = 180/" $PHPINI
 
+        echo -e "$VE Límite de Memoria por script → 'memory_limit = 128M'$CL"
+        sudo sed -r -i "s/^;?\s*memory_limit\s*=.*$/memory_limit = 128M/" $PHPINI
+
     }
 
     personalizar_php() {
