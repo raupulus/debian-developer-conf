@@ -66,6 +66,19 @@ php_postconfiguracion() {
 
         echo -e "$VE Activando Mostrar errores al iniciar → 'display_startup_errors'$CL"
         sudo sed -r -i "s/^;?\s*display_startup_errors\s*=.*$/display_startup_errors = On/" $PHPINI
+
+        echo -e "$VE Tiempo máximo de ejecución 3 minutos → 'max_execution_time'$CL"
+        sudo sed -r -i "s/^;?\s*max_execution_time\s*=.*$/max_execution_time = 180/" $PHPINI
+
+        echo -e "$VE Límite de Memoria por script → 'memory_limit = 128M'$CL"
+        sudo sed -r -i "s/^;?\s*memory_limit\s*=.*$/memory_limit = 128M/" $PHPINI
+
+        ## Límite de archivos
+        echo -e "$VE Tamaño máximo de subida → 'upload_max_filesize = 512M'$CL"
+        sudo sed -r -i "s/^;?\s*upload_max_filesize\s*=.*$/upload_max_filesize = 512M/" $PHPINI
+
+        echo -e "$VE Tamaño máximo de POST → 'post_max_size = 1024M'$CL"
+        sudo sed -r -i "s/^;?\s*post_max_size\s*=.*$/post_max_size = 1024M/" $PHPINI
     }
 
     personalizar_php() {
@@ -87,7 +100,7 @@ php_postconfiguracion() {
 
                 ## Manual
                 echo -e "$VE Instalando manual para$RO PsySH$AM"
-                if [[ -d "$HOME/.local/share/psysh" ]]; then
+                if [[ ! -d "$HOME/.local/share/psysh" ]]; then
                     mkdir -p "$HOME/.local/share/psysh"
                 fi
                 cp "$WORKSCRIPT/tmp/php_manual.sqlite" "$HOME/.local/share/psysh/php_manual.sqlite"
@@ -95,7 +108,12 @@ php_postconfiguracion() {
 
             if [[ -f "$HOME/.local/bin/psysh" ]]
             then
-                echo -e "$VE Ya esta$RO psysh$VE instalado en el equipo,$AM omitiendo paso$CL"
+                echo -e "$VE Ya esta$RO psysh$VE instalado en el equipo$CL"
+                read -p "¿Quieres volve a instalarlo? s/N → " input
+                if [[ "$input" = 's' ]] || [[ "$input" = 'S' ]]; then
+                    descargar_psysh
+                    instalar_psysh
+                fi
             else
                 if [[ -f "$WORKSCRIPT/tmp/psysh" ]]; then
                     instalar_psysh

@@ -1,13 +1,13 @@
 #Bloquear descarga del htaccess
 <Files .htaccess>
-Order allow,deny
-Deny from all
+    Order allow,deny
+    Deny from all
 </Files>
 
 #Bloquear descarga del htpasswd
 <Files .htpasswd>
-Order allow,deny
-Deny from all
+    Order allow,deny
+    Deny from all
 </Files>
 
 #Permitir mostrar directorios
@@ -17,7 +17,7 @@ Options +Indexes
 IndexOptions -FancyIndexing
 
 
-#Proteger mediante contraseña --> 123456, comando para añadir usuario: htpasswd -c /var/www/.htpasswd usuario
+#Proteger mediante contraseña
 AuthType Basic
 AuthName "Zona Privada"
 AuthUserFile /var/www/.htpasswd
