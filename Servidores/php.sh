@@ -77,6 +77,8 @@ php_postconfiguracion() {
         echo -e "$VE Tamaño máximo de subida → 'upload_max_filesize = 512M'$CL"
         sudo sed -r -i "s/^;?\s*upload_max_filesize\s*=.*$/upload_max_filesize = 512M/" $PHPINI
 
+        echo -e "$VE Tamaño máximo de POST → 'post_max_size = 1024M'$CL"
+        sudo sed -r -i "s/^;?\s*post_max_size\s*=.*$/post_max_size = 1024M/" $PHPINI
     }
 
     personalizar_php() {
