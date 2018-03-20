@@ -3,7 +3,7 @@ Este script surge de la necesidad como desarrollador web para tener un entorno f
 
 Este script prepará completamente el entorno de programación, aplicaciones, servidores, plantillas y repositorios en Debian Stable.
 
-![Imagen de previsualización](doc/preview.png)
+![Imagen de previsualización](docs/preview.png)
 
 Con la colaboración de un testeo constante por parte de @mavalroot (https://github.com/mavalroot).
 
@@ -11,7 +11,7 @@ Basado en el script original para otro Sistema Operativo de @ricpelo en esta dir
 
 Todas las configuraciones y elecciones se han establecido a mi gusto, puedes personalizar cualquier parte que decidas para este script.
 
-![Imagen de previsualización 1](doc/preview1.png)
+![Imagen de previsualización 1](docs/preview1.png)
 
 ## Estado
 Este repositorio lo uso habitualmente a modo configuración personal y lo actualizo y actualizaré en el futuro.
@@ -163,6 +163,7 @@ También instala desde **npm** bower y los siguientes paquetes globales:
 - Accesos_Directos → Contiene los accesos directos individuales para usuario que van en ~/.local/share/applications
 - Apache2 → Contenido para apache
 - Apps → Contiene scripts y configuraciones especiales para ciertas aplicaciones
+- docs → Directorio con la documentación del proyecto e imágenes.
 - fonts → Contiene un directorio por cada conjunto de fuentes similares
 - gedit → Contiene configuración específica para gedit
 - conf → Contiene archivos de configuración o plantillas para generarlos
