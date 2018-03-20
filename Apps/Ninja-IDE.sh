@@ -47,7 +47,7 @@ ninjaide_postconfiguracion() {
     fi
 
     ## Resolviendo otras dependencia de plugins para Ninja IDE
-    echo -e "$VEResolviendo$RO dependencias$VE para plugins de Ninja IDE$CL"
+    echo -e "$VE Resolviendo$RO dependencias$VE para plugins de Ninja IDE$CL"
     instalarSoftware 'python-git' 'python3-git'
 }
 
