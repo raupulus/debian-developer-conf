@@ -6,16 +6,15 @@ engines:
         enabled: false
       SC2086:
         enabled: false
-      
+      SC2033:
+        enabled: false
+      SC1090:
+        enabled: false
   markdownlint:
     enabled: true
     checks:
       MD002:
         enabled: false
-  csslint:
-    enabled: false
-  eslint:
-    enabled: false
 
 exclude_patterns:
 - conf/
