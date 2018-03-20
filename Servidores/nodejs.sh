@@ -42,7 +42,7 @@ nodejs_postconfiguracion() {
     ## FIXME → Crear array para la variable:
     local paquetes='eslint jscs bower compass stylelint bundled'
 
-    instalarNpm paquetes
+    instalarNpm $paquetes
 }
 
 nodejs_instalador() {
