@@ -73,6 +73,10 @@ php_postconfiguracion() {
         echo -e "$VE Límite de Memoria por script → 'memory_limit = 128M'$CL"
         sudo sed -r -i "s/^;?\s*memory_limit\s*=.*$/memory_limit = 128M/" $PHPINI
 
+        ## Límite de archivos
+        echo -e "$VE Tamaño máximo de subida → 'upload_max_filesize = 512M'$CL"
+        sudo sed -r -i "s/^;?\s*upload_max_filesize\s*=.*$/upload_max_filesize = 512M/" $PHPINI
+
     }
 
     personalizar_php() {
