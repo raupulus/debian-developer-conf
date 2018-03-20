@@ -1,6 +1,4 @@
-version: "2"
-
-plugins:
+engines:
   shellcheck:
     enabled: true
     checks:
@@ -15,7 +13,7 @@ plugins:
   markdownlint:
     enabled: true
     checks:
-      MD002: # "First header should be a h1 header"
+      MD002:
         enabled: false
   csslint:
     enabled: false
