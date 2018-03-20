@@ -1,9 +1,4 @@
----
-engines:
-  csslint:
-    enabled: false
-  eslint:
-    enabled: false
+plugins:
   shellcheck:
     enabled: true
     checks:
@@ -11,12 +6,21 @@ engines:
         enabled: false
       SC2086:
         enabled: false
+  csslint:
+    enabled: false
+  eslint:
+    enabled: false
+
 ratings:
   paths:
   - "**.sh"
   - "**.py"
   - "**.md"
+
+exclude_paths:
+- "conf/"
+- "Apache2/"
+- "fonts/"
+
 exclude_patterns:
-- "/conf/*"
-- "/Apache2/*"
-- "/fonts/*"
+- "*notas*"
