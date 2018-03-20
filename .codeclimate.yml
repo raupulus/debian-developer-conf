@@ -8,13 +8,17 @@ plugins:
         enabled: false
       SC2086:
         enabled: false
+  markdownlint:
+    enabled: true
+    checks:
+      MD002: # "First header should be a h1 header"
+      enabled: false
   csslint:
     enabled: false
   eslint:
     enabled: false
 
 exclude_patterns:
-- "conf/"
-- "Apache2/"
-- "fonts/"
-- "*notas*"
+- conf/
+- Apache2/
+- fonts/
