@@ -91,6 +91,7 @@ rubygems-integration
 ruby-minitest
 ruby-power-assert
 sakura
+shellcheck
 tcl
 terminator
 tilix
