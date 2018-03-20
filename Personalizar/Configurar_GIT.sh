@@ -106,7 +106,7 @@ configurar_git() {
     git config --global gui.encoding utf-8
 
     ## Preguntar si se desea configurar GPG
-    echo -e "$VE ¿Quieres configurar una clave$RO GPG$VE para firmar?$yellow"
+    echo -e "$VE ¿Quieres configurar una clave$RO GPG$VE para firmar?$CL"
     read -p 'Introduce una opción y/N → ' input
     if [[ -n $input ]] ||
        [[ $input = 'n' ]] ||

@@ -53,7 +53,6 @@ aplicaciones_basicas() {
         for x in "${lista_todos_paquetes[@]}"; do
             if [[ $s = $x ]]; then
                 echo -e "$RO $s$VE ya estaba instalado$CL"
-                tmp=false
                 break
             else
                 instalarSoftware "$s"
