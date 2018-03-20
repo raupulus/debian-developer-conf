@@ -16,10 +16,14 @@
 ############################
 ##     INSTRUCCIONES      ##
 ############################
+## Este script tiene como objetivo instalar el IDE Atom dando la opción de
+## personalizar su instalación y configuración por defecto usando en
+## sincronización la suministrada por el repositorio y sus futuras
+## actualizaciones.
 
-###########################
-##       FUNCIONES       ##
-###########################
+############################
+##       FUNCIONES        ##
+############################
 
 atom_preconfiguracion() {
     echo -e "$VE Se va a instalar$RO Atom IDE$CL"
