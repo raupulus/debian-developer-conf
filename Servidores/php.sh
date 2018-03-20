@@ -100,7 +100,7 @@ php_postconfiguracion() {
 
                 ## Manual
                 echo -e "$VE Instalando manual para$RO PsySH$AM"
-                if [[ -d "$HOME/.local/share/psysh" ]]; then
+                if [[ ! -d "$HOME/.local/share/psysh" ]]; then
                     mkdir -p "$HOME/.local/share/psysh"
                 fi
                 cp "$WORKSCRIPT/tmp/php_manual.sqlite" "$HOME/.local/share/psysh/php_manual.sqlite"
