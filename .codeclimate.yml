@@ -6,3 +6,7 @@ plugins:
         enabled: false
       SC2086:
         enabled: false
+
+  engines:
+    csslint:
+      enabled: false
