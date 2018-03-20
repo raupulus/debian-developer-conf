@@ -66,6 +66,10 @@ php_postconfiguracion() {
 
         echo -e "$VE Activando Mostrar errores al iniciar → 'display_startup_errors'$CL"
         sudo sed -r -i "s/^;?\s*display_startup_errors\s*=.*$/display_startup_errors = On/" $PHPINI
+
+        echo -e "$VE Tiempo máximo de ejecución 3 minutos → 'max_execution_time'$CL"
+        sudo sed -r -i "s/^;?\s*max_execution_time\s*=.*$/max_execution_time = 180/" $PHPINI
+
     }
 
     personalizar_php() {
