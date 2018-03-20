@@ -1,3 +1,5 @@
+version: "2"
+
 plugins:
   shellcheck:
     enabled: true
@@ -11,16 +13,8 @@ plugins:
   eslint:
     enabled: false
 
-ratings:
-  paths:
-  - "**.sh"
-  - "**.py"
-  - "**.md"
-
-exclude_paths:
+exclude_patterns:
 - "conf/"
 - "Apache2/"
 - "fonts/"
-
-exclude_patterns:
 - "*notas*"
