@@ -6,10 +6,7 @@ engines:
         enabled: false
       SC2086:
         enabled: false
-      SC2033:
-        enabled: false
-      SC1090:
-        enabled: false
+      
   markdownlint:
     enabled: true
     checks:
