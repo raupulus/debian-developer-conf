@@ -1,4 +1,8 @@
 plugins:
   shellcheck:
     enabled: true
-    
+    checks:
+      SC2162:
+        enabled: false
+      SC2086:
+        enabled: false
