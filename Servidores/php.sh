@@ -108,7 +108,12 @@ php_postconfiguracion() {
 
             if [[ -f "$HOME/.local/bin/psysh" ]]
             then
-                echo -e "$VE Ya esta$RO psysh$VE instalado en el equipo,$AM omitiendo paso$CL"
+                echo -e "$VE Ya esta$RO psysh$VE instalado en el equipo$CL"
+                read -p "¿Quieres volve a instalarlo? s/N → " input
+                if [[ "$input" = 's' ]] || [[ "$input" = 'S' ]]; then
+                    descargar_psysh
+                    instalar_psysh
+                fi
             else
                 if [[ -f "$WORKSCRIPT/tmp/psysh" ]]; then
                     instalar_psysh
