@@ -16,14 +16,12 @@
 ############################
 ##     INSTRUCCIONES      ##
 ############################
+## Descarga el gestor de control de versiones Gitkraken
 
 ############################
-##     IMPORTACIONES      ##
+##       FUNCIONES        ##
 ############################
 
-###########################
-##       FUNCIONES       ##
-###########################
 gitkraken_descargar() {
     descargar "gitkraken.deb" "https://release.gitkraken.com/linux/gitkraken-amd64.deb"
 }
