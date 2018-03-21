@@ -18,9 +18,9 @@
 ############################
 ## Plantea instalación y configuración del gestor de ventanas i3
 
-###########################
-##       FUNCIONES       ##
-###########################
+############################
+##       FUNCIONES        ##
+############################
 i3wm_descargar() {
     echo ""
 }
