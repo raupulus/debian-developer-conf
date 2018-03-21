@@ -16,10 +16,7 @@
 ############################
 ##     INSTRUCCIONES      ##
 ############################
-
-############################
-##     IMPORTACIONES      ##
-############################
+## Descarga Haroopad desde su fuente oficial y lo instala en el sistema.
 
 ###########################
 ##       FUNCIONES       ##
