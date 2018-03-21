@@ -16,10 +16,12 @@
 ############################
 ##     INSTRUCCIONES      ##
 ############################
+## Descarga e instala ninja IDE (Editor para python) resolviendo libreías y
+## dependencias que faltan.
 
-###########################
-##       FUNCIONES       ##
-###########################
+############################
+##       FUNCIONES        ##
+############################
 ninjaide_descargar() {
     descargar 'ninja-ide_2.3-2_all.deb' 'http://ftp.es.debian.org/debian/pool/main/n/ninja-ide/ninja-ide_2.3-2_all.deb'
 }
