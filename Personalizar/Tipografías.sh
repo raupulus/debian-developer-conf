@@ -16,10 +16,16 @@
 ############################
 ##     INSTRUCCIONES      ##
 ############################
+## Instala todas las fuentes tiporáficas del directorio "fonts" en la raíz de
+## este repositorio a nuestro sistema de forma global y accesible para todos
+## los usuarios.
+##
+## También instala algunas fuentes desde repositorios oficiales de la
+## distribución Debian.
 
-###########################
-##       FUNCIONES       ##
-###########################
+############################
+##       FUNCIONES        ##
+############################
 agregar_fuentes() {
     echo -e "$VEAñadiendo$RO fuentes Tipográficas$VE al sistema$CL"
 
