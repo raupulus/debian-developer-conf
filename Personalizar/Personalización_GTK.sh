@@ -16,10 +16,15 @@
 ############################
 ##     INSTRUCCIONES      ##
 ############################
+## Este script configura la parte visual que concierne al usuario en temas
+## de personalización como temas, cursores, fondo de pantalla, bordes de
+## ventanas, iconos, shell...
+##
+## Además también configura el tema de grub
 
-###########################
-##       FUNCIONES       ##
-###########################
+############################
+##       FUNCIONES        ##
+############################
 configurar_cursores() {
     echo -e "$VE Configurando pack de cursores$CL"
     instalarSoftware 'crystalcursors'
