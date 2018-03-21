@@ -16,6 +16,9 @@
 ############################
 ##     INSTRUCCIONES      ##
 ############################
+## Instala y configura ohmyzsh para el usuario actual con el que se ha
+## ejecutado el script. Añade personalizaciones y configuración para el
+## archivo .zshrc en el home del usuario.
 
 ###########################
 ##       FUNCIONES       ##
