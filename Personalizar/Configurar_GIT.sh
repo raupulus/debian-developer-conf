@@ -16,6 +16,11 @@
 ############################
 ##     INSTRUCCIONES      ##
 ############################
+## Configuración guiada de forma interactiva para git.
+## Este script va preguntando al usuario los datos para configurar el perfil
+## de este control de versiones en distintas platafarmas y lo configura
+## mediante token para una autenticación transparente y segura al trabajar.
+## Además personaliza y formatea mensajes y alias entre otras cosas.
 
 ## TODO → Refactorizar y dejar configuración independiente para github y gitlab
 ## TODO → Plantear integración con Bitbucket en el archivo git y su token
@@ -31,9 +36,9 @@ correo_git=""
 TOKEN=""
 TOKEN_GITLAB=""
 
-###########################
-##       FUNCIONES       ##
-###########################
+############################
+##       FUNCIONES        ##
+############################
 datos_input() {
     ## Se entiende que tiene el mismo usuario para GitHub y para GitLab
     read -p "Introduce el usuario de GitHub y GitLab → " usuario_git
