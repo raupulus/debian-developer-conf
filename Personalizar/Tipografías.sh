@@ -31,12 +31,12 @@ agregar_fuentes() {
 
     fuentes_repositorios="fonts-powerline fonts-freefont-ttf fonts-hack-ttf fonts-lmodern"
 
-    for f in "$fuentes_repositorios"; do
+    for f in $fuentes_repositorios; do
         echo -e "$VE Instalando fuente$MA →$RO $f $CL"
         instalarSoftware "$f"
     done
 
-    for f in "$WORKSCRIPT/fonts/*"
+    for f in $WORKSCRIPT/fonts/*
     do
         if [[ -d "$WORKSCRIPT/fonts/$f" ]]; then
             echo -e "$VE Instalando fuente$MA →$RO $f $CL"
