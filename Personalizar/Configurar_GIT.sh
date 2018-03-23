@@ -16,6 +16,11 @@
 ############################
 ##     INSTRUCCIONES      ##
 ############################
+## Configuración guiada de forma interactiva para git.
+## Este script va preguntando al usuario los datos para configurar el perfil
+## de este control de versiones en distintas platafarmas y lo configura
+## mediante token para una autenticación transparente y segura al trabajar.
+## Además personaliza y formatea mensajes y alias entre otras cosas.
 
 ## TODO → Refactorizar y dejar configuración independiente para github y gitlab
 ## TODO → Plantear integración con Bitbucket en el archivo git y su token
@@ -32,12 +37,8 @@ TOKEN=""
 TOKEN_GITLAB=""
 
 ############################
-##     IMPORTACIONES      ##
+##       FUNCIONES        ##
 ############################
-
-###########################
-##       FUNCIONES       ##
-###########################
 datos_input() {
     ## Se entiende que tiene el mismo usuario para GitHub y para GitLab
     read -p "Introduce el usuario de GitHub y GitLab → " usuario_git
@@ -98,7 +99,7 @@ gpg_git() {
 
 ## Configurar el usuario GIT local
 configurar_git() {
-    cd
+    cd || return
     git config --global user.name "$nombre_git"
     git config --global user.email "$correo_git"
     git config --global core.editor vim
@@ -119,12 +120,12 @@ configurar_git() {
     ## Reparar finales de linea que mete la mierda de windows CRLF to LF
     git config --global core.autocrlf input
 
-    cd $WORKSCRIPT
+    cd $WORKSCRIPT || return
 }
 
 ## Configura el usuario en GITHUB
 configurar_github() {
-    cd
+    cd || return
     git config --global github.name "$nombre_git"
     git config --global github.user "$usuario_git"
     ## TODO →   github-oauth.github.com is not defined.
@@ -134,15 +135,15 @@ configurar_github() {
     echo -e "$VE Establece https a$RO hub.protocol$CL"
     git config --global hub.protocol https
 
-    cd "$WORKSCRIPT"
+    cd "$WORKSCRIPT" || return
 }
 
 ## Configurar el usuario en gitlab
 configurar_gitlab() {
-    cd
+    cd || return
     git config --global gitlab.name "$nombre_git"
     git config --global gitlab.user "$usuario_git"
-    cd "$WORKSCRIPT"
+    cd "$WORKSCRIPT" || return
 }
 
 configurar_netrc() {
@@ -171,7 +172,7 @@ configurar_netrc() {
 
 ## Crear TOKEN
 crear_token() {
-    cd
+    cd "$HOME" || return
     ## Generando TOKEN para GitHub
     xdg-open "https://github.com/settings/tokens/new?scopes=repo,gist&description=Nuevo_token" > /dev/null 2>&1
     echo -e "$VE Vete a$RO $URL$VE para crear un token, pulsa en 'Generate token', cópialo y pégalo aquí"
@@ -201,7 +202,7 @@ crear_token() {
         git config --global gitlab.token $TOKEN_GITLAB
     fi
 
-    cd "$WORKSCRIPT"
+    cd "$WORKSCRIPT" || return
 }
 
 ## Crear Alias dentro de GIT
@@ -224,7 +225,7 @@ configuracion_git() {
     read -p '  s/N  → ' input
 
     if [[ $input = 's' ]] || [[ $input = 'S' ]]; then
-        cd
+        cd "$HOME" || return
 
         echo -e "$VE Configurando GIT$CL"
         read -p "Introduce el nombre completo del programador → " nombre_git
@@ -251,6 +252,6 @@ configuracion_git() {
         configurar_netrc
         crear_git_alias
 
-        cd "$WORKSCRIPT"
+        cd "$WORKSCRIPT" || return
     fi
 }

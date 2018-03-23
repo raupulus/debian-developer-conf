@@ -16,10 +16,15 @@
 ############################
 ##     INSTRUCCIONES      ##
 ############################
+## Este script configura la parte visual que concierne al usuario en temas
+## de personalización como temas, cursores, fondo de pantalla, bordes de
+## ventanas, iconos, shell...
+##
+## Además también configura el tema de grub
 
-###########################
-##       FUNCIONES       ##
-###########################
+############################
+##       FUNCIONES        ##
+############################
 configurar_cursores() {
     echo -e "$VE Configurando pack de cursores$CL"
     instalarSoftware 'crystalcursors'
@@ -53,9 +58,9 @@ instalar_flatplat() {
 
         ## Actualizar repositorio para Flat-Plat
         echo -e "$VE Actualizando Repositorio de$RO Flat-Plat$CL"
-        cd "$WORKSCRIPT/tmp/Materia_Theme_Flat-Plat/"
+        cd "$WORKSCRIPT/tmp/Materia_Theme_Flat-Plat/" || return
         git pull
-        cd "$WORKSCRIPT"
+        cd "$WORKSCRIPT" || return
     else
         ## Descargar desde repositorio
         descargarGIT 'Flat-Plat' 'https://github.com/nana-4/materia-theme.git' "$WORKSCRIPT/tmp/Materia_Theme_Flat-Plat"
@@ -64,9 +69,9 @@ instalar_flatplat() {
     ## Instalar Flat-Plat, en este punto debe existir instalador
     if [[ -f "$WORKSCRIPT/tmp/Materia_Theme_Flat-Plat/install.sh" ]]; then
         echo -e "$VE Preparando para instalar$RO Tema Flat-Plat$CL"
-        cd "$WORKSCRIPT/tmp/Materia_Theme_Flat-Plat/"
+        cd "$WORKSCRIPT/tmp/Materia_Theme_Flat-Plat/" || return
         sudo ./install.sh
-        cd "$WORKSCRIPT"
+        cd "$WORKSCRIPT" || return
     fi
 }
 

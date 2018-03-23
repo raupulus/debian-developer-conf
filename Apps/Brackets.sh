@@ -16,14 +16,12 @@
 ############################
 ##     INSTRUCCIONES      ##
 ############################
+## Instala el Editor/IDE Brackets en el sistema resolviendo dependencias y
+## descargándolo desde su sitio oficial.
 
 ############################
-##     IMPORTACIONES      ##
+##       FUNCIONES        ##
 ############################
-
-###########################
-##       FUNCIONES       ##
-###########################
 
 brackets_descargar() {
     descargar 'Brackets.deb' "https://github.com/adobe/brackets/releases/download/release-1.12/Brackets.Release.1.12.64-bit.deb"

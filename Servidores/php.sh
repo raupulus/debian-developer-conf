@@ -16,6 +16,12 @@
 ############################
 ##     INSTRUCCIONES      ##
 ############################
+## Instala php en su última versión estable desde repositorios y además
+## configura todas las versiones instaladas en el sistema.
+## Se activan módulos necesarios de apache y se corrigen posibles conflictos
+## con otras versiones en archivos de configuración si hemos actualizado desde
+## php 5.
+## Configura Xdebug también.
 
 ############################
 ##        FUNCIONES       ##
@@ -35,7 +41,6 @@ php_instalar() {
     instalarSoftware "$paquetes_basicos"
 
     echo -e "$VE Instalando$RO paquetes extras$CL"
-    ## TODO → Convertir en array el contenido de la variable:
     local paquetes_extras="php-gd php-curl php-pgsql php-sqlite3 sqlite sqlite3 php-intl php-mbstring php-xml php-xdebug php-json"
     instalarSoftware "$paquetes_extras"
 
@@ -153,17 +158,17 @@ php_postconfiguracion() {
     done
 
     ## Si solo hay una versión de PHP la configura, en otro caso pregunta
-    if [[ 1 = ${#ALL_PHP[@]} ]]; then
+    if [[ 1 = "${#ALL_PHP[@]}" ]]; then
         sudo a2enmod "php${ALL_PHP[0]}"
     else
         ## Pide introducir la versión de PHP para configurar con apache
         while true :; do
             clear
             echo -e "$VE Introduce la versión de$RO PHP$VE a utilizar$CL"
-            echo -e "$AZ ${ALL_PHP[@]} $RO"  ## Pinta versiones para elegirla
+            echo -e "$AZ ${ALL_PHP[*]} $RO"  ## Pinta versiones para elegirla
             read -p "    → " input
             for V_PHP in "${ALL_PHP[@]}"; do
-                if [[ $input = $V_PHP ]]; then
+                if [[ $input = "$V_PHP" ]]; then
                     sudo a2enmod "php$V_PHP"
                     break
                 fi
@@ -174,14 +179,14 @@ php_postconfiguracion() {
 
     ## Activar módulos
     echo -e "$VE Activando módulos$CL"
-    sudo phpenmod -s apache2 xdebug
+    sudo phpenmod -s 'apache2' 'xdebug'
 
     echo -e "$VE Desactivando Módulos"
     ## Xdebug para PHP CLI no tiene sentido y ralentiza
-    sudo phpdismod -s cli xdebug
+    sudo phpdismod -s 'cli' 'xdebug'
 
     ## Reiniciar apache2 para hacer efectivos los cambios
-    reiniciarServicio apache2
+    reiniciarServicio 'apache2'
 }
 
 

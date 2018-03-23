@@ -16,10 +16,15 @@
 ############################
 ##     INSTRUCCIONES      ##
 ############################
+## Instala vim de forma global al sistema y lo configura para el usuario que
+## ha ejecutado el script generando perfil de color, correccion de sintaxis y
+## un conjunto de plugins (incluido vundle) para trabajar con los principales
+## lenguajes de progamación que utilizo.
+## Al terminar instala y habilita todos los complementos.
 
-###########################
-##       FUNCIONES       ##
-###########################
+############################
+##       FUNCIONES        ##
+############################
 vim_preconfiguracion() {
     echo -e "$VE Generando Pre-Configuraciones de$RO Vim$CL"
     local archivosConfiguracion='.vim .vimrc .gvimrc'

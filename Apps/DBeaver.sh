@@ -19,12 +19,8 @@
 ## Instala el editor de Base de Datos Dbeaver
 
 ############################
-##     IMPORTACIONES      ##
+##       FUNCIONES        ##
 ############################
-
-###########################
-##       FUNCIONES       ##
-###########################
 
 dbeaver_descargar() {
     descargar 'dbeaver.deb' 'https://dbeaver.jkiss.org/files/dbeaver-ce_latest_amd64.deb'

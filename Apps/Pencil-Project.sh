@@ -16,14 +16,11 @@
 ############################
 ##     INSTRUCCIONES      ##
 ############################
+## Instala el programa Pencil Project desde su sitio web oficial
 
 ############################
-##     IMPORTACIONES      ##
+##       FUNCIONES        ##
 ############################
-
-###########################
-##       FUNCIONES       ##
-###########################
 pencilProject_descargar() {
     descargar 'Pencil_Project.deb' 'http://pencil.evolus.vn/dl/V3.0.4/Pencil_3.0.4_amd64.deb'
 }

@@ -16,14 +16,12 @@
 ############################
 ##     INSTRUCCIONES      ##
 ############################
+## Descarga e instala las versiones de firefox (nightly y developer) solo
+## para el usuario actual que ha ejecutado el script
 
 ############################
-##     IMPORTACIONES      ##
+##       FUNCIONES        ##
 ############################
-
-###########################
-##       FUNCIONES       ##
-###########################
 
 ## Instalar versiones de Firefox
 firefox_instalador() {

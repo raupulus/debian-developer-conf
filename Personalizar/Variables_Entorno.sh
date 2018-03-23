@@ -16,10 +16,12 @@
 ############################
 ##     INSTRUCCIONES      ##
 ############################
+## Añade las variables globales al sistema operativo para poder ser
+## consultadas en cualquier momento y declaradas desde el momento de arranque.
 
-###########################
-##       FUNCIONES       ##
-###########################
+############################
+##       FUNCIONES        ##
+############################
 # Importa todas las variables al inicio del sistema Operativo
 function instalar_variables() {
     echo -e "$VE Instalando$RO Variables Globales$VE al sistema$CL"

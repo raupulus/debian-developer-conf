@@ -16,6 +16,8 @@
 ############################
 ##     INSTRUCCIONES      ##
 ############################
+## Instala NodeJS, su gestor de paquetes NPM y además una serie de paquetes
+## globales para corrección de sintaxis entre otras utilidades.
 
 ############################
 ##        FUNCIONES       ##
@@ -33,15 +35,17 @@ nodejs_instalar() {
     echo -e "$VE Instalando$RO NodeJS$CL"
     instalarSoftware nodejs
     actualizarSoftware nodejs
+
+    echo -e "$VE Instalando Dependencias para $RO NodeJS$CL"
+    local dependencias='node-typescript'
+    instalarSoftware "$dependencias"
 }
 
 nodejs_postconfiguracion() {
     echo -e "$VE Generando Post-Configuraciones de NodeJS$CL"
 
     ## Instalando paquetes globales
-    ## FIXME → Crear array para la variable:
     local paquetes='eslint jscs bower compass stylelint bundled'
-
     instalarNpm $paquetes
 }
 

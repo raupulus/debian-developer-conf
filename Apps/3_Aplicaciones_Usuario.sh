@@ -15,6 +15,9 @@
 ############################
 ##     INSTRUCCIONES      ##
 ############################
+## Instala software que se configura para cada usuario de forma independiente
+## y necesitará ser ejecutado una vez por cada usuario que quiera implementar
+## estas funcionalidades para si mismo.
 
 ############################
 ##     IMPORTACIONES      ##
@@ -22,16 +25,8 @@
 source "$WORKSCRIPT/Apps/Firefox.sh"
 
 ############################
-##       CONSTANTES       ##
+##       FUNCIONES        ##
 ############################
-
-###########################
-##       VARIABLES       ##
-###########################
-
-###########################
-##       FUNCIONES       ##
-###########################
 configurar_heroku() {
     echo -e "$VE Se va a configurar$RO Heroku$CL"
     instalarSoftware 'heroku'
@@ -48,7 +43,3 @@ aplicaciones_usuarios() {
     configurar_heroku
     firefox_instalador
 }
-
-###########################
-##       EJECUCIÓN       ##
-###########################

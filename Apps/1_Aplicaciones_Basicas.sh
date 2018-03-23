@@ -15,18 +15,11 @@
 ############################
 ##     INSTRUCCIONES      ##
 ############################
-
-############################
-##     IMPORTACIONES      ##
-############################
-
-############################
-##       CONSTANTES       ##
-############################
-
-###########################
-##       VARIABLES       ##
-###########################
+## Este script instala siempre las aplicaciones que considero básicas en un
+## sistema operativo para trabajar y desarrollar.
+##
+## La lista de software utilizada se extrae de "Software.lst" y cualquier
+## progama que añadamos en este archivo, será instalado desde este script.
 
 ###########################
 ##       FUNCIONES       ##
@@ -64,7 +57,3 @@ aplicaciones_basicas() {
     sudo apt --fix-broken install 2>> /dev/null
     sudo apt install -f -y 2>> /dev/null
 }
-
-###########################
-##       EJECUCIÓN       ##
-###########################

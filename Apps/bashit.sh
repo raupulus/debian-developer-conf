@@ -16,10 +16,13 @@
 ############################
 ##     INSTRUCCIONES      ##
 ############################
+## Instala y configura bash-it para el usuario actual con el que se ha
+## ejecutado el script. Añade personalizaciones y configuración para el
+## archivo .bashrc en el home del usuario.
 
-###########################
-##       FUNCIONES       ##
-###########################
+############################
+##       FUNCIONES        ##
+############################
 bashit_descargar() {
     local REINTENTOS=5
 

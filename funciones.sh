@@ -19,9 +19,9 @@
 ## Este script tiene como objetivo ofrecer funciones recurrentes de
 ## forma auxiliar para todos los demás scripts.
 
-###########################
-##       FUNCIONES       ##
-###########################
+############################
+##       FUNCIONES        ##
+############################
 ##
 ## Crea un respaldo del archivo o directorio pasado como parámetro
 ## @param  $*  Recibe una serie de elementos a los que crearle un backup
@@ -147,9 +147,9 @@ descargarGIT() {
     else
         echo -e "$RO$1$VE ya está instalado$CL"
         echo -e "$VE Se actualizará el repositorio existente de$RO $1$CL"
-        cd "$3"
+        cd "$3" || return
         git pull origin master
-        cd "$WORKSCRIPT"
+        cd "$WORKSCRIPT" || return
     fi
 }
 ##

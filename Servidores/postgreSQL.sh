@@ -16,6 +16,7 @@
 ############################
 ##     INSTRUCCIONES      ##
 ############################
+## Instala y configura postgreSQL tanto la parte cliente como el servidor.
 
 ############################
 ##        FUNCIONES       ##
@@ -31,7 +32,6 @@ postgresql_preconfiguracion() {
 
 postgresql_instalar() {
     echo -e "$VE Instalando$RO PostgreSQL$CL"
-    ## TODO → Convertir en array:
     local dependencias="postgresql postgresql-client postgresql-contrib postgresql-all"
 
     ## Instalando dependencias
@@ -75,6 +75,6 @@ postgresql_instalador() {
     postgresql_instalar
     postgresql_postconfiguracion
 
-    ## Reiniciar servidor postgresql al terminar con la instalación y configuración
+    ## Reiniciar servidor postgresql
     reiniciarServicio 'postgresql'
 }

@@ -15,6 +15,15 @@
 ############################
 ##     INSTRUCCIONES      ##
 ############################
+## Este script enlaza la instalación de todas las aplicaciones opcionales
+## que podían ser interesante instalar en uno u otro momento.
+##
+## ¡Actualmente se instala todo por defecto!
+## TODO → Admitir parámetro $1 = -a para instalar todo
+## TODO → Mostrar opciones para instalar 1 programa concreto con las opciones:
+##        - Instalar
+##        - Reinstalar
+##        - Volver a descargar y luego reinstalar
 
 ############################
 ##     IMPORTACIONES      ##
@@ -32,16 +41,8 @@ source "$WORKSCRIPT/Apps/Pencil-Project.sh"
 source "$WORKSCRIPT/Apps/vim.sh"
 
 ############################
-##       CONSTANTES       ##
+##       FUNCIONES        ##
 ############################
-
-###########################
-##       VARIABLES       ##
-###########################
-
-###########################
-##       FUNCIONES       ##
-###########################
 aplicaciones_extras() {
     echo -e "$VE Instalando Aplicaciones$RO Extras$CL"
     atom_instalador
@@ -55,7 +56,3 @@ aplicaciones_extras() {
     bashit_Instalador
     ohmyzsh_Instalador
 }
-
-###########################
-##       EJECUCIÓN       ##
-###########################
