@@ -35,6 +35,10 @@ nodejs_instalar() {
     echo -e "$VE Instalando$RO NodeJS$CL"
     instalarSoftware nodejs
     actualizarSoftware nodejs
+
+    echo -e "$VE Instalando Dependencias para $RO NodeJS$CL"
+    local dependencias='node-typescript'
+    instalarSoftware "$dependencias"
 }
 
 nodejs_postconfiguracion() {
