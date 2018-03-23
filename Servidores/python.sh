@@ -37,6 +37,12 @@ python_instalar() {
     echo -e "$VE Instalando$RO Python y Django$CL"
     ## Instalar python y gestor de paquetes
     instalarSoftware python python3 python-pip python3-pip
+
+    ## Instalando dependencias
+    echo -e "$VE Instalando dependencias$CL"
+
+    local dependencias='flake8 pyflakes pyflakes3 pydocstyle pylama prospector virtualenv'
+    instalarSoftware "$dependencias"
 }
 
 python_postconfiguracion() {
