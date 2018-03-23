@@ -16,6 +16,10 @@
 ############################
 ##     INSTRUCCIONES      ##
 ############################
+## Instala python 2, python 3, Django y gestor de paquete pip para ambas
+## versiones de php.
+## Además instala paquetes básicos recurridos, correctores de sintaxis y reglas
+## de estilos para PEP8 principalmente.
 
 ############################
 ##        FUNCIONES       ##
