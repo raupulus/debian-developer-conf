@@ -20,7 +20,7 @@
 ## script. Normalmente se espera no necesitarse usar pero existirá.
 ## El uso de este script puede ser perjudicial y debes asumir el riesgo
 
-## TOFIX → Restaurar archivos BACKUP creados con el script antes de eliminar!!!
+## FIXME → Restaurar archivos BACKUP creados con el script antes de eliminar!!!
 
 ############################
 ##       CONSTANTES       ##
@@ -28,32 +28,22 @@
 AM="\033[1;33m"  ## Color Amarillo
 AZ="\033[1;34m"  ## Color Azul
 BL="\033[1;37m"  ## Color Blanco
-CY="\033[1;36m"  ## Color Cyan
-GR="\033[0;37m"  ## Color Gris
-MA="\033[1;35m"  ## Color Magenta
 RO="\033[1;31m"  ## Color Rojo
 VE="\033[1;32m"  ## Color VE
 CL="\e[0m"       ## Limpiar colores
 
-#############################
-##   Variables Generales   ##
-#############################
-
 ############################
-##     IMPORTACIONES      ##
+##       FUNCIONES        ##
 ############################
-
-###########################
-##       FUNCIONES       ##
-###########################
+##
 ## Función para comprobar los archivos que están con BACKUP y restaurarlos
+##
 restaurar_Backups() {
-    echo -e "$VE Preparando para restaurar archivos$CL"
+    echo -e "$VE Preparando para$RO Restaurar$AZ archivos$CL"
 }
 
-
 limpiar_con_fuerza() {
-    echo -e "$VE Este script es muy peligroso y borrara muchas cosas"
+    echo -e "$VE Este$AM script$VE es muy$BL peligroso$VE y borrará muchas cosas"
     echo -e "$VE Asegúrate que es lo que necesitas hacer antes de ejecutarlo"
     read -p "Pulsa una tecla para destruir personalización generada por este script"
 
@@ -102,7 +92,6 @@ limpiar_con_fuerza() {
     rm -R -f ~/.udisks-glue.conf 2>> /dev/null
     rm -R -f ~/.vimrc 2>> /dev/null
     rm -R -f ~/.zshrc 2>> /dev/null
-
 
     local paquetes_borrar="vim atom ninja-ide dbeaver brackets haroopad"
     desinstalar_paquetes "$paquetes_borrar"
