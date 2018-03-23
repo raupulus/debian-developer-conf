@@ -19,9 +19,9 @@
 ## Este script tiene como objetivo ofrecer funciones recurrentes de
 ## forma auxiliar para todos los demás scripts.
 
-###########################
-##       FUNCIONES       ##
-###########################
+############################
+##       FUNCIONES        ##
+############################
 ##
 ## Crea un respaldo del archivo o directorio pasado como parámetro
 ## @param  $*  Recibe una serie de elementos a los que crearle un backup
