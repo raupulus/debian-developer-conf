@@ -50,6 +50,11 @@ python_postconfiguracion() {
 
     configurar_python2() {
         echo -e "$VE Preparando configuracion de$RO Python2$CL"
+        echo -e "$VE Instalando dependencias para Python 2$CL"
+
+        local dependencias='python-autopep8 python-bottle python-cryptography python-dev python-enum34 python-flake python-frozendict python-future python-idna python-ipaddress python-ipython python-jedi python-mccabe python-openssl python-pep8 python-pip python-powerline python-powerline-taskwarrior python-pyasn1 python-pycodestyle python-pyflakes python-pygments python-pylama python-setuptools python-urllib3 python-virtualenv python-waitress'
+
+        instalarSoftware "$dependencias"
     }
 
     configurar_python3() {
