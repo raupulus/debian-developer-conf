@@ -16,6 +16,10 @@
 ############################
 ##     INSTRUCCIONES      ##
 ############################
+## Instala y configura apache 2, además opcionalmente facilita la
+## personalización de una estructura lista para usar con una zona privada y
+## otra zona pública donde se podrá desplegar aplicaciones nada más acabar.
+## Además se habilitan módulos y se modifican archivos de configuración.
 
 ############################
 ##        FUNCIONES       ##
@@ -137,7 +141,7 @@ apache2_postconfiguracion() {
 
         ## Cambia los permisos
         echo -e "$VE Asignando permisos"
-        ## TOFIX → Función para los permisos
+        ## FIXME → Función para los permisos
         sudo chmod 775 -R /var/www/*
         sudo chmod 700 '/var/www/.htpasswd'
         sudo chmod 700 '/var/www/html/Privado/.htaccess'
