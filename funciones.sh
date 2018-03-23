@@ -147,9 +147,9 @@ descargarGIT() {
     else
         echo -e "$RO$1$VE ya está instalado$CL"
         echo -e "$VE Se actualizará el repositorio existente de$RO $1$CL"
-        cd "$3"
+        cd "$3" || return
         git pull origin master
-        cd "$WORKSCRIPT"
+        cd "$WORKSCRIPT" || return
     fi
 }
 ##
