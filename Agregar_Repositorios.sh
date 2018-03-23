@@ -16,6 +16,11 @@
 ############################
 ##     INSTRUCCIONES      ##
 ############################
+## Este script agrega los repositorios estables y algunos más de forma segura
+## y con sus llaves correspondientes.
+## Por motivos de seguridad se dejarán los repositorios listos para usar en
+## el sistema pero comentados, es decir, los que considero que depende del
+## usuario activarlos y usarlo bajo su responsabilidad están comentados.
 
 ###########################
 ##       FUNCIONES       ##
