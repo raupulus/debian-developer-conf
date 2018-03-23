@@ -60,11 +60,8 @@ source "$WORKSCRIPT/Personalizar/Variables_Entorno.sh"
 source "$WORKSCRIPT/Servidores/0_Main.sh"
 source "$WORKSCRIPT/variables.sh"
 
-## TOFIX → Refactorizar servidores en subdirectorio con menú propio
-## TOFIX → Refactorizar Personalización en subdirectorio añadiendo menú propio
-#source 'Servidores/0_Main.sh'
+## FIXME → Refactorizar Personalización en subdirectorio añadiendo menú propio
 #source 'Personalizar/0_Main.sh'
-
 
 ###########################
 ##       VARIABLES       ##
@@ -101,7 +98,6 @@ menuPrincipal() {
             2) menuAplicaciones;;         ## Menú de Aplicaciones
             3) instalar_configuraciones;; ## Menú de Configuraciones
             4) #menuPersonalizacion;;     ## Menú de Personalización
-               ## TOFIX → Las siguientes funciones deben quedar en Personalizar/
                configuracion_git
                personalizar
                agregar_fuentes
@@ -115,8 +111,6 @@ menuPrincipal() {
                agregar_fuentes
                instalar_variables
                menuServidores -a;;        ## Indica con "-a" que ejecute todas
-
-
             0) ## SALIR
               clear
               echo -e "$RO Se sale del menú$CL"
