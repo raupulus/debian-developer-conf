@@ -54,6 +54,11 @@ python_postconfiguracion() {
 
     configurar_python3() {
         echo -e "$VE Preparando configuracion de$RO Python3$CL"
+        echo -e "$VE Instalando dependencias para Python 3$CL"
+
+        local dependencias='python3-dev python3-flake8 python3-frozendict python3-future python3-ipython python3-mccabe python3-pep8 python3-pep8-naming python3-pip python3-pylama python3-powerline python3-powerline-taskwarrior python3-pycodestyle python3-pyflakes python3-setuptools python3-virtualenv'
+
+        instalarSoftware "$dependencias"
     }
 
     personalizar_python2() {
