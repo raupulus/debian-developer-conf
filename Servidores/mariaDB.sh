@@ -16,6 +16,11 @@
 ############################
 ##     INSTRUCCIONES      ##
 ############################
+## Instala, configura y personaliza el SGBD para bases de datos MariaDB tanto
+## cliente como servidor y phpmyadmin para gesión via interfaz web.
+##
+## Además se propone la creación de un usuario para desarrollar con el
+## nombre para este "dev" y contraseña "dev"
 
 ############################
 ##        FUNCIONES       ##
