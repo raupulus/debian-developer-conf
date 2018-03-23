@@ -16,6 +16,12 @@
 ############################
 ##     INSTRUCCIONES      ##
 ############################
+## Instala configuraciones para el usuario, asigna permisos correspondientes y
+## establece aplicaciones preferidas por defecto.
+##
+## Además configura los hosts a nivel global bloqueando direcciones
+## sospechosas y/o reportadas en internet para aumentar velocidad de navegación
+## y prevenir sitios sospechosos.
 
 ###########################
 ##       FUNCIONES       ##
