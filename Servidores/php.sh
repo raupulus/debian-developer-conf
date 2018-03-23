@@ -16,6 +16,12 @@
 ############################
 ##     INSTRUCCIONES      ##
 ############################
+## Instala php en su última versión estable desde repositorios y además
+## configura todas las versiones instaladas en el sistema.
+## Se activan módulos necesarios de apache y se corrigen posibles conflictos
+## con otras versiones en archivos de configuración si hemos actualizado desde
+## php 5.
+## Configura Xdebug también.
 
 ############################
 ##        FUNCIONES       ##
@@ -35,7 +41,6 @@ php_instalar() {
     instalarSoftware "$paquetes_basicos"
 
     echo -e "$VE Instalando$RO paquetes extras$CL"
-    ## TODO → Convertir en array el contenido de la variable:
     local paquetes_extras="php-gd php-curl php-pgsql php-sqlite3 sqlite sqlite3 php-intl php-mbstring php-xml php-xdebug php-json"
     instalarSoftware "$paquetes_extras"
 
