@@ -60,9 +60,6 @@ source "$WORKSCRIPT/Personalizar/Variables_Entorno.sh"
 source "$WORKSCRIPT/Servidores/0_Main.sh"
 source "$WORKSCRIPT/variables.sh"
 
-## FIXME → Refactorizar Personalización en subdirectorio añadiendo menú propio
-#source 'Personalizar/0_Main.sh'
-
 ###########################
 ##       VARIABLES       ##
 ###########################
