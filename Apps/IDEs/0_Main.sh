@@ -22,6 +22,8 @@
 ##     IMPORTACIONES      ##
 ############################
 source "$WORKSCRIPT/Apps/IDEs/Atom_IDE.sh"
+source "$WORKSCRIPT/Apps/IDEs/Brackets.sh"
+source "$WORKSCRIPT/Apps/IDEs/Ninja-IDE.sh"
 
 ############################
 ##       FUNCIONES        ##
@@ -34,6 +36,9 @@ menuIDES() {
     todos_IDES() {
         clear
         echo -e "$VE Instalando todos los IDES$CL"
+        atom_instalador
+        brackets_instalador
+        ninjaide_instalador
     }
 
     ## Si la función recibe "-a" indica que se instalen todos los IDES
@@ -45,12 +50,12 @@ menuIDES() {
             local descripcion='Menú de aplicaciones
                 1) Atom
                 2) Brackets
-                3) PHP Storm
+                3) PHP Storm (No implementado)
                 4) Ninja IDE
-                5) NetBeans
-                6) Aptana Studio
-                7) PyCharm
-                8) Web Storm
+                5) NetBeans (No implementado)
+                6) Aptana Studio (No implementado)
+                7) PyCharm (No implementado)
+                8) Web Storm (No implementado)
                 9) Todos los pasos anteriores
 
                 0) Atrás
@@ -63,14 +68,14 @@ menuIDES() {
 
             case $entrada in
 
-                1)  ;;  ##
-                2)  ;;  ##
-                3)  ;;  ##
-                3)  ;;  ##
-                3)  ;;  ##
-                3)  ;;  ##
-                3)  ;;  ##
-                3)  ;;  ##
+                1)  atom_instalador;;  ##
+                2)  brackets_instalador;;  ##
+                #3)  ;;  ##
+                4)  ninjaide_instalador;;  ##
+                #5)  ;;  ##
+                #6)  ;;  ##
+                #7)  ;;  ##
+                #8)  ;;  ##
                 9)  todos_IDES  ## Todos los IDES
                     break;;
 
