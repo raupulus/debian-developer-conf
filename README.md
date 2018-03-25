@@ -196,6 +196,10 @@ documentación accesible una vez dentro del mismo intérprete usando la palabra
 reservada **doc** seguido de la función que solicitamos ayuda/información.
 
 ### PostgreSQL
+Se instala la última versión stable de PostgreSQL pero se configuran todas las
+versiones que pudieran estar instalada en el sistema, esto será:
+- intervalstyle = 'iso_8601
+- timezone = 'UTC'
 
 ### MariaDB
 Instala el cliente y el servidor para MariaDB (versión libre de MySQL)
