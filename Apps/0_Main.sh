@@ -27,9 +27,9 @@ source "$WORKSCRIPT/Apps/1_Aplicaciones_Basicas.sh"
 source "$WORKSCRIPT/Apps/2_Aplicaciones_Extras.sh"
 source "$WORKSCRIPT/Apps/3_Aplicaciones_Usuario.sh"
 
-###########################
-##       FUNCIONES       ##
-###########################
+############################
+##       FUNCIONES        ##
+############################
 ##
 ## Menú para elegir las aplicaciones a instalar
 ## @param $1 -a Si recibe este parámetro ejecutará todos los scripts
