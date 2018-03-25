@@ -71,8 +71,8 @@ menuAplicaciones() {
                 1)  aplicaciones_basicas;;   ## Aplicaciones Básicas
                 2)  aplicaciones_extras;;    ## Aplicaciones Extras
                 3)  aplicaciones_usuarios;;  ## Aplicaciones de Usuario
-                3)  menuIDES;;               ## Menú para instalar IDEs
-                4)  todas_aplicaciones       ## Todas las aplicaciones
+                4)  menuIDES;;               ## Menú para instalar IDEs
+                5)  todas_aplicaciones       ## Todas las aplicaciones
                     break;;
 
                 0)  ## SALIR
