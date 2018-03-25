@@ -26,6 +26,7 @@
 source "$WORKSCRIPT/Apps/1_Aplicaciones_Basicas.sh"
 source "$WORKSCRIPT/Apps/2_Aplicaciones_Extras.sh"
 source "$WORKSCRIPT/Apps/3_Aplicaciones_Usuario.sh"
+source "$WORKSCRIPT/Apps/IDEs/0_Main.sh"
 
 ############################
 ##       FUNCIONES        ##
@@ -41,6 +42,7 @@ menuAplicaciones() {
         aplicaciones_basicas
         aplicaciones_extras
         aplicaciones_usuarios
+        menuIDES -a
     }
 
     ## Si la función recibe "-a" indica que ejecute todas las aplicaciones
@@ -53,7 +55,8 @@ menuAplicaciones() {
                 1) Aplicaciones Básicas
                 2) Aplicaciones Extras
                 3) Aplicaciones de Usuario
-                4) Todos los pasos anteriores
+                4) Instalar IDEs
+                5) Todos los pasos anteriores completos
 
                 0) Atrás
             '
@@ -68,6 +71,7 @@ menuAplicaciones() {
                 1)  aplicaciones_basicas;;   ## Aplicaciones Básicas
                 2)  aplicaciones_extras;;    ## Aplicaciones Extras
                 3)  aplicaciones_usuarios;;  ## Aplicaciones de Usuario
+                3)  menuIDES;;               ## Menú para instalar IDEs
                 4)  todas_aplicaciones       ## Todas las aplicaciones
                     break;;
 
