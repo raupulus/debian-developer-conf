@@ -33,7 +33,7 @@ vim_preconfiguracion() {
     enlazarHome "$archivosConfiguracion"
 
     vim_colores() {
-        if [[ -d "$HOME/vim/colors" ]]; then
+        if [[ ! -d "$HOME/vim/colors" ]]; then
             mkdir -p "$HOME/.vim/colors"
         fi
 
