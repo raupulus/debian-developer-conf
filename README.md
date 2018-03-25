@@ -74,6 +74,7 @@ Estos son los principales objetivos:
 - Configurar terminales, bash y zsh
 - Instalar tipografías
 - Instalar editores Brackets, Atom, ninja IDE y Vim con sus personalizaciones
+- Instalar IDEs si el usuario lo elige
 - Configurar sistema y variables globales
 - Ampliar repositorios desde fuentes estables y fiables
 - Instalar configuraciones y personalizaciones para el sistema y programas en
@@ -197,6 +198,17 @@ reservada **doc** seguido de la función que solicitamos ayuda/información.
 ### PostgreSQL
 
 ### MariaDB
+Instala el cliente y el servidor para MariaDB (versión libre de MySQL)
+
+También instala phpmyadmin para poder manipular/trabajar con estas bases de
+datos de forma gráfica desde su interfaz web.
+
+Una vez instalado plantea si quieres crear un usuario para desarrollar con el
+nombre "**dev**" y con la contraseña en un principio "**dev**" dándole todos
+los permisos de administración y manipulación a este usuario. No debe usarse
+así en producción y se aconseja una vez finalizado el script cambiar la
+contraseña de este usuario si habilitamos la posibilidad de conectar fuera de
+localhost (para evitar que en sitios públicos puedan acceder, esto aún así es poco probable además).
 
 ### Python
 Contempla la instalación de Python2 y Python3 con sus gestores de paquetes
