@@ -195,9 +195,19 @@ Se instalan las siguientes herramientas de fuentes externas:
 documentación accesible una vez dentro del mismo intérprete usando la palabra
 reservada **doc** seguido de la función que solicitamos ayuda/información.
 
+Se modifican los archivos de configuración para **Todas** las versiones de
+PHP que se encuentren instaladas en el equipo. Estas modificaciones serán:
+- timezone = 'UTC'
+- error_reporting = E_ALL
+- display_errors = On
+- display_startup_errors = On
+- max_execution_time = 180
+- memory_limit = 128M
+- upload_max_filesize = 512M
+- post_max_size = 1024M
+
 ### PostgreSQL
-Se instala la última versión stable de PostgreSQL pero se configuran todas las
-versiones que pudieran estar instalada en el sistema, esto será:
+Se instala la última versión stable de PostgreSQL (en el futuro se configuran todas las versiones que pudieran estar instalada en el sistema), configura:
 - intervalstyle = 'iso_8601
 - timezone = 'UTC'
 
