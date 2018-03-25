@@ -8,7 +8,7 @@ configuraciones de distintos dispositivos con los que trabajo.
 Este script prepará completamente el entorno de programación, aplicaciones,
 servidores, plantillas y repositorios en Debian Stable.
 
-![Imagen de previsualización](docs/preview.png)
+![Imagen de previsualización](docs/Preview.png)
 
 Con la colaboración de un testeo constante por parte de @mavalroot
 (https://github.com/mavalroot).
@@ -18,8 +18,6 @@ dirección https://github.com/ricpelo/conf
 
 Todas las configuraciones y elecciones se han establecido a mi gusto, puedes
 personalizar cualquier parte que decidas para este script.
-
-![Imagen de previsualización 1](docs/preview1.png)
 
 ## Estado
 Este repositorio lo uso habitualmente a modo configuración personal y lo
@@ -68,6 +66,8 @@ según las preferencias del autor (https://github.com/fryntiz).
 Se plantea lo más modular que me ha sido posible para que en algunos casos no
 sea necesario ejecutar el script completo y solo la parte que realmente
 necesitas (si fuese el caso).
+
+![Imagen de previsualización 1](docs/Apps.png)
 
 Estos son los principales objetivos:
 
@@ -150,8 +150,10 @@ Todo esto se instalará de forma opcional eligiendo dicha opción en el menú. P
 ahora se instalan pero se han de activar manualmente.
 
 ## Servidores
-Se incorporan en la parte servidores instalación para apache2, php, postregsq,
-mariadb
+Se incorporan en la parte servidores instalación para apache2, php, postregsql,
+mariadb, python2, python3 y NodeJS.
+
+![Imagen de previsualización 1](docs/Servidores.png)
 
 ### Apache 2
 Se crean 3 servidores virtuales:
@@ -271,16 +273,17 @@ y su uso se desaconseja por ser áltamente arriesgado a perder datos.
 configura
 
 Dentro de Apps/
-- Atom_IDE.sh → Instala el editor ATOM con su configuración y complementos
+- IDEs:
+  - Atom_IDE.sh → Instala el editor ATOM con su configuración y complementos
+  - Brackets.sh → Instala y configura Brackets
+  - Ninja-IDE.sh → Instala y configura Ninja IDE
 - bashit.sh → Instala y configura Bash-it
-- Brackets.sh → Instala y configura Brackets
 - DBeaver.sh → Instala y configura DBeaver
 - Firefox.sh → Instala la versión para desarrolladores **Quantum** y la versión
 en desarrollo principal **Nightly**
 - GitKraken.sh → Instala y configura GitKraken
 - Haroopad.sh → Instala y configura Haroopad
 - i3wm.sh → Instala y configura gestor de ventanas i3wm
-- Ninja-IDE.sh → Instala y configura Ninja IDE
 - OhMyZsh.sh → Instala y configura OhMyZsh
 - Pencil-Project.sh → Instala y configura Pencil Project
 - vim.sh → Instala y configura Vim
