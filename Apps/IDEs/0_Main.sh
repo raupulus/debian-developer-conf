@@ -21,7 +21,7 @@
 ############################
 ##     IMPORTACIONES      ##
 ############################
-#source "$WORKSCRIPT/Apps/"
+source "$WORKSCRIPT/Apps/IDEs/Atom_IDE.sh"
 
 ############################
 ##       FUNCIONES        ##
