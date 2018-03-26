@@ -28,14 +28,11 @@
 ############################
 ##     IMPORTACIONES      ##
 ############################
-source "$WORKSCRIPT/Apps/Atom_IDE.sh"
 source "$WORKSCRIPT/Apps/bashit.sh"
-source "$WORKSCRIPT/Apps/Brackets.sh"
 source "$WORKSCRIPT/Apps/DBeaver.sh"
 source "$WORKSCRIPT/Apps/GitKraken.sh"
 source "$WORKSCRIPT/Apps/Haroopad.sh"
 source "$WORKSCRIPT/Apps/i3wm.sh"
-source "$WORKSCRIPT/Apps/Ninja-IDE.sh"
 source "$WORKSCRIPT/Apps/OhMyZsh.sh"
 source "$WORKSCRIPT/Apps/Pencil-Project.sh"
 source "$WORKSCRIPT/Apps/vim.sh"
@@ -45,12 +42,9 @@ source "$WORKSCRIPT/Apps/vim.sh"
 ############################
 aplicaciones_extras() {
     echo -e "$VE Instalando Aplicaciones$RO Extras$CL"
-    atom_instalador
-    brackets_instalador
     dbeaver_instalador
     gitkraken_instalador
     haroopad_instalador
-    ninjaide_instalador
     pencilProject_instalador
     vim_Instalador
     bashit_Instalador

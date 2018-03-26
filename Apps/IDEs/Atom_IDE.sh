@@ -67,7 +67,7 @@ atom_postconfiguracion() {
 
 atom_plugins() {
     ## Lista con paquetes ATOM
-    local atom=$(cat $WORKSCRIPT/Apps/Atom_Paquetes.lst)
+    local atom=$(cat $WORKSCRIPT/Apps/IDEs/Atom_Paquetes.lst)
 
     ## Si se ha instalado correctamente ATOM, instalamos sus plugins
     echo -e "$VE Preparando instalación complementos$RO Atom$CL"

@@ -1,6 +1,7 @@
 [![Maintainability](https://api.codeclimate.com/v1/badges/a98475bf9c466d5ca815/maintainability)](https://codeclimate.com/github/fryntiz/Debian_Developer_Init/maintainability)
 
 # Script para Preparar Entorno de Programación en Debian
+
 Este script surge de la necesidad como desarrollador web para tener un entorno
 funcional en poco tiempo y además existir una concordancia entre las
 configuraciones de distintos dispositivos con los que trabajo.
@@ -8,7 +9,7 @@ configuraciones de distintos dispositivos con los que trabajo.
 Este script prepará completamente el entorno de programación, aplicaciones,
 servidores, plantillas y repositorios en Debian Stable.
 
-![Imagen de previsualización](docs/preview.png)
+![Imagen de previsualización](docs/Preview.png)
 
 Con la colaboración de un testeo constante por parte de @mavalroot
 (https://github.com/mavalroot).
@@ -19,9 +20,8 @@ dirección https://github.com/ricpelo/conf
 Todas las configuraciones y elecciones se han establecido a mi gusto, puedes
 personalizar cualquier parte que decidas para este script.
 
-![Imagen de previsualización 1](docs/preview1.png)
-
 ## Estado
+
 Este repositorio lo uso habitualmente a modo configuración personal y lo
 actualizo y actualizaré en el futuro.
 
@@ -38,6 +38,7 @@ En todo caso recomiendo usar la rama **Master** y si quieres colaborar crea un
 **fork** y haz **PR** sobre la rama **dev**
 
 ## Advertencias
+
 Si no usas **repositorios oficiales** o usas repositorios mezclados con los
 oficiales usar este script es un **experimento** ya que no lo he probado ni
 tengo interés en ello. Podría funcionar bien (o no) así que úsalo bajo tu
@@ -62,6 +63,7 @@ para que puedas aprovechar parte o por completo la misma (Respetando la
 licencia GPLv3 que le he asignado).
 
 ## Objetivos
+
 Crear un entorno de trabajo personalizado para desarrollar aplicaciones web
 según las preferencias del autor (https://github.com/fryntiz).
 
@@ -69,11 +71,14 @@ Se plantea lo más modular que me ha sido posible para que en algunos casos no
 sea necesario ejecutar el script completo y solo la parte que realmente
 necesitas (si fuese el caso).
 
+![Imagen de previsualización 1](docs/Apps.png)
+
 Estos son los principales objetivos:
 
 - Configurar terminales, bash y zsh
 - Instalar tipografías
 - Instalar editores Brackets, Atom, ninja IDE y Vim con sus personalizaciones
+- Instalar IDEs si el usuario lo elige
 - Configurar sistema y variables globales
 - Ampliar repositorios desde fuentes estables y fiables
 - Instalar configuraciones y personalizaciones para el sistema y programas en
@@ -87,6 +92,7 @@ Firefox Nightly
 - Instalar herramientas para ayudar a debug en lenguajes web
 
 ## Distribución compatible
+
 Está destinado única y exclusivamente para **Debian 9** (estable) y se irá
 actualizando con esta rama estable.
 
@@ -100,6 +106,7 @@ adaptándolo a tu distribución podrás conseguir un cierto nivel de
 compatibilidad.
 
 ## Modularidad
+
 Se ha intentado hacer modular de forma que apenas sea necesario tocar los
 scripts para añadir/quitar funciones.
 
@@ -113,6 +120,7 @@ script de forma aún más sencilla y además permita utilizar listas.lst donde e
 usuario introducirá un valor por línea para su configuración personalizada.
 
 ## Ejecutar script
+
 Es importante realizar todos los pasos desde bash. Si usas **zsh** cambia a
 **bash** antes de ejecutarlo:
 ```bash
@@ -136,7 +144,9 @@ Entramos y ejecutamos el script principal
 ```
 
 ## Personalización estética
+
 Se han incorporados cambios en la personalización:
+
 - Fondo de pantalla
 - Grub
 - GDM
@@ -149,10 +159,14 @@ Todo esto se instalará de forma opcional eligiendo dicha opción en el menú. P
 ahora se instalan pero se han de activar manualmente.
 
 ## Servidores
-Se incorporan en la parte servidores instalación para apache2, php, postregsq,
-mariadb
+
+Se incorporan en la parte servidores instalación para apache2, php, postregsql,
+mariadb, python2, python3 y NodeJS.
+
+![Imagen de previsualización 1](docs/Servidores.png)
 
 ### Apache 2
+
 Se crean 3 servidores virtuales:
 
 - Por defecto escuchando todo, con ruta /var/www/html
@@ -163,17 +177,20 @@ creada/generada en /var/www/.htpasswd
 Todos por el puerto estándar, 80
 
 ### PHP
+
 En este script para seguir rigurosamente la filosofía **Debian** apostando por
 la seguridad que nos acostumbra y sobre todo la estabilidad la cual es bastante
 conocida, optamos a seguir siempre con la versión más alta de sus repositorios
 estables y oficiales libres.
 
 Se instalan los siguientes paquetes básicos desde repositorios:
+
 - php
 - php-cli
 - libapache2-mod-php
 
-Se instalan los siguientes paquetes extras desde repositorios
+Se instalan los siguientes paquetes extras desde repositorios:
+
 - php-gd
 - php-curl
 - php-pgsql
@@ -186,28 +203,64 @@ Se instalan los siguientes paquetes extras desde repositorios
 - php-xdebug
 - php-json
 
-Se instala Composer y algunos paquetes con este
+Se instala Composer y algunos paquetes con este:
+
 - composer
 
 Se instalan las siguientes herramientas de fuentes externas:
+
 - psysh → Un intérprete interactivo para aprender o hacer debug, incluyendo su
 documentación accesible una vez dentro del mismo intérprete usando la palabra
 reservada **doc** seguido de la función que solicitamos ayuda/información.
 
+Se modifican los archivos de configuración para **Todas** las versiones de
+PHP que se encuentren instaladas en el equipo. Estas modificaciones serán:
+
+- timezone = 'UTC'
+- error_reporting = E_ALL
+- display_errors = On
+- display_startup_errors = On
+- max_execution_time = 180
+- memory_limit = 128M
+- upload_max_filesize = 512M
+- post_max_size = 1024M
+
 ### PostgreSQL
+
+Se instala la última versión stable de PostgreSQL (en el futuro se configuran
+todas las versiones que pudieran estar instalada en el sistema), configura:
+
+- intervalstyle = 'iso_8601
+- timezone = 'UTC'
 
 ### MariaDB
 
+Instala el cliente y el servidor para MariaDB (versión libre de MySQL)
+
+También instala phpmyadmin para poder manipular/trabajar con estas bases de
+datos de forma gráfica desde su interfaz web.
+
+Una vez instalado plantea si quieres crear un usuario para desarrollar con el
+nombre "**dev**" y con la contraseña en un principio "**dev**" dándole todos
+los permisos de administración y manipulación a este usuario. No debe usarse
+así en producción y se aconseja una vez finalizado el script cambiar la
+contraseña de este usuario si habilitamos la posibilidad de conectar fuera de
+localhost (para evitar que en sitios públicos puedan acceder, esto aún así es
+poco probable además).
+
 ### Python
+
 Contempla la instalación de Python2 y Python3 con sus gestores de paquetes
 **pip** para cada uno de ellos.
 
 ### NodeJS
+
 Instala NodeJS (tienen que estar los repositorios agregados) y además contempla
 la instalación de algunos paquetes como ámbito global para poder corregir
 sintaxis javascript en algunos IDE's y/o desde terminal.
 
 También instala desde **npm** bower y los siguientes paquetes globales:
+
 - eslint
 - jscs
 - compass
@@ -215,6 +268,7 @@ También instala desde **npm** bower y los siguientes paquetes globales:
 - bundled
 
 ## Directorios
+
 - Accesos_Directos → Contiene los accesos directos individuales para usuario
 que van en ~/.local/share/applications
 - Apache2 → Contenido para apache
@@ -231,6 +285,7 @@ se añadiran al sistema cuando se elige la opción de agregar repositorios.
 el futuro dentro de conf)
 
 # Scripts (La estructura está pendiente de completar Refactorización)
+
 - Agregar_Repositorios.sh → Añade algunos repositorios útiles y sus llaves para
 seguridad
 - funciones.sh →
@@ -245,21 +300,24 @@ y su uso se desaconseja por ser áltamente arriesgado a perder datos.
 configura
 
 Dentro de Apps/
-- Atom_IDE.sh → Instala el editor ATOM con su configuración y complementos
+
+- IDEs:
+  - Atom_IDE.sh → Instala el editor ATOM con su configuración y complementos
+  - Brackets.sh → Instala y configura Brackets
+  - Ninja-IDE.sh → Instala y configura Ninja IDE
 - bashit.sh → Instala y configura Bash-it
-- Brackets.sh → Instala y configura Brackets
 - DBeaver.sh → Instala y configura DBeaver
 - Firefox.sh → Instala la versión para desarrolladores **Quantum** y la versión
 en desarrollo principal **Nightly**
 - GitKraken.sh → Instala y configura GitKraken
 - Haroopad.sh → Instala y configura Haroopad
 - i3wm.sh → Instala y configura gestor de ventanas i3wm
-- Ninja-IDE.sh → Instala y configura Ninja IDE
 - OhMyZsh.sh → Instala y configura OhMyZsh
 - Pencil-Project.sh → Instala y configura Pencil Project
 - vim.sh → Instala y configura Vim
 
 Estructura pendiente de ordenar, alguna información extra:
+
 - Configurar_GIT.sh → Scripts para configurar la integración de GIT, GitHub y
 GitLab
 - Instalar_Software → Instala los programas indicados en la lista

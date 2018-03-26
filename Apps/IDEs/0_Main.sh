@@ -16,47 +16,47 @@
 ############################
 ##     INSTRUCCIONES      ##
 ############################
-## Menú principal para instalar aplicaciones desde el que se permite
-## elegir entre los tipos de aplicaciones a instalar desde un menú
-## interactivo seleccionando el número que le corresponda
+##
 
 ############################
 ##     IMPORTACIONES      ##
 ############################
-source "$WORKSCRIPT/Apps/1_Aplicaciones_Basicas.sh"
-source "$WORKSCRIPT/Apps/2_Aplicaciones_Extras.sh"
-source "$WORKSCRIPT/Apps/3_Aplicaciones_Usuario.sh"
-source "$WORKSCRIPT/Apps/IDEs/0_Main.sh"
+source "$WORKSCRIPT/Apps/IDEs/Atom_IDE.sh"
+source "$WORKSCRIPT/Apps/IDEs/Brackets.sh"
+source "$WORKSCRIPT/Apps/IDEs/Ninja-IDE.sh"
 
 ############################
 ##       FUNCIONES        ##
 ############################
 ##
-## Menú para elegir las aplicaciones a instalar
+## Menú para elegir los IDE's que vamos a instalar
 ## @param $1 -a Si recibe este parámetro ejecutará todos los scripts
 ##
-menuAplicaciones() {
-    todas_aplicaciones() {
+menuIDES() {
+    todos_IDES() {
         clear
-        echo -e "$VE Instalando todas las aplicaciones$CL"
-        aplicaciones_basicas
-        aplicaciones_extras
-        aplicaciones_usuarios
-        menuIDES -a
+        echo -e "$VE Instalando todos los IDES$CL"
+        atom_instalador
+        brackets_instalador
+        ninjaide_instalador
     }
 
-    ## Si la función recibe "-a" indica que ejecute todas las aplicaciones
+    ## Si la función recibe "-a" indica que se instalen todos los IDES
     if [[ "$1" = '-a' ]]; then
-        todas_aplicaciones
+        todos_IDES
     else
         while true :; do
             clear
             local descripcion='Menú de aplicaciones
-                1) Aplicaciones Básicas
-                2) Aplicaciones Extras
-                3) Aplicaciones de Usuario
-                4) Instalar IDEs
-                5) Todos los pasos anteriores completos
+                1) Atom
+                2) Brackets
+                3) PHP Storm (No implementado)
+                4) Ninja IDE
+                5) NetBeans (No implementado)
+                6) Aptana Studio (No implementado)
+                7) PyCharm (No implementado)
+                8) Web Storm (No implementado)
+                9) Todos los pasos anteriores
 
                 0) Atrás
             '
@@ -68,11 +68,15 @@ menuAplicaciones() {
 
             case $entrada in
 
-                1)  aplicaciones_basicas;;   ## Aplicaciones Básicas
-                2)  aplicaciones_extras;;    ## Aplicaciones Extras
-                3)  aplicaciones_usuarios;;  ## Aplicaciones de Usuario
-                4)  menuIDES;;               ## Menú para instalar IDEs
-                5)  todas_aplicaciones       ## Todas las aplicaciones
+                1)  atom_instalador;;  ##
+                2)  brackets_instalador;;  ##
+                #3)  ;;  ##
+                4)  ninjaide_instalador;;  ##
+                #5)  ;;  ##
+                #6)  ;;  ##
+                #7)  ;;  ##
+                #8)  ;;  ##
+                9)  todos_IDES  ## Todos los IDES
                     break;;
 
                 0)  ## SALIR
