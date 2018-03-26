@@ -282,3 +282,13 @@ then
     ## Cargar Bash-it
     source "$BASH_IT"/bash_it.sh
 fi
+
+###################################
+###  Opciones para bash propias ###
+###################################
+if [[ -f ~/.bashrc_custom ]]; then ## Comprobar si existe para el usuario
+    source $HOME/.bashrc_custom
+else
+    touch $HOME/.bashrc_custom
+    echo '## Añade en este archivo tus personalizaciones' >> "$HOME/.bashrcustom"
+fi
