@@ -92,6 +92,20 @@ if [[ -d $HOME/.config/composer/vendor/bin ]]; then
     PATH=$PATH:$HOME/.config/composer/vendor/bin
 fi
 
+
+###################################
+###   Variables de desarrollo   ###
+###################################
+## pyenv (python)
+if [[ -d $HOME/.pyenv ]]; then
+    export PYENV_ROOT="$HOME/.pyenv"
+    export PATH="$PYENV_ROOT/bin:$PATH"
+
+    if command -v pyenv 1>/dev/null 2>&1; then
+        eval "$(pyenv init -)"
+    fi
+fi
+
 ############################
 ##         COLOR          ##
 ############################
