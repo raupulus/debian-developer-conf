@@ -27,6 +27,9 @@
 
 python_descargar() {
     echo "$VE Descargando$RO python$CL"
+
+    ## Descargando pyenv para gestionar versión de python en un proyecto
+    descargarGIT 'https://github.com/pyenv/pyenv.git' "$HOME/.pyenv"
 }
 
 python_preconfiguracion() {
