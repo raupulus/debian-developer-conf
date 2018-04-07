@@ -20,7 +20,6 @@ deb-src http://ftp.es.debian.org/debian/ stable-updates non-free contrib main
 deb http://ftp.fr.debian.org/debian/ stretch-backports main contrib non-free
 deb-src http://ftp.fr.debian.org/debian/ stretch-backports main contrib non-free
 
-
 ########################################################
 ##                 MOZILLA FIREFOX                    ##
 ########################################################

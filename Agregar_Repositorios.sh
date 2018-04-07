@@ -58,6 +58,10 @@ agregar_llaves() {
     echo -e "$VE Agregando clave para$RO Heroku$CL"
     curl -L https://cli-assets.heroku.com/apt/release.key | sudo apt-key add -
 
+    ## Kali Linux
+    echo -e "$VE Agregando clave para$RO Kali Linux$CL"
+    sudo apt-key adv --keyserver pgp.mit.edu --recv-keys ED444FF07D8D0BF6
+
     ## Mi propio repositorio en launchpad
     echo -e "$VE Agregando clave para$RO Fryntiz Repositorio$CL"
     gpg --keyserver keyserver.ubuntu.com --recv-key B5C6D9592512B8CD && gpg -a --export $PUBKRY | sudo apt-key add -
