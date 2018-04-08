@@ -55,7 +55,7 @@ python_postconfiguracion() {
         echo -e "$VE Preparando configuracion de$RO Python2$CL"
         echo -e "$VE Instalando dependencias para Python 2$CL"
 
-        local dependencias='python-autopep8 python-bottle python-cryptography python-dev python-enum34 python-flake python-frozendict python-future python-idna python-ipaddress python-ipython python-jedi python-mccabe python-openssl python-pep8 python-pip python-powerline python-powerline-taskwarrior python-pyasn1 python-pycodestyle python-pyflakes python-pygments python-pylama python-setuptools python-urllib3 python-virtualenv python-waitress'
+        local dependencias='python-autopep8 python-bottle python-cryptography python-dev python-enum34 python-flake python-frozendict python-future python-idna python-ipaddress python-ipython python-jedi python-mccabe python-mysqldb python-openssl python-pep8 python-pip python-powerline python-powerline-taskwarrior python-pyasn1 python-pycodestyle python-pyflakes python-pygments python-pylama python-setuptools python-urllib3 python-virtualenv python-waitress'
 
         instalarSoftware "$dependencias"
     }
@@ -64,7 +64,7 @@ python_postconfiguracion() {
         echo -e "$VE Preparando configuracion de$RO Python3$CL"
         echo -e "$VE Instalando dependencias para Python 3$CL"
 
-        local dependencias='python3-dev python3-flake8 python3-frozendict python3-future python3-ipython python3-mccabe python3-pep8 python3-pep8-naming python3-pip python3-pylama python3-powerline python3-powerline-taskwarrior python3-pycodestyle python3-pyflakes python3-setuptools python3-virtualenv'
+        local dependencias='python3-dev python3-flake8 python3-frozendict python3-future python3-ipython python3-mccabe python3-mysqldb python3-pep8 python3-pep8-naming python3-pip python3-pylama python3-powerline python3-powerline-taskwarrior python3-pycodestyle python3-pyflakes python3-setuptools python3-virtualenv'
 
         instalarSoftware "$dependencias"
     }
