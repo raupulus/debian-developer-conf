@@ -38,3 +38,6 @@ errores.log
 /conf/home/.vim/syntax_checkers
 /conf/home/.vim/test
 /.idea
+npm-debug.log
+/npm-debug.log
+/.ropeproject
