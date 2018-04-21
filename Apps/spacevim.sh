@@ -16,16 +16,23 @@
 ############################
 ##     INSTRUCCIONES      ##
 ############################
+## Este script instala SpaceVim desde su sitio oficial
 
 ############################
 ##       FUNCIONES        ##
 ############################
 spacevim_preconfiguracion() {
     echo -e "$VE Generando Pre-Configuraciones de$RO Space Vim$CL"
-    #local archivosConfiguracion='.vim .vimrc .gvimrc'
 
-    ## Enlazar archivos de este repo
-    #enlazarHome "$archivosConfiguracion"
+    ## Si el directorio de configuración para vim es un enlace, se quita
+    if [[ -h "$HOME/.vim" ]]; then
+        rm -f "$HOME/.vim"
+    fi
+
+    ## Si el archivo de configuración para vim es un enlace, se quita
+    if [[ -h "$HOME/.vimrc" ]]; then
+        rm -f "$HOME/.vimrc"
+    fi
 }
 
 spacevim_instalar() {
@@ -35,7 +42,6 @@ spacevim_instalar() {
 
 spacevim_postconfiguracion() {
     echo -e "$VE Generando Post-Configuraciones$RO Space Vim$CL"
-
 }
 
 spacevim_Instalador() {
