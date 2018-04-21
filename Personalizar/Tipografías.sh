@@ -50,7 +50,7 @@ agregar_fuentes() {
             git checkout -- .
             git pull
         else
-            descargarGIT 'Nerd-Fonts' 'https://github.com/ryanoasis/nerd-fonts.git' "$WORKSCRIPT/tmp/nerd-fonts"
+            git clone --depth 1 'https://github.com/ryanoasis/nerd-fonts.git' "$WORKSCRIPT/tmp/nerd-fonts"
         fi
 
         cd "$WORKSCRIPT/tmp/nerd-fonts" || exit
