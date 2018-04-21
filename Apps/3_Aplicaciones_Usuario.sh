@@ -22,7 +22,11 @@
 ############################
 ##     IMPORTACIONES      ##
 ############################
+source "$WORKSCRIPT/Apps/bashit.sh"
+source "$WORKSCRIPT/Apps/OhMyZsh.sh"
 source "$WORKSCRIPT/Apps/Firefox.sh"
+source "$WORKSCRIPT/Apps/spacevim.sh"
+source "$WORKSCRIPT/Apps/vim.sh"
 
 ############################
 ##       FUNCIONES        ##
@@ -42,4 +46,24 @@ aplicaciones_usuarios() {
     echo -e "$VE Instalando Aplicaciones específicas para el usuario$RO $USER$CL"
     configurar_heroku
     firefox_instalador
+    bashit_Instalador
+    ohmyzsh_Instalador
+
+    while true; do
+        echo -e "$VE ¿Quieres instalar$RO vim$VE o$RO spacevim$CL"
+        echo -e "$RO 1)$VE vim$CL"
+        echo -e "$RO 2)$VE spacevim$CL"
+        read -p "→ " editor
+        case "$editor" in
+            vim | 1)
+                vim_Instalador
+                break;;
+            spacevim | 2)
+                spacevim_Instalador
+                break;;
+            *)  ## Opción errónea
+                clear
+                echo -e "$RO Opción no válida$CL"
+        esac
+    done
 }
