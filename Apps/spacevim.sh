@@ -47,7 +47,7 @@ spacevim_postconfiguracion() {
 spacevim_Instalador() {
     echo -e "$VE Comenzando instalación de$RO Space Vim$CL"
 
-    vim_preconfiguracion
-    vim_instalar
-    vim_postconfiguracion
+    spacevim_preconfiguracion
+    spacevim_instalar
+    spacevim_postconfiguracion
 }
