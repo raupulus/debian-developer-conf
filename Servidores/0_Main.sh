@@ -29,6 +29,7 @@ source "$WORKSCRIPT/Servidores/nodejs.sh"
 source "$WORKSCRIPT/Servidores/php.sh"
 source "$WORKSCRIPT/Servidores/postgreSQL.sh"
 source "$WORKSCRIPT/Servidores/python.sh"
+source "$WORKSCRIPT/Servidores/ruby.sh"
 
 ###########################
 ##       FUNCIONES       ##
@@ -47,6 +48,7 @@ menuServidores() {
         php_instalador
         postgresql_instalador
         python_instalador
+        ruby_instalador
     }
 
     ## Si la función recibe "-a" indica que instale todos los servidores
@@ -55,14 +57,15 @@ menuServidores() {
     else
         while true :; do
             clear
-            local descripcion='Menú de aplicaciones
+            local descripcion='Menú de Servidores y Lenguajes de programación
                 1) Apache
                 2) MariaDB
                 3) NodeJS
                 4) PHP
                 5) PostgreSQL
                 6) Python
-                7) Todos los pasos anteriores
+                7) Ruby
+                8) Todos los pasos anteriores
 
                 0) Atrás
             '
@@ -75,12 +78,13 @@ menuServidores() {
             case $entrada in
 
                 1)  apache2_instalador;;     ## Instala servidor Apache2
-                2)  mariadb_instalador;;     ## Instala PHP
-                3)  nodejs_instalador;;      ## Instala servidores SQL
-                4)  php_instalador;;         ## Instala Python
-                5)  postgresql_instalador;;  ## Instala servidor NodeJS
-                6)  python_instalador;;      ## Instala servidor NodeJS
-                7)  todos_servidores         ## Todas las aplicaciones
+                2)  mariadb_instalador;;     ## Instala MariaDB
+                3)  nodejs_instalador;;      ## Instala NodeJS
+                4)  php_instalador;;         ## Instala PHP
+                5)  postgresql_instalador;;  ## Instala PostgreSQL
+                6)  python_instalador;;      ## Instala Python
+                7)  ruby_instalador;;        ## Instala Ruby
+                8)  todos_servidores         ## Todos los servidores
                     break;;
 
                 0)  ## SALIR
