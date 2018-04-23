@@ -17,6 +17,10 @@ filetype plugin indent on
 set fdm=syntax
 set foldlevelstart=20
 
+python3 from powerline.vim import setup as powerline_setup
+python3 powerline_setup()
+python3 del powerline_setup
+
 let python_highlight_all=1
 let NERDTreeIgnore=['\.pyc$', '\~$'] "ignore files in NERDTree
 

@@ -43,4 +43,24 @@ agregar_fuentes() {
             sudo cp -r "$HOME/fonts/$f/" '/usr/local/share/fonts/'
         fi
     done
+
+    nerd_fonts() {
+        if [[ -d "$WORKSCRIPT/tmp/nerd-fonts" ]]; then
+            cd "$WORKSCRIPT/tmp/nerd-fonts" || exit && cd "$WORKSCRIPT" || exit
+            git checkout -- .
+            git pull
+        else
+            git clone --depth 1 'https://github.com/ryanoasis/nerd-fonts.git' "$WORKSCRIPT/tmp/nerd-fonts"
+        fi
+
+        cd "$WORKSCRIPT/tmp/nerd-fonts" || exit
+        ./install.sh
+        cd "$WORKSCRIPT" || exit
+    }
+
+    echo -e "$VE ¿Instalar$RO Nerd-Fonts$VE, ocupará más de 1GB (y su descarga)?"
+    read -p ' y/N → ' YN
+    if [[ "$YN" = 'y' ]] || [[ "$YN" = 'Y' ]]; then
+        nerd_fonts
+    fi
 }

@@ -27,13 +27,19 @@
 ############################
 vim_preconfiguracion() {
     echo -e "$VE Generando Pre-Configuraciones de$RO Vim$CL"
+
+    ## Si el directorio de configuración para vim es un enlace, se borra
+    if [[ -h "$HOME/.vim" ]]; then
+        rm -f "$HOME/.vim"
+    fi
+
     local archivosConfiguracion='.vim .vimrc .gvimrc'
 
     ## Enlazar archivos de este repo
     enlazarHome "$archivosConfiguracion"
 
     vim_colores() {
-        if [[ ! -d "$HOME/vim/colors" ]]; then
+        if [[ ! -d "$HOME/.vim/colors" ]]; then
             mkdir -p "$HOME/.vim/colors"
         fi
 
@@ -75,7 +81,7 @@ vim_instalar() {
     local dependencias=(vim vim-addon-manager vim-addon-mw-utils vim-asciidoc vim-athena vim-autopep8 vim-command-t vim-conque vim-ctrlp vim-editorconfig vim-fugitive vim-gnome vim-gocomplete vim-gtk vim-gtk3 vim-haproxy vim-icinga2 vim-khuno vim-lastplace vim-latexsuite vim-migemo vim-nox vim-pathogen vim-python-jedi vim-rails vim-runtime vim-scripts vim-snipmate vim-snippets vim-syntastic vim-syntax-gtk vim-tabular vim-tjp vim-tlib vim-ultisnips vim-vimerl vim-vimerl-syntax vim-vimoutliner vim-voom vim-youcompleteme)
     for s in "${dependencias[@]}"; do
         for x in "${lista_todos_paquetes[@]}"; do
-            if [[ $s = $x ]]; then
+            if [[ "$s" = "$x" ]]; then
                 echo -e "$RO $s$VE ya estaba instalado$CL"
                 break
             else
