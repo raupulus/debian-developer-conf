@@ -143,14 +143,18 @@ terminal() {
 ## Configurar editor de gnome, gedit
 ##
 configurar_gedit() {
+    echo -e "$VE Configurando$RO Gedit$CL"
+    local WORKDIR_GEDIT="$WORKSCRIPT/conf/Apps/gedit"
+
     if [[ ! -d "$HOME/.local/share" ]]; then
-        mkdir -p "$HOME/.local/share/" 2>> /dev/null
+        mkdir -p "$HOME/.local/share/"
     fi
+    cp -r $WORKDIR_GEDIT/.local/share/* "$HOME/.local/share/"
 
-    cp -r ./gedit/.local/share/* "$HOME/.local/share/"
-
-    mkdir -p "$HOME/.config/gedit/" 2>> /dev/null
-    cp -r ./gedit/.config/gedit/* "$HOME/.config/gedit/"
+    if [[ ! -d "$HOME/.config/gedit/" ]]; then
+        mkdir -p "$HOME/.config/gedit/"
+    fi
+    cp -r $WORKDIR_GEDIT/.config/gedit/* "$HOME/.config/gedit/"
 }
 
 ##
