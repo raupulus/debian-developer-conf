@@ -47,51 +47,25 @@ limpiar_con_fuerza() {
     echo -e "$VE Asegúrate que es lo que necesitas hacer antes de ejecutarlo"
     read -p "Pulsa una tecla para destruir personalización generada por este script"
 
-    ## TODO → Crear una lista con todos los directorios a borrar y otra con todos los archivos
-    DIRECTORIOS_BORRAR=""
-    ARCHIVOS_BORRAR=""
+    local DIRECTORIOS_BORRAR=".oh-my-zsh .bash_it .nvm fasd .vim .local/opt/Firefox_Quantum_Developer .local/bin/firefox-quantum .local/share/applications/firefox-quantum.desktop .local/opt/Firefox_Nightly .local/bin/firefox-nightly .local/share/applications/firefox-nightly.desktop .atom .i3 .ninja-ide dunst powerline sakura"
+
+    local ARCHIVOS_BORRAR=".local/bin/psysh .tmux.conf .udisks-glue.conf .vimrc .gvimrc .zshrc"
 
     for d in $DIRECTORIOS_BORRAR
     do
-        rm -R -f $d 2>> /dev/null
-        mv $d.BACKUP $d 2>> /dev/null
+        if [[ -d "$HOME/$d" ]]; then
+            rm -Rf "$HOME/$d"
+        fi
+        #mv "$WORKSCRIPT/Backups/$d" $d 2>> /dev/null
     done
 
     for a in $ARCHIVOS_BORRAR
     do
-        rm -f $a 2>> /dev/null
-        mv $a.BACKUP $a 2>> /dev/null
+        if [[ -f "$HOME/$a" ]]; then
+            rm -f "$HOME/$a"
+        fi
+        #mv "$WORKSCRIPT/Backups/$d" $a 2>> /dev/null
     done
-
-
-    # TODO → Pasar archivos y directorios a las listas anteriores
-    # para que sean borrados desde los bucles
-
-    rm -R -f ~/.oh-my-zsh 2>> /dev/null
-    rm -R -f ~/.bash_it 2>> /dev/null
-    rm -R -f ~/.nvm 2>> /dev/null
-    rm -R -f ~/fasd 2>> /dev/null
-    rm -R -f ~/.vim 2>> /dev/null
-    rm -R -f ~/.local/opt/Firefox_Quantum_Developer 2>> /dev/null
-    rm -R -f ~/.local/bin/firefox-quantum 2>> /dev/null
-    rm -R -f ~/.local/share/applications/firefox-quantum.desktop 2>> /dev/null
-    rm -R -f ~/.local/opt/Firefox_Nightly 2>> /dev/null
-    rm -R -f ~/.local/bin/firefox-nightly 2>> /dev/null
-    rm -R -f ~/.local/share/applications/firefox-nightly.desktop 2>> /dev/null
-    rm -R -f ~/.local/bin/psysh 2>> /dev/null
-    rm -R -f ~/.atom 2>> /dev/null
-    rm -R -f ~/.i3 2>> /dev/null
-    rm -R -f ~/.ninja-ide 2>> /dev/null
-    rm -R -f ~/dunst 2>> /dev/null
-    rm -R -f ~/powerline 2>> /dev/null
-    rm -R -f ~/sakura 2>> /dev/null
-    rm -R -f ~/.less 2>> /dev/null
-    rm -R -f ~/.lessfilter 2>> /dev/null
-    rm -R -f ~/.tmux.conf 2>> /dev/null
-    rm -R -f ~/.tmux.conf2 2>> /dev/null
-    rm -R -f ~/.udisks-glue.conf 2>> /dev/null
-    rm -R -f ~/.vimrc 2>> /dev/null
-    rm -R -f ~/.zshrc 2>> /dev/null
 
     local paquetes_borrar="vim atom ninja-ide dbeaver brackets haroopad"
     desinstalar_paquetes "$paquetes_borrar"
