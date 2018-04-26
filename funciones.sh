@@ -152,6 +152,23 @@ descargarGIT() {
         cd "$WORKSCRIPT" || return
     fi
 }
+
+##
+## Recibe un nombre y el directorio donde se encuentra el repositorio.
+## @param  $1  String  Nombre, es más para informar y registrar log.
+## @param  $2  String  Ruta hacia la raíz del repositorio en el sistema.
+##
+actualizarGIT() {
+    if [[ -d "$2" ]] && [[ -d "$2/.git" ]]; then
+        cd $2 || exit 1
+        echo -e "$VE Limpiando posibles cambios en el repositorio$RO $1$CL"
+        git checkout -- .
+        echo -e "$VE Actualizando repositorio$RO $1$CL"
+        git pull
+        cd $WORKSCRIPT || return
+    fi
+}
+
 ##
 ## Crea un enlace por archivo pasado después de realizar una copia de seguridad ## tomando como punto de referencia el propio repositorio, ruta conf/home/
 ## donde estarán situado todos los archivos para ser actualizados con
