@@ -29,7 +29,14 @@ python_descargar() {
     echo "$VE Descargando$RO python$CL"
 
     ## Descargando pyenv para gestionar versión de python en un proyecto
-    descargarGIT 'Pyenv' 'https://github.com/pyenv/pyenv.git' "$HOME/.pyenv"
+    if [[ -d "$HOME/.pyenv" ]] && [[ -d "$HOME/.pyenv/.git" ]]; then
+        echo -e "$VE Limpiando posibles cambios en el repositorio$RO .pyenv$CL"
+        git checkout -- .
+        echo -e "$VE Actualizando repositorio$RO .pyenv$CL"
+        git pull
+    else
+        descargarGIT 'Pyenv' 'https://github.com/pyenv/pyenv.git' "$HOME/.pyenv"
+    fi
 }
 
 python_preconfiguracion() {
