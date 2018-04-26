@@ -103,7 +103,7 @@ fi
 ###   Variables de desarrollo   ###
 ###################################
 ## Pyenv, permite establecer versiones de python distintas para cada proyecto
-if [[ -d $HOME/.pyenv ]]; then
+if [[ -d "$HOME/.pyenv" ]]; then
     export PYENV_ROOT="$HOME/.pyenv"
     export PATH="$PYENV_ROOT/bin:$PATH"
 
@@ -116,7 +116,7 @@ fi
 ###            COLOR            ###
 ###################################
 ## Habilita el soporte de color para "ls" y algunos alias
-if [ -x /usr/bin/dircolors ]; then
+if [[ -x /usr/bin/dircolors ]]; then
     test -r ~/.dircolors && eval "$(dircolors -b ~/.dircolors)" || eval "$(dircolors -b)"
     alias ls='ls --color=auto'
     alias dir='dir --color=auto'
@@ -150,17 +150,17 @@ alias git="LANG=C git"
 alias glg="git lg"
 alias gl='git lg'
 alias gh='git hist'
-alias gs='git status '
-alias ga='git add '
-alias gb='git branch '
-alias gc='git commit '
-alias gd='git diff '
-alias go='git checkout '
+alias gs='git status'
+alias ga='git add'
+alias gb='git branch'
+alias gc='git commit'
+alias gd='git diff'
+alias go='git checkout'
 alias gk='gitk --all&'
 alias gx='gitx --all'
-alias got='git '
-alias get='git '
-alias gp='git push '
+alias got='git'
+alias get='git'
+alias gp='git push'
 
 ## Otros
 #alias rm="rm -i"
@@ -187,23 +187,23 @@ if [[ $TILIX_ID ]] || [[ $VTE_VERSION ]]; then
 fi
 
 ## POWERLINE EN BASH (No lo uso, el siguiente código puede no funcionar bien)
-#if [ -f /usr/bin/powerline-daemon ]; then
-#  /usr/share/powerline/bindings/bash/powerline.sh -q
-#  POWERLINE_BASH_CONTINUATION=1
-#  POWERLINE_BASH_SELECT=1
-#  . /usr/share/powerline/bindings/bash/powerline.sh
+#if [[ -f /usr/bin/powerline-daemon ]]; then
+#    /usr/share/powerline/bindings/bash/powerline.sh -q
+#    POWERLINE_BASH_CONTINUATION=1
+#    POWERLINE_BASH_SELECT=1
+#    . /usr/share/powerline/bindings/bash/powerline.sh
 #fi
 
 ###################################
 ### Mensaje al iniciar terminal ###
 ###################################
-if [[ -f /usr/bin/neofetch ]]; then
+if [[ -f '/usr/bin/neofetch' ]]; then
     neofetch
-elif [[ -f /usr/bin/screenfetch ]]; then
+elif [[ -f '/usr/bin/screenfetch' ]]; then
     screenfetch
 fi
 
-if [ -f /usr/bin/fryntiz ]; then
+if [[ -f '/usr/bin/fryntiz' ]]; then
     echo -e "      \033[1;31m Para utilizar el menú interactivo usa el comando \033[1;32m\"fryntiz\" \033[1;00m"
 fi
 
@@ -229,8 +229,8 @@ export LESS_TERMCAP_us=$'\E[04;38;5;146m' ## begin underline
 ###################################
 ###     Configurando Bash-it    ###
 ###################################
-if [[ -f ~/.bash_it/bash_it.sh ]] ## Comprobar si está instalado para el usuario
-then
+## Comprobar si está instalado para el usuario
+if [[ -f ~/.bash_it/bash_it.sh ]]; then
     ## Directorio con la configuración para bash_it
     export BASH_IT="/$HOME/.bash_it"
 
@@ -289,6 +289,6 @@ fi
 if [[ -f ~/.bashrc_custom ]]; then ## Comprobar si existe para el usuario
     source $HOME/.bashrc_custom
 else
-    touch $HOME/.bashrc_custom
-    echo '## Añade en este archivo tus personalizaciones' >> "$HOME/.bashrcustom"
+    touch "$HOME/.bashrc_custom"
+    echo '## Añade en este archivo tus personalizaciones' >> "$HOME/.bashrc_custom"
 fi
