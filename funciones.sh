@@ -146,10 +146,7 @@ descargarGIT() {
         done
     else
         echo -e "$RO$1$VE ya está instalado$CL"
-        echo -e "$VE Se actualizará el repositorio existente de$RO $1$CL"
-        cd "$3" || return
-        git pull origin master
-        cd "$WORKSCRIPT" || return
+        actualizarGIT "$1" "$3"
     fi
 }
 
@@ -160,6 +157,7 @@ descargarGIT() {
 ##
 actualizarGIT() {
     if [[ -d "$2" ]] && [[ -d "$2/.git" ]]; then
+        echo -e "$VE Se actualizará el repositorio existente de$RO $1$CL"
         cd $2 || exit 1
         echo -e "$VE Limpiando posibles cambios en el repositorio$RO $1$CL"
         git checkout -- .
