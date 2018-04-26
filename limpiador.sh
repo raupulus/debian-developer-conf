@@ -20,7 +20,7 @@
 ## script. Normalmente se espera no necesitarse usar pero existirá.
 ## El uso de este script puede ser perjudicial y debes asumir el riesgo
 
-## FIXME → Restaurar archivos BACKUP creados con el script antes de eliminar!!!
+## TODO → Restaurar archivos BACKUP creados con el script antes de eliminar!!!
 
 ############################
 ##       CONSTANTES       ##
@@ -54,7 +54,7 @@ limpiar_con_fuerza() {
     for d in $DIRECTORIOS_BORRAR
     do
         if [[ -d "$HOME/$d" ]]; then
-            rm -Rf "$HOME/$d"
+            rm -Rf "${HOME:?}/$d"
         fi
         #mv "$WORKSCRIPT/Backups/$d" $d 2>> /dev/null
     done
@@ -62,7 +62,7 @@ limpiar_con_fuerza() {
     for a in $ARCHIVOS_BORRAR
     do
         if [[ -f "$HOME/$a" ]]; then
-            rm -f "$HOME/$a"
+            rm -f "${HOME:?}/$a"
         fi
         #mv "$WORKSCRIPT/Backups/$d" $a 2>> /dev/null
     done
