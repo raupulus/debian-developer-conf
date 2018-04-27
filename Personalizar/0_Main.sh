@@ -20,7 +20,10 @@
 ############################
 ##     IMPORTACIONES      ##
 ############################
-source "$WORKSCRIPT/....."
+source "$WORKSCRIPT/Configurar_GIT.sh"
+source "$WORKSCRIPT/Personalizar_GTK.sh"
+source "$WORKSCRIPT/Tipografias.sh"
+source "$WORKSCRIPT/Variables_Entorno.sh"
 
 ###########################
 ##       FUNCIONES       ##
