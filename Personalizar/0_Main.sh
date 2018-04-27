@@ -38,40 +38,45 @@ menuPersonalizacion() {
         instalar_variables
     }
 
-    while true :; do
-        clear
-        local descripcion='Menú de Personalización del sistema
-            1) Configurar GIT
-            2) Personalizar GTK
-            3) Tipografías
-            4) Variables de Entorno
-            5) Todos los pasos anteriores
+    ## Si la función recibe "-a" indica que instale todos los servidores
+    if [[ "$1" = '-a' ]]; then
+        todos_servidores
+    else
+        while true :; do
+            clear
+            local descripcion='Menú de Personalización del sistema
+                1) Configurar GIT
+                2) Personalizar GTK
+                3) Tipografías
+                4) Variables de Entorno
+                5) Todos los pasos anteriores
 
-            0) Atrás
-        '
-        opciones "$descripcion"
+                0) Atrás
+            '
+            opciones "$descripcion"
 
-        echo -e "$RO"
-        read -p "    Acción → " entrada
-        echo -e "$CL"
+            echo -e "$RO"
+            read -p "    Acción → " entrada
+            echo -e "$CL"
 
-        case $entrada in
+            case $entrada in
 
-            1)  configuracion_git;;        ## Configurar GIT
-            2)  personalizarGTK;;          ## Personalizar GTK
-            3)  agregar_fuentes;;          ## Tipografías
-            4)  instalar_variables;;       ## Variables de Entorno
-            5)  todas_personalizaciones;;  ## Todos los pasos anteriores
+                1)  configuracion_git;;        ## Configurar GIT
+                2)  personalizarGTK;;          ## Personalizar GTK
+                3)  agregar_fuentes;;          ## Tipografías
+                4)  instalar_variables;;       ## Variables de Entorno
+                5)  todas_personalizaciones;;  ## Todos los pasos anteriores
 
-            0)  ## SALIR
-                clear
-                echo -e "$RO Se sale del menú$CL"
-                echo ''
-                break;;
+                0)  ## SALIR
+                    clear
+                    echo -e "$RO Se sale del menú$CL"
+                    echo ''
+                    break;;
 
-            *)  ## Acción ante entrada no válida
-                echo ""
-                echo -e "                      $RO ATENCIÓN: Elección no válida$CL";;
-        esac
-    done
+                *)  ## Acción ante entrada no válida
+                    echo ""
+                    echo -e "                      $RO ATENCIÓN: Elección no válida$CL";;
+            esac
+        done
+    fi
 }

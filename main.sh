@@ -90,15 +90,12 @@ menuPrincipal() {
             1) agregar_repositorios;;     ## Menú de Repositorios
             2) menuAplicaciones;;         ## Menú de Aplicaciones
             3) instalar_configuraciones;; ## Menú de Configuraciones
-            4) menuPersonalizacion;;      ## Menú de Personalización
+            4) menuPersonalizacion -a;;   ## Menú de Personalización
             5) menuServidores;;           ## Menú de Servidores
             6) agregar_repositorios       ## Todos los pasos anteriores
                menuAplicaciones -a        ## Indica con "-a" que ejecute todas
-               instalar_configuraciones
-               configuracion_git
-               personalizar
-               agregar_fuentes
-               instalar_variables
+               instalar_configuraciones 
+               menuPersonalizacion -a     ## Indica con "-a" que ejecute todas
                menuServidores -a;;        ## Indica con "-a" que ejecute todas
             0) ## SALIR
               clear
