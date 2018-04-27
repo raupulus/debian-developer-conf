@@ -82,7 +82,7 @@ configurar_iconos() {
     instalarSoftwareDPKG "$WORKSCRIPT/tmp/Paper_Theme.deb"
 }
 
-personalizar() {
+personalizarGTK() {
     echo -e "$VE Iniciando configuracion de estética general y GTK$CL"
     instalar_flatplat
     configurar_iconos
