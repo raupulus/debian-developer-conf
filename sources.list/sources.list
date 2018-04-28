@@ -14,7 +14,7 @@ deb http://ftp.es.debian.org/debian/ stable-updates non-free contrib main
 deb-src http://ftp.es.debian.org/debian/ stable-updates non-free contrib main
 
 ########################################################
-##                 STRETCH BACKPORTS                   ##
+##                 STRETCH BACKPORTS                  ##
 ########################################################
 ##### apt-get install debian-keyring
 deb http://ftp.fr.debian.org/debian/ stretch-backports main contrib non-free
@@ -38,32 +38,6 @@ deb-src http://ftp.fr.debian.org/debian/ stretch-backports main contrib non-free
 ########################################################
 ##### wget -q -O - http://liveusb.info/multisystem/depot/multisystem.asc | sudo apt-key add -
 deb http://liveusb.info/multisystem/depot/ all main
-
-########################################################
-##                      WEBMIN                        ##
-########################################################
-#####wget http://www.webmin.com/jcameron-key.asc && apt-key add jcameron-key.asc
-# deb http://download.webmin.com/download/repository/ sarge contrib
-# deb http://webmin.mirror.somersettechsolutions.co.uk/repository/ sarge contrib
-
-########################################################
-##                   VIRTUALBOX                       ##
-########################################################
-# curl -O https://www.virtualbox.org/download/oracle_vbox_2016.asc
-# sudo apt-key add oracle_vbox_2016.asc
-deb http://download.virtualbox.org/virtualbox/debian stretch contrib
-
-########################################################
-##                      DOCKER                        ##
-########################################################
-####sudo apt-key adv --keyserver hkp://p80.pool.sks-keyservers.net:80 --recv-keys F76221572C52609D
-deb https://apt.dockerproject.org/repo debian-stretch main
-
-########################################################
-##                      HEROKU                        ##
-########################################################
-####curl -L https://cli-assets.heroku.com/apt/release.key | sudo apt-key add -
-deb https://cli-assets.heroku.com/branches/stable/apt ./
 
 ########################################################
 ##                     FRYNTIZ                        ##
