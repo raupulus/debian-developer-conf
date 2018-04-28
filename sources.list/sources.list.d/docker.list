@@ -1,0 +1,5 @@
+########################################################
+##                      DOCKER                        ##
+########################################################
+####sudo apt-key adv --keyserver hkp://p80.pool.sks-keyservers.net:80 --recv-keys F76221572C52609D
+deb https://apt.dockerproject.org/repo debian-stretch main
