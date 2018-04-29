@@ -219,6 +219,13 @@ crear_git_alias() {
     git config --global push.default simple
 }
 
+## hub is a command-line wrapper for git that makes you better at GitHub.
+instalar_hub() {
+    descargarGIT 'Hub' 'https://github.com/github/hub.git' "$WORKSCRIPT/tmp/hub"
+    cd "$WORKSCRIPT/tmp/hub" || return 0
+    script/build -o "$HOME/bin/hub"
+}
+
 configuracion_git() {
     ## Pregunta si configurar GIT
     echo -e "$VE ¿Quieres configurar$RO git$VE y sus plataformas?$AM"
@@ -253,5 +260,9 @@ configuracion_git() {
         crear_git_alias
 
         cd "$WORKSCRIPT" || return
+
     fi
+
+    instalar_hub
+
 }
