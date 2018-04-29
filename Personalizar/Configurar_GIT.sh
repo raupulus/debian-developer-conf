@@ -132,8 +132,10 @@ configurar_github() {
     ## TODO → composer config -g github-oauth.github.com
 
     ## GHI → Git Hub Issues
+    ## HUB → git-hub tools
     echo -e "$VE Establece https a$RO hub.protocol$CL"
     git config --global hub.protocol https
+    git config --global --add hub.host https://github.com
 
     cd "$WORKSCRIPT" || return
 }
@@ -187,6 +189,12 @@ crear_token() {
 
         ## Agrega el token para GHI → Git Hub Issues
         git config --global ghi.token $TOKEN
+
+        ## Agregando usuario y token para HUB dentro de ~/.config/hub
+        echo 'github.com:' > "$HOME/.config/hub"
+        echo "- user: $usuario_git" >> "$HOME/.config/hub"
+        echo "  oauth_token: $TOKEN" >> "$HOME/.config/hub"
+        echo '  protocol: https' >> "$HOME/.config/hub"
     fi
 
     ## Generando TOKEN para GitLab
@@ -244,7 +252,6 @@ instalar_hub() {
     ## Instalando
     echo -e "$VE Instalando$RO Hub$CL"
     cd "$WORKSCRIPT/tmp/$version_hub" || return 0
-    ls
     sudo ./install
     cd "$WORKSCRIPT" || exit 1
 }
