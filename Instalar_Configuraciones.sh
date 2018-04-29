@@ -163,26 +163,15 @@ configurar_gedit() {
 configurar_nano() {
     echo -e "$VE Configurando editor$RO nano$CL"
 
-    if [[ -d "$HOME/.nano" ]] &&
-       [[ ! -d "$HOME/.nano/.git" ]]
-    then
+    if [[ -d "$HOME/.nano" ]] && [[ ! -d "$HOME/.nano/.git" ]]; then
         crearBackup '.nano'
         rm -Rf "$HOME/.nano"
     fi
 
-    ## Clona el repositorio o actualizarlo si ya existe
-    if [[ -d "$HOME/.nano/.git" ]]; then
-        ## Actualizar Repositorio con git pull
-        cd "$HOME/.nano"
-        echo -e "$VE Actualizando repositorios$RO $HOME/.nano/.git$CL"
-        git pull
-        cd "$WORKSCRIPT"
-    else
-        git clone 'https://github.com/scopatz/nanorc.git' "$HOME/.nano"
-    fi
+    descargarGIT 'Nano' 'https://github.com/scopatz/nanorc.git' "$HOME/.nano"
 
     ## Habilita syntaxis para el usuario
-    cat "$HOME/.nano/nanorc" >> "$HOME/.nanorc"
+    cat "$HOME/.nano/nanorc" > "$HOME/.nanorc"
 }
 
 ##
@@ -198,7 +187,7 @@ configurar_hosts() {
     fi
 
     if [[ -f '/etc/hosts.BACKUP' ]]; then
-        sudo cat '/etc/hosts.BACKUP' > "$WORKSCRIPT/tmp/hosts"
+        cat '/etc/hosts.BACKUP' > "$WORKSCRIPT/tmp/hosts"
         cat "$WORKSCRIPT/conf/etc/hosts" >> "$WORKSCRIPT/tmp/hosts"
         sudo cp "$WORKSCRIPT/tmp/hosts" '/etc/hosts'
     else
