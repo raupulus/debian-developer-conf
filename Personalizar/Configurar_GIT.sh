@@ -221,13 +221,14 @@ crear_git_alias() {
 
 ## hub is a command-line wrapper for git that makes you better at GitHub.
 instalar_hub() {
+    local version_hub='hub-linux-amd64-2.3.0-pre10'
     ## Compilando hub, necesita golang >= 1.8 y ruby >= 1.9
     #descargarGIT 'Hub' 'https://github.com/github/hub.git' "$WORKSCRIPT/tmp/hub"
     #cd "$WORKSCRIPT/tmp/hub" || return 0
     #script/build -o "$HOME/bin/hub"
 
     ## Limpiando directorio
-    rm -Rf "$WORKSCRIPT/tmp/hub"
+    rm -Rf "$WORKSCRIPT/tmp/$version_hub"
 
     ## Descargando binario
     if [[ ! -f "$WORKSCRIPT/tmp/hub.tgz" ]]; then
@@ -236,12 +237,15 @@ instalar_hub() {
 
     ## Descomprimiendo
     echo -e "$VE Descomprimiendo$RO Hub$CL"
-    tar -zxf "$WORKSCRIPT/tmp/hub.tgz" -C "$WORKSCRIPT/tmp/hub" 2>> /dev/null
+    cd "$WORKSCRIPT/tmp/" || return 0
+    tar -zxf "$WORKSCRIPT/tmp/hub.tgz" 2>> /dev/null
+    cd "$WORKSCRIPT" || exit 1
 
     ## Instalando
     echo -e "$VE Instalando$RO Hub$CL"
-    cd "$WORKSCRIPT/tmp/hub" || return 0
-    . install.sh
+    cd "$WORKSCRIPT/tmp/$version_hub" || return 0
+    ls
+    sudo ./install
     cd "$WORKSCRIPT" || exit 1
 }
 
