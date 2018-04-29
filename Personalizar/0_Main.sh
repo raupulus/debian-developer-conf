@@ -40,7 +40,7 @@ menuPersonalizacion() {
 
     ## Si la función recibe "-a" indica que instale todos los servidores
     if [[ "$1" = '-a' ]]; then
-        todos_servidores
+        todas_personalizaciones
     else
         while true :; do
             clear
