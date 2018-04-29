@@ -23,7 +23,7 @@
 ############################
 
 postgresql_descargar() {
-    echo "$VE Descargando$RO postgresql$CL"
+    echo -e "$VE Descargando$RO postgresql$CL"
 }
 
 postgresql_preconfiguracion() {

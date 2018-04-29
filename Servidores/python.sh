@@ -26,7 +26,7 @@
 ############################
 
 python_descargar() {
-    echo "$VE Descargando$RO python$CL"
+    echo -e "$VE Descargando$RO python$CL"
 
     ## Descargando pyenv para gestionar versión de python en un proyecto
     descargarGIT 'Pyenv' 'https://github.com/pyenv/pyenv.git' "$HOME/.pyenv"

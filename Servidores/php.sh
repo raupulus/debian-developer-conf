@@ -28,7 +28,7 @@
 ############################
 
 php_descargar() {
-    echo "$VE Descargando$RO php$CL"
+    echo -e "$VE Descargando$RO php$CL"
 }
 
 php_preconfiguracion() {
