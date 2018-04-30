@@ -75,17 +75,9 @@ instalar_flatplat() {
     fi
 }
 
-configurar_iconos() {
-    descargar 'Paper_Theme.deb' 'https://snwh.org/paper/download.php?owner=snwh&ppa=pulp&pkg=paper-gtk-theme,16.04'
-
-    echo -e "$VE Preparando para instalar$RO Iconos Paper_Theme$CL"
-    instalarSoftwareDPKG "$WORKSCRIPT/tmp/Paper_Theme.deb"
-}
-
 personalizarGTK() {
     echo -e "$VE Iniciando configuracion de estética general y GTK$CL"
     instalar_flatplat
-    configurar_iconos
     configurar_cursores
     configurar_temas
     configurar_grub
