@@ -26,7 +26,7 @@
 ## $1 string Recibe el nombre de la versión
 ##
 phpstorm_descargar() {
-    descargar 'PhpStorm' "https://download.jetbrains.com/webide/${1}.tar.gz"
+    descargar '${1}.tar.gz' "https://download.jetbrains.com/webide/${1}.tar.gz"
 }
 
 phpstorm_preconfiguracion() {
@@ -50,7 +50,11 @@ phpstorm_preconfiguracion() {
 ##
 phpstorm_instalar() {
     echo -e "$VE Preparando para instalar$RO PhpStorm$CL"
+    echo -e "$VE Extrayendo IDE$CL"
+    cd "$WORKSCRIPT/tmp/" || return 0
+    tar -zxf "${1}.tar.gz" 2>> /dev/null
     mv "$WORKSCRIPT/tmp/$1" "$HOME/.local/opt/phpstorm"
+    cd "$WORKSCRIPT" || exit 1
 }
 
 phpstorm_postconfiguracion() {
@@ -59,6 +63,9 @@ phpstorm_postconfiguracion() {
     echo -e "$VE Generando acceso directo$CL"
     rm -f "$HOME/.local/share/applications/phpstorm.desktop"
     cp "$WORKSCRIPT/Accesos_Directos/phpstorm.desktop" "$HOME/.local/share/applications/"
+
+    echo -e "$VE Generando comando$RO phpstorm$CL"
+    ln -s "$HOME/.local/opt/phpstorm/bin/phpstorm.sh" "$HOME/.local/bin/phpstorm"
 }
 
 phpstorm_instalador() {
