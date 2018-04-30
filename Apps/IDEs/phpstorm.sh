@@ -53,7 +53,8 @@ phpstorm_instalar() {
     echo -e "$VE Extrayendo IDE$CL"
     cd "$WORKSCRIPT/tmp/" || return 0
     tar -zxf "${1}.tar.gz" 2>> /dev/null
-    mv "$WORKSCRIPT/tmp/$1" "$HOME/.local/opt/phpstorm"
+    local directorio="$(ls | grep -E ^PhpStorm.+[^\.tar\.gz]$)"
+    mv "$WORKSCRIPT/tmp/$directorio" "$HOME/.local/opt/phpstorm"
     cd "$WORKSCRIPT" || exit 1
 }
 
