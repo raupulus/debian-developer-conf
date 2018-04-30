@@ -22,9 +22,19 @@
 ##       FUNCIONES        ##
 ############################
 instalar_iconos() {
+    echo -e "$VE Instalando iconos personalizados dentro de$RO /usr/share/icons/fryntiz$CL"
     if [[ -d '/usr/share/icons/fryntiz' ]]; then
         rm -Rf '/usr/share/icons/fryntiz'
     fi
-
     cp -r '$WORKSCRIPT/conf/usr/share/icons/fryntiz' '/usr/share/icons/fryntiz'
+
+    iconos_paper_theme() {
+        echo -e "$VE Descargando pack de iconos$RO Paper Theme$CL"
+        descargar 'Paper_Theme.deb' 'https://snwh.org/paper/download.php?owner=snwh&ppa=pulp&pkg=paper-gtk-theme,16.04'
+
+        echo -e "$VE Instalando iconos$RO Paper_Theme$CL"
+        instalarSoftwareDPKG "$WORKSCRIPT/tmp/Paper_Theme.deb"
+    }
+
+    iconos_paper_theme
 }
