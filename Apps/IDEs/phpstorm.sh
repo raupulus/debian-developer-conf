@@ -61,11 +61,6 @@ phpstorm_postconfiguracion() {
     cp "$WORKSCRIPT/Accesos_Directos/phpstorm.desktop" "$HOME/.local/share/applications/"
 }
 
-
-## TODO → Añadir acceso directo
-## TODO → Entrada al menú de IDEs
-## TODO → Entrada al limpiador
-
 phpstorm_instalador() {
     local version='PhpStorm-2018.1.2'
 
