@@ -26,7 +26,7 @@ instalar_iconos() {
     if [[ -d '/usr/share/icons/fryntiz' ]]; then
         rm -Rf '/usr/share/icons/fryntiz'
     fi
-    cp -r '$WORKSCRIPT/conf/usr/share/icons/fryntiz' '/usr/share/icons/fryntiz'
+    sudo cp -r '$WORKSCRIPT/conf/usr/share/icons/fryntiz' '/usr/share/icons/fryntiz'
 
     iconos_paper_theme() {
         echo -e "$VE Descargando pack de iconos$RO Paper Theme$CL"
