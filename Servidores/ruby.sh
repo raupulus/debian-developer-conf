@@ -18,7 +18,7 @@
 ############################
 
 ruby_descargar() {
-    echo "$VE Descargando$RO Ruby$CL"
+    echo -e "$VE Descargando$RO Ruby$CL"
 }
 
 ruby_preconfiguracion() {

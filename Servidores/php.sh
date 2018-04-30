@@ -28,7 +28,7 @@
 ############################
 
 php_descargar() {
-    echo "$VE Descargando$RO php$CL"
+    echo -e "$VE Descargando$RO php$CL"
 }
 
 php_preconfiguracion() {
@@ -151,7 +151,7 @@ php_postconfiguracion() {
 
     ## Configura todas las versiones de php existentes
     for V_PHP in "${ALL_PHP[@]}"; do
-        instalar_php "$V_PHP"
+        #instalar_php "$V_PHP"
         configurar_php "$V_PHP"
         personalizar_php "$V_PHP"
         xdebug "$V_PHP"

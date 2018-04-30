@@ -111,32 +111,33 @@ programas_default() {
 
 ##
 ## Elegir intérprete de comandos entre los actuales instalados del sistema
+## Contempla bash y zsh, por defecto si no está zsh configurará solo para bash
 ##
 terminal() {
-    ## TODO → Comprobar si solo está bash instalado, no pregunta.
-    while true; do
-        echo -e "$VE Selecciona a continuación el$RO terminal$VE a usar$CL"
-        echo -e "$VE Tenga en cuenta que este script está optimizado para$RO bash$CL"
-        echo -e "$RO 1)$VE bash$CL"
-        echo -e "$RO 2)$VE zsh$CL"
-        read -p "Introduce el terminal → bash/zsh: " term
-        case "$term" in
-            bash | 1)  ## Establecer bash como terminal
-                chsh -s /bin/bash
-                ## Cambiar enlace por defecto desde sh a bash
-                sudo rm /bin/sh
-                sudo ln -s /bin/bash /bin/sh
-                break;;
-            zsh | 2)  ## Establecer zsh como terminal
-                chsh -s /bin/zsh
-                ## Cambiar enlace por defecto desde sh a zsh
-                sudo rm /bin/sh
-                sudo ln -s /bin/zsh /bin/sh
-                break;;
-            *)  ## Opción errónea
-                echo -e "$RO Opción no válida$CL"
-        esac
-    done
+    local shell='bash'
+
+    if [[ -f '/bin/bash' ]] && [[ -f '/bin/zsh' ]]; then
+        while true; do
+            echo -e "$VE Selecciona a continuación el$RO terminal$VE a usar$CL"
+            echo -e "$VE Tenga en cuenta que este script está optimizado para$RO bash$CL"
+            echo -e "$RO 1)$VE bash$CL"
+            echo -e "$RO 2)$VE zsh$CL"
+            read -p "Introduce el terminal → bash/zsh: " term
+            case "$term" in
+                bash | 1) local shell='bash'; break;;
+                zsh  | 2) local shell='zsh'; break;;
+                *)  ## Opción errónea
+                    echo -e "$RO Opción no válida$CL"
+            esac
+        done
+    fi
+
+    ## Asignar shell
+    sudo usermod -s "/bin/$shell" "$USER"
+
+    ## Cambiar enlace por defecto desde sh a bash
+    sudo rm '/bin/sh'
+    sudo ln -s "/bin/$shell" '/bin/sh'
 }
 
 ##
@@ -163,26 +164,15 @@ configurar_gedit() {
 configurar_nano() {
     echo -e "$VE Configurando editor$RO nano$CL"
 
-    if [[ -d "$HOME/.nano" ]] &&
-       [[ ! -d "$HOME/.nano/.git" ]]
-    then
+    if [[ -d "$HOME/.nano" ]] && [[ ! -d "$HOME/.nano/.git" ]]; then
         crearBackup '.nano'
         rm -Rf "$HOME/.nano"
     fi
 
-    ## Clona el repositorio o actualizarlo si ya existe
-    if [[ -d "$HOME/.nano/.git" ]]; then
-        ## Actualizar Repositorio con git pull
-        cd "$HOME/.nano"
-        echo -e "$VE Actualizando repositorios$RO $HOME/.nano/.git$CL"
-        git pull
-        cd "$WORKSCRIPT"
-    else
-        git clone 'https://github.com/scopatz/nanorc.git' "$HOME/.nano"
-    fi
+    descargarGIT 'Nano' 'https://github.com/scopatz/nanorc.git' "$HOME/.nano"
 
     ## Habilita syntaxis para el usuario
-    cat "$HOME/.nano/nanorc" >> "$HOME/.nanorc"
+    cat "$HOME/.nano/nanorc" > "$HOME/.nanorc"
 }
 
 ##
@@ -198,7 +188,7 @@ configurar_hosts() {
     fi
 
     if [[ -f '/etc/hosts.BACKUP' ]]; then
-        sudo cat '/etc/hosts.BACKUP' > "$WORKSCRIPT/tmp/hosts"
+        cat '/etc/hosts.BACKUP' > "$WORKSCRIPT/tmp/hosts"
         cat "$WORKSCRIPT/conf/etc/hosts" >> "$WORKSCRIPT/tmp/hosts"
         sudo cp "$WORKSCRIPT/tmp/hosts" '/etc/hosts'
     else

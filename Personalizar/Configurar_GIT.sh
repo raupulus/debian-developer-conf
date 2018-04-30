@@ -132,8 +132,10 @@ configurar_github() {
     ## TODO → composer config -g github-oauth.github.com
 
     ## GHI → Git Hub Issues
+    ## HUB → git-hub tools
     echo -e "$VE Establece https a$RO hub.protocol$CL"
     git config --global hub.protocol https
+    git config --global --add hub.host https://github.com
 
     cd "$WORKSCRIPT" || return
 }
@@ -187,6 +189,12 @@ crear_token() {
 
         ## Agrega el token para GHI → Git Hub Issues
         git config --global ghi.token $TOKEN
+
+        ## Agregando usuario y token para HUB dentro de ~/.config/hub
+        echo 'github.com:' > "$HOME/.config/hub"
+        echo "- user: $usuario_git" >> "$HOME/.config/hub"
+        echo "  oauth_token: $TOKEN" >> "$HOME/.config/hub"
+        echo '  protocol: https' >> "$HOME/.config/hub"
     fi
 
     ## Generando TOKEN para GitLab
@@ -217,6 +225,35 @@ crear_git_alias() {
     git config --global alias.his "log --pretty=format:\"%h %ad | %s%d [%an]\" --graph --date=short"
 
     git config --global push.default simple
+}
+
+## hub is a command-line wrapper for git that makes you better at GitHub.
+instalar_hub() {
+    local version_hub='hub-linux-amd64-2.3.0-pre10'
+    ## Compilando hub, necesita golang >= 1.8 y ruby >= 1.9
+    #descargarGIT 'Hub' 'https://github.com/github/hub.git' "$WORKSCRIPT/tmp/hub"
+    #cd "$WORKSCRIPT/tmp/hub" || return 0
+    #script/build -o "$HOME/bin/hub"
+
+    ## Limpiando directorio
+    rm -Rf "$WORKSCRIPT/tmp/$version_hub"
+
+    ## Descargando binario
+    if [[ ! -f "$WORKSCRIPT/tmp/hub.tgz" ]]; then
+        descargar 'hub.tgz' 'https://github.com/github/hub/releases/download/v2.3.0-pre10/hub-linux-amd64-2.3.0-pre10.tgz'
+    fi
+
+    ## Descomprimiendo
+    echo -e "$VE Descomprimiendo$RO Hub$CL"
+    cd "$WORKSCRIPT/tmp/" || return 0
+    tar -zxf "$WORKSCRIPT/tmp/hub.tgz" 2>> /dev/null
+    cd "$WORKSCRIPT" || exit 1
+
+    ## Instalando
+    echo -e "$VE Instalando$RO Hub$CL"
+    cd "$WORKSCRIPT/tmp/$version_hub" || return 0
+    sudo ./install
+    cd "$WORKSCRIPT" || exit 1
 }
 
 configuracion_git() {
@@ -253,5 +290,9 @@ configuracion_git() {
         crear_git_alias
 
         cd "$WORKSCRIPT" || return
+
     fi
+
+    instalar_hub
+
 }

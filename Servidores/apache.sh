@@ -26,7 +26,7 @@
 ############################
 
 apache2_descargar() {
-    echo "$VE Descargando$RO Apache2$CL"
+    echo -e "$VE Descargando$RO Apache2$CL"
 }
 
 apache2_preconfiguracion() {

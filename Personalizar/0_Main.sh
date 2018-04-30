@@ -20,10 +20,10 @@
 ############################
 ##     IMPORTACIONES      ##
 ############################
-source "$WORKSCRIPT/Configurar_GIT.sh"
-source "$WORKSCRIPT/Personalizar_GTK.sh"
-source "$WORKSCRIPT/Tipografias.sh"
-source "$WORKSCRIPT/Variables_Entorno.sh"
+source "$WORKSCRIPT/Personalizar/Configurar_GIT.sh"
+source "$WORKSCRIPT/Personalizar/Personalizar_GTK.sh"
+source "$WORKSCRIPT/Personalizar/Tipografias.sh"
+source "$WORKSCRIPT/Personalizar/Variables_Entorno.sh"
 
 ###########################
 ##       FUNCIONES       ##
@@ -40,7 +40,7 @@ menuPersonalizacion() {
 
     ## Si la función recibe "-a" indica que instale todos los servidores
     if [[ "$1" = '-a' ]]; then
-        todos_servidores
+        todas_personalizaciones
     else
         while true :; do
             clear
