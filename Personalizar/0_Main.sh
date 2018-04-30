@@ -23,6 +23,7 @@
 source "$WORKSCRIPT/Personalizar/Configurar_GIT.sh"
 source "$WORKSCRIPT/Personalizar/Personalizar_GTK.sh"
 source "$WORKSCRIPT/Personalizar/Tipografias.sh"
+source "$WORKSCRIPT/Personalizar/iconos.sh"
 source "$WORKSCRIPT/Personalizar/Variables_Entorno.sh"
 
 ###########################
@@ -36,6 +37,7 @@ menuPersonalizacion() {
         personalizarGTK
         agregar_fuentes
         instalar_variables
+        instalar_iconos
     }
 
     ## Si la función recibe "-a" indica que instale todos los servidores
@@ -49,7 +51,8 @@ menuPersonalizacion() {
                 2) Personalizar GTK
                 3) Tipografías
                 4) Variables de Entorno
-                5) Todos los pasos anteriores
+                5) Instalar Iconos
+                6) Todos los pasos anteriores
 
                 0) Atrás
             '
@@ -65,7 +68,8 @@ menuPersonalizacion() {
                 2)  personalizarGTK;;          ## Personalizar GTK
                 3)  agregar_fuentes;;          ## Tipografías
                 4)  instalar_variables;;       ## Variables de Entorno
-                5)  todas_personalizaciones;;  ## Todos los pasos anteriores
+                5)  instalar_iconos;;          ## Iconos Personalizados
+                6)  todas_personalizaciones;;  ## Todos los pasos anteriores
 
                 0)  ## SALIR
                     clear
