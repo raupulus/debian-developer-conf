@@ -47,9 +47,9 @@ limpiar_con_fuerza() {
     echo -e "$VE Asegúrate que es lo que necesitas hacer antes de ejecutarlo"
     read -p "Pulsa una tecla para destruir personalización generada por este script"
 
-    local DIRECTORIOS_BORRAR=".oh-my-zsh .bash_it .nvm fasd .vim .local/opt/Firefox_Quantum_Developer .local/bin/firefox-quantum .local/share/applications/firefox-quantum.desktop .local/opt/Firefox_Nightly .local/bin/firefox-nightly .local/share/applications/firefox-nightly.desktop .atom .i3 .ninja-ide dunst powerline sakura"
+    local DIRECTORIOS_BORRAR=".oh-my-zsh .bash_it .nvm fasd .vim .local/opt/Firefox_Quantum_Developer .local/bin/firefox-quantum .local/share/applications/firefox-quantum.desktop .local/opt/Firefox_Nightly .local/bin/firefox-nightly .local/share/applications/firefox-nightly.desktop .atom .i3 .ninja-ide dunst powerline sakura .local/opt/phpstorm"
 
-    local ARCHIVOS_BORRAR=".local/bin/psysh .tmux.conf .udisks-glue.conf .vimrc .gvimrc .zshrc"
+    local ARCHIVOS_BORRAR=".local/bin/psysh .tmux.conf .udisks-glue.conf .vimrc .gvimrc .zshrc .local/bin/phpstorm .local/share/applications/phpstorm.desktop"
 
     for d in $DIRECTORIOS_BORRAR
     do
@@ -69,4 +69,12 @@ limpiar_con_fuerza() {
 
     local paquetes_borrar="vim atom ninja-ide dbeaver brackets haroopad"
     desinstalar_paquetes "$paquetes_borrar"
+
+    echo -e "$RO Borrar toda la carpeta de temporales (tmp) en este directorio"
+    read -p '  s/N → ' input
+    if [[ $input = 's' ]] || [[ $input = 'S' ]]; then
+        if [[ -d "$WORKSCRIPT/tmp" ]]; then
+            rm -Rf $WORKSCRIPT/tmp/*
+        fi
+    fi
 }
