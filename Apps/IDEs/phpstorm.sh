@@ -26,7 +26,7 @@
 ## $1 string Recibe el nombre de la versión
 ##
 phpstorm_descargar() {
-    descargar '${1}.tar.gz' "https://download.jetbrains.com/webide/${1}.tar.gz"
+    descargar "${1}.tar.gz" "https://download.jetbrains.com/webide/${1}.tar.gz"
 }
 
 phpstorm_preconfiguracion() {
