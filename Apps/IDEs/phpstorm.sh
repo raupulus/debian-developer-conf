@@ -21,41 +21,70 @@
 ############################
 ##       FUNCIONES        ##
 ############################
-
+##
+## Descarga PhpStorm de su web oficial
+## $1 string Recibe el nombre de la versión
+##
 phpstorm_descargar() {
-    descargar 'Web' "https://download.jetbrains.com/webide/PhpStorm-2018.1.2.tar.gz"
+    descargar 'PhpStorm' "https://download.jetbrains.com/webide/${1}.tar.gz"
 }
 
 phpstorm_preconfiguracion() {
     echo -e "$VE Generando Pre-Configuraciones de$RO PhpStorm$CL"
+    if [[ -d "$HOME/.local/opt/phpstorm" ]]; then
+        rm -Rf "$HOME/.local/opt/phpstorm"
+    fi
+
+    if [[ -f "$HOME/.local/bin/phpstorm" ]]; then
+        rm -f "$HOME/.local/bin/phpstorm"
+    fi
+
+    if [[ -f "$HOME/.local/share/applications/phpstorm.desktop" ]]; then
+        rm -f "$HOME/.local/share/applications/phpstorm.desktop"
+    fi
 }
 
+##
+## Instala PhpStorm para el usuario dentro de ~/.local/opt
+## $1 string Recibe el nombre de la versión
+##
 phpstorm_instalar() {
     echo -e "$VE Preparando para instalar$RO PhpStorm$CL"
+    mv "$WORKSCRIPT/tmp/$1" "$HOME/.local/opt/phpstorm"
 }
 
 phpstorm_postconfiguracion() {
     echo -e "$VE Generando Post-Configuraciones$RO PhpStorm$CL"
 
     echo -e "$VE Generando acceso directo$CL"
+    rm -f "$HOME/.local/share/applications/phpstorm.desktop"
     cp "$WORKSCRIPT/Accesos_Directos/phpstorm.desktop" "$HOME/.local/share/applications/"
 }
 
+
+## TODO → Añadir acceso directo
+## TODO → Entrada al menú de IDEs
+## TODO → Entrada al limpiador
+
 phpstorm_instalador() {
+    local version='PhpStorm-2018.1.2'
+
     echo -e "$VE Comenzando instalación de$RO PhpStorm$CL"
 
-    phpstorm_preconfiguracion
+    phpstorm_preconfiguracion "$version"
 
-    if [[ -f '/usr/bin/phpstorm' ]]; then
+    if [[ -f "$HOME/.local/bin/phpstorm" ]] &&
+       [[ -d "$HOME/.local/opt/phpstorm" ]]
+    then
         echo -e "$VE Ya esta$RO PhpStorm$VE instalado en el equipo, omitiendo paso$CL"
     else
-        if [[ -f "$WORKSCRIPT/tmp/PhpStorm.deb" ]]; then
-            phpstorm_instalar || rm -Rf "$WORKSCRIPT/tmp/PhpStorm.deb"
+        if [[ -f "$WORKSCRIPT/tmp/${version}.tar.gz" ]]; then
+            phpstorm_instalar "$version" || rm -Rf "$WORKSCRIPT/tmp/${version}.tar.gz"
         else
-            phpstorm_descargar
-            phpstorm_instalar
+            phpstorm_descargar "$version"
+            phpstorm_instalar "$version"
         fi
     fi
 
-    phpstorm_postconfiguracion
+    phpstorm_postconfiguracion "$version"
 }
