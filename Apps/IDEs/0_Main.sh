@@ -24,6 +24,10 @@
 source "$WORKSCRIPT/Apps/IDEs/Atom_IDE.sh"
 source "$WORKSCRIPT/Apps/IDEs/Brackets.sh"
 source "$WORKSCRIPT/Apps/IDEs/Ninja-IDE.sh"
+source "$WORKSCRIPT/Apps/IDEs/phpstorm.sh"
+source "$WORKSCRIPT/Apps/IDEs/webstorm.sh"
+source "$WORKSCRIPT/Apps/IDEs/netbeans.sh"
+source "$WORKSCRIPT/Apps/IDEs/aptanastudio.sh"
 
 ############################
 ##       FUNCIONES        ##
@@ -50,7 +54,7 @@ menuIDES() {
             local descripcion='Menú de aplicaciones
                 1) Atom
                 2) Brackets
-                3) PHP Storm (No implementado)
+                3) PHP Storm
                 4) Ninja IDE
                 5) NetBeans (No implementado)
                 6) Aptana Studio (No implementado)
@@ -68,10 +72,10 @@ menuIDES() {
 
             case $entrada in
 
-                1)  atom_instalador;;  ##
-                2)  brackets_instalador;;  ##
-                #3)  ;;  ##
-                4)  ninjaide_instalador;;  ##
+                1)  atom_instalador;;      ##  Instala Atom
+                2)  brackets_instalador;;  ##  Instala Brackets
+                3)  phpstorm_instalador;;  ##  Instala PHP Storm
+                4)  ninjaide_instalador;;  ##  Instala Ninja IDE
                 #5)  ;;  ##
                 #6)  ;;  ##
                 #7)  ;;  ##
