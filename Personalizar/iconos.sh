@@ -21,3 +21,10 @@
 ############################
 ##       FUNCIONES        ##
 ############################
+instalar_iconos() {
+    if [[ -d '/usr/share/icons/fryntiz' ]]; then
+        rm -Rf '/usr/share/icons/fryntiz'
+    fi
+
+    cp -r '$WORKSCRIPT/conf/usr/share/icons/fryntiz' '/usr/share/icons/fryntiz'
+}
