@@ -70,6 +70,9 @@ client.focused    #4c7899  #285577  #ffffff  #2e9ef4
 client.unfocused  #4c7899  #24364F  #aaaaaa  #2e9ef4
 client.focused    #c10101  #880404  #ffffff  #00AA00
 
+## Quita los bordes de los extremos de la pantalla
+hide_edge_borders vertical
+
 ############################################################
 #############          Bindings           ##################
 ############################################################
@@ -202,8 +205,39 @@ exec --no-startup-id numlockx on
 # Applet de volumen
 exec --no-startup-id volumeicon
 
-# Fondo de pantalla nitrogen
+## run with reload
+#exec_always --no-startup-id al-polybar-session
+exec_always --no-startup-id nitrogen --restore
+#exec_always --no-startup-id xrdb -load ~/.Xresources
+
+# run once
+#exec --no-startup-id ksuperkey -e 'Super_L=Alt_L|F1'
+#exec --no-startup-id al-compositor --start
+## Fondo de pantalla nitrogen
 exec --no-startup-id nitrogen --restore
+#exec --no-startup-id xfsettingsd
+#exec --no-startup-id lxpolkit
+
+assign [title="^Momentum$"] 3
+for_window [title="^Momentum$"] focus
+for_window [title="^Momentum$"] floating enable
+
+# exec --no-startup-id xinput --set-prop 'pointer:Telink Wireless Receiver' 'Device Accel Constant Deceleration' 3
+# exec --no-startup-id xinput --set-prop 'pointer:Telink Wireless Receiver' 'Device Accel Profile' 4
+# exec --no-startup-id xset m 4 3
+exec --no-startup-id xset r rate 250 30
+exec --no-startup-id setxkbmap -option "ctrl:swapcaps"
+# exec --no-startup-id ~/.local/bin/xcape -e 'Control_L=Escape'
+# exec --no-startup-id lxpolkit
+# exec --no-startup-id start-pulseaudio-x11
+# exec --no-startup-id pasystray
+# exec --no-startup-id pcmanfm -d
+#exec --no-startup-id xflux -l 36.7756 -g -6.3616 -k 4200
+#exec --no-startup-id ~/.local/bin/unclutter --timeout 1 --fork
+#exec --no-startup-id "i3-msg 'workspace 2; append_layout ~/.i3/workspace-2.json'"
+#exec --no-startup-id sakura
+#exec --no-startup-id "i3-msg 'workspace 1; append_layout ~/.i3/workspace-1.json'"
+#exec --no-startup-id x-www-browser
 
 ############################################################
 ##############        Reload configs        ################
@@ -232,6 +266,23 @@ exec_always --no-startup-id xautolock -detectsleep -notify 30 -notifier "notify-
 bindsym XF86AudioRaiseVolume exec pactl set-sink-volume 0 +5% #increase sound volume
 bindsym XF86AudioLowerVolume exec pactl set-sink-volume 0 -5% #decrease sound volume
 bindsym XF86AudioMute exec pactl set-sink-mute 0 toggle # mute sound
+
+#for_window [class="(?i)(?:qt5ct|pinentry)"] floating enable, focus
+#for_window [class="(?i)(?:tilix|thunar)"] focus
+#for_window [class="(?i)(?:geany|firefox)"] focus
+
+# Assign Applications to specific workspace
+# get class with xprop
+#assign [class="(?i)(?:firefox)"] → $WS1
+#assign [class="(?i)(?:geany)"] → $WS2
+#assign [class="(?i)(?:thunar)"] → $WS3
+
+# focus, floating, & sticky
+#for_window [title="(?i)(?:copying|deleting|moving)"] floating enable
+#for_window [window_role="(?i)(?:pop-up|setup)"] floating enable
+
+# set trayer to be borderless
+#for_window [class="(?i)trayer"] border pixel 0
 
 ###########################################################
 ############               PRUEBAS             ############
