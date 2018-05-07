@@ -45,3 +45,20 @@ i3wm_instalador() {
     i3wm_instalar
     i3wm_postconfiguracion
 }
+
+i3wm_gaps_instalador() {
+    ## Instalando dependencias
+    sudo apt install libxcb-keysyms1-dev libpango1.0-dev libxcb-util0-dev xcb libxcb1-dev libxcb-icccm4-dev libyajl-dev libev-dev libxcb-xkb-dev libxcb-cursor-dev libxkbcommon-dev libxcb-xinerama0-dev libxkbcommon-x11-dev libstartup-notification0-dev libxcb-randr0-dev libxcb-xrm0 libxcb-xrm-dev
+
+    ## Instalo i3gaps desde repositorio GitHub en vez de i3 normal
+    git clone https://www.github.com/Airblader/i3 i3-gaps
+    cd i3-gaps || exit
+    git checkout gaps && git pull
+
+    autoreconf --force --install
+    rm -rf build/
+    mkdir -p build && cd build || exit
+
+    ./configure
+    cd x86_64-pc-linux-gnu && make && sudo make install
+}
