@@ -46,6 +46,11 @@ i3wm_instalador() {
     i3wm_postconfiguracion
 }
 
+##
+## Instalador para el fork de i3 gaps en:
+## https://github.com/Airblader/i3/tree/gaps
+## Se usa la rama "gaps" en vez de la rama "gaps-next"
+## 
 i3wm_gaps_instalador() {
     ## Instalando dependencias
     sudo apt install libxcb-keysyms1-dev libpango1.0-dev libxcb-util0-dev xcb libxcb1-dev libxcb-icccm4-dev libyajl-dev libev-dev libxcb-xkb-dev libxcb-cursor-dev libxkbcommon-dev libxcb-xinerama0-dev libxkbcommon-x11-dev libstartup-notification0-dev libxcb-randr0-dev libxcb-xrm0 libxcb-xrm-dev
