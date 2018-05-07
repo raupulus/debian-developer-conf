@@ -41,7 +41,7 @@ i3wm_postconfiguracion() {
 
     echo -e "$VE Generando archivos de configuración$CL"
     ## Enlazar "$WORKSCRIPT/conf/home/.i3" en "$HOME/.i3"
-    enlazarHome '.config/i3' '.conf/tint2' '.conf/compto.conf' '.conf/conky' '.Xresources' '.config/nitrogen'
+    enlazarHome '.config/i3' '.conf/tint2' '.conf/compton.conf' '.conf/conky' '.Xresources' '.config/nitrogen'
 }
 
 i3wm_instalador() {
