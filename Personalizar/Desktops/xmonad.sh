@@ -16,3 +16,25 @@
 #############################
 ##     INSTRUCCIONES       ##
 #############################
+
+
+sudo apt-get install xmonad suckless-tools
+
+mkdir ~/.xmonad
+vi ~/.xmonad/xmonad.hs
+
+
+## Añadir archivo de configuración
+cp ??? ???
+
+## Compilar
+xmonad --recompile
+
+
+##### CONFIGURACIONES OPCIONALES
+
+## Cambiar background
+gconftool --type string --set /desktop/gnome/background/picture_filename "/path/to/your/image.png"
+
+## Cambiar icono gnome reemplazando:
+/usr/share/icons/icon-theme/16x16/places/start-here.png
