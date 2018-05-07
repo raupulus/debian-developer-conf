@@ -27,7 +27,7 @@ i3wm_preconfiguracion() {
 
 i3wm_instalar() {
     echo -e "$VE Preparando para instalar$RO i3wm$CL"
-    sudo apt install i3-wm i3-blocks suckless-tools
+    instalarSoftware i3-wm i3-blocks suckless-tools
 }
 
 ##
@@ -35,7 +35,13 @@ i3wm_instalar() {
 ##
 i3wm_postconfiguracion() {
     echo -e "$VE Generando Post-Configuraciones$RO i3wm$CL"
-    sudo apt install rxvt-unicode-256color compton compton-conf compton-conf-l10n nitrogen gpicview thunar ranger w3m tint2 arandr neofetch
+
+    echo -e "$VE Instalando software secundario$CL"
+    instalarSoftware rxvt-unicode-256color compton compton-conf compton-conf-l10n nitrogen gpicview thunar ranger w3m tint2 arandr neofetch
+
+    echo -e "$VE Generando archivos de configuración$CL"
+    ## Enlazar "$WORKSCRIPT/conf/home/.i3" en "$HOME/.i3"
+    enlazarHome '.i3'
 }
 
 i3wm_instalador() {
@@ -50,10 +56,10 @@ i3wm_instalador() {
 ## Instalador para el fork de i3 gaps en:
 ## https://github.com/Airblader/i3/tree/gaps
 ## Se usa la rama "gaps" en vez de la rama "gaps-next"
-## 
+##
 i3wm_gaps_instalador() {
     ## Instalando dependencias
-    sudo apt install libxcb-keysyms1-dev libpango1.0-dev libxcb-util0-dev xcb libxcb1-dev libxcb-icccm4-dev libyajl-dev libev-dev libxcb-xkb-dev libxcb-cursor-dev libxkbcommon-dev libxcb-xinerama0-dev libxkbcommon-x11-dev libstartup-notification0-dev libxcb-randr0-dev libxcb-xrm0 libxcb-xrm-dev
+    instalarSoftware libxcb-keysyms1-dev libpango1.0-dev libxcb-util0-dev xcb libxcb1-dev libxcb-icccm4-dev libyajl-dev libev-dev libxcb-xkb-dev libxcb-cursor-dev libxkbcommon-dev libxcb-xinerama0-dev libxkbcommon-x11-dev libstartup-notification0-dev libxcb-randr0-dev libxcb-xrm0 libxcb-xrm-dev
 
     ## Instalo i3gaps desde repositorio GitHub en vez de i3 normal
     git clone https://www.github.com/Airblader/i3 i3-gaps
