@@ -38,10 +38,12 @@ bindsym $mod+d exec dmenu_run
 
 
 
+############################################################
+###############            i3bar          ##################
+############################################################
 # Start i3bar to display a workspace bar (plus the system information i3status
 # finds out, if available)
 
-#Barra Superior
 bar {
         position        top             #Posición Arriba
         status_command  i3status        # Mostrar status de monitoreo
@@ -62,72 +64,15 @@ bar {
     }
 }
 
-
 #Decoración de ventanas
 # class           bordes   backgr.  text
 client.focused    #4c7899  #285577  #ffffff  #2e9ef4
 client.unfocused  #4c7899  #24364F  #aaaaaa  #2e9ef4
 client.focused    #c10101  #880404  #ffffff  #00AA00
 
-#Autoinicio
-exec --no-startup-id dropbox start
-exec --no-startup-id synology-cloud-station-drive
-exec --no-startup-id nautilus
-exec --no-startup-id i3-msg 'workspace 2; exec x-www-browser; workspace 1'
-exec --no-startup-id i3-msg 'workspace 3; exec tilix; workspace 1'
-
-# Red
-exec --no-startup-id nm-applet
-
-# Transparencia
-exec --no-startup-id compton -cCGb
-
-# Teclado numerico
-exec --no-startup-id numlockx on
-
-# Applet de volumen
-exec --no-startup-id volumeicon
-
-# Fondo de pantalla nitrogen
-exec --no-startup-id nitrogen --restore
-
-#Imprimir pantalla
-bindsym Print exec scrot '%Y-%m-%d_%T_scrot.png' -e 'mv $f ~/Imágenes/screenshots/'
-
-# Screen brightness controls
-bindcode $mod+67 exec xbacklight - 10
-bindcode $mod+68 exec xbacklight + 10
-
-# media keys
-#bindsym $mod+Home exec curl http://localhost:2000/command/default/playpause
-#bindsym $mod+Next exec curl http://localhost:2000/command/default/prev
-#bindsym $mod+Prior exec curl http://localhost:2000/command/default/next
-
-# set background image
-#exec --no-startup-id nitrogen --save --set-auto /home/gordin/Bilder/rainbow_dash_wallpaper_by_ancientkale-d3tjto3.png
-
-
-#PRUEBAS ARRANQUE
-
-exec --no-startup-id xbindkeys
-exec --no-startup-id pulseaudio --start
-exec_always --no-startup-id dunst
-
-
-#Bloqueo de pantalla
-bindsym $mod+p exec "xautolock -locknow -locker 'i3lock -c 000000 -d'"
-exec_always --no-startup-id xautolock -detectsleep -notify 30 -notifier "notify-send -u low -t 2000 -- 'Locking screen in 30s'" -time 5 -locker "i3lock -c 000000 -d"
-
-
-
-# volume
-bindsym XF86AudioRaiseVolume exec pactl set-sink-volume 0 +5% #increase sound volume
-bindsym XF86AudioLowerVolume exec pactl set-sink-volume 0 -5% #decrease sound volume
-bindsym XF86AudioMute exec pactl set-sink-mute 0 toggle # mute sound
-
-###########################################################
-#############         Bindings           ##################
-###########################################################
+############################################################
+#############          Bindings           ##################
+############################################################
 ## Navegar entre las ventanas $mod+[jkln] o $mod+[←↓→]
 bindsym $mod+j focus left
 bindsym $mod+k focus down
@@ -224,13 +169,44 @@ mode "resize" {
 
 bindsym $mod+r mode "resize"
 
+#Imprimir pantalla
+bindsym Print exec scrot '%Y-%m-%d_%T_scrot.png' -e 'mv $f ~/Imágenes/screenshots/'
 
-#####################################################
-###############     Autostart      ##################
-#####################################################
+# Screen brightness controls
+bindcode $mod+67 exec xbacklight - 10
+bindcode $mod+68 exec xbacklight + 10
+
+# media keys
+#bindsym $mod+Home exec curl http://localhost:2000/command/default/playpause
+#bindsym $mod+Next exec curl http://localhost:2000/command/default/prev
+#bindsym $mod+Prior exec curl http://localhost:2000/command/default/next
 
 ############################################################
-##############     Reload configs           ################
+###############          Autostart        ##################
+############################################################
+exec --no-startup-id dropbox start
+exec --no-startup-id synology-cloud-station-drive
+exec --no-startup-id nautilus
+exec --no-startup-id i3-msg 'workspace 2; exec x-www-browser; workspace 1'
+exec --no-startup-id i3-msg 'workspace 3; exec tilix; workspace 1'
+
+# Red
+exec --no-startup-id nm-applet
+
+# Transparencia
+exec --no-startup-id compton -cCGb
+
+# Teclado numerico
+exec --no-startup-id numlockx on
+
+# Applet de volumen
+exec --no-startup-id volumeicon
+
+# Fondo de pantalla nitrogen
+exec --no-startup-id nitrogen --restore
+
+############################################################
+##############        Reload configs        ################
 ############################################################
 ## Recargar el archivo de configuración
 bindsym $mod+Shift+c reload
@@ -241,10 +217,26 @@ bindsym $mod+Shift+r restart
 # Salir de i3 (logs you out of your X session)
 bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'Si pulsas sobre salir se cerrará todo lo que tengas abierto. ¿Realmente quieres salir?' -b 'Si, exit i3' 'i3-msg exit'"
 
-########################################################
-############      Container/Window control  ############
-########################################################
+###########################################################
+############      Container/Window control     ############
+###########################################################
 
-###################################################
-############    application settings   ############
-###################################################
+###########################################################
+############        application settings       ############
+###########################################################
+## Bloqueo de pantalla
+bindsym $mod+p exec "xautolock -locknow -locker 'i3lock -c 000000 -d'"
+exec_always --no-startup-id xautolock -detectsleep -notify 30 -notifier "notify-send -u low -t 2000 -- 'Locking screen in 30s'" -time 5 -locker "i3lock -c 000000 -d"
+
+## Volumen
+bindsym XF86AudioRaiseVolume exec pactl set-sink-volume 0 +5% #increase sound volume
+bindsym XF86AudioLowerVolume exec pactl set-sink-volume 0 -5% #decrease sound volume
+bindsym XF86AudioMute exec pactl set-sink-mute 0 toggle # mute sound
+
+###########################################################
+############               PRUEBAS             ############
+###########################################################
+
+exec --no-startup-id xbindkeys
+exec --no-startup-id pulseaudio --start
+exec_always --no-startup-id dunst
