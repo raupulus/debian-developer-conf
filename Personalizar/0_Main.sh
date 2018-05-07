@@ -41,7 +41,7 @@ menuPersonalizacion() {
         instalar_iconos
     }
 
-    ## Si la función recibe "-a" indica que instale todos los servidores
+    ## Si la función recibe "-a" indica que instale todas
     if [[ "$1" = '-a' ]]; then
         todas_personalizaciones
     else
