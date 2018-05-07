@@ -13,9 +13,9 @@
 ##             Guía de estilos aplicada:
 ## @style      https://github.com/fryntiz/Bash_Style_Guide
 
-############################
-##     INSTRUCCIONES      ##
-############################
+#############################
+##     INSTRUCCIONES       ##
+#############################
 ## Configuración guiada de forma interactiva para git.
 ## Este script va preguntando al usuario los datos para configurar el perfil
 ## de este control de versiones en distintas platafarmas y lo configura
@@ -36,9 +36,9 @@ correo_git=""
 TOKEN=""
 TOKEN_GITLAB=""
 
-############################
-##       FUNCIONES        ##
-############################
+#############################
+##       FUNCIONES         ##
+#############################
 datos_input() {
     ## Se entiende que tiene el mismo usuario para GitHub y para GitLab
     read -p "Introduce el usuario de GitHub y GitLab → " usuario_git
