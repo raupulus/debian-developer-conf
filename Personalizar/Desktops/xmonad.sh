@@ -13,28 +13,55 @@
 ##             Guía de estilos aplicada:
 ## @style      https://github.com/fryntiz/Bash_Style_Guide
 
-#############################
-##     INSTRUCCIONES       ##
-#############################
+############################
+##     INSTRUCCIONES      ##
+############################
+## Plantea la instalación de Xmonad con las configuraciones
 
+############################
+##       FUNCIONES        ##
+############################
+xmonad_preconfiguracion() {
+    echo -e "$VE Generando Pre-Configuraciones de$RO xmonad$CL"
+}
 
-sudo apt-get install xmonad suckless-tools
+xmonad_instalar() {
+    echo -e "$VE Preparando para instalar$RO xmonad$CL"
+    instalarSoftware xmonad
+}
 
-mkdir ~/.xmonad
-vi ~/.xmonad/xmonad.hs
+##
+## Instalando software extra y configuraciones adicionales
+##
+xmonad_postconfiguracion() {
+    echo -e "$VE Generando Post-Configuraciones$RO xmonad$CL"
 
+    echo -e "$VE Instalando software secundario$CL"
+    instalarSoftware suckless-tools
 
-## Añadir archivo de configuración
-cp ??? ???
+    echo -e "$VE Generando archivos de configuración$CL"
+    ## Enlazar "$WORKSCRIPT/conf/home/.i3" en "$HOME/.i3"
+    enlazarHome '.xmonad'
 
-## Compilar
-xmonad --recompile
+    ## Compilar
+    xmonad --recompile
+}
 
+xmonad_postconfiguracionOpcional() {
+    echo -e "$VE Generando Post-Configuraciones Opcionales$RO xmonad$CL"
 
-##### CONFIGURACIONES OPCIONALES
+    ## Cambiar background
+    #gconftool --type string --set /desktop/gnome/background/picture_filename "/path/to/your/image.png"
 
-## Cambiar background
-gconftool --type string --set /desktop/gnome/background/picture_filename "/path/to/your/image.png"
+    ## Cambiar icono gnome reemplazando:
+    #/usr/share/icons/icon-theme/16x16/places/start-here.png
+}
 
-## Cambiar icono gnome reemplazando:
-/usr/share/icons/icon-theme/16x16/places/start-here.png
+xmonad_instalador() {
+    echo -e "$VE Comenzando instalación de$RO xmonad$CL"
+
+    xmonad_preconfiguracion
+    xmonad_instalar
+    xmonad_postconfiguracion
+    xmonad_postconfiguracionOpcional
+}
