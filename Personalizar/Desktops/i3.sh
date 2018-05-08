@@ -41,7 +41,7 @@ i3wm_postconfiguracion() {
 
     echo -e "$VE Generando archivos de configuración$CL"
     ## Enlazar "$WORKSCRIPT/conf/home/.i3" en "$HOME/.i3"
-    enlazarHome '.config/i3' '.conf/tint2' '.conf/compton.conf' '.conf/conky' '.Xresources' '.config/nitrogen'
+    enlazarHome '.config/i3' '.conf/tint2' '.conf/compton.conf' '.conf/conky' '.Xresources' '.config/nitrogen' '.config/i3status'
 
     if [[ ! -d "$HOME/Imágenes/Screenshot" ]]; then
         mkdir -p "$HOME/Imágenes/Screenshots"
