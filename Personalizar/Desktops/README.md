@@ -24,3 +24,14 @@ En esta instalación se parte de la base de XFCE
 -   ranger → Gestor de archivos para terminal
 -   tint2 → Barra de menú (redundante, no se usará por defecto)
 -   arandr → Interfaz de xrandr para organizar pantallas/monitores
+-   scrot → Captura Imágenes
+
+### Organización de los escritorios
+
+-   1 → clean
+-   2 → term
+-   3 → web
+-   4 → RS
+-   5 → IDE
+-   6 → AUDIO
+-   7 → Imagen
