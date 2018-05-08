@@ -15,6 +15,18 @@
 ## Tecla modificadora.
 set $mod Mod4
 
+## Espacios de trabajo
+set $WS1 WORK
+set $WS2 TERM
+set $WS3 WWW
+set $WS4 REDES
+set $WS5 IDE
+set $WS6 AUDIO
+set $WS7 IMG
+set $WS8 8
+set $WS9 9
+set $WS10 10
+
 ## Fuente para títulos de ventanas usadas en bar {} block below.
 font pango:monospace 8
 #font pango:DejaVu Sans Mono 8
@@ -29,14 +41,10 @@ bindsym $mod+Return exec i3-sensible-terminal
 bindsym $mod+Shift+q kill
 
 ## Abrir dmenu (Lanzador de programas)
-bindsym $mod+d exec dmenu_run
+bindsym $mod+d exec i3-dmenu-desktop ## Antes dmenu_run
 
-# There also is the (new) i3-dmenu-desktop which only displays applications
-# shipping a .desktop file. It is a wrapper around dmenu, so you need that
-# installed.
-# bindsym $mod+d exec --no-startup-id i3-dmenu-desktop
-
-
+## Modo de Organizar ventanas por defecto: default|stacking|tabbed
+workspace_layout tabbed
 
 ############################################################
 ###############            i3bar          ##################
@@ -45,9 +53,9 @@ bindsym $mod+d exec dmenu_run
 # finds out, if available)
 
 bar {
-        position        top             #Posición Arriba
-        status_command  i3status        # Mostrar status de monitoreo
-        font pango:terminus, awesome 9  #Fuente tipografica
+        position        top             ## Posición Arriba
+        status_command  i3status        ## Mostrar status de monitoreo
+        font pango:terminus, awesome 9  ## Fuente tipografica
 
 
     colors {
@@ -64,8 +72,8 @@ bar {
     }
 }
 
-#Decoración de ventanas
-# class           bordes   backgr.  text
+## Decoración de ventanas
+##    class        bordes   backgr.  text
 client.focused    #4c7899  #285577  #ffffff  #2e9ef4
 client.unfocused  #4c7899  #24364F  #aaaaaa  #2e9ef4
 client.focused    #c10101  #880404  #ffffff  #00AA00
@@ -123,28 +131,28 @@ bindsym $mod+a focus parent
 #bindsym $mod+d focus child
 
 ## Cambiar entre espacioes de trabajo
-bindsym $mod+1 workspace 1
-bindsym $mod+2 workspace 2
-bindsym $mod+3 workspace 3
-bindsym $mod+4 workspace 4
-bindsym $mod+5 workspace 5
-bindsym $mod+6 workspace 6
-bindsym $mod+7 workspace 7
-bindsym $mod+8 workspace 8
-bindsym $mod+9 workspace 9
-bindsym $mod+0 workspace 10
+bindsym $mod+1 workspace $WS1
+bindsym $mod+2 workspace $WS2
+bindsym $mod+3 workspace $WS3
+bindsym $mod+4 workspace $WS4
+bindsym $mod+5 workspace $WS5
+bindsym $mod+6 workspace $WS6
+bindsym $mod+7 workspace $WS7
+bindsym $mod+8 workspace $WS8
+bindsym $mod+9 workspace $WS9
+bindsym $mod+0 workspace $WS10
 
 ## Mover una ventana a un espacio de trabajo concreto
-bindsym $mod+Shift+1 move container to workspace 1
-bindsym $mod+Shift+2 move container to workspace 2
-bindsym $mod+Shift+3 move container to workspace 3
-bindsym $mod+Shift+4 move container to workspace 4
-bindsym $mod+Shift+5 move container to workspace 5
-bindsym $mod+Shift+6 move container to workspace 6
-bindsym $mod+Shift+7 move container to workspace 7
-bindsym $mod+Shift+8 move container to workspace 8
-bindsym $mod+Shift+9 move container to workspace 9
-bindsym $mod+Shift+0 move container to workspace 10
+bindsym $mod+Shift+1 move container to workspace $WS1
+bindsym $mod+Shift+2 move container to workspace $WS2
+bindsym $mod+Shift+3 move container to workspace $WS3 
+bindsym $mod+Shift+4 move container to workspace $WS4 
+bindsym $mod+Shift+5 move container to workspace $WS5
+bindsym $mod+Shift+6 move container to workspace $WS6
+bindsym $mod+Shift+7 move container to workspace $WS7
+bindsym $mod+Shift+8 move container to workspace $WS8
+bindsym $mod+Shift+9 move container to workspace $WS9
+bindsym $mod+Shift+0 move container to workspace $WS10
 
 ## Redimensionar ventana (you can also use the mouse for that)
 mode "resize" {
@@ -170,14 +178,14 @@ mode "resize" {
         bindsym Escape mode "default"
 }
 
-bindsym $mod+r mode "resize"
+bindsym $mod+r mode "resire"
 
 #Imprimir pantalla
-bindsym Print exec scrot '%Y-%m-%d_%T_scrot.png' -e 'mv $f ~/Imágenes/screenshots/'
+bindsym Print exec scrot '%Y-%m-%d_%T_scrot.png' -e 'mv $f ~/Imágenes/Screenshots/'
 
 # Screen brightness controls
-bindcode $mod+67 exec xbacklight - 10
-bindcode $mod+68 exec xbacklight + 10
+#bindcode $mod+67 exec xbacklight - 10
+#bindcode $mod+68 exec xbacklight + 10
 
 # media keys
 #bindsym $mod+Home exec curl http://localhost:2000/command/default/playpause
@@ -189,9 +197,11 @@ bindcode $mod+68 exec xbacklight + 10
 ############################################################
 exec --no-startup-id dropbox start
 exec --no-startup-id synology-cloud-station-drive
-exec --no-startup-id nautilus
-exec --no-startup-id i3-msg 'workspace 2; exec x-www-browser; workspace 1'
-exec --no-startup-id i3-msg 'workspace 3; exec tilix; workspace 1'
+#exec --no-startup-id nautilus
+exec --no-startup-id i3-msg 'workspace $WS2; exec tilix; workspace $WS1'
+exec --no-startup-id i3-msg 'workspace $WS3; exec x-www-browser; workspace $WS1'
+exec --no-startup-id i3-msg 'workspace $WS4; exec telegram; workspace $WS1'
+exec --no-startup-id i3-msg 'workspace $WS4; exec corebird; workspace $WS1'
 
 # Red
 exec --no-startup-id nm-applet
@@ -252,8 +262,22 @@ bindsym $mod+Shift+r restart
 bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'Si pulsas sobre salir se cerrará todo lo que tengas abierto. ¿Realmente quieres salir?' -b 'Si, exit i3' 'i3-msg exit'"
 
 ###########################################################
-############      Container/Window control     ############
+############ Ubicacion de ventanas por defecto ############
 ###########################################################
+assign [class="^[fF]irefox"] → $WS3
+assign [class="^[cC]hrome"] → $WS3
+assign [class="^[cC]hromium"] → $WS3
+assign [class="^[tT]hunderbird"] → $WS4
+assign [class="^Corebird"] → $WS4
+assign [class="^[pP]hpstorm"] → $WS5
+assign [class="^[pP]ycharm"] → $WS5
+assign [class="^[aA]tom"] → $WS5
+assign [class="^Brackets"] → $WS5
+assign [class="^Audacity"] → $WS6
+assign [class="^Gimp"] → $WS7
+assign [class="^Inkscape"] → $WS7
+assign [class="^Dia"] → $WS7
+
 
 ###########################################################
 ############        application settings       ############
@@ -262,10 +286,25 @@ bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'Si pulsas sobre salir se cer
 bindsym $mod+p exec "xautolock -locknow -locker 'i3lock -c 000000 -d'"
 exec_always --no-startup-id xautolock -detectsleep -notify 30 -notifier "notify-send -u low -t 2000 -- 'Locking screen in 30s'" -time 5 -locker "i3lock -c 000000 -d"
 
-## Volumen
-bindsym XF86AudioRaiseVolume exec pactl set-sink-volume 0 +5% #increase sound volume
-bindsym XF86AudioLowerVolume exec pactl set-sink-volume 0 -5% #decrease sound volume
-bindsym XF86AudioMute exec pactl set-sink-mute 0 toggle # mute sound
+# Pulse Audio controls
+bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume 0 +5% #increase sound volume
+bindsym XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume 0 -5% #decrease sound volume
+bindsym XF86AudioMute exec --no-startup-id pactl set-sink-mute 0 toggle # mute sound
+
+# Sreen brightness controls
+bindsym XF86MonBrightnessUp exec xbacklight -inc 10 # increase screen brightness
+bindsym XF86MonBrightnessDown exec xbacklight -dec 10 # decrease screen brightness
+
+# Touchpad controls
+#bindsym XF86TouchpadToggle exec /some/path/toggletouchpad.sh # toggle touchpad
+
+# Media player controls
+#bindsym XF86AudioPlay exec playerctl play
+#bindsym XF86AudioPause exec playerctl pause
+#bindsym XF86AudioNext exec playerctl next
+#bindsym XF86AudioPrev exec playerctl previous
+
+## Mostrar todas las teclas y codigos → xmodmap -pke y 
 
 #for_window [class="(?i)(?:qt5ct|pinentry)"] floating enable, focus
 #for_window [class="(?i)(?:tilix|thunar)"] focus
@@ -291,3 +330,9 @@ bindsym XF86AudioMute exec pactl set-sink-mute 0 toggle # mute sound
 exec --no-startup-id xbindkeys
 exec --no-startup-id pulseaudio --start
 exec_always --no-startup-id dunst
+
+
+
+
+## Keybinds para obtener focus de un programa
+#bindsym $mod+F1 [class="Firefox"] focus
