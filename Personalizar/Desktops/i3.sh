@@ -37,7 +37,7 @@ i3wm_postconfiguracion() {
     echo -e "$VE Generando Post-Configuraciones$RO i3wm$CL"
 
     echo -e "$VE Instalando software secundario$CL"
-    instalarSoftware rxvt-unicode-256color compton compton-conf compton-conf-l10n nitrogen gpicview thunar ranger w3m tint2 arandr neofetch scrot xbacklight
+    instalarSoftware rxvt-unicode-256color compton compton-conf compton-conf-l10n nitrogen gpicview thunar ranger w3m tint2 arandr neofetch scrot xbacklight gvfs
 
     echo -e "$VE Generando archivos de configuración$CL"
     ## Enlazar "$WORKSCRIPT/conf/home/.i3" en "$HOME/.i3"
@@ -46,6 +46,10 @@ i3wm_postconfiguracion() {
     if [[ ! -d "$HOME/Imágenes/Screenshot" ]]; then
         mkdir -p "$HOME/Imágenes/Screenshots"
     fi
+
+    ## Instalando i3pystatus
+    instalarSoftware 'python3' 'pip3'
+    pip3 install i3pystatus netifaces colour basiciw pyalsaaudio fontawesome
 }
 
 i3wm_instalador() {
