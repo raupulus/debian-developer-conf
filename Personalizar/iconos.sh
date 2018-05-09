@@ -24,7 +24,7 @@
 instalar_iconos() {
     echo -e "$VE Instalando iconos personalizados dentro de$RO /usr/share/icons/fryntiz$CL"
     if [[ -d '/usr/share/icons/fryntiz' ]]; then
-        rm -Rf '/usr/share/icons/fryntiz'
+        sudo rm -Rf '/usr/share/icons/fryntiz'
     fi
     sudo cp -r "$WORKSCRIPT/conf/usr/share/icons/fryntiz" '/usr/share/icons/fryntiz'
     sudo chmod 755 -R '/usr/share/icons/fryntiz'

@@ -1,0 +1,381 @@
+#!/usr/bin/env bash
+# -*- ENCODING: UTF-8 -*-
+##
+## @author     Raúl Caro Pastorino
+## @copyright  Copyright © 2018 Raúl Caro Pastorino
+## @license    https://wwww.gnu.org/licenses/gpl.txt
+## @email      tecnico@fryntiz.es
+## @web        www.fryntiz.es
+## @github     https://github.com/fryntiz
+## @gitlab     https://gitlab.com/fryntiz
+## @twitter    https://twitter.com/fryntiz
+
+## Please see http://i3wm.org/docs/userguide.html for a complete and oficial reference!
+
+## Tecla modificadora.
+set $mod Mod4
+
+## Espacios de trabajo
+set $WS1 1:FILE
+set $WS2 2:TERM
+set $WS3 3:WWW
+set $WS4 4:REDES
+set $WS5 5:IDE
+set $WS6 6:AUDIO
+set $WS7 7:IMG
+set $WS8 8
+set $WS9 9
+set $WS10 10
+
+## Fuente para títulos de ventanas usadas en bar {} block below.
+font pango:monospace 8
+#font pango:DejaVu Sans Mono 8
+
+## Usar Mouse+$mod para arrastrar ventanas flotantes
+floating_modifier $mod
+
+## Abrir terminal con $mod+Intro
+bindsym $mod+Return exec i3-sensible-terminal
+
+## Cerrar ventana actual con $mod+shift+q
+bindsym $mod+Shift+q kill
+
+## Abrir dmenu (Lanzador de programas)
+bindsym $mod+d exec i3-dmenu-desktop ## Antes dmenu_run
+
+## Modo de Organizar ventanas por defecto: default|stacking|tabbed
+workspace_layout tabbed
+
+############################################################
+###############            i3bar          ##################
+############################################################
+# Start i3bar to display a workspace bar (plus the system information i3status
+# finds out, if available)
+
+bar {
+    #status_command  i3status        ## Mostrar status de monitoreo
+    status_command  python3 ~/.config/i3/scripts/i3pystatus-config.py
+    position        bottom             ## Posición Arriba
+    
+    ## Fuente
+    #font pango:terminus, awesome 9  ## Fuente tipografica
+    font pango:Inconsolata-dz for Powerline  10
+    
+    workspace_buttons yes
+
+
+    colors {
+        background  #001111  #Color del panel
+        statusline  #fdf6e3  #Color del status
+        separator   #9e9e9e  #Color de separadores
+
+#::::::::::::::::::::::: Indicadores ::::::::::::::::::::::::::#
+#                            bordes     backgr     text
+        focused_workspace    #FDF6E3    #FDF6E3    #002B36
+        inactive_workspace   #607D8B    #607D8B    #002B36
+        urgent_workspace     #859900    #859900    #121212
+
+    }
+}
+
+## Decoración de ventanas
+##    class        bordes   backgr.  text
+client.focused    #4c7899  #285577  #ffffff  #2e9ef4
+client.unfocused  #4c7899  #24364F  #aaaaaa  #2e9ef4
+client.focused    #c10101  #880404  #ffffff  #00AA00
+
+## Quita los bordes de los extremos de la pantalla
+hide_edge_borders vertical
+
+############################################################
+#############          Bindings           ##################
+############################################################
+## Navegar entre las ventanas $mod+[jkln] o $mod+[←↓→]
+bindsym $mod+j focus left
+bindsym $mod+k focus down
+bindsym $mod+l focus up
+bindsym $mod+ntilde focus right
+bindsym $mod+Left focus left
+bindsym $mod+Down focus down
+bindsym $mod+Up focus up
+bindsym $mod+Right focus right
+
+## Mover una ventana $mod+shift+[jkln] o $mod+shift+[←↓→]
+bindsym $mod+Shift+j move left
+bindsym $mod+Shift+k move down
+bindsym $mod+Shift+l move up
+bindsym $mod+Shift+ntilde move right
+bindsym $mod+Shift+Left move left
+bindsym $mod+Shift+Down move down
+bindsym $mod+Shift+Up move up
+bindsym $mod+Shift+Right move right
+
+# split in horizontal orientation
+bindsym $mod+h split h
+
+# split in vertical orientation
+bindsym $mod+v split v
+
+## Poner en pantalla completa la ventana actual con $mod+f
+bindsym $mod+f fullscreen toggle
+
+# change container layout (stacked, tabbed, toggle split)
+bindsym $mod+s layout stacking
+bindsym $mod+w layout tabbed
+bindsym $mod+e layout toggle split
+
+## Alternar ventana entre flotante o tiling con $mod+Shift+space
+bindsym $mod+Shift+space floating toggle
+
+## Cambiar el foco entre tiling / floating windows
+bindsym $mod+space focus mode_toggle
+
+## El foco sobre el contenedor padre
+bindsym $mod+a focus parent
+
+## El foco sobre el contenedor hijo
+#bindsym $mod+d focus child
+
+## Cambiar entre espacioes de trabajo
+bindsym $mod+1 workspace $WS1
+bindsym $mod+2 workspace $WS2
+bindsym $mod+3 workspace $WS3
+bindsym $mod+4 workspace $WS4
+bindsym $mod+5 workspace $WS5
+bindsym $mod+6 workspace $WS6
+bindsym $mod+7 workspace $WS7
+bindsym $mod+8 workspace $WS8
+bindsym $mod+9 workspace $WS9
+bindsym $mod+0 workspace $WS10
+
+## Mover una ventana a un espacio de trabajo concreto
+bindsym $mod+Shift+1 move container to workspace $WS1
+bindsym $mod+Shift+2 move container to workspace $WS2
+bindsym $mod+Shift+3 move container to workspace $WS3 
+bindsym $mod+Shift+4 move container to workspace $WS4 
+bindsym $mod+Shift+5 move container to workspace $WS5
+bindsym $mod+Shift+6 move container to workspace $WS6
+bindsym $mod+Shift+7 move container to workspace $WS7
+bindsym $mod+Shift+8 move container to workspace $WS8
+bindsym $mod+Shift+9 move container to workspace $WS9
+bindsym $mod+Shift+0 move container to workspace $WS10
+
+## Redimensionar ventana (you can also use the mouse for that)
+mode "resize" {
+        # These bindings trigger as soon as you enter the resize mode
+
+        # Pressing left will shrink the window’s width.
+        # Pressing right will grow the window’s width.
+        # Pressing up will shrink the window’s height.
+        # Pressing down will grow the window’s height.
+        bindsym j resize shrink width 10 px or 10 ppt
+        bindsym k resize grow height 10 px or 10 ppt
+        bindsym l resize shrink height 10 px or 10 ppt
+        bindsym ntilde resize grow width 10 px or 10 ppt
+
+        # same bindings, but for the arrow keys
+        bindsym Left resize shrink width 10 px or 10 ppt
+        bindsym Down resize grow height 10 px or 10 ppt
+        bindsym Up resize shrink height 10 px or 10 ppt
+        bindsym Right resize grow width 10 px or 10 ppt
+
+        # back to normal: Enter or Escape
+        bindsym Return mode "default"
+        bindsym Escape mode "default"
+}
+
+bindsym $mod+r mode "resire"
+
+## Captura de Pantalla
+bindsym Print exec scrot '%Y-%m-%d_%T_scrot.png' -e 'mv $f ~/Imágenes/Screenshots/'
+
+## Captura de Ventana
+bindsym $mod+Print exec scrot '%Y-%m-%d_%T_scrot.png' -u -e 'mv $f ~/Imágenes/Screenshots/'
+
+bindsym $mod+control+Print exec scrot -s '%Y-%m-%d_%T_scrot.png' -e 'mv $f ~/Imágenes/Screenshots/'
+
+# Screen brightness controls
+#bindcode $mod+67 exec xbacklight - 10
+#bindcode $mod+68 exec xbacklight + 10
+
+# media keys
+#bindsym $mod+Home exec curl http://localhost:2000/command/default/playpause
+#bindsym $mod+Next exec curl http://localhost:2000/command/default/prev
+#bindsym $mod+Prior exec curl http://localhost:2000/command/default/next
+
+############################################################
+###############          Autostart        ##################
+############################################################
+exec --no-startup-id dropbox start
+exec --no-startup-id synology-cloud-station-drive
+#exec --no-startup-id nautilus
+exec --no-startup-id i3-msg 'workspace $WS1; exec thunar;'
+exec --no-startup-id i3-msg 'workspace $WS1; exec thunar;'
+exec --no-startup-id i3-msg 'workspace $WS2; exec tilix; workspace $WS1'
+exec --no-startup-id i3-msg 'workspace $WS3; exec x-www-browser; workspace $WS1'
+exec --no-startup-id i3-msg 'workspace $WS4; exec ~/4_Programas/Telegram/Telegram; workspace $WS1'
+exec --no-startup-id i3-msg 'workspace $WS4; exec corebird; workspace $WS1'
+exec --no-startup-id i3-msg 'workspace $WS4; exec whatsie; workspace $WS1'
+exec --no-startup-id i3-msg 'workspace $WS4; exec thunderbird; workspace $WS1'
+
+# Red
+exec --no-startup-id nm-applet
+
+# Transparencia
+exec --no-startup-id compton -cCGb
+
+# Teclado numerico
+exec --no-startup-id numlockx on
+
+# Applet de volumen
+exec --no-startup-id volumeicon
+
+## run with reload
+#exec_always --no-startup-id al-polybar-session
+exec_always --no-startup-id nitrogen --restore
+#exec_always --no-startup-id xrdb -load ~/.Xresources
+
+# run once
+#exec --no-startup-id ksuperkey -e 'Super_L=Alt_L|F1'
+#exec --no-startup-id al-compositor --start
+## Fondo de pantalla nitrogen
+exec --no-startup-id nitrogen --restore
+#exec --no-startup-id xfsettingsd
+#exec --no-startup-id lxpolkit
+
+assign [title="^Momentum$"] 3
+for_window [title="^Momentum$"] focus
+for_window [title="^Momentum$"] floating enable
+
+# exec --no-startup-id xinput --set-prop 'pointer:Telink Wireless Receiver' 'Device Accel Constant Deceleration' 3
+# exec --no-startup-id xinput --set-prop 'pointer:Telink Wireless Receiver' 'Device Accel Profile' 4
+# exec --no-startup-id xset m 4 3
+exec --no-startup-id xset r rate 250 30
+exec --no-startup-id setxkbmap -option "ctrl:swapcaps"
+# exec --no-startup-id ~/.local/bin/xcape -e 'Control_L=Escape'
+# exec --no-startup-id lxpolkit
+# exec --no-startup-id start-pulseaudio-x11
+# exec --no-startup-id pasystray
+# exec --no-startup-id pcmanfm -d
+#exec --no-startup-id xflux -l 36.7756 -g -6.3616 -k 4200
+#exec --no-startup-id ~/.local/bin/unclutter --timeout 1 --fork
+#exec --no-startup-id "i3-msg 'workspace 2; append_layout ~/.i3/workspace-2.json'"
+#exec --no-startup-id sakura
+#exec --no-startup-id "i3-msg 'workspace 1; append_layout ~/.i3/workspace-1.json'"
+#exec --no-startup-id x-www-browser
+
+############################################################
+##############        Reload configs        ################
+############################################################
+## Recargar el archivo de configuración
+bindsym $mod+Shift+c reload
+
+## Reiniciar i3 conservando la sesión
+bindsym $mod+Shift+r restart
+
+# Salir de i3 (logs you out of your X session)
+bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'Si pulsas sobre salir se cerrará todo lo que tengas abierto. ¿Realmente quieres salir?' -b 'Si, exit i3' 'i3-msg exit'"
+
+###########################################################
+############ Ubicacion de ventanas por defecto ############
+###########################################################
+assign [class="^[fF]irefox"] → $WS3
+for_window [class="^[fF]irefox"] focus
+assign [class="^[cC]hrome"] → $WS3
+for_window [class="^[cC]hrome"] focus
+assign [class="^[cC]hromium"] → $WS3
+for_window [class="^[cC]Chromium"] focus
+assign [class="^Thunderbird"] → $WS4
+for_window [class="^Thunderbird"] focus
+assign [class="^Corebird"] → $WS4
+for_window [class="^Corebird"] focus
+assign [class="^Telegram"] → $WS4
+for_window [class="^Telegram"] focus
+assign [class="^[wW]hatsie"] → $WS4
+for_window [class="^[wW]hatsie"] focus
+assign [class="[pP]hp[sS]torm"] → $WS5
+for_window [class="[pP]hp[sS]torm"] focus
+assign [class="^[pP]y[cC]harm"] → $WS5
+for_window [class="^[pP]y[cC]harm"] focus
+assign [class="^[aA]tom"] → $WS5
+for_window [class="^[aA]tom"] focus
+assign [class="^Brackets"] → $WS5
+for_window [class="^Brackets"] focus
+assign [class="^Audacity"] → $WS6
+for_window [class="^Audacity"] focus
+assign [class="^Gimp"] → $WS7
+for_window [class="^Gimp"] focus
+assign [class="^Inkscape"] → $WS7
+for_window [class="^Inkscape"] focus
+assign [class="^Dia"] → $WS7
+for_window [class="^Dia"] focus
+
+
+###########################################################
+############        application settings       ############
+###########################################################
+## Bloqueo de pantalla
+bindsym $mod+p exec "xautolock -locknow -locker 'i3lock -c 000000 -d'"
+exec_always --no-startup-id xautolock -detectsleep -notify 30 -notifier "notify-send -u low -t 2000 -- 'La pantalla se bloqueará en 30s'" -time 5 -locker "i3lock -c 000000 -d"
+
+# Pulse Audio controls
+bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume 0 +5% #increase sound volume
+bindsym XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume 0 -5% #decrease sound volume
+bindsym XF86AudioMute exec --no-startup-id pactl set-sink-mute 0 toggle # mute sound
+
+# Sreen brightness controls
+bindsym XF86MonBrightnessUp exec xbacklight -inc 10 # increase screen brightness
+bindsym XF86MonBrightnessDown exec notify-send xbacklight -dec 10 # decrease screen brightness
+
+# Touchpad controls
+#bindsym XF86TouchpadToggle exec /some/path/toggletouchpad.sh # toggle touchpad
+
+# Media player controls
+#bindsym XF86AudioPlay exec playerctl play
+#bindsym XF86AudioPause exec playerctl pause
+#bindsym XF86AudioNext exec playerctl next
+#bindsym XF86AudioPrev exec playerctl previous
+
+## Mostrar todas las teclas y codigos → xmodmap -pke y 
+
+#for_window [class="(?i)(?:qt5ct|pinentry)"] floating enable, focus
+#for_window [class="(?i)(?:tilix|thunar)"] focus
+#for_window [class="(?i)(?:geany|firefox)"] focus
+
+# Assign Applications to specific workspace
+# get class with xprop
+#assign [class="(?i)(?:firefox)"] → $WS1
+#assign [class="(?i)(?:geany)"] → $WS2
+#assign [class="(?i)(?:thunar)"] → $WS3
+
+# focus, floating, & sticky
+#for_window [title="(?i)(?:copying|deleting|moving)"] floating enable
+#for_window [window_role="(?i)(?:pop-up|setup)"] floating enable
+
+# set trayer to be borderless
+#for_window [class="(?i)trayer"] border pixel 0
+
+###########################################################
+############               PRUEBAS             ############
+###########################################################
+
+exec --no-startup-id xbindkeys
+exec --no-startup-id pulseaudio --start
+exec_always --no-startup-id dunst
+
+
+
+
+## Keybinds para obtener focus de un programa
+bindsym $mod+F1 [class="Firefox"] focus
+bindsym $mod+F2 [class="Atom"] focus
+bindsym $mod+F3 [class="PhpStorm"] focus
+bindsym $mod+F4 [class="Thunar"] focus
+bindsym $mod+F5 [class="tilix"] focus
+bindsym $mod+F6 [class="PyCharm"] focus
+bindsym $mod+F7 [class="Firefox"] focus
+bindsym $mod+F8 [class="Firefox"] focus
+bindsym $mod+F9 [class="Firefox"] focus
+bindsym $mod+F10 [class="Thunderbird"] focus
+bindsym $mod+F11 [class="whatsie"] focus
+bindsym $mod+F12 [class="Telegram"] focus

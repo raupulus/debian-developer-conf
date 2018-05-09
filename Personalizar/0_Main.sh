@@ -25,6 +25,7 @@ source "$WORKSCRIPT/Personalizar/Personalizar_GTK.sh"
 source "$WORKSCRIPT/Personalizar/Tipografias.sh"
 source "$WORKSCRIPT/Personalizar/iconos.sh"
 source "$WORKSCRIPT/Personalizar/Variables_Entorno.sh"
+source "$WORKSCRIPT/Personalizar/Desktops/0_Main.sh"
 
 ###########################
 ##       FUNCIONES       ##
@@ -40,7 +41,7 @@ menuPersonalizacion() {
         instalar_iconos
     }
 
-    ## Si la función recibe "-a" indica que instale todos los servidores
+    ## Si la función recibe "-a" indica que instale todas
     if [[ "$1" = '-a' ]]; then
         todas_personalizaciones
     else
@@ -53,6 +54,7 @@ menuPersonalizacion() {
                 4) Variables de Entorno
                 5) Instalar Iconos
                 6) Todos los pasos anteriores
+                7) Instalar un Desktop o Window Manager
 
                 0) Atrás
             '
@@ -70,6 +72,7 @@ menuPersonalizacion() {
                 4)  instalar_variables;;       ## Variables de Entorno
                 5)  instalar_iconos;;          ## Iconos Personalizados
                 6)  todas_personalizaciones;;  ## Todos los pasos anteriores
+                7)  menuDesktops;;             ## Lleva al menú Escritorios
 
                 0)  ## SALIR
                     clear

@@ -137,7 +137,12 @@ apache2_postconfiguracion() {
             fi
         }
 
-        enlaces
+        ## Pregunta si generar enlace solo cuando falta uno de ellos
+        if [[ ! -h "$HOME/git" ]] &&
+           [[ ! -h "$HOME/GIT" ]] &&
+           [[ ! -h "$HOME/web" ]]; then
+            enlaces
+        fi
 
         ## Cambia los permisos
         echo -e "$VE Asignando permisos"
