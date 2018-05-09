@@ -24,12 +24,17 @@ set $WS5 5:IDE
 set $WS6 6:AUDIO
 set $WS7 7:IMG
 set $WS8 8
-set $WS9 9
-set $WS10 10
+
+## Monitor 2 escritorio 1
+set $WS9 HDMI1 
+## Monitor 2 escritorio 2
+set $WS10 HDMI2 
 
 ## Fuente para títulos de ventanas usadas en bar {} block below.
 font pango:monospace 8
 #font pango:DejaVu Sans Mono 8
+
+focus_follows_mouse no
 
 ## Usar Mouse+$mod para arrastrar ventanas flotantes
 floating_modifier $mod
@@ -53,9 +58,12 @@ workspace_layout tabbed
 # finds out, if available)
 
 bar {
+    ## Monitor para información en la barra de estado
     #status_command  i3status        ## Mostrar status de monitoreo
     status_command  python3 ~/.config/i3/scripts/i3pystatus-config.py
-    position        bottom             ## Posición Arriba
+
+    ## Posición donde colocar la barra
+    position        bottom           ## Posición Abajo
     
     ## Fuente
     #font pango:terminus, awesome 9  ## Fuente tipografica
@@ -63,23 +71,38 @@ bar {
     
     workspace_buttons yes
 
-
     colors {
         background  #001111  #Color del panel
         statusline  #fdf6e3  #Color del status
         separator   #9e9e9e  #Color de separadores
+        #background #1b1b1b
+        #statusline #ffffff
+        #separator #444444
 
-#::::::::::::::::::::::: Indicadores ::::::::::::::::::::::::::#
-#                            bordes     backgr     text
+        # Dark
+        #Colors           border  backgr. text
+        #focused_workspace  #141414 #283232 #606060
+        #active_workspace   #141414 #202020 #606060
+        #inactive_workspace #141414 #202020 #606060
+        #urgent_workspace   #141414 #452828 #8c644c
+
+        # Light
+        # Colors           border  backgr. text
+        #focused_workspace  #dddddd #ddbbdd #606060
+        #active_workspace   #dddddd #dddddd #606060
+        #inactive_workspace #dddddd #dddddd #606060
+        #urgent_workspace   #dddddd #452828 #8c644c
+        
+        #Mi tema
+        #Colores             bordes     fondo      texto
         focused_workspace    #FDF6E3    #FDF6E3    #002B36
         inactive_workspace   #607D8B    #607D8B    #002B36
         urgent_workspace     #859900    #859900    #121212
-
     }
 }
 
 ## Decoración de ventanas
-##    class        bordes   backgr.  text
+##  Clase         Bordes   Fondo    Texto    Indicador
 client.focused    #4c7899  #285577  #ffffff  #2e9ef4
 client.unfocused  #4c7899  #24364F  #aaaaaa  #2e9ef4
 client.focused    #c10101  #880404  #ffffff  #00AA00
@@ -160,6 +183,9 @@ bindsym $mod+Shift+8 move container to workspace $WS8
 bindsym $mod+Shift+9 move container to workspace $WS9
 bindsym $mod+Shift+0 move container to workspace $WS10
 
+bindsym $mod+x workspace next ## Siguiente workspace
+bindsym $mod+z workspace prev ## Anterior workspace
+
 ## Redimensionar ventana (you can also use the mouse for that)
 mode "resize" {
         # These bindings trigger as soon as you enter the resize mode
@@ -198,17 +224,11 @@ bindsym $mod+control+Print exec scrot -s '%Y-%m-%d_%T_scrot.png' -e 'mv $f ~/Im�
 #bindcode $mod+67 exec xbacklight - 10
 #bindcode $mod+68 exec xbacklight + 10
 
-# media keys
-#bindsym $mod+Home exec curl http://localhost:2000/command/default/playpause
-#bindsym $mod+Next exec curl http://localhost:2000/command/default/prev
-#bindsym $mod+Prior exec curl http://localhost:2000/command/default/next
-
 ############################################################
 ###############          Autostart        ##################
 ############################################################
 exec --no-startup-id dropbox start
 exec --no-startup-id synology-cloud-station-drive
-#exec --no-startup-id nautilus
 exec --no-startup-id i3-msg 'workspace $WS1; exec thunar;'
 exec --no-startup-id i3-msg 'workspace $WS1; exec thunar;'
 exec --no-startup-id i3-msg 'workspace $WS2; exec tilix; workspace $WS1'
@@ -232,37 +252,24 @@ exec --no-startup-id volumeicon
 
 ## run with reload
 #exec_always --no-startup-id al-polybar-session
-exec_always --no-startup-id nitrogen --restore
 #exec_always --no-startup-id xrdb -load ~/.Xresources
 
 # run once
 #exec --no-startup-id ksuperkey -e 'Super_L=Alt_L|F1'
-#exec --no-startup-id al-compositor --start
+
 ## Fondo de pantalla nitrogen
 exec --no-startup-id nitrogen --restore
+exec_always --no-startup-id nitrogen --restore
 #exec --no-startup-id xfsettingsd
 #exec --no-startup-id lxpolkit
 
-assign [title="^Momentum$"] 3
-for_window [title="^Momentum$"] focus
-for_window [title="^Momentum$"] floating enable
+#assign [title="^Momentum$"] 3
+#for_window [title="^Momentum$"] focus
+#for_window [title="^Momentum$"] floating enable
 
-# exec --no-startup-id xinput --set-prop 'pointer:Telink Wireless Receiver' 'Device Accel Constant Deceleration' 3
-# exec --no-startup-id xinput --set-prop 'pointer:Telink Wireless Receiver' 'Device Accel Profile' 4
-# exec --no-startup-id xset m 4 3
 exec --no-startup-id xset r rate 250 30
-exec --no-startup-id setxkbmap -option "ctrl:swapcaps"
-# exec --no-startup-id ~/.local/bin/xcape -e 'Control_L=Escape'
-# exec --no-startup-id lxpolkit
-# exec --no-startup-id start-pulseaudio-x11
-# exec --no-startup-id pasystray
-# exec --no-startup-id pcmanfm -d
-#exec --no-startup-id xflux -l 36.7756 -g -6.3616 -k 4200
-#exec --no-startup-id ~/.local/bin/unclutter --timeout 1 --fork
-#exec --no-startup-id "i3-msg 'workspace 2; append_layout ~/.i3/workspace-2.json'"
-#exec --no-startup-id sakura
-#exec --no-startup-id "i3-msg 'workspace 1; append_layout ~/.i3/workspace-1.json'"
-#exec --no-startup-id x-www-browser
+# exec --no-startup-id setxkbmap -option "ctrl:swapcaps" Cambia bloq Mayus y CTRL
+# exec --no-startup-id xflux -l 36.7756 -g -6.3616 -k 4200
 
 ############################################################
 ##############        Reload configs        ################
@@ -310,7 +317,6 @@ for_window [class="^Inkscape"] focus
 assign [class="^Dia"] → $WS7
 for_window [class="^Dia"] focus
 
-
 ###########################################################
 ############        application settings       ############
 ###########################################################
@@ -331,29 +337,19 @@ bindsym XF86MonBrightnessDown exec notify-send xbacklight -dec 10 # decrease scr
 #bindsym XF86TouchpadToggle exec /some/path/toggletouchpad.sh # toggle touchpad
 
 # Media player controls
-#bindsym XF86AudioPlay exec playerctl play
-#bindsym XF86AudioPause exec playerctl pause
-#bindsym XF86AudioNext exec playerctl next
-#bindsym XF86AudioPrev exec playerctl previous
+bindsym XF86AudioPlay exec playerctl play
+bindsym XF86AudioPause exec playerctl pause
+bindsym XF86AudioNext exec playerctl next
+
 
 ## Mostrar todas las teclas y codigos → xmodmap -pke y 
 
-#for_window [class="(?i)(?:qt5ct|pinentry)"] floating enable, focus
-#for_window [class="(?i)(?:tilix|thunar)"] focus
-#for_window [class="(?i)(?:geany|firefox)"] focus
-
-# Assign Applications to specific workspace
-# get class with xprop
-#assign [class="(?i)(?:firefox)"] → $WS1
-#assign [class="(?i)(?:geany)"] → $WS2
-#assign [class="(?i)(?:thunar)"] → $WS3
-
 # focus, floating, & sticky
-#for_window [title="(?i)(?:copying|deleting|moving)"] floating enable
-#for_window [window_role="(?i)(?:pop-up|setup)"] floating enable
+for_window [title="(?i)(?:copying|deleting|moving)"] floating enable
+for_window [window_role="(?i)(?:pop-up|setup)"] floating enable
 
 # set trayer to be borderless
-#for_window [class="(?i)trayer"] border pixel 0
+for_window [class="(?i)trayer"] border pixel 0
 
 ###########################################################
 ############               PRUEBAS             ############
@@ -379,3 +375,19 @@ bindsym $mod+F9 [class="Firefox"] focus
 bindsym $mod+F10 [class="Thunderbird"] focus
 bindsym $mod+F11 [class="whatsie"] focus
 bindsym $mod+F12 [class="Telegram"] focus
+
+
+
+## Asigno salidas para cada escritorio
+#workspace 1 output DVI-I-1
+#workspace 2 output DVI-I-1
+#workspace 3 output DVI-I-1
+#workspace 4 output DVI-I-1
+#workspace 5 output DVI-I-1
+#workspace 6 output DVI-D-0
+#workspace 7 output DVI-D-0
+#workspace 8 output DVI-D-0
+
+## Ubicación por defecto para escritorios del segundo monitor
+workspace $WS9 output DVI-D-0
+workspace $WS10 output DVI-D-0

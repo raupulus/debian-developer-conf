@@ -16,7 +16,7 @@ En esta instalación se parte de la base de XFCE
 -   i3-save-tree
 
 
-### Paquetes Secundarios instalados
+### Paquetes SecundaSrios instalados
 -   compton → Compositor de ventanas
 -   nitrogen → Seleccionar fondo de pantalla
 -   gpicview → visor de imágenes
@@ -26,6 +26,9 @@ En esta instalación se parte de la base de XFCE
 -   arandr → Interfaz de xrandr para organizar pantallas/monitores
 -   scrot → Captura Imágenes
 -   gvfs → Automontaje de dispositivos y papelera
+-   zathura → Lector pdf que permite usar las teclas de vim
+-   cmus → Reproductor C con curses.
+-   mplayer → Reproductor
 
 ### Organización de los escritorios
 
