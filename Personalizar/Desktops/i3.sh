@@ -48,7 +48,8 @@ i3wm_postconfiguracion() {
     fi
 
     ## Instalando i3pystatus
-    instalarSoftware 'python3' 'pip3'
+    ## libasound2-dev → Necesario para pyalsaaudio
+    instalarSoftware 'python3' 'pip3' 'libasound2-dev'
     pip3 install i3pystatus netifaces colour basiciw pyalsaaudio fontawesome
 }
 
