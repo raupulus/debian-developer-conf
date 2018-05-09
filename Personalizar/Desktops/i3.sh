@@ -27,7 +27,7 @@ i3wm_preconfiguracion() {
 
 i3wm_instalar() {
     echo -e "$VE Preparando para instalar$RO i3wm$CL"
-    instalarSoftware i3-wm i3-blocks suckless-tools
+    instalarSoftware i3 i3-wm i3blocks i3lock i3status suckless-tools
 }
 
 ##
@@ -40,7 +40,7 @@ i3wm_postconfiguracion() {
     instalarSoftware rxvt-unicode-256color compton compton-conf compton-conf-l10n nitrogen thunar ranger w3m tint2 arandr neofetch scrot xbacklight gvfs gpicview mplayer cmus zathura
 
     echo -e "$VE Generando archivos de configuración$CL"
-    enlazarHome '.config/i3' '.conf/tint2' '.conf/compton.conf' '.conf/conky' '.Xresources' '.config/nitrogen' '.config/i3status'
+    enlazarHome '.config/i3' '.config/tint2' '.config/compton.conf' '.config/conky' '.Xresources' '.config/nitrogen' '.config/i3status'
 
     if [[ ! -d "$HOME/Imágenes/Screenshot" ]]; then
         mkdir -p "$HOME/Imágenes/Screenshots"
@@ -49,8 +49,8 @@ i3wm_postconfiguracion() {
     ## Instalando i3pystatus
     ## libasound2-dev → Necesario para pyalsaaudio
     ## libiw-dev → Necesario para basiciw
-    instalarSoftware 'python3' 'pip3' 'libasound2-dev' 'libiw-dev'
-    sudo pip3 install i3pystatus basiciw netifaces colour pyalsaaudio fontawesome
+    instalarSoftware 'python3' 'python3-pip' 'libasound2-dev' 'libiw-dev'
+    sudo pip3 install --upgrade i3pystatus basiciw netifaces colour pyalsaaudio fontawesome
 }
 
 i3wm_instalador() {
