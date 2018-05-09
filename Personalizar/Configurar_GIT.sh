@@ -105,6 +105,7 @@ configurar_git() {
     git config --global core.editor vim
     git config --global color.ui true
     git config --global gui.encoding utf-8
+    git config --global help.autocorrect 1  ## Activa corrector de comandos
 
     ## Preguntar si se desea configurar GPG
     echo -e "$VE ¿Quieres configurar una clave$RO GPG$VE para firmar?$CL"
