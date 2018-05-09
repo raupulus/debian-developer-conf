@@ -59,8 +59,12 @@ agregar_fuentes() {
     }
 
     echo -e "$VE ¿Instalar$RO Nerd-Fonts$VE, ocupará más de 1GB (y su descarga)?"
-    read -p ' y/N → ' YN
-    if [[ "$YN" = 'y' ]] || [[ "$YN" = 'Y' ]]; then
+    read -p ' s/N → ' SN
+    if [[ "$SN" = 'y' ]] ||
+       [[ "$SN" = 'Y' ]] ||
+       [[ "$SN" = 's' ]] ||
+       [[ "$SN" = 'S' ]]
+    then
         nerd_fonts
     fi
 }
