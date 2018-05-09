@@ -16,13 +16,13 @@
 set $mod Mod4
 
 ## Espacios de trabajo
-set $WS1 WORK
-set $WS2 TERM
-set $WS3 WWW
-set $WS4 REDES
-set $WS5 IDE
-set $WS6 AUDIO
-set $WS7 IMG
+set $WS1 1:FILE
+set $WS2 2:TERM
+set $WS3 3:WWW
+set $WS4 4:REDES
+set $WS5 5:IDE
+set $WS6 6:AUDIO
+set $WS7 7:IMG
 set $WS8 8
 set $WS9 9
 set $WS10 10
@@ -53,15 +53,21 @@ workspace_layout tabbed
 # finds out, if available)
 
 bar {
-        position        top             ## Posición Arriba
-        status_command  i3status        ## Mostrar status de monitoreo
-        font pango:terminus, awesome 9  ## Fuente tipografica
+    #status_command  i3status        ## Mostrar status de monitoreo
+    status_command  python3 ~/.config/i3/scripts/i3pystatus-config.py
+    position        bottom             ## Posición Arriba
+    
+    ## Fuente
+    #font pango:terminus, awesome 9  ## Fuente tipografica
+    font pango:Inconsolata-dz for Powerline  10
+    
+    workspace_buttons yes
 
 
     colors {
-            background  #001111  #Color del panel
-            statusline  #fdf6e3  #Color del status
-            separator   #9e9e9e  #Color de separadores
+        background  #001111  #Color del panel
+        statusline  #fdf6e3  #Color del status
+        separator   #9e9e9e  #Color de separadores
 
 #::::::::::::::::::::::: Indicadores ::::::::::::::::::::::::::#
 #                            bordes     backgr     text
@@ -180,8 +186,13 @@ mode "resize" {
 
 bindsym $mod+r mode "resire"
 
-#Imprimir pantalla
+## Captura de Pantalla
 bindsym Print exec scrot '%Y-%m-%d_%T_scrot.png' -e 'mv $f ~/Imágenes/Screenshots/'
+
+## Captura de Ventana
+bindsym $mod+Print exec scrot '%Y-%m-%d_%T_scrot.png' -u -e 'mv $f ~/Imágenes/Screenshots/'
+
+bindsym $mod+control+Print exec scrot -s '%Y-%m-%d_%T_scrot.png' -e 'mv $f ~/Imágenes/Screenshots/'
 
 # Screen brightness controls
 #bindcode $mod+67 exec xbacklight - 10
@@ -198,10 +209,14 @@ bindsym Print exec scrot '%Y-%m-%d_%T_scrot.png' -e 'mv $f ~/Imágenes/Screensho
 exec --no-startup-id dropbox start
 exec --no-startup-id synology-cloud-station-drive
 #exec --no-startup-id nautilus
+exec --no-startup-id i3-msg 'workspace $WS1; exec thunar;'
+exec --no-startup-id i3-msg 'workspace $WS1; exec thunar;'
 exec --no-startup-id i3-msg 'workspace $WS2; exec tilix; workspace $WS1'
 exec --no-startup-id i3-msg 'workspace $WS3; exec x-www-browser; workspace $WS1'
-exec --no-startup-id i3-msg 'workspace $WS4; exec telegram; workspace $WS1'
+exec --no-startup-id i3-msg 'workspace $WS4; exec ~/4_Programas/Telegram/Telegram; workspace $WS1'
 exec --no-startup-id i3-msg 'workspace $WS4; exec corebird; workspace $WS1'
+exec --no-startup-id i3-msg 'workspace $WS4; exec whatsie; workspace $WS1'
+exec --no-startup-id i3-msg 'workspace $WS4; exec thunderbird; workspace $WS1'
 
 # Red
 exec --no-startup-id nm-applet
@@ -265,18 +280,35 @@ bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'Si pulsas sobre salir se cer
 ############ Ubicacion de ventanas por defecto ############
 ###########################################################
 assign [class="^[fF]irefox"] → $WS3
+for_window [class="^[fF]irefox"] focus
 assign [class="^[cC]hrome"] → $WS3
+for_window [class="^[cC]hrome"] focus
 assign [class="^[cC]hromium"] → $WS3
-assign [class="^[tT]hunderbird"] → $WS4
+for_window [class="^[cC]Chromium"] focus
+assign [class="^Thunderbird"] → $WS4
+for_window [class="^Thunderbird"] focus
 assign [class="^Corebird"] → $WS4
-assign [class="^[pP]hpstorm"] → $WS5
-assign [class="^[pP]ycharm"] → $WS5
+for_window [class="^Corebird"] focus
+assign [class="^Telegram"] → $WS4
+for_window [class="^Telegram"] focus
+assign [class="^[wW]hatsie"] → $WS4
+for_window [class="^[wW]hatsie"] focus
+assign [class="[pP]hp[sS]torm"] → $WS5
+for_window [class="[pP]hp[sS]torm"] focus
+assign [class="^[pP]y[cC]harm"] → $WS5
+for_window [class="^[pP]y[cC]harm"] focus
 assign [class="^[aA]tom"] → $WS5
+for_window [class="^[aA]tom"] focus
 assign [class="^Brackets"] → $WS5
+for_window [class="^Brackets"] focus
 assign [class="^Audacity"] → $WS6
+for_window [class="^Audacity"] focus
 assign [class="^Gimp"] → $WS7
+for_window [class="^Gimp"] focus
 assign [class="^Inkscape"] → $WS7
+for_window [class="^Inkscape"] focus
 assign [class="^Dia"] → $WS7
+for_window [class="^Dia"] focus
 
 
 ###########################################################
@@ -284,7 +316,7 @@ assign [class="^Dia"] → $WS7
 ###########################################################
 ## Bloqueo de pantalla
 bindsym $mod+p exec "xautolock -locknow -locker 'i3lock -c 000000 -d'"
-exec_always --no-startup-id xautolock -detectsleep -notify 30 -notifier "notify-send -u low -t 2000 -- 'Locking screen in 30s'" -time 5 -locker "i3lock -c 000000 -d"
+exec_always --no-startup-id xautolock -detectsleep -notify 30 -notifier "notify-send -u low -t 2000 -- 'La pantalla se bloqueará en 30s'" -time 5 -locker "i3lock -c 000000 -d"
 
 # Pulse Audio controls
 bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume 0 +5% #increase sound volume
@@ -293,7 +325,7 @@ bindsym XF86AudioMute exec --no-startup-id pactl set-sink-mute 0 toggle # mute s
 
 # Sreen brightness controls
 bindsym XF86MonBrightnessUp exec xbacklight -inc 10 # increase screen brightness
-bindsym XF86MonBrightnessDown exec xbacklight -dec 10 # decrease screen brightness
+bindsym XF86MonBrightnessDown exec notify-send xbacklight -dec 10 # decrease screen brightness
 
 # Touchpad controls
 #bindsym XF86TouchpadToggle exec /some/path/toggletouchpad.sh # toggle touchpad
@@ -335,4 +367,15 @@ exec_always --no-startup-id dunst
 
 
 ## Keybinds para obtener focus de un programa
-#bindsym $mod+F1 [class="Firefox"] focus
+bindsym $mod+F1 [class="Firefox"] focus
+bindsym $mod+F2 [class="Atom"] focus
+bindsym $mod+F3 [class="PhpStorm"] focus
+bindsym $mod+F4 [class="Thunar"] focus
+bindsym $mod+F5 [class="tilix"] focus
+bindsym $mod+F6 [class="PyCharm"] focus
+bindsym $mod+F7 [class="Firefox"] focus
+bindsym $mod+F8 [class="Firefox"] focus
+bindsym $mod+F9 [class="Firefox"] focus
+bindsym $mod+F10 [class="Thunderbird"] focus
+bindsym $mod+F11 [class="whatsie"] focus
+bindsym $mod+F12 [class="Telegram"] focus
