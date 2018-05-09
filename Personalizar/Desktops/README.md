@@ -25,6 +25,7 @@ En esta instalación se parte de la base de XFCE
 -   tint2 → Barra de menú (redundante, no se usará por defecto)
 -   arandr → Interfaz de xrandr para organizar pantallas/monitores
 -   scrot → Captura Imágenes
+-   gvfs → Automontaje de dispositivos y papelera
 
 ### Organización de los escritorios
 
