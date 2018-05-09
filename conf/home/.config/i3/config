@@ -26,14 +26,35 @@ set $WS7 7:IMG
 set $WS8 8
 
 ## Monitor 2 escritorio 1
-set $WS9 HDMI1 
+set $WS9 9:HDMI1 
 ## Monitor 2 escritorio 2
-set $WS10 HDMI2 
+set $WS10 10:HDMI2 
+
+
+
+## Asigno salidas para cada escritorio
+#workspace 1 output DVI-I-1
+#workspace 2 output DVI-I-1
+#workspace 3 output DVI-I-1
+#workspace 4 output DVI-I-1
+#workspace 5 output DVI-I-1
+#workspace 6 output DVI-D-0
+#workspace 7 output DVI-D-0
+#workspace 8 output DVI-D-0
+
+## Ubicación por defecto para escritorios del segundo monitor
+workspace $WS9 output DVI-D-0
+workspace $WS10 output DVI-D-0
+
+## Establezc a 90 dpi
+exec --no-startup-id xrandr --dpi 90
+exec_always --no-startup-id xrandr --dpi 90
 
 ## Fuente para títulos de ventanas usadas en bar {} block below.
 font pango:monospace 8
 #font pango:DejaVu Sans Mono 8
 
+## Habilita o Deshabilita tener el foco al pasar el ratón
 focus_follows_mouse no
 
 ## Usar Mouse+$mod para arrastrar ventanas flotantes
@@ -67,7 +88,8 @@ bar {
     
     ## Fuente
     #font pango:terminus, awesome 9  ## Fuente tipografica
-    font pango:Inconsolata-dz for Powerline  10
+    #font pango:Inconsolata-dz for Powerline  10
+    font pango:Space Mono for Powerline  10
     
     workspace_buttons yes
 
@@ -252,7 +274,7 @@ exec --no-startup-id volumeicon
 
 ## run with reload
 #exec_always --no-startup-id al-polybar-session
-#exec_always --no-startup-id xrdb -load ~/.Xresources
+exec_always --no-startup-id xrdb -load ~/.Xresources
 
 # run once
 #exec --no-startup-id ksuperkey -e 'Super_L=Alt_L|F1'
@@ -378,16 +400,3 @@ bindsym $mod+F12 [class="Telegram"] focus
 
 
 
-## Asigno salidas para cada escritorio
-#workspace 1 output DVI-I-1
-#workspace 2 output DVI-I-1
-#workspace 3 output DVI-I-1
-#workspace 4 output DVI-I-1
-#workspace 5 output DVI-I-1
-#workspace 6 output DVI-D-0
-#workspace 7 output DVI-D-0
-#workspace 8 output DVI-D-0
-
-## Ubicación por defecto para escritorios del segundo monitor
-workspace $WS9 output DVI-D-0
-workspace $WS10 output DVI-D-0
