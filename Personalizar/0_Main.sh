@@ -21,7 +21,7 @@
 ##     IMPORTACIONES      ##
 ############################
 source "$WORKSCRIPT/Personalizar/Configurar_GIT.sh"
-source "$WORKSCRIPT/Personalizar/SPersonalización_GTK.sh"
+source "$WORKSCRIPT/Personalizar/Personalización_GTK.sh"
 source "$WORKSCRIPT/Personalizar/Tipografías.sh"
 source "$WORKSCRIPT/Personalizar/iconos.sh"
 source "$WORKSCRIPT/Personalizar/Variables_Entorno.sh"
