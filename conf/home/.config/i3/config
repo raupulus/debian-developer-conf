@@ -16,7 +16,7 @@
 set $mod Mod4
 
 ## Espacios de trabajo
-set $WS1 1:WORK
+set $WS1 1:FILE
 set $WS2 2:TERM
 set $WS3 3:WWW
 set $WS4 4:REDES
@@ -209,6 +209,8 @@ bindsym $mod+control+Print exec scrot -s '%Y-%m-%d_%T_scrot.png' -e 'mv $f ~/Im√
 exec --no-startup-id dropbox start
 exec --no-startup-id synology-cloud-station-drive
 #exec --no-startup-id nautilus
+exec --no-startup-id i3-msg 'workspace $WS1; exec thunar;'
+exec --no-startup-id i3-msg 'workspace $WS1; exec thunar;'
 exec --no-startup-id i3-msg 'workspace $WS2; exec tilix; workspace $WS1'
 exec --no-startup-id i3-msg 'workspace $WS3; exec x-www-browser; workspace $WS1'
 exec --no-startup-id i3-msg 'workspace $WS4; exec ~/4_Programas/Telegram/Telegram; workspace $WS1'
