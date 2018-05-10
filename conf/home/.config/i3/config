@@ -75,9 +75,7 @@ workspace_layout tabbed
 ############################################################
 ###############            i3bar          ##################
 ############################################################
-# Start i3bar to display a workspace bar (plus the system information i3status
-# finds out, if available)
-
+## Barra para monitor principal
 bar {
     ## Monitor para información en la barra de estado
     #status_command  i3status        ## Mostrar status de monitoreo
@@ -86,12 +84,33 @@ bar {
     ## Posición donde colocar la barra
     position        bottom           ## Posición Abajo
     
+    ## Solo muestra applets/iconos en la barra principal
+    tray_output primary    
+    tray_output HDMI0
+    tray_output HDMI-0
+    tray_output DVI-I-1
+    tray_output LVDS-1
+    
+    
     ## Fuente
     #font pango:terminus, awesome 9  ## Fuente tipografica
-    #font pango:Inconsolata-dz for Powerline  10
-    font pango:Space Mono for Powerline  10
+    font pango:Inconsolata-dz for Powerline  10
+    #font pango:Space Mono for Powerline  10
     
     workspace_buttons yes
+
+    ## Salidas donde habilito esta barra
+    output primary
+    output HDMI0
+    output HDMI-0
+    output DVI-I-1
+    output LVDS-1
+
+    ## Márgenes de iconos en la bandeja
+    tray_padding 0
+
+    ## Deshabilita el número en el nombre de los espacios de trabajo
+    #strip_workspace_numbers yes
 
     colors {
         background  #001111  #Color del panel
@@ -122,6 +141,38 @@ bar {
         urgent_workspace     #859900    #859900    #121212
     }
 }
+
+## Planteando barra solo visible en el segundo monitor
+bar {
+    output secundary
+    output HDMI1
+    output HDMI-1
+    output DVI-D-0
+    output LVDS-2
+    output VGA
+
+    #status_command  python3 ~/.config/i3/scripts/i3pystatus-min-config.py
+
+    ## Deshabilitado iconos en esta segunda barra
+    tray_output none
+    
+    font pango:Inconsolata-dz for Powerline  10
+
+    ## Deshabilita el número en el nombre de los espacios de trabajo
+    #strip_workspace_numbers yes
+
+    colors {
+        background  #001111  #Color del panel
+        statusline  #fdf6e3  #Color del status
+        separator   #9e9e9e  #Color de separadores
+        
+        focused_workspace    #FDF6E3    #FDF6E3    #002B36
+        inactive_workspace   #607D8B    #607D8B    #002B36
+        urgent_workspace     #859900    #859900    #121212
+
+    }
+}
+
 
 ## Decoración de ventanas
 ##  Clase         Bordes   Fondo    Texto    Indicador
@@ -257,8 +308,8 @@ exec --no-startup-id i3-msg 'workspace $WS2; exec tilix; workspace $WS1'
 exec --no-startup-id i3-msg 'workspace $WS3; exec x-www-browser; workspace $WS1'
 exec --no-startup-id i3-msg 'workspace $WS4; exec ~/4_Programas/Telegram/Telegram; workspace $WS1'
 exec --no-startup-id i3-msg 'workspace $WS4; exec corebird; workspace $WS1'
-exec --no-startup-id i3-msg 'workspace $WS4; exec whatsie; workspace $WS1'
-exec --no-startup-id i3-msg 'workspace $WS4; exec thunderbird; workspace $WS1'
+#exec --no-startup-id i3-msg 'workspace $WS4; exec whatsie; workspace $WS1'
+#exec --no-startup-id i3-msg 'workspace $WS4; exec thunderbird; workspace $WS1'
 
 # Red
 exec --no-startup-id nm-applet
@@ -289,7 +340,7 @@ exec_always --no-startup-id nitrogen --restore
 #for_window [title="^Momentum$"] focus
 #for_window [title="^Momentum$"] floating enable
 
-exec --no-startup-id xset r rate 250 30
+#exec --no-startup-id xset r rate 250 30
 # exec --no-startup-id setxkbmap -option "ctrl:swapcaps" Cambia bloq Mayus y CTRL
 # exec --no-startup-id xflux -l 36.7756 -g -6.3616 -k 4200
 

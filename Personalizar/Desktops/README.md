@@ -29,6 +29,8 @@ En esta instalación se parte de la base de XFCE
 -   zathura → Lector pdf que permite usar las teclas de vim
 -   cmus → Reproductor C con curses.
 -   mplayer → Reproductor
+-   xautolock → Lanzador de programas en sesiones de X inactivas
+-   xbindkeys → Permite asignar combinaciones de teclas a acciones
 
 ### Organización de los escritorios
 
