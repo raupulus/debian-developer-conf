@@ -26,9 +26,9 @@ set $WS7 7:IMG
 set $WS8 8
 
 ## Monitor 2 escritorio 1
-set $WS9 9:HDMI1 
+set $WS9 9:HDMI1
 ## Monitor 2 escritorio 2
-set $WS10 10:HDMI2 
+set $WS10 10:HDMI2
 
 
 
