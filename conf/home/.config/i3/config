@@ -307,7 +307,7 @@ exec --no-startup-id i3-msg 'workspace $WS1; exec thunar;'
 exec --no-startup-id i3-msg 'workspace $WS2; exec tilix; workspace $WS1'
 exec --no-startup-id i3-msg 'workspace $WS3; exec x-www-browser; workspace $WS1'
 exec --no-startup-id i3-msg 'workspace $WS4; exec ~/4_Programas/Telegram/Telegram; workspace $WS1'
-exec --no-startup-id i3-msg 'workspace $WS4; exec corebird; workspace $WS1'
+#exec --no-startup-id i3-msg 'workspace $WS4; exec corebird; workspace $WS1'
 #exec --no-startup-id i3-msg 'workspace $WS4; exec whatsie; workspace $WS1'
 #exec --no-startup-id i3-msg 'workspace $WS4; exec thunderbird; workspace $WS1'
 
@@ -397,10 +397,10 @@ for_window [class="^Dia"] focus
 bindsym $mod+p exec "xautolock -locknow -locker 'i3lock -c 000000 -d'"
 exec_always --no-startup-id xautolock -detectsleep -notify 30 -notifier "notify-send -u low -t 2000 -- 'La pantalla se bloqueará en 30s'" -time 5 -locker "i3lock -c 000000 -d"
 
-# Pulse Audio controls
-bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume 0 +5% #increase sound volume
-bindsym XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume 0 -5% #decrease sound volume
-bindsym XF86AudioMute exec --no-startup-id pactl set-sink-mute 0 toggle # mute sound
+## Alsamixer controles
+bindsym XF86AudioRaiseVolume exec --no-startup-id amixer set Master 10%+ 
+bindsym XF86AudioLowerVolume exec --no-startup-id amixer set Master 10%-
+bindsym XF86AudioMute exec --no-startup-id amixer set Master toggle
 
 # Sreen brightness controls
 bindsym XF86MonBrightnessUp exec xbacklight -inc 10 # increase screen brightness
