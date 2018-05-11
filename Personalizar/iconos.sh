@@ -44,7 +44,7 @@ instalar_iconos() {
 
     ## Lo enlazo para que se usen por defecto con el usuario
     if [[ -d "$HOME/.local/share/icons/default" ]]; then
-        rm "$HOME/.local/share/icons/default"
+        rm -Rf "$HOME/.local/share/icons/default"
     fi
 
     mkdir -p "$HOME/.local/share/icons/default"
