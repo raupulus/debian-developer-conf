@@ -67,12 +67,11 @@
       "language-csharp"
       "language-java"
       "symbols-list"
-      "tree-view"
     ]
     projectHome: "$HOME/1_GIT/"
     telemetryConsent: "no"
     themes: [
-      "nucleus-dark-ui"
+      "atom-dark-ui"
       "monokai"
     ]
   editor:
