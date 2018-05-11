@@ -10,12 +10,19 @@
 ## @gitlab     https://gitlab.com/fryntiz
 ## @twitter    https://twitter.com/fryntiz
 
-## Please see http://i3wm.org/docs/userguide.html for a complete and oficial reference!
+## Referencia oficial: http://i3wm.org/docs/userguide.html
 
-## Tecla modificadora.
+## Tecla modificadora
 set $mod Mod4
 
-## Espacios de trabajo
+## Nombre de monitores 1 y 2:
+set $mon1 DVI-I-1
+set $mon2 DVI-D-0
+
+###########################################################
+############        Espacios de trabajo        ############
+###########################################################
+## Nombres para cada espacio del monitor 1
 set $WS1 1:FILE
 set $WS2 2:TERM
 set $WS3 3:WWW
@@ -25,28 +32,78 @@ set $WS6 6:AUDIO
 set $WS7 7:IMG
 set $WS8 8
 
-## Monitor 2 escritorio 1
+## Nombres para cada espacio del monitor 2
 set $WS9 9:HDMI1
-## Monitor 2 escritorio 2
 set $WS10 10:HDMI2
 
+## Asigno workspaces a Monitor 1
+#workspace 1 output $mon1
+#workspace 2 output $mon1
+#workspace 3 output $mon1
+#workspace 4 output $mon1
+#workspace 5 output $mon1
+#workspace 6 output $mon1
+#workspace 7 output $mon1
+#workspace 8 output $mon1
 
+## Asigno workspaces a Monitor 2
+workspace $WS9 output $mon2
+workspace $WS10 output $mon2
 
-## Asigno salidas para cada escritorio
-#workspace 1 output DVI-I-1
-#workspace 2 output DVI-I-1
-#workspace 3 output DVI-I-1
-#workspace 4 output DVI-I-1
-#workspace 5 output DVI-I-1
-#workspace 6 output DVI-D-0
-#workspace 7 output DVI-D-0
-#workspace 8 output DVI-D-0
+###########################################################
+############ Ubicacion de ventanas por defecto ############
+###########################################################
+assign [class="^[fF]irefox"] → $WS3
+for_window [class="^[fF]irefox"] focus
+assign [class="^[cC]hrome"] → $WS3
+for_window [class="^[cC]hrome"] focus
+assign [class="^[cC]hromium"] → $WS3
+for_window [class="^[cC]Chromium"] focus
+assign [class="^Thunderbird"] → $WS4
+for_window [class="^Thunderbird"] focus
+assign [class="^Corebird"] → $WS4
+for_window [class="^Corebird"] focus
+assign [class="^Telegram"] → $WS4
+for_window [class="^Telegram"] focus
+assign [class="^[wW]hatsie"] → $WS4
+for_window [class="^[wW]hatsie"] focus
+assign [class="[pP]hp[sS]torm"] → $WS5
+for_window [class="[pP]hp[sS]torm"] focus
+assign [class="^[pP]y[cC]harm"] → $WS5
+for_window [class="^[pP]y[cC]harm"] focus
+assign [class="^[aA]tom"] → $WS5
+for_window [class="^[aA]tom"] focus
+assign [class="^Brackets"] → $WS5
+for_window [class="^Brackets"] focus
+assign [class="^Audacity"] → $WS6
+for_window [class="^Audacity"] focus
+assign [class="^Gimp"] → $WS7
+for_window [class="^Gimp"] focus
+assign [class="^Inkscape"] → $WS7
+for_window [class="^Inkscape"] focus
+assign [class="^Dia"] → $WS7
+for_window [class="^Dia"] focus
 
-## Ubicación por defecto para escritorios del segundo monitor
-workspace $WS9 output DVI-D-0
-workspace $WS10 output DVI-D-0
+###########################################################
+############         FOCUS DE VENTANAS         ############
+###########################################################
+bindsym $mod+F1 [class="Firefox"] focus
+bindsym $mod+F2 [class="Atom"] focus
+bindsym $mod+F3 [class="PhpStorm"] focus
+bindsym $mod+F4 [class="Thunar"] focus
+bindsym $mod+F5 [class="tilix"] focus
+bindsym $mod+F6 [class="PyCharm"] focus
+bindsym $mod+F7 [class="Firefox"] focus
+bindsym $mod+F8 [class="Firefox"] focus
+bindsym $mod+F9 [class="Firefox"] focus
+bindsym $mod+F10 [class="Thunderbird"] focus
+bindsym $mod+F11 [class="whatsie"] focus
+bindsym $mod+F12 [class="Telegram"] focus
 
-## Establezc a 90 dpi
+###########################################################
+############       Visualización/Pantalla      ############
+###########################################################
+## Establezco a 90 dpi
 exec --no-startup-id xrandr --dpi 90
 exec_always --no-startup-id xrandr --dpi 90
 
@@ -60,17 +117,25 @@ focus_follows_mouse no
 ## Usar Mouse+$mod para arrastrar ventanas flotantes
 floating_modifier $mod
 
-## Abrir terminal con $mod+Intro
-bindsym $mod+Return exec i3-sensible-terminal
+## Quita los bordes de los extremos de la pantalla
+hide_edge_borders vertical
 
-## Cerrar ventana actual con $mod+shift+q
-bindsym $mod+Shift+q kill
-
-## Abrir dmenu (Lanzador de programas)
-bindsym $mod+d exec i3-dmenu-desktop ## Antes dmenu_run
+## Decoración de ventanas
+##  Clase         Bordes   Fondo    Texto    Indicador
+client.focused    #4c7899  #285577  #ffffff  #2e9ef4
+client.unfocused  #4c7899  #24364F  #aaaaaa  #2e9ef4
+client.focused    #c10101  #880404  #ffffff  #00AA00
 
 ## Modo de Organizar ventanas por defecto: default|stacking|tabbed
 workspace_layout tabbed
+
+## focus, floating, & sticky
+## Pongo flotante ventanas de copiar, eliminar, mover y configuración
+for_window [title="(?i)(?:copying|deleting|moving)"] floating enable
+for_window [window_role="(?i)(?:pop-up|setup)"] floating enable
+
+# set trayer to be borderless
+for_window [class="(?i)trayer"] border pixel 0
 
 ############################################################
 ###############            i3bar          ##################
@@ -83,20 +148,20 @@ bar {
 
     ## Posición donde colocar la barra
     position        bottom           ## Posición Abajo
-    
+
     ## Solo muestra applets/iconos en la barra principal
-    tray_output primary    
+    tray_output primary
     tray_output HDMI0
     tray_output HDMI-0
     tray_output DVI-I-1
     tray_output LVDS-1
-    
-    
+
+
     ## Fuente
-    #font pango:terminus, awesome 9  ## Fuente tipografica
-    font pango:Inconsolata-dz for Powerline  10
-    #font pango:Space Mono for Powerline  10
-    
+    #font pango:terminus, awesome 9
+    font pango:Inconsolata-dz for Powerline 10
+    #font pango:Space Mono for Powerline 10
+
     workspace_buttons yes
 
     ## Salidas donde habilito esta barra
@@ -107,42 +172,42 @@ bar {
     output LVDS-1
 
     ## Márgenes de iconos en la bandeja
-    tray_padding 0
+    tray_padding 1
 
     ## Deshabilita el número en el nombre de los espacios de trabajo
     #strip_workspace_numbers yes
 
     colors {
-        background  #001111  #Color del panel
-        statusline  #fdf6e3  #Color del status
-        separator   #9e9e9e  #Color de separadores
-        #background #1b1b1b
-        #statusline #ffffff
-        #separator #444444
+        background  #001111  ## Color del panel
+        statusline  #fdf6e3  ## Color del status
+        separator   #9e9e9e  ## Color de separadores
+        #background  #1b1b1b
+        #statusline  #ffffff
+        #separator   #444444
 
         # Dark
-        #Colors           border  backgr. text
-        #focused_workspace  #141414 #283232 #606060
-        #active_workspace   #141414 #202020 #606060
-        #inactive_workspace #141414 #202020 #606060
-        #urgent_workspace   #141414 #452828 #8c644c
+        ## Colores           Bordes     Fondo      Texto
+        #focused_workspace   #141414    #283232    #606060
+        #active_workspace    #141414    #202020    #606060
+        #inactive_workspace  #141414    #202020    #606060
+        #urgent_workspace    #141414    #452828    #8c644c
 
         # Light
-        # Colors           border  backgr. text
-        #focused_workspace  #dddddd #ddbbdd #606060
-        #active_workspace   #dddddd #dddddd #606060
-        #inactive_workspace #dddddd #dddddd #606060
-        #urgent_workspace   #dddddd #452828 #8c644c
-        
-        #Mi tema
-        #Colores             bordes     fondo      texto
+        ## Colores           Bordes     Fondo      Texto
+        #focused_workspace   #dddddd    #ddbbdd    #606060
+        #active_workspace    #dddddd    #dddddd    #606060
+        #inactive_workspace  #dddddd    #dddddd    #606060
+        #urgent_workspace    #dddddd    #452828    #8c644c
+
+        ## Mi tema
+        ## Colores           Bordes     Fondo      Texto
         focused_workspace    #FDF6E3    #FDF6E3    #002B36
         inactive_workspace   #607D8B    #607D8B    #002B36
         urgent_workspace     #859900    #859900    #121212
     }
 }
 
-## Planteando barra solo visible en el segundo monitor
+## Barra solo visible en el segundo monitor
 bar {
     output secundary
     output HDMI1
@@ -155,7 +220,7 @@ bar {
 
     ## Deshabilitado iconos en esta segunda barra
     tray_output none
-    
+
     font pango:Inconsolata-dz for Powerline  10
 
     ## Deshabilita el número en el nombre de los espacios de trabajo
@@ -165,26 +230,15 @@ bar {
         background  #001111  #Color del panel
         statusline  #fdf6e3  #Color del status
         separator   #9e9e9e  #Color de separadores
-        
+
         focused_workspace    #FDF6E3    #FDF6E3    #002B36
         inactive_workspace   #607D8B    #607D8B    #002B36
         urgent_workspace     #859900    #859900    #121212
-
     }
 }
 
-
-## Decoración de ventanas
-##  Clase         Bordes   Fondo    Texto    Indicador
-client.focused    #4c7899  #285577  #ffffff  #2e9ef4
-client.unfocused  #4c7899  #24364F  #aaaaaa  #2e9ef4
-client.focused    #c10101  #880404  #ffffff  #00AA00
-
-## Quita los bordes de los extremos de la pantalla
-hide_edge_borders vertical
-
 ############################################################
-#############          Bindings           ##################
+#############     Bindings del Sistema    ##################
 ############################################################
 ## Navegar entre las ventanas $mod+[jkln] o $mod+[←↓→]
 bindsym $mod+j focus left
@@ -206,10 +260,10 @@ bindsym $mod+Shift+Down move down
 bindsym $mod+Shift+Up move up
 bindsym $mod+Shift+Right move right
 
-# split in horizontal orientation
+## Divide en orientación Horizontal
 bindsym $mod+h split h
 
-# split in vertical orientation
+## Divide en orientación Vertical
 bindsym $mod+v split v
 
 ## Poner en pantalla completa la ventana actual con $mod+f
@@ -247,8 +301,8 @@ bindsym $mod+0 workspace $WS10
 ## Mover una ventana a un espacio de trabajo concreto
 bindsym $mod+Shift+1 move container to workspace $WS1
 bindsym $mod+Shift+2 move container to workspace $WS2
-bindsym $mod+Shift+3 move container to workspace $WS3 
-bindsym $mod+Shift+4 move container to workspace $WS4 
+bindsym $mod+Shift+3 move container to workspace $WS3
+bindsym $mod+Shift+4 move container to workspace $WS4
 bindsym $mod+Shift+5 move container to workspace $WS5
 bindsym $mod+Shift+6 move container to workspace $WS6
 bindsym $mod+Shift+7 move container to workspace $WS7
@@ -278,30 +332,43 @@ mode "resize" {
         bindsym Up resize shrink height 10 px or 10 ppt
         bindsym Right resize grow width 10 px or 10 ppt
 
-        # back to normal: Enter or Escape
+        ## Para volver al modo normal introducir: Enter o Escape
         bindsym Return mode "default"
         bindsym Escape mode "default"
 }
 
-bindsym $mod+r mode "resire"
+## Entrar al modo para redimensionar
+bindsym $mod+r mode "resize"
 
+## Abrir terminal con $mod+Intro
+#bindsym $mod+Return exec ~/.config/i3/scripts/i3-shell.sh
+bindsym $mod+Return exec i3-sensible-terminal
+
+## Cerrar ventana actual con $mod+shift+q
+bindsym $mod+Shift+q kill
+
+## Abrir dmenu (Lanzador de programas)
+bindsym $mod+d exec i3-dmenu-desktop ## Antes dmenu_run
+
+############################################################
+#############       Bindings Propios      ##################
+############################################################
 ## Captura de Pantalla
 bindsym Print exec scrot '%Y-%m-%d_%T_scrot.png' -e 'mv $f ~/Imágenes/Screenshots/'
 
 ## Captura de Ventana
 bindsym $mod+Print exec scrot '%Y-%m-%d_%T_scrot.png' -u -e 'mv $f ~/Imágenes/Screenshots/'
 
+## Capturar un área (No termina de funcionar correctamente)
 bindsym $mod+control+Print exec scrot -s '%Y-%m-%d_%T_scrot.png' -e 'mv $f ~/Imágenes/Screenshots/'
 
-# Screen brightness controls
-#bindcode $mod+67 exec xbacklight - 10
-#bindcode $mod+68 exec xbacklight + 10
+## Brillo de la pantalla
+bindcode XF86MonBrightnessUp exec xbacklight - 10
+bindcode XF86MonBrightnessDown exec xbacklight + 10
 
 ############################################################
 ###############          Autostart        ##################
 ############################################################
-exec --no-startup-id dropbox start
-exec --no-startup-id synology-cloud-station-drive
 exec --no-startup-id i3-msg 'workspace $WS1; exec thunar;'
 exec --no-startup-id i3-msg 'workspace $WS1; exec thunar;'
 exec --no-startup-id i3-msg 'workspace $WS2; exec tilix; workspace $WS1'
@@ -311,41 +378,58 @@ exec --no-startup-id i3-msg 'workspace $WS4; exec ~/4_Programas/Telegram/Telegra
 #exec --no-startup-id i3-msg 'workspace $WS4; exec whatsie; workspace $WS1'
 #exec --no-startup-id i3-msg 'workspace $WS4; exec thunderbird; workspace $WS1'
 
-# Red
-exec --no-startup-id nm-applet
-
-# Transparencia
-exec --no-startup-id compton -cCGb
-
-# Teclado numerico
-exec --no-startup-id numlockx on
-
-# Applet de volumen
-exec --no-startup-id volumeicon
-
-## run with reload
-#exec_always --no-startup-id al-polybar-session
-exec_always --no-startup-id xrdb -load ~/.Xresources
-
-# run once
-#exec --no-startup-id ksuperkey -e 'Super_L=Alt_L|F1'
-
 ## Fondo de pantalla nitrogen
 exec --no-startup-id nitrogen --restore
-exec_always --no-startup-id nitrogen --restore
+
+## Mensajes emergentes
+exec_always --no-startup-id dunst
+
+exec --no-startup-id xbindkeys
+exec --no-startup-id pulseaudio --start
+
+## Ejemplos o ideas
+#exec_always --no-startup-id al-polybar-session
 #exec --no-startup-id xfsettingsd
 #exec --no-startup-id lxpolkit
-
-#assign [title="^Momentum$"] 3
-#for_window [title="^Momentum$"] focus
-#for_window [title="^Momentum$"] floating enable
-
 #exec --no-startup-id xset r rate 250 30
-# exec --no-startup-id setxkbmap -option "ctrl:swapcaps" Cambia bloq Mayus y CTRL
-# exec --no-startup-id xflux -l 36.7756 -g -6.3616 -k 4200
+#exec --no-startup-id setxkbmap -option "ctrl:swapcaps" #Cambia bloq Mayus y CTRL
+#exec --no-startup-id xflux -l 36.7756 -g -6.3616 -k 4200
+#exec --no-startup-id ksuperkey -e 'Super_L=Alt_L|F1'
 
 ############################################################
-##############        Reload configs        ################
+###############    EJECUTAR AL RECARGAR   ##################
+############################################################
+## Fondo de pantalla nitrogen
+exec_always --no-startup-id nitrogen --restore
+
+#exec_always --no-startup-id xrdb -load ~/.Xresources
+
+############################################################
+###############           APPLETS         ##################
+############################################################
+## Dropbox
+exec --no-startup-id dropbox start
+
+## Synology Cloud Station
+exec --no-startup-id synology-cloud-station-drive
+
+## Red
+exec --no-startup-id nm-applet
+
+## Transparencia
+exec --no-startup-id compton -cCGb
+
+## Teclado Numérico
+exec --no-startup-id numlockx on
+
+## Applet de Volumen
+exec --no-startup-id volumeicon
+
+## Applet de Firewalld
+exec --no-startup-id firewall-applet
+
+############################################################
+##############      Recargar y/o Salir      ################
 ############################################################
 ## Recargar el archivo de configuración
 bindsym $mod+Shift+c reload
@@ -353,58 +437,17 @@ bindsym $mod+Shift+c reload
 ## Reiniciar i3 conservando la sesión
 bindsym $mod+Shift+r restart
 
-# Salir de i3 (logs you out of your X session)
+## Salir de i3 (logs you out of your X session)
 bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'Si pulsas sobre salir se cerrará todo lo que tengas abierto. ¿Realmente quieres salir?' -b 'Si, exit i3' 'i3-msg exit'"
 
 ###########################################################
-############ Ubicacion de ventanas por defecto ############
+############         TECLAS MULTIMEDIA         ############
 ###########################################################
-assign [class="^[fF]irefox"] → $WS3
-for_window [class="^[fF]irefox"] focus
-assign [class="^[cC]hrome"] → $WS3
-for_window [class="^[cC]hrome"] focus
-assign [class="^[cC]hromium"] → $WS3
-for_window [class="^[cC]Chromium"] focus
-assign [class="^Thunderbird"] → $WS4
-for_window [class="^Thunderbird"] focus
-assign [class="^Corebird"] → $WS4
-for_window [class="^Corebird"] focus
-assign [class="^Telegram"] → $WS4
-for_window [class="^Telegram"] focus
-assign [class="^[wW]hatsie"] → $WS4
-for_window [class="^[wW]hatsie"] focus
-assign [class="[pP]hp[sS]torm"] → $WS5
-for_window [class="[pP]hp[sS]torm"] focus
-assign [class="^[pP]y[cC]harm"] → $WS5
-for_window [class="^[pP]y[cC]harm"] focus
-assign [class="^[aA]tom"] → $WS5
-for_window [class="^[aA]tom"] focus
-assign [class="^Brackets"] → $WS5
-for_window [class="^Brackets"] focus
-assign [class="^Audacity"] → $WS6
-for_window [class="^Audacity"] focus
-assign [class="^Gimp"] → $WS7
-for_window [class="^Gimp"] focus
-assign [class="^Inkscape"] → $WS7
-for_window [class="^Inkscape"] focus
-assign [class="^Dia"] → $WS7
-for_window [class="^Dia"] focus
-
-###########################################################
-############        application settings       ############
-###########################################################
-## Bloqueo de pantalla
-bindsym $mod+p exec "xautolock -locknow -locker 'i3lock -c 000000 -d'"
-exec_always --no-startup-id xautolock -detectsleep -notify 30 -notifier "notify-send -u low -t 2000 -- 'La pantalla se bloqueará en 30s'" -time 5 -locker "i3lock -c 000000 -d"
-
+## Mostrar todas las teclas y codigos → xmodmap -pke y
 ## Alsamixer controles
-bindsym XF86AudioRaiseVolume exec --no-startup-id amixer set Master 10%+ 
+bindsym XF86AudioRaiseVolume exec --no-startup-id amixer set Master 10%+
 bindsym XF86AudioLowerVolume exec --no-startup-id amixer set Master 10%-
 bindsym XF86AudioMute exec --no-startup-id amixer set Master toggle
-
-# Sreen brightness controls
-bindsym XF86MonBrightnessUp exec xbacklight -inc 10 # increase screen brightness
-bindsym XF86MonBrightnessDown exec notify-send xbacklight -dec 10 # decrease screen brightness
 
 # Touchpad controls
 #bindsym XF86TouchpadToggle exec /some/path/toggletouchpad.sh # toggle touchpad
@@ -414,40 +457,6 @@ bindsym XF86AudioPlay exec playerctl play
 bindsym XF86AudioPause exec playerctl pause
 bindsym XF86AudioNext exec playerctl next
 
-
-## Mostrar todas las teclas y codigos → xmodmap -pke y 
-
-# focus, floating, & sticky
-for_window [title="(?i)(?:copying|deleting|moving)"] floating enable
-for_window [window_role="(?i)(?:pop-up|setup)"] floating enable
-
-# set trayer to be borderless
-for_window [class="(?i)trayer"] border pixel 0
-
 ###########################################################
 ############               PRUEBAS             ############
 ###########################################################
-
-exec --no-startup-id xbindkeys
-exec --no-startup-id pulseaudio --start
-exec_always --no-startup-id dunst
-
-
-
-
-## Keybinds para obtener focus de un programa
-bindsym $mod+F1 [class="Firefox"] focus
-bindsym $mod+F2 [class="Atom"] focus
-bindsym $mod+F3 [class="PhpStorm"] focus
-bindsym $mod+F4 [class="Thunar"] focus
-bindsym $mod+F5 [class="tilix"] focus
-bindsym $mod+F6 [class="PyCharm"] focus
-bindsym $mod+F7 [class="Firefox"] focus
-bindsym $mod+F8 [class="Firefox"] focus
-bindsym $mod+F9 [class="Firefox"] focus
-bindsym $mod+F10 [class="Thunderbird"] focus
-bindsym $mod+F11 [class="whatsie"] focus
-bindsym $mod+F12 [class="Telegram"] focus
-
-
-
