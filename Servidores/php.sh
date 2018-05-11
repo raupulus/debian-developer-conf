@@ -89,44 +89,32 @@ php_postconfiguracion() {
     personalizar_php() {
         echo -e "$VE Personalizando PHP$CL"
 
+        ## Descargar e instalar Psysh y su manual en Español
         psysh() {
-            descargar_psysh() {
-                echo -e "$VE Descargando Intérprete$RO PsySH$AM"
-                ## Descargar PsySH
-                descargar 'psysh' 'https://git.io/psysh'
-                ## Descargar Manual para PsySH
-                descargar 'php_manual.sqlite' 'http://psysh.org/manual/es/php_manual.sqlite'
-            }
+            echo -e "$VE Descargando e instalando$RO PsySH$CL"
+            descargarGIT 'psysh' 'https://github.com/bobthecow/psysh.git' "$WORKSCRIPT/tmp/pysh"
 
-            instalar_psysh() {
-                echo -e "$VE Instalando Intérprete$RO PsySH$AM"
-                cp "$WORKSCRIPT/tmp/psysh" "$HOME/.local/bin/psysh"
-                chmod +x "$HOME/.local/bin/psysh"
-
-                ## Manual
-                echo -e "$VE Instalando manual para$RO PsySH$AM"
-                if [[ ! -d "$HOME/.local/share/psysh" ]]; then
-                    mkdir -p "$HOME/.local/share/psysh"
-                fi
-                cp "$WORKSCRIPT/tmp/php_manual.sqlite" "$HOME/.local/share/psysh/php_manual.sqlite"
-            }
-
-            if [[ -f "$HOME/.local/bin/psysh" ]]
-            then
-                echo -e "$VE Ya esta$RO psysh$VE instalado en el equipo$CL"
-                read -p "¿Quieres volve a instalarlo? s/N → " input
-                if [[ "$input" = 's' ]] || [[ "$input" = 'S' ]]; then
-                    descargar_psysh
-                    instalar_psysh
-                fi
-            else
-                if [[ -f "$WORKSCRIPT/tmp/psysh" ]]; then
-                    instalar_psysh
-                else
-                    descargar_psysh
-                    instalar_psysh
-                fi
+            echo -e "$VE Instalando Intérprete$RO PsySH$AM"
+            if [[ -f "$HOME/.local/bin/psysh" ]]; then
+                rm -f "$HOME/.local/bin/psysh"
             fi
+            cp "$WORKSCRIPT/tmp/psysh/bin/psysh" "$HOME/.local/bin/psysh"
+            chmod +x "$HOME/.local/bin/psysh"
+
+            echo -e "$VE Instalando manual para$RO PsySH$AM"
+            if [[ -f "$HOME/.local/share/psysh/php_manual.sqlite" ]]; then
+                rm -f "$HOME/.local/share/psysh/php_manual.sqlite"
+            fi
+
+            if [[ ! -d "$HOME/.local/share/psysh" ]]; then
+                mkdir -p "$HOME/.local/share/psysh"
+            fi
+
+            if [[ ! -f "$WORKSCRIPT/tmp/php_manual.sqlite" ]]; then
+                descargar 'php_manual.sqlite' 'http://psysh.org/manual/es/php_manual.sqlite'
+            fi
+
+            cp "$WORKSCRIPT/tmp/php_manual.sqlite" "$HOME/.local/share/psysh/php_manual.sqlite"
         }
 
         psysh
