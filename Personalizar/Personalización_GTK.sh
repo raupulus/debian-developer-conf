@@ -37,6 +37,8 @@ configurar_temas() {
     ## TODO → Establecer Flat-Plat como tema activo por defecto
 
     #echo -e "$VE Configurando temas QT$CL"
+    #
+    instalarSoftware 'gtk2-engines-murrine'
 }
 
 configurar_grub() {
