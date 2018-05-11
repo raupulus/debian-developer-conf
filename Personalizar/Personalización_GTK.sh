@@ -37,7 +37,8 @@ configurar_cursores() {
 configurar_temas() {
     echo -e "$VE Configurando temas GTK$CL"
     instalarSoftware 'gtk2-engines-murrine'
-    gconftool-2 –type string –set /desktop/gnome/interface/gtk_theme "Flat-Plat"
+    gconftool-2 –type string –set /desktop/gnome/interface/gtk_theme "Flat-Plat-compact"
+    gsettings set org.gnome.desktop.interface gtk-theme "Flat-Plat-compact"
 
     echo -e "$VE Configurando temas QT$CL"
 }
@@ -86,7 +87,7 @@ conf_gnome3() {
     gsettings set org.gnome.desktop.interface clock-show-seconds "false"
     gsettings set org.gnome.desktop.interface cursor-theme "crystalblue"
     gsettings set org.gnome.desktop.interface enable-animations "false"
-    gsettings set org.gnome.desktop.interface toolkit-accesibility "false"
+    gsettings set org.gnome.desktop.interface toolkit-accessibility "false"
 
     gsettings set org.gnome.desktop.session idle-delay "720"
     gsettings set org.gnome.desktop.search-providers disable-external "true"
