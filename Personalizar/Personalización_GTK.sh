@@ -29,16 +29,17 @@ configurar_cursores() {
     echo -e "$VE Configurando pack de cursores$CL"
     instalarSoftware 'crystalcursors'
 
-    sudo update-alternatives --set x-cursor-theme /etc/X11/cursors/crystalblue.theme 2>> /dev/null
+    update-alternatives --set x-cursor-theme /etc/X11/cursors/crystalblue.theme
+
+    sudo update-alternatives --set x-cursor-theme /etc/X11/cursors/crystalblue.theme
 }
 
 configurar_temas() {
     echo -e "$VE Configurando temas GTK$CL"
-    ## TODO → Establecer Flat-Plat como tema activo por defecto
-
-    #echo -e "$VE Configurando temas QT$CL"
-    #
     instalarSoftware 'gtk2-engines-murrine'
+    gconftool-2 –type string –set /desktop/gnome/interface/gtk_theme "Flat-Plat"
+
+    echo -e "$VE Configurando temas QT$CL"
 }
 
 configurar_grub() {
@@ -77,11 +78,85 @@ instalar_flatplat() {
     fi
 }
 
+conf_gnome3() {
+    echo -e "$VE Configurando gtk3$CL"
+    gsettings set org.gnome.desktop.interface gtk-theme "Flat-Plat-compact"
+    gsettings set org.gnome.desktop.interface clock-format "24h"
+    gsettings set org.gnome.desktop.interface clock-show-date "true"
+    gsettings set org.gnome.desktop.interface clock-show-seconds "false"
+    gsettings set org.gnome.desktop.interface cursor-theme "crystalblue"
+    gsettings set org.gnome.desktop.interface enable-animations "false"
+    gsettings set org.gnome.desktop.interface toolkit-accesibility "false"
+
+    gsettings set org.gnome.desktop.session idle-delay "720"
+    gsettings set org.gnome.desktop.search-providers disable-external "true"
+
+    gsettings set org.gnome.desktop.privacy hide-identity "true"
+    gsettings set org.gnome.desktop.privacy old-files-age "14"
+    gsettings set org.gnome.desktop.privacy recent-files-max-age "-1"
+    gsettings set org.gnome.desktop.privacy remember-recent-files "false"
+    gsettings set org.gnome.desktop.privacy remove-old-temp-files "true"
+    gsettings set org.gnome.desktop.privacy remove-old-trash-files "true"
+    gsettings set org.gnome.desktop.privacy report-technical-problems "false"
+    gsettings set org.gnome.desktop.privacy send-software-usage-stats "false"
+    gsettings set org.gnome.desktop.privacy show-full-name-in-top-bar "false"
+
+    gsettings set org.gnome.desktop.peripherals.keyboard delay "300"
+    gsettings set org.gnome.desktop.peripherals.keyboard repeat "true"
+    gsettings set org.gnome.desktop.peripherals.keyboard repeat-interval "20"
+    gsettings set org.gnome.desktop.peripherals.touchpad click-method "none"
+    gsettings set org.gnome.desktop.peripherals.touchpad edge-scrolling-enabled "true"
+    gsettings set org.gnome.desktop.peripherals.touchpad speed "0.2"
+    gsettings set org.gnome.desktop.peripherals.trackball accel-profile "adaptative"
+
+    gsettings set org.gnome.desktop.notifications show-in-lock-screen "false"
+
+    gsettings set org.gnome.desktop.media-handling automount "false"
+    gsettings set org.gnome.desktop.media-handling automount-open "false"
+    gsettings set org.gnome.desktop.media-handling autorun-never "true"
+
+    gsettings set org.gnome.desktop.input-sources  "[('xkb', 'es'), ('xkb', 'gb+dvorak')]"
+
+    gsettings set org.gnome.desktop.archives default-format "7zip"
+
+    gsettings set org.gnome.desktop.applications.terminal exec "tilix"
+
+    gsettings set org.gnome.mutter center-new-windows "true"
+    gsettings set org.gnome.mutter dynamic-workspaces "true"
+    gsettings set org.gnome.mutter edge-tiling "true"
+    gsettings set org.gnome.mutter workspaces-only-on-primary "true"
+
+    gsettings set org.gnome.nautilus.desktop home-icon-visible "false"
+    gsettings set org.gnome.nautilus.desktop volumes-visible "false"
+
+    gsettings set org.gnome.nm-applet suppress-wireless-networks-available "true"
+
+    gsettings set org.gnome.settings-daemon.peripherals.keyboard numlock-state "on"
+    gsettings set org.gnome.settings-daemon.peripherals.keyboard remember-numlock-state "off"
+
+    ## Plugins
+    gsettings set org.gnome.settings-daemon.plugins.xsettings antialiasing "rgba"
+    gsettings set org.gnome.settings-daemon.plugins.xsettings hinting "full"
+
+    gsettings set org.gnome.settings-daemon.plugins.power power-button-action "suspend"
+    gsettings set org.gnome.settings-daemon.plugins.power sleep-inactive-ac-timeout "3600"
+}
+
+preconfiguracion_personalizaciones() {
+    instalarSoftware 'dconf-cli' 'dconf-editor' 'dconf-gsettings-backend'
+}
+
 personalizarGTK() {
     echo -e "$VE Iniciando configuracion de estética general y GTK$CL"
+    preconfiguracion_personalizaciones
+
     instalar_flatplat
     configurar_cursores
     configurar_temas
     configurar_grub
     configurar_fondos
+
+    if [[ -f '/usr/bin/gsettings' ]]; then
+        conf_gnome3
+    fi
 }
