@@ -155,21 +155,34 @@ conf_gnome3() {
     gsettings set org.gnome.settings-daemon.plugins.power sleep-inactive-ac-timeout "3600"
 }
 
-preconfiguracion_personalizaciones() {
+preconfiguracion_gnome3() {
+    echo -e "$VE Instalando software para configurar$RO Gnome-Shell 3$CL"
     instalarSoftware 'dconf-cli' 'dconf-editor' 'dconf-gsettings-backend'
+}
+
+conf_gtk2() {
+    echo -e "$VE Configurando$RO GTK 2$CL"
+    enlazarHome '.config/gtk-2.0'
+}
+
+conf_gtk3() {
+    echo -e "$VE Configurando$RO GTK 3$CL"
+    enlazarHome '.config/gtk-3.0'
 }
 
 personalizarGTK() {
     echo -e "$VE Iniciando configuracion de estética general y GTK$CL"
-    preconfiguracion_personalizaciones
-
     instalar_flatplat
     configurar_cursores
     configurar_temas
     configurar_grub
     configurar_fondos
 
-    if [[ -f '/usr/bin/gsettings' ]]; then
+    conf_gtk2
+    conf_gtk3
+
+    if [[ -f '/usr/bin/gsettings' ]] && [[ -f '/usr/bin/gnome-shell' ]]; then
+        preconfiguracion_gnome3
         conf_gnome3
     fi
 }

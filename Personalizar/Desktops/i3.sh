@@ -40,7 +40,7 @@ i3wm_postconfiguracion() {
     instalarSoftware rxvt-unicode-256color compton compton-conf compton-conf-l10n nitrogen thunar ranger w3m tint2 arandr neofetch scrot xbacklight gvfs gpicview mplayer cmus zathura xautolock xbindkeys xbindkeys-config pulseaudio volumeicon-alsa alsamixergui xfce4-settings firewall-applet firewall-config firewalld unclutter lxappearance gtk-chtheme qt4-qtconfig
 
     echo -e "$VE Generando archivos de configuración$CL"
-    enlazarHome '.config/i3' '.config/tint2' '.config/compton.conf' '.config/conky' '.Xresources' '.config/nitrogen' '.config/i3status'
+    enlazarHome '.config/i3' '.config/tint2' '.config/compton.conf' '.config/conky' '.Xresources' '.config/nitrogen' '.config/i3status' '.config/plank'
 
     if [[ ! -d "$HOME/Imágenes/Screenshot" ]]; then
         mkdir -p "$HOME/Imágenes/Screenshots"
@@ -62,6 +62,10 @@ i3wm_instalador() {
     i3wm_preconfiguracion
     i3wm_instalar
     i3wm_postconfiguracion
+
+    ## Configurando Personalizaciones
+    conf_gtk2  ## Configura gtk-2.0 desde script → Personalizacion_GTK
+    conf_gtk3  ## Configura gtk-3.0 desde script → Personalizacion_GTK
 }
 
 ##
