@@ -416,8 +416,8 @@ exec --no-startup-id synology-cloud-station-drive
 ## Red
 exec --no-startup-id nm-applet
 
-## Transparencia
-exec --no-startup-id compton -cCGb
+## Transparencias de ventanas y menús mediante Compton
+#exec --no-startup-id compton -cCGb
 
 ## Teclado Numérico
 exec --no-startup-id numlockx on
