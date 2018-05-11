@@ -428,6 +428,9 @@ exec --no-startup-id volumeicon
 ## Applet de Firewalld
 exec --no-startup-id firewall-applet
 
+## Applet de Impresora
+exec --no-startup-id system-config-printer-applet
+
 ############################################################
 ##############      Recargar y/o Salir      ################
 ############################################################
