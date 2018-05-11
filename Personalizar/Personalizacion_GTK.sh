@@ -61,10 +61,16 @@ configurar_grub() {
 }
 
 configurar_fondos() {
-    echo -e "$VE Configurando$RO fondo de pantalla$CL"
-    sudo cp -r $WORKSCRIPT/usr/share/desktop-base/softwaves-themes/* '/usr/share/desktop-base/softwaves-theme/'
-    echo -e "$VE Configurando plymouth$CL"
-    sudo cp -r $WORKSCRIPT/usr/share/plymouth/themes/softwaves/* '/usr/share/plymouth/themes/softwaves/'
+    descargarGIT 'Temas Debian' 'https://github.com/fryntiz/Art-for-Debian.git' "$WORKSCRIPT/tmp/Art-for-Debian"
+
+    cd "$WORKSCRIPT/tmp/Art-for-Debian/Temas_Completos/DebBlood" || return 1 && ./install.sh
+    cd "$WORKSCRIPT" || return 1
+
+    #echo -e "$VE Configurando$RO fondo de pantalla$CL"
+    #sudo cp -r $WORKSCRIPT/tmp/fondos_debian/Temas Completos/DebBlood/usr/share/* '/usr/share/desktop-base/softwaves-theme/'
+
+    #echo -e "$VE Configurando plymouth$CL"
+    #sudo cp -r $WORKSCRIPT/usr/share/plymouth/themes/softwaves/* '/usr/share/plymouth/themes/softwaves/'
 }
 
 instalar_flatplat() {
