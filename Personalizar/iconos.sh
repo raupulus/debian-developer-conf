@@ -38,4 +38,7 @@ instalar_iconos() {
     }
 
     iconos_paper_theme
+
+    ## Establece iconos Paper en uso
+    gconftool-2 --type string --set /desktop/gnome/interface/icon_theme 'Paper'
 }
