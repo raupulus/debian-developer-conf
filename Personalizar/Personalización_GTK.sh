@@ -120,7 +120,7 @@ conf_gnome3() {
 
     gsettings set org.gnome.desktop.archives default-format "7zip"
 
-    gsettings set org.gnome.desktop.applications.terminal exec "tilix"
+    gsettings set org.gnome.desktop.default-applications.terminal 'exec' "tilix"
 
     gsettings set org.gnome.mutter center-new-windows "true"
     gsettings set org.gnome.mutter dynamic-workspaces "true"
@@ -133,7 +133,7 @@ conf_gnome3() {
     gsettings set org.gnome.nm-applet suppress-wireless-networks-available "true"
 
     gsettings set org.gnome.settings-daemon.peripherals.keyboard numlock-state "on"
-    gsettings set org.gnome.settings-daemon.peripherals.keyboard remember-numlock-state "off"
+    gsettings set org.gnome.settings-daemon.peripherals.keyboard remember-numlock-state "false"
 
     ## Plugins
     gsettings set org.gnome.settings-daemon.plugins.xsettings antialiasing "rgba"
