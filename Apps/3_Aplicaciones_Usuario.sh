@@ -42,6 +42,19 @@ configurar_heroku() {
     fi
 }
 
+##
+## Mi generador de proyectos https://github.com/fryntiz/Generador_Proyectos.git
+## Este generador de proyectos crea un script que permite generar la estructura
+## para los proyectos más recurridos por mi (php, python, bash....) y después
+## pregunta si subirlo automáticamente a GitHub
+##
+generador_proyectos() {
+    descargarGIT 'Generador de Proyectos' 'https://github.com/fryntiz/Generador_Proyectos.git' "$WORKSCRIPT/tmp/Generador_Proyectos"
+
+    cd "$WORKSCRIPT/tmp/Generador_Proyectos" || return 1 && ./instalar.sh
+    cd "$WORKSCRIPT" || exit
+}
+
 aplicaciones_usuarios() {
     echo -e "$VE Instalando Aplicaciones específicas para el usuario$RO $USER$CL"
     configurar_heroku
@@ -66,4 +79,7 @@ aplicaciones_usuarios() {
                 echo -e "$RO Opción no válida$CL"
         esac
     done
+
+    ## Mis propias aplicaciones
+    generador_proyectos
 }
