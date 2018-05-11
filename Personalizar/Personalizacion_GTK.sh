@@ -32,6 +32,18 @@ configurar_cursores() {
     update-alternatives --set x-cursor-theme /etc/X11/cursors/crystalblue.theme
 
     sudo update-alternatives --set x-cursor-theme /etc/X11/cursors/crystalblue.theme
+
+    if [[ ! -d "$HOME/.icons" ]]; then
+        mkdir "$HOME/.icons"
+    fi
+
+    ## Enlazo en el usuario hacia los iconos crystalblue
+    if [[ ! -d "$HOME/.icons/default" ]] &&
+       [[ -f '/etc/X11/cursors/crystalblue.theme' ]]
+    then
+        mkdir "$HOME/.icons/default"
+        ln -s '/etc/X11/cursors/crystalblue.theme' "$HOME/.icons/default/index.theme"
+    fi
 }
 
 configurar_temas() {

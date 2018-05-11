@@ -84,6 +84,8 @@
     softWrapAtPreferredLineLength: true
     tabLength: 4
     tabType: "soft"
+  "exception-reporting":
+    userId: "0ef9dd58-1a13-4cdc-ba5d-d9a8a44ec417"
   "file-icons": {}
   "linter-phpcs":
     autoExecutableSearch: false
