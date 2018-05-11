@@ -51,6 +51,9 @@ i3wm_postconfiguracion() {
     ## libiw-dev → Necesario para basiciw
     instalarSoftware 'python3' 'python3-pip' 'libasound2-dev' 'libiw-dev'
     sudo pip3 install --upgrade i3pystatus basiciw netifaces colour pyalsaaudio fontawesome
+
+    ## Tema Paper para GTK2 (Debe estar instalado)
+    gconftool-2 --type string --set /desktop/gnome/interface/icon_theme 'Paper'
 }
 
 i3wm_instalador() {
