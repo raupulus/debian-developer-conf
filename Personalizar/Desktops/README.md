@@ -31,6 +31,7 @@ En esta instalación se parte de la base de XFCE
 -   mplayer → Reproductor
 -   xautolock → Lanzador de programas en sesiones de X inactivas
 -   xbindkeys → Permite asignar combinaciones de teclas a acciones
+-   unclutter → Oculta el ratón mientras no se utiliza
 
 ### Organización de los escritorios
 
