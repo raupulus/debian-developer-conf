@@ -46,7 +46,7 @@ agregar_fuentes() {
 
     nerd_fonts() {
         if [[ -d "$WORKSCRIPT/tmp/nerd-fonts" ]]; then
-            cd "$WORKSCRIPT/tmp/nerd-fonts" || exit && cd "$WORKSCRIPT" || exit
+            cd "$WORKSCRIPT/tmp/nerd-fonts" || exit
             git checkout -- .
             git pull
         else
