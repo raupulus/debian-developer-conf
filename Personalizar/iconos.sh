@@ -41,4 +41,15 @@ instalar_iconos() {
 
     ## Establece iconos Paper en uso
     gconftool-2 --type string --set /desktop/gnome/interface/icon_theme 'Paper'
+
+    ## Lo enlazo para que se usen por defecto con el usuario
+    if [[ -d "$HOME/.local/share/icons/default" ]]; then
+        rm "$HOME/.local/share/icons/default"
+    fi
+
+    mkdir -p "$HOME/.local/share/icons/default"
+
+    if [[ -d '/usr/share/icons/Paper' ]]; then
+        ln -s '/usr/share/icons/Paper/index.theme' "$HOME/.local/share/icons/default/index.theme"
+    fi
 }
