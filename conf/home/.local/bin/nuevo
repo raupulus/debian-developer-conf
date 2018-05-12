@@ -67,7 +67,7 @@ case "$1" in
     html|html5) generar 'Web/HTML5.html' "$2" '.html';;
     js|javascript) generar 'Web/Javascript.html' "$2" '.js';;
     php) generar 'Web/PHP.php' "$2" '.php';;
-    *) echo "Opción introducida no válida" && exit 1;;
+    *) echo "Opción introducida no válida" && about && exit 1;;
 esac
 
 exit 0
