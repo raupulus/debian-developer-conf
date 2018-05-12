@@ -30,7 +30,7 @@ set $WS4 4:REDES
 set $WS5 5:IDE
 set $WS6 6:AUDIO
 set $WS7 7:IMG
-set $WS8 8
+set $WS8 8:VIRT
 
 ## Nombres para cada espacio del monitor 2
 set $WS9 9:HDMI1
