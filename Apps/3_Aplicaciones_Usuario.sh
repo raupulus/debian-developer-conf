@@ -59,11 +59,7 @@ generador_proyectos() {
 ## Crea un comando para generar plantillas de archivos
 ##
 generador_plantillas() {
-    if [[ -f "$HOME/.local/bin/nuevo" ]]; then
-        rm -f "$HOME/.local/bin/nuevo"
-    fi
-
-    cp "$WORKSCRIPT/conf/home/.local/bin/nuevo" "$HOME/.local/bin/nuevo"
+    enlazarHome '.local/bin/nuevo'
 }
 
 devicons_ls() {
@@ -105,4 +101,5 @@ aplicaciones_usuarios() {
 
     ## Mis propias aplicaciones
     generador_proyectos
+    generador_plantillas
 }
