@@ -92,13 +92,15 @@ php_postconfiguracion() {
         ## Descargar e instalar Psysh y su manual en Español
         psysh() {
             echo -e "$VE Descargando e instalando$RO PsySH$CL"
-            descargarGIT 'psysh' 'https://github.com/bobthecow/psysh.git' "$WORKSCRIPT/tmp/pysh"
-
-            echo -e "$VE Instalando Intérprete$RO PsySH$AM"
             if [[ -f "$HOME/.local/bin/psysh" ]]; then
                 rm -f "$HOME/.local/bin/psysh"
             fi
-            cp "$WORKSCRIPT/tmp/psysh/bin/psysh" "$HOME/.local/bin/psysh"
+
+            if [[ ! -f "$WORKSCRIPT/tmp/psysh" ]]; then
+                descargar 'psysh' 'https://git.io/psysh'
+            fi
+
+            cp "$WORKSCRIPT/tmp/psysh" "$HOME/.local/bin/psysh"
             chmod +x "$HOME/.local/bin/psysh"
 
             echo -e "$VE Instalando manual para$RO PsySH$AM"
