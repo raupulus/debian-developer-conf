@@ -33,6 +33,7 @@ En esta instalación se parte de la base de XFCE
 -   xbindkeys → Permite asignar combinaciones de teclas a acciones
 -   unclutter → Oculta el ratón mientras no se utiliza
 -   parcellite → Portapapeles
+-   zenity → Calendario
 
 ### Organización de los escritorios
 
