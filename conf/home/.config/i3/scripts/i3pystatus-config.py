@@ -78,7 +78,7 @@ diskFColor='#C4D5DD'
 status.register("text",
     text = "Menú",
     ## Abrir el menu obmenubar
-    on_leftclick = "~/mimenu/obmenubar",
+    on_leftclick = "~/.config/i3/scripts/menu",
     ## Abrir terminal
     on_rightclick = "tilix",
     )
