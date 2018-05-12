@@ -47,7 +47,7 @@ ethernet = patron_eth.findall(str(interfaces))
 ## Variables para colores
 naranja = ''
 amarillo = '#ffff33'
-azul = ''
+azul = '#3300ff'
 gris = ''
 pastel = ''
 negro = ''
@@ -138,6 +138,15 @@ status.register("clock",
 #    interval = 1,
 #)
 
+## REPRODUCTOR -------------------------------------------------------------
+#status.register(
+#    "cmus",
+#    #format = "[{status}{artist: >.50} - {title: >.50}]",
+#    format = "<span background='"+backlightColor+"' color='"+alsaColor+"'></span\
+#             ><span background='"+alsaColor+"' >{status}{artist: >.50} - {title: >.50}</span>",
+#    status = {'stop': '', 'play': '', 'pause': ''},
+#)
+
 ## ALSA SOUND ----------------------------------------------------------
 status.register("alsa",
     on_leftclick = "amixer set Master toggle",
@@ -190,6 +199,23 @@ for ifc in wlan:
         ><span background='"+networkColor+"' ></span>",
     )
 
+## ETHERNET ------------------------------------------------------------
+## Por cada interfaz de red wireless genero un monitor de estado
+for ifc in ethernet:
+    status.register(
+        "network",
+        interface = ifc,
+
+        color_up = networkFColor,
+        color_down=networkFColor,
+        hints= {"markup": "pango","separator": False,"separator_block_width": 0},
+
+        format_up = "<span background='"+batteryColor+"' color='"+networkColor+"'></span\
+        ><span background='"+networkColor+"' > {bytes_recv:6.1f}KiB {bytes_sent:5.1f}KiB</span>",
+
+        format_down = "",
+    )
+
 ## BATERIA -------------------------------------------------------------
 ## Solo carga si hay una batería
 if path.exists('/sys/class/power_supply/BAT0'):
@@ -216,47 +242,44 @@ if path.exists('/sys/class/power_supply/BAT0'):
 
 ## TEMPERATURA ---------------------------------------------------------
 status.register("temp",
-	hints= {"markup": "pango","separator": False,"separator_block_width": 0},
+    hints = {"markup": "pango","separator": False,"separator_block_width": 0},
      #format = " {temp}°",
-    format    = "<span background='"+cpuColor+"' color='"+tempColor+"'></span\
-                 ><span background='"+tempColor+"'>  {temp}°</span>",
-    color=tempFColor,
+    format = "<span background='"+cpuColor+"' color='"+tempColor+"'></span\
+             ><span background='"+tempColor+"'>  {temp}°C</span>",
+    color = tempFColor,
     alert_color = "#FFEF00",
     alert_temp = 60,
   )
 
 ## CPU USO -------------------------------------------------------------
 status.register("cpu_usage",
-	color=cpuFColor,
-	hints= {"markup": "pango","separator": False,"separator_block_width": 0},
-	on_leftclick="tilix --title=htop -e 'htop'",
+    color=cpuFColor,
+    hints= {"markup": "pango","separator": False,"separator_block_width": 0},
+    on_leftclick="tilix --title=htop -e 'htop'",
 
     format = "<span background='"+memColor+"' color='"+cpuColor+"'></span\
-                 ><span background='"+cpuColor+"' >  {usage}%</span>",
-
-
-
+             ><span background='"+cpuColor+"' > CPU {usage}%</span>",
     )
 
 ## MEMORIA -------------------------------------------------------------
 status.register("mem",
-	hints= {"markup": "pango","separator": False,"separator_block_width": 0},
-    color=memFColor,
-    warn_color="#E5E500S",
-    alert_color="#FF1919",
-     #format=" {percent_used_mem}",
+    hints = {"markup": "pango","separator": False,"separator_block_width": 0},
+    color = memFColor,
+    warn_color = "#E5E500S",
+    alert_color = "#FF1919",
+    #format = " {percent_used_mem}",
 
-      format    = "<span background='"+diskColor+"' color='"+memColor+"'></span\
-                 ><span background='"+memColor+"' > {percent_used_mem}%</span>",
-    #divisor=1073741824,
+    format = "<span background='"+diskColor+"' color='"+memColor+"'></span\
+             ><span background='"+memColor+"' > RAM{percent_used_mem}%</span>",
+    #divisor = 1073741824,
     )
 
 ## DISK USAGE ----------------------------------------------------------
 status.register("disk",
-    hints= {"markup": "pango","separator": False,"separator_block_width": 0},
-    color=diskFColor,
-    path="/",
-    on_leftclick="thunar",
+    hints = {"markup": "pango","separator": False,"separator_block_width": 0},
+    color = diskFColor,
+    path = "/",
+    on_leftclick = "thunar",
     #format=" {avail} GB",
 
       format = "<span color='"+diskColor+"'></span\
