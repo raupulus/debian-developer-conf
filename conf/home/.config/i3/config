@@ -418,6 +418,29 @@ exec_always --no-startup-id nitrogen --restore
 exec_always --no-startup-id xrdb -load ~/.Xresources
 
 ############################################################
+###############  MENÚ DE APAGADO/BLOQUEO  ##################
+############################################################
+set $mode_system Sistema: (l) Bloquear, (e) Salir, (s) Suspender, (h) Hibernar, (r) Reiniciar, (Shift+s) Apagar
+
+set $i3exit ~/.config/i3/scripts/i3exit.sh
+
+mode "$mode_system" {
+
+    bindsym l exec --no-startup-id $i3exit lock, mode "default"
+    bindsym e exec --no-startup-id $i3exit logout, mode "default"
+    bindsym s exec --no-startup-id $i3exit suspend, mode "default"
+    bindsym h exec --no-startup-id $i3exit hibernate, mode "default"
+    bindsym r exec --no-startup-id $i3exit reboot, mode "default"
+    bindsym Shift+s exec --no-startup-id $i3exit shutdown, mode "default"
+
+    # back to normal: Enter or Escape
+    bindsym Return mode "default"
+    bindsym Escape mode "default"
+}
+
+bindsym $mod+Escape mode "$mode_system"
+
+############################################################
 ###############           APPLETS         ##################
 ############################################################
 ## Dropbox
