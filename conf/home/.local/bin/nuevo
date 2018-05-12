@@ -21,9 +21,12 @@
 ############################
 ##       FUNCIONES        ##
 ############################
-
-echo $*
-
+##
+## Crea una nueva plantilla recibiendo la ruta, nombre y extensión
+## $1 Ruta dentro de plantillas
+## $2 Nombre del nuevo archivo
+## $3 Extensión del archivo
+##
 generar() {
     local plantilla="$HOME/Plantillas/Genéricas/$1"
 
@@ -35,13 +38,13 @@ generar() {
 }
 
 case "$1" in
-    python|python3) generar 'Scripts/Python3' $2;;
-    python2) generar 'Scripts/Python2' $2;;
-    bash) generar 'Scripts/Script\ Bash' $2;;
-    sql|posgresql) generar 'Scripts/Script\ SQL' $2;;
-    css) generar 'Web/CSS.css' $2;;
-    html|html5) generar 'Web/HTML5.html' $2;;
-    js|javascript) generar 'Web/Javascript.html' $2;;
-    php) generar 'Web/PHP.php' $2;;
-    *) echo "Opción introducida no válida" $2;;
+    py|python|python3) generar 'Scripts/Python3.py' "$2" '.py';;
+    python2) generar 'Scripts/Python2.py' "$2" '.py';;
+    bash) generar 'Scripts/Script\ Bash.sh' "$2" '.sh';;
+    sql|posgresql) generar 'Scripts/Script\ SQL.sql' "$2" '.sql';;
+    css) generar 'Web/CSS.css' "$2" '.css';;
+    html|html5) generar 'Web/HTML5.html' "$2" '.css';;
+    js|javascript) generar 'Web/Javascript.html' "$2" '.js';;
+    php) generar 'Web/PHP.php' "$2" '.php';;
+    *) echo "Opción introducida no válida";;
 esac
