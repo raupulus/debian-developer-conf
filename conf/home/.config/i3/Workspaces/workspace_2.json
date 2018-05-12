@@ -21,10 +21,10 @@
             "percent": 0.6,
             "swallows": [
                {
-               // "class": "^Tilix$",
-               // "instance": "^tilix$",
-               // "title": "^Tilix\\:\\ Principal$",
-               // "transient_for": "^$"
+                "class": "^Tilix$",
+                "instance": "^tilix$",
+                "title": "^Tilix\\:\\ Principal$",
+                "transient_for": "^$"
                }
             ],
             "type": "con"
@@ -51,10 +51,10 @@
                     "percent": 0.5,
                     "swallows": [
                        {
-                       // "class": "^Tilix$",
-                       // "instance": "^tilix$",
-                       // "title": "^Tilix\\:\\ Principal$",
-                       // "transient_for": "^$"
+                        "class": "^Tilix$",
+                        "instance": "^tilix$",
+                        "title": "^Tilix\\:\\ Principal$",
+                        "transient_for": "^$"
                        }
                     ],
                     "type": "con"
@@ -73,10 +73,10 @@
                     "percent": 0.5,
                     "swallows": [
                        {
-                       // "class": "^Tilix$",
-                       // "instance": "^tilix$",
-                       // "title": "^Tilix\\:\\ Principal$",
-                       // "transient_for": "^$"
+                        "class": "^Tilix$",
+                        "instance": "^tilix$",
+                        "title": "^Tilix\\:\\ Principal$",
+                        "transient_for": "^$"
                        }
                     ],
                     "type": "con"
