@@ -83,16 +83,25 @@ status.register("text",
     on_rightclick = "tilix",
     )
 
-
-
-## Actuaklizaciones ----------------------------------------------------
-status.register("updates",
-   format = ":{count}",
-    format_no_updates = "",
-    on_leftclick="tilix -e 'sudo apt upgrade -y'",
-    color=updatesFColor,
-    backends = [aptget.AptGet()],
+## Grabación
+status.register("text",
+    text = "Grabar",
+    ## Abrir el menu obmenubar
+    on_leftclick = "~/.config/i3/scripts/record.sh start",
+    ## Abrir terminal
+    on_rightclick = "~/.config/i3/scripts/record.sh stop",
     )
+
+
+## Actualizaciones -----------------------------------------------------
+status.register("updates",
+   format = "APT:{count}",
+   format_no_updates = "OK",
+   on_leftclick="sudo apt update -y",
+   on_rightclick="sudo apt upgrade -y",
+   color=updatesFColor,
+   backends = [aptget.AptGet()],
+)
 
 # Displays clock like this:
 # Tue 30 Jul 11:59:46 PM KW31
