@@ -26,22 +26,40 @@ from i3pystatus import Status
 from i3pystatus.updates import aptget
 
 from time import sleep
+from os import listdir
+import re
+
 #######################################
 # #             Variables           # #
 #######################################
 status = Status()
 
+## Todas las interfaces de red
+interfaces = " ".join(listdir('/sys/class/net/'))
+
+patron_wlan = re.compile(r'w\w+')
+patron_eth = re.compile(r'e\w+')
+
+## Lista con cada tipo de interfaz de red
+wlan = patron_wlan.findall(str(interfaces))
+ethernet = patron_eth.findall(str(interfaces))
+
 ## Variables para colores
 naranja = ''
-amarillo = ''
+amarillo = '#ffff33'
 azul = ''
 gris = ''
 pastel = ''
 negro = ''
 naranja = ''
+verde = '#00cc00'
+verdeC = '#99ff66'
+rojo = '#cc0000'
+rojoC = ''
 rosa = ''
 marron = ''
 background = ''
+backgroundC = ''
 
 #######################################
 # #             Funciones           # #
@@ -80,8 +98,8 @@ status.register("text",
     ## Abrir el menu obmenubar
     on_leftclick = "~/.config/i3/scripts/menu",
     ## Abrir terminal
-    on_rightclick = "tilix",
-    )
+    #on_rightclick = "tilix",
+)
 
 ## Grabación
 status.register("text",
@@ -90,48 +108,44 @@ status.register("text",
     on_leftclick = "~/.config/i3/scripts/record.sh start",
     ## Abrir terminal
     on_rightclick = "~/.config/i3/scripts/record.sh stop",
-    )
-
+)
 
 ## Actualizaciones -----------------------------------------------------
 status.register("updates",
-   format = "APT:{count}",
-   format_no_updates = "OK",
-   on_leftclick="sudo apt update -y",
-   on_rightclick="sudo apt upgrade -y",
-   color=updatesFColor,
-   backends = [aptget.AptGet()],
+    format = "APT:{count}",
+    format_no_updates = "OK",
+    on_leftclick = "sudo apt update -y",
+    on_rightclick = "sudo apt upgrade -y",
+    color = updatesFColor,
+    backends = [aptget.AptGet()],
 )
 
+## Reloj ---------------------------------------------------------------
 # Displays clock like this:
 # Tue 30 Jul 11:59:46 PM KW31
 #                          ^-- calendar week
-
-## Reloj ---------------------------------------------------------------
 status.register("clock",
     hints= {"markup": "pango"},
     format="<span background='"+alsaColor+"' color ='#002B36'></span>"+"  %H:%M",
-    color=clockFColor,
+    color=verdeC, #clockFColor,
     interval=5,
     on_leftclick="zenity --calendar --text ''",)
 
 ## CAL -----------------------------------------------------------------
 #status.register("clock",
-    #format="  %a %d-%m-%Y ",
-    #color='#61AEEE',
-    #interval=1,)
+#    format = "  %a %d-%m-%Y",
+#    color = verdeC,
+#    interval = 1,
+#)
 
 ## ALSA SOUND ----------------------------------------------------------
 status.register("alsa",
-    #on_leftclick = "switch_mute",
-    on_leftclick = "amixer -D pulse set Master toggle",
-    # or as a strings without the list
-    #on_upscroll = "increase_volume",
-    #on_downscroll = "decrease_volume",
-    # this will refresh any module by clicking on it
+    on_leftclick = "amixer set Master toggle",
+    #on_upscroll = "amixer set Master 10%+",
+    #on_downscroll = "amixer set Master 10%-",
     on_rightclick = "pavucontrol",
-    color=alsaFColor,
-    color_muted  = '#E06C75',
+    color = alsaFColor,
+    color_muted = '#E06C75',
     #format_muted=' [muted]',
     #format=" {volume}%",
     hints= {"markup": "pango","separator": False,"separator_block_width": 0},
@@ -140,8 +154,6 @@ status.register("alsa",
 
     format_muted = "<span background='"+backlightColor+"' color='"+alsaColor+"'></span\
              ><span background='"+alsaColor+"' > [muted] </span>",
-
-
     )
 
 ## BACKLIGHT -----------------------------------------------------------
@@ -158,20 +170,24 @@ if path.exists('/sys/class/backlight/intel_backlight'):
         )
 
 ## WIRELESS ------------------------------------------------------------
-status.register("network",
-    interface="wlp3s0",
+## Por cada interfaz de red wireless genero un monitor de estado
+for ifc in wlan:
+    status.register("network",
+        interface=ifc,
 
-     color_up = networkFColor,
-    color_down=networkFColor,
-     hints= {"markup": "pango","separator": False,"separator_block_width": 0},
-    #format_up=" {essid}  {bytes_recv:6.1f}KiB",
+        color_up = networkFColor,
+        color_down=networkFColor,
+        hints= {"markup": "pango","separator": False,"separator_block_width": 0},
+        #format_up=" {essid}  {bytes_recv:6.1f}KiB",
 
-    format_up = "<span background='"+batteryColor+"' color='"+networkColor+"'></span\
-        ><span background='"+networkColor+"' >{essid} {bytes_recv:6.1f}KiB {bytes_sent:5.1f}KiB</span>",
+        #format_up = "<span background='"+batteryColor+"' color='"+networkColor+"'></span\
+        #><span background='"+networkColor+"' >{essid} {bytes_recv:6.1f}KiB {bytes_sent:5.1f}KiB</span>",
 
-	 format_down = "<span background='"+batteryColor+"' color='"+networkColor+"'></span\
+        format_up = "<span background='"+batteryColor+"' color='"+networkColor+"'></span\
+        ><span background='"+networkColor+"' > {bytes_recv:6.1f}KiB {bytes_sent:5.1f}KiB</span>",
+
+        format_down = "<span background='"+batteryColor+"' color='"+networkColor+"'></span\
         ><span background='"+networkColor+"' ></span>",
-
     )
 
 ## BATERIA -------------------------------------------------------------
