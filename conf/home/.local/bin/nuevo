@@ -1,0 +1,47 @@
+#!/usr/bin/env bash
+# -*- ENCODING: UTF-8 -*-
+##
+## @author     Raúl Caro Pastorino
+## @copyright  Copyright © 2018 Raúl Caro Pastorino
+## @license    https://wwww.gnu.org/licenses/gpl.txt
+## @email      tecnico@fryntiz.es
+## @web        www.fryntiz.es
+## @github     https://github.com/fryntiz
+## @gitlab     https://gitlab.com/fryntiz
+## @twitter    https://twitter.com/fryntiz
+##
+##             Guía de estilos aplicada:
+## @style      https://github.com/fryntiz/Bash_Style_Guide
+
+############################
+##     INSTRUCCIONES      ##
+############################
+## Genera un nuevo archivo a partir de la plantilla correspondiente
+
+############################
+##       FUNCIONES        ##
+############################
+
+echo $*
+
+generar() {
+    local plantilla="$HOME/Plantillas/Genéricas/$1"
+
+    if [[ -f "$plantilla" ]]; then
+        cp "$plantilla" "./$2" && echo "Plantilla copiada"
+    else
+        echo "No tienes instalada esta plantilla"
+    fi
+}
+
+case "$1" in
+    python|python3) generar 'Scripts/Python3' $2;;
+    python2) generar 'Scripts/Python2' $2;;
+    bash) generar 'Scripts/Script\ Bash' $2;;
+    sql|posgresql) generar 'Scripts/Script\ SQL' $2;;
+    css) generar 'Web/CSS.css' $2;;
+    html|html5) generar 'Web/HTML5.html' $2;;
+    js|javascript) generar 'Web/Javascript.html' $2;;
+    php) generar 'Web/PHP.php' $2;;
+    *) echo "Opción introducida no válida" $2;;
+esac
