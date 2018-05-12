@@ -71,6 +71,24 @@ configurar_fondos() {
 
     #echo -e "$VE Configurando plymouth$CL"
     #sudo cp -r $WORKSCRIPT/usr/share/plymouth/themes/softwaves/* '/usr/share/plymouth/themes/softwaves/'
+
+    ## Configuro thema debblood:
+    ## Configuro plymouth
+    sudo update-alternatives --install /usr/share/plymouth/themes/default.plymouth default.plymouth /usr/share/plymouth/themes/debblood 100
+
+    ## Configuro fondo de pantalla debblood
+    sudo update-alternatives --install /usr/share/images/desktop-base/desktop-background desktop-background /usr/share/desktop-base/debblood/wallpaper/contents/images/1920x1080.svg 65
+
+    sudo update-alternatives --set desktop-background /usr/share/desktop-base/debblood/wallpaper/contents/images/1920x1080.svg
+
+    ## Configuro Fondo de GRUB con debblood
+    sudo update-alternatives --install /usr/share/desktop-base/desktop-grub desktop-grub /usr/share/desktop-base/debblood/grub/grub-4x3.png 65
+    sudo update-alternatives --install /usr/share/desktop-base/desktop-grub desktop-grub /usr/share/desktop-base/debblood/grub/grub-16x9.png 66
+
+    sudo update-alternatives --set desktop-grub /usr/share/desktop-base/debblood/grub/grub-16x9.png
+
+    ## Configuro Fondo de GDM
+    #update-alternatives --set desktop-splash /usr/share/desktop-base/debblood/
 }
 
 instalar_flatplat() {
@@ -191,4 +209,6 @@ personalizarGTK() {
         preconfiguracion_gnome3
         conf_gnome3
     fi
+
+    sudo update-initramfs -u
 }
