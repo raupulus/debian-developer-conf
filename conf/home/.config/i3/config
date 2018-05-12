@@ -23,7 +23,7 @@ set $mon2 DVI-D-0
 ############        Espacios de trabajo        ############
 ###########################################################
 ## Nombres para cada espacio del monitor 1
-set $WS1 1:FILE
+set $WS1 1:MAIN
 set $WS2 2:TERM
 set $WS3 3:WWW
 set $WS4 4:REDES
@@ -54,7 +54,7 @@ workspace $WS10 output $mon2
 ## Generar: i3-save-tree --workspace 2:TERM > ~/.config/i3/workspace_2.json
 ## Limpiar: tail -n +2 ~/.config/i3/Workspaces/workspace_2.json | fgrep -v '// splitv' | sed 's|//||g' > ~/.config/i3/Workspaces/workspace_2.json
 
-exec --no-startup-id ~/.config/i3/Workspaces/load_layouts.sh
+#exec --no-startup-id ~/.config/i3/Workspaces/load_layouts.sh
 
 ###########################################################
 ############ Ubicacion de ventanas por defecto ############
@@ -357,6 +357,9 @@ bindsym $mod+Shift+q kill
 #bindsym $mod+d exec i3-dmenu-desktop ## Antes dmenu_run
 bindsym $mod+d exec j4-dmenu-desktop
 
+bindsym $mod+shift+d exec rofi -combi-modi window,drun,ssh -theme solarized -font "hack 10" -show combi
+bindsym $mod+m exec --no-startup-id ~/.config/i3/scripts/rofr.sh -r
+
 ############################################################
 #############       Bindings Propios      ##################
 ############################################################
@@ -378,7 +381,7 @@ bindcode XF86MonBrightnessDown exec xbacklight + 10
 ############################################################
 exec --no-startup-id i3-msg 'workspace $WS1; exec thunar;'
 exec --no-startup-id i3-msg 'workspace $WS1; exec thunar;'
-#exec --no-startup-id i3-msg 'workspace $WS2; exec tilix; workspace $WS1'
+exec --no-startup-id i3-msg 'workspace $WS2; exec tilix; workspace $WS1'
 exec --no-startup-id i3-msg 'workspace $WS3; exec x-www-browser; workspace $WS1'
 exec --no-startup-id i3-msg 'workspace $WS4; exec ~/4_Programas/Telegram/Telegram; workspace $WS1'
 #exec --no-startup-id i3-msg 'workspace $WS4; exec corebird; workspace $WS1'

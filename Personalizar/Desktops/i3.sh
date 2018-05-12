@@ -27,7 +27,7 @@ i3wm_preconfiguracion() {
 
 i3wm_instalar() {
     echo -e "$VE Preparando para instalar$RO i3wm$CL"
-    instalarSoftware i3 i3-wm i3blocks i3lock i3status suckless-tools j4-dmenu-desktop
+    instalarSoftware i3 i3-wm i3blocks i3lock i3status suckless-tools j4-dmenu-desktop rofi
 }
 
 ##
