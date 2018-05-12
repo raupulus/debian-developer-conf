@@ -357,8 +357,9 @@ bindsym $mod+Shift+q kill
 #bindsym $mod+d exec i3-dmenu-desktop ## Antes dmenu_run
 bindsym $mod+d exec j4-dmenu-desktop
 
-bindsym $mod+shift+d exec rofi -combi-modi window,drun,ssh -theme solarized -font "hack 10" -show combi
+#bindsym $mod+shift+d exec rofi -combi-modi window,drun,ssh -theme Paper -font "hack 10" -show combi
 bindsym $mod+m exec --no-startup-id ~/.config/i3/scripts/rofr.sh -r
+bindsym $mod+shift+d exec --no-startup-id ~/.config/i3/scripts/rofr.sh -r
 
 ############################################################
 #############       Bindings Propios      ##################
@@ -480,7 +481,7 @@ bindsym $mod+Shift+r restart
 bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'Si pulsas sobre salir se cerrará todo lo que tengas abierto. ¿Realmente quieres salir?' -b 'Si, exit i3' 'i3-msg exit'"
 
 ## Suspender al pulsar botón de apagado
-bindsym PowerOff exec i3lock && pm-suspend
+bindsym PowerOff exec --no-startup-id i3lock; pm-suspend
 
 ###########################################################
 ############         TECLAS MULTIMEDIA         ############
