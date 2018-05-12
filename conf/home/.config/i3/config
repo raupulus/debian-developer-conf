@@ -479,6 +479,9 @@ bindsym $mod+Shift+r restart
 ## Salir de i3 (logs you out of your X session)
 bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'Si pulsas sobre salir se cerrará todo lo que tengas abierto. ¿Realmente quieres salir?' -b 'Si, exit i3' 'i3-msg exit'"
 
+## Suspender al pulsar botón de apagado
+bindsym PowerOff exec i3lock && pm-suspend
+
 ###########################################################
 ############         TECLAS MULTIMEDIA         ############
 ###########################################################
@@ -499,6 +502,3 @@ bindsym XF86AudioNext exec playerctl next
 ###########################################################
 ############               PRUEBAS             ############
 ###########################################################
-
-
-bindsym PowerOff exec pm-suspend
