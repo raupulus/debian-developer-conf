@@ -158,7 +158,7 @@ status.register("alsa",
     #format_muted=' [muted]',
     #format=" {volume}%",
     hints= {"markup": "pango","separator": False,"separator_block_width": 0},
-    format = "<span background='"+backlightColor+"' color='"+alsaColor+"'></span\
+    format = "<span background='"+tempColor+"' color='"+alsaColor+"'></span\
              ><span background='"+alsaColor+"' > {volume}% </span>",
 
     format_muted = "<span background='"+backlightColor+"' color='"+alsaColor+"'></span\
@@ -177,44 +177,6 @@ if path.exists('/sys/class/backlight/intel_backlight'):
                  ><span background='"+backlightColor+"'> {percentage:.0f}% </span>",
         backlight="intel_backlight",
         )
-
-## WIRELESS ------------------------------------------------------------
-## Por cada interfaz de red wireless genero un monitor de estado
-for ifc in wlan:
-    status.register("network",
-        interface=ifc,
-
-        color_up = networkFColor,
-        color_down=networkFColor,
-        hints= {"markup": "pango","separator": False,"separator_block_width": 0},
-        #format_up=" {essid}  {bytes_recv:6.1f}KiB",
-
-        #format_up = "<span background='"+batteryColor+"' color='"+networkColor+"'></span\
-        #><span background='"+networkColor+"' >{essid} {bytes_recv:6.1f}KiB {bytes_sent:5.1f}KiB</span>",
-
-        format_up = "<span background='"+batteryColor+"' color='"+networkColor+"'></span\
-        ><span background='"+networkColor+"' > {bytes_recv:6.1f}KiB {bytes_sent:5.1f}KiB</span>",
-
-        format_down = "<span background='"+batteryColor+"' color='"+networkColor+"'></span\
-        ><span background='"+networkColor+"' ></span>",
-    )
-
-## ETHERNET ------------------------------------------------------------
-## Por cada interfaz de red wireless genero un monitor de estado
-for ifc in ethernet:
-    status.register(
-        "network",
-        interface = ifc,
-
-        color_up = networkFColor,
-        color_down=networkFColor,
-        hints= {"markup": "pango","separator": False,"separator_block_width": 0},
-
-        format_up = "<span background='"+batteryColor+"' color='"+networkColor+"'></span\
-        ><span background='"+networkColor+"' > {bytes_recv:6.1f}KiB {bytes_sent:5.1f}KiB</span>",
-
-        format_down = "",
-    )
 
 ## BATERIA -------------------------------------------------------------
 ## Solo carga si hay una batería
@@ -282,11 +244,9 @@ status.register("disk",
     on_leftclick = "thunar",
     #format=" {avail} GB",
 
-      format = "<span color='"+diskColor+"'></span\
-                ><span background='"+diskColor+"' > {avail} GB</span>",
-    )
-
-
+    format = "<span background='"+networkColor+"' color='"+diskColor+"'></span\
+             ><span background='"+diskColor+"' > {avail} GB</span>",
+)
 
 #status.register('ping',
 #    format_disabled='',
@@ -307,5 +267,43 @@ status.register("disk",
     #layouts=["fr", "ar"],
     #format = u"\u2328 {name}",
     #)
+
+## WIRELESS ------------------------------------------------------------
+## Por cada interfaz de red wireless genero un monitor de estado
+for ifc in wlan:
+    status.register("network",
+        interface=ifc,
+
+        color_up = networkFColor,
+        color_down = networkFColor,
+        hints = {"markup": "pango","separator": False,"separator_block_width": 0},
+        #format_up=" {essid}  {bytes_recv:6.1f}KiB",
+
+        #format_up = "<span background='"+batteryColor+"' color='"+networkColor+"'></span\
+        #><span background='"+networkColor+"' >{essid} {bytes_recv:6.1f}KiB {bytes_sent:5.1f}KiB</span>",
+
+        format_up = "<span background='"+networkColor+"' color='"+networkColor+"'></span\
+        ><span background='"+networkColor+"' > {bytes_recv:6.1f}K {bytes_sent:5.1f}K</span>",
+
+        format_down = "<span background='"+batteryColor+"' color='"+networkColor+"'></span\
+        ><span background='"+networkColor+"' ></span>",
+    )
+
+## ETHERNET ------------------------------------------------------------
+## Por cada interfaz de red wireless genero un monitor de estado
+for ifc in ethernet:
+    status.register(
+        "network",
+        interface = ifc,
+
+        color_up = networkFColor,
+        color_down=networkFColor,
+        hints= {"markup": "pango","separator": False,"separator_block_width": 0},
+
+        format_up = "<span color='"+networkColor+"'>\uE0B2</span\
+        ><span background='"+networkColor+"' >\uE0A0 {bytes_recv:6.1f}K {bytes_sent:5.1f}K</span>",
+
+        format_down = "",
+    )
 
 status.run()
