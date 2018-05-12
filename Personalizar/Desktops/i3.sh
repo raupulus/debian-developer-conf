@@ -23,6 +23,9 @@
 ############################
 i3wm_preconfiguracion() {
     echo -e "$VE Generando Pre-Configuraciones de$RO i3wm$CL"
+
+    ## Al pulsar botón de apagar se suspende
+    sudo sed -r -i "s/^#?\s*HandlePowerKey\s*=.*$/HandlePowerKey=suspend/" /etc/systemd/logind.conf
 }
 
 i3wm_instalar() {
