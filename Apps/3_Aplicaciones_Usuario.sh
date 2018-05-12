@@ -55,6 +55,27 @@ generador_proyectos() {
     cd "$WORKSCRIPT" || exit
 }
 
+##
+## Crea un comando para generar plantillas de archivos
+##
+generador_plantillas() {
+    if [[ -f "$HOME/.local/bin/nuevo" ]]; then
+        rm -f "$HOME/.local/bin/nuevo"
+    fi
+
+    cp "$WORKSCRIPT/conf/home/.local/bin/nuevo" "$HOME/.local/bin/nuevo"
+}
+
+devicons_ls() {
+    descargarGIT 'devicons-ls' 'https://github.com/ryanoasis/devicons-shell.git' "$WORKSCRIPT/tmp/devicons-shell"
+
+    if [[ -f "$HOME/.local/bin/devicons-ls" ]]; then
+        rm -f "$HOME/.local/bin/devicons-ls"
+    fi
+
+    cp "$WORKSCRIPT/tmp/devicons-shell/devicons-ls" "$HOME/.local/bin/devicons-ls"
+}
+
 aplicaciones_usuarios() {
     echo -e "$VE Instalando Aplicaciones específicas para el usuario$RO $USER$CL"
     configurar_heroku
@@ -79,6 +100,8 @@ aplicaciones_usuarios() {
                 echo -e "$RO Opción no válida$CL"
         esac
     done
+
+    devicons_ls
 
     ## Mis propias aplicaciones
     generador_proyectos
