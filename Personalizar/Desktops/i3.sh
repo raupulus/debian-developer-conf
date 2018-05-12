@@ -30,7 +30,7 @@ i3wm_preconfiguracion() {
 
 i3wm_instalar() {
     echo -e "$VE Preparando para instalar$RO i3wm$CL"
-    instalarSoftware i3 i3-wm i3blocks i3lock i3status suckless-tools j4-dmenu-desktop rofi
+    instalarSoftware i3 i3-wm i3blocks i3lock i3status suckless-tools j4-dmenu-desktop rofi dunst
 }
 
 ##
@@ -40,7 +40,7 @@ i3wm_postconfiguracion() {
     echo -e "$VE Generando Post-Configuraciones$RO i3wm$CL"
 
     echo -e "$VE Instalando software secundario$CL"
-    instalarSoftware rxvt-unicode-256color compton compton-conf compton-conf-l10n nitrogen thunar ranger w3m tint2 arandr neofetch scrot xbacklight gvfs gpicview mplayer cmus zathura xautolock xbindkeys xbindkeys-config pulseaudio volumeicon-alsa alsamixergui xfce4-settings firewall-applet firewall-config firewalld unclutter lxappearance gtk-chtheme qt4-qtconfig pm-utils
+    instalarSoftware rxvt-unicode-256color compton compton-conf compton-conf-l10n nitrogen thunar ranger w3m tint2 arandr neofetch xbacklight gvfs gpicview mplayer cmus zathura xautolock xbindkeys xbindkeys-config pulseaudio volumeicon-alsa alsamixergui xfce4-settings firewall-applet firewall-config firewalld unclutter lxappearance gtk-chtheme qt4-qtconfig pm-utils xfce4-screenshooter parcellite
 
     echo -e "$VE Generando archivos de configuración$CL"
     enlazarHome '.config/i3' '.config/tint2' '.config/compton.conf' '.config/conky' '.Xresources' '.config/nitrogen' '.config/i3status' '.config/plank' '.config/rofi'

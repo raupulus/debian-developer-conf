@@ -364,14 +364,20 @@ bindsym $mod+shift+d exec --no-startup-id ~/.config/i3/scripts/rofr.sh -r
 ############################################################
 #############       Bindings Propios      ##################
 ############################################################
-## Captura de Pantalla
-bindsym Print exec scrot '%Y-%m-%d_%T_scrot.png' -e 'mv $f ~/Imágenes/Screenshots/'
+## Captura un área de la pantalla seleccionada al portapapeles
+bindsym --release shift+Print exec xfce4-screenshooter -crm
 
-## Captura de Ventana
-bindsym $mod+Print exec scrot '%Y-%m-%d_%T_scrot.png' -u -e 'mv $f ~/Imágenes/Screenshots/'
+## Captura un área de la pantalla a Imágenes
+bindsym --release Control+shift+Print exec xfce4-screenshooter -rm -s ~/Imágenes/Screenshots/
 
-## Capturar un área (No termina de funcionar correctamente)
-bindsym $mod+control+Print exec scrot -s '%Y-%m-%d_%T_scrot.png' -e 'mv $f ~/Imágenes/Screenshots/'
+## Captura de Ventana actual
+bindsym --release $mod+print exec xfce4-screenshooter -wm -s ~/Imágenes/Screenshots/
+
+## Captura de Pantalla Completa al portapapeles
+bindsym --release $mod+shift+print exec xfce4-screenshooter -cfm
+
+## Captura de Pantalla Completa
+bindsym --release print exec xfce4-screenshooter -fm -s ~/Imágenes/Screenshots/
 
 ## Brillo de la pantalla
 bindcode XF86MonBrightnessUp exec xbacklight - 10
@@ -392,11 +398,17 @@ exec --no-startup-id i3-msg 'workspace $WS4; exec ~/4_Programas/Telegram/Telegra
 ## Fondo de pantalla nitrogen
 exec --no-startup-id nitrogen --restore
 
+## Portapapeles parcellite
+exec --no-startup-id parcellite
+
 ## Mensajes emergentes
-exec_always --no-startup-id dunst
+exec --no-startup-id dunst
 
 ## Ocultar ratón tras inactividad
 exec --no-startup-id unclutter -idle 0.8
+
+## Configuraciones para X
+exec --no-startup-id xrdb -load ~/.Xresources
 
 exec --no-startup-id xbindkeys
 exec --no-startup-id pulseaudio --start
@@ -415,7 +427,7 @@ exec --no-startup-id pulseaudio --start
 ############################################################
 ## Fondo de pantalla nitrogen
 exec_always --no-startup-id nitrogen --restore
-
+exec_always --no-startup-id dunst
 exec_always --no-startup-id xrdb -load ~/.Xresources
 
 ############################################################

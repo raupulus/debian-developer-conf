@@ -24,7 +24,7 @@ En esta instalación se parte de la base de XFCE
 -   ranger → Gestor de archivos para terminal
 -   tint2 → Barra de menú (redundante, no se usará por defecto)
 -   arandr → Interfaz de xrandr para organizar pantallas/monitores
--   scrot → Captura Imágenes
+-   xfce4-screenshooter → Captura Imágenes
 -   gvfs → Automontaje de dispositivos y papelera
 -   zathura → Lector pdf que permite usar las teclas de vim
 -   cmus → Reproductor C con curses.
@@ -32,6 +32,7 @@ En esta instalación se parte de la base de XFCE
 -   xautolock → Lanzador de programas en sesiones de X inactivas
 -   xbindkeys → Permite asignar combinaciones de teclas a acciones
 -   unclutter → Oculta el ratón mientras no se utiliza
+-   parcellite → Portapapeles
 
 ### Organización de los escritorios
 
