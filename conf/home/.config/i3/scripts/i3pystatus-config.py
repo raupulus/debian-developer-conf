@@ -1,15 +1,51 @@
-# -*- coding: utf-8 -*-
+#!/usr/bin/python3
+# -*- encoding: utf-8 -*-
 
+# @author     Raúl Caro Pastorino
+# @copyright  Copyright © 2018 Raúl Caro Pastorino
+# @license    https://wwww.gnu.org/licenses/gpl.txt
+# @email      tecnico@fryntiz.es
+# @web        www.fryntiz.es
+# @github     https://github.com/fryntiz
+# @gitlab     https://gitlab.com/fryntiz
+# @twitter    https://twitter.com/fryntiz
+
+# Guía de estilos aplicada: PEP8
+
+#######################################
+# #           Descripción           # #
+#######################################
+
+#######################################
+# #       Importar Librerías        # #
+#######################################
 import subprocess
 import os.path as path
 
 from i3pystatus import Status
 from i3pystatus.updates import aptget
 
-
+from time import sleep
+#######################################
+# #             Variables           # #
+#######################################
 status = Status()
 
 ## Variables para colores
+naranja = ''
+amarillo = ''
+azul = ''
+gris = ''
+pastel = ''
+negro = ''
+naranja = ''
+rosa = ''
+marron = ''
+background = ''
+
+#######################################
+# #             Funciones           # #
+#######################################
 updatesFColor='#CA4932'
 clockFColor='#E6E6FA'
 forColor='#EDE4E4'
@@ -40,7 +76,7 @@ diskFColor='#C4D5DD'
 
 ## Menu ----------------------------------------------------------------
 status.register("text",
-    text = "",
+    text = "Menú",
     ## Abrir el menu obmenubar
     on_leftclick = "~/mimenu/obmenubar",
     ## Abrir terminal
