@@ -481,7 +481,7 @@ exec --no-startup-id firewall-applet
 exec --no-startup-id system-config-printer-applet
 
 ############################################################
-##############      Recargar y/o Salir      ################
+##############   Recargar/Bloquear/Salir    ################
 ############################################################
 ## Recargar el archivo de configuración
 bindsym $mod+Shift+c reload
@@ -494,6 +494,10 @@ bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'Si pulsas sobre salir se cer
 
 ## Suspender al pulsar botón de apagado
 bindsym PowerOff exec --no-startup-id i3lock; pm-suspend
+
+## Bloquear pantalla
+bindsym $mod+p exec "~/.config/i3/scripts/lock_and_blur.sh"
+exec xautolock -detectsleep -time 1 -locker "~/.config/i3/scripts/lock_and_blur.sh" -notify 50 -notifier "notify-send -u critical -t 10000 -- 'Bloqueando pantalla en 30 seconds'"
 
 ###########################################################
 ############         TECLAS MULTIMEDIA         ############

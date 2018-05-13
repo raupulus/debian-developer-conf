@@ -1,10 +1,6 @@
 #!/bin/bash
-lock() {
-    i3lock
-}
-
 case "$1" in
-    lock) lock ;;
+    lock) ~/.config/i3/scripts/lock_and_blur.sh ;;
     logout) i3-msg exit;;
     suspend) lock && systemctl suspend;;
     hibernate) lock && systemctl hibernate;;
