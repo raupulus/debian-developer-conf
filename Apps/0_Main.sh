@@ -42,7 +42,7 @@ menuAplicaciones() {
         aplicaciones_basicas
         aplicaciones_extras -a
         aplicaciones_usuarios
-        menuIDES -a
+        #menuIDES -a
     }
 
     ## Si la función recibe "-a" indica que ejecute todas las aplicaciones

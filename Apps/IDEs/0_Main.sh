@@ -25,6 +25,7 @@ source "$WORKSCRIPT/Apps/IDEs/Atom_IDE.sh"
 source "$WORKSCRIPT/Apps/IDEs/Brackets.sh"
 source "$WORKSCRIPT/Apps/IDEs/Ninja-IDE.sh"
 source "$WORKSCRIPT/Apps/IDEs/phpstorm.sh"
+source "$WORKSCRIPT/Apps/IDEs/pycharm_pro.sh"
 source "$WORKSCRIPT/Apps/IDEs/webstorm.sh"
 source "$WORKSCRIPT/Apps/IDEs/netbeans.sh"
 source "$WORKSCRIPT/Apps/IDEs/aptanastudio.sh"
@@ -42,7 +43,9 @@ menuIDES() {
         echo -e "$VE Instalando todos los IDES$CL"
         atom_instalador
         brackets_instalador
+        phpstorm_instalador
         ninjaide_instalador
+        pycharm_pro_instalador
     }
 
     ## Si la función recibe "-a" indica que se instalen todos los IDES
