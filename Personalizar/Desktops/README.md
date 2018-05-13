@@ -2,7 +2,13 @@
 
 ## i3wm
 
-En esta instalación se parte de la base de XFCE
+Instalo y configuro i3 con diversos componentes para construir un entorno
+agradable, liviano y despejado pero a la vez suficientemente potente para
+trabajar con las herramientas necesarias.
+
+![Previsualización i3](docs/i3.png)
+
+![Previsualización i3 con dos monitores](docs/i3-Dual_Monitor.png)
 
 ### Paquetes instalados
 
@@ -15,8 +21,8 @@ En esta instalación se parte de la base de XFCE
 -   perl-anyevent-i3
 -   i3-save-tree
 
-
 ### Paquetes SecundaSrios instalados
+
 -   compton → Compositor de ventanas
 -   nitrogen → Seleccionar fondo de pantalla
 -   gpicview → visor de imágenes

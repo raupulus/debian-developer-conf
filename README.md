@@ -2,31 +2,17 @@
 
 # Script para Preparar Entorno de Programación en Debian
 
-Este script surge de la necesidad como desarrollador web para tener un entorno
-funcional en poco tiempo y además existir una concordancia entre las
-configuraciones de distintos dispositivos con los que trabajo.
+Script para tener un entorno funcional en poco tiempo y además tener
+sincronizada la configuración de distintos dispositivos con los que trabajo.
 
 Este script prepará completamente el entorno de programación, aplicaciones,
-servidores, plantillas y repositorios en Debian Stable.
+servidores, comandos personalizados, interfaz gráfica, plantillas y repositorios en Debian Stable.
 
 ![Imagen de previsualización](docs/Preview.png)
 
-Con la colaboración de un testeo constante por parte de @mavalroot
-(https://github.com/mavalroot).
-
-Basado en el script original para otro Sistema Operativo de @ricpelo en esta
-dirección https://github.com/ricpelo/conf
-
 Todas las configuraciones y elecciones se han establecido a mi gusto, puedes
-personalizar cualquier parte que decidas para este script.
-
-## Estado
-
-Este repositorio lo uso habitualmente a modo configuración personal y lo
-actualizo y actualizaré en el futuro.
-
-En este momento tiene cierta estabilidad y la mayoría de los objetivos
-programados los cumple adecuadamente sin errores (aparentes claro está).
+personalizar cualquier parte que decidas para este script bajo la misma
+licencia GPLv3.
 
 Si encuentras algún fallo o detectas que algo podría funcionar mejor, añade un
 **Issue** al que estaré encantado de atender y valorar.
@@ -35,32 +21,28 @@ También puedes colaborar con los PR que creas oportuno siempre que vaya en la
 línea del script y no sea necesario darle la vuelta a todo el proyecto.
 
 En todo caso recomiendo usar la rama **Master** y si quieres colaborar crea un
-**fork** y haz **PR** sobre la rama **dev**
+**fork** y haz **PR** sobre la rama **dev** para valorar si formará parte de
+la siguiente versión.
 
 ## Advertencias
 
-Si no usas **repositorios oficiales** o usas repositorios mezclados con los
-oficiales usar este script es un **experimento** ya que no lo he probado ni
-tengo interés en ello. Podría funcionar bien (o no) así que úsalo bajo tu
-riesgo.
+Si no usas **repositorios oficiales**, mezclas repositorios o tienes otro
+sistema distinto a Debian Stable estarás **experimentando** así que úsalo bajo
+tu riesgo.
 
 Este script está automatizado y puede cambiar configuración sin que te pregunte.
 
 Una buena idea sería que lo ejecutaras tras hacer una copia de seguridad o en
 una máquina virtual hasta ver que el script completo se adapta a tus
-necesidades o modificar la parte que prefieras diferente. Trabajo en la
-modularidad para que puedas ejecutar solo una parte que te interese.
+necesidades o modificar la parte que prefieras diferente.
+
+Trabajo en la modularidad para que puedas ejecutar solo una parte que te interese.
 
 Para evitar que sea interactivo y estar constantemente preguntando se establece
 "-y" como parámetro por defecto en **apt** lo cual puede instalar software en
 forma de dependencia y/o romper en casos muy extremos el sistema, aunque repito
 que con repositorios oficiales no debe ocurrir nada extraño y si es así puedes
 reportarlo para su corrección.
-
-En **ningún caso** me hago responsable de pérdidas de datos con el uso de esta
-herramienta ya que se ha diseñado en función a mis necesidades y la comparto
-para que puedas aprovechar parte o por completo la misma (Respetando la
-licencia GPLv3 que le he asignado).
 
 ## Objetivos
 
@@ -90,6 +72,7 @@ python, nodejs, ruby, bash, zsh
 - Instalar Navegadores WEB para desarrolladores como Firefox Developer y
 Firefox Nightly
 - Instalar herramientas para ayudar a debug en lenguajes web
+- Configurar interfaces gráficas
 
 ## Distribución compatible
 
@@ -110,53 +93,49 @@ compatibilidad.
 Se ha intentado hacer modular de forma que apenas sea necesario tocar los
 scripts para añadir/quitar funciones.
 
-La idea es que el script pregunte ciertas cosas como shell a usar (bash o zsh)
-pero también podemos añadir fuentes simplemente copiándolas al directorio
-"fonts" o instalar aplicaciones simplemente añadiéndolas a la lista de
-aplicaciones para instalar "Software.lst"
-
-En las próximas versiones se plantea una Refactorización que permita manejar el
-script de forma aún más sencilla y además permita utilizar listas.lst donde el
-usuario introducirá un valor por línea para su configuración personalizada.
+La idea es que el script pregunte lo mínimo posible y que esto sean decisiones
+relevantes.
 
 ## Ejecutar script
 
 Es importante realizar todos los pasos desde bash. Si usas **zsh** cambia a
 **bash** antes de ejecutarlo:
+
 ```bash
     bash
 ```
 
 Primero instalamos GIT
-```debian
+
+```bash
     sudo apt install git
 ```
 
 Clonamos el repositorio actual en nuestro equipo
-```GIT
-    git clone https://github.com/fryntiz/preparar_entorno
+
+```bash
+    git clone https://github.com/fryntiz/Debian_Developer_Init.git
 ```
 
 Entramos y ejecutamos el script principal
+
 ```bash
     cd preparar_entorno
     ./main.sh
 ```
 
-## Personalización estética
+## Personalización
 
-Se han incorporados cambios en la personalización:
+Agrega elementos gráficos al sistema, los configura para el usuario y activa.
 
 - Fondo de pantalla
 - Grub
 - GDM
-- Iconos crystalblue
+- Iconos
+- Cursores crystalblue
 
 Además también se añadieron iconos "paper", temas "flatpat" y la instalación de
 cursores "**crystal**"
-
-Todo esto se instalará de forma opcional eligiendo dicha opción en el menú. Por
-ahora se instalan pero se han de activar manualmente.
 
 ## Servidores
 
@@ -327,3 +306,23 @@ iconos, temas y cursores
 - Tipografías.sh → Instala fuentes tipográficas
 - Variables_Entorno.sh → Genera variables de entorno que seran globales en el
 sistema
+
+## Desktops y Windows Manager
+
+Sección opcional que permite instalar y dejar configurado automáticamente el
+estcritorio o window manager elegido.
+
+Puedes leer más sobre los escritorios desde aquí:
+https://github.com/fryntiz/Debian_Developer_Init/Personalizar/Desktops/README.md
+
+### i3 Window Manager
+
+Instala y configura i3 Window Manager personalizando la barra de estado con i3pystatus y applets autoiniciados.
+
+![Previsualización i3](docs/i3.png)
+
+![Previsualización i3 con dos monitores](docs/i3-Dual_Monitor.png)
+
+### Xmonad
+
+### Openbox
