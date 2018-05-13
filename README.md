@@ -230,7 +230,9 @@ poco probable además).
 ### Python
 
 Contempla la instalación de Python2 y Python3 con sus gestores de paquetes
-**pip** para cada uno de ellos.
+**pip** y **pip3**.
+
+Además se instalan una serie de librerías normalmente recurridas.
 
 ### NodeJS
 
@@ -250,33 +252,27 @@ También instala desde **npm** bower y los siguientes paquetes globales:
 
 - Accesos_Directos → Contiene los accesos directos individuales para usuario
 que van en ~/.local/share/applications
-- Apache2 → Contenido para apache
+- Apache2 → Contenido para la estructura de apache
 - Apps → Contiene scripts y configuraciones especiales para ciertas aplicaciones
 - docs → Directorio con la documentación del proyecto e imágenes.
 - fonts → Contiene un directorio por cada conjunto de fuentes similares
-- gedit → Contiene configuración específica para gedit
+- Personalizar → Scripts para configurar la estética y comportamientos del sistema, cambiar fondos/temas/iconos/cursores y la instalación opcional de escritorios o window manager.
 - conf → Contiene archivos de configuración o plantillas para generarlos
 - tmp → Directorio donde se descargan los archivos temporales, se crea al
 iniciar el script.
-- sources.list → Contiene las listas (la mayoría de ellas) de repositorios que
-se añadiran al sistema cuando se elige la opción de agregar repositorios.
-- usr → Contiene archivos compartidos de usuarios (temporalmente, se añadirá en
-el futuro dentro de conf)
+- Servidores → Instala y configura servidores además de lenguajes de programación.
+- sources.list → Contiene las listas de repositorios para añadirlas al sistema cuando se elige la opción de agregar repositorios.
 
 # Scripts (La estructura está pendiente de completar Refactorización)
 
 - Agregar_Repositorios.sh → Añade algunos repositorios útiles y sus llaves para
 seguridad
-- funciones.sh →
-- Instalar_Configuraciones → Genera todas las configuraciones de programas como
-Vim, Bashit, ohmyzsh y además añade configuraciones al sistema y el directorio
-home
+- funciones.sh → Contiene funciones globales y auxiliares para no repetir código
+- Instalar_Configuraciones → Establece aplicaciones determinadas.
 - Limpiador.sh → Este script limpia los directorios y archivos que pueden
 causar más problemas en algún momento, esto existe para depurar principalmente
 y su uso se desaconseja por ser áltamente arriesgado a perder datos.
 - main.sh → Programa principal con menú para elegir paso a realizar
-- Servidores.sh → Instala servidores como apache2 php postregsql mariadb y los
-configura
 
 Dentro de Apps/
 
@@ -284,6 +280,11 @@ Dentro de Apps/
   - Atom_IDE.sh → Instala el editor ATOM con su configuración y complementos
   - Brackets.sh → Instala y configura Brackets
   - Ninja-IDE.sh → Instala y configura Ninja IDE
+  - aptanastudio.sh → (No implementado aún, en proceso)
+  - netbeans.sh → (No implementado aún, en proceso)
+  - phpstorm.sh → Instala y configura el IDE PhpStorm para Debian GNU/Linux
+  - pycharm.sh → (No implementado aún, en proceso)
+  - webstorm.sh → (No implementado aún, en proceso)
 - bashit.sh → Instala y configura Bash-it
 - DBeaver.sh → Instala y configura DBeaver
 - Firefox.sh → Instala la versión para desarrolladores **Quantum** y la versión
@@ -293,6 +294,7 @@ en desarrollo principal **Nightly**
 - i3wm.sh → Instala y configura gestor de ventanas i3wm
 - OhMyZsh.sh → Instala y configura OhMyZsh
 - Pencil-Project.sh → Instala y configura Pencil Project
+- spacevim.sh → Instala y configura SpaceVim
 - vim.sh → Instala y configura Vim
 
 Estructura pendiente de ordenar, alguna información extra:
