@@ -52,9 +52,14 @@ phpstorm_instalar() {
     echo -e "$VE Preparando para instalar$RO PhpStorm$CL"
     echo -e "$VE Extrayendo IDE$CL"
     cd "$WORKSCRIPT/tmp/" || return 0
+
     tar -zxf "${1}.tar.gz" 2>> /dev/null
+
     local directorio="$(ls | grep -E ^PhpStorm.+[^\.tar\.gz]$)"
-    mv "$WORKSCRIPT/tmp/$directorio" "$HOME/.local/opt/phpstorm"
+    if [[ "$directorio" != '' ]]; then
+        mv "$WORKSCRIPT/tmp/$directorio" "$HOME/.local/opt/phpstorm"
+    fi
+
     cd "$WORKSCRIPT" || exit 1
 }
 

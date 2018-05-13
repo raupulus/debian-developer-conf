@@ -309,6 +309,6 @@ fi
 ###  Sobrescribiendo Comandos   ###
 ###################################
 ## devicons-ls (Iconos para terminal al hacer ls)
-if [[ -x "$HOME/.local/bin/devicons-ls" ]]; then
-    alias ls='devicons-ls'
-fi
+#if [[ -x "$HOME/.local/bin/devicons-ls" ]]; then
+#    alias ls='devicons-ls'
+#fi
