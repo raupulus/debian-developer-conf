@@ -127,7 +127,8 @@ if path.exists('/sys/class/backlight/intel_backlight'):
         interval=5,
         color = backlightFColor,
         format=" {percentage:.0f}%",
-        hints= {"markup": "pango","separator": False,"separator_block_width": 0},
+        hints= {"markup": "pango","separator": True,"separator_block_width": 12},
+        #hints= {"markup": "pango","separator": False,"separator_block_width": 0},
         #format = "<span background='"+networkColor+"' color='"+backlightColor+"'></span\
         #><span background='"+backlightColor+"'> {percentage:.0f}% </span>",
         backlight="intel_backlight",
@@ -140,7 +141,8 @@ if path.exists('/sys/class/power_supply/BAT0'):
         #battery_ident="BAT1",
         interval=3,
         format="{status} {percentage:.0f}%",
-        hints= {"markup": "pango","separator": False,"separator_block_width": 0},
+        hints= {"markup": "pango","separator": True,"separator_block_width": 12},
+        #hints= {"markup": "pango","separator": False,"separator_block_width": 0},
         #format    = "<span background='"+tempColor+"' color='"+batteryColor+"'></span\
         #><span background='"+batteryColor+"'> {status} {percentage:.0f}%</span>",
 
