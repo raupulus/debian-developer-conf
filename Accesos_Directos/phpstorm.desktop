@@ -1,0 +1,8 @@
+[Desktop Entry]
+Name=PhpStorm
+Type=Application
+Categories=Development
+Exec=.local/opt/phpstorm/bin/phpstorm.sh %U
+Icon=/usr/share/icons/fryntiz/phpstorm.png
+MimeType=text/html;
+Keywords=Text;Editor;Write;Web;Development;

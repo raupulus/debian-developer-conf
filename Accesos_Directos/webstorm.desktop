@@ -1,0 +1,8 @@
+[Desktop Entry]
+Name=WebStorm
+Type=Application
+Categories=Development
+Exec=.local/opt/webstorm/bin/webstorm.sh %U
+Icon=/usr/share/icons/fryntiz/webstorm.png
+MimeType=text/html;
+Keywords=Text;Editor;Write;Web;Development;

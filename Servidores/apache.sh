@@ -26,7 +26,7 @@
 ############################
 
 apache2_descargar() {
-    echo "$VE Descargando$RO Apache2$CL"
+    echo -e "$VE Descargando$RO Apache2$CL"
 }
 
 apache2_preconfiguracion() {
@@ -137,7 +137,12 @@ apache2_postconfiguracion() {
             fi
         }
 
-        enlaces
+        ## Pregunta si generar enlace solo cuando falta uno de ellos
+        if [[ ! -h "$HOME/git" ]] &&
+           [[ ! -h "$HOME/GIT" ]] &&
+           [[ ! -h "$HOME/web" ]]; then
+            enlaces
+        fi
 
         ## Cambia los permisos
         echo -e "$VE Asignando permisos"

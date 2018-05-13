@@ -40,9 +40,9 @@ menuAplicaciones() {
         clear
         echo -e "$VE Instalando todas las aplicaciones$CL"
         aplicaciones_basicas
-        aplicaciones_extras
+        aplicaciones_extras -a
         aplicaciones_usuarios
-        menuIDES -a
+        #menuIDES -a
     }
 
     ## Si la función recibe "-a" indica que ejecute todas las aplicaciones

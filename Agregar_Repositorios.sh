@@ -70,7 +70,14 @@ agregar_llaves() {
     wget --quiet -O - https://www.postgresql.org/media/keys/ACCC4CF8.asc | sudo apt-key add -
 
     ## Repositorio de NodeJS Oficial
+    echo -e "$VE Agregando clave para$RO NodeJS Repositorio Oficial$CL"
     curl -sL https://deb.nodesource.com/setup_9.x | sudo -E bash -
+
+    ## Repositorio para Tor oficial y estable
+    echo -e "$VE Agregando clave para$RO Tor Repositorio$CL"
+    gpg --keyserver keys.gnupg.net --recv A3C4F0F979CAA22CDBA8F512EE8CBC9E886DDD89 && gpg --export A3C4F0F979CAA22CDBA8F512EE8CBC9E886DDD89 | sudo apt-key add -
+    sudo apt update
+    sudo apt install deb.torproject.org-keyring
 }
 
 ##

@@ -1,0 +1,19 @@
+[Desktop Entry]
+Name=Gimp 2.10
+Name[es]=Gimp 2.10
+Comment=Editor de Imágenes
+Comment[es]=Editor de Imágenes
+GenericName=Image Editor
+GenericName[es]=Editor de imágenes
+X-GNOME-FullName=Editor de imágenes Gimp 2.10
+X-GNOME-FullName[es]=Editor de imágenes Gimp 2.10
+Exec=flatpak run org.gimp.GIMP
+Terminal=false
+X-MultipleArgs=false
+Type=Application
+Icon=/usr/share/icons/Paper/512x512/apps/gimp.png
+Categories=Multimedia;Image Editor;
+MimeType=text/html;text/xml;application/xhtml+xml;application/xml;application/vnd.mozilla.xul+xml;application/rss+xml;application/rdf+xml;image/gif;image/jpeg;image/png;x-scheme-handler/http;x-scheme-handler/https;
+StartupWMClass=Gimp 2.10
+StartupNotify=true
+Name[es_ES]=Gimp 2.10

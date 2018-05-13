@@ -1,8 +1,0 @@
-[Plymouth Theme]
-Name=Default theme for Debian 9.0 Stretch
-Description=A theme that features a white debian logo in a pulsing green circle, on a blue-gray background
-ModuleName=script
-
-[script]
-ImageDir=/usr/share/plymouth/themes/softwaves
-ScriptFile=/usr/share/plymouth/themes/softwaves/softwaves.script
