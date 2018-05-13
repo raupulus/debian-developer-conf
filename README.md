@@ -276,7 +276,10 @@ y su uso se desaconseja por ser áltamente arriesgado a perder datos.
 
 Dentro de Apps/
 
-- IDEs:
+## IDEs
+
+![Previsualización Menú IDEs](docs/IDEs.png)
+
   - Atom_IDE.sh → Instala el editor ATOM con su configuración y complementos
   - Brackets.sh → Instala y configura Brackets
   - Ninja-IDE.sh → Instala y configura Ninja IDE
