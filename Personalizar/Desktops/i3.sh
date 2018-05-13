@@ -23,11 +23,14 @@
 ############################
 i3wm_preconfiguracion() {
     echo -e "$VE Generando Pre-Configuraciones de$RO i3wm$CL"
+
+    ## Al pulsar botón de apagar se suspende
+    sudo sed -r -i "s/^#?\s*HandlePowerKey\s*=.*$/HandlePowerKey=suspend/" /etc/systemd/logind.conf
 }
 
 i3wm_instalar() {
     echo -e "$VE Preparando para instalar$RO i3wm$CL"
-    instalarSoftware i3-wm i3-blocks suckless-tools
+    instalarSoftware i3 i3-wm i3blocks i3lock i3status suckless-tools j4-dmenu-desktop rofi dunst
 }
 
 ##
@@ -37,19 +40,23 @@ i3wm_postconfiguracion() {
     echo -e "$VE Generando Post-Configuraciones$RO i3wm$CL"
 
     echo -e "$VE Instalando software secundario$CL"
-    instalarSoftware rxvt-unicode-256color compton compton-conf compton-conf-l10n nitrogen gpicview thunar ranger w3m tint2 arandr neofetch scrot xbacklight gvfs
+    instalarSoftware rxvt-unicode-256color compton compton-conf compton-conf-l10n nitrogen thunar ranger w3m tint2 arandr neofetch xbacklight gvfs gpicview mplayer cmus zathura xautolock xbindkeys xbindkeys-config pulseaudio volumeicon-alsa alsamixergui xfce4-settings firewall-applet firewall-config firewalld unclutter lxappearance gtk-chtheme qt4-qtconfig pm-utils xfce4-screenshooter parcellite zenity scrot
 
     echo -e "$VE Generando archivos de configuración$CL"
-    ## Enlazar "$WORKSCRIPT/conf/home/.i3" en "$HOME/.i3"
-    enlazarHome '.config/i3' '.conf/tint2' '.conf/compton.conf' '.conf/conky' '.Xresources' '.config/nitrogen' '.config/i3status'
+    enlazarHome '.config/i3' '.config/tint2' '.config/compton.conf' '.config/conky' '.Xresources' '.config/nitrogen' '.config/i3status' '.config/plank' '.config/rofi'
 
     if [[ ! -d "$HOME/Imágenes/Screenshot" ]]; then
         mkdir -p "$HOME/Imágenes/Screenshots"
     fi
 
     ## Instalando i3pystatus
-    instalarSoftware 'python3' 'pip3'
-    pip3 install i3pystatus netifaces colour basiciw pyalsaaudio fontawesome
+    ## libasound2-dev → Necesario para pyalsaaudio
+    ## libiw-dev → Necesario para basiciw
+    instalarSoftware 'python3' 'python3-pip' 'libasound2-dev' 'libiw-dev'
+    sudo pip3 install --upgrade i3pystatus basiciw netifaces colour pyalsaaudio fontawesome
+
+    ## Tema Paper para GTK2 (Debe estar instalado)
+    gconftool-2 --type string --set /desktop/gnome/interface/icon_theme 'Paper'
 }
 
 i3wm_instalador() {
@@ -58,6 +65,10 @@ i3wm_instalador() {
     i3wm_preconfiguracion
     i3wm_instalar
     i3wm_postconfiguracion
+
+    ## Configurando Personalizaciones
+    conf_gtk2  ## Configura gtk-2.0 desde script → Personalizacion_GTK
+    conf_gtk3  ## Configura gtk-3.0 desde script → Personalizacion_GTK
 }
 
 ##

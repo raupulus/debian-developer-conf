@@ -1,0 +1,73 @@
+#!/usr/bin/env bash
+# -*- ENCODING: UTF-8 -*-
+##
+## @author     Raúl Caro Pastorino
+## @copyright  Copyright © 2018 Raúl Caro Pastorino
+## @license    https://wwww.gnu.org/licenses/gpl.txt
+## @email      tecnico@fryntiz.es
+## @web        www.fryntiz.es
+## @github     https://github.com/fryntiz
+## @gitlab     https://gitlab.com/fryntiz
+## @twitter    https://twitter.com/fryntiz
+##
+##             Guía de estilos aplicada:
+## @style      https://github.com/fryntiz/Bash_Style_Guide
+
+############################
+##     INSTRUCCIONES      ##
+############################
+## Genera un nuevo archivo a partir de la plantilla correspondiente
+
+############################
+##       FUNCIONES        ##
+############################
+## Almaceno la cantidad de parámetros recibidos
+par=$#
+
+##
+## Mensaje con información de uso para este comando
+##
+about() {
+    echo "Error de sintaxis: Se esperaba 2 parámetros (tipo y nombre)"
+    echo "Ejemplo: nuevo html miweb"
+    echo "Valores admitidos para el tipo de archivo: py python python3 python2 bash sql css html html5 js php"
+    exit 0
+}
+
+##
+## Crea una nueva plantilla recibiendo la ruta, nombre y extensión
+## $1 Ruta dentro de plantillas
+## $2 Nombre del nuevo archivo
+## $3 Extensión del archivo
+##
+generar() {
+    local plantilla="$HOME/Plantillas/Genéricas/$1"
+
+    if [[ ! -f "$plantilla" ]]; then
+        echo "No tienes instalada esta plantilla"
+        exit 1
+    fi
+
+    if [[ "$par" = 1 ]]; then
+        cp "$plantilla" . && echo "Plantilla copiada" && exit 0
+    elif [[ "$par" = 2 ]]; then
+        cp "$plantilla" "./$2$3" && echo "Plantilla copiada" && exit 0
+    else
+        about
+    fi
+}
+
+case "$1" in
+    -h|--help) about;;
+    py|python|python3) generar 'Scripts/Python3.py' "$2" '.py';;
+    python2) generar 'Scripts/Python2.py' "$2" '.py';;
+    bash) generar 'Scripts/Script\ Bash.sh' "$2" '.sh';;
+    sql|posgresql) generar 'Scripts/Script\ SQL.sql' "$2" '.sql';;
+    css) generar 'Web/CSS.css' "$2" '.css';;
+    html|html5) generar 'Web/HTML5.html' "$2" '.html';;
+    js|javascript) generar 'Web/Javascript.html' "$2" '.js';;
+    php) generar 'Web/PHP.php' "$2" '.php';;
+    *) echo "Opción introducida no válida" && about && exit 1;;
+esac
+
+exit 0

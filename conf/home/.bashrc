@@ -13,6 +13,10 @@
 ##             Guía de estilos aplicada:
 ## @style      https://github.com/fryntiz/Bash_Style_Guide
 
+RO="\033[1;31m"  ## Color Rojo
+VE="\033[1;32m"  ## Color Verde
+CL="\e[0m"       ## Limpiar colores
+
 ## En caso de no ser ejecutado de forma interactiva se sale sin hacer nada
 case $- in
     *i*) ;;
@@ -291,4 +295,20 @@ if [[ -f ~/.bashrc_custom ]]; then ## Comprobar si existe para el usuario
 else
     touch "$HOME/.bashrc_custom"
     echo '## Añade en este archivo tus personalizaciones' >> "$HOME/.bashrc_custom"
+fi
+
+if [[ -x "$HOME/.local/bin/proyecto" ]]; then
+    echo -e "$VE Con el comando$RO proyecto$VE puedes generar un proyecto nuevo$CL"
+fi
+
+if [[ -x "$HOME/.local/bin/nuevo" ]]; then
+    echo -e "$VE Usando el comando$RO nuevo$VE generas un archivo desde la plantilla$CL"
+fi
+
+###################################
+###  Sobrescribiendo Comandos   ###
+###################################
+## devicons-ls (Iconos para terminal al hacer ls)
+if [[ -x "$HOME/.local/bin/devicons-ls" ]]; then
+    alias ls='devicons-ls'
 fi

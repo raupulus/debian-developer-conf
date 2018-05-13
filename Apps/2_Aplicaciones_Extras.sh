@@ -17,13 +17,6 @@
 ############################
 ## Este script enlaza la instalación de todas las aplicaciones opcionales
 ## que podían ser interesante instalar en uno u otro momento.
-##
-## ¡Actualmente se instala todo por defecto!
-## TODO → Admitir parámetro $1 = -a para instalar todo
-## TODO → Mostrar opciones para instalar 1 programa concreto con las opciones:
-##        - Instalar
-##        - Reinstalar
-##        - Volver a descargar y luego reinstalar
 
 ############################
 ##     IMPORTACIONES      ##
@@ -31,16 +24,59 @@
 source "$WORKSCRIPT/Apps/DBeaver.sh"
 source "$WORKSCRIPT/Apps/GitKraken.sh"
 source "$WORKSCRIPT/Apps/Haroopad.sh"
-source "$WORKSCRIPT/Apps/i3wm.sh"
 source "$WORKSCRIPT/Apps/Pencil-Project.sh"
 
 ############################
 ##       FUNCIONES        ##
 ############################
-aplicaciones_extras() {
-    echo -e "$VE Instalando Aplicaciones$RO Extras$CL"
+
+instalar_todas_aplicaciones_extras() {
     dbeaver_instalador
     gitkraken_instalador
     haroopad_instalador
     pencilProject_instalador
+}
+
+aplicaciones_extras() {
+    echo -e "$VE Instalando Aplicaciones$RO Extras$CL"
+    if [[ "$1" = '-a' ]]; then
+        instalar_todas_aplicaciones_extras
+    else
+        while true :; do
+            clear
+            local descripcion='Menú de aplicaciones
+                1) DBeaver
+                2) GitKraken
+                3) Haroopad
+                4) pencilProject
+                5) Todos los pasos anteriores completos
+
+                0) Atrás
+            '
+            opciones "$descripcion"
+
+            echo -e "$RO"
+            read -p "    Acción → " entrada
+            echo -e "$CL"
+
+            case $entrada in
+
+                1)  dbeaver_instalador;;
+                2)  gitkraken_instalador;;
+                3)  haroopad_instalador;;
+                4)  pencilProject_instalador;;
+                5)  instalar_todas_aplicaciones_extras; break;;
+
+                0)  ## SALIR
+                    clear
+                    echo -e "$RO Se sale del menú$CL"
+                    echo ''
+                    break;;
+
+                *)  ## Acción ante entrada no válida
+                    echo ""
+                    echo -e "                      $RO ATENCIÓN: Elección no válida$CL";;
+            esac
+        done
+    fi
 }

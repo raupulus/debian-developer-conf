@@ -25,6 +25,7 @@ source "$WORKSCRIPT/Apps/IDEs/Atom_IDE.sh"
 source "$WORKSCRIPT/Apps/IDEs/Brackets.sh"
 source "$WORKSCRIPT/Apps/IDEs/Ninja-IDE.sh"
 source "$WORKSCRIPT/Apps/IDEs/phpstorm.sh"
+source "$WORKSCRIPT/Apps/IDEs/pycharm_pro.sh"
 source "$WORKSCRIPT/Apps/IDEs/webstorm.sh"
 source "$WORKSCRIPT/Apps/IDEs/netbeans.sh"
 source "$WORKSCRIPT/Apps/IDEs/aptanastudio.sh"
@@ -42,7 +43,9 @@ menuIDES() {
         echo -e "$VE Instalando todos los IDES$CL"
         atom_instalador
         brackets_instalador
+        phpstorm_instalador
         ninjaide_instalador
+        pycharm_pro_instalador
     }
 
     ## Si la función recibe "-a" indica que se instalen todos los IDES
@@ -55,12 +58,13 @@ menuIDES() {
                 1) Atom
                 2) Brackets
                 3) PHP Storm
-                4) Ninja IDE
-                5) NetBeans (No implementado)
-                6) Aptana Studio (No implementado)
-                7) PyCharm (No implementado)
-                8) Web Storm (No implementado)
-                9) Todos los pasos anteriores
+                4) PyCharm Profesional
+                5) PyCharm Comunidad (No implementado)
+                6) Ninja IDE
+                7) NetBeans (No implementado)
+                8) Aptana Studio (No implementado)
+                9) Web Storm (No implementado)
+                10) Todos los pasos anteriores
 
                 0) Atrás
             '
@@ -75,11 +79,9 @@ menuIDES() {
                 1)  atom_instalador;;      ##  Instala Atom
                 2)  brackets_instalador;;  ##  Instala Brackets
                 3)  phpstorm_instalador;;  ##  Instala PHP Storm
-                4)  ninjaide_instalador;;  ##  Instala Ninja IDE
+                4)  pycharm_pro_instalador;;  ##  Instala Pycharm Profesional
                 #5)  ;;  ##
-                #6)  ;;  ##
-                #7)  ;;  ##
-                #8)  ;;  ##
+                6)  ninjaide_instalador;;  ##  Instala Ninja IDE
                 9)  todos_IDES  ## Todos los IDES
                     break;;
 

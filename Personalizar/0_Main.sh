@@ -21,15 +21,15 @@
 ##     IMPORTACIONES      ##
 ############################
 source "$WORKSCRIPT/Personalizar/Configurar_GIT.sh"
-source "$WORKSCRIPT/Personalizar/Personalizar_GTK.sh"
+source "$WORKSCRIPT/Personalizar/Personalizacion_GTK.sh"
 source "$WORKSCRIPT/Personalizar/Tipografias.sh"
 source "$WORKSCRIPT/Personalizar/iconos.sh"
 source "$WORKSCRIPT/Personalizar/Variables_Entorno.sh"
 source "$WORKSCRIPT/Personalizar/Desktops/0_Main.sh"
 
-###########################
-##       FUNCIONES       ##
-###########################
+############################
+##       FUNCIONES        ##
+############################
 menuPersonalizacion() {
     todas_personalizaciones() {
         clear
