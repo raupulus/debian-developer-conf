@@ -120,6 +120,43 @@ status.register("updates",
     backends = [aptget.AptGet()],
 )
 
+## BACKLIGHT -----------------------------------------------------------
+## Solo se carga si existe
+if path.exists('/sys/class/backlight/intel_backlight'):
+    status.register("backlight",
+        interval=5,
+        color = backlightFColor,
+        format=" {percentage:.0f}%",
+        hints= {"markup": "pango","separator": False,"separator_block_width": 0},
+        #format = "<span background='"+networkColor+"' color='"+backlightColor+"'></span\
+        #><span background='"+backlightColor+"'> {percentage:.0f}% </span>",
+        backlight="intel_backlight",
+        )
+
+## BATERIA -------------------------------------------------------------
+## Solo carga si hay una batería
+if path.exists('/sys/class/power_supply/BAT0'):
+    status.register("battery",
+        #battery_ident="BAT1",
+        interval=3,
+        format="{status} {percentage:.0f}%",
+        hints= {"markup": "pango","separator": False,"separator_block_width": 0},
+        #format    = "<span background='"+tempColor+"' color='"+batteryColor+"'></span\
+        #><span background='"+batteryColor+"'> {status} {percentage:.0f}%</span>",
+
+        alert=True,
+        alert_percentage=30,
+        color=forColor,
+        critical_color="#FF1919",
+        charging_color="#E5E500",
+        full_color=batteryFColor,
+        status={
+            "DIS": " ",
+            "CHR": "  ",
+            "FULL": " ",
+        },
+    )
+
 ## Reloj ---------------------------------------------------------------
 # Displays clock like this:
 # Tue 30 Jul 11:59:46 PM KW31
@@ -161,46 +198,9 @@ status.register("alsa",
     format = "<span background='"+tempColor+"' color='"+alsaColor+"'></span\
              ><span background='"+alsaColor+"' > {volume}% </span>",
 
-    format_muted = "<span background='"+backlightColor+"' color='"+alsaColor+"'></span\
+    format_muted = "<span background='"+tempColor+"' color='"+alsaColor+"'></span\
              ><span background='"+alsaColor+"' > [muted] </span>",
     )
-
-## BACKLIGHT -----------------------------------------------------------
-## Solo se carga si existe
-if path.exists('/sys/class/backlight/intel_backlight'):
-    status.register("backlight",
-        interval=5,
-        color = backlightFColor,
-        #format=" {percentage:.0f}%",
-         hints= {"markup": "pango","separator": False,"separator_block_width": 0},
-        format = "<span background='"+networkColor+"' color='"+backlightColor+"'></span\
-                 ><span background='"+backlightColor+"'> {percentage:.0f}% </span>",
-        backlight="intel_backlight",
-        )
-
-## BATERIA -------------------------------------------------------------
-## Solo carga si hay una batería
-if path.exists('/sys/class/power_supply/BAT0'):
-   status.register("battery",
-       #battery_ident="BAT1",
-       interval=3,
-       #format="{status} {percentage:.0f}%",
-       hints= {"markup": "pango","separator": False,"separator_block_width": 0},
-       format    = "<span background='"+tempColor+"' color='"+batteryColor+"'></span\
-                    ><span background='"+batteryColor+"'> {status} {percentage:.0f}%</span>",
-
-       alert=True,
-       alert_percentage=30,
-       color=forColor,
-       critical_color="#FF1919",
-       charging_color="#E5E500",
-       full_color=batteryFColor,
-       status={
-           "DIS": " ",
-           "CHR": "  ",
-           "FULL": " ",
-       },
-     )
 
 ## TEMPERATURA ---------------------------------------------------------
 status.register("temp",
@@ -232,7 +232,7 @@ status.register("mem",
     #format = " {percent_used_mem}",
 
     format = "<span background='"+diskColor+"' color='"+memColor+"'></span\
-             ><span background='"+memColor+"' > RAM{percent_used_mem}%</span>",
+             ><span background='"+memColor+"' > RAM {percent_used_mem}%</span>",
     #divisor = 1073741824,
     )
 
@@ -285,7 +285,7 @@ for ifc in wlan:
         format_up = "<span background='"+networkColor+"' color='"+networkColor+"'></span\
         ><span background='"+networkColor+"' > {bytes_recv:6.1f}K {bytes_sent:5.1f}K</span>",
 
-        format_down = "<span background='"+batteryColor+"' color='"+networkColor+"'></span\
+        format_down = "<span background='"+networkColor+"' color='"+networkColor+"'></span\
         ><span background='"+networkColor+"' ></span>",
     )
 
