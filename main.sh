@@ -87,16 +87,16 @@ menuPrincipal() {
 
         case ${entrada} in
 
-            1) agregar_repositorios 2>> "$LOGERROR";;     ## Menú de Repositorios
-            2) menuAplicaciones 2>> "$LOGERROR";;         ## Menú de Aplicaciones
-            3) instalar_configuraciones 2>> "$LOGERROR";; ## Menú de Configuraciones
-            4) menuPersonalizacion 2>> "$LOGERROR";;      ## Menú de Personalización
-            5) menuServidores 2>> "$LOGERROR";;           ## Menú de Servidores
-            6) agregar_repositorios 2>> "$LOGERROR"       ## Todos los pasos anteriores
-               menuAplicaciones -a 2>> "$LOGERROR"        ## Indica con "-a" que ejecute todas
-               instalar_configuraciones 2>> "$LOGERROR"
-               menuPersonalizacion -a 2>> "$LOGERROR"     ## Indica con "-a" que ejecute todas
-               menuServidores -a 2>> "$LOGERROR";;        ## Indica con "-a" que ejecute todas
+            1) agregar_repositorios #2>> "$LOGERROR";;     ## Menú de Repositorios
+            2) menuAplicaciones #2>> "$LOGERROR";;         ## Menú de Aplicaciones
+            3) instalar_configuraciones #2>> "$LOGERROR";; ## Menú de Configuraciones
+            4) menuPersonalizacion #2>> "$LOGERROR";;      ## Menú de Personalización
+            5) menuServidores #2>> "$LOGERROR";;           ## Menú de Servidores
+            6) agregar_repositorios #2>> "$LOGERROR"       ## Todos los pasos anteriores
+               menuAplicaciones -a #2>> "$LOGERROR"        ## Indica con "-a" que ejecute todas
+               instalar_configuraciones #2>> "$LOGERROR"
+               menuPersonalizacion -a #2>> "$LOGERROR"     ## Indica con "-a" que ejecute todas
+               menuServidores -a #2>> "$LOGERROR";;        ## Indica con "-a" que ejecute todas
             0) ## SALIR
               clear
               echo -e "$RO Se sale del menú$CL"
