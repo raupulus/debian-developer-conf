@@ -103,7 +103,7 @@ status.register("text",
 
 ## Grabación
 status.register("text",
-    text = "Grabar",
+    text = "\uf03dGrabar",
     ## Abrir el menu obmenubar
     on_leftclick = "~/.config/i3/scripts/record.sh start",
     ## Abrir terminal
