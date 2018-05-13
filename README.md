@@ -53,6 +53,8 @@ Se plantea lo más modular que me ha sido posible para que en algunos casos no
 sea necesario ejecutar el script completo y solo la parte que realmente
 necesitas (si fuese el caso).
 
+Previsualización de menú para aplicaciones:
+
 ![Imagen de previsualización 1](docs/Apps.png)
 
 Estos son los principales objetivos:
@@ -73,6 +75,10 @@ python, nodejs, ruby, bash, zsh
 Firefox Nightly
 - Instalar herramientas para ayudar a debug en lenguajes web
 - Configurar interfaces gráficas
+
+Previsualización de menú Personalización:
+
+![Imagen de previsualización 1](docs/Personalización.png)
 
 ## Distribución compatible
 
@@ -263,7 +269,7 @@ iniciar el script.
 - Servidores → Instala y configura servidores además de lenguajes de programación.
 - sources.list → Contiene las listas de repositorios para añadirlas al sistema cuando se elige la opción de agregar repositorios.
 
-# Scripts (La estructura está pendiente de completar Refactorización)
+# Scripts
 
 - Agregar_Repositorios.sh → Añade algunos repositorios útiles y sus llaves para
 seguridad
