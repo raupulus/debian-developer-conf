@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-
+# -*- ENCODING: UTF-8 -*-
 Name=$(basename "$0")
 Version="0.1"
 

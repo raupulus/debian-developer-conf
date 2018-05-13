@@ -27,9 +27,9 @@ source "$WORKSCRIPT/Personalizar/iconos.sh"
 source "$WORKSCRIPT/Personalizar/Variables_Entorno.sh"
 source "$WORKSCRIPT/Personalizar/Desktops/0_Main.sh"
 
-###########################
-##       FUNCIONES       ##
-###########################
+############################
+##       FUNCIONES        ##
+############################
 menuPersonalizacion() {
     todas_personalizaciones() {
         clear

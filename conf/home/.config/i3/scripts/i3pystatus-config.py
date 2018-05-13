@@ -94,7 +94,7 @@ diskFColor='#C4D5DD'
 
 ## Menu ----------------------------------------------------------------
 status.register("text",
-    text = "Menú",
+    text = "Debian ",
     ## Abrir el menu obmenubar
     on_leftclick = "~/.config/i3/scripts/menu",
     ## Abrir terminal
