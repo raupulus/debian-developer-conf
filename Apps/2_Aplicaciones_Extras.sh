@@ -31,7 +31,6 @@
 source "$WORKSCRIPT/Apps/DBeaver.sh"
 source "$WORKSCRIPT/Apps/GitKraken.sh"
 source "$WORKSCRIPT/Apps/Haroopad.sh"
-source "$WORKSCRIPT/Apps/i3wm.sh"
 source "$WORKSCRIPT/Apps/Pencil-Project.sh"
 
 ############################
