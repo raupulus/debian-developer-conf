@@ -42,11 +42,15 @@ i3wm_preconfiguracion() {
 
     sudo cp "$WORKSCRIPT/tmp/Inconsolata Nerd Font Complete Mono.otf" '/usr/share/fonts/Inconsolata/'
 
+    sudo chmod 755 -R '/usr/share/fonts/Inconsolata'
+
     if [[ ! -d '/usr/share/fonts/Powerline' ]]; then
         sudo mkdir '/usr/share/fonts/Powerline'
     fi
 
-    sudo cp "$WORKSCRIPT/tmp/Inconsolata-dz for Powerline.otf.otf" '/usr/share/fonts/Powerline/'
+    sudo cp "$WORKSCRIPT/tmp/Inconsolata-dz for Powerline.otf" '/usr/share/fonts/Powerline/'
+
+    sudo chmod 755 -R '/usr/share/fonts/Powerline'
 }
 
 i3wm_instalar() {
