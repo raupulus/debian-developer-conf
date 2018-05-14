@@ -52,6 +52,23 @@ terminales_postconfiguracion() {
     fi
 
     enlazarHome '.config/tilix' '.config/terminator'
+
+    ## Defino terminal tilix por defecto
+    gsettings set org.gnome.desktop.default-applications.terminal 'exec' "tilix"
+
+    if [[ -f /usr/bin/tilix ]]; then
+        echo -e "$VE Estableciendo terminal por defecto a$RO Tilix$CL"
+        sudo update-alternatives --set x-terminal-emulator /usr/bin/tilix.wrapper
+    elif [[ -f '/usr/bin/terminator' ]]; then
+        echo -e "$VE Estableciendo terminal por defecto a$RO Terminator$CL"
+        sudo update-alternatives --set x-terminal-emulator /usr/bin/terminator
+    elif [[ -f '/usr/bin/sakura' ]]; then
+        echo -e "$VE Estableciendo terminal por defecto a$RO Sakura$CL"
+        sudo update-alternatives --set x-terminal-emulator /usr/bin/sakura
+    else
+        echo -e "$VE Estableciendo terminal por defecto a$RO XTerm$CL"
+        sudo update-alternatives --set x-terminal-emulator /usr/bin/xterm
+    fi
 }
 
 terminales_instalador() {

@@ -32,6 +32,8 @@ i3wm_preconfiguracion() {
 
     descargar 'Inconsolata Nerd Font Complete Mono.otf' 'https://github.com/ryanoasis/nerd-fonts/blob/master/patched-fonts/Inconsolata/complete/Inconsolata%20Nerd%20Font%20Complete%20Mono.otf'
 
+    descargar 'Inconsolata-dz for Powerline.otf' 'https://github.com/powerline/fonts/blob/master/InconsolataDz/Inconsolata-dz%20for%20Powerline.otf'
+
     if [[ ! -d '/usr/share/fonts/Inconsolata' ]]; then
         sudo mkdir '/usr/share/fonts/Inconsolata'
     fi
@@ -39,6 +41,12 @@ i3wm_preconfiguracion() {
     sudo cp "$WORKSCRIPT/tmp/Inconsolata Nerd Font Complete.otf" '/usr/share/fonts/Inconsolata/'
 
     sudo cp "$WORKSCRIPT/tmp/Inconsolata Nerd Font Complete Mono.otf" '/usr/share/fonts/Inconsolata/'
+
+    if [[ ! -d '/usr/share/fonts/Powerline' ]]; then
+        sudo mkdir '/usr/share/fonts/Powerline'
+    fi
+
+    sudo cp "$WORKSCRIPT/tmp/Inconsolata-dz for Powerline.otf.otf" '/usr/share/fonts/Powerline/'
 }
 
 i3wm_instalar() {

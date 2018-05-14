@@ -48,23 +48,6 @@ permisos() {
 ##
 programas_default() {
     echo -e "$VE Estableciendo programas por defecto$CL"
-
-    ## TERMINAL
-    if [[ -f /usr/bin/tilix ]]; then
-        echo -e "$VE Estableciendo terminal por defecto a$RO Tilix$CL"
-        sudo touch /etc/profile.d/vte.sh 2>> /dev/null
-        sudo update-alternatives --set x-terminal-emulator /usr/bin/tilix.wrapper 2>> /dev/null
-    elif [[ -f '/usr/bin/terminator' ]]; then
-        echo -e "$VE Estableciendo terminal por defecto a$RO Terminator$CL"
-        sudo update-alternatives --set x-terminal-emulator /usr/bin/terminator
-    elif [[ -f '/usr/bin/sakura' ]]; then
-        echo -e "$VE Estableciendo terminal por defecto a$RO Sakura$CL"
-        sudo update-alternatives --set x-terminal-emulator /usr/bin/sakura
-    else
-        echo -e "$VE Estableciendo terminal por defecto a$RO XTerm$CL"
-        sudo update-alternatives --set x-terminal-emulator /usr/bin/xterm
-    fi
-
     ## Navegador
     if [[ -f '/usr/bin/firefox-esr' ]]; then
         echo -e "$VE Estableciendo Navegador WEB por defecto a$RO Firefox-ESR$CL"
