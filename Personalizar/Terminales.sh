@@ -24,6 +24,7 @@
 
 terminales_preconfiguracion() {
     echo -e "$VE Generando Pre-Configuraciones de$RO terminales$CL"
+    instalarSoftware 'dconf-cli'
 }
 
 terminales_instalar() {
