@@ -24,13 +24,13 @@ set $mon2 DVI-D-0
 ###########################################################
 ## Nombres para cada espacio del monitor 1
 set $WS1 1:MAIN
-set $WS2 2:TERM
+set $WS2 2:IDE
 set $WS3 3:WWW
 set $WS4 4:REDES
-set $WS5 5:IDE
+set $WS5 5:IMG
 set $WS6 6:AUDIO
-set $WS7 7:IMG
-set $WS8 8:VIRT
+set $WS7 7:VIRT
+set $WS8 8:
 
 ## Nombres para cada espacio del monitor 2
 set $WS9 9:HDMI1
@@ -59,12 +59,26 @@ workspace $WS10 output $mon2
 ###########################################################
 ############ Ubicacion de ventanas por defecto ############
 ###########################################################
+
+## 2
+assign [class="[pP]hp[sS]torm"] → $WS2
+for_window [class="[pP]hp[sS]torm"] focus
+assign [class="[pP]y[cC]harm"] → $WS2
+for_window [class="[pP]y[cC]harm"] focus
+assign [class="^[aA]tom"] → $WS2
+for_window [class="^[aA]tom"] focus
+assign [class="^Brackets"] → $WS2
+for_window [class="^Brackets"] focus
+
+## 3
 assign [class="^[fF]irefox"] → $WS3
 for_window [class="^[fF]irefox"] focus
 assign [class="^[cC]hrome"] → $WS3
 for_window [class="^[cC]hrome"] focus
 assign [class="^[cC]hromium"] → $WS3
 for_window [class="^[cC]Chromium"] focus
+
+## 4
 assign [class="^Thunderbird"] → $WS4
 for_window [class="^Thunderbird"] focus
 assign [class="^Corebird"] → $WS4
@@ -73,32 +87,34 @@ assign [class="^Telegram"] → $WS4
 for_window [class="^Telegram"] focus
 assign [class="^[wW]hatsie"] → $WS4
 for_window [class="^[wW]hatsie"] focus
-assign [class="[pP]hp[sS]torm"] → $WS5
-for_window [class="[pP]hp[sS]torm"] focus
-assign [class="[pP]y[cC]harm"] → $WS5
-for_window [class="[pP]y[cC]harm"] focus
-assign [class="^[aA]tom"] → $WS5
-for_window [class="^[aA]tom"] focus
-assign [class="^Brackets"] → $WS5
-for_window [class="^Brackets"] focus
+
+## 5
+assign [class="^Gimp"] → $WS5
+for_window [class="^Gimp"] focus
+assign [class="^Inkscape"] → $WS5
+for_window [class="^Inkscape"] focus
+assign [class="^Dia"] → $WS5
+for_window [class="^Dia"] focus
+
+## 6
 assign [class="^Audacity"] → $WS6
 for_window [class="^Audacity"] focus
-assign [class="^Gimp"] → $WS7
-for_window [class="^Gimp"] focus
-assign [class="^Inkscape"] → $WS7
-for_window [class="^Inkscape"] focus
-assign [class="^Dia"] → $WS7
-for_window [class="^Dia"] focus
+
+## 7
+assign [class="VirtualBox"] → $WS7
+for_window [class="VirtualBox"] focus
+assign [class="Oracle VM VirtualBox"] → $WS7
+for_window [class="Oracle VM VirtualBox"] focus
 
 ###########################################################
 ############         FOCUS DE VENTANAS         ############
 ###########################################################
 bindsym $mod+F1 [class="Firefox"] focus
 bindsym $mod+F2 [class="Atom"] focus
-bindsym $mod+F3 [class="PhpStorm"] focus
+bindsym $mod+F3 [title="PhpStorm"] focus
 bindsym $mod+F4 [class="Thunar"] focus
 bindsym $mod+F5 [class="tilix"] focus
-bindsym $mod+F6 [class="PyCharm"] focus
+bindsym $mod+F6 [title="PyCharm"] focus
 bindsym $mod+F7 [class="Firefox"] focus
 bindsym $mod+F8 [class="Firefox"] focus
 bindsym $mod+F9 [class="Firefox"] focus
@@ -387,13 +403,12 @@ bindcode XF86MonBrightnessDown exec xbacklight + 10
 ###############          Autostart        ##################
 ############################################################
 exec --no-startup-id i3-msg 'workspace $WS1; exec thunar;'
-exec --no-startup-id i3-msg 'workspace $WS1; exec thunar;'
-exec --no-startup-id i3-msg 'workspace $WS2; exec tilix; workspace $WS1'
+exec --no-startup-id i3-msg 'workspace $WS1; exec tilix;
 exec --no-startup-id i3-msg 'workspace $WS3; exec x-www-browser; workspace $WS1'
 exec --no-startup-id i3-msg 'workspace $WS4; exec ~/4_Programas/Telegram/Telegram; workspace $WS1'
 #exec --no-startup-id i3-msg 'workspace $WS4; exec corebird; workspace $WS1'
 #exec --no-startup-id i3-msg 'workspace $WS4; exec whatsie; workspace $WS1'
-#exec --no-startup-id i3-msg 'workspace $WS4; exec thunderbird; workspace $WS1'
+exec --no-startup-id i3-msg 'workspace $WS4; exec thunderbird; workspace $WS1'
 
 ## Fondo de pantalla nitrogen
 exec --no-startup-id nitrogen --restore
