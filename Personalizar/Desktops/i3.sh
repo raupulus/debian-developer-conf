@@ -26,6 +26,19 @@ i3wm_preconfiguracion() {
 
     ## Al pulsar botón de apagar se suspende
     sudo sed -r -i "s/^#?\s*HandlePowerKey\s*=.*$/HandlePowerKey=suspend/" /etc/systemd/logind.conf
+
+    ## Instalando fuentes:
+    descargar 'Inconsolata Nerd Font Complete.otf' 'https://github.com/ryanoasis/nerd-fonts/blob/master/patched-fonts/Inconsolata/complete/Inconsolata%20Nerd%20Font%20Complete.otf'
+
+    descargar 'Inconsolata Nerd Font Complete Mono.otf' 'https://github.com/ryanoasis/nerd-fonts/blob/master/patched-fonts/Inconsolata/complete/Inconsolata%20Nerd%20Font%20Complete%20Mono.otf'
+
+    if [[ ! -d '/usr/share/fonts/Inconsolata' ]]; then
+        sudo mkdir '/usr/share/fonts/Inconsolata'
+    fi
+
+    sudo cp "$WORKSCRIPT/tmp/Inconsolata Nerd Font Complete.otf" '/usr/share/fonts/Inconsolata/'
+
+    sudo cp "$WORKSCRIPT/tmp/Inconsolata Nerd Font Complete Mono.otf" '/usr/share/fonts/Inconsolata/'
 }
 
 i3wm_instalar() {
@@ -40,7 +53,7 @@ i3wm_postconfiguracion() {
     echo -e "$VE Generando Post-Configuraciones$RO i3wm$CL"
 
     echo -e "$VE Instalando software secundario$CL"
-    instalarSoftware rxvt-unicode-256color compton compton-conf compton-conf-l10n nitrogen thunar ranger w3m tint2 arandr neofetch xbacklight gvfs gpicview mplayer cmus zathura xautolock xbindkeys xbindkeys-config pulseaudio volumeicon-alsa alsamixergui xfce4-settings firewall-applet firewall-config firewalld unclutter lxappearance gtk-chtheme qt4-qtconfig pm-utils xfce4-screenshooter parcellite zenity scrot lxpolkit ssh-askpass wireless-tools
+    instalarSoftware rxvt-unicode-256color compton compton-conf compton-conf-l10n nitrogen thunar ranger w3m tint2 arandr neofetch xbacklight gvfs gpicview mplayer cmus zathura xautolock xbindkeys xbindkeys-config pulseaudio volumeicon-alsa alsamixergui xfce4-settings firewall-applet firewall-config firewalld unclutter lxappearance gtk-chtheme qt4-qtconfig pm-utils xfce4-screenshooter parcellite zenity scrot lxpolkit ssh-askpass wireless-tools fonts-powerline
 
     echo -e "$VE Generando archivos de configuración$CL"
     enlazarHome '.config/i3' '.config/tint2' '.config/compton.conf' '.config/conky' '.Xresources' '.config/nitrogen' '.config/i3status' '.config/plank' '.config/rofi'
