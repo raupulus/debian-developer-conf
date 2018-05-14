@@ -44,7 +44,7 @@ terminales_postconfiguracion() {
         sudo chown root:root "/etc/profile.d/vte.sh"
     fi
 
-    if [[ ! -f "/etc/profile.d/vte-2.91.sh.sh" ]]; then
+    if [[ ! -f "/etc/profile.d/vte-2.91.sh" ]]; then
         sudo ln -s /etc/profile.d/vte-2.91.sh /etc/profile.d/vte.sh
         sudo chmod 744 "/etc/profile.d/vte-2.91.sh.sh"
         sudo chown root:root "/etc/profile.d/vte-2.91.sh.sh"
