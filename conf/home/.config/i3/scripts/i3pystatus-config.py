@@ -147,7 +147,7 @@ if path.exists('/sys/class/power_supply/BAT0'):
         #><span background='"+batteryColor+"'> {status} {percentage:.0f}%</span>",
 
         alert=True,
-        alert_percentage=30,
+        alert_percentage=10,
         color=forColor,
         critical_color="#FF1919",
         charging_color="#E5E500",
