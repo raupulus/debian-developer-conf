@@ -55,7 +55,13 @@ i3wm_preconfiguracion() {
 
 i3wm_instalar() {
     echo -e "$VE Preparando para instalar$RO i3wm$CL"
-    instalarSoftware i3 i3-wm i3blocks i3lock i3status suckless-tools j4-dmenu-desktop rofi dunst
+    instalarSoftware i3 i3-wm i3blocks i3lock i3status suckless-tools j4-dmenu-desktop rofi
+
+    ## Notificaciones del escritorio con dunst
+    instalarSoftware dunst
+
+    ## Instalando gestor de archivos xfe
+    instalarSoftware xfe xfe-i18n xfe-themes
 }
 
 ##
