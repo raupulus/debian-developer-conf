@@ -227,7 +227,7 @@ bar {
 
     ## Fuente
     #font pango:terminus, awesome 9
-    font pango:Inconsolata-dz for Powerline 10
+    font pango:Inconsolata-dz for Powerline, ZektonLt Bold 11
     #font pango:ZektonLt Bold 11
     #font pango:Inconsolata Nerd Font Complete Mono 10
     #font pango:Space Mono for Powerline 10
