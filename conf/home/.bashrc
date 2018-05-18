@@ -79,7 +79,7 @@ else
 fi
 unset color_prompt force_color_prompt
 
-## Si estamos con Xterm estavlece el título (original → user@host:dir)
+## Si estamos con Xterm establece el título (original → user@host:dir)
 case "$TERM" in
 xterm*|rxvt*)
     PS1='$(__git_ps1 " (%s))"'
@@ -186,7 +186,7 @@ elif [[ -f /etc/bash_completion ]]; then
 fi
 
 ## Compatibilidad con terminal "Tilix"
-if [[ $TILIX_ID ]] || [[ $VTE_VERSION ]]; then
+if [[ "$TILIX_ID" ]] || [[ "$VTE_VERSION" ]]; then
     source /etc/profile.d/vte.sh
 fi
 

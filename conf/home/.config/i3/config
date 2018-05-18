@@ -15,6 +15,7 @@
 ## Iconos de ejemplo:
 ##                                    
 ##                                 
+##                     
 
 ## Tecla modificadora
 set $mod Mod4
@@ -28,13 +29,13 @@ set $mon2 DVI-D-0
 ###########################################################
 ## Nombres para cada espacio del monitor 1
 set $WS1 1:
-set $WS2 2:
+set $WS2 2:
 set $WS3 3:
 set $WS4 4:
 set $WS5 5:
 set $WS6 6:
-set $WS7 7:
-set $WS8 8:
+set $WS7 7:
+set $WS8 8:
 
 ## Nombres para cada espacio del monitor 2
 set $WS9 9:HDMI1
@@ -228,7 +229,8 @@ bar {
     ## Fuente
     #font pango:terminus, awesome 9
     #font pango:Inconsolata-dz for Powerline, ZektonLt Bold 11
-    font pango:DejaVu Sans Mono for Powerline Bold 11
+    #font pango:DejaVu Sans Mono for Powerline Bold 11
+    font pango:DejaVu Sans Mono for Powerline, PowerlineSymbols, FontAwesome, Linux Libertine Mono O Bold 11
     #font pango:Droid Sans Mono for Powerline 11
     #font pango:ZektonLt Bold 11
     #font pango:Inconsolata Nerd Font Complete Mono 10
