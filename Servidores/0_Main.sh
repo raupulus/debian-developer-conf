@@ -24,6 +24,7 @@
 ##     IMPORTACIONES      ##
 ############################
 source "$WORKSCRIPT/Servidores/apache.sh"
+source "$WORKSCRIPT/Servidores/bind.sh"
 source "$WORKSCRIPT/Servidores/mariaDB.sh"
 source "$WORKSCRIPT/Servidores/nodejs.sh"
 source "$WORKSCRIPT/Servidores/php.sh"
@@ -49,6 +50,7 @@ menuServidores() {
         postgresql_instalador
         python_instalador
         ruby_instalador
+        bind_instalador
     }
 
     ## Si la función recibe "-a" indica que instale todos los servidores
@@ -65,7 +67,8 @@ menuServidores() {
                 5) PostgreSQL
                 6) Python
                 7) Ruby
-                8) Todos los pasos anteriores
+                8) Bind 9
+                9) Todos los pasos anteriores
 
                 0) Atrás
             '
@@ -84,7 +87,8 @@ menuServidores() {
                 5)  postgresql_instalador;;  ## Instala PostgreSQL
                 6)  python_instalador;;      ## Instala Python
                 7)  ruby_instalador;;        ## Instala Ruby
-                8)  todos_servidores         ## Todos los servidores
+                8)  bind_instalador;;        ## Instala Bind
+                9)  todos_servidores         ## Todos los servidores
                     break;;
 
                 0)  ## SALIR
