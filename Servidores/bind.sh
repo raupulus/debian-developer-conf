@@ -74,6 +74,15 @@ bind_postconfiguracion() {
         echo '' | sudo tee '/etc/bind/named.conf.local'
     fi
 
+    echo -e "$VE Creando zonas:$RO directa$VE e$RO inversa$CL"
+
+    ## Creando Zona Directa:
+    sudo cp '/etc/bind/db.local' "/etc/bind/db.${dominio}"
+    sudo echo "zone \"$dominio\" {" >> '/etc/bind/named.conf.local'
+    sudo echo "    type ${zona};" >> '/etc/bind/named.conf.local'
+    sudo echo "    //also-notify \{192.168.1.2\};" >> '/etc/bind/named.conf.local'
+    sudo echo "    file \"/etc/bind/db.${dominio}\";" >> '/etc/bind/named.conf.local'
+    sudo echo '};'
 }
 
 bind_instalador() {
