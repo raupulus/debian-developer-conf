@@ -32,12 +32,40 @@ bind_preconfiguracion() {
 
 bind_instalar() {
     echo -e "$VE Instalando$RO Bind 9$CL"
-    local programa='bind9'
-    instalarSoftware "$programa"
+    local software='bind9 bind9utils'
+    instalarSoftware "$software"
 }
 
 bind_postconfiguracion() {
     echo -e "$VE Generando Post-Configuraciones de Bind 9$CL"
+
+    echo -e "$VE Creando Backups$CL"
+    crearBackup '/etc/bind/named.conf' '/etc/bind/named.conf.local'
+
+    local dominio=''
+    local zona='master'  ## master/slave
+    local ipzona=''
+    local ipzonainv=''
+    local reenviador1='8.8.8.8'
+    local reenviador2='8.8.4.4'
+
+    while [[ "$dominio" == '' ]]:; do
+        clear
+        echo -e "$AM Introduce el nombre de$RO dominio:$CL"
+        read -p 'Dominio → ' dominio
+    done
+
+    while [[ "$ipzona" == '' ]]:; do
+        clear
+        echo -e "$AM Introduce la$RO IP$VE:$CL"
+        read -p 'IP → ' ipzona
+    done
+
+    while [[ "$ipzonainv" == '' ]]:; do
+        clear
+        echo -e "$AM Introduce los 3 primeros bloques de la$RO IP$VE al revés (1.168.192):$CL"
+        read -p 'IP → ' ipzona
+    done
 
 }
 
