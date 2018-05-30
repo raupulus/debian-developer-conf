@@ -305,6 +305,11 @@ if [[ -x "$HOME/.local/bin/nuevo" ]]; then
     echo -e "$VE Usando el comando$RO nuevo$VE generas un archivo desde la plantilla$CL"
 fi
 
+## Comparto tty1 mediante screen al hacer login en ella
+if [[ "$(/usr/bin/tty)" == "/dev/tty1" ]] && [[ -x '/usr/bin/screen' ]]; then
+    exec /usr/bin/screen
+fi
+
 ###################################
 ###  Sobrescribiendo Comandos   ###
 ###################################
