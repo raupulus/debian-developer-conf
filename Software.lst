@@ -23,14 +23,11 @@ golang-go
 gpick
 gvfs-bin
 heroku
-i3
-i3-wm
 libnotify-bin
 libxml-writer-perl
 locate
 neofetch
 network-manager-gnome
-nitrogen
 nkf
 pandoc
 pasystray
@@ -39,11 +36,8 @@ powerline
 pulseaudio
 rake
 ranger
-ruby
-rubygems-integration
-ruby-minitest
-ruby-power-assert
 sakura
+screen
 shellcheck
 tcl
 terminator
@@ -58,6 +52,9 @@ xbuilder
 xcape
 xclip
 xdg-user-dirs
+xfe
+xfe-i18n
+xfe-themes
 xorg
 ycmd
 zip
