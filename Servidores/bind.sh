@@ -49,22 +49,22 @@ bind_postconfiguracion() {
     local reenviador1='8.8.8.8'
     local reenviador2='8.8.4.4'
 
-    while [[ "$dominio" == '' ]]:; do
+    while [[ "$dominio" == '' ]]; do
         clear
         echo -e "$AM Introduce el nombre de$RO dominio:$CL"
         read -p 'Dominio → ' dominio
     done
 
-    while [[ "$ipzona" == '' ]]:; do
+    while [[ "$ipzona" == '' ]]; do
         clear
         echo -e "$AM Introduce la$RO IP$VE:$CL"
         read -p 'IP → ' ipzona
     done
 
-    while [[ "$ipzonainv" == '' ]]:; do
+    while [[ "$ipzonainv" == '' ]]; do
         clear
-        echo -e "$AM Introduce los 3 primeros bloques de la$RO IP$VE al revés (1.168.192):$CL"
-        read -p 'IP → ' ipzona
+        echo -e "$AM Introduce los bloques red con esa parte de la$RO IP$VE al$RO revés$VE (1.168.192 o 18.172):$CL"
+        read -p 'IP → ' ipzonainv
     done
 
     echo -e "$VE ¿Quieres limpiar configuraciones anteriores?$CL"
