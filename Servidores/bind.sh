@@ -115,6 +115,13 @@ bind_postconfiguracion() {
     sed -i "s/localhost/${dominio}/" "$dbzona"
     sed -i "s/127.0.0.1/$ipzona/" "$dbzona"
     sudo sed -r -i "s/^@\s*IN\sA\s*127.0.0.1.*$/${dominio} IN A 127.0.0.1/" "$dbzona"
+
+    ## Configurar zona inversa
+    local dbzonainv="/etc/bind/db.${ipzonainv}.rev"
+    echo -e "$VE Configurando$RO Zona Inversa$CL"
+    sudo sed -i "s/root.localhost/$dominio/" "$dbzonainv"
+    sudo sed -i "s/localhost/$dominio/" "$dbzonainv"
+    sudo sed -i "s/1.0.0/$ipzonainv/" "$dbzonainv"
 }
 
 bind_instalador() {
