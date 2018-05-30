@@ -83,6 +83,14 @@ bind_postconfiguracion() {
     sudo echo "    //also-notify \{192.168.1.2\};" >> '/etc/bind/named.conf.local'
     sudo echo "    file \"/etc/bind/db.${dominio}\";" >> '/etc/bind/named.conf.local'
     sudo echo '};'
+
+    ## Creando Zona Inversa:
+    sudo cp '/etc/bind/db.127' "/etc/bind/db.${ipzonainv}.rev"
+    sudo echo "zone \"${ipzonainv}.in-addr.arpa\" {" >> '/etc/bind/named.conf.local'
+    sudo echo "    type ${zona};" >> '/etc/bind/named.conf.local'
+    sudo echo "    //also-notify \{192.168.1.2\};" >> '/etc/bind/named.conf.local'
+    sudo echo "    file \"/etc/bind/db.${ipzonainv}.rev\";" >> '/etc/bind/named.conf.local'
+    sudo echo '};'
 }
 
 bind_instalador() {
