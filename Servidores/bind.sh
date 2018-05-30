@@ -107,6 +107,14 @@ bind_postconfiguracion() {
     sudo echo "        auth-nxdomain no;    # conform to RFC1035" >> "$optns"
     sudo echo "        listen-on-v6 { any; };" >> "$optns"
     sudo echo "};" >> "$optns"
+
+    ## Configurar zona directa
+    local dbzona="/etc/bind/db.$dominio"
+    echo -e "$VE Configurando$RO Zona Directa$CL"
+    sed -i "s/root.localhost/${dominio}/" "$dbzona"
+    sed -i "s/localhost/${dominio}/" "$dbzona"
+    sed -i "s/127.0.0.1/$ipzona/" "$dbzona"
+    sudo sed -r -i "s/^@\s*IN\sA\s*127.0.0.1.*$/${dominio} IN A 127.0.0.1/" "$dbzona"
 }
 
 bind_instalador() {
