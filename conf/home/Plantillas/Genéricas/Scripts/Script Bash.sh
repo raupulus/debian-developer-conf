@@ -1,17 +1,42 @@
 #!/usr/bin/env bash
 # -*- ENCODING: UTF-8 -*-
-##
+
+
 ## @author     Raúl Caro Pastorino
-## @copyright  Copyright © 2018 Raúl Caro Pastorino
-## @license    https://wwww.gnu.org/licenses/gpl.txt
 ## @email      tecnico@fryntiz.es
-## @web        www.fryntiz.es
+## @web        http://www.fryntiz.es
 ## @github     https://github.com/fryntiz
 ## @gitlab     https://gitlab.com/fryntiz
 ## @twitter    https://twitter.com/fryntiz
-##
+
+## Create Date: 2018
+## Project Name: 
+## Description: 
+## Dependencies: 
+
 ##             Guía de estilos aplicada:
 ## @style      https://github.com/fryntiz/Bash_Style_Guide
+
+## Revision 0.01 - File Created
+## Additional Comments: 
+
+## @license    https://wwww.gnu.org/licenses/gpl.txt
+## @copyright  Copyright © 2018 Raúl Caro Pastorino
+##
+## This program is free software: you can redistribute it and/or modify
+## it under the terms of the GNU General Public License as published by
+## the Free Software Foundation, either version 3 of the License, or
+## (at your option) any later version.
+##
+## This program is distributed in the hope that it will be useful,
+## but WITHOUT ANY WARRANTY; without even the implied warranty of
+## MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+## GNU General Public License for more details.
+##
+## You should have received a copy of the GNU General Public License
+## along with this program.  If not, see <http://www.gnu.org/licenses/>
+
+
 
 ############################
 ##     INSTRUCCIONES      ##
