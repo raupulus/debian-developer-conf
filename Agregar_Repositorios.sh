@@ -86,11 +86,17 @@ agregar_llaves() {
 sources_repositorios() {
     echo -e "$VE Añadido$RO sources.list$VE y$RO sources.list.d/$VE Agregados$CL"
 
+    if [[ ! -d '/etc/apt/sources.list.d' ]]; then
+        sudo mkdir -p '/etc/apt/sources.list.d'
+    fi
     sudo cp $WORKSCRIPT/sources.list/sources.list.d/* /etc/apt/sources.list.d/
 
     #sudo mv /etc/apt/sources.list /etc/apt/sources.list.BACKUP 2>> /dev/null
     crearBackup '/etc/apt/sources.list' '/etc/apt/sources.list.d/'
 
+    if [[ ! -d '/etc/apt/sources.list' ]]; then
+        sudo rm -f '/etc/apt/sources.list'
+    fi
     sudo cp "$WORKSCRIPT/sources.list/sources.list" "/etc/apt/sources.list"
 }
 
