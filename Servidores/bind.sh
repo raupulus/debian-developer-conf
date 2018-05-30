@@ -67,6 +67,13 @@ bind_postconfiguracion() {
         read -p 'IP → ' ipzona
     done
 
+    echo -e "$VE ¿Quieres limpiar configuraciones anteriores?$CL"
+    echo -e "$VE Elegir$RO SI$VE puede$RO Borrar$VE conviguraciones"
+    read -p ' s/N → ' input
+    if [[ "$input" == 's' ]] || [[ "$input" == 'S' ]]; then
+        echo '' | sudo tee '/etc/bind/named.conf.local'
+    fi
+
 }
 
 bind_instalador() {
