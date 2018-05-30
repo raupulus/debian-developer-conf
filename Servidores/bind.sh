@@ -122,6 +122,8 @@ bind_postconfiguracion() {
     sudo sudo sed -i "s/root.localhost/$dominio/" "$dbzonainv"
     sudo sudo sed -i "s/localhost/$dominio/" "$dbzonainv"
     sudo sed -i "s/1.0.0/$ipzonainv/" "$dbzonainv"
+
+    sudo nano "$dbzona"
 }
 
 bind_instalador() {
