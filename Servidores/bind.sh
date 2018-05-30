@@ -91,6 +91,22 @@ bind_postconfiguracion() {
     sudo echo "    //also-notify \{192.168.1.2\};" >> '/etc/bind/named.conf.local'
     sudo echo "    file \"/etc/bind/db.${ipzonainv}.rev\";" >> '/etc/bind/named.conf.local'
     sudo echo '};'
+
+    ## Reenviadores
+    echo -e "$VE Configurando$RO reenviadores$CL"
+    local optns='/etc/bind/named.conf.options'
+    sudo echo "options {" > "$optns"
+    sudo echo "        directory \"/var/cache/bind\";" >> "$optns"
+    sudo echo "        forwarders {" >> "$optns"
+    sudo echo "            $reenviador1;" >> "$optns"
+    sudo echo "            $reenviador2;" >> "$optns"
+    sudo echo "        };" >> "$optns"
+    sudo echo "" >> "$optns"
+    sudo echo "        dnssec-validation auto;" >> "$optns"
+    sudo echo "" >> "$optns"
+    sudo echo "        auth-nxdomain no;    # conform to RFC1035" >> "$optns"
+    sudo echo "        listen-on-v6 { any; };" >> "$optns"
+    sudo echo "};" >> "$optns"
 }
 
 bind_instalador() {
