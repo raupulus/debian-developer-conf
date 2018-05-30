@@ -68,7 +68,7 @@ bind_postconfiguracion() {
     done
 
     echo -e "$VE ¿Quieres limpiar configuraciones anteriores?$CL"
-    echo -e "$VE Elegir$RO SI$VE puede$RO Borrar$VE conviguraciones"
+    echo -e "$VE Elegir$RO SI$VE puede$RO Borrar$VE configuraciones"
     read -p ' s/N → ' input
     if [[ "$input" == 's' ]] || [[ "$input" == 'S' ]]; then
         echo '' | sudo tee '/etc/bind/named.conf.local'
@@ -78,49 +78,49 @@ bind_postconfiguracion() {
 
     ## Creando Zona Directa:
     sudo cp '/etc/bind/db.local' "/etc/bind/db.${dominio}"
-    sudo echo "zone \"$dominio\" {" >> '/etc/bind/named.conf.local'
-    sudo echo "    type ${zona};" >> '/etc/bind/named.conf.local'
-    sudo echo "    //also-notify \{192.168.1.2\};" >> '/etc/bind/named.conf.local'
-    sudo echo "    file \"/etc/bind/db.${dominio}\";" >> '/etc/bind/named.conf.local'
-    sudo echo '};'
+    echo "zone \"$dominio\" {" | sudo tee -a '/etc/bind/named.conf.local'
+    echo "    type ${zona};" | sudo tee -a '/etc/bind/named.conf.local'
+    echo "    //also-notify \{192.168.1.2\};" | sudo tee -a '/etc/bind/named.conf.local'
+    echo "    file \"/etc/bind/db.${dominio}\";" | sudo tee -a '/etc/bind/named.conf.local'
+    echo '};'
 
     ## Creando Zona Inversa:
     sudo cp '/etc/bind/db.127' "/etc/bind/db.${ipzonainv}.rev"
-    sudo echo "zone \"${ipzonainv}.in-addr.arpa\" {" >> '/etc/bind/named.conf.local'
-    sudo echo "    type ${zona};" >> '/etc/bind/named.conf.local'
-    sudo echo "    //also-notify \{192.168.1.2\};" >> '/etc/bind/named.conf.local'
-    sudo echo "    file \"/etc/bind/db.${ipzonainv}.rev\";" >> '/etc/bind/named.conf.local'
-    sudo echo '};'
+    echo "zone \"${ipzonainv}.in-addr.arpa\" {" | sudo tee -a '/etc/bind/named.conf.local'
+    echo "    type ${zona};" | sudo tee -a '/etc/bind/named.conf.local'
+    echo "    //also-notify \{192.168.1.2\};" | sudo tee -a '/etc/bind/named.conf.local'
+    echo "    file \"/etc/bind/db.${ipzonainv}.rev\";" | sudo tee -a '/etc/bind/named.conf.local'
+    echo '};'
 
     ## Reenviadores
     echo -e "$VE Configurando$RO reenviadores$CL"
     local optns='/etc/bind/named.conf.options'
-    sudo echo "options {" > "$optns"
-    sudo echo "        directory \"/var/cache/bind\";" >> "$optns"
-    sudo echo "        forwarders {" >> "$optns"
-    sudo echo "            $reenviador1;" >> "$optns"
-    sudo echo "            $reenviador2;" >> "$optns"
-    sudo echo "        };" >> "$optns"
-    sudo echo "" >> "$optns"
-    sudo echo "        dnssec-validation auto;" >> "$optns"
-    sudo echo "" >> "$optns"
-    sudo echo "        auth-nxdomain no;    # conform to RFC1035" >> "$optns"
-    sudo echo "        listen-on-v6 { any; };" >> "$optns"
-    sudo echo "};" >> "$optns"
+    echo "options {" | sudo tee "$optns"
+    echo "        directory \"/var/cache/bind\";" | sudo tee -a "$optns"
+    echo "        forwarders {" | sudo tee -a "$optns"
+    echo "            $reenviador1;" | sudo tee -a "$optns"
+    echo "            $reenviador2;" | sudo tee -a "$optns"
+    echo "        };" | sudo tee -a "$optns"
+    echo "" | sudo tee -a "$optns"
+    echo "        dnssec-validation auto;" | sudo tee -a "$optns"
+    echo "" | sudo tee -a "$optns"
+    echo "        auth-nxdomain no;    # conform to RFC1035" | sudo tee -a "$optns"
+    echo "        listen-on-v6 { any; };" | sudo tee -a "$optns"
+    echo "};" | sudo tee -a "$optns"
 
     ## Configurar zona directa
     local dbzona="/etc/bind/db.$dominio"
     echo -e "$VE Configurando$RO Zona Directa$CL"
-    sed -i "s/root.localhost/${dominio}/" "$dbzona"
-    sed -i "s/localhost/${dominio}/" "$dbzona"
-    sed -i "s/127.0.0.1/$ipzona/" "$dbzona"
+    sudo sed -i "s/root.localhost/${dominio}/" "$dbzona"
+    sudo sed -i "s/localhost/${dominio}/" "$dbzona"
+    sudo sed -i "s/127.0.0.1/$ipzona/" "$dbzona"
     sudo sed -r -i "s/^@\s*IN\sA\s*127.0.0.1.*$/${dominio} IN A 127.0.0.1/" "$dbzona"
 
     ## Configurar zona inversa
     local dbzonainv="/etc/bind/db.${ipzonainv}.rev"
     echo -e "$VE Configurando$RO Zona Inversa$CL"
-    sudo sed -i "s/root.localhost/$dominio/" "$dbzonainv"
-    sudo sed -i "s/localhost/$dominio/" "$dbzonainv"
+    sudo sudo sed -i "s/root.localhost/$dominio/" "$dbzonainv"
+    sudo sudo sed -i "s/localhost/$dominio/" "$dbzonainv"
     sudo sed -i "s/1.0.0/$ipzonainv/" "$dbzonainv"
 }
 
@@ -136,5 +136,5 @@ bind_instalador() {
     fi
 
     ## Reiniciar servidor BIND para aplicar configuración
-    reiniciarServicio bind
+    reiniciarServicio bind9
 }
