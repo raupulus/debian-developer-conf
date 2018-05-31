@@ -60,6 +60,8 @@ generador_proyectos() {
 ##
 generador_plantillas() {
     enlazarHome '.local/bin/nuevo'
+    sudo chmod 755 "/home/${USER}/.local/bin/nuevo"
+    sudo chown ${USER}:${USER} "/home/${USER}/.local/bin/nuevo"
 }
 
 devicons_ls() {
