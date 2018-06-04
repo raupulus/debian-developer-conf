@@ -230,11 +230,22 @@ prepararInstalador() {
 
 ##
 ## Instala los paquetes recibidos con "npm" el gestor de paquetes de NodeJS.
+## De esta forma serán instalado los paquetes localmente
+## @param $* Recibe los paquetes que se van a instalar
+##
+instalarNpm() {
+    for x in $*; do
+        echo -e "$RO Instalando $x$CL"
+        npm install "$x"
+    done
+}
+##
+## Instala los paquetes recibidos con "npm" el gestor de paquetes de NodeJS.
 ## De esta forma serán instalado los paquetes de forma global, no para un
 ## proyecto concreto como dependencia.
 ## @param $* Recibe los paquetes que se van a instalar
 ##
-instalarNpm() {
+instalarNpmGlobal() {
     for x in $*; do
         echo -e "$RO Instalando $x$CL"
         sudo npm install -g "$x"
