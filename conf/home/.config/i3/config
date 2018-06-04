@@ -462,7 +462,7 @@ exec --no-startup-id i3-msg 'workspace $WS3; exec x-www-browser; workspace $WS1'
 exec --no-startup-id i3-msg 'workspace $WS4; exec ~/4_Programas/Telegram/Telegram; workspace $WS1'
 #exec --no-startup-id i3-msg 'workspace $WS4; exec corebird; workspace $WS1'
 #exec --no-startup-id i3-msg 'workspace $WS4; exec whatsie; workspace $WS1'
-exec --no-startup-id i3-msg 'workspace $WS4; exec thunderbird; workspace $WS1'
+#exec --no-startup-id i3-msg 'workspace $WS4; exec thunderbird; workspace $WS1'
 
 ## Fondo de pantalla nitrogen
 exec --no-startup-id nitrogen --restore
