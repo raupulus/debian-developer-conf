@@ -46,7 +46,12 @@ nodejs_postconfiguracion() {
 
     ## Instalando paquetes globales
     local paquetes='eslint jscs bower compass stylelint bundled'
-    instalarNpm $paquetes
+    instalarNpmGlobal $paquetes
+}
+
+nodejs_angular() {
+    echo -e "$VE Instalando Angular$CL"
+    instalarNpmGlobal @angular/cli
 }
 
 nodejs_instalador() {
