@@ -13,9 +13,14 @@
 ##             Guía de estilos aplicada:
 ## @style      https://github.com/fryntiz/Bash_Style_Guide
 
+###################################
+###          CONSTANTES         ###
+###################################
 RO="\033[1;31m"  ## Color Rojo
 VE="\033[1;32m"  ## Color Verde
 CL="\e[0m"       ## Limpiar colores
+
+USER="$(whoami)" ## Nombre del usuario
 
 ## En caso de no ser ejecutado de forma interactiva se sale sin hacer nada
 case $- in
@@ -134,43 +139,6 @@ fi
 ## Colorear Errores y Advertencias de GCC
 export GCC_COLORS='error=01;31:warning=01;35:note=01;36:caret=01;32:locus=01:quote=01'
 
-###################################
-###            ALIAS            ###
-###################################
-## Comando ls
-alias ll='ls -hl'
-alias la='ls -A'
-alias l='ls -CF'
-
-## Comando cd
-alias ..="cd .."
-alias cd..="cd .."
-alias ...='cd ../..'
-alias ....='cd ../../..'
-alias .....='cd ../../../..'
-
-## Git
-alias git="LANG=C git"
-alias glg="git lg"
-alias gl='git lg'
-alias gh='git hist'
-alias gs='git status'
-alias ga='git add'
-alias gb='git branch'
-alias gc='git commit'
-alias gd='git diff'
-alias go='git checkout'
-alias gk='gitk --all&'
-alias gx='gitx --all'
-alias got='git'
-alias get='git'
-alias gp='git push'
-
-## Otros
-#alias rm="rm -i"
-#alias cp="cp -i"
-#alias mv="mv -i"
-
 ## Alias importados desde subdirectorio ~/.bash_aliases
 if [[ -f ~/.bash_aliases ]]; then
     . ~/.bash_aliases
@@ -288,8 +256,59 @@ if [[ -f ~/.bash_it/bash_it.sh ]]; then
 fi
 
 ###################################
+###            ALIAS            ###
+###################################
+## Comando ls
+alias ll='ls -hl'
+alias la='ls -A'
+alias l='ls -CF'
+
+## Comando cd
+alias ..="cd .."
+alias cd..="cd .."
+alias ...='cd ../..'
+alias ....='cd ../../..'
+alias .....='cd ../../../..'
+
+## Git
+alias git="LANG=C git"
+alias glg="git lg"
+alias gl='git lg'
+alias gh='git hist'
+alias gs='git status'
+alias ga='git add'
+alias gb='git branch'
+alias gc='git commit'
+alias gd='git diff'
+alias go='git checkout'
+alias gk='gitk --all&'
+alias gx='gitx --all'
+alias got='git'
+alias get='git'
+alias gp='git push'
+
+## Historial
+alias c="clear"
+alias h="history 20"
+alias hh="history 200 | grep "
+alias hc="history -c"
+
+## Atajos Generales
+
+
+## Otros
+#alias rm="rm -i"
+#alias rm="mv ??????/tmp/deleted_$USER"
+#alias cp="cp -i"
+#alias mv="mv -i"
+
+###################################
 ###  Opciones para bash propias ###
 ###################################
+if [[ ! -d "/tmp/deleted_$USER" ]]; then
+    mkdir "/tmp/deleted_$USER" && chmod 700 -R "/tmp/deleted_$USER"
+fi
+
 if [[ -f ~/.bashrc_custom ]]; then ## Comprobar si existe para el usuario
     source $HOME/.bashrc_custom
 else
