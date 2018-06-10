@@ -69,8 +69,8 @@ def nextValue():
     Elige el próximo valor para establecer el brillo.
     """
     value = int(brightness) + diferencia
-    if (value >= 4437):
-        newBrightness('4437')
+    if (value >= int(max_brightness)):
+        newBrightness(max_brightness)
     else:
         newBrightness(value)
 
