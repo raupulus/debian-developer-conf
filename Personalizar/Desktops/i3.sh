@@ -88,6 +88,13 @@ i3wm_postconfiguracion() {
 
     ## Tema Paper para GTK2 (Debe estar instalado)
     gconftool-2 --type string --set /desktop/gnome/interface/icon_theme 'Paper'
+
+    if [[ -f "$HOME/.local/bin/brillo" ]]; then
+        rm -f "$HOME/.local/bin/brillo"
+    fi
+    ln -s "$HOME/.config/i3/scripts/brillo.py" "$HOME/.local/bin/brillo"
+    chmod +x "$HOME/.local/bin/brillo"
+
 }
 
 i3wm_instalador() {
