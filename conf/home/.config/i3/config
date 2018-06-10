@@ -450,8 +450,10 @@ bindsym --release $mod+shift+print exec xfce4-screenshooter -cfm
 bindsym --release print exec xfce4-screenshooter -fm -s ~/Imágenes/Screenshots/
 
 ## Brillo de la pantalla
-bindcode XF86MonBrightnessUp exec --no-startup-id xbacklight -inc 10
-bindcode XF86MonBrightnessDown exec --no-startup-id xbacklight -dec 10
+#bindcode XF86MonBrightnessUp exec --no-startup-id xbacklight -inc 10
+#bindcode XF86MonBrightnessDown exec --no-startup-id xbacklight -dec 10
+bindcode XF86MonBrightnessUp exec --no-startup-id ~/config/.i3/scripts/brillo.py next && notify-send "Brillo Arriba"
+bindcode XF86MonBrightnessDown exec --no-startup-id ~/config/.i3/scripts/brillo.py back && notify-send "Brillo Abajo"
 
 ############################################################
 ###############          Autostart        ##################
