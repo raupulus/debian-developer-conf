@@ -100,6 +100,11 @@
     userId: "0ef9dd58-1a13-4cdc-ba5d-d9a8a44ec417"
   "file-icons":
     coloured: true
+  "ide-python":
+    pylsPlugins:
+      pydocstyle:
+        enabled: true
+    python: "python3"
   "linter-phpcs":
     autoExecutableSearch: false
     codeStandardOrConfigFile: "/opt/composer/vendor/yiisoft/yii2-coding-standards/Yii2"
