@@ -23,6 +23,10 @@ set $mod Mod4
 ## Nombre de monitores 1 y 2:
 set $mon1 DVI-I-1
 set $mon2 DVI-D-0
+#set $mon3 HDMI-0
+
+## Configuración
+set $coordenadas '36.7349439:-6.4253577'  ## Coordenadas
 
 ###########################################################
 ############        Espacios de trabajo        ############
@@ -459,7 +463,7 @@ bindcode XF86MonBrightnessDown exec --no-startup-id ~/config/.i3/scripts/brillo.
 ###############          Autostart        ##################
 ############################################################
 exec --no-startup-id i3-msg 'workspace $WS1; exec thunar;'
-exec --no-startup-id i3-msg 'workspace $WS1; exec tilix;
+exec --no-startup-id i3-msg 'workspace $WS1; exec tilix;'
 exec --no-startup-id i3-msg 'workspace $WS3; exec x-www-browser; workspace $WS1'
 exec --no-startup-id i3-msg 'workspace $WS4; exec ~/4_Programas/Telegram/Telegram; workspace $WS1'
 #exec --no-startup-id i3-msg 'workspace $WS4; exec corebird; workspace $WS1'
@@ -488,7 +492,7 @@ exec --no-startup-id xrdb -load ~/.Xresources
 exec --no-startup-id lxpolkit
 
 ## Temperatura de pantalla según zona y hora
-exec --no-startup-id redshift -l 36.7349439:-6.4253577 -t 5500:4500
+exec --no-startup-id redshift -l $coordenadas -t 5500:4500
 
 exec --no-startup-id xbindkeys
 exec --no-startup-id pulseaudio --start
