@@ -452,8 +452,8 @@ bindsym --release print exec xfce4-screenshooter -fm -s ~/Imágenes/Screenshots/
 ## Brillo de la pantalla
 #bindcode XF86MonBrightnessUp exec --no-startup-id xbacklight -inc 10
 #bindcode XF86MonBrightnessDown exec --no-startup-id xbacklight -dec 10
-bindcode XF86MonBrightnessUp exec --no-startup-id ~/config/.i3/scripts/brillo.py next && notify-send "Brillo Arriba"
-bindcode XF86MonBrightnessDown exec --no-startup-id ~/config/.i3/scripts/brillo.py back && notify-send "Brillo Abajo"
+bindcode XF86MonBrightnessUp exec --no-startup-id ~/config/.i3/scripts/brillo.py next && notify-send "Brillo Arriba" || notify-send "Error: Brillo Arriba ha fallado"
+bindcode XF86MonBrightnessDown exec --no-startup-id ~/config/.i3/scripts/brillo.py back && notify-send "Brillo Abajo" || notify-send "Error: Brillo Abajo ha fallado"
 
 ############################################################
 ###############          Autostart        ##################
@@ -592,7 +592,7 @@ bindsym XF86AudioMute exec --no-startup-id amixer set Master toggle
 #bindsym XF86TouchpadToggle exec /some/path/toggletouchpad.sh # toggle touchpad
 
 # Media player controls
-bindsym XF86AudioPlay exec playerctl play
+bindsym XF86AudioPlay exec playerctl play && "notify-send 'PLAY'"
 bindsym XF86AudioPause exec playerctl pause
 bindsym XF86AudioNext exec playerctl next
 
