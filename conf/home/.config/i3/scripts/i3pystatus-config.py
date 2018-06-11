@@ -64,6 +64,46 @@ backgroundC = ''
 #######################################
 # #             Funciones           # #
 #######################################
+
+# Refactorizar colores de forma aleatoria mediante un array y cada elemento
+# tomará el color de su posición determinando el mismo colo en el array de
+# forma que se usará el próximo colo como punta.
+#
+# En caso de ser el último usar color de la barra.
+#
+# No puede haber colores parecidos dos posiciones delante o detrás
+
+# Esta matriz proporciona en primer nivel los fondos que coincidirán con el
+# segundo nivel de colores para el texto.
+colores = (
+    (
+        '#CA4932',
+        '#568C3B',
+        '#D22D72',
+        '#48417C',
+        '#257FAD',
+        '#EF3E14',
+        '#5D5DB1',
+        '#BF6643',
+        '#5A7B8C'
+    ),
+    (
+        '#E6E6FA',
+        '#D5AEBE',
+        '#AAF3AA',
+        '#68C274',
+        '#D0C6A6',
+        '#E4DCDA',
+        '#C4C4E0',
+        '#DACAC4',
+        '#C4D5DD'
+    )
+)
+
+#print (colores[1][2])
+
+#quit()
+
 updatesFColor='#CA4932'
 clockFColor='#E6E6FA'
 forColor='#EDE4E4'
