@@ -42,18 +42,6 @@ nodejs_preconfiguracion() {
     if [[ ! -d "$HOME/.npm/cache" ]]; then
         mkdir -p "$HOME/.npm/cache"
     fi
-
-    echo -e "$VE Fijando ~/.npm como predeterminado$CL"
-    npm config set prefix "$HOME/.npm"
-    npm config get prefix
-
-    echo -e "$VE Fijando ~/.npm/cache como directorio para la caché$CL"
-    npm config set cache "$HOME/.npm/cache"
-    npm config get cache
-
-    echo -e "$VE Exporto variables para usar$RO ~/.npm$CL"
-    export NODE_PATH=~/.npm/lib/node_modules:$NODE_PATH
-    export PATH=~/.npm/bin:$PATH
 }
 
 nodejs_instalar() {
@@ -68,6 +56,18 @@ nodejs_instalar() {
 
 nodejs_postconfiguracion() {
     echo -e "$VE Generando Post-Configuraciones de NodeJS$CL"
+
+    echo -e "$VE Fijando ~/.npm como predeterminado$CL"
+    npm config set prefix "$HOME/.npm"
+    #npm config get prefix
+
+    echo -e "$VE Fijando ~/.npm/cache como directorio para la caché$CL"
+    npm config set cache "$HOME/.npm/cache"
+    #npm config get cache
+
+    echo -e "$VE Exporto variables para usar$RO ~/.npm$CL"
+    export NODE_PATH=~/.npm/lib/node_modules:$NODE_PATH
+    export PATH=~/.npm/bin:$PATH
 
     ## Instalando paquetes globales
     local paquetes='eslint jscs bower compass stylelint bundled'
