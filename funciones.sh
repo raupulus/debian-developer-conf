@@ -248,6 +248,6 @@ instalarNpm() {
 instalarNpmGlobal() {
     for x in $*; do
         echo -e "$RO Instalando $x$CL"
-        sudo npm install -g "$x"
+        npm install -g "$x"
     done
 }
