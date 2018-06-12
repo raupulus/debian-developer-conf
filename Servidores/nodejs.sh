@@ -29,6 +29,31 @@ nodejs_descargar() {
 
 nodejs_preconfiguracion() {
     echo -e "$VE Generando Pre-Configuraciones de$RO NodeJS$CL"
+
+    echo -e "$VE Generando directorios para$RO npm$VE en el home del usuario$CL"
+    if [[ ! -d "$HOME/.npm/lib" ]]; then
+        mkdir -p "$HOME/.npm/lib"
+    fi
+
+    if [[ ! -d "$HOME/.npm/bin" ]]; then
+        mkdir -p "$HOME/.npm/bin"
+    fi
+
+    if [[ ! -d "$HOME/.npm/cache" ]]; then
+        mkdir -p "$HOME/.npm/cache"
+    fi
+
+    echo -e "$VE Fijando ~/.npm como predeterminado$CL"
+    npm config set prefix "$HOME/.npm"
+    npm config get prefix
+
+    echo -e "$VE Fijando ~/.npm/cache como directorio para la caché$CL"
+    npm config set cache "$HOME/.npm/cache"
+    npm config get cache
+
+    echo -e "$VE Exporto variables para usar$RO ~/.npm$CL"
+    export NODE_PATH=~/.npm/lib/node_modules:$NODE_PATH
+    export PATH=~/.npm/bin:$PATH
 }
 
 nodejs_instalar() {

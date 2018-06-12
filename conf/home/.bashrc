@@ -158,6 +158,15 @@ if [[ "$TILIX_ID" ]] || [[ "$VTE_VERSION" ]]; then
     source /etc/profile.d/vte.sh
 fi
 
+## Ruta para npm en $HOME de usuario
+if [[ -d "$HOME/.npm/lib" ]] &&
+   [[ -d "$HOME/.npm/bin" ]] &&
+   [[ -x '/usr/bin/node' ]]
+then
+    export NODE_PATH=~/.npm/lib/node_modules:$NODE_PATH
+    export PATH=~/.npm/bin:$PATH
+fi
+
 ## POWERLINE EN BASH (No lo uso, el siguiente código puede no funcionar bien)
 #if [[ -f /usr/bin/powerline-daemon ]]; then
 #    /usr/share/powerline/bindings/bash/powerline.sh -q
