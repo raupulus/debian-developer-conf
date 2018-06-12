@@ -72,6 +72,10 @@ nodejs_postconfiguracion() {
     ## Instalando paquetes globales
     local paquetes='eslint jscs bower compass stylelint bundled'
     instalarNpmGlobal $paquetes
+
+    echo -e "$VE Instalando última versión de$RO npm$VE en directorio local$CL"
+    instalarNpmGlobal npm
+    npm --version
 }
 
 nodejs_angular() {
