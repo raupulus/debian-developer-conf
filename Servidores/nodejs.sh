@@ -55,13 +55,13 @@ nodejs_instalar() {
 }
 
 nodejs_postconfiguracion() {
-    echo -e "$VE Generando Post-Configuraciones de NodeJS$CL"
+    echo -e "$VE Generando Post-Configuraciones de$RO NodeJS$CL"
 
-    echo -e "$VE Fijando ~/.npm como predeterminado$CL"
+    echo -e "$VE Fijando$RO ~/.npm$VE como predeterminado$CL"
     npm config set prefix "$HOME/.npm"
     #npm config get prefix
 
-    echo -e "$VE Fijando ~/.npm/cache como directorio para la caché$CL"
+    echo -e "$VE Fijando$RO ~/.npm/cache$VE como directorio para la$RO caché$CL"
     npm config set cache "$HOME/.npm/cache"
     #npm config get cache
 
