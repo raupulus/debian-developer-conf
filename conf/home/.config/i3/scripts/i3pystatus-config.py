@@ -75,6 +75,7 @@ backgroundC = ''
 
 # Esta matriz proporciona en primer nivel los fondos que coincidirán con el
 # segundo nivel de colores para el texto.
+colorActual = 0
 colores = (
     (
         '#CA4932',
@@ -100,8 +101,19 @@ colores = (
     )
 )
 
-#print (colores[1][2])
+def color():
+    """
+    Devuelve una lista con tres posiciones indicando el color de fondo actual,
+    el color del texto y el color de fondo siguiente (para la punta):
+    [ColorActual][texto][PróximoColor].
+    """
+    global colorActual
+    actual = colorActual
+    colorActual = nextColor = (colorActual + 1)
+    return (colores[0][actual], colores[1][actual], colores[0][nextColor])
 
+#print (color())
+#print (color())
 #quit()
 
 updatesFColor='#CA4932'
