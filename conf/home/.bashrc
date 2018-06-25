@@ -295,6 +295,7 @@ alias gx='gitx --all'
 alias got='git'
 alias get='git'
 alias gp='git push'
+alias gr='git remote'
 
 ## Historial
 alias c="clear"
