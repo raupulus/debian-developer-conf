@@ -1,4 +1,4 @@
-[![Maintainability](https://api.codeclimate.com/v1/badges/a98475bf9c466d5ca815/maintainability)](https://codeclimate.com/github/fryntiz/Debian_Developer_Init/maintainability)
+[![Maintainability](https://api.codeclimate.com/v1/badges/a98475bf9c466d5ca815/maintainability)](https://codeclimate.com/github/fryntiz/debian-developer-conf/maintainability)
 
 # Script para Preparar Entorno de Programación en Debian
 
@@ -120,7 +120,7 @@ Primero instalamos GIT
 Clonamos el repositorio actual en nuestro equipo
 
 ```bash
-    git clone https://github.com/fryntiz/Debian_Developer_Init.git
+    git clone https://github.com/fryntiz/debian-developer-conf.git
 ```
 
 Entramos y ejecutamos el script principal
@@ -324,7 +324,7 @@ Sección opcional que permite instalar y dejar configurado automáticamente el
 estcritorio o window manager elegido.
 
 Puedes leer más sobre los escritorios desde aquí:
-https://github.com/fryntiz/Debian_Developer_Init/Personalizar/Desktops/README.md
+https://github.com/fryntiz/debian-developer-conf/Personalizar/Desktops/README.md
 
 ### i3 Window Manager
 
