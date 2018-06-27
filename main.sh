@@ -47,7 +47,6 @@ DEBUG=false      ## Establece si está el script en modo depuración
 ############################
 ##     IMPORTACIONES      ##
 ############################
-source "$WORKSCRIPT/Agregar_Repositorios.sh"
 source "$WORKSCRIPT/funciones.sh"
 source "$WORKSCRIPT/Instalar_Configuraciones.sh"
 source "$WORKSCRIPT/limpiador.sh"
@@ -55,6 +54,7 @@ source "$WORKSCRIPT/limpiador.sh"
 source "$WORKSCRIPT/Apps/0_Main.sh"
 source "$WORKSCRIPT/Personalizar/0_Main.sh"
 source "$WORKSCRIPT/Servidores/0_Main.sh"
+source "$WORKSCRIPT/sources.list/0_Main.sh"
 
 ###########################
 ##       VARIABLES       ##
@@ -69,7 +69,7 @@ menuPrincipal() {
         clear
 
         local descripcion='Menú Principal
-            1) Agregar Repositorios
+            1) Repositorios
             2) Aplicaciones
             3) Configuraciones
             4) Personalización
@@ -87,16 +87,16 @@ menuPrincipal() {
 
         case ${entrada} in
 
-            1) agregar_repositorios;; #2>> "$LOGERROR";;     ## Menú de Repositorios
+            1) menuRepositorios;; #2>> "$LOGERROR";;     ## Menú de Repositorios
             2) menuAplicaciones;; #2>> "$LOGERROR";;         ## Menú de Aplicaciones
             3) instalar_configuraciones;; #2>> "$LOGERROR";; ## Menú de Configuraciones
             4) menuPersonalizacion;; #2>> "$LOGERROR";;      ## Menú de Personalización
             5) menuServidores;; #2>> "$LOGERROR";;           ## Menú de Servidores
-            6) agregar_repositorios #2>> "$LOGERROR"       ## Todos los pasos anteriores
-               menuAplicaciones -a #2>> "$LOGERROR"        ## Indica con "-a" que ejecute todas
+            6) menuRepositorios -a #2>> "$LOGERROR"       ## Todos los pasos
+               menuAplicaciones -a #2>> "$LOGERROR"
                instalar_configuraciones #2>> "$LOGERROR"
-               menuPersonalizacion -a #2>> "$LOGERROR"     ## Indica con "-a" que ejecute todas
-               menuServidores -a;; #2>> "$LOGERROR";;        ## Indica con "-a" que ejecute todas
+               menuPersonalizacion -a #2>> "$LOGERROR"
+               menuServidores -a;; #2>> "$LOGERROR";;
             0) ## SALIR
               clear
               echo -e "$RO Se sale del menú$CL"
@@ -106,7 +106,7 @@ menuPrincipal() {
             *)  ## Acción ante entrada no válida
               clear
               echo ""
-              echo -e "                      $RO ATENCIÓN: Elección no válida$CL";;
+              echo -e "                   $RO ATENCIÓN: Elección no válida$CL";;
         esac
     done
 }
