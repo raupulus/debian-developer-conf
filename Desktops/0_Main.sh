@@ -19,10 +19,10 @@
 ############################
 ##     IMPORTACIONES      ##
 ############################
-source "$WORKSCRIPT/Personalizar/Desktops/i3.sh"
-source "$WORKSCRIPT/Personalizar/Desktops/xmonad.sh"
-source "$WORKSCRIPT/Personalizar/Desktops/openbox.sh"
-source "$WORKSCRIPT/Personalizar/Desktops/gnome-shell.sh"
+source "$WORKSCRIPT/Desktops/i3.sh"
+source "$WORKSCRIPT/Desktops/xmonad.sh"
+source "$WORKSCRIPT/Desktops/openbox.sh"
+source "$WORKSCRIPT/Desktops/gnome-shell.sh"
 
 ###########################
 ##       FUNCIONES       ##
@@ -37,7 +37,6 @@ menuDesktops() {
         gnome_shell_instalador
     }
 
-    ## Si la función recibe "-a" indica que instale todas las opciones
     if [[ "$1" = '-a' ]]; then
         todos_desktops
     else
@@ -59,11 +58,11 @@ menuDesktops() {
             echo -e "$CL"
 
             case $entrada in
-                1)  i3wm_instalador;;        ## Instala i3wm
-                2)  xmonad_instalador;;      ## Instala xmonad
+                1)  i3wm_instalador;;         ## Instala i3wm
+                2)  xmonad_instalador;;       ## Instala xmonad
                 3)  openbox_instalador;;      ## Instala openbox
-                4)  gnome_shell_instalador;;      ## Instala gnome shell
-                3)  todos_desktops;;         ## Todos los pasos anteriores
+                4)  gnome_shell_instalador;;  ## Instala gnome shell
+                3)  todos_desktops;;          ## Todos los pasos anteriores
 
                 0)  ## SALIR
                     clear
