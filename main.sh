@@ -48,13 +48,17 @@ DEBUG=false      ## Establece si está el script en modo depuración
 ##     IMPORTACIONES      ##
 ############################
 source "$WORKSCRIPT/funciones.sh"
-source "$WORKSCRIPT/Instalar_Configuraciones.sh"
+source "$WORKSCRIPT/configuraciones.sh"
 source "$WORKSCRIPT/limpiador.sh"
 
 source "$WORKSCRIPT/Apps/0_Main.sh"
 source "$WORKSCRIPT/Personalizar/0_Main.sh"
 source "$WORKSCRIPT/Servidores/0_Main.sh"
 source "$WORKSCRIPT/Repositorios/0_Main.sh"
+source "$WORKSCRIPT/Lenguajes-Programacion/0_Main.sh"
+source "$WORKSCRIPT/Desktops/0_Main.sh"
+source "$WORKSCRIPT/Usuario/0_Main.sh"
+source "$WORKSCRIPT/Root/0_Main.sh"
 
 ###########################
 ##       VARIABLES       ##
@@ -74,7 +78,12 @@ menuPrincipal() {
             3) Configuraciones
             4) Personalización
             5) Servidores
-            6) Todos los pasos anteriores a la vez
+            6) Lenguajes de Programación
+            7) Desktops
+            8) Configurar este Usuario
+            9) Todos los pasos anteriores a la vez
+
+            10) Configurar root
 
             0) Salir
         '
@@ -92,11 +101,15 @@ menuPrincipal() {
             3) instalar_configuraciones;; #2>> "$LOGERROR";; ## Menú de Configuraciones
             4) menuPersonalizacion;; #2>> "$LOGERROR";;      ## Menú de Personalización
             5) menuServidores;; #2>> "$LOGERROR";;           ## Menú de Servidores
-            6) menuRepositorios -a #2>> "$LOGERROR"       ## Todos los pasos
+            6) menuLenguajes;;
+            7) menuDesktops;;
+            8) menuUsuario;;
+            9) menuRepositorios -a #2>> "$LOGERROR"       ## Todos los pasos
                menuAplicaciones -a #2>> "$LOGERROR"
                instalar_configuraciones #2>> "$LOGERROR"
                menuPersonalizacion -a #2>> "$LOGERROR"
                menuServidores -a;; #2>> "$LOGERROR";;
+            10) menuRoot;;
             0) ## SALIR
               clear
               echo -e "$RO Se sale del menú$CL"
