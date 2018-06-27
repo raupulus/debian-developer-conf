@@ -30,7 +30,7 @@ ruby_instalar() {
     instalarSoftware 'ruby' 'ruby-full'
 
     echo -e "$VE Instalando gestor de paquetes$RO Rbenv$CL"
-    instalarSoftware 'rbenv'
+    instalarSoftware 'rbenv' 'bundler'
 
     echo -e "$VE Instalando paquetes complementarios de$RO Ruby$CL"
     local complementarios='rubygems-integration ruby-base64 ruby-bcrypt ruby-cairo ruby-clutter ruby-color ruby-crack ruby-curses ruby-debian ruby-dbus ruby-http ruby-i18n ruby-inline ruby-indentation ruby-json ruby-mime ruby-mongo ruby-ncurses ruby-nenv ruby-neovim ruby-net-ssh ruby-minitest ruby-password ruby-pg ruby-pkg-config ruby-power-assert ruby-rbpdf ruby-rbpdf-font ruby-sqlite3 ruby-twitter ruby-zip'
