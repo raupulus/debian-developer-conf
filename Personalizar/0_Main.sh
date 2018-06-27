@@ -26,7 +26,6 @@ source "$WORKSCRIPT/Personalizar/Tipografias.sh"
 source "$WORKSCRIPT/Personalizar/iconos.sh"
 source "$WORKSCRIPT/Personalizar/Variables_Entorno.sh"
 source "$WORKSCRIPT/Personalizar/Terminales.sh"
-source "$WORKSCRIPT/Personalizar/Desktops/0_Main.sh"
 
 ############################
 ##       FUNCIONES        ##
@@ -43,7 +42,6 @@ menuPersonalizacion() {
         terminales_instalador
     }
 
-    ## Si la función recibe "-a" indica que instale todas
     if [[ "$1" = '-a' ]]; then
         todas_personalizaciones
     else
@@ -57,7 +55,6 @@ menuPersonalizacion() {
                 5) Personalizar GTK
                 6) Configurar Terminales (Tilix y Terminator)
                 7) Todos los pasos anteriores
-                8) Instalar un Desktop o Window Manager
 
                 0) Atrás
             '
@@ -76,7 +73,6 @@ menuPersonalizacion() {
                 5)  personalizarGTK;;          ## Personalizar GTK
                 6)  terminales_instalador;;    ## Configura terminales
                 7)  todas_personalizaciones;;  ## Todos los pasos anteriores
-                8)  menuDesktops;;             ## Lleva al menú Escritorios
 
                 0)  ## SALIR
                     clear
