@@ -2,7 +2,7 @@
 # -*- ENCODING: UTF-8 -*-
 ##
 ## @author     Raúl Caro Pastorino
-## @copyright  Copyright © 2017 Raúl Caro Pastorino
+## @copyright  Copyright © 2018 Raúl Caro Pastorino
 ## @license    https://wwww.gnu.org/licenses/gpl.txt
 ## @email      tecnico@fryntiz.es
 ## @web        www.fryntiz.es
@@ -28,7 +28,7 @@
 ##
 ## Añade llaves oficiales para cada repositorio
 ##
-agregar_llaves() {
+stable_agregar_llaves() {
     echo -e "$VE Instalando llaves de repositorios$CL"
 
     sudo apt install -y debian-keyring 2>> /dev/null
@@ -83,27 +83,27 @@ agregar_llaves() {
 ##
 ## Crea Backups de repositorios y añade nuevas listas
 ##
-sources_repositorios() {
+stable_sources_repositorios() {
     echo -e "$VE Añadido$RO sources.list$VE y$RO sources.list.d/$VE Agregados$CL"
+
+    crearBackup '/etc/apt/sources.list' '/etc/apt/sources.list.d/'
 
     if [[ ! -d '/etc/apt/sources.list.d' ]]; then
         sudo mkdir -p '/etc/apt/sources.list.d'
     fi
-    sudo cp $WORKSCRIPT/sources.list/sources.list.d/* /etc/apt/sources.list.d/
-
-    #sudo mv /etc/apt/sources.list /etc/apt/sources.list.BACKUP 2>> /dev/null
-    crearBackup '/etc/apt/sources.list' '/etc/apt/sources.list.d/'
+    sudo cp $WORKSCRIPT/Repositorios/stable/sources.list.d/* /etc/apt/sources.list.d/
 
     if [[ ! -d '/etc/apt/sources.list' ]]; then
         sudo rm -f '/etc/apt/sources.list'
     fi
-    sudo cp "$WORKSCRIPT/sources.list/sources.list" "/etc/apt/sources.list"
+    sudo cp "$WORKSCRIPT/Repositorios/stable/sources.list" "/etc/apt/sources
+    .list"
 }
 
 ##
 ## Instala dependencias para actualizar repositorios e instalar
 ##
-preparar_repositorios() {
+stable_preparar_repositorios() {
     echo -e "$VE Actualizando repositorios por primera vez$CL"
     sudo apt update >> /dev/null 2>> /dev/null
     instalarSoftware apt-transport-https && echo -e "$VE Instalado el paquete$RO apt-transport-https$CL" || echo -e "$VE Error al instalar$RO apt-transport-https$CL"
@@ -117,7 +117,7 @@ preparar_repositorios() {
 ##
 ## Añade Repositorios extras a Debian
 ##
-agregar_repositorios() {
+stable_agregar_repositorios() {
     preparar_repositorios
     sources_repositorios
 
