@@ -54,7 +54,7 @@ source "$WORKSCRIPT/limpiador.sh"
 source "$WORKSCRIPT/Apps/0_Main.sh"
 source "$WORKSCRIPT/Personalizar/0_Main.sh"
 source "$WORKSCRIPT/Servidores/0_Main.sh"
-source "$WORKSCRIPT/sources.list/0_Main.sh"
+source "$WORKSCRIPT/Repositorios/0_Main.sh"
 
 ###########################
 ##       VARIABLES       ##
