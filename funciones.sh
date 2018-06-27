@@ -90,6 +90,88 @@ instalarSoftwareDPKG() {
 }
 
 ##
+## Recibe SOLO 1 nombre del archivo con la lista de paquetes, se recorrerá
+## este archivo e instalará todos los paquetes que contenga.
+## @param  $1  String  Nombre de la lista que contiene los paquetes
+##
+instalarSoftwareLista() {
+    ## En caso de no recibir parámetros, saldrá
+    if [[ $# = 0 ]]; then
+        return False
+    fi
+
+    repararGestorPaquetes
+
+    ## Instalando lo más básico desde "Software-Basico.lst"
+    echo -e "$VE Instalando Software adicional$CL"
+
+    ## Paquetes a instalar
+    local lista_Software=(`cat $1`)
+
+    ## La siguiente variable guarda toda la lista de paquetes desde DPKG
+    local lista_todos_paquetes=(${dpkg-query -W -f='${Installed-Size} ${Package}\n' | sort -n | cut -d" " -f2})
+
+    ## Comprueba si el software está instalado y en caso contrario instala
+
+    for s in "${lista_Software[@]}"; do
+        for x in "${lista_todos_paquetes[@]}"; do
+            if [[ $s = $x ]]; then
+                echo -e "$RO $s$VE ya estaba instalado$CL"
+                break
+            else
+                instalarSoftware "$s"
+                break
+            fi
+        done
+    done
+
+    repararGestorPaquetes
+}
+
+##
+## Repara errores de dependencias rotas que pudiesen haber.
+##
+repararGestorPaquetes() {
+    echo -e "$VE Comprobando estado del$RO Gestor de paquetes$VE (Paciencia)$CL"
+    sudo apt --fix-broken install -y >> /dev/null 2>> /dev/null
+    sudo apt install -f -y >> /dev/null 2>> /dev/null
+}
+
+##
+## Actualiza las listas de los repositorios
+##
+actualizarRepositorios() {
+    echo -e "$VE Actualizando listas de$RO Repositorios$VE (Paciencia)$CL"
+    sudo apt update >> /dev/null 2>> /dev/null
+}
+
+##
+## Recibe uno o más parámetros con el nombre de los programas para instalar
+## desde FlatPak en el sistema.
+## @param  $*  String  Nombres de programas para ser instalados
+##
+instalarSoftwareFlatPak() {
+    ## Si no está FlatPak instalado → Instalar
+    if [[ ! -x '/usr/bin/flatpak' ]]; then
+        instalarSoftware 'flatpak'
+    fi
+
+    if [[ ! -x '/usr/bin/flatpak' ]]; then
+        echo -e "$VE Instalando desde$RO FlatPak$CL"
+
+        for programa in $*; do
+            echo -e "$VE Instalando $RO $programa$VE desde$RO FlatPak$CL"
+            flatpak install "$programa"
+        done
+
+        return True
+    else
+        echo -e "$VE No se encuentra$RO FlatPak$VE instalado en el equipo$CL"
+        return False
+    fi
+}
+
+##
 ## Descarga desde el lugar pasado como segundo parámetro y lo guarda con el
 ## nombre del primer parámetro dentro del directorio temporal "tmp" de este
 ## repositorio, quedando excluido del mismo control de versiones.

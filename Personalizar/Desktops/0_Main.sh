@@ -21,6 +21,8 @@
 ############################
 source "$WORKSCRIPT/Personalizar/Desktops/i3.sh"
 source "$WORKSCRIPT/Personalizar/Desktops/xmonad.sh"
+source "$WORKSCRIPT/Personalizar/Desktops/openbox.sh"
+source "$WORKSCRIPT/Personalizar/Desktops/gnome-shell.sh"
 
 ###########################
 ##       FUNCIONES       ##
@@ -31,6 +33,8 @@ menuDesktops() {
         echo -e "$VE Instalando todos los Desktops y WM$CL"
         i3wm_instalador
         xmonad_instalador
+        openbox_instalador
+        gnome_shell_instalador
     }
 
     ## Si la función recibe "-a" indica que instale todas las opciones
@@ -41,7 +45,9 @@ menuDesktops() {
             clear
             local descripcion='Menú de Personalización del sistema
                 1) Instalar i3wm
-                2) Instalar xmonad
+                2) Instalar Xmonad
+                2) Instalar Openbox
+                2) Instalar Gnome Shell
                 3) Todos los pasos anteriores
 
                 0) Atrás
@@ -55,6 +61,8 @@ menuDesktops() {
             case $entrada in
                 1)  i3wm_instalador;;        ## Instala i3wm
                 2)  xmonad_instalador;;      ## Instala xmonad
+                3)  openbox_instalador;;      ## Instala openbox
+                4)  gnome_shell_instalador;;      ## Instala gnome shell
                 3)  todos_desktops;;         ## Todos los pasos anteriores
 
                 0)  ## SALIR
@@ -65,7 +73,7 @@ menuDesktops() {
 
                 *)  ## Acción ante entrada no válida
                     echo ""
-                    echo -e "                      $RO ATENCIÓN: Elección no válida$CL";;
+                    echo -e "             $RO ATENCIÓN: Elección no válida$CL";;
             esac
         done
     fi

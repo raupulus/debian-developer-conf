@@ -27,10 +27,8 @@ source "$WORKSCRIPT/Servidores/apache.sh"
 source "$WORKSCRIPT/Servidores/bind.sh"
 source "$WORKSCRIPT/Servidores/mariaDB.sh"
 source "$WORKSCRIPT/Servidores/nodejs.sh"
-source "$WORKSCRIPT/Servidores/php.sh"
 source "$WORKSCRIPT/Servidores/postgreSQL.sh"
-source "$WORKSCRIPT/Servidores/python.sh"
-source "$WORKSCRIPT/Servidores/ruby.sh"
+source "$WORKSCRIPT/Servidores/docker.sh"
 
 ###########################
 ##       FUNCIONES       ##
@@ -46,11 +44,9 @@ menuServidores() {
         apache2_instalador
         mariadb_instalador
         nodejs_instalador
-        php_instalador
         postgresql_instalador
-        python_instalador
-        ruby_instalador
         bind_instalador
+        docker_instalador
     }
 
     ## Si la función recibe "-a" indica que instale todos los servidores
@@ -63,12 +59,10 @@ menuServidores() {
                 1) Apache
                 2) MariaDB
                 3) NodeJS
-                4) PHP
-                5) PostgreSQL
-                6) Python
-                7) Ruby
-                8) Bind 9
-                9) Todos los pasos anteriores
+                4) PostgreSQL
+                5) Bind 9
+                6) Docker
+                7) Todos los pasos anteriores
 
                 0) Atrás
             '
@@ -83,12 +77,10 @@ menuServidores() {
                 1)  apache2_instalador;;     ## Instala servidor Apache2
                 2)  mariadb_instalador;;     ## Instala MariaDB
                 3)  nodejs_instalador;;      ## Instala NodeJS
-                4)  php_instalador;;         ## Instala PHP
-                5)  postgresql_instalador;;  ## Instala PostgreSQL
-                6)  python_instalador;;      ## Instala Python
-                7)  ruby_instalador;;        ## Instala Ruby
-                8)  bind_instalador;;        ## Instala Bind
-                9)  todos_servidores         ## Todos los servidores
+                4)  postgresql_instalador;;  ## Instala PostgreSQL
+                5)  bind_instalador;;        ## Instala Bind
+                6)  docker_instalador;;      ## Instala Bind
+                7)  todos_servidores         ## Todos los servidores
                     break;;
 
                 0)  ## SALIR
@@ -99,7 +91,7 @@ menuServidores() {
 
                 *)  ## Acción ante entrada no válida
                     echo ""
-                    echo -e "                      $RO ATENCIÓN: Elección no válida$CL";;
+                    echo -e "             $RO ATENCIÓN: Elección no válida$CL";;
             esac
         done
     fi
