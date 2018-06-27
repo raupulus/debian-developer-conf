@@ -26,7 +26,7 @@ go_preconfiguracion() {
 }
 
 go_instalar() {
-    echo -e "$VE Instalando$RO C$VE y$RO C++$CL"
+    echo -e "$VE Instalando$RO go$CL"
     instalarSoftware 'golang-go'
 
     echo -e "$VE Instalando paquetes complementarios de$RO go$CL"

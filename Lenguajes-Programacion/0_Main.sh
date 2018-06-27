@@ -36,10 +36,10 @@ source "$WORKSCRIPT/Lenguajes-Programacion/ruby.sh"
 ## Menú para elegir los lenguajes de programación a instalar y configurar
 ## @param $1 -a Si recibe este parámetro ejecutará todos los scripts
 ##
-menuServidores() {
-    todos_servidores() {
+menuLenguajes() {
+    todos_lenguajes() {
         clear
-        echo -e "$VE Instalando todos los servidores$CL"
+        echo -e "$VE Instalando todos los lenguajes$CL"
         php_instalador
         python_instalador
         ruby_instalador
@@ -48,7 +48,7 @@ menuServidores() {
     }
 
     if [[ "$1" = '-a' ]]; then
-        todos_servidores
+        todos_lenguajes
     else
         while true :; do
             clear
@@ -74,8 +74,8 @@ menuServidores() {
                 2)  python_instalador;;      ## Instala Python
                 3)  ruby_instalador;;        ## Instala Ruby
                 4)  go_instalador;;          ## Instala Go
-                5) c_instalador;;            ## Instala C y C++
-                6) todos_servidores          ## Todos los servidores
+                5)  c_instalador;;            ## Instala C y C++
+                6)  todos_lenguajes          ## Todos los lenguajes
                     break;;
 
                 0)  ## SALIR
