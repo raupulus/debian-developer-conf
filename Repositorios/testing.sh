@@ -96,8 +96,7 @@ testing_sources_repositorios() {
     if [[ ! -d '/etc/apt/sources.list' ]]; then
         sudo rm -f '/etc/apt/sources.list'
     fi
-    sudo cp "$WORKSCRIPT/Repositorios/testing/sources.list" "/etc/apt/sources
-    .list"
+    sudo cp "$WORKSCRIPT/Repositorios/testing/sources.list" "/etc/apt/sources.list"
 }
 
 ##
