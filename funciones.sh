@@ -97,7 +97,7 @@ instalarSoftwareDPKG() {
 instalarSoftwareLista() {
     ## En caso de no recibir parámetros, saldrá
     if [[ $# = 0 ]]; then
-        return False
+        return 1
     fi
 
     repararGestorPaquetes
@@ -126,6 +126,8 @@ instalarSoftwareLista() {
     done
 
     repararGestorPaquetes
+
+    return 0
 }
 
 ##
@@ -151,26 +153,52 @@ actualizarRepositorios() {
 ## @param  $*  String  Nombres de programas para ser instalados
 ##
 instalarSoftwareFlatPak() {
-    ## Si no está FlatPak instalado → Instalar
     if [[ ! -x '/usr/bin/flatpak' ]]; then
         instalarSoftware 'flatpak'
     fi
 
-    if [[ ! -x '/usr/bin/flatpak' ]]; then
+    if [[ $# = 0 ]]; then
+        echo -e "$VE No hay paquetes$RO FlatPak$VE para instalar$CL"
+    fi
+
+    if [[ -x '/usr/bin/flatpak' ]]; then
         echo -e "$VE Instalando desde$RO FlatPak$CL"
 
         for programa in $*; do
             echo -e "$VE Instalando $RO $programa$VE desde$RO FlatPak$CL"
-            flatpak install "$programa"
+            if [[ $programa != '' ]]; then
+                flatpak install "$programa"
+            fi
         done
 
-        return True
+        return 0
     else
         echo -e "$VE No se encuentra$RO FlatPak$VE instalado en el equipo$CL"
-        return False
+        return 1
     fi
 }
 
+##
+## Instala todos los programas FlatPak del archivo de lista recibido.
+## @param  $1  String  Ruta del archivo lista con los paquetes
+instalarSoftwareFlatPakLista() {
+    ## Paquetes a instalar
+    if [[ $1 = '' ]]; then
+        echo -e "$VE No hay paquete a instalar$CL"
+        return 1
+    fi
+
+    local lista_Software=(`cat $1`)
+
+    for x in "${lista_Software[@]}"; do
+        if [[ $x != '' ]]; then
+            echo -e "$VE Instalando$RO $x$VE desde$RO FlatPak$CL"
+            instalarSoftwareFlatPak "$x"
+        fi
+    done
+
+    return 0
+}
 ##
 ## Descarga desde el lugar pasado como segundo parámetro y lo guarda con el
 ## nombre del primer parámetro dentro del directorio temporal "tmp" de este
