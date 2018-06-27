@@ -36,7 +36,7 @@ menuPaquetes() {
         instalarSoftwareLista "$WORKSCRIPT/Apps/Packages/developer.lst"
         instalarSoftwareLista "$WORKSCRIPT/Apps/Packages/diseño-grafico.lst"
         instalarSoftwareLista "$WORKSCRIPT/Apps/Packages/edicion-multimedia.lst"
-        instalarSoftwareFlatPak "$WORKSCRIPT/Apps/Packages/flatpak.lst"
+        instalarSoftwareFlatPakLista "$WORKSCRIPT/Apps/Packages/flatpak.lst"
         instalarSoftwareLista "$WORKSCRIPT/Apps/Packages/internet.lst"
         instalarSoftwareLista "$WORKSCRIPT/Apps/Packages/vps.lst"
     }
@@ -70,7 +70,7 @@ menuPaquetes() {
                 1)  instalarSoftwareLista "$WORKSCRIPT/Apps/Packages/developer.lst";;
                 2)  instalarSoftwareLista "$WORKSCRIPT/Apps/Packages/diseño-grafico.lst";;
                 3)  instalarSoftwareLista "$WORKSCRIPT/Apps/Packages/edicion-multimedia.lst";;
-                4)  instalarSoftwareFlatPak "$WORKSCRIPT/Apps/Packages/flatpak.lst";;
+                4)  instalarSoftwareFlatPakLista "$WORKSCRIPT/Apps/Packages/flatpak.lst";;
                 5)  instalarSoftwareLista "$WORKSCRIPT/Apps/Packages/internet.lst";;
                 6)  todos_servidores
                     break;;
