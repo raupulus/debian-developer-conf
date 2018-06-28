@@ -26,16 +26,79 @@
 ############################
 ##       FUNCIONES        ##
 ############################
-agregar_fuentes() {
-    echo -e "$VEAñadiendo$RO fuentes Tipográficas$VE al sistema$CL"
+fuentes_repositorios() {
+    echo -e "$VE Instalando fuentes desde$RO repositorios$CL"
 
-    fuentes_repositorios="fonts-powerline fonts-freefont-ttf fonts-hack-ttf fonts-lmodern"
+    fuentes_repositorios="fonts-powerline fonts-freefont-ttf fonts-hack
+    fonts-hack-ttf fonts-lmodern fonts-font-awesome fonts-inconsolata
+    fonts-dejavu fonts-dejavu-extra fonts-linuxlibertine xfonts-terminus
+    fonts-fantasque-sans fonts-firacode fonts-jura fonts-liberation
+    fonts-liberation2 fonts-cantarell fonts-lobster"
 
     for f in $fuentes_repositorios; do
         echo -e "$VE Instalando fuente$MA →$RO $f $CL"
         instalarSoftware "$f"
     done
+}
 
+fuentes_download() {
+    descargar 'Inconsolata Nerd Font Complete.otf' 'https://github.com/ryanoasis/nerd-fonts/blob/master/patched-fonts/Inconsolata/complete/Inconsolata%20Nerd%20Font%20Complete.otf'
+
+    descargar 'Inconsolata Nerd Font Complete Mono.otf' 'https://github.com/ryanoasis/nerd-fonts/blob/master/patched-fonts/Inconsolata/complete/Inconsolata%20Nerd%20Font%20Complete%20Mono.otf'
+
+    descargar 'Inconsolata-dz for Powerline.otf' 'https://github.com/powerline/fonts/blob/master/InconsolataDz/Inconsolata-dz%20for%20Powerline.otf'
+
+    if [[ ! -d '/usr/share/fonts/Inconsolata' ]]; then
+        sudo mkdir '/usr/share/fonts/Inconsolata'
+    fi
+
+    sudo cp "$WORKSCRIPT/tmp/Inconsolata Nerd Font Complete.otf" '/usr/share/fonts/Inconsolata/'
+
+    sudo cp "$WORKSCRIPT/tmp/Inconsolata Nerd Font Complete Mono.otf" '/usr/share/fonts/Inconsolata/'
+
+    sudo chmod 755 -R '/usr/share/fonts/Inconsolata'
+
+    if [[ ! -d '/usr/share/fonts/Powerline' ]]; then
+        sudo mkdir '/usr/share/fonts/Powerline'
+    fi
+
+    sudo cp "$WORKSCRIPT/tmp/Inconsolata-dz for Powerline.otf" '/usr/share/fonts/Powerline/'
+
+    sudo chmod 755 -R '/usr/share/fonts/Powerline'
+}
+
+fuentes_nerdfonts() {
+    instaladas='false'
+    if [[ -d "$WORKSCRIPT/tmp/nerd-fonts" ]]; then
+        cd "$WORKSCRIPT/tmp/nerd-fonts" || exit
+        git checkout -- .
+        git pull
+        instaladas='true'
+    else
+        git clone --depth 1 'https://github.com/ryanoasis/nerd-fonts.git' "$WORKSCRIPT/tmp/nerd-fonts"
+    fi
+
+    if [[ $instaladas = 'true' ]]; then
+        echo -e "$VE Las fuentes$RO Nerd-Fonts$VE ya estaban instaladas, reinstalar?$CL"
+        read -p ' s/N → ' SN
+
+        if [[ "$SN" = 'y' ]] ||
+           [[ "$SN" = 'Y' ]] ||
+           [[ "$SN" = 's' ]] ||
+           [[ "$SN" = 'S' ]]
+        then
+            cd "$WORKSCRIPT/tmp/nerd-fonts" || exit
+            ./install.sh
+            cd "$WORKSCRIPT" || exit
+        fi
+    else
+        cd "$WORKSCRIPT/tmp/nerd-fonts" || exit
+        ./install.sh
+        cd "$WORKSCRIPT" || exit
+    fi
+}
+
+fuentes_locales() {
     for f in $WORKSCRIPT/fonts/*
     do
         if [[ -d "$WORKSCRIPT/fonts/$f" ]]; then
@@ -43,23 +106,17 @@ agregar_fuentes() {
             sudo cp -r "$HOME/fonts/$f/" '/usr/local/share/fonts/'
         fi
     done
+}
 
-    nerd_fonts() {
-        if [[ -d "$WORKSCRIPT/tmp/nerd-fonts" ]]; then
-            cd "$WORKSCRIPT/tmp/nerd-fonts" || exit
-            git checkout -- .
-            git pull
-        else
-            git clone --depth 1 'https://github.com/ryanoasis/nerd-fonts.git' "$WORKSCRIPT/tmp/nerd-fonts"
-        fi
+agregar_fuentes() {
+    echo -e "$VE Añadiendo$RO fuentes Tipográficas$VE al sistema$CL"
 
-        cd "$WORKSCRIPT/tmp/nerd-fonts" || exit
-        ./install.sh
-        cd "$WORKSCRIPT" || exit
-    }
+    fuentes_repositorios
+    fuentes_download
+    fuentes_locales
 
     if [[ -d "$WORKSCRIPT/tmp/nerd-fonts/.git" ]]; then
-        nerd_fonts
+        fuentes_nerdfonts
     else
         echo -e "$VE ¿Instalar$RO Nerd-Fonts$VE, ocupará más de 1GB (y su descarga)?"
         read -p ' s/N → ' SN
@@ -69,7 +126,7 @@ agregar_fuentes() {
            [[ "$SN" = 's' ]] ||
            [[ "$SN" = 'S' ]]
         then
-            nerd_fonts
+            fuentes_nerdfonts
         fi
     fi
 }

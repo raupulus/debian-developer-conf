@@ -1,0 +1,5 @@
+########################################################
+##                       TOR                          ##
+########################################################
+deb https://deb.torproject.org/torproject.org testing main
+deb-src https://deb.torproject.org/torproject.org testing main

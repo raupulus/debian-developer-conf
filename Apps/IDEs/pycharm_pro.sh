@@ -53,8 +53,11 @@ pycharm_instalar() {
     echo -e "$VE Extrayendo IDE$CL"
     cd "$WORKSCRIPT/tmp/" || return 0
     tar -zxf "${1}.tar.gz" 2>> /dev/null
-    local directorio="$(ls | grep -E ^PyCharm.+[^\.tar\.gz]$)"
-    mv "$WORKSCRIPT/tmp/$directorio" "$HOME/.local/opt/pycharm"
+    local directorio="$(ls | grep -E ^pycharm.+[^\.tar\.gz]$)"
+ls
+    if [[ "$directorio" != '' ]]; then
+        mv "$WORKSCRIPT/tmp/$directorio" "$HOME/.local/opt/pycharm"
+    fi
     cd "$WORKSCRIPT" || exit 1
 }
 
@@ -62,8 +65,7 @@ pycharm_postconfiguracion() {
     echo -e "$VE Generando Post-Configuraciones$RO PyCharm$CL"
 
     echo -e "$VE Generando acceso directo$CL"
-    rm -f "$HOME/.local/share/applications/pycharm.desktop"
-    cp "$WORKSCRIPT/Accesos_Directos/pycharm.desktop" "$HOME/.local/share/applications/"
+    cp "$WORKSCRIPT/Accesos_Directos/pycharm.desktop" "$HOME/.local/share/applications/"ls
 
     echo -e "$VE Generando comando$RO pycharm$CL"
     ln -s "$HOME/.local/opt/pycharm/bin/pycharm.sh" "$HOME/.local/bin/pycharm"
@@ -77,7 +79,8 @@ pycharm_pro_instalador() {
     pycharm_preconfiguracion "$version"
 
     if [[ -f "$HOME/.local/bin/pycharm" ]] &&
-       [[ -d "$HOME/.local/opt/pycharm" ]]
+       [[ -d "$HOME/.local/opt/pycharm" ]] &&
+       [[ -f "$HOME/.local/share/applications/pycharm.desktop" ]]
     then
         echo -e "$VE Ya esta$RO PyCharm$VE instalado en el equipo, omitiendo paso$CL"
     else

@@ -44,7 +44,6 @@
       "git-control"
       "git-commit"
       "expose"
-      "busy-signal"
       "atom-sass"
       "atom-jade"
       "Atom-Bash-Snippets"
@@ -68,6 +67,19 @@
       "language-java"
       "symbols-list"
     ]
+    ignoredNames: [
+      ".git"
+      ".hg"
+      ".svn"
+      ".DS_Store"
+      "._*"
+      "Thumbs.db"
+      "desktop.ini"
+      ".pioenvs"
+      ".piolibdeps"
+      ".clang_complete"
+      ".gcc-flags.json"
+    ]
     projectHome: "$HOME/1_GIT/"
     telemetryConsent: "no"
     themes: [
@@ -86,7 +98,13 @@
     tabType: "soft"
   "exception-reporting":
     userId: "0ef9dd58-1a13-4cdc-ba5d-d9a8a44ec417"
-  "file-icons": {}
+  "file-icons":
+    coloured: true
+  "ide-python":
+    pylsPlugins:
+      pydocstyle:
+        enabled: true
+    python: "python3"
   "linter-phpcs":
     autoExecutableSearch: false
     codeStandardOrConfigFile: "/opt/composer/vendor/yiisoft/yii2-coding-standards/Yii2"
@@ -98,6 +116,7 @@
   "linter-ui-default":
     panelHeight: 300
     showPanel: true
+    useBusySignal: false
   "markdown-preview":
     useGitHubStyle: true
   minimap:
@@ -156,6 +175,8 @@
     hideOnEmptyList: true
   "tool-bar":
     position: "Left"
+  "tree-view":
+    hideIgnoredNames: true
   "vim-mode-plus": {}
   welcome:
     showOnStartup: false

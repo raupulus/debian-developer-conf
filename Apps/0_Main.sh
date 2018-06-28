@@ -27,6 +27,7 @@ source "$WORKSCRIPT/Apps/1_Aplicaciones_Basicas.sh"
 source "$WORKSCRIPT/Apps/2_Aplicaciones_Extras.sh"
 source "$WORKSCRIPT/Apps/3_Aplicaciones_Usuario.sh"
 source "$WORKSCRIPT/Apps/IDEs/0_Main.sh"
+source "$WORKSCRIPT/Apps/Packages/0_Main.sh"
 
 ############################
 ##       FUNCIONES        ##
@@ -43,6 +44,7 @@ menuAplicaciones() {
         aplicaciones_extras -a
         aplicaciones_usuarios
         #menuIDES -a
+        menuPaquetes -a
     }
 
     ## Si la función recibe "-a" indica que ejecute todas las aplicaciones
@@ -55,8 +57,11 @@ menuAplicaciones() {
                 1) Aplicaciones Básicas
                 2) Aplicaciones Extras
                 3) Aplicaciones de Usuario
-                4) Instalar IDEs
+                4) Instalar Grupo de aplicaciones
+
                 5) Todos los pasos anteriores completos
+
+                6) Instalar IDEs
 
                 0) Atrás
             '
@@ -71,8 +76,9 @@ menuAplicaciones() {
                 1)  aplicaciones_basicas;;   ## Aplicaciones Básicas
                 2)  aplicaciones_extras;;    ## Aplicaciones Extras
                 3)  aplicaciones_usuarios;;  ## Aplicaciones de Usuario
-                4)  menuIDES;;               ## Menú para instalar IDEs
-                5)  todas_aplicaciones       ## Todas las aplicaciones
+                4)  menuPaquetes;;           ## Aplicaciones de por lotes
+                5)  todas_aplicaciones;;     ## Todas las aplicaciones
+                6)  menuIDES                 ## Menú para instalar IDEs
                     break;;
 
                 0)  ## SALIR
@@ -83,7 +89,7 @@ menuAplicaciones() {
 
                 *)  ## Acción ante entrada no válida
                     echo ""
-                    echo -e "                      $RO ATENCIÓN: Elección no válida$CL";;
+                    echo -e "             $RO ATENCIÓN: Elección no válida$CL";;
             esac
         done
     fi

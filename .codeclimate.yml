@@ -15,8 +15,19 @@ engines:
     checks:
       MD002:
         enabled: false
-
-exclude_patterns:
+  duplication:
+    enabled: true
+    config:
+      languages:
+      - python
+      - bash
+  fixme:
+    enabled: true
+ratings:
+  paths:
+  - "**.sh"
+  - "**.py"
+exclude_paths:
 - conf/
 - Apache2/
 - fonts/

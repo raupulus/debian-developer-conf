@@ -90,6 +90,116 @@ instalarSoftwareDPKG() {
 }
 
 ##
+## Recibe SOLO 1 nombre del archivo con la lista de paquetes, se recorrerá
+## este archivo e instalará todos los paquetes que contenga.
+## @param  $1  String  Nombre de la lista que contiene los paquetes
+##
+instalarSoftwareLista() {
+    ## En caso de no recibir parámetros, saldrá
+    if [[ $# = 0 ]]; then
+        return 1
+    fi
+
+    repararGestorPaquetes
+
+    ## Instalando lo más básico desde "Software-Basico.lst"
+    echo -e "$VE Instalando Software adicional$CL"
+
+    ## Paquetes a instalar
+    local lista_Software=(`cat $1`)
+
+    ## La siguiente variable guarda toda la lista de paquetes desde DPKG
+    local lista_todos_paquetes=(${dpkg-query -W -f='${Installed-Size} ${Package}\n' | sort -n | cut -d" " -f2})
+
+    ## Comprueba si el software está instalado y en caso contrario instala
+
+    for s in "${lista_Software[@]}"; do
+        for x in "${lista_todos_paquetes[@]}"; do
+            if [[ $s = $x ]]; then
+                echo -e "$RO $s$VE ya estaba instalado$CL"
+                break
+            else
+                instalarSoftware "$s"
+                break
+            fi
+        done
+    done
+
+    repararGestorPaquetes
+
+    return 0
+}
+
+##
+## Repara errores de dependencias rotas que pudiesen haber.
+##
+repararGestorPaquetes() {
+    echo -e "$VE Comprobando estado del$RO Gestor de paquetes$VE (Paciencia)$CL"
+    sudo apt --fix-broken install -y >> /dev/null 2>> /dev/null
+    sudo apt install -f -y >> /dev/null 2>> /dev/null
+}
+
+##
+## Actualiza las listas de los repositorios
+##
+actualizarRepositorios() {
+    echo -e "$VE Actualizando listas de$RO Repositorios$VE (Paciencia)$CL"
+    sudo apt update >> /dev/null 2>> /dev/null
+}
+
+##
+## Recibe uno o más parámetros con el nombre de los programas para instalar
+## desde FlatPak en el sistema.
+## @param  $*  String  Nombres de programas para ser instalados
+##
+instalarSoftwareFlatPak() {
+    if [[ ! -x '/usr/bin/flatpak' ]]; then
+        instalarSoftware 'flatpak'
+    fi
+
+    if [[ $# = 0 ]]; then
+        echo -e "$VE No hay paquetes$RO FlatPak$VE para instalar$CL"
+    fi
+
+    if [[ -x '/usr/bin/flatpak' ]]; then
+        echo -e "$VE Instalando desde$RO FlatPak$CL"
+
+        for programa in $*; do
+            echo -e "$VE Instalando $RO $programa$VE desde$RO FlatPak$CL"
+            if [[ $programa != '' ]]; then
+                flatpak install "$programa"
+            fi
+        done
+
+        return 0
+    else
+        echo -e "$VE No se encuentra$RO FlatPak$VE instalado en el equipo$CL"
+        return 1
+    fi
+}
+
+##
+## Instala todos los programas FlatPak del archivo de lista recibido.
+## @param  $1  String  Ruta del archivo lista con los paquetes
+instalarSoftwareFlatPakLista() {
+    ## Paquetes a instalar
+    if [[ $1 = '' ]]; then
+        echo -e "$VE No hay paquete a instalar$CL"
+        return 1
+    fi
+
+    local lista_Software=(`cat $1`)
+
+    for x in "${lista_Software[@]}"; do
+        if [[ $x != '' ]]; then
+            echo -e "$VE Instalando$RO $x$VE desde$RO FlatPak$CL"
+            instalarSoftwareFlatPak "$x"
+        fi
+    done
+
+    return 0
+}
+##
 ## Descarga desde el lugar pasado como segundo parámetro y lo guarda con el
 ## nombre del primer parámetro dentro del directorio temporal "tmp" de este
 ## repositorio, quedando excluido del mismo control de versiones.
@@ -230,13 +340,24 @@ prepararInstalador() {
 
 ##
 ## Instala los paquetes recibidos con "npm" el gestor de paquetes de NodeJS.
-## De esta forma serán instalado los paquetes de forma global, no para un
-## proyecto concreto como dependencia.
+## De esta forma serán instalado los paquetes localmente
 ## @param $* Recibe los paquetes que se van a instalar
 ##
 instalarNpm() {
     for x in $*; do
         echo -e "$RO Instalando $x$CL"
-        sudo npm install -g "$x"
+        npm install "$x"
+    done
+}
+##
+## Instala los paquetes recibidos con "npm" el gestor de paquetes de NodeJS.
+## De esta forma serán instalado los paquetes de forma global, no para un
+## proyecto concreto como dependencia.
+## @param $* Recibe los paquetes que se van a instalar
+##
+instalarNpmGlobal() {
+    for x in $*; do
+        echo -e "$RO Instalando $x$CL"
+        npm install -g "$x"
     done
 }

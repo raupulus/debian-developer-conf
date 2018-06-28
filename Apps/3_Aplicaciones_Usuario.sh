@@ -27,6 +27,7 @@ source "$WORKSCRIPT/Apps/OhMyZsh.sh"
 source "$WORKSCRIPT/Apps/Firefox.sh"
 source "$WORKSCRIPT/Apps/spacevim.sh"
 source "$WORKSCRIPT/Apps/vim.sh"
+source "$WORKSCRIPT/Apps/Geany.sh"
 
 ############################
 ##       FUNCIONES        ##
@@ -60,6 +61,8 @@ generador_proyectos() {
 ##
 generador_plantillas() {
     enlazarHome '.local/bin/nuevo'
+    sudo chmod 755 "/home/${USER}/.local/bin/nuevo"
+    sudo chown ${USER}:${USER} "/home/${USER}/.local/bin/nuevo"
 }
 
 devicons_ls() {
@@ -78,6 +81,7 @@ aplicaciones_usuarios() {
     firefox_instalador
     bashit_Instalador
     ohmyzsh_Instalador
+    geany_Instalador
 
     while true; do
         echo -e "$VE ¿Quieres instalar$RO vim$VE o$RO spacevim$CL"

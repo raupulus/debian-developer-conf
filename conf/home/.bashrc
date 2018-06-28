@@ -13,9 +13,14 @@
 ##             Guía de estilos aplicada:
 ## @style      https://github.com/fryntiz/Bash_Style_Guide
 
+###################################
+###          CONSTANTES         ###
+###################################
 RO="\033[1;31m"  ## Color Rojo
 VE="\033[1;32m"  ## Color Verde
 CL="\e[0m"       ## Limpiar colores
+
+USER="$(whoami)" ## Nombre del usuario
 
 ## En caso de no ser ejecutado de forma interactiva se sale sin hacer nada
 case $- in
@@ -79,7 +84,7 @@ else
 fi
 unset color_prompt force_color_prompt
 
-## Si estamos con Xterm estavlece el título (original → user@host:dir)
+## Si estamos con Xterm establece el título (original → user@host:dir)
 case "$TERM" in
 xterm*|rxvt*)
     PS1='$(__git_ps1 " (%s))"'
@@ -134,43 +139,6 @@ fi
 ## Colorear Errores y Advertencias de GCC
 export GCC_COLORS='error=01;31:warning=01;35:note=01;36:caret=01;32:locus=01:quote=01'
 
-###################################
-###            ALIAS            ###
-###################################
-## Comando ls
-alias ll='ls -hl'
-alias la='ls -A'
-alias l='ls -CF'
-
-## Comando cd
-alias ..="cd .."
-alias cd..="cd .."
-alias ...='cd ../..'
-alias ....='cd ../../..'
-alias .....='cd ../../../..'
-
-## Git
-alias git="LANG=C git"
-alias glg="git lg"
-alias gl='git lg'
-alias gh='git hist'
-alias gs='git status'
-alias ga='git add'
-alias gb='git branch'
-alias gc='git commit'
-alias gd='git diff'
-alias go='git checkout'
-alias gk='gitk --all&'
-alias gx='gitx --all'
-alias got='git'
-alias get='git'
-alias gp='git push'
-
-## Otros
-#alias rm="rm -i"
-#alias cp="cp -i"
-#alias mv="mv -i"
-
 ## Alias importados desde subdirectorio ~/.bash_aliases
 if [[ -f ~/.bash_aliases ]]; then
     . ~/.bash_aliases
@@ -186,8 +154,17 @@ elif [[ -f /etc/bash_completion ]]; then
 fi
 
 ## Compatibilidad con terminal "Tilix"
-if [[ $TILIX_ID ]] || [[ $VTE_VERSION ]]; then
+if [[ "$TILIX_ID" ]] || [[ "$VTE_VERSION" ]]; then
     source /etc/profile.d/vte.sh
+fi
+
+## Ruta para npm en $HOME de usuario
+if [[ -d "$HOME/.npm/lib" ]] &&
+   [[ -d "$HOME/.npm/bin" ]] &&
+   [[ -x '/usr/bin/node' ]]
+then
+    export NODE_PATH=~/.npm/lib/node_modules:$NODE_PATH
+    export PATH=~/.npm/bin:$PATH
 fi
 
 ## POWERLINE EN BASH (No lo uso, el siguiente código puede no funcionar bien)
@@ -288,8 +265,60 @@ if [[ -f ~/.bash_it/bash_it.sh ]]; then
 fi
 
 ###################################
+###            ALIAS            ###
+###################################
+## Comando ls
+alias ll='ls -hl'
+alias la='ls -A'
+alias l='ls -CF'
+
+## Comando cd
+alias ..="cd .."
+alias cd..="cd .."
+alias ...='cd ../..'
+alias ....='cd ../../..'
+alias .....='cd ../../../..'
+
+## Git
+alias git="LANG=C git"
+alias glg="git lg"
+alias gl='git lg'
+alias gh='git hist'
+alias gs='git status'
+alias ga='git add'
+alias gb='git branch'
+alias gc='git commit'
+alias gd='git diff'
+alias go='git checkout'
+alias gk='gitk --all&'
+alias gx='gitx --all'
+alias got='git'
+alias get='git'
+alias gp='git push'
+alias gr='git remote'
+
+## Historial
+alias c="clear"
+alias h="history 20"
+alias hh="history 200 | grep "
+alias hc="history -c"
+
+## Atajos Generales
+
+
+## Otros
+#alias rm="rm -i"
+#alias rm="mv ??????/tmp/deleted_$USER"
+#alias cp="cp -i"
+#alias mv="mv -i"
+
+###################################
 ###  Opciones para bash propias ###
 ###################################
+if [[ ! -d "/tmp/deleted_$USER" ]]; then
+    mkdir "/tmp/deleted_$USER" && chmod 700 -R "/tmp/deleted_$USER"
+fi
+
 if [[ -f ~/.bashrc_custom ]]; then ## Comprobar si existe para el usuario
     source $HOME/.bashrc_custom
 else
@@ -305,10 +334,15 @@ if [[ -x "$HOME/.local/bin/nuevo" ]]; then
     echo -e "$VE Usando el comando$RO nuevo$VE generas un archivo desde la plantilla$CL"
 fi
 
+## Comparto tty1 mediante screen al hacer login en ella
+if [[ "$(/usr/bin/tty)" == "/dev/tty1" ]] && [[ -x '/usr/bin/screen' ]]; then
+    exec /usr/bin/screen
+fi
+
 ###################################
 ###  Sobrescribiendo Comandos   ###
 ###################################
 ## devicons-ls (Iconos para terminal al hacer ls)
-if [[ -x "$HOME/.local/bin/devicons-ls" ]]; then
-    alias ls='devicons-ls'
-fi
+#if [[ -x "$HOME/.local/bin/devicons-ls" ]]; then
+#    alias ls='devicons-ls'
+#fi

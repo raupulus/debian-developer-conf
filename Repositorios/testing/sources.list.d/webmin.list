@@ -1,0 +1,6 @@
+########################################################
+##                      WEBMIN                        ##
+########################################################
+#####wget http://www.webmin.com/jcameron-key.asc && apt-key add jcameron-key.asc
+# deb http://download.webmin.com/download/repository/ sarge contrib
+# deb http://webmin.mirror.somersettechsolutions.co.uk/repository/ sarge contrib

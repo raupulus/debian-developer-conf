@@ -12,25 +12,34 @@
 
 ## Referencia oficial: http://i3wm.org/docs/userguide.html
 
+## Iconos de ejemplo:
+##                                    
+##                                 
+##                     
+
 ## Tecla modificadora
 set $mod Mod4
 
 ## Nombre de monitores 1 y 2:
 set $mon1 DVI-I-1
 set $mon2 DVI-D-0
+#set $mon3 HDMI-0
+
+## Configuración
+set $coordenadas '36.7349439:-6.4253577'  ## Coordenadas
 
 ###########################################################
 ############        Espacios de trabajo        ############
 ###########################################################
 ## Nombres para cada espacio del monitor 1
-set $WS1 1:MAIN
-set $WS2 2:TERM
-set $WS3 3:WWW
-set $WS4 4:REDES
-set $WS5 5:IDE
-set $WS6 6:AUDIO
-set $WS7 7:IMG
-set $WS8 8:VIRT
+set $WS1 1:
+set $WS2 2:
+set $WS3 3:
+set $WS4 4:
+set $WS5 5:
+set $WS6 6:
+set $WS7 7:
+set $WS8 8:
 
 ## Nombres para cada espacio del monitor 2
 set $WS9 9:HDMI1
@@ -56,49 +65,85 @@ workspace $WS10 output $mon2
 
 #exec --no-startup-id ~/.config/i3/Workspaces/load_layouts.sh
 
+## Establecer monitores HDMI al conectarse:
+#exec --no-startup-id xrandr --output eDP1-1 --primary
+#exec --no-startup-id xrandr --output HDMI-1 --secundary
+
 ###########################################################
 ############ Ubicacion de ventanas por defecto ############
 ###########################################################
+
+## 2
+assign [class="[pP]hp[sS]torm"] → $WS2
+for_window [class="[pP]hp[sS]torm"] focus
+assign [class="[pP]y[cC]harm"] → $WS2
+for_window [class="[pP]y[cC]harm"] focus
+assign [class="^[aA]tom"] → $WS2
+for_window [class="^[aA]tom"] focus
+assign [class="^[bB]rackets"] → $WS2
+for_window [class="^[Bb]rackets"] focus
+assign [class="^[gG]eany"] → $WS2
+for_window [class="^[gG]eany"] focus
+
+## 3
 assign [class="^[fF]irefox"] → $WS3
 for_window [class="^[fF]irefox"] focus
 assign [class="^[cC]hrome"] → $WS3
 for_window [class="^[cC]hrome"] focus
 assign [class="^[cC]hromium"] → $WS3
 for_window [class="^[cC]Chromium"] focus
-assign [class="^Thunderbird"] → $WS4
-for_window [class="^Thunderbird"] focus
+assign [class="^[gG]oogle-chrome"] → $WS3
+for_window [class="^[gG]oogle-chrome"] focus
+assign [class="[tT]orbrowser|[tT]orbrowser-launcher"] → $WS3
+for_window [class="[tT]orbrowser|[tT]orbrowser-launcher"] focus
+
+## 4
+assign [class="[tT]hunderbird|[eE]volution"] → $WS4
+for_window [class="[tT]hunderbird|[eE]volution"] focus
 assign [class="^Corebird"] → $WS4
 for_window [class="^Corebird"] focus
-assign [class="^Telegram"] → $WS4
-for_window [class="^Telegram"] focus
-assign [class="^[wW]hatsie"] → $WS4
-for_window [class="^[wW]hatsie"] focus
-assign [class="[pP]hp[sS]torm"] → $WS5
-for_window [class="[pP]hp[sS]torm"] focus
-assign [class="^[pP]y[cC]harm"] → $WS5
-for_window [class="^[pP]y[cC]harm"] focus
-assign [class="^[aA]tom"] → $WS5
-for_window [class="^[aA]tom"] focus
-assign [class="^Brackets"] → $WS5
-for_window [class="^Brackets"] focus
+assign [class="[tT]elegram"] → $WS4
+for_window [class="[tT]elegram"] focus
+assign [class="[wW]hatsie|[wW]hatsapp"] → $WS4
+for_window [class="[wW]hatsie|[wW]hatsapp"] focus
+
+## 5
+assign [class="^Gimp"] → $WS5
+for_window [class="^Gimp"] focus
+assign [class="^Inkscape"] → $WS5
+for_window [class="^Inkscape"] focus
+assign [class="^Dia"] → $WS5
+for_window [class="^Dia"] focus
+assign [class="kdenlive|openshot-qt|openshot|cinelerra"] → $WS5
+for_window [class="^kdenlive|openshot-qt|openshot|cinelerra"] focus
+assign [class="^Darktable"] → $WS5
+for_window [class="^Darktable"] focus
+
+## 6
 assign [class="^Audacity"] → $WS6
 for_window [class="^Audacity"] focus
-assign [class="^Gimp"] → $WS7
-for_window [class="^Gimp"] focus
-assign [class="^Inkscape"] → $WS7
-for_window [class="^Inkscape"] focus
-assign [class="^Dia"] → $WS7
-for_window [class="^Dia"] focus
+assign [class="^Rhythmbox"] → $WS6
+for_window [class="^Rhythmbox"] focus
+
+## 7
+assign [class="VirtualBox|Vmplayer"] → $WS7
+for_window [class="VirtualBox|Vmplayer"] focus
+assign [class="Oracle VM VirtualBox"] → $WS7
+for_window [class="Oracle VM VirtualBox"] focus
+
+## 8
+assign [class="Pychess"] → $WS7
+for_window [class="Pychess"] focus
 
 ###########################################################
 ############         FOCUS DE VENTANAS         ############
 ###########################################################
 bindsym $mod+F1 [class="Firefox"] focus
 bindsym $mod+F2 [class="Atom"] focus
-bindsym $mod+F3 [class="PhpStorm"] focus
+bindsym $mod+F3 [title="PhpStorm"] focus
 bindsym $mod+F4 [class="Thunar"] focus
 bindsym $mod+F5 [class="tilix"] focus
-bindsym $mod+F6 [class="PyCharm"] focus
+bindsym $mod+F6 [title="PyCharm"] focus
 bindsym $mod+F7 [class="Firefox"] focus
 bindsym $mod+F8 [class="Firefox"] focus
 bindsym $mod+F9 [class="Firefox"] focus
@@ -135,13 +180,35 @@ client.focused    #c10101  #880404  #ffffff  #00AA00
 ## Modo de Organizar ventanas por defecto: default|stacking|tabbed
 workspace_layout tabbed
 
+# set trayer to be borderless
+for_window [class="(?i)trayer"] border pixel 0
+
+###########################################################
+############   VENTANAS FLOTANTES POR DEFECTO  ############
+###########################################################
 ## focus, floating, & sticky
 ## Pongo flotante ventanas de copiar, eliminar, mover y configuración
 for_window [title="(?i)(?:copying|deleting|moving)"] floating enable
 for_window [window_role="(?i)(?:pop-up|setup)"] floating enable
 
-# set trayer to be borderless
-for_window [class="(?i)trayer"] border pixel 0
+for_window [class="Galculator"] floating enable
+for_window [class="Imagewriter"] floating enable
+for_window [class="^Gpick$"] floating enable
+for_window [class="^Gnome-font-viewer$"] floating enable
+for_window [class="Lxappearance|lxappearance"] floating enable, move position 290 150
+for_window [class="Nitrogen"] floating enable, move position 50 50
+for_window [class="SimpleScreenRecorder"] floating enable
+for_window [class="Kazam"] floating enable
+for_window [class="System-config-printer"] floating enable
+for_window [class="[tT]orbrowser-launcher$"] floating enable
+for_window [class="Unetbootin"] floating enable
+for_window [class="Usb-creator-gtk"] floating enable
+for_window [class="Xfce4-taskmanager"] floating enable
+for_window [title="^Terminator Preferences$"] floating enable
+
+###########################################################
+############       VENTANAS NO FLOTANTES       ############
+###########################################################
 
 ############################################################
 ###############            i3bar          ##################
@@ -165,7 +232,12 @@ bar {
 
     ## Fuente
     #font pango:terminus, awesome 9
-    font pango:Inconsolata-dz for Powerline 10
+    #font pango:Inconsolata-dz for Powerline, ZektonLt Bold 11
+    #font pango:DejaVu Sans Mono for Powerline Bold 11
+    font pango:DejaVu Sans Mono for Powerline, PowerlineSymbols, FontAwesome, Linux Libertine Mono O Bold 11
+    #font pango:Droid Sans Mono for Powerline 11
+    #font pango:ZektonLt Bold 11
+    #font pango:Inconsolata Nerd Font Complete Mono 10
     #font pango:Space Mono for Powerline 10
 
     workspace_buttons yes
@@ -184,9 +256,9 @@ bar {
     #strip_workspace_numbers yes
 
     colors {
-        background  #001111  ## Color del panel
-        statusline  #fdf6e3  ## Color del status
-        separator   #9e9e9e  ## Color de separadores
+        #background  #001111  ## Color del panel
+        #statusline  #fdf6e3  ## Color del status
+        #separator   #9e9e9e  ## Color de separadores
         #background  #1b1b1b
         #statusline  #ffffff
         #separator   #444444
@@ -206,10 +278,15 @@ bar {
         #urgent_workspace    #dddddd    #452828    #8c644c
 
         ## Mi tema
+        background #001111
+        statusline #fdf6e3
+        separator  #9e9e9e
         ## Colores           Bordes     Fondo      Texto
-        focused_workspace    #FDF6E3    #FDF6E3    #002B36
-        inactive_workspace   #607D8B    #607D8B    #002B36
-        urgent_workspace     #859900    #859900    #121212
+        focused_workspace   #FF0000    #FF0000    #FFFFFF
+        active_workspace    #333333    #FFFFFF    #FF0000
+        inactive_workspace  #001111    #285577    #C79A97
+        urgent_workspace    #ffff00    #ffff00    #000000
+        binding_mode        #2F343A    #900000    #FFFFFF
     }
 }
 
@@ -237,9 +314,12 @@ bar {
         statusline  #fdf6e3  #Color del status
         separator   #9e9e9e  #Color de separadores
 
-        focused_workspace    #FDF6E3    #FDF6E3    #002B36
-        inactive_workspace   #607D8B    #607D8B    #002B36
-        urgent_workspace     #859900    #859900    #121212
+        ## Colores           Bordes     Fondo      Texto
+        focused_workspace   #FF0000    #FF0000    #FFFFFF
+        active_workspace    #333333    #FFFFFF    #FF0000
+        inactive_workspace  #001111    #285577    #C79A97
+        urgent_workspace    #ffff00    #ffff00    #000000
+        binding_mode        #2F343A    #900000    #FFFFFF
     }
 }
 
@@ -267,13 +347,13 @@ bindsym $mod+Shift+Up move up
 bindsym $mod+Shift+Right move right
 
 ## Divide en orientación Horizontal
-bindsym $mod+h split h
+bindsym $mod+h split h; exec notify-send 'Horizontal'
 
 ## Divide en orientación Vertical
-bindsym $mod+v split v
+bindsym $mod+v split v; exec notify-send 'Vertical'
 
 ## Poner en pantalla completa la ventana actual con $mod+f
-bindsym $mod+f fullscreen toggle
+bindsym $mod+f fullscreen toggle; exec notify-send 'Pantalla completa'
 
 # change container layout (stacked, tabbed, toggle split)
 bindsym $mod+s layout stacking
@@ -318,6 +398,8 @@ bindsym $mod+Shift+0 move container to workspace $WS10
 
 bindsym $mod+x workspace next ## Siguiente workspace
 bindsym $mod+z workspace prev ## Anterior workspace
+bindsym Mod1+Ctrl+Right workspace next
+bindsym Mod1+Ctrl+Left workspace prev
 
 ## Redimensionar ventana (you can also use the mouse for that)
 mode "resize" {
@@ -380,15 +462,16 @@ bindsym --release $mod+shift+print exec xfce4-screenshooter -cfm
 bindsym --release print exec xfce4-screenshooter -fm -s ~/Imágenes/Screenshots/
 
 ## Brillo de la pantalla
-bindcode XF86MonBrightnessUp exec xbacklight - 10
-bindcode XF86MonBrightnessDown exec xbacklight + 10
+#bindcode XF86MonBrightnessUp exec --no-startup-id xbacklight -inc 10
+#bindcode XF86MonBrightnessDown exec --no-startup-id xbacklight -dec 10
+bindcode XF86MonBrightnessUp exec --no-startup-id ~/config/.i3/scripts/brillo.py next && notify-send "Brillo Arriba" || notify-send "Error: Brillo Arriba ha fallado"
+bindcode XF86MonBrightnessDown exec --no-startup-id ~/config/.i3/scripts/brillo.py back && notify-send "Brillo Abajo" || notify-send "Error: Brillo Abajo ha fallado"
 
 ############################################################
 ###############          Autostart        ##################
 ############################################################
 exec --no-startup-id i3-msg 'workspace $WS1; exec thunar;'
-exec --no-startup-id i3-msg 'workspace $WS1; exec thunar;'
-exec --no-startup-id i3-msg 'workspace $WS2; exec tilix; workspace $WS1'
+exec --no-startup-id i3-msg 'workspace $WS1; exec tilix;'
 exec --no-startup-id i3-msg 'workspace $WS3; exec x-www-browser; workspace $WS1'
 exec --no-startup-id i3-msg 'workspace $WS4; exec ~/4_Programas/Telegram/Telegram; workspace $WS1'
 #exec --no-startup-id i3-msg 'workspace $WS4; exec corebird; workspace $WS1'
@@ -399,7 +482,10 @@ exec --no-startup-id i3-msg 'workspace $WS4; exec ~/4_Programas/Telegram/Telegra
 exec --no-startup-id nitrogen --restore
 
 ## Portapapeles parcellite
-exec --no-startup-id parcellite
+#exec --no-startup-id parcellite
+
+#Portapapeles de XFCE (permite guardar capturas de pantalla): xfce4-clipman
+exec --no-startup-id xfce4-clipman
 
 ## Mensajes emergentes
 exec --no-startup-id dunst
@@ -409,6 +495,12 @@ exec --no-startup-id unclutter -idle 0.8
 
 ## Configuraciones para X
 exec --no-startup-id xrdb -load ~/.Xresources
+
+## Authentication agent
+exec --no-startup-id lxpolkit
+
+## Temperatura de pantalla según zona y hora
+exec --no-startup-id redshift -l $coordenadas -t 5500:4500
 
 exec --no-startup-id xbindkeys
 exec --no-startup-id pulseaudio --start
@@ -478,7 +570,7 @@ exec --no-startup-id volumeicon
 exec --no-startup-id firewall-applet
 
 ## Applet de Impresora
-exec --no-startup-id system-config-printer-applet
+#exec --no-startup-id system-config-printer-applet
 
 ############################################################
 ##############   Recargar/Bloquear/Salir    ################
@@ -512,7 +604,7 @@ bindsym XF86AudioMute exec --no-startup-id amixer set Master toggle
 #bindsym XF86TouchpadToggle exec /some/path/toggletouchpad.sh # toggle touchpad
 
 # Media player controls
-bindsym XF86AudioPlay exec playerctl play
+bindsym XF86AudioPlay exec playerctl play && "notify-send 'PLAY'"
 bindsym XF86AudioPause exec playerctl pause
 bindsym XF86AudioNext exec playerctl next
 

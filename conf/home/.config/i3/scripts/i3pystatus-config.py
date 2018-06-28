@@ -64,6 +64,58 @@ backgroundC = ''
 #######################################
 # #             Funciones           # #
 #######################################
+
+# Refactorizar colores de forma aleatoria mediante un array y cada elemento
+# tomará el color de su posición determinando el mismo colo en el array de
+# forma que se usará el próximo colo como punta.
+#
+# En caso de ser el último usar color de la barra.
+#
+# No puede haber colores parecidos dos posiciones delante o detrás
+
+# Esta matriz proporciona en primer nivel los fondos que coincidirán con el
+# segundo nivel de colores para el texto.
+colorActual = 0
+colores = (
+    (
+        '#CA4932',
+        '#568C3B',
+        '#D22D72',
+        '#48417C',
+        '#257FAD',
+        '#EF3E14',
+        '#5D5DB1',
+        '#BF6643',
+        '#5A7B8C'
+    ),
+    (
+        '#E6E6FA',
+        '#D5AEBE',
+        '#AAF3AA',
+        '#68C274',
+        '#D0C6A6',
+        '#E4DCDA',
+        '#C4C4E0',
+        '#DACAC4',
+        '#C4D5DD'
+    )
+)
+
+def color():
+    """
+    Devuelve una lista con tres posiciones indicando el color de fondo actual,
+    el color del texto y el color de fondo siguiente (para la punta):
+    [ColorActual][texto][PróximoColor].
+    """
+    global colorActual
+    actual = colorActual
+    colorActual = nextColor = (colorActual + 1)
+    return (colores[0][actual], colores[1][actual], colores[0][nextColor])
+
+#print (color())
+#print (color())
+#quit()
+
 updatesFColor='#CA4932'
 clockFColor='#E6E6FA'
 forColor='#EDE4E4'
@@ -114,8 +166,8 @@ status.register("text",
 status.register("updates",
     format = "APT:{count}",
     format_no_updates = "OK",
-    on_leftclick = "sudo apt update -y",
-    on_rightclick = "sudo apt upgrade -y",
+    on_leftclick = "apt update -y",
+    on_rightclick = "apt upgrade -y",
     color = updatesFColor,
     backends = [aptget.AptGet()],
 )
@@ -127,6 +179,8 @@ if path.exists('/sys/class/backlight/intel_backlight'):
         interval=5,
         color = backlightFColor,
         format=" {percentage:.0f}%",
+        on_leftclick = "~/.config/i3/scripts/brillo.py -- && notify-send 'Brillo Abajo' || notify-send 'Error: Brillo Abajo ha fallado'",
+        on_rightclick = "~/.config/i3/scripts/brillo.py ++  && notify-send 'Brillo Arriba' || notify-send 'Error: Brillo Arriba ha fallado'",
         hints= {"markup": "pango","separator": True,"separator_block_width": 12},
         #hints= {"markup": "pango","separator": False,"separator_block_width": 0},
         #format = "<span background='"+networkColor+"' color='"+backlightColor+"'></span\
@@ -147,7 +201,7 @@ if path.exists('/sys/class/power_supply/BAT0'):
         #><span background='"+batteryColor+"'> {status} {percentage:.0f}%</span>",
 
         alert=True,
-        alert_percentage=30,
+        alert_percentage=10,
         color=forColor,
         critical_color="#FF1919",
         charging_color="#E5E500",
@@ -165,7 +219,7 @@ if path.exists('/sys/class/power_supply/BAT0'):
 #                          ^-- calendar week
 status.register("clock",
     hints= {"markup": "pango"},
-    format="<span background='"+alsaColor+"' color ='#002B36'></span>"+"  %H:%M",
+    format="<span background='"+alsaColor+"' color ='#002B36'></span>"+" %H:%M",
     color=verdeC, #clockFColor,
     interval=5,
     on_leftclick="zenity --calendar --text ''",)
@@ -209,7 +263,7 @@ status.register("temp",
     hints = {"markup": "pango","separator": False,"separator_block_width": 0},
      #format = " {temp}°",
     format = "<span background='"+cpuColor+"' color='"+tempColor+"'></span\
-             ><span background='"+tempColor+"'>  {temp}°C</span>",
+             ><span background='"+tempColor+"'> {temp}°C</span>",
     color = tempFColor,
     alert_color = "#FFEF00",
     alert_temp = 60,
@@ -303,7 +357,7 @@ for ifc in ethernet:
         hints= {"markup": "pango","separator": False,"separator_block_width": 0},
 
         format_up = "<span color='"+networkColor+"'>\uE0B2</span\
-        ><span background='"+networkColor+"' >\uE0A0 {bytes_recv:6.1f}K {bytes_sent:5.1f}K</span>",
+        ><span background='"+networkColor+"' >\uE0A0{bytes_recv:6.1f}K {bytes_sent:5.1f}K</span>",
 
         format_down = "",
     )

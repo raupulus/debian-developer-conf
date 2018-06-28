@@ -2,7 +2,7 @@
 Name=PyCharm
 Type=Application
 Categories=Development
-Exec=.local/opt/phpstorm/bin/pycharm.sh %U
+Exec=.local/opt/pycharm/bin/pycharm.sh %U
 Icon=/usr/share/icons/fryntiz/pycharm.png
 MimeType=text/html;
 Keywords=Text;Editor;Write;Web;Development;

@@ -1,0 +1,21 @@
+[global_config]
+  hide_from_taskbar = True
+  scroll_tabbar = True
+  tab_position = bottom
+[keybindings]
+[layouts]
+  [[default]]
+    [[[child1]]]
+      parent = window0
+      profile = default
+      type = Terminal
+    [[[window0]]]
+      parent = ""
+      type = Window
+[plugins]
+[profiles]
+  [[default]]
+    cursor_color = "#aaaaaa"
+    scrollback_lines = 10000
+    urgent_bell = True
+    visible_bell = True
