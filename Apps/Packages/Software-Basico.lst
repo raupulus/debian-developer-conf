@@ -3,8 +3,10 @@ bash-completion
 build-essential
 command-not-found
 curl
+cpp
 erlang-base
 exuberant-ctags
+gdebi
 git
 gvfs-bin
 htop
@@ -22,6 +24,7 @@ rake
 ranger
 sakura
 screen
+synaptics
 tcl
 terminator
 tilix
