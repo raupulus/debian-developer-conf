@@ -55,7 +55,7 @@ geany_postconfiguracion() {
 
         if [[ "$input" = 's' ]] || [[ "$input" = 'S' ]]; then
             geany_config
-
+        fi
     fi
 
     ## Crea el backup y enlazar archivos de este repo
