@@ -219,7 +219,7 @@ if path.exists('/sys/class/power_supply/BAT0'):
 #                          ^-- calendar week
 status.register("clock",
     hints= {"markup": "pango"},
-    format="<span background='"+alsaColor+"' color ='#002B36'></span>"+"  %H:%M",
+    format="<span background='"+alsaColor+"' color ='#002B36'></span>"+" %H:%M",
     color=verdeC, #clockFColor,
     interval=5,
     on_leftclick="zenity --calendar --text ''",)
@@ -263,7 +263,7 @@ status.register("temp",
     hints = {"markup": "pango","separator": False,"separator_block_width": 0},
      #format = " {temp}°",
     format = "<span background='"+cpuColor+"' color='"+tempColor+"'></span\
-             ><span background='"+tempColor+"'>  {temp}°C</span>",
+             ><span background='"+tempColor+"'> {temp}°C</span>",
     color = tempFColor,
     alert_color = "#FFEF00",
     alert_temp = 60,
@@ -357,7 +357,7 @@ for ifc in ethernet:
         hints= {"markup": "pango","separator": False,"separator_block_width": 0},
 
         format_up = "<span color='"+networkColor+"'>\uE0B2</span\
-        ><span background='"+networkColor+"' >\uE0A0 {bytes_recv:6.1f}K {bytes_sent:5.1f}K</span>",
+        ><span background='"+networkColor+"' >\uE0A0{bytes_recv:6.1f}K {bytes_sent:5.1f}K</span>",
 
         format_down = "",
     )
