@@ -117,13 +117,13 @@ testing_preparar_repositorios() {
 ## Añade Repositorios extras a Debian
 ##
 testing_agregar_repositorios() {
-    preparar_repositorios
-    sources_repositorios
+    testing_preparar_repositorios
+    testing_sources_repositorios
 
     echo -e "$VE Actualizando listas de$RO repositorios$VE por segunda vez$CL"
     sudo apt update
 
-    agregar_llaves
+    testing_agregar_llaves
 
     echo -e "$VE Actualizando listas de repositorios definitiva, comprueba que no hay$RO errores$CL"
     sudo apt update
