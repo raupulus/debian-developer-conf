@@ -66,6 +66,9 @@ i3wm_instalar() {
 
     ## Navegador web liviano "surf"
     instalarSoftware surf
+
+    ## Visor de imágenes nomacs
+    instalarSoftware nomacs
 }
 
 ##
