@@ -24,7 +24,7 @@ En todo caso recomiendo usar la rama **Master** y si quieres colaborar crea un
 **fork** y haz **PR** sobre la rama **dev** para valorar si formará parte de
 la siguiente versión.
 
-## Advertencias
+## Advertencias y Explicación para decisiones
 
 Si no usas **repositorios oficiales**, mezclas repositorios o tienes otro
 sistema distinto a Debian Stable estarás **experimentando** así que úsalo bajo
@@ -34,9 +34,11 @@ Este script está automatizado y puede cambiar configuración sin que te pregunt
 
 Una buena idea sería que lo ejecutaras tras hacer una copia de seguridad o en
 una máquina virtual hasta ver que el script completo se adapta a tus
-necesidades o modificar la parte que prefieras diferente.
+necesidades o modificar la parte que prefieras diferente realizando un fork de
+este repositorio.
 
-Trabajo en la modularidad para que puedas ejecutar solo una parte que te interese.
+Trabajo en la modularidad para que puedas ejecutar solo una parte que te
+interese y no dependas del script al completo.
 
 Para evitar que sea interactivo y estar constantemente preguntando se establece
 "-y" como parámetro por defecto en **apt** lo cual puede instalar software en
@@ -145,8 +147,8 @@ cursores "**crystal**"
 
 ## Servidores
 
-Se incorporan en la parte servidores instalación para apache2, php, postregsql,
-mariadb, python2, python3 y NodeJS.
+Se incorporan en la parte servidores instalación para apache2, postregsql,
+mariadb, NodeJS, bind9 y docker.
 
 ![Imagen de previsualización 1](docs/Servidores.png)
 
@@ -254,6 +256,18 @@ También instala desde **npm** bower y los siguientes paquetes globales:
 - stylelint
 - bundled
 
+## Lenguajes de Programación
+
+Se plantea la instalación y configuración de los siguientes lenguajes:
+
+- C
+- C++
+- go
+- php
+- python
+- ruby
+- nodejs
+
 ## Directorios
 
 - Accesos_Directos → Contiene los accesos directos individuales para usuario
@@ -266,16 +280,17 @@ que van en ~/.local/share/applications
 - conf → Contiene archivos de configuración o plantillas para generarlos
 - tmp → Directorio donde se descargan los archivos temporales, se crea al
 iniciar el script.
-- Servidores → Instala y configura servidores además de lenguajes de programación.
-- sources.list → Contiene las listas de repositorios para añadirlas al sistema cuando se elige la opción de agregar repositorios.
+- Servidores → Instala y configura servidores.
+- Lenguajes-Programacion → Instala y configura lenguajes de programación.
+- Repositorios → Contiene las listas de repositorios para añadirlas al sistema 
+cuando se elige la opción de agregar repositorios.
+- Desktops → Instala y configura escritorios o window manager
 
 # Scripts
 
-- Agregar_Repositorios.sh → Añade algunos repositorios útiles y sus llaves para
-seguridad
 - funciones.sh → Contiene funciones globales y auxiliares para no repetir código
-- Instalar_Configuraciones → Establece aplicaciones determinadas.
-- Limpiador.sh → Este script limpia los directorios y archivos que pueden
+- configuraciones.sh → Establece aplicaciones determinadas.
+- limpiador.sh → Este script limpia los directorios y archivos que pueden
 causar más problemas en algún momento, esto existe para depurar principalmente
 y su uso se desaconseja por ser áltamente arriesgado a perder datos.
 - main.sh → Programa principal con menú para elegir paso a realizar
