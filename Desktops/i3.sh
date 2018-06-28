@@ -27,30 +27,8 @@ i3wm_preconfiguracion() {
     ## Al pulsar botón de apagar se suspende
     sudo sed -r -i "s/^#?\s*HandlePowerKey\s*=.*$/HandlePowerKey=suspend/" /etc/systemd/logind.conf
 
-    ## Instalando fuentes:
-    descargar 'Inconsolata Nerd Font Complete.otf' 'https://github.com/ryanoasis/nerd-fonts/blob/master/patched-fonts/Inconsolata/complete/Inconsolata%20Nerd%20Font%20Complete.otf'
-
-    descargar 'Inconsolata Nerd Font Complete Mono.otf' 'https://github.com/ryanoasis/nerd-fonts/blob/master/patched-fonts/Inconsolata/complete/Inconsolata%20Nerd%20Font%20Complete%20Mono.otf'
-
-    descargar 'Inconsolata-dz for Powerline.otf' 'https://github.com/powerline/fonts/blob/master/InconsolataDz/Inconsolata-dz%20for%20Powerline.otf'
-
-    if [[ ! -d '/usr/share/fonts/Inconsolata' ]]; then
-        sudo mkdir '/usr/share/fonts/Inconsolata'
-    fi
-
-    sudo cp "$WORKSCRIPT/tmp/Inconsolata Nerd Font Complete.otf" '/usr/share/fonts/Inconsolata/'
-
-    sudo cp "$WORKSCRIPT/tmp/Inconsolata Nerd Font Complete Mono.otf" '/usr/share/fonts/Inconsolata/'
-
-    sudo chmod 755 -R '/usr/share/fonts/Inconsolata'
-
-    if [[ ! -d '/usr/share/fonts/Powerline' ]]; then
-        sudo mkdir '/usr/share/fonts/Powerline'
-    fi
-
-    sudo cp "$WORKSCRIPT/tmp/Inconsolata-dz for Powerline.otf" '/usr/share/fonts/Powerline/'
-
-    sudo chmod 755 -R '/usr/share/fonts/Powerline'
+    ## Instalo fuentes tipográficas necesarias
+    fuentes_repositorios
 }
 
 i3wm_instalar() {
@@ -90,9 +68,13 @@ i3wm_postconfiguracion() {
     ## Instalando i3pystatus
     ## libasound2-dev → Necesario para pyalsaaudio
     ## libiw-dev → Necesario para basiciw
-    instalarSoftware 'python3' 'python3-pip' 'libasound2-dev' 'libiw-dev'
+    instalarSoftware 'python3' 'python3-pip' 'libasound2-dev' 'libiw-dev' \
+    'python3-powerline' 'python3-psutil' 'python3-powerline-taskwarrior' \
+    'fonts-font-awesome'
+
+
     sudo pip3 install --upgrade 'i3pystatus' 'basiciw' 'netifaces' 'colour' \
-    'pyalsaaudio' 'fontawesome' 'psutil'
+    'pyalsaaudio' 'fontawesome'
 
     ## Tema Paper para GTK2 (Debe estar instalado)
     gconftool-2 --type string --set /desktop/gnome/interface/icon_theme 'Paper'
