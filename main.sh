@@ -79,10 +79,10 @@ menuPrincipal() {
             4) Personalización
             5) Servidores
             6) Lenguajes de Programación
-            7) Desktops
-            8) Configurar este Usuario
-            9) Todos los pasos anteriores a la vez
+            7) Configurar este Usuario
+            8) Todos los pasos anteriores a la vez
 
+            9) Desktops
             10) Configurar root
 
             0) Salir
@@ -102,14 +102,14 @@ menuPrincipal() {
             4) menuPersonalizacion;; #2>> "$LOGERROR";;      ## Menú de Personalización
             5) menuServidores;; #2>> "$LOGERROR";;           ## Menú de Servidores
             6) menuLenguajes;;
-            7) menuDesktops;;
-            8) menuUsuario;;
-            9) menuRepositorios -a #2>> "$LOGERROR"       ## Todos los pasos
+            7) menuUsuario;;
+            8) menuRepositorios -a #2>> "$LOGERROR"       ## Todos los pasos
                menuAplicaciones -a #2>> "$LOGERROR"
                instalar_configuraciones #2>> "$LOGERROR"
                menuPersonalizacion -a #2>> "$LOGERROR"
                menuServidores -a
                menuLenguajes -a;; #2>> "$LOGERROR";;
+            9) menuDesktops;;
             10) menuRoot;;
             0) ## SALIR
               clear
