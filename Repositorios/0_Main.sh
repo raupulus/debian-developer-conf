@@ -33,37 +33,8 @@ source "$WORKSCRIPT/Repositorios/testing.sh"
 ##
 menuRepositorios() {
 
-    ## Si la función recibe "-a" indica que detecte de forma automática
-    if [[ "$1" = '-a' ]]; then
-        local testing='buster/sid buster buster/testing testing'
-        local stable='stretch stable'
-        local version=''    ## Indica los repositorios a configurar
-        local testing=False
-
-        ## Almaceno el primer caracter de la versión ("9" por ejemplo en stable)
-        #local v_stable=$(cat /etc/debian_version | cut -d. -f1)
-
-        if [[ -f '/etc/debian_version' ]]; then
-            version=$(cat '/etc/debian_version')
-        else
-            version='stable'
-        fi
-
-        for v in $testing; do
-            if [[ $v = $version ]]; then
-                testing=True
-                break
-            fi
-        done
-
-        if [[ $testing = True ]]; then
-            testing_agregar_repositorios
-        else
-            stable_agregar_repositorios
-        fi
-    else
-        while true :; do
-            clear
+    elegirRama() {
+        clear
             local descripcion='Menú para configurar e integrar repositorios
                 1) Stable
                 2) Testing
@@ -77,7 +48,6 @@ menuRepositorios() {
             echo -e "$CL"
 
             case $entrada in
-
                 1)  stable_agregar_repositorios;;
                 2)  testing_agregar_repositorios;;
 
@@ -91,6 +61,39 @@ menuRepositorios() {
                     echo ""
                     echo -e "             $RO ATENCIÓN: Elección no válida$CL";;
             esac
+    }
+
+    ## Si la función recibe "-a" indica que detecte de forma automática
+    if [[ "$1" = '-a' ]]; then
+        local testing=('buster/sid' 'buster' 'buster/testing' 'testing')
+        local version='stable'    ## Indica los repositorios a configurar
+
+        ## Almaceno el primer caracter de la versión ("9" por ejemplo en stable)
+        #local v_stable=$(cat /etc/debian_version | cut -d. -f1)
+
+        if [[ -f '/etc/debian_version' ]]; then
+            version=$(cat '/etc/debian_version')
+        else
+            version='stable'
+        fi
+
+        for v in ${testing[@]}; do
+            if [[ $v = $version ]]; then
+                version='testing'
+                break
+            fi
+        done
+
+        if [[ $version = 'stable' ]]; then
+            stable_agregar_repositorios
+        elif [[ $version = 'testing' ]]; then
+            testing_agregar_repositorios
+        else
+            elegirRama
+        fi
+    else
+        while true; do
+            elegirRama
         done
     fi
 }
