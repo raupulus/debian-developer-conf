@@ -108,7 +108,8 @@ menuPrincipal() {
                menuAplicaciones -a #2>> "$LOGERROR"
                instalar_configuraciones #2>> "$LOGERROR"
                menuPersonalizacion -a #2>> "$LOGERROR"
-               menuServidores -a;; #2>> "$LOGERROR";;
+               menuServidores -a
+               menuLenguajes -a;; #2>> "$LOGERROR";;
             10) menuRoot;;
             0) ## SALIR
               clear
