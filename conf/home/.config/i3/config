@@ -256,9 +256,9 @@ bar {
     #strip_workspace_numbers yes
 
     colors {
-        background  #001111  ## Color del panel
-        statusline  #fdf6e3  ## Color del status
-        separator   #9e9e9e  ## Color de separadores
+        #background  #001111  ## Color del panel
+        #statusline  #fdf6e3  ## Color del status
+        #separator   #9e9e9e  ## Color de separadores
         #background  #1b1b1b
         #statusline  #ffffff
         #separator   #444444
@@ -278,10 +278,15 @@ bar {
         #urgent_workspace    #dddddd    #452828    #8c644c
 
         ## Mi tema
+        background #001111
+        statusline #fdf6e3
+        separator  #9e9e9e
         ## Colores           Bordes     Fondo      Texto
-        focused_workspace    #FDF6E3    #FDF6E3    #002B36
-        inactive_workspace   #607D8B    #607D8B    #002B36
-        urgent_workspace     #859900    #859900    #121212
+        focused_workspace   #FF0000    #FF0000    #FFFFFF
+        active_workspace    #333333    #FFFFFF    #FF0000
+        inactive_workspace  #001111    #285577    #C79A97
+        urgent_workspace    #ffff00    #ffff00    #000000
+        binding_mode        #2F343A    #900000    #FFFFFF
     }
 }
 
@@ -309,9 +314,12 @@ bar {
         statusline  #fdf6e3  #Color del status
         separator   #9e9e9e  #Color de separadores
 
-        focused_workspace    #FDF6E3    #FDF6E3    #002B36
-        inactive_workspace   #607D8B    #607D8B    #002B36
-        urgent_workspace     #859900    #859900    #121212
+        ## Colores           Bordes     Fondo      Texto
+        focused_workspace   #FF0000    #FF0000    #FFFFFF
+        active_workspace    #333333    #FFFFFF    #FF0000
+        inactive_workspace  #001111    #285577    #C79A97
+        urgent_workspace    #ffff00    #ffff00    #000000
+        binding_mode        #2F343A    #900000    #FFFFFF
     }
 }
 
