@@ -34,14 +34,13 @@ geany_instalar() {
 }
 
 geany_config() {
-    cat "$WORKSCRIPT/conf/home/.config/geany/geany.conf" \
-    > "$HOME/.config/geany/geany.conf"
+    cat "$WORKSCRIPT/conf/home/.config/geany/geany.conf" > "$HOME/.config/geany/geany.conf"
 }
 
 geany_postconfiguracion() {
-    local archivosConfiguracion='.config/geany/colorschemes' \
-    '.config/geany/filedefs' '.config/geany/tags' '.config/geany/templates' \
-    '.config/geany/keybindings.conf'
+    local archivosConfiguracion=".config/geany/colorschemes \
+    .config/geany/filedefs .config/geany/tags .config/geany/templates \
+    .config/geany/keybindings.conf"
 
     ## Genero el directorio principal en el home del usuario si no existiera
     if [[ ! -d "$HOME/.config/geany" ]]; then
@@ -60,7 +59,7 @@ geany_postconfiguracion() {
     fi
 
     ## Crea el backup y enlazar archivos de este repo
-    enlazarHome $archivosConfiguracion
+    enlazarHome "$archivosConfiguracion"
 }
 
 geany_Instalador() {
