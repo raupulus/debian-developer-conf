@@ -34,7 +34,8 @@ source "$WORKSCRIPT/Repositorios/testing.sh"
 menuRepositorios() {
 
     elegirRama() {
-        clear
+        while true; do
+            clear
             local descripcion='Menú para configurar e integrar repositorios
                 1) Stable
                 2) Testing
@@ -48,8 +49,10 @@ menuRepositorios() {
             echo -e "$CL"
 
             case $entrada in
-                1)  stable_agregar_repositorios;;
-                2)  testing_agregar_repositorios;;
+                1)  stable_agregar_repositorios
+                    break;;
+                2)  testing_agregar_repositorios
+                    break;;
 
                 0)  ## SALIR
                     clear
@@ -61,6 +64,7 @@ menuRepositorios() {
                     echo ""
                     echo -e "             $RO ATENCIÓN: Elección no válida$CL";;
             esac
+        done
     }
 
     ## Si la función recibe "-a" indica que detecte de forma automática
@@ -92,8 +96,6 @@ menuRepositorios() {
             elegirRama
         fi
     else
-        while true; do
-            elegirRama
-        done
+        elegirRama
     fi
 }
