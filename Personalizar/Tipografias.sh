@@ -68,17 +68,17 @@ fuentes_download() {
 }
 
 fuentes_nerdfonts() {
-    instaladas=False
+    instaladas='false'
     if [[ -d "$WORKSCRIPT/tmp/nerd-fonts" ]]; then
         cd "$WORKSCRIPT/tmp/nerd-fonts" || exit
         git checkout -- .
         git pull
-        instaladas=True
+        instaladas='true'
     else
         git clone --depth 1 'https://github.com/ryanoasis/nerd-fonts.git' "$WORKSCRIPT/tmp/nerd-fonts"
     fi
 
-    if [[ $instaladas = True ]]; then
+    if [[ $instaladas = 'true' ]]; then
         echo -e "$VE Las fuentes$RO Nerd-Fonts$VE ya estaban instaladas, reinstalar?$CL"
         read -p ' s/N → ' SN
 
