@@ -28,6 +28,7 @@ dbeaver_descargar() {
 
 dbeaver_preconfiguracion() {
     echo -e "$VE Generando Pre-Configuraciones de$RO DBeaver$CL"
+    instalarSoftware 'default-jre-headless'
 }
 
 dbeaver_instalar() {
