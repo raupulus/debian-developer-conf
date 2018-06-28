@@ -73,7 +73,7 @@ menuRepositorios() {
         local version='stable'    ## Indica los repositorios a configurar
 
         ## Almaceno el primer caracter de la versión ("9" por ejemplo en stable)
-        #local v_stable=$(cat /etc/debian_version | cut -d. -f1)
+        local v_stable=$(cat /etc/debian_version | cut -d. -f1)
 
         if [[ -f '/etc/debian_version' ]]; then
             version=$(cat '/etc/debian_version')
@@ -88,7 +88,8 @@ menuRepositorios() {
             fi
         done
 
-        if [[ $version = 'stable' ]]; then
+        if [[ $version = 'stable' ]] ||
+           [[ $(echo $version | cut -d. -f1) = $v_stable ]]; then
             stable_agregar_repositorios
         elif [[ $version = 'testing' ]]; then
             testing_agregar_repositorios
