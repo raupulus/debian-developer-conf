@@ -166,7 +166,12 @@ php_postconfiguracion() {
                     break
                 fi
             done
-            echo -e "AM No es válida la opción, introduce correctamente un valor$CL"
+
+            if [[ $salir = 'salir' ]]; then
+                break
+            fi
+
+            echo -e "$AM No es válida la opción, introduce correctamente un valor$CL"
         done
     fi
 
