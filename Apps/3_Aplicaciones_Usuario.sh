@@ -24,10 +24,8 @@
 ############################
 source "$WORKSCRIPT/Apps/bashit.sh"
 source "$WORKSCRIPT/Apps/OhMyZsh.sh"
-source "$WORKSCRIPT/Apps/Firefox.sh"
 source "$WORKSCRIPT/Apps/spacevim.sh"
 source "$WORKSCRIPT/Apps/vim.sh"
-source "$WORKSCRIPT/Apps/Geany.sh"
 
 ############################
 ##       FUNCIONES        ##
@@ -78,10 +76,8 @@ devicons_ls() {
 aplicaciones_usuarios() {
     echo -e "$VE Instalando Aplicaciones específicas para el usuario$RO $USER$CL"
     configurar_heroku
-    firefox_instalador
     bashit_Instalador
     ohmyzsh_Instalador
-    geany_Instalador
 
     while true; do
         echo -e "$VE ¿Quieres instalar$RO vim$VE o$RO spacevim$CL"

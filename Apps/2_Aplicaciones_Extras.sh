@@ -25,6 +25,8 @@ source "$WORKSCRIPT/Apps/DBeaver.sh"
 source "$WORKSCRIPT/Apps/GitKraken.sh"
 source "$WORKSCRIPT/Apps/Haroopad.sh"
 source "$WORKSCRIPT/Apps/Pencil-Project.sh"
+source "$WORKSCRIPT/Apps/Geany.sh"
+source "$WORKSCRIPT/Apps/Firefox.sh"
 
 ############################
 ##       FUNCIONES        ##
@@ -35,6 +37,8 @@ instalar_todas_aplicaciones_extras() {
     gitkraken_instalador
     haroopad_instalador
     pencilProject_instalador
+    firefox_instalador
+    geany_Instalador
 }
 
 aplicaciones_extras() {
@@ -49,7 +53,9 @@ aplicaciones_extras() {
                 2) GitKraken
                 3) Haroopad
                 4) pencilProject
-                5) Todos los pasos anteriores completos
+                5) Firefox
+                6) Geany
+                7) Todos los pasos anteriores completos
 
                 0) Atrás
             '
@@ -65,7 +71,9 @@ aplicaciones_extras() {
                 2)  gitkraken_instalador;;
                 3)  haroopad_instalador;;
                 4)  pencilProject_instalador;;
-                5)  instalar_todas_aplicaciones_extras; break;;
+                5)  firefox_instalador;;
+                6)  geany_Instalador;;
+                7)  instalar_todas_aplicaciones_extras; break;;
 
                 0)  ## SALIR
                     clear
@@ -75,7 +83,7 @@ aplicaciones_extras() {
 
                 *)  ## Acción ante entrada no válida
                     echo ""
-                    echo -e "                      $RO ATENCIÓN: Elección no válida$CL";;
+                    echo -e "             $RO ATENCIÓN: Elección no válida$CL";;
             esac
         done
     fi
