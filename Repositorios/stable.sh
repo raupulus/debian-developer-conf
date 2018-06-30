@@ -71,7 +71,7 @@ stable_agregar_llaves() {
 
     ## Repositorio de NodeJS Oficial
     echo -e "$VE Agregando clave para$RO NodeJS Repositorio Oficial$CL"
-    curl -sL https://deb.nodesource.com/setup_9.x | sudo -E bash -
+    curl -sL https://deb.nodesource.com/setup_10.x | sudo -E bash -
 
     ## Repositorio para Tor oficial y estable
     echo -e "$VE Agregando clave para$RO Tor Repositorio$CL"
