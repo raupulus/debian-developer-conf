@@ -27,6 +27,7 @@ source "$WORKSCRIPT/Usuario/permisos.sh"
 source "$WORKSCRIPT/Usuario/plantillas.sh"
 source "$WORKSCRIPT/Usuario/programas-default.sh"
 source "$WORKSCRIPT/Usuario/terminales.sh"
+source "$WORKSCRIPT/Usuario/heroku.sh"
 
 ###########################
 ##       FUNCIONES       ##
@@ -44,4 +45,5 @@ menuUsuario() {
     usuario_nano
     usuario_plantillas
     usuario_terminales
+    usuario_heroku
 }
