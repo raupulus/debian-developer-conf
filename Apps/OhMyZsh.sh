@@ -38,6 +38,7 @@ ohmyzsh_descargar() {
 
 ohmyzsh_preconfiguracion() {
     echo -e "$VE Generando Pre-Configuraciones de$RO ohmyzsh$CL"
+    instalarSoftware 'zsh zsh-antigen zsh-syntax-highlighting'
 }
 
 ohmyzsh_instalar() {
