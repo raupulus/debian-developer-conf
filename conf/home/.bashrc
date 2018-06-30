@@ -340,7 +340,7 @@ if [[ "$(/usr/bin/tty)" == "/dev/tty1" ]] && [[ -x '/usr/bin/screen' ]]; then
 fi
 
 ## Permisos por defecto para nuevos archivos
-umask 017
+umask 007
 
 ###################################
 ###  Sobrescribiendo Comandos   ###
