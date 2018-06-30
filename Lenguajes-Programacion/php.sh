@@ -152,7 +152,9 @@ php_postconfiguracion() {
         sudo a2enmod "php${ALL_PHP[0]}"
     else
         ## Pide introducir la versión de PHP para configurar con apache
-        while true :; do
+        local salir=''
+
+        while [[ $salir != 'salir' ]]; do
             clear
             echo -e "$VE Introduce la versión de$RO PHP$VE a utilizar$CL"
             echo -e "$AZ ${ALL_PHP[*]} $RO"  ## Pinta versiones para elegirla
@@ -160,6 +162,7 @@ php_postconfiguracion() {
             for V_PHP in "${ALL_PHP[@]}"; do
                 if [[ $input = "$V_PHP" ]]; then
                     sudo a2enmod "php$V_PHP"
+                    salir='salir'
                     break
                 fi
             done
