@@ -1,11 +1,16 @@
 bash
 bash-completion
 build-essential
+ca-certificates
 command-not-found
 curl
 cpp
+debian-keyring
 erlang-base
 exuberant-ctags
+gnupg
+gnupg-agent
+gnupg-l10n
 firewall-applet
 firewall-config
 firewalld
