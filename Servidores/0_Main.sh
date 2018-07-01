@@ -29,6 +29,7 @@ source "$WORKSCRIPT/Servidores/mariaDB.sh"
 source "$WORKSCRIPT/Servidores/nodejs.sh"
 source "$WORKSCRIPT/Servidores/postgreSQL.sh"
 source "$WORKSCRIPT/Servidores/docker.sh"
+source "$WORKSCRIPT/Servidores/ssh.sh"
 
 ###########################
 ##       FUNCIONES       ##
