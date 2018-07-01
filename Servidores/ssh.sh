@@ -43,6 +43,9 @@ ssh_postconfiguracion() {
         sudo sed -r -i "s/^#?\s*ClientAliveInterval.*$/ClientAliveInterval 36000/" $sshd
         sudo sed -r -i "s/^#?\s*ClientAliveCountMax.*$/ClientAliveCountMax 3/" $sshd
         sudo sed -r -i "s/^#?\s*TCPKeepAlive.*$/TCPKeepAlive yes/" $sshd
+
+        ## Reenvío de X11
+        sudo sed -r -i "s/^#?\s*X11Forwarding.*$/X11Forwarding yes/" $sshd
     fi
 }
 
