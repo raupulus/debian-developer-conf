@@ -53,6 +53,15 @@ ssh_postconfiguracion() {
         ## No permitir root login
         sudo sed -r -i "s/^#?\s*PermitRootLogin.*$/PermitRootLogin yes/" $sshd
     fi
+
+    ## Configuro mensajes de bienvenida
+    ## /etc/issue -> Mensaje de login para acceso local al equipo (Acceso por TTY)
+    ## /etc/issue.net -> Mensaje de login para acceso por red (Acceso por SSH)
+    ## /etc/motd -> Mensaje para después del login.
+    echo 'Debian by Fryntiz → tecnico@fryntiz.es' > '/etc/issue'
+    echo 'Debian by Fryntiz → tecnico@fryntiz.es' > '/etc/issue.net'
+    echo 'Has conectado al servidor Debian mantenido por → tecnico@fryntiz.es' > '/etc/motd'
+
 }
 
 ssh_instalador() {
