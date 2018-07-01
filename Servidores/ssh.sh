@@ -46,6 +46,12 @@ ssh_postconfiguracion() {
 
         ## Reenvío de X11
         sudo sed -r -i "s/^#?\s*X11Forwarding.*$/X11Forwarding yes/" $sshd
+
+        ## Puerto
+        sudo sed -r -i "s/^#?\s*Port.*$/Port 22/" $sshd
+
+        ## No permitir root login
+        sudo sed -r -i "s/^#?\s*PermitRootLogin.*$/PermitRootLogin yes/" $sshd
     fi
 }
 
