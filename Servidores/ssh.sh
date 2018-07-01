@@ -61,7 +61,6 @@ ssh_postconfiguracion() {
     echo 'Debian by Fryntiz → tecnico@fryntiz.es' > '/etc/issue'
     echo 'Debian by Fryntiz → tecnico@fryntiz.es' > '/etc/issue.net'
     echo 'Has conectado al servidor Debian mantenido por → tecnico@fryntiz.es' > '/etc/motd'
-
 }
 
 ssh_instalador() {

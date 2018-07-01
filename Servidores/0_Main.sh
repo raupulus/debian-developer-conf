@@ -47,6 +47,7 @@ menuServidores() {
         postgresql_instalador
         bind_instalador
         docker_instalador
+        ssh_instalador
     }
 
     ## Si la función recibe "-a" indica que instale todos los servidores
@@ -62,7 +63,8 @@ menuServidores() {
                 4) PostgreSQL
                 5) Bind 9
                 6) Docker
-                7) Todos los pasos anteriores
+                7) Ssh
+                8) Todos los pasos anteriores
 
                 0) Atrás
             '
@@ -80,7 +82,8 @@ menuServidores() {
                 4)  postgresql_instalador;;  ## Instala PostgreSQL
                 5)  bind_instalador;;        ## Instala Bind
                 6)  docker_instalador;;      ## Instala Bind
-                7)  todos_servidores         ## Todos los servidores
+                7)  ssh_instalador;;         ## Instala Bind
+                8)  todos_servidores         ## Todos los servidores
                     break;;
 
                 0)  ## SALIR
