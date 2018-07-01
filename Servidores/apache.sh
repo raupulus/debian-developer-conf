@@ -180,7 +180,7 @@ apache2_postconfiguracion() {
         ## Habilita Sitios Virtuales (VirtualHost)
         sudo a2ensite 'default.conf'
         #sudo a2ensite 'publico.conf'
-        #sudo a2ensite 'privado.conf'
+        sudo a2ensite 'privado.conf'
 
         activar_hosts() {
             echo -e "$VE Añadiendo$RO Sitios Virtuales$AM"
