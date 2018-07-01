@@ -52,6 +52,9 @@ ssh_postconfiguracion() {
 
         ## No permitir root login
         sudo sed -r -i "s/^#?\s*PermitRootLogin.*$/PermitRootLogin yes/" $sshd
+
+        ## No permitir claves vacías
+        sudo sed -r -i "s/^#?\s*PermitEmptyPasswords.*$/PermitEmptyPasswords no/" $sshd
     fi
 
     ## Configuro mensajes de bienvenida
