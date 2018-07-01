@@ -6,6 +6,9 @@ curl
 cpp
 erlang-base
 exuberant-ctags
+firewall-applet
+firewall-config
+firewalld
 gdebi
 git
 gvfs-bin
@@ -14,7 +17,7 @@ libnotify-bin
 libxml-writer-perl
 locate
 neofetch
-network-manager-gnome
+network-manager
 nkf
 pasystray
 pavucontrol
@@ -32,6 +35,7 @@ tk
 tmux
 tmux-plugin-manager
 wget
+wireless-tools
 x11-xserver-utils
 xbase-clients
 xbuilder
