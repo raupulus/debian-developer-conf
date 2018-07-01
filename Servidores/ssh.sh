@@ -38,6 +38,12 @@ ssh_postconfiguracion() {
     echo -e "$VE Generando Post-Configuraciones de$RO ssh$CL"
     local sshd='/etc/ssh/sshd_config'
 
+    if [[ -f '/etc/ssh/sshd_config' ]]; then
+        ## Inactividad → 30 minutos, pregunta 3 veces (cada 10 minutos)
+        sudo sed -r -i "s/^#?\s*ClientAliveInterval.*$/ClientAliveInterval 36000/" $sshd
+        sudo sed -r -i "s/^#?\s*ClientAliveCountMax.*$/ClientAliveCountMax 3/" $sshd
+        sudo sed -r -i "s/^#?\s*TCPKeepAlive.*$/TCPKeepAlive yes/" $sshd
+    fi
 }
 
 ssh_instalador() {
