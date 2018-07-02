@@ -78,6 +78,10 @@ testing_agregar_llaves() {
     gpg --keyserver keys.gnupg.net --recv A3C4F0F979CAA22CDBA8F512EE8CBC9E886DDD89 && gpg --export A3C4F0F979CAA22CDBA8F512EE8CBC9E886DDD89 | sudo apt-key add -
     sudo apt update
     sudo apt install deb.torproject.org-keyring
+
+    ## Repositorio para mongodb
+    echo -e "$VE Agregando clave para$RO MongoDB Repositorio Oficial$CL"
+    sudo apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv 9DA31620334BD75D9DCB49F368818C72E52529D4
 }
 
 ##
