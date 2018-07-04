@@ -66,6 +66,7 @@ apache2_permisos() {
 apache2_modulos() {
     echo -e "$VE Activando módulos$RO"
     sudo a2enmod rewrite
+    sudo a2enmod ssl
 
     echo -e "$VE Desactivando módulos$RO"
     sudo a2dismod php5
