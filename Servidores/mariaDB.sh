@@ -32,6 +32,9 @@ mariadb_descargar() {
 
 mariadb_preconfiguracion() {
     echo -e "$VE Generando Pre-Configuraciones de$RO mariadb"
+
+    sudo groupadd mysql
+    sudo usermod -a -G mysql "$USER"
 }
 
 mariadb_instalar() {

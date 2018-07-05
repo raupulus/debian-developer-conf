@@ -23,6 +23,9 @@ docker_descargar() {
 
 docker_preconfiguracion() {
     echo -e "$VE Generando Pre-Configuraciones de$RO Docker$CL"
+
+    sudo groupadd docker
+    sudo usermod -a -G docker "$USER"
 }
 
 docker_instalar() {

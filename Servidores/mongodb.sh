@@ -23,6 +23,9 @@ mongodb_descargar() {
 
 mongodb_preconfiguracion() {
     echo -e "$VE Generando Pre-Configuraciones de$RO mongodb$CL"
+
+    sudo groupadd mongodb
+    sudo usermod -a -G mongodb "$USER"
 }
 
 mongodb_instalar() {
