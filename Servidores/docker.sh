@@ -27,10 +27,10 @@ docker_preconfiguracion() {
 
 docker_instalar() {
     echo -e "$VE Instalando$RO Docker$CL"
-    instalarSoftware 'docker'
+    instalarSoftware 'docker docker-compose docker-engine'
 
     echo -e "$VE Instalando paquetes complementarios de$RO Docker$CL"
-    local complementarios=''
+    local complementarios='debocker'
     instalarSoftware "$complementarios"
 }
 
