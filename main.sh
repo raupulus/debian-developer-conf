@@ -59,6 +59,7 @@ source "$WORKSCRIPT/Lenguajes-Programacion/0_Main.sh"
 source "$WORKSCRIPT/Desktops/0_Main.sh"
 source "$WORKSCRIPT/Usuario/0_Main.sh"
 source "$WORKSCRIPT/Root/0_Main.sh"
+source "$WORKSCRIPT/VPS/0_Main.sh"
 
 ###########################
 ##       VARIABLES       ##
@@ -84,6 +85,7 @@ menuPrincipal() {
 
             9) Desktops
             10) Configurar root
+            11) Configurar VPS
 
             0) Salir
         '
@@ -96,21 +98,23 @@ menuPrincipal() {
 
         case ${entrada} in
 
-            1) menuRepositorios;; #2>> "$LOGERROR";;     ## Menú de Repositorios
-            2) menuAplicaciones;; #2>> "$LOGERROR";;         ## Menú de Aplicaciones
-            3) instalar_configuraciones;; #2>> "$LOGERROR";; ## Menú de Configuraciones
-            4) menuPersonalizacion;; #2>> "$LOGERROR";;      ## Menú de Personalización
-            5) menuServidores;; #2>> "$LOGERROR";;           ## Menú de Servidores
+            1) menuRepositorios;;          ## Menú de Repositorios
+            2) menuAplicaciones;;          ## Menú de Aplicaciones
+            3) instalar_configuraciones;;  ## Menú de Configuraciones
+            4) menuPersonalizacion;;       ## Menú de Personalización
+            5) menuServidores;;            ## Menú de Servidores
             6) menuLenguajes;;
             7) menuUsuario;;
-            8) menuRepositorios -a #2>> "$LOGERROR"       ## Todos los pasos
-               menuAplicaciones -a #2>> "$LOGERROR"
-               instalar_configuraciones #2>> "$LOGERROR"
-               menuPersonalizacion -a #2>> "$LOGERROR"
+            8) menuRepositorios -a         ## Todos los pasos
+               menuAplicaciones -a
+               instalar_configuraciones
+               menuPersonalizacion -a
                menuServidores -a
-               menuLenguajes -a;; #2>> "$LOGERROR";;
+               menuLenguajes -a;;
             9) menuDesktops;;
             10) menuRoot;;
+            11) menuVPS;;
+
             0) ## SALIR
               clear
               echo -e "$RO Se sale del menú$CL"
