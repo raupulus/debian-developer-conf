@@ -21,7 +21,7 @@
 ############################
 ##     IMPORTACIONES      ##
 ############################
-#source "$WORKSCRIPT/VPS/????.sh"
+source "$WORKSCRIPT/VPS/firewall.sh"
 
 ###########################
 ##       FUNCIONES       ##
@@ -46,4 +46,7 @@ menuVPS() {
     bashit_Instalador
     ohmyzsh_Instalador
     vim_Instalador
+
+    ## Específicos de VPS en este directorio
+    mainFirewall
 }
