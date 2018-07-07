@@ -16,4 +16,3 @@ mainFirewall() {
     ## Recargo cortafuegos
     sudo firewall-cmd --reload
 }
-exit 0
