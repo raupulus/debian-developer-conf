@@ -28,6 +28,7 @@ source "$WORKSCRIPT/Lenguajes-Programacion/go.sh"
 source "$WORKSCRIPT/Lenguajes-Programacion/php.sh"
 source "$WORKSCRIPT/Lenguajes-Programacion/python.sh"
 source "$WORKSCRIPT/Lenguajes-Programacion/ruby.sh"
+source "$WORKSCRIPT/Lenguajes-Programacion/perl.sh"
 
 ###########################
 ##       FUNCIONES       ##
@@ -45,6 +46,7 @@ menuLenguajes() {
         ruby_instalador
         go_instalador
         c_instalador
+        perl_instalador
     }
 
     if [[ "$1" = '-a' ]]; then
@@ -58,7 +60,8 @@ menuLenguajes() {
                 3) Ruby
                 4) Go
                 5) C y C++
-                6) Todos los pasos anteriores
+                6) Perl
+                7) Todos los pasos anteriores
 
                 0) Atrás
             '
@@ -74,8 +77,9 @@ menuLenguajes() {
                 2)  python_instalador;;      ## Instala Python
                 3)  ruby_instalador;;        ## Instala Ruby
                 4)  go_instalador;;          ## Instala Go
-                5)  c_instalador;;            ## Instala C y C++
-                6)  todos_lenguajes          ## Todos los lenguajes
+                5)  c_instalador;;           ## Instala C y C++
+                6)  perl_instalador;;        ## Instala C y C++
+                7)  todos_lenguajes          ## Todos los lenguajes
                     break;;
 
                 0)  ## SALIR

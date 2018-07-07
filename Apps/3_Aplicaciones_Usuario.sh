@@ -24,24 +24,13 @@
 ############################
 source "$WORKSCRIPT/Apps/bashit.sh"
 source "$WORKSCRIPT/Apps/OhMyZsh.sh"
-source "$WORKSCRIPT/Apps/Firefox.sh"
 source "$WORKSCRIPT/Apps/spacevim.sh"
 source "$WORKSCRIPT/Apps/vim.sh"
-source "$WORKSCRIPT/Apps/Geany.sh"
 
 ############################
 ##       FUNCIONES        ##
 ############################
-configurar_heroku() {
-    echo -e "$VE Se va a configurar$RO Heroku$CL"
-    instalarSoftware 'heroku'
-    echo -e "$VE ¿Quieres configurar tu cuenta de$RO Heroku?$CL"
-    echo -e "$VE Para configurar la cuenta tienes que tenerla creada$CL"
-    read -p '    s/N → ' input
-    if [[ $input = 's' ]] || [[ $input = 'S' ]]; then
-        heroku login
-    fi
-}
+
 
 ##
 ## Mi generador de proyectos https://github.com/fryntiz/Generador_Proyectos.git
@@ -77,11 +66,8 @@ devicons_ls() {
 
 aplicaciones_usuarios() {
     echo -e "$VE Instalando Aplicaciones específicas para el usuario$RO $USER$CL"
-    configurar_heroku
-    firefox_instalador
     bashit_Instalador
     ohmyzsh_Instalador
-    geany_Instalador
 
     while true; do
         echo -e "$VE ¿Quieres instalar$RO vim$VE o$RO spacevim$CL"

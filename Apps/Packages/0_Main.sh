@@ -39,6 +39,7 @@ menuPaquetes() {
         instalarSoftwareFlatPakLista "$WORKSCRIPT/Apps/Packages/flatpak.lst"
         instalarSoftwareLista "$WORKSCRIPT/Apps/Packages/internet.lst"
         instalarSoftwareLista "$WORKSCRIPT/Apps/Packages/x11-base.lst"
+        instalarSoftwareLista "$WORKSCRIPT/Apps/Packages/firmware.lst"
         instalarSoftwareLista "$WORKSCRIPT/Apps/Packages/vps.lst"
     }
 
@@ -54,10 +55,11 @@ menuPaquetes() {
                 3) Edición Multimedia
                 4) Flatpak
                 5) Internet
-                6) X11 base (xorg xorg-server...)
-                7) Todos los pasos anteriores
+                6) Firmware (Controladores)
+                7) X11 base (xorg xorg-server...)
+                8 7) Todos los pasos anteriores
 
-                8) VPS
+                9) VPS
 
                 0) Atrás
             '
@@ -74,10 +76,11 @@ menuPaquetes() {
                 3)  instalarSoftwareLista "$WORKSCRIPT/Apps/Packages/edicion-multimedia.lst";;
                 4)  instalarSoftwareFlatPakLista "$WORKSCRIPT/Apps/Packages/flatpak.lst";;
                 5)  instalarSoftwareLista "$WORKSCRIPT/Apps/Packages/internet.lst";;
-                6)  instalarSoftwareLista "$WORKSCRIPT/Apps/Packages/x11-base.lst";;
-                7)  todos_paquetes
+                6)  instalarSoftwareLista "$WORKSCRIPT/Apps/Packages/firmware.lst";;
+                7)  instalarSoftwareLista "$WORKSCRIPT/Apps/Packages/x11-base.lst";;
+                8)  todos_paquetes
                     break;;
-                8)  instalarSoftwareLista "$WORKSCRIPT/Apps/Packages/vps.lst";;
+                9)  instalarSoftwareLista "$WORKSCRIPT/Apps/Packages/vps.lst";;
 
                 0)  ## SALIR
                     clear

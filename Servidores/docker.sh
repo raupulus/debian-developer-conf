@@ -23,14 +23,17 @@ docker_descargar() {
 
 docker_preconfiguracion() {
     echo -e "$VE Generando Pre-Configuraciones de$RO Docker$CL"
+
+    sudo groupadd docker
+    sudo usermod -a -G docker "$USER"
 }
 
 docker_instalar() {
     echo -e "$VE Instalando$RO Docker$CL"
-    instalarSoftware 'docker'
+    instalarSoftware 'docker docker-compose docker-engine'
 
     echo -e "$VE Instalando paquetes complementarios de$RO Docker$CL"
-    local complementarios=''
+    local complementarios='debocker'
     instalarSoftware "$complementarios"
 }
 

@@ -339,6 +339,9 @@ if [[ "$(/usr/bin/tty)" == "/dev/tty1" ]] && [[ -x '/usr/bin/screen' ]]; then
     exec /usr/bin/screen
 fi
 
+## Permisos por defecto para nuevos archivos
+umask 007
+
 ###################################
 ###  Sobrescribiendo Comandos   ###
 ###################################
@@ -346,3 +349,5 @@ fi
 #if [[ -x "$HOME/.local/bin/devicons-ls" ]]; then
 #    alias ls='devicons-ls'
 #fi
+
+

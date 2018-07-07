@@ -41,7 +41,7 @@ php_instalar() {
     instalarSoftware "$paquetes_basicos"
 
     echo -e "$VE Instalando$RO paquetes extras$CL"
-    local paquetes_extras="php-gd php-curl php-pgsql php-sqlite3 sqlite sqlite3 php-intl php-mbstring php-xml php-xdebug php-json php-zip"
+    local paquetes_extras="php-gd php-curl php-pgsql php-sqlite3 php-intl php-mbstring php-xml php-xdebug php-json php-zip php-mongodb "
     instalarSoftware "$paquetes_extras"
 
     echo -e "$VE Instalando librerías$CL"
@@ -152,7 +152,9 @@ php_postconfiguracion() {
         sudo a2enmod "php${ALL_PHP[0]}"
     else
         ## Pide introducir la versión de PHP para configurar con apache
-        while true :; do
+        local salir=''
+
+        while [[ $salir != 'salir' ]]; do
             clear
             echo -e "$VE Introduce la versión de$RO PHP$VE a utilizar$CL"
             echo -e "$AZ ${ALL_PHP[*]} $RO"  ## Pinta versiones para elegirla
@@ -160,10 +162,16 @@ php_postconfiguracion() {
             for V_PHP in "${ALL_PHP[@]}"; do
                 if [[ $input = "$V_PHP" ]]; then
                     sudo a2enmod "php$V_PHP"
+                    salir='salir'
                     break
                 fi
             done
-            echo -e "AM No es válida la opción, introduce correctamente un valor$CL"
+
+            if [[ $salir = 'salir' ]]; then
+                break
+            fi
+
+            echo -e "$AM No es válida la opción, introduce correctamente un valor$CL"
         done
     fi
 

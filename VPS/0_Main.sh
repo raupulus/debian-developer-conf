@@ -5,9 +5,9 @@
 ## @copyright  Copyright © 2018 Raúl Caro Pastorino
 ## @license    https://wwww.gnu.org/licenses/gpl.txt
 ## @email      tecnico@fryntiz.es
-## @web        www.fryntiz.es
-## @github     https://github.com/fryntiz
+## @web        https://fryntiz.es
 ## @gitlab     https://gitlab.com/fryntiz
+## @github     https://github.com/fryntiz
 ## @twitter    https://twitter.com/fryntiz
 ##
 ##             Guía de estilos aplicada:
@@ -16,34 +16,37 @@
 ############################
 ##     INSTRUCCIONES      ##
 ############################
-## Menú principal para configurar al usuario
+## Menú principal para configurar un VPS
 
 ############################
 ##     IMPORTACIONES      ##
 ############################
-source "$WORKSCRIPT/Usuario/gedit.sh"
-source "$WORKSCRIPT/Usuario/nano.sh"
-source "$WORKSCRIPT/Usuario/permisos.sh"
-source "$WORKSCRIPT/Usuario/plantillas.sh"
-source "$WORKSCRIPT/Usuario/programas-default.sh"
-source "$WORKSCRIPT/Usuario/terminales.sh"
-source "$WORKSCRIPT/Usuario/heroku.sh"
+source "$WORKSCRIPT/VPS/firewall.sh"
 
 ###########################
 ##       FUNCIONES       ##
 ###########################
 ##
-## Menú instalar todas las configuraciones del usuario
+## Menú instalar todas las configuraciones de un VPS
 ##
-menuUsuario() {
-    usuario_permisos
-    usuario_programas_default
+menuVPS() {
+    stable_agregar_repositorios
+    aplicaciones_basicas
 
-    cd "$WORKSCRIPT"
+    instalarSoftwareLista "$WORKSCRIPT/Apps/Packages/vps.lst"
+    instalarSoftwareLista "$WORKSCRIPT/Apps/Packages/developer.lst"
 
-    usuario_gedit
-    usuario_nano
-    usuario_plantillas
-    usuario_terminales
-    usuario_heroku
+    configuracion_git
+    terminales_instalador
+    instalar_variables
+
+    menuServidores -a
+    menuLenguajes -a
+
+    bashit_Instalador
+    ohmyzsh_Instalador
+    vim_Instalador
+
+    ## Específicos de VPS en este directorio
+    mainFirewall
 }
