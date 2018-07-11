@@ -24,7 +24,7 @@
 ############################
 
 brackets_descargar() {
-    descargar 'Brackets.deb' "https://github.com/adobe/brackets/releases/download/release-1.12/Brackets.Release.1.12.64-bit.deb"
+    descargar 'Brackets.deb' "https://github.com/adobe/brackets/releases/download/release-1.13/Brackets.Release.1.13.64-bit.deb"
 
     descargar 'libgcrypt.deb' "http://security.debian.org/debian-security/pool/updates/main/libg/libgcrypt11/libgcrypt11_1.5.0-5+deb7u6_amd64.deb"
 }
