@@ -65,7 +65,7 @@ pycharm_postconfiguracion() {
     echo -e "$VE Generando Post-Configuraciones$RO PyCharm$CL"
 
     echo -e "$VE Generando acceso directo$CL"
-    cp "$WORKSCRIPT/Accesos_Directos/pycharm.desktop" "$HOME/.local/share/applications/"ls
+    cp "$WORKSCRIPT/Accesos_Directos/pycharm.desktop" "$HOME/.local/share/applications/"
 
     echo -e "$VE Generando comando$RO pycharm$CL"
     ln -s "$HOME/.local/opt/pycharm/bin/pycharm.sh" "$HOME/.local/bin/pycharm"
