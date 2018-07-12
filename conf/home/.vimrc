@@ -28,9 +28,9 @@ set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
 Plugin 'VundleVim/Vundle.vim'
 Plugin 'jistr/vim-nerdtree-tabs'
+Plugin 'vim-airline/vim-airline'
 Plugin 'vim-airline/vim-airline-themes'
 Plugin 'scrooloose/syntastic'
-Plugin 'nvie/vim-flake8'
 Plugin 'jnurmine/Zenburn'
 Plugin 'altercation/vim-colors-solarized'
 Plugin 'seebi/dircolors-solarized'
@@ -44,7 +44,6 @@ Plugin 'xolox/vim-session'
 Plugin 'xolox/vim-misc'
 Plugin 'majutsushi/tagbar'
 Plugin 'airblade/vim-gitgutter'
-Plugin 'vim-ruby/vim-ruby'
 Plugin 'tpope/vim-endwise'
 Plugin 'xolox/vim-easytags'
 Plugin 'tomasr/molokai'
@@ -52,7 +51,32 @@ Plugin 'vimoutliner/vimoutliner'
 Plugin 'lifepillar/pgsql.vim'
 Plugin 'ivalkeen/vim-simpledb'
 Plugin 'von-forks/vim-bracketed-paste'
+
+" Ultimos añadidos
+Plugin 'yegappan/mru'
+Plugin 'tomtom/tcomment_vim'
+Plugin 'tmhedberg/matchit'
+Plugin 'squizlabs/PHP_CodeSniffer'
+Plugin 'phpmd/phpmd'
+Plugin 'ternjs/tern_for_vim'
+Plugin 'pangloss/vim-javascript'
+Plugin 'jelera/vim-javascript-syntax'
+Plugin 'nathanaelkane/vim-indent-guides'
+Plugin 'Raimondi/delimitMate'
+Plugin 'leafgarland/typescript-vim'
 call vundle#end()
+
+
+
+"prettier
+"run prettier before saving
+let g:prettier#autoformat = 0
+autocmd BufWritePre *.jsx,*.js,*.json,*.css,*.scss,*.less,*.graphql Prettier
+
+"ctrlp filter
+let g:ctrlp_custom_ignore = 'node_modules\|DS_Store\|git'
+
+
 
 set showcmd                     " display incomplete commands
 
