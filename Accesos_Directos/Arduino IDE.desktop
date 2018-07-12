@@ -1,0 +1,13 @@
+[Desktop Entry]
+Type=Application
+Name=Arduino IDE
+GenericName=Arduino IDE
+Comment=Open-source electronics prototyping platform
+Exec=~/.local/opt/arduino/arduino
+Icon=arduino-arduinoide
+Terminal=false
+Categories=Development;IDE;Electronics;
+MimeType=text/x-arduino;
+Keywords=embedded electronics;electronics;avr;microcontroller;
+StartupWMClass=processing-app-Base
+Name[es_ES]=Arduino IDE
