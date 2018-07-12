@@ -75,7 +75,7 @@ phpstorm_postconfiguracion() {
 }
 
 phpstorm_instalador() {
-    local version='PhpStorm-2018.1.2'
+    local version='PhpStorm-2018.1.6'
 
     echo -e "$VE Comenzando instalación de$RO PhpStorm$CL"
 

@@ -70,7 +70,7 @@ nodejs_postconfiguracion() {
     export PATH=~/.npm/bin:$PATH
 
     ## Instalando paquetes globales
-    local paquetes='eslint jscs bower compass stylelint bundled'
+    local paquetes='eslint jscs bower compass stylelint bundled typescript'
     instalarNpmGlobal $paquetes
 
     echo -e "$VE Instalando última versión de$RO npm$VE en directorio local$CL"
