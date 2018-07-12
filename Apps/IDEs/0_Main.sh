@@ -63,7 +63,7 @@ menuIDES() {
                 6) Ninja IDE
                 7) NetBeans (No implementado)
                 8) Aptana Studio (No implementado)
-                9) Web Storm (No implementado)
+                9) Web Storm
                 10) Todos los pasos anteriores
 
                 0) Atrás
@@ -76,13 +76,14 @@ menuIDES() {
 
             case $entrada in
 
-                1)  atom_instalador;;      ##  Instala Atom
-                2)  brackets_instalador;;  ##  Instala Brackets
-                3)  phpstorm_instalador;;  ##  Instala PHP Storm
-                4)  pycharm_pro_instalador;;  ##  Instala Pycharm Profesional
+                1)   atom_instalador;;      ##  Instala Atom
+                2)   brackets_instalador;;  ##  Instala Brackets
+                3)   phpstorm_instalador;;  ##  Instala PHP Storm
+                4)   pycharm_pro_instalador;;  ##  Instala Pycharm Profesional
                 #5)  ;;  ##
-                6)  ninjaide_instalador;;  ##  Instala Ninja IDE
-                9)  todos_IDES  ## Todos los IDES
+                6)   ninjaide_instalador;;  ##  Instala Ninja IDE
+                9)   webstorm_instalador;;  ##  Instala Ninja IDE
+                10)  todos_IDES  ## Todos los IDES
                     break;;
 
                 0)  ## SALIR
