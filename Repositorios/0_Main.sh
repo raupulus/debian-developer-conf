@@ -99,4 +99,8 @@ menuRepositorios() {
     else
         elegirRama
     fi
+
+    ## Asigna lectura a todos para buscar paquetes sin sudo
+    sudo chmod 744 /etc/apt/sources.list
+    sudo chmod 744 -R /etc/apt/sources.list.d
 }
