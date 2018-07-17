@@ -23,7 +23,7 @@
 ############################
 
 arduino_descargar() {
-    local version=$1
+    local version="${1}-linux64"
     descargar "${version}.tar.xz" "https://downloads.arduino.cc/${version}.tar.xz"
 }
 
@@ -50,9 +50,9 @@ arduino_instalar() {
 
     cd "$WORKSCRIPT/tmp/" || return 0
 
-    tar -Jxvf "${version}.tar.xz" 2>> /dev/null
+    tar -Jxvf "${version}-linux64.tar.xz" 2>> /dev/null
 
-    if [[ -d $WORKSCRIPT/tmp/$version ]]; then
+    if [[ -d "$WORKSCRIPT/tmp/$version" ]]; then
         mv "$WORKSCRIPT/tmp/$version" "$HOME/.local/opt/arduino"
     fi
 
@@ -72,7 +72,7 @@ arduino_postconfiguracion() {
 
 arduino_instalador() {
     echo -e "$VE Comenzando instalación de$RO arduino$CL"
-    local version='arduino-1.8.5-linux64'
+    local version='arduino-1.8.5'
 
     arduino_preconfiguracion "$version"
 
@@ -81,8 +81,8 @@ arduino_instalador() {
     then
         echo -e "$VE Ya esta$RO arduino$VE instalado en el equipo, omitiendo paso$CL"
     else
-        if [[ -f "$WORKSCRIPT/tmp/${version}.tar.xz" ]]; then
-            arduino_instalar "$version" || rm -Rf "$WORKSCRIPT/tmp/${version}.tar.xz"
+        if [[ -f "$WORKSCRIPT/tmp/${version}-linux64.tar.xz" ]]; then
+            arduino_instalar "$version" || rm -Rf "$WORKSCRIPT/tmp/${version}-linux64.tar.xz"
         else
             arduino_descargar "$version"
             arduino_instalar "$version"
