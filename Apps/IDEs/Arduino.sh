@@ -50,7 +50,7 @@ arduino_instalar() {
 
     cd "$WORKSCRIPT/tmp/" || return 0
 
-    tar -zxf "${version}.tar.xz" 2>> /dev/null
+    tar -Jxvf "${version}.tar.xz" 2>> /dev/null
 
     if [[ -d $WORKSCRIPT/tmp/$version ]]; then
         mv "$WORKSCRIPT/tmp/$version" "$HOME/.local/opt/arduino"
@@ -63,7 +63,7 @@ arduino_postconfiguracion() {
     echo -e "$VE Generando Post-Configuraciones$RO arduino$CL"
 
     echo -e "$VE Generando acceso directo$CL"
-    rm -f "$HOME/.local/share/applications/phpstorm.desktop"
+    rm -f "$HOME/.local/share/applications/Arduino-IDE.desktop"
     cp "$WORKSCRIPT/Accesos_Directos/Arduino-IDE.desktop" "$HOME/.local/share/applications/"
 
     echo -e "$VE Generando comando$RO arduino$CL"
