@@ -24,7 +24,7 @@
 
 arduino_descargar() {
     local version=$1
-    descargar "$version" "https://www.arduino.cc/download_handler.php?f=/$version"
+    descargar "$version" "https://www.arduino.cc/download_handler.php?f=/${version}.tar.xz"
 }
 
 arduino_preconfiguracion() {
@@ -44,18 +44,35 @@ arduino_preconfiguracion() {
 
 arduino_instalar() {
     echo -e "$VE Instalando$RO arduino$CL"
+    echo -e "$VE Extrayendo IDE$CL"
+
+    local version="$1"
+
+    cd "$WORKSCRIPT/tmp/" || return 0
+
+    tar -zxf "${version}.tar.xz" 2>> /dev/null
+
+    if [[ -d $WORKSCRIPT/tmp/$version ]]; then
+        mv "$WORKSCRIPT/tmp/$version" "$HOME/.local/opt/arduino"
+    fi
+
+    cd "$WORKSCRIPT" || exit 1
 }
 
 arduino_postconfiguracion() {
     echo -e "$VE Generando Post-Configuraciones$RO arduino$CL"
 
     echo -e "$VE Generando acceso directo$CL"
-    cp "$WORKSCRIPT/Accesos_Directos/Arduino.desktop" "$HOME/.local/share/applications/"
+    rm -f "$HOME/.local/share/applications/phpstorm.desktop"
+    cp "$WORKSCRIPT/Accesos_Directos/Arduino-IDE.desktop" "$HOME/.local/share/applications/"
+
+    echo -e "$VE Generando comando$RO arduino$CL"
+    ln -s "$HOME/.local/opt/arduino/arduino" "$HOME/.local/bin/arduino"
 }
 
 arduino_instalador() {
     echo -e "$VE Comenzando instalación de$RO arduino$CL"
-    local version='arduino-1.8.5-linux64.tar.xz'
+    local version='arduino-1.8.5-linux64'
 
     arduino_preconfiguracion "$version"
 
@@ -65,7 +82,7 @@ arduino_instalador() {
         echo -e "$VE Ya esta$RO arduino$VE instalado en el equipo, omitiendo paso$CL"
     else
         if [[ -f "$WORKSCRIPT/tmp/$version" ]]; then
-            arduino_instalar "$version" || rm -Rf "$WORKSCRIPT/tmp/$version"
+            arduino_instalar "$version" || rm -Rf "$WORKSCRIPT/tmp/${version}.tar.xz"
         else
             arduino_descargar "$version"
             arduino_instalar "$version"
