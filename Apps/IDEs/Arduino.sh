@@ -24,7 +24,7 @@
 
 arduino_descargar() {
     local version=$1
-    descargar "$version" "https://www.arduino.cc/download_handler.php?f=/${version}.tar.xz"
+    descargar "$version" "https://downloads.arduino.cc/${version}.tar.xz"
 }
 
 arduino_preconfiguracion() {
