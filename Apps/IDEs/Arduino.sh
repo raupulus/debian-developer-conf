@@ -50,7 +50,7 @@ arduino_instalar() {
 
     cd "$WORKSCRIPT/tmp/" || return 0
 
-    tar -Jxvf "${version}.tar.xz" 2>> /dev/null 
+    tar -Jxvf "${version}.tar.xz" 2>> /dev/null
 
     if [[ -d $WORKSCRIPT/tmp/$version ]]; then
         mv "$WORKSCRIPT/tmp/$version" "$HOME/.local/opt/arduino"
@@ -81,7 +81,7 @@ arduino_instalador() {
     then
         echo -e "$VE Ya esta$RO arduino$VE instalado en el equipo, omitiendo paso$CL"
     else
-        if [[ -f "$WORKSCRIPT/tmp/$version" ]]; then
+        if [[ -f "$WORKSCRIPT/tmp/${version}.tar.xz" ]]; then
             arduino_instalar "$version" || rm -Rf "$WORKSCRIPT/tmp/${version}.tar.xz"
         else
             arduino_descargar "$version"
