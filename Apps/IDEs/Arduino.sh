@@ -33,7 +33,7 @@ arduino_preconfiguracion() {
         rm -Rf "$HOME/.local/opt/arduino"
     fi
 
-    if [[ -f "$HOME/.local/bin/arduino" ]]; then
+    if [[ -h "$HOME/.local/bin/arduino" ]]; then
         rm -f "$HOME/.local/bin/arduino"
     fi
 
