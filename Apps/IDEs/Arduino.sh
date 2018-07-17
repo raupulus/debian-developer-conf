@@ -16,17 +16,30 @@
 ############################
 ##     INSTRUCCIONES      ##
 ############################
+## Descarga el IDE de Arduino desde la página web en su última versión estable
 
 ############################
 ##       FUNCIONES        ##
 ############################
 
 arduino_descargar() {
-    descargar 'Arduino.deb' "https://????"
+    local version=$1
+    descargar "$version" "https://www.arduino.cc/download_handler.php?f=/$version"
 }
 
 arduino_preconfiguracion() {
     echo -e "$VE Generando Pre-Configuraciones de$RO arduino$CL"
+    if [[ -d "$HOME/.local/opt/arduino" ]]; then
+        rm -Rf "$HOME/.local/opt/arduino"
+    fi
+
+    if [[ -f "$HOME/.local/bin/arduino" ]]; then
+        rm -f "$HOME/.local/bin/arduino"
+    fi
+
+    if [[ -f "$HOME/.local/share/applications/Arduino-IDE.desktop" ]]; then
+        rm -f "$HOME/.local/share/applications/Arduino-IDE.desktop"
+    fi
 }
 
 arduino_instalar() {
@@ -42,19 +55,22 @@ arduino_postconfiguracion() {
 
 arduino_instalador() {
     echo -e "$VE Comenzando instalación de$RO arduino$CL"
+    local version='arduino-1.8.5-linux64.tar.xz'
 
-    arduino_preconfiguracion
+    arduino_preconfiguracion "$version"
 
-    if [[ -f '/usr/bin/arduino' ]]; then
+    if [[ -f "$HOME/.local/bin/arduino" ]] &&
+       [[ -d "$HOME/.local/opt/arduino" ]]
+    then
         echo -e "$VE Ya esta$RO arduino$VE instalado en el equipo, omitiendo paso$CL"
     else
-        if [[ -f "$WORKSCRIPT/tmp/arduino.deb" ]]; then
-            arduino_instalar
+        if [[ -f "$WORKSCRIPT/tmp/$version" ]]; then
+            arduino_instalar "$version" || rm -Rf "$WORKSCRIPT/tmp/$version"
         else
-            arduino_descargar
-            arduino_instalar
+            arduino_descargar "$version"
+            arduino_instalar "$version"
         fi
     fi
 
-    arduino_postconfiguracion
+    arduino_postconfiguracion "$version"
 }
