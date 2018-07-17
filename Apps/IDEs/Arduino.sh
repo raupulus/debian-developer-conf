@@ -24,7 +24,7 @@
 
 arduino_descargar() {
     local version=$1
-    descargar "$version" "https://downloads.arduino.cc/${version}.tar.xz"
+    descargar "${version}.tar.xz" "https://downloads.arduino.cc/${version}.tar.xz"
 }
 
 arduino_preconfiguracion() {
@@ -50,7 +50,7 @@ arduino_instalar() {
 
     cd "$WORKSCRIPT/tmp/" || return 0
 
-    tar -Jxvf "${version}.tar.xz" 2>> /dev/null
+    tar -Jxvf "${version}.tar.xz" 2>> /dev/null 
 
     if [[ -d $WORKSCRIPT/tmp/$version ]]; then
         mv "$WORKSCRIPT/tmp/$version" "$HOME/.local/opt/arduino"
