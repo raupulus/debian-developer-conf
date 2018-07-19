@@ -335,6 +335,8 @@ if [[ -x "$HOME/.local/bin/nuevo" ]]; then
 fi
 
 ## Comparto tty1 mediante screen al hacer login en ella
+## screen -r #Listar pantallas compartidas
+## screen -S pantalla
 if [[ "$(/usr/bin/tty)" == "/dev/tty1" ]] && [[ -x '/usr/bin/screen' ]]; then
     exec /usr/bin/screen
 fi
