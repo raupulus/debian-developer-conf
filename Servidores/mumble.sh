@@ -32,6 +32,8 @@ mumble_instalar() {
 
 mumble_postconfiguracion() {
     echo -e "$VE Generando Post-Configuraciones de$RO mumble$CL"
+    sudo cat "$WORKSCRIPT/conf/etc/mumble-server.ini" '/etc/mumble-server.ini'
+    sudo dpkg-reconfigure mumble-server
 }
 
 mumble_instalador() {
