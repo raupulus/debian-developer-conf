@@ -5,11 +5,11 @@
 deb http://ftp.es.debian.org/debian/ testing main contrib non-free
 deb-src http://ftp.es.debian.org/debian/ testing main contrib non-free
 
-##### Actualizaciones de seguridad Debian Etesting
+##### Actualizaciones de seguridad Debian Testing
 deb http://security.debian.org/ testing/updates main contrib non-free
 deb-src http://security.debian.org/ testing/updates non-free contrib main
 
-##### Actualizaciones para testing (Updates)
+##### Actualizaciones para Testing (Updates)
 deb http://ftp.es.debian.org/debian/ testing-updates non-free contrib main
 deb-src http://ftp.es.debian.org/debian/ testing-updates non-free contrib main
 
