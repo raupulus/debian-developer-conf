@@ -304,7 +304,7 @@ alias hh="history 200 | grep "
 alias hc="history -c"
 
 ## Atajos Generales
-
+alias pip3="pip3 --disable-pip-version-check"
 
 ## Otros
 #alias rm="rm -i"
