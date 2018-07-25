@@ -17,6 +17,9 @@ mainFirewall() {
     #sudo firewall-cmd --zone=public --add-port=64738/tcp --permanent
     #sudo firewall-cmd --zone=public --add-port=64738/udp --permanent
 
+    ## Permito VPN
+    #sudo firewall-cmd --zone=public --add-port=1194/udp --permanent
+
     ## Recargo cortafuegos
     sudo firewall-cmd --reload
 }
