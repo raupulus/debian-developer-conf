@@ -32,13 +32,13 @@ fail2ban_preconfiguracion() {
 
 fail2ban_instalar() {
     echo -e "$VE Instalando$RO fail2ban$CL"
-    local software=''
+    local software='fail2ban'
     instalarSoftware "$software"
 }
 
 fail2ban_postconfiguracion() {
     echo -e "$VE Generando Post-Configuraciones de fail2ban$CL"
-
+    sudo cp /etc/fail2ban/jail.conf /etc/fail2ban/jail.local
 }
 
 fail2ban_instalador() {
@@ -46,6 +46,8 @@ fail2ban_instalador() {
     fail2ban_preconfiguracion
     fail2ban_instalar
 
-    ## Reiniciar servidor fail2ban para aplicar configuración
+    ## Reiniciar fail2ban para aplicar configuración
     reiniciarServicio fail2ban
+    sudo systemctl status fail2ban
+    sudo fail2ban-client ping
 }
