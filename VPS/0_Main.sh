@@ -53,4 +53,7 @@ menuVPS() {
 
     ## Idioma y Zona Horaria
     mainZone
+
+    ## Protección contra ataques e intentos de crackeo
+    fail2ban_instalador
 }
