@@ -55,6 +55,7 @@ menuServidores() {
         mongodb_instalador
         sqlite_instalador
         mumble_instalador
+        postfix_instalador
     }
 
     ## Si la función recibe "-a" indica que instale todos los servidores
@@ -74,7 +75,8 @@ menuServidores() {
                 8) MongoDB
                 9) Sqlite 3
                 10) Mumble
-                11) Todos los pasos anteriores
+                11) Postfix y Dovecot (Mail)
+                12) Todos los pasos anteriores
 
                 0) Atrás
             '
@@ -96,7 +98,8 @@ menuServidores() {
                 8)  mongodb_instalador;;     ## Instala MongoDB
                 9)  sqlite_instalador;;      ## Instala Sqlite
                 10)  mumble_instalador;;     ## Instala Mumble
-                11) todos_servidores         ## Todos los servidores
+                11)  postfix_instalador;;    ## Instala Servidor Mail
+                12) todos_servidores         ## Todos los servidores
                     break;;
 
                 0)  ## SALIR
