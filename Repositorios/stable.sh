@@ -29,59 +29,7 @@
 ## Añade llaves oficiales para cada repositorio
 ##
 stable_agregar_llaves() {
-    echo -e "$VE Instalando llaves de repositorios$CL"
-
-    sudo apt install -y debian-keyring 2>> /dev/null
-    sudo apt install -y pkg-mozilla-archive-keyring 2>> /dev/null
-    sudo apt install -y deb-multimedia-keyring 2>> /dev/null
-
-    ## Multisystem
-    echo -e "$VE Agregando clave para$RO Multisystem$CL"
-    sudo wget -q -O - http://liveusb.info/multisystem/depot/multisystem.asc | sudo apt-key add -
-
-    ## Webmin
-    echo -e "$VE Agregando clave para$RO Webmin$CL"
-    wget http://www.webmin.com/jcameron-key.asc && sudo apt-key add jcameron-key.asc
-    sudo rm jcameron-key.asc
-
-    ## Virtualbox Oficial
-    echo -e "$VE Agregando clave para$RO Virtualbox$CL"
-    wget https://www.virtualbox.org/download/oracle_vbox_2016.asc
-    sudo apt-key add oracle_vbox_2016.asc
-    sudo rm oracle_vbox_2016.asc
-
-    ## Docker
-    echo -e "$VE Agregando clave para$RO Docker$CL"
-    sudo apt-key adv --keyserver hkp://p80.pool.sks-keyservers.net:80 --recv-keys F76221572C52609D
-
-    ## Heroku
-    echo -e "$VE Agregando clave para$RO Heroku$CL"
-    curl -L https://cli-assets.heroku.com/apt/release.key | sudo apt-key add -
-
-    ## Kali Linux
-    echo -e "$VE Agregando clave para$RO Kali Linux$CL"
-    sudo apt-key adv --keyserver pgp.mit.edu --recv-keys ED444FF07D8D0BF6
-
-    ## Mi propio repositorio en launchpad
-    echo -e "$VE Agregando clave para$RO Fryntiz Repositorio$CL"
-    gpg --keyserver keyserver.ubuntu.com --recv-key B5C6D9592512B8CD && gpg -a --export $PUBKRY | sudo apt-key add -
-
-    ## Repositorio de PostgreSQL Oficial
-    wget --quiet -O - https://www.postgresql.org/media/keys/ACCC4CF8.asc | sudo apt-key add -
-
-    ## Repositorio de NodeJS Oficial
-    echo -e "$VE Agregando clave para$RO NodeJS Repositorio Oficial$CL"
-    curl -sL https://deb.nodesource.com/setup_10.x | sudo -E bash -
-
-    ## Repositorio para Tor oficial y estable
-    echo -e "$VE Agregando clave para$RO Tor Repositorio$CL"
-    gpg --keyserver keys.gnupg.net --recv A3C4F0F979CAA22CDBA8F512EE8CBC9E886DDD89 && gpg --export A3C4F0F979CAA22CDBA8F512EE8CBC9E886DDD89 | sudo apt-key add -
-    sudo apt update
-    sudo apt install deb.torproject.org-keyring
-
-    ## Repositorio para mongodb
-    echo -e "$VE Agregando clave para$RO MongoDB Repositorio Oficial$CL"
-    sudo apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv 9DA31620334BD75D9DCB49F368818C72E52529D4
+    echo -e "$VE Agregando llaves solo para repositorios$RO stable$CL"
 }
 
 ##
@@ -104,31 +52,22 @@ stable_sources_repositorios() {
 }
 
 ##
-## Instala dependencias para actualizar repositorios e instalar
+## Agrega los repositorios desde su directorio "stable"
 ##
-stable_preparar_repositorios() {
-    echo -e "$VE Actualizando repositorios por primera vez$CL"
-    sudo apt update >> /dev/null 2>> /dev/null
-    instalarSoftware apt-transport-https && echo -e "$VE Instalado el paquete$RO apt-transport-https$CL" || echo -e "$VE Error al instalar$RO apt-transport-https$CL"
-
-    instalarSoftware dirmngr && echo -e "$VE Instalado el paquete$RO dirmngr$CL" || echo -e "$VE Error al instalar$RO dirmngr$CL"
-    echo -e "$VE Agregando Repositorios$CL"
-
-    instalarSoftware 'curl'
+stable_download_repositorios() {
+    echo -e "$VE Descargando repositorios desde scripts oficiales$CL"
 }
 
 ##
-## Añade Repositorios extras a Debian
+## Añade todos los repositorios y llaves
 ##
 stable_agregar_repositorios() {
-    stable_preparar_repositorios
+    echo -e "$VE Instalando repositorios$RO Debian Stable$CL"
     stable_sources_repositorios
-
-    echo -e "$VE Actualizando listas de$RO repositorios$VE por segunda vez$CL"
-    sudo apt update
-
+    stable_download_repositorios
+    echo -e "$VE Actualizando antes de obtener las llaves, es normal que se muestren errores$AM (Serán solucionados en el próximo paso)$CL"
+    actualizarRepositorios
     stable_agregar_llaves
-
     echo -e "$VE Actualizando listas de repositorios definitiva, comprueba que no hay$RO errores$CL"
-    sudo apt update
+    actualizarRepositorios
 }
