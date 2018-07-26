@@ -20,9 +20,9 @@
 ############################
 ##     IMPORTACIONES      ##
 ############################
-source "$WORKSCRIPT/Repositorios/comunes.sh"
 source "$WORKSCRIPT/Repositorios/stable.sh"
 source "$WORKSCRIPT/Repositorios/testing.sh"
+source "$WORKSCRIPT/Repositorios/comunes.sh"
 
 ###########################
 ##       FUNCIONES       ##
@@ -32,6 +32,29 @@ source "$WORKSCRIPT/Repositorios/testing.sh"
 ## @param $1 -a Si recibe este parámetro lo hará de forma automática
 ##
 menuRepositorios() {
+    ##
+    ## Instala dependencias para actualizar repositorios e instalar
+    ##
+    instalar_dependencias() {
+        echo -e "$VE Actualizando repositorios por primera vez$CL"
+        sudo apt update >> /dev/null 2>> /dev/null
+        instalarSoftware apt-transport-https && echo -e "$VE Instalado el paquete$RO apt-transport-https$CL" || echo -e "$VE Error al instalar$RO apt-transport-https$CL"
+
+        instalarSoftware dirmngr && echo -e "$VE Instalado el paquete$RO dirmngr$CL" || echo -e "$VE Error al instalar$RO dirmngr$CL"
+        echo -e "$VE Agregando Repositorios$CL"
+
+        instalarSoftware 'curl'
+    }
+
+    ##
+    ## Instala paquetes para gestionar llaves de repositorios
+    ##
+    prepararLlaves() {
+        echo -e "$VE Instalando llaves de repositorios$CL"
+
+        instalarSoftware debian-keyring
+        instalarSoftware pkg-mozilla-archive-keyring
+    }
 
     elegirRama() {
         while true; do
@@ -67,6 +90,9 @@ menuRepositorios() {
         done
     }
 
+    instalar_dependencias
+    prepararLlaves
+
     ## Si la función recibe "-a" indica que detecte de forma automática
     if [[ "$1" = '-a' ]]; then
         local testing=('buster/sid' 'buster' 'buster/testing' 'testing')
@@ -99,6 +125,8 @@ menuRepositorios() {
     else
         elegirRama
     fi
+
+    comunes_agregar_repositorios
 
     ## Asigna lectura a todos para buscar paquetes sin sudo
     sudo chmod 744 /etc/apt/sources.list
