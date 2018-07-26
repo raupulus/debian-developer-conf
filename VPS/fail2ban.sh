@@ -38,7 +38,9 @@ fail2ban_instalar() {
 
 fail2ban_postconfiguracion() {
     echo -e "$VE Generando Post-Configuraciones de fail2ban$CL"
-    sudo cp /etc/fail2ban/jail.conf /etc/fail2ban/jail.local
+    if [[ ! -f '/etc/fail2ban/jail.local' ]]; then
+        sudo cp '/etc/fail2ban/jail.conf' '/etc/fail2ban/jail.local'
+    fi
 }
 
 fail2ban_instalador() {
