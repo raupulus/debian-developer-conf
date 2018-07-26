@@ -56,6 +56,9 @@ menuRepositorios() {
         instalarSoftware pkg-mozilla-archive-keyring
     }
 
+    instalar_dependencias
+    prepararLlaves
+
     elegirRama() {
         while true; do
             clear
@@ -89,9 +92,6 @@ menuRepositorios() {
             esac
         done
     }
-
-    instalar_dependencias
-    prepararLlaves
 
     ## Si la función recibe "-a" indica que detecte de forma automática
     if [[ "$1" = '-a' ]]; then
