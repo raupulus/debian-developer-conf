@@ -43,26 +43,25 @@ postfix_postconfiguracion() {
     echo -e "$VE Generando Post-Configuraciones de postfix$CL"
 
     local dominio=''
+    local postfixconf='/etc/postfix/main.cf'
+    local dovecotconf='/etc/dovecot/conf.d/10-auth.conf'
 
-    ## Configuración, se guardará en /etc/postfix/main.cf
-    ## Sitio de internet
-    ## Nombre del sistema de correo: fryntiz.cloud
+    echo -e "$VE Introduce el dominio$RO mail$VE por ejemplo$AM mail.miweb.es$CL"
+    echo -e "$VE Deja en blanco para continuar sin configurar$CL"
+    read -p '  → ' input
 
-    ## Pedir entrada de datos para esta parte
-    #sudo nano /etc/postfix/main.cf
-    ## mydomain = mail.fryntiz.cloud
-    ## myhostname = mail.fryntiz.cloud
+    if [[ $input = '' ]]; then
+        ## Configuración Postfix
+        sudo sed -r -i "s/^#?\s*mydomain =/$dominio/" "$postfixconf"
+        sudo sed -r -i "s/^#?\s*myhostname =/$dominio/" "$postfixconf"
 
+        ## Configuración Dovecot
+        sudo sed -r -i "s/^#?\s*disable_plaintext_auth =/disable_plaintext_auth = no/" "$dovecotconf"
+        echo "localhost $dominio" | sudo tee -a /etc/hosts
 
-    ## Configurar dovecot
-    #sudo nano /etc/dovecot/conf.d/10-auth.conf
-    ## disable_plaintext_auth = no
-
-    ## Agregar dominios admitidos a /etc/hosts
-    echo "localhost $dominio" | sudo tee -a /etc/hosts
-
-    ## Reconfigurar postfix y comprobar datos
-    sudo dpkg-reconfigure postfix
+        ## Reconfigurar postfix y comprobar datos
+        sudo dpkg-reconfigure postfix
+    fi
 }
 
 postfix_instalador() {
