@@ -14,6 +14,12 @@ deb http://ftp.es.debian.org/debian/ testing-updates non-free contrib main
 deb-src http://ftp.es.debian.org/debian/ testing-updates non-free contrib main
 
 ########################################################
+##                      KERNEL                        ##
+########################################################
+# deb http://mirrors.kernel.org/debian testing main contrib non-free
+# deb-src http://mirrors.kernel.org/debian testing main contrib non-free
+
+########################################################
 ##                 MOZILLA FIREFOX                    ##
 ########################################################
 ##### apt-get install pkg-mozilla-archive-keyring
