@@ -20,6 +20,14 @@ deb-src http://ftp.es.debian.org/debian/ testing-updates non-free contrib main
 # deb-src http://mirrors.kernel.org/debian testing main contrib non-free
 
 ########################################################
+##                 KERNEL LIQUORIX                    ##
+########################################################
+#### curl https://liquorix.net/linux-liquorix.pub | sudo apt-key add - && sudo
+apt-get update
+# deb http://liquorix.net/debian sid main
+# deb-src http://liquorix.net/debian sid main
+
+########################################################
 ##                 MOZILLA FIREFOX                    ##
 ########################################################
 ##### apt-get install pkg-mozilla-archive-keyring
