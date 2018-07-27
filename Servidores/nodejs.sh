@@ -76,6 +76,8 @@ nodejs_postconfiguracion() {
     echo -e "$VE Instalando última versión de$RO npm$VE en directorio local$CL"
     instalarNpmGlobal npm
     npm --version
+
+    npm update -g
 }
 
 nodejs_angular() {
