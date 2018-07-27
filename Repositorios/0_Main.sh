@@ -4,8 +4,8 @@
 ## @author     Raúl Caro Pastorino
 ## @copyright  Copyright © 2018 Raúl Caro Pastorino
 ## @license    https://wwww.gnu.org/licenses/gpl.txt
-## @email      tecnico@fryntiz.es
-## @web        www.fryntiz.es
+## @email      dev@fryntiz.es
+## @web        https://fryntiz.es
 ## @github     https://github.com/fryntiz
 ## @gitlab     https://gitlab.com/fryntiz
 ## @twitter    https://twitter.com/fryntiz
@@ -22,6 +22,7 @@
 ############################
 source "$WORKSCRIPT/Repositorios/stable.sh"
 source "$WORKSCRIPT/Repositorios/testing.sh"
+source "$WORKSCRIPT/Repositorios/unstable.sh"
 source "$WORKSCRIPT/Repositorios/comunes.sh"
 
 ###########################
@@ -65,6 +66,7 @@ menuRepositorios() {
             local descripcion='Menú para configurar e integrar repositorios
                 1) Stable
                 2) Testing
+                3) Unstable
 
                 0) Atrás
             '
@@ -78,6 +80,8 @@ menuRepositorios() {
                 1)  stable_agregar_repositorios
                     break;;
                 2)  testing_agregar_repositorios
+                    break;;
+                3)  unstable_agregar_repositorios
                     break;;
 
                 0)  ## SALIR
@@ -95,7 +99,8 @@ menuRepositorios() {
 
     ## Si la función recibe "-a" indica que detecte de forma automática
     if [[ "$1" = '-a' ]]; then
-        local testing=('buster/sid' 'buster' 'buster/testing' 'testing')
+        local unstable=('sid' 'unstable')
+        local testing=('buster' 'buster/testing' 'testing')
         local version='stable'    ## Indica los repositorios a configurar
 
         ## Almaceno el primer caracter de la versión ("9" por ejemplo en stable)
@@ -111,6 +116,9 @@ menuRepositorios() {
             if [[ $v = $version ]]; then
                 version='testing'
                 break
+            elif [[ $v = $version ]]; then
+                version='unstable'
+                break
             fi
         done
 
@@ -119,6 +127,8 @@ menuRepositorios() {
             stable_agregar_repositorios
         elif [[ $version = 'testing' ]]; then
             testing_agregar_repositorios
+        elif [[ $version = 'unstable' ]]; then
+            unstable_agregar_repositorios
         else
             elegirRama
         fi
@@ -131,4 +141,5 @@ menuRepositorios() {
     ## Asigna lectura a todos para buscar paquetes sin sudo
     sudo chmod 744 /etc/apt/sources.list
     sudo chmod 744 -R /etc/apt/sources.list.d
+    sudo chmod 755 /etc/apt/sources.list.d
 }
