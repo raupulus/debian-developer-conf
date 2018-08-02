@@ -51,7 +51,7 @@ ssh_postconfiguracion() {
         sudo sed -r -i "s/^#?\s*Port.*$/Port 22/" $sshd
 
         ## No permitir root login
-        sudo sed -r -i "s/^#?\s*PermitRootLogin.*$/PermitRootLogin yes/" $sshd
+        sudo sed -r -i "s/^#?\s*PermitRootLogin.*$/PermitRootLogin no/" $sshd
 
         ## No permitir claves vacías
         sudo sed -r -i "s/^#?\s*PermitEmptyPasswords.*$/PermitEmptyPasswords no/" $sshd
@@ -61,9 +61,9 @@ ssh_postconfiguracion() {
     ## /etc/issue -> Mensaje de login para acceso local al equipo (Acceso por TTY)
     ## /etc/issue.net -> Mensaje de login para acceso por red (Acceso por SSH)
     ## /etc/motd -> Mensaje para después del login.
-    echo 'Debian by Fryntiz → tecnico@fryntiz.es' | sudo tee '/etc/issue'
-    echo 'Debian by Fryntiz → tecnico@fryntiz.es' | sudo tee '/etc/issue.net'
-    echo 'Has conectado al servidor Debian mantenido por → tecnico@fryntiz.es' | sudo tee '/etc/motd'
+    echo 'Debian by Fryntiz → dev@fryntiz.es' | sudo tee '/etc/issue'
+    echo 'Debian by Fryntiz → dev@fryntiz.es' | sudo tee '/etc/issue.net'
+    echo 'Has conectado al servidor Debian mantenido por → dev@fryntiz.es' | sudo tee '/etc/motd'
 }
 
 ssh_instalador() {

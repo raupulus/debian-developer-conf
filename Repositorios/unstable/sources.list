@@ -1,23 +1,17 @@
 ########################################################
 ##                 OFICIALES DEBIAN                   ##
 ########################################################
-##### Repositorio Debian Testing
-deb http://ftp.es.debian.org/debian/ testing main contrib non-free
-deb-src http://ftp.es.debian.org/debian/ testing main contrib non-free
-
-##### Actualizaciones de seguridad Debian Testing
-deb http://security.debian.org/ testing/updates main contrib non-free
-deb-src http://security.debian.org/ testing/updates non-free contrib main
-
-##### Actualizaciones para Testing (Updates)
-deb http://ftp.es.debian.org/debian/ testing-updates non-free contrib main
-deb-src http://ftp.es.debian.org/debian/ testing-updates non-free contrib main
+##### Repositorio Debian Unstable
+deb http://ftp.es.debian.org/debian/ sid main contrib non-free
+deb-src http://ftp.es.debian.org/debian/ sid main contrib non-free
+# deb http://ftp.de.debian.org/debian/ experimental main contrib non-free
+# deb-src http://ftp.de.debian.org/debian/ experimental main contrib non-free
 
 ########################################################
 ##                      KERNEL                        ##
 ########################################################
-# deb http://mirrors.kernel.org/debian testing main contrib non-free
-# deb-src http://mirrors.kernel.org/debian testing main contrib non-free
+# deb http://mirrors.kernel.org/debian sid main contrib non-free
+# deb-src http://mirrors.kernel.org/debian sid main contrib non-free
 
 ########################################################
 ##                 KERNEL LIQUORIX                    ##
@@ -28,23 +22,16 @@ apt-get update
 # deb-src http://liquorix.net/debian sid main
 
 ########################################################
-##                 MOZILLA FIREFOX                    ##
-########################################################
-##### apt-get install pkg-mozilla-archive-keyring
-# deb http://mozilla.debian.net/ testing-backports firefox-release
-# deb-src http://mozilla.debian.net/ testing-backports firefox-release
-
-########################################################
-##                MULTIMEDIA testing                  ##
+##                MULTIMEDIA Unstable                 ##
 ########################################################
 ###### apt-get install deb-multimedia-keyring
-# deb http://www.deb-multimedia.org/ testing non-free main
+# deb http://www.deb-multimedia.org/ sid non-free main
 
 ########################################################
 ##                  MULTISYSTEM                       ##
 ########################################################
 ##### wget -q -O - http://liveusb.info/multisystem/depot/multisystem.asc | sudo apt-key add -
-deb http://liveusb.info/multisystem/depot/ all main
+#deb http://liveusb.info/multisystem/depot/ all main
 
 ########################################################
 ##                     FRYNTIZ                        ##

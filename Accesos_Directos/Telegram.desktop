@@ -1,0 +1,14 @@
+[Desktop Entry]
+Version=1.0
+Name=Telegram Desktop
+Comment=Official desktop application for the Telegram messaging service
+TryExec=/home/fryntiz/4_Programas/Telegram/Telegram/Telegram
+Exec=~/.local/opt/Telegram/Telegram -- %u
+Icon=telegram
+Terminal=false
+StartupWMClass=TelegramDesktop
+Type=Application
+Categories=Network;InstantMessaging;Qt;
+MimeType=x-scheme-handler/tg;
+X-Desktop-File-Install-Version=0.23
+Name[es_ES]=Telegram

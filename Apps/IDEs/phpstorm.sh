@@ -35,7 +35,7 @@ phpstorm_preconfiguracion() {
         rm -Rf "$HOME/.local/opt/phpstorm"
     fi
 
-    if [[ -f "$HOME/.local/bin/phpstorm" ]]; then
+    if [[ -h "$HOME/.local/bin/phpstorm" ]]; then
         rm -f "$HOME/.local/bin/phpstorm"
     fi
 

@@ -22,6 +22,7 @@
 ##     IMPORTACIONES      ##
 ############################
 source "$WORKSCRIPT/VPS/firewall.sh"
+source "$WORKSCRIPT/VPS/idioma_hora.sh"
 
 ###########################
 ##       FUNCIONES       ##
@@ -49,4 +50,10 @@ menuVPS() {
 
     ## Específicos de VPS en este directorio
     mainFirewall
+
+    ## Idioma y Zona Horaria
+    mainZone
+
+    ## Protección contra ataques e intentos de crackeo
+    fail2ban_instalador
 }

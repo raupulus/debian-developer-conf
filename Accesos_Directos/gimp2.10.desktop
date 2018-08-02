@@ -16,4 +16,4 @@ Categories=Multimedia;Image Editor;
 MimeType=text/html;text/xml;application/xhtml+xml;application/xml;application/vnd.mozilla.xul+xml;application/rss+xml;application/rdf+xml;image/gif;image/jpeg;image/png;x-scheme-handler/http;x-scheme-handler/https;
 StartupWMClass=Gimp 2.10
 StartupNotify=true
-Name[es_ES]=Gimp 2.10
+Name[es_ES]=gimp2.10

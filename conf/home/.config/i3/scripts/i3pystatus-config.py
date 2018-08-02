@@ -261,7 +261,7 @@ status.register("alsa",
 ## TEMPERATURA ---------------------------------------------------------
 status.register("temp",
     hints = {"markup": "pango","separator": False,"separator_block_width": 0},
-     #format = " {temp}°",
+    #format = " {temp}°",
     format = "<span background='"+cpuColor+"' color='"+tempColor+"'></span\
              ><span background='"+tempColor+"'> {temp}°C</span>",
     color = tempFColor,

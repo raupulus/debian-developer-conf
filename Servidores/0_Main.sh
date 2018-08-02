@@ -32,6 +32,7 @@ source "$WORKSCRIPT/Servidores/docker.sh"
 source "$WORKSCRIPT/Servidores/ssh.sh"
 source "$WORKSCRIPT/Servidores/mongodb.sh"
 source "$WORKSCRIPT/Servidores/sqlite.sh"
+source "$WORKSCRIPT/Servidores/mumble.sh"
 
 ###########################
 ##       FUNCIONES       ##
@@ -53,6 +54,8 @@ menuServidores() {
         ssh_instalador
         mongodb_instalador
         sqlite_instalador
+        mumble_instalador
+        postfix_instalador
     }
 
     ## Si la función recibe "-a" indica que instale todos los servidores
@@ -71,7 +74,9 @@ menuServidores() {
                 7) Ssh
                 8) MongoDB
                 9) Sqlite 3
-                10) Todos los pasos anteriores
+                10) Mumble
+                11) Postfix y Dovecot (Mail)
+                12) Todos los pasos anteriores
 
                 0) Atrás
             '
@@ -92,7 +97,9 @@ menuServidores() {
                 7)  ssh_instalador;;         ## Instala Ssh
                 8)  mongodb_instalador;;     ## Instala MongoDB
                 9)  sqlite_instalador;;      ## Instala Sqlite
-                10) todos_servidores         ## Todos los servidores
+                10)  mumble_instalador;;     ## Instala Mumble
+                11)  postfix_instalador;;    ## Instala Servidor Mail
+                12) todos_servidores         ## Todos los servidores
                     break;;
 
                 0)  ## SALIR

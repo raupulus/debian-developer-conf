@@ -16,11 +16,7 @@
 ############################
 ##     INSTRUCCIONES      ##
 ############################
-## Este script agrega los repositorios estables y algunos más de forma segura
-## y con sus llaves correspondientes.
-## Por motivos de seguridad se dejarán los repositorios listos para usar en
-## el sistema pero comentados, es decir, los que considero que depende del
-## usuario activarlos y usarlo bajo su responsabilidad están comentados.
+## Este script agrega los repositorios unstable
 
 ###########################
 ##       FUNCIONES       ##
@@ -28,14 +24,14 @@
 ##
 ## Añade llaves oficiales para cada repositorio
 ##
-stable_agregar_llaves() {
-    echo -e "$VE Agregando llaves solo para repositorios$RO stable$CL"
+unstable_agregar_llaves() {
+    echo -e "$VE Agregando llaves solo para repositorios$RO unstable$CL"
 }
 
 ##
 ## Crea Backups de repositorios y añade nuevas listas
 ##
-stable_sources_repositorios() {
+unstable_sources_repositorios() {
     echo -e "$VE Añadido$RO sources.list$VE y$RO sources.list.d/$VE Agregados$CL"
 
     crearBackup '/etc/apt/sources.list' '/etc/apt/sources.list.d/'
@@ -43,31 +39,31 @@ stable_sources_repositorios() {
     if [[ ! -d '/etc/apt/sources.list.d' ]]; then
         sudo mkdir -p '/etc/apt/sources.list.d'
     fi
-    sudo cp $WORKSCRIPT/Repositorios/stable/sources.list.d/* /etc/apt/sources.list.d/
+    sudo cp $WORKSCRIPT/Repositorios/unstable/sources.list.d/* /etc/apt/sources.list.d/
 
     if [[ ! -d '/etc/apt/sources.list' ]]; then
         sudo rm -f '/etc/apt/sources.list'
     fi
-    sudo cp "$WORKSCRIPT/Repositorios/stable/sources.list" "/etc/apt/sources.list"
+    sudo cp "$WORKSCRIPT/Repositorios/unstable/sources.list" "/etc/apt/sources.list"
 }
 
 ##
-## Agrega los repositorios desde su directorio "stable"
+## Agrega los repositorios desde su directorio "unstable"
 ##
-stable_download_repositorios() {
+unstable_download_repositorios() {
     echo -e "$VE Descargando repositorios desde scripts oficiales$CL"
 }
 
 ##
 ## Añade todos los repositorios y llaves
 ##
-stable_agregar_repositorios() {
-    echo -e "$VE Instalando repositorios$RO Debian Stable$CL"
-    stable_sources_repositorios
-    stable_download_repositorios
+unstable_agregar_repositorios() {
+    echo -e "$VE Instalando repositorios$RO Debian unstable$CL"
+    unstable_sources_repositorios
+    unstable_download_repositorios
     echo -e "$VE Actualizando antes de obtener las llaves, es normal que se muestren errores$AM (Serán solucionados en el próximo paso)$CL"
     actualizarRepositorios
-    stable_agregar_llaves
+    unstable_agregar_llaves
     echo -e "$VE Actualizando listas de repositorios definitiva, comprueba que no hay$RO errores$CL"
     actualizarRepositorios
 }
