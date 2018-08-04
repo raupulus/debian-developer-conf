@@ -53,8 +53,8 @@ atom_preconfiguracion() {
         enlazarHome '.atom/snippets.cson'
     fi
 
-    if [[ ! -h "$HOME/.atom/styless.less" ]]; then
-        enlazarHome '.atom/styless.less'
+    if [[ ! -h "$HOME/.atom/styles.less" ]]; then
+        enlazarHome '.atom/styles.less'
     fi
 
     if [[ ! -d "$HOME/.atom/Diccionarios" ]]; then
