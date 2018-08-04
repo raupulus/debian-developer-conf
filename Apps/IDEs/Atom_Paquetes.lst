@@ -19,11 +19,11 @@ whitespace
 autocomplete-css
 autocomplete-html
 toggle-quotes
-console-log-atom
+console-log
 file-icons
 pigments
 linter-eslint
 autocomplete-modules
 atom-css-clean
-platformio-atom-ide-terminal
+platformio-ide-terminal
 docblockr
