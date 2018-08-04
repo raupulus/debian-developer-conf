@@ -53,6 +53,10 @@ atom_preconfiguracion() {
         enlazarHome '.atom/snippets.cson'
     fi
 
+    if [[ ! -h "$HOME/.atom/styless.less" ]]; then
+        enlazarHome '.atom/styless.less'
+    fi
+
     if [[ ! -d "$HOME/.atom/Diccionarios" ]]; then
         descargarGIT 'Diccionarios' 'git://github.com/titoBouzout/Dictionaries.git' "$HOME/.atom/Diccionarios"
     fi
