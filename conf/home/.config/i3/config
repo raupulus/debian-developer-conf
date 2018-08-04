@@ -448,6 +448,9 @@ bindsym $mod+shift+d exec --no-startup-id ~/.config/i3/scripts/rofr.sh -r
 ############################################################
 #############       Bindings Propios      ##################
 ############################################################
+## Alternar entre teclado "es-querty" y "dvorak"
+bindsym $mod+Control+space exec --no-startup-id ~/.config/i3/scripts/keyboard.sh
+
 ## Captura un área de la pantalla seleccionada al portapapeles
 bindsym --release shift+Print exec xfce4-screenshooter -crm
 
