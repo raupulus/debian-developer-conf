@@ -2,11 +2,12 @@
 # -*- encoding: utf-8 -*-
 
 # @author     Raúl Caro Pastorino
-# @email      tecnico@fryntiz.es
-# @web        http://www.fryntiz.es
-# @github     https://github.com/fryntiz
+# @email      dev@fryntiz.es
+# @web        https://fryntiz.es
 # @gitlab     https://gitlab.com/fryntiz
+# @github     https://github.com/fryntiz
 # @twitter    https://twitter.com/fryntiz
+# @telegram   https://t.me/fryntiz
 
 # Create Date: 2018
 # Project Name: 
