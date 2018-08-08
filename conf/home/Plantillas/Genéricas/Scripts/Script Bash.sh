@@ -9,6 +9,7 @@
 ## @twitter    https://twitter.com/fryntiz
 ## @telegram   https://t.me/fryntiz
 
+## @bash        4.2 or later
 ## Create Date: 2018
 ## Project Name: 
 ## Description: 
