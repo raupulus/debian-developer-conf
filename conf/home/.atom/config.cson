@@ -113,3 +113,15 @@
     hideIgnoredNames: true
   welcome:
     showOnStartup: false
+".basic.html.text":
+  editor:
+    tabLength: 2
+".json.source":
+  editor:
+    tabLength: 2
+".source.ts":
+  editor:
+    tabLength: 2
+".source.tsx":
+  editor:
+    tabLength: 2
