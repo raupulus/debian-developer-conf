@@ -4,7 +4,7 @@
 ## @author     Raúl Caro Pastorino
 ## @copyright  Copyright © 2018 Raúl Caro Pastorino
 ## @license    https://wwww.gnu.org/licenses/gpl.txt
-## @email      tecnico@fryntiz.es
+## @email      dev@fryntiz.es
 ## @web        https://fryntiz.es
 ## @gitlab     https://gitlab.com/fryntiz
 ## @github     https://github.com/fryntiz
@@ -24,6 +24,7 @@
 source "$WORKSCRIPT/VPS/firewall.sh"
 source "$WORKSCRIPT/VPS/idioma_hora.sh"
 source "$WORKSCRIPT/VPS/administrador.sh"
+source "$WORKSCRIPT/VPS/fail2ban.sh"
 
 ###########################
 ##       FUNCIONES       ##
@@ -32,11 +33,7 @@ source "$WORKSCRIPT/VPS/administrador.sh"
 ## Menú instalar todas las configuraciones de un VPS
 ##
 menuVPS() {
-    if [[ $ENV = '' ]]; then
-        echo -e "$VE Agregando variable como entorno de producción$CL"
-        echo 'ENV=prod' | sudo tee -a /etc/environment
-        export ENV='prod'
-    fi
+    instalar_variables 'prod'
 
     stable_agregar_repositorios
     aplicaciones_basicas
@@ -47,8 +44,8 @@ menuVPS() {
     configuracion_git
     terminales_instalador
 
-    menuServidores -a prod
-    menuLenguajes -a prod
+    menuServidores -a 'prod'
+    menuLenguajes -a 'prod'
 
     bashit_Instalador
     ohmyzsh_Instalador

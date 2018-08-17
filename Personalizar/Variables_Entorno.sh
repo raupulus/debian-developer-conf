@@ -28,14 +28,19 @@
 ##
 variablesGlobales() {
     echo -e "$VE Instalando$RO Variables Globales$VE al sistema$CL"
-    if [[ $ENV = '' ]]; then
-        echo -e "$VE Agregando variable como entorno de producción$CL"
-        echo 'ENV=dev' | sudo tee -a /etc/environment
-        export ENV='dev'
+    if [[ "$1" = 'pro' ]];then
+        setVariableGlobal 'ENV' 'prod'
+        setVariableGlobal 'DEBIAN_VERSION' 'stable'
+    else
+        setVariableGlobal 'ENV' 'dev'
     fi
+
+    setVariableGlobal 'LC_ALL' 'es_ES.UTF-8'
+    setVariableGlobal 'LC_CTYPE' 'es_ES.UTF-8'
+    setVariableGlobal 'LC_MESSAGES' 'es_ES.UTF-8'
 }
 
 # Importa todas las variables al inicio del sistema Operativo
 instalar_variables() {
-    variablesGlobales
+    variablesGlobales $1
 }
