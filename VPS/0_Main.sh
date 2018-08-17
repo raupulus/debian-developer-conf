@@ -33,7 +33,8 @@ source "$WORKSCRIPT/VPS/idioma_hora.sh"
 menuVPS() {
     if [[ $ENV = '' ]]; then
         echo -e "$VE Agregando variable como entorno de producción$CL"
-        echo "ENV='prod'" | sudo tee -a /etc/environment
+        echo 'ENV=prod' | sudo tee -a /etc/environment
+        export ENV='prod'
     fi
 
     stable_agregar_repositorios
