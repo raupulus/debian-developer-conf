@@ -61,4 +61,7 @@ menuVPS() {
 
     ## Protección contra ataques e intentos de crackeo
     fail2ban_instalador
+
+    ## Instalo cliente angular de forma insegura para root
+    sudo npm install -g @angular/cli -unsafe-perm
 }
