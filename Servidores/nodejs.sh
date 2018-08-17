@@ -90,4 +90,7 @@ nodejs_instalador() {
     nodejs_preconfiguracion
     nodejs_instalar
     nodejs_postconfiguracion
+
+    ## Se instalan paquetes adicionales
+    nodejs_angular
 }
