@@ -47,8 +47,8 @@ menuVPS() {
     configuracion_git
     terminales_instalador
 
-    menuServidores -a
-    menuLenguajes -a
+    menuServidores -a prod
+    menuLenguajes -a prod
 
     bashit_Instalador
     ohmyzsh_Instalador
