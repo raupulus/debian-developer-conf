@@ -23,6 +23,7 @@
 ############################
 source "$WORKSCRIPT/VPS/firewall.sh"
 source "$WORKSCRIPT/VPS/idioma_hora.sh"
+source "$WORKSCRIPT/VPS/administrador.sh"
 
 ###########################
 ##       FUNCIONES       ##
