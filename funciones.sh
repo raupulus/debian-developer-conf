@@ -4,14 +4,14 @@
 ## @author     Raúl Caro Pastorino
 ## @copyright  Copyright © 2017 Raúl Caro Pastorino
 ## @license    https://wwww.gnu.org/licenses/gpl.txt
-## @email      tecnico@fryntiz.es
-## @web        www.fryntiz.es
-## @github     https://github.com/fryntiz
+## @email      dev@fryntiz.es
+## @web        https://fryntiz.es
 ## @gitlab     https://gitlab.com/fryntiz
+## @github     https://github.com/fryntiz
 ## @twitter    https://twitter.com/fryntiz
 ##
 ##             Guía de estilos aplicada:
-## @style      https://github.com/fryntiz/Bash_Style_Guide
+## @style      https://gitlab.com/fryntiz/bash-style-guide
 
 ############################
 ##     INSTRUCCIONES      ##
@@ -360,4 +360,17 @@ instalarNpmGlobal() {
         echo -e "$RO Instalando $x$CL"
         npm install -g "$x"
     done
+}
+
+##
+## Agrega variable de entorno si no tiene valor. Si tiene valor no se hace nada.
+## @param $1 Recibe el nombre de la variable
+## @param $2 Recibe el valor que se quiere poner en caso de no tener valor
+##
+setVariableGlobal() {
+    if [[ "$1" = '' ]]; then
+        echo -e "$VE Seteando globalmente: ${1}=${2}$CL"
+        echo "${1}=${2}" | sudo tee -a /etc/environment
+        export "${1}=${2}"
+    fi
 }
