@@ -31,6 +31,11 @@ source "$WORKSCRIPT/VPS/idioma_hora.sh"
 ## Menú instalar todas las configuraciones de un VPS
 ##
 menuVPS() {
+    if [[ $ENV = '' ]]; then
+        echo -e "$VE Agregando variable como entorno de producción$CL"
+        echo "ENV='prod'" | sudo tee -a /etc/environment
+    fi
+
     stable_agregar_repositorios
     aplicaciones_basicas
 
