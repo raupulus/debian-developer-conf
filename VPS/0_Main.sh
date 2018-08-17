@@ -45,7 +45,6 @@ menuVPS() {
 
     configuracion_git
     terminales_instalador
-    instalar_variables
 
     menuServidores -a
     menuLenguajes -a
