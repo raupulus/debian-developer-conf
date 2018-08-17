@@ -116,6 +116,9 @@
 ".basic.html.text":
   editor:
     tabLength: 2
+".css.source":
+  editor:
+    tabLength: 2
 ".json.source":
   editor:
     tabLength: 2
