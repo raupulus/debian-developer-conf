@@ -45,19 +45,23 @@ menuServidores() {
     todos_servidores() {
         clear
         echo -e "$VE Instalando todos los servidores$CL"
-        apache2_instalador
-        mariadb_instalador
-        nodejs_instalador
-        postgresql_instalador
-        docker_instalador
-        ssh_instalador
-        mongodb_instalador
-        sqlite_instalador
+        apache2_instalador $1
+        mariadb_instalador $1
+        nodejs_instalador $1
+        postgresql_instalador $1
+        docker_instalador $1
+        ssh_instalador $1
+        mongodb_instalador $1
+        sqlite_instalador $1
     }
 
     ## Si la función recibe "-a" indica que instale todos los servidores
     if [[ "$1" = '-a' ]]; then
-        todos_servidores
+        if [[ "$2" = 'prod' ]]; then
+            todos_servidores 'prod'
+        else
+            todos_servidores
+        fi
     else
         while true :; do
             clear
