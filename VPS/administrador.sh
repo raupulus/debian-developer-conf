@@ -30,9 +30,4 @@ configureAdmin() {
     sudo usermod -a -G postgres web
     sudo usermod -a -G crontab web
     sudo usermod -a -G adm web
-
-    #cat "$WORKSCRIPT/VPS/conf/.bashrc" | sudo tee '/home/web/.bashrc'
-
-    ## Instalo cliente angular para usuario administrador
-    sudo -u web npm install -g @angular/cli -unsafe-perm
 }
