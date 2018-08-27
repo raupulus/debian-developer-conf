@@ -1,0 +1,16 @@
+python
+python3
+python-pip
+python3-pip
+flake8
+pyflakes
+pyflakes3
+pydocstyle
+pylama
+prospector
+virtualenv
+libasound2-dev
+libiw-dev
+python3-powerline
+python3-psutil
+python3-powerline-taskwarrior
