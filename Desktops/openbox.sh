@@ -24,6 +24,7 @@
 openbox_preconfiguracion() {
     echo -e "$VE Generando Pre-Configuraciones de$RO openbox$CL"
     enlazarHome '.idesktop' '.config/.openbox' '.ideskrc'
+    instalarSoftwareLista "$SOFTLIST/Desktops/x11-base.lst"
 }
 
 openbox_instalar() {
