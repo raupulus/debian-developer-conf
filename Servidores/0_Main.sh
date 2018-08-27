@@ -98,11 +98,11 @@ menuServidores() {
                 6)  ssh_instalador;;         ## Instala Ssh
                 7)  mongodb_instalador;;     ## Instala MongoDB
                 8)  sqlite_instalador;;      ## Instala Sqlite
-                9) todos_servidores          ## Todos los servidores
+                9) todos_servidores;;          ## Todos los servidores
 
                 10)  bind_instalador;;       ## Instala Bind
                 11)  mumble_instalador;;     ## Instala Mumble
-                12)  postfix_instalador;;    ## Instala Servidor Mail
+                12)  postfix_instalador    ## Instala Servidor Mail
                      break;;
 
                 0)  ## SALIR
