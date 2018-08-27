@@ -368,9 +368,46 @@ instalarNpmGlobal() {
 ## @param $2 Recibe el valor que se quiere poner en caso de no tener valor
 ##
 setVariableGlobal() {
-    if [[ "$1" = '' ]]; then
+    if [[ "${!1}" = '' ]]; then
         echo -e "$VE Seteando globalmente: ${1}=${2}$CL"
         echo "${1}=${2}" | sudo tee -a /etc/environment
         export "${1}=${2}"
     fi
+}
+
+
+##
+## Recibe una lista de paquetes a instalar como usuario en su home
+## @param $* Recibe la lista de paquetes
+##
+python2Install() {
+    echo -e "$VE Instalando paquete Python$CL"
+    for x in $*; do
+        echo -e "$RO Instalando $x$CL"
+        pip install --user --upgrade "$x"
+    done
+}
+
+##
+## Recibe una lista de paquetes a instalar como usuario en su home
+## @param $* Recibe la lista de paquetes
+##
+python3Install() {
+    echo -e "$VE Instalando paquete Python$CL"
+    for x in $*; do
+        echo -e "$RO Instalando $x$CL"
+        pip3 install --user --upgrade "$x"
+    done
+}
+
+##
+## Recibe una lista de paquetes a instalar de forma global como root
+## @param $* Recibe la lista de paquetes
+##
+python3InstallGlobal() {
+    echo -e "$VE Instalando paquete Python de forma global$CL"
+    for x in $*; do
+        echo -e "$RO Instalando $x$CL"
+        sudo pip3 install --upgrade "$x"
+    done
 }
