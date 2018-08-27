@@ -41,6 +41,9 @@ CL="\e[0m"       ## Limpiar colores
 WORKSCRIPT=$PWD  ## Directorio principal del script
 USER=$(whoami)   ## Usuario que ejecuta el script
 VERSION='0.8.2'  ## Versión en desarrollo
+MY_DISTRO="$DISTRO"  ## Distribución sobre la que se ejecuta
+MY_BRANCH="$BRANCH"  ## stable|testing|unstable
+SOFTLIST="$WORKSCRIPT/Software-Lists/$MY_DISTRO"  ## Ruta hacia listas software
 LOGERROR="$WORKSCRIPT/errores.log"  ## Archivo donde almacenar errores
 DEBUG=false      ## Establece si está el script en modo depuración
 
@@ -50,6 +53,7 @@ DEBUG=false      ## Establece si está el script en modo depuración
 source "$WORKSCRIPT/funciones.sh"
 source "$WORKSCRIPT/configuraciones.sh"
 source "$WORKSCRIPT/limpiador.sh"
+source "$WORKSCRIPT/preferences.sh"
 
 source "$WORKSCRIPT/Apps/0_Main.sh"
 source "$WORKSCRIPT/Personalizar/0_Main.sh"
@@ -69,6 +73,8 @@ errores=()
 ###########################
 ##       FUNCIONES       ##
 ###########################
+configurePreferences
+
 menuPrincipal() {
     while true :; do
         clear
