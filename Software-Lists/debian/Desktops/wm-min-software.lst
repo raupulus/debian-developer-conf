@@ -53,3 +53,6 @@ xfce4-clipman
 redshift
 lm-sensors
 libsensors4-dev
+network-manager
+lxrandr
+volti
