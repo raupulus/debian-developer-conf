@@ -44,6 +44,9 @@
 - xfce4-clipman → Portapapeles con soporte para imágenes de XFCE4
 - redshift → Cambia el tono de la pantalla según la hora del día
 - lm-sensors → Sensores de temperatura para el hardware
+- network-manager → Configuración de red
+- lxrandr → Gestor de pantalla, muy útil cuando deseas proyectar mediante HDMI
+- volti → administra el volumen
 
 ## i3wm
 
@@ -55,7 +58,7 @@ trabajar con las herramientas necesarias.
 
 ![Previsualización i3 con dos monitores](docs/i3-Dual_Monitor.png)
 
-### Paquetes instalados
+### Paquetes instalados por este escritorio
 
 -   i3-lock
 -   i3status
@@ -73,3 +76,14 @@ trabajar con las herramientas necesarias.
 - 6 → Multimedia
 - 7 → Virtual Machine
 - 8 → Games
+
+
+## Openbox
+
+### Paquetes instalados por este escritorio
+- idesk → Maneja fondo de escritorio y los iconos
+- obconf → Gestor de configuraciones para openbox
+- obmenu → Editor de menú gráfico
+- menu → Genera menús de programas para todas las aplicaciones que sean de menú
+- openbox-gnome-session → Integración con gnome
+- openbox-menu → Menú que muestra las entradas de archivos *.desktop
