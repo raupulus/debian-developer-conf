@@ -55,7 +55,7 @@ setBranch() {
         read -p "Introduce la rama → " MY_BRANCH
     done
 
-    setVariableGlobal 'DISTRO' $MY_BRANCH
+    setVariableGlobal 'BRANCH' "$MY_BRANCH"
 }
 
 ##
@@ -65,4 +65,7 @@ configurePreferences() {
     echo -e "$VE Puedes setear tu mismo las variables en /etc/environment$CL"
     setDistro
     setBranch
+
+    ## Recarga variables del entorno
+    source '/etc/environment'
 }

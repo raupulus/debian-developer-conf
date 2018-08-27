@@ -79,6 +79,7 @@ python_postconfiguracion() {
 
     ## Variable global que indica que instale los paquetes como usuario en home
     setVariableGlobal 'PIP_USER' 'y'
+    source '/etc/environment'
 }
 
 
