@@ -1,6 +1,4 @@
 x11-misc/rofi
-media-fonts/fontawesome
-media-fonts/powerline-symbols
 sys-apps/gawk
 virtual/awk
 www-client/surf
@@ -43,7 +41,6 @@ sys-auth/polkit
 net-misc/x11-ssh-askpass
 net-misc/ssh-askpass-fullscreen
 net-wireless/wireless-tools
-media-fonts/powerline-symbols
 x11-misc/redshift
 sys-apps/lm_sensors
 x11-misc/xsensors
