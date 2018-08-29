@@ -143,11 +143,11 @@ instalarSoftwareLista() {
         done
     elif [[ "$MY_DISTRO" = 'gentoo' ]]; then
         for x in "${lista_Software[@]}"; do
-            instalarSoftware "$s"
+            instalarSoftware "$x"
         done
     elif [[ "$MY_DISTRO" = 'fedora' ]]; then
         for x in "${lista_Software[@]}"; do
-             instalarSoftware "$s"
+             instalarSoftware "$x"
         done
     fi
 
