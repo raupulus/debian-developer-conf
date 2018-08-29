@@ -119,6 +119,9 @@
 ".css.source":
   editor:
     tabLength: 2
+".html.php.text":
+  editor:
+    tabLength: 2
 ".json.source":
   editor:
     tabLength: 2
