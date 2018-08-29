@@ -230,6 +230,7 @@ bar {
     tray_output HDMI-0
     tray_output DVI-I-1
     tray_output LVDS-1
+    tray_output LVDS1
 
 
     ## Fuente
@@ -250,6 +251,7 @@ bar {
     output HDMI-0
     output DVI-I-1
     output LVDS-1
+    output LVDS1
 
     ## Márgenes de iconos en la bandeja
     tray_padding 1
