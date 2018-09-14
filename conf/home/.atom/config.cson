@@ -82,6 +82,7 @@
   "php-debug":
     AutoExpandLocals: true
     currentPanelMode: "bottom"
+  "php-integrator-base-legacy-php56": {}
   "spell-check":
     addKnownWords: true
     grammars: [
