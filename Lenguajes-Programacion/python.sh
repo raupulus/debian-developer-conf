@@ -50,14 +50,14 @@ python_postconfiguracion() {
         echo -e "$VE Preparando configuracion de$RO Python2$CL"
         instalarSoftwareLista "$SOFTLIST/Lenguajes-Programacion/python2.lst"
 
-        python2Install 'python-language-server[all]' 'pip' 'virtualenvwrapper'
+        python2Install 'python-language-server[all]' 'virtualenvwrapper'
     }
 
     configurar_python3() {
         echo -e "$VE Preparando configuracion de$RO Python3$CL"
         echo -e "$VE Instalando dependencias para Python 3$CL"
 
-        python3Install 'python-language-server[all]' 'pip' 'virtualenvwrapper'
+        python3Install 'python-language-server[all]' 'virtualenvwrapper'
     }
 
     personalizar_python2() {
