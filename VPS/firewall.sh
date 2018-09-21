@@ -21,5 +21,5 @@ mainFirewall() {
     #sudo firewall-cmd --zone=public --add-port=1194/udp --permanent
 
     ## Recargo cortafuegos
-    sudo firewall-cmd --reload
+    #sudo firewall-cmd --reload
 }

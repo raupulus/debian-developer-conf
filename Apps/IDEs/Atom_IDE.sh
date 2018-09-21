@@ -36,7 +36,7 @@ atom_preconfiguracion() {
         read -p '¿Quieres borrar toda la configuración existente? s/N → ' input
         if [[ $input = 's' ]] || [[ $input = 'S' ]]; then
             echo -e "$RO →Borrando configuración vieja←$CL"
-            rm -R "$HOME/.atom"
+            rm -Rf "$HOME/.atom"
             mkdir "$HOME/.atom"
         fi
     fi
@@ -53,6 +53,10 @@ atom_preconfiguracion() {
         enlazarHome '.atom/snippets.cson'
     fi
 
+    if [[ ! -h "$HOME/.atom/styles.less" ]]; then
+        enlazarHome '.atom/styles.less'
+    fi
+
     if [[ ! -d "$HOME/.atom/Diccionarios" ]]; then
         descargarGIT 'Diccionarios' 'git://github.com/titoBouzout/Dictionaries.git' "$HOME/.atom/Diccionarios"
     fi
@@ -62,7 +66,7 @@ atom_postconfiguracion() {
     echo -e "$VE Añadiendo Post-Configuraciones para$RO Atom$CL"
 
     echo -e "$VE Deshabilitando complementos$CL"
-    apm disable welcome
+    apm disable welcome metrics
 }
 
 atom_plugins() {

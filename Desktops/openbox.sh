@@ -23,11 +23,14 @@
 ############################
 openbox_preconfiguracion() {
     echo -e "$VE Generando Pre-Configuraciones de$RO openbox$CL"
+    enlazarHome '.idesktop' '.config/.openbox' '.ideskrc'
+    instalarSoftwareLista "$SOFTLIST/Desktops/x11-base.lst"
 }
 
 openbox_instalar() {
     echo -e "$VE Preparando para instalar$RO openbox$CL"
-    instalarSoftware openbox obconf-qt openbox-gnome-session openbox-menu
+    instalarSoftwareLista "$SOFTLIST/Desktops/openbox.lst"
+    instalarSoftwareLista "$SOFTLIST/Desktops/wm-min-software.lst"
 }
 
 ##
@@ -35,12 +38,6 @@ openbox_instalar() {
 ##
 openbox_postconfiguracion() {
     echo -e "$VE Generando Post-Configuraciones$RO openbox$CL"
-
-    echo -e "$VE Instalando software secundario$CL"
-    #instalarSoftware suckless-tools
-
-    echo -e "$VE Generando archivos de configuración$CL"
-    #enlazarHome '.config/.openbox'
 }
 
 openbox_instalador() {

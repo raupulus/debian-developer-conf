@@ -1,0 +1,9 @@
+table Icon
+  Caption: Xfe
+  Command: /usr/bin/xfe
+  Icon: /usr/share/pixmaps/xfe.xpm
+  Width: 48
+  Height: 48
+  X: 30
+  Y: 120
+end

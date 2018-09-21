@@ -45,22 +45,23 @@ menuServidores() {
     todos_servidores() {
         clear
         echo -e "$VE Instalando todos los servidores$CL"
-        apache2_instalador
-        mariadb_instalador
-        nodejs_instalador
-        postgresql_instalador
-        bind_instalador
-        docker_instalador
-        ssh_instalador
-        mongodb_instalador
-        sqlite_instalador
-        mumble_instalador
-        postfix_instalador
+        apache2_instalador $1
+        mariadb_instalador $1
+        nodejs_instalador $1
+        postgresql_instalador $1
+        docker_instalador $1
+        ssh_instalador $1
+        mongodb_instalador $1
+        sqlite_instalador $1
     }
 
     ## Si la función recibe "-a" indica que instale todos los servidores
     if [[ "$1" = '-a' ]]; then
-        todos_servidores
+        if [[ "$2" = 'prod' ]]; then
+            todos_servidores 'prod'
+        else
+            todos_servidores
+        fi
     else
         while true :; do
             clear
@@ -69,14 +70,15 @@ menuServidores() {
                 2) MariaDB
                 3) NodeJS
                 4) PostgreSQL
-                5) Bind 9
-                6) Docker
-                7) Ssh
-                8) MongoDB
-                9) Sqlite 3
-                10) Mumble
-                11) Postfix y Dovecot (Mail)
-                12) Todos los pasos anteriores
+                5) Docker
+                6) Ssh
+                7) MongoDB
+                8) Sqlite 3
+                9) Todos los servidores anteriores
+
+                10) Bind 9
+                11) Mumble
+                12) Postfix y Dovecot (Mail)
 
                 0) Atrás
             '
@@ -92,15 +94,16 @@ menuServidores() {
                 2)  mariadb_instalador;;     ## Instala MariaDB
                 3)  nodejs_instalador;;      ## Instala NodeJS
                 4)  postgresql_instalador;;  ## Instala PostgreSQL
-                5)  bind_instalador;;        ## Instala Bind
-                6)  docker_instalador;;      ## Instala Docker
-                7)  ssh_instalador;;         ## Instala Ssh
-                8)  mongodb_instalador;;     ## Instala MongoDB
-                9)  sqlite_instalador;;      ## Instala Sqlite
-                10)  mumble_instalador;;     ## Instala Mumble
-                11)  postfix_instalador;;    ## Instala Servidor Mail
-                12) todos_servidores         ## Todos los servidores
-                    break;;
+                5)  docker_instalador;;      ## Instala Docker
+                6)  ssh_instalador;;         ## Instala Ssh
+                7)  mongodb_instalador;;     ## Instala MongoDB
+                8)  sqlite_instalador;;      ## Instala Sqlite
+                9) todos_servidores;;          ## Todos los servidores
+
+                10)  bind_instalador;;       ## Instala Bind
+                11)  mumble_instalador;;     ## Instala Mumble
+                12)  postfix_instalador    ## Instala Servidor Mail
+                     break;;
 
                 0)  ## SALIR
                     clear

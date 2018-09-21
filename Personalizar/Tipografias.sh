@@ -29,16 +29,7 @@
 fuentes_repositorios() {
     echo -e "$VE Instalando fuentes desde$RO repositorios$CL"
 
-    fuentes_repositorios="fonts-powerline fonts-freefont-ttf fonts-hack
-    fonts-hack-ttf fonts-lmodern fonts-font-awesome fonts-inconsolata
-    fonts-dejavu fonts-dejavu-extra fonts-linuxlibertine xfonts-terminus
-    fonts-fantasque-sans fonts-firacode fonts-jura fonts-liberation
-    fonts-liberation2 fonts-cantarell fonts-lobster"
-
-    for f in $fuentes_repositorios; do
-        echo -e "$VE Instalando fuente$MA →$RO $f $CL"
-        instalarSoftware "$f"
-    done
+    instalarSoftwareLista "$SOFTLIST/Personalizar/tipografias.lst"
 }
 
 fuentes_download() {

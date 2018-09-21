@@ -26,15 +26,20 @@ atom-text-editor {
   // background-color: hsl(180, 24%, 12%);
 }
 
+// wrap-guide: Barra límite 80 carácteres
+atom-text-editor .wrap-guide {
+  width: 3px;
+  background-color: red;
+}
+
+// style UI elements inside atom-text-editor
+atom-text-editor .cursor {
+  // border-color: red;
+}
+
 // Cursor
 atom-text-editor.editor .cursor {
   border-color: red;
-}
-
-//
-.status-bar {
-  color: white;
-  background-color: #0d0079;
 }
 
 // Color de fondo de la línea de números
@@ -47,16 +52,16 @@ atom-text-editor.editor .cursor {
     padding: 0;
 
     .icon-right {
-        padding: 0;
+      padding: 0;
     }
   }
 }
 
 atom-text-editor .gutter {
-    min-width: 1px;
+  min-width: 1px;
 }
 
 // Color de fondo de la línea de números actual
 atom-text-editor .line-number.cursor-line-no-selection {
-    background-color: red;
+  background-color: red;
 }

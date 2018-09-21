@@ -187,10 +187,26 @@ php_postconfiguracion() {
     reiniciarServicio 'apache2'
 }
 
+php_produccion() {
+    echo -e "$VE Configurando PHP para producción$CL"
+    echo -e "$VE Desactivando Reportar todos los errores → 'error_reporting'$CL"
+    sudo sed -r -i "s/^;?\s*error_reporting\s*=.*$/error_reporting = E_ALL & ~E_DEPRECATED & ~E_STRICT/" $PHPINI
+
+    echo -e "$VE Desactivando Mostrar errores → 'display_errors'$CL"
+    sudo sed -r -i "s/^;?\s*display_errors\s*=.*$/display_errors = Off/" $PHPINI
+
+    echo -e "$VE Desactivando Mostrar errores al iniciar → 'display_startup_errors'$CL"
+    sudo sed -r -i "s/^;?\s*display_startup_errors\s*=.*$/display_startup_errors = Off/" $PHPINI
+}
 
 php_instalador() {
     php_descargar
     php_preconfiguracion
     php_instalar
     php_postconfiguracion
+
+    if [[ "$1" = 'prod' ]]; then
+        php_produccion
+    fi
+
 }

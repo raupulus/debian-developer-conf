@@ -1,71 +1,20 @@
 "*":
+  "aligner-css": {}
   "atom-autocomplete-php":
     binComposer: "composer"
-  "atom-i18n":
+  "atom-typescript":
+    compileOnSave: true
     locale: "es"
-  "atom-ternjs":
-    excludeLowerPriorityProviders: true
-    inlineFnCompletionDocumentation: true
-    snippetsFirst: true
-    useSnippets: true
-  "atom-toolbar": {}
-  "autocomplete-python": {}
+    showSemanticView: true
+  autosave:
+    enabled: true
+  "console-log":
+    backgroundStyling: "purple"
+    semiColons: true
   core:
-    customFileTypes:
-      "source.ini": [
-        ".buckconfig"
-        ".hgrc"
-        ".flowconfig"
-      ]
-      "source.json": [
-        "BUCK.autodeps"
-      ]
-      "source.python": [
-        "BUCK"
-      ]
     disabledPackages: [
+      "metrics"
       "welcome"
-      "linter-pycodestyle"
-      "remote-edit"
-      "script"
-      "open-bash-git"
-      "merge-conflicts"
-      "linter-ui-default"
-      "linter-sass-lint"
-      "linter-php"
-      "linter-js-blyss"
-      "language-unix-shell"
-      "intentions"
-      "highlight-selected"
-      "goto-definition"
-      "git-time-machine"
-      "git-plus-toolbar"
-      "git-plus"
-      "git-control"
-      "git-commit"
-      "expose"
-      "atom-sass"
-      "atom-jade"
-      "Atom-Bash-Snippets"
-      "vim-mode-plus"
-      "about"
-      "linter"
-      "atom-i18n"
-      "linter-tidy"
-      "linter-csslint"
-      "linter-eslint"
-      "linter-htmlhint"
-      "linter-jshint"
-      "linter-phpcs"
-      "linter-python"
-      "linter-python-pep8"
-      "linter-spell-shellscript"
-      "atom-ide-ui"
-      "atom-toolbar"
-      "panel-boss"
-      "language-csharp"
-      "language-java"
-      "symbols-list"
     ]
     ignoredNames: [
       ".git"
@@ -75,36 +24,40 @@
       "._*"
       "Thumbs.db"
       "desktop.ini"
-      ".pioenvs"
-      ".piolibdeps"
-      ".clang_complete"
-      ".gcc-flags.json"
+      "*.pdf"
+      "*.url"
+      "*.mp4"
+      "*.m4v"
+      "*.avi"
+      "*.dv"
+      "*.zip"
+      ".tmp"
     ]
-    projectHome: "$HOME/1_GIT/"
+    projectHome: "~/GIT"
     telemetryConsent: "no"
-    themes: [
-      "atom-dark-ui"
-      "monokai"
-    ]
+    warnOnLargeFileLimit: 10
   editor:
-    fontFamily: "Fira Code"
+    autoIndentOnPaste: true
+    fontFamily: "Fira Code, Menlo, Consolas, DejaVu Sans Mono, monospace"
     fontSize: 15
-    invisibles: {}
     showIndentGuide: true
     showInvisibles: true
     softWrap: true
     softWrapAtPreferredLineLength: true
     tabLength: 4
-    tabType: "soft"
   "exception-reporting":
-    userId: "0ef9dd58-1a13-4cdc-ba5d-d9a8a44ec417"
+    userId: "062f83f3-498d-4325-8817-f6e68c469cc9"
   "file-icons":
     coloured: true
+  "git-diff":
+    showIconsInEditorGutter: true
   "ide-python":
     pylsPlugins:
       pydocstyle:
         enabled: true
     python: "python3"
+  linter:
+    lintOnChangeInterval: 100
   "linter-phpcs":
     autoExecutableSearch: false
     codeStandardOrConfigFile: "/opt/composer/vendor/yiisoft/yii2-coding-standards/Yii2"
@@ -114,9 +67,7 @@
       "**/tests/**"
     ]
   "linter-ui-default":
-    panelHeight: 300
-    showPanel: true
-    useBusySignal: false
+    decorateOnTreeView: "Files and Directories"
   "markdown-preview":
     useGitHubStyle: true
   minimap:
@@ -124,13 +75,6 @@
     plugins:
       "minimap-autohider": true
       "minimap-autohiderDecorationsZIndex": 0
-  nuclide:
-    "atom-ide-code-format":
-      formatOnSave: true
-    "atom-ide-diagnostics-ui": {}
-    "atom-ide-outline-view": {}
-    "nuclide-home":
-      showHome: false
   "php-cs-fixer":
     executablePath: "/opt/composer/vendor/bin/php-cs-fixer"
     executeOnSave: true
@@ -138,6 +82,7 @@
   "php-debug":
     AutoExpandLocals: true
     currentPanelMode: "bottom"
+  "php-integrator-base-legacy-php56": {}
   "spell-check":
     addKnownWords: true
     grammars: [
@@ -165,27 +110,22 @@
       "English"
       "English (American)"
     ]
-  "split-diff":
-    diffWords: true
-    ignoreWhitespace: true
-    leftEditorColor: "red"
-    rightEditorColor: "green"
-    syncHorizontalScroll: true
-  "symbols-list":
-    hideOnEmptyList: true
-  "tool-bar":
-    position: "Left"
   "tree-view":
     hideIgnoredNames: true
-  "vim-mode-plus": {}
   welcome:
     showOnStartup: false
-".ansi.text":
+".basic.html.text":
   editor:
-    softWrapHangingIndent: 4
-".hack.html.text":
+    tabLength: 2
+".css.source":
   editor:
-    softWrapHangingIndent: 4
-".python.source":
+    tabLength: 2
+".json.source":
   editor:
-    autoIndentOnPaste: true
+    tabLength: 2
+".source.ts":
+  editor:
+    tabLength: 2
+".source.tsx":
+  editor:
+    tabLength: 2

@@ -4,7 +4,7 @@
 ## @author     Raúl Caro Pastorino
 ## @copyright  Copyright © 2018 Raúl Caro Pastorino
 ## @license    https://wwww.gnu.org/licenses/gpl.txt
-## @email      tecnico@fryntiz.es
+## @email      dev@fryntiz.es
 ## @web        https://fryntiz.es
 ## @gitlab     https://gitlab.com/fryntiz
 ## @github     https://github.com/fryntiz
@@ -23,6 +23,8 @@
 ############################
 source "$WORKSCRIPT/VPS/firewall.sh"
 source "$WORKSCRIPT/VPS/idioma_hora.sh"
+source "$WORKSCRIPT/VPS/administrador.sh"
+source "$WORKSCRIPT/VPS/fail2ban.sh"
 
 ###########################
 ##       FUNCIONES       ##
@@ -31,6 +33,8 @@ source "$WORKSCRIPT/VPS/idioma_hora.sh"
 ## Menú instalar todas las configuraciones de un VPS
 ##
 menuVPS() {
+    instalar_variables 'prod'
+
     stable_agregar_repositorios
     aplicaciones_basicas
 
@@ -39,10 +43,9 @@ menuVPS() {
 
     configuracion_git
     terminales_instalador
-    instalar_variables
 
-    menuServidores -a
-    menuLenguajes -a
+    menuServidores -a 'prod'
+    menuLenguajes -a 'prod'
 
     bashit_Instalador
     ohmyzsh_Instalador
@@ -56,4 +59,7 @@ menuVPS() {
 
     ## Protección contra ataques e intentos de crackeo
     fail2ban_instalador
+
+    ## Configura el usuario "web" como administrador
+    configureAdmin
 }

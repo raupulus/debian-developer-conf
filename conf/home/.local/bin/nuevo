@@ -61,8 +61,8 @@ case "$1" in
     -h|--help) about;;
     py|python|python3) generar 'Scripts/Python3.py' "$2" '.py';;
     python2) generar 'Scripts/Python2.py' "$2" '.py';;
-    bash) generar 'Scripts/Script\ Bash.sh' "$2" '.sh';;
-    sql|posgresql) generar 'Scripts/Script\ SQL.sql' "$2" '.sql';;
+    bash) generar 'Scripts/Script Bash.sh' "$2" '.sh';;
+    sql|posgresql) generar 'Scripts/Script SQL.sql' "$2" '.sql';;
     css) generar 'Web/CSS.css' "$2" '.css';;
     html|html5) generar 'Web/HTML5.html' "$2" '.html';;
     js|javascript) generar 'Web/Javascript.html' "$2" '.js';;

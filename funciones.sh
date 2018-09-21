@@ -4,14 +4,14 @@
 ## @author     Raúl Caro Pastorino
 ## @copyright  Copyright © 2017 Raúl Caro Pastorino
 ## @license    https://wwww.gnu.org/licenses/gpl.txt
-## @email      tecnico@fryntiz.es
-## @web        www.fryntiz.es
-## @github     https://github.com/fryntiz
+## @email      dev@fryntiz.es
+## @web        https://fryntiz.es
 ## @gitlab     https://gitlab.com/fryntiz
+## @github     https://github.com/fryntiz
 ## @twitter    https://twitter.com/fryntiz
 ##
 ##             Guía de estilos aplicada:
-## @style      https://github.com/fryntiz/Bash_Style_Guide
+## @style      https://gitlab.com/fryntiz/bash-style-guide
 
 ############################
 ##     INSTRUCCIONES      ##
@@ -59,9 +59,19 @@ opciones() {
 ## @param  $*  String  Nombre de programas a instalar
 ##
 instalarSoftware() {
-    for programa in $*; do
-        sudo apt install -y "$programa"
-    done
+    if [[ "$MY_DISTRO" = 'debian' ]] || [[ "$MY_DISTRO" = 'raspbian' ]]; then
+        for programa in $*; do
+            sudo apt install -y "$programa"
+        done
+    elif [[ "$MY_DISTRO" = 'gentoo' ]]; then
+        for programa in $*; do
+            sudo emerge "$programa"
+        done
+    elif [[ "$MY_DISTRO" = 'fedora' ]]; then
+        for programa in $*; do
+            sudo dnf install -y "$programa"
+        done
+    fi
 }
 
 ##
@@ -70,9 +80,19 @@ instalarSoftware() {
 ## @param  $*  String  Nombres de programas para ser actualizados
 ##
 actualizarSoftware() {
-    for programa in $*; do
-        sudo apt upgrade -y "$programa"
-    done
+    if [[ "$MY_DISTRO" = 'debian' ]] || [[ "$MY_DISTRO" = 'raspbian' ]]; then
+        for programa in $*; do
+            sudo apt upgrade -y "$programa"
+        done
+    elif [[ "$MY_DISTRO" = 'gentoo' ]]; then
+        for programa in $*; do
+            sudo emerge -vDuN "$programa"
+        done
+    elif [[ "$MY_DISTRO" = 'fedora' ]]; then
+        for programa in $*; do
+            sudo dnf upgrade -y "$programa"
+        done
+    fi
 }
 
 ##
@@ -99,31 +119,37 @@ instalarSoftwareLista() {
     if [[ $# = 0 ]]; then
         return 1
     fi
-
     repararGestorPaquetes
 
-    ## Instalando lo más básico desde "Software-Basico.lst"
-    echo -e "$VE Instalando Software adicional$CL"
+    lista_Software=$(cat $1)
 
-    ## Paquetes a instalar
-    local lista_Software=(`cat $1`)
+    if [[ "$MY_DISTRO" = 'debian' ]] || [[ "$MY_DISTRO" = 'raspbian' ]]; then
+        ## Paquetes a instalar
+        ## La siguiente variable guarda toda la lista de paquetes desde DPKG
+        local lista_todos_paquetes=(${dpkg-query -W -f='${Installed-Size} ${Package}\n' | sort -n | cut -d" " -f2})
 
-    ## La siguiente variable guarda toda la lista de paquetes desde DPKG
-    local lista_todos_paquetes=(${dpkg-query -W -f='${Installed-Size} ${Package}\n' | sort -n | cut -d" " -f2})
+        ## Comprueba si el software está instalado y en caso contrario instala
 
-    ## Comprueba si el software está instalado y en caso contrario instala
-
-    for s in "${lista_Software[@]}"; do
-        for x in "${lista_todos_paquetes[@]}"; do
-            if [[ $s = $x ]]; then
-                echo -e "$RO $s$VE ya estaba instalado$CL"
-                break
-            else
-                instalarSoftware "$s"
-                break
-            fi
+        for s in "${lista_Software[@]}"; do
+            for x in "${lista_todos_paquetes[@]}"; do
+                if [[ $s = $x ]]; then
+                    echo -e "$RO $s$VE ya estaba instalado$CL"
+                    break
+                else
+                    instalarSoftware "$s"
+                    break
+                fi
+            done
         done
-    done
+    elif [[ "$MY_DISTRO" = 'gentoo' ]]; then
+        for x in "${lista_Software[@]}"; do
+            instalarSoftware "$x"
+        done
+    elif [[ "$MY_DISTRO" = 'fedora' ]]; then
+        for x in "${lista_Software[@]}"; do
+             instalarSoftware "$x"
+        done
+    fi
 
     repararGestorPaquetes
 
@@ -135,8 +161,10 @@ instalarSoftwareLista() {
 ##
 repararGestorPaquetes() {
     echo -e "$VE Comprobando estado del$RO Gestor de paquetes$VE (Paciencia)$CL"
-    sudo apt --fix-broken install -y >> /dev/null 2>> /dev/null
-    sudo apt install -f -y >> /dev/null 2>> /dev/null
+    if [[ "$MY_DISTRO" = 'debian' ]] || [[ "$MY_DISTRO" = 'raspbian' ]]; then
+        sudo apt --fix-broken install -y >> /dev/null 2>> /dev/null
+        sudo apt install -f -y >> /dev/null 2>> /dev/null
+    fi
 }
 
 ##
@@ -144,7 +172,13 @@ repararGestorPaquetes() {
 ##
 actualizarRepositorios() {
     echo -e "$VE Actualizando listas de$RO Repositorios$VE (Paciencia)$CL"
-    sudo apt update >> /dev/null 2>> /dev/null
+    if [[ "$MY_DISTRO" = 'debian' ]] || [[ "$MY_DISTRO" = 'raspbian' ]]; then
+        sudo apt update
+    elif [[ "$MY_DISTRO" = 'gentoo' ]]; then
+        sudo emerge --sync
+    elif [[ "$MY_DISTRO" = 'fedora' ]]; then
+        sudo dnf update
+    fi
 }
 
 ##
@@ -278,7 +312,8 @@ actualizarGIT() {
 }
 
 ##
-## Crea un enlace por archivo pasado después de realizar una copia de seguridad ## tomando como punto de referencia el propio repositorio, ruta conf/home/
+## Crea un enlace por archivo pasado después de realizar una copia de seguridad
+## tomando como punto de referencia el propio repositorio, ruta conf/home/
 ## donde estarán situado todos los archivos para ser actualizados con
 ## el repositorio.
 ## @param  $*  String  Nombre del archivo o directorio dentro del home del user
@@ -359,5 +394,55 @@ instalarNpmGlobal() {
     for x in $*; do
         echo -e "$RO Instalando $x$CL"
         npm install -g "$x"
+    done
+}
+
+##
+## Agrega variable de entorno si no tiene valor. Si tiene valor no se hace nada.
+## @param $1 Recibe el nombre de la variable
+## @param $2 Recibe el valor que se quiere poner en caso de no tener valor
+##
+setVariableGlobal() {
+    if [[ "${!1}" = '' ]]; then
+        echo -e "$VE Seteando globalmente: ${1}=${2}$CL"
+        echo "${1}=${2}" | sudo tee -a /etc/environment
+        export "${1}=${2}"
+    fi
+}
+
+
+##
+## Recibe una lista de paquetes a instalar como usuario en su home
+## @param $* Recibe la lista de paquetes
+##
+python2Install() {
+    echo -e "$VE Instalando paquete Python$CL"
+    for x in $*; do
+        echo -e "$RO Instalando $x$CL"
+        pip install --user --upgrade "$x"
+    done
+}
+
+##
+## Recibe una lista de paquetes a instalar como usuario en su home
+## @param $* Recibe la lista de paquetes
+##
+python3Install() {
+    echo -e "$VE Instalando paquete Python$CL"
+    for x in $*; do
+        echo -e "$RO Instalando $x$CL"
+        pip3 install --user --upgrade "$x"
+    done
+}
+
+##
+## Recibe una lista de paquetes a instalar de forma global como root
+## @param $* Recibe la lista de paquetes
+##
+python3InstallGlobal() {
+    echo -e "$VE Instalando paquete Python de forma global$CL"
+    for x in $*; do
+        echo -e "$RO Instalando $x$CL"
+        sudo pip3 install --upgrade "$x"
     done
 }

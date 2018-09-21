@@ -4,10 +4,10 @@
 ## @author     Raúl Caro Pastorino
 ## @copyright  Copyright © 2018 Raúl Caro Pastorino
 ## @license    https://wwww.gnu.org/licenses/gpl.txt
-## @email      tecnico@fryntiz.es
-## @web        www.fryntiz.es
-## @github     https://github.com/fryntiz
+## @email      dev@fryntiz.es
+## @web        https://fryntiz.es
 ## @gitlab     https://gitlab.com/fryntiz
+## @github     https://github.com/fryntiz
 ## @twitter    https://twitter.com/fryntiz
 ##
 ##             Guía de estilos aplicada:
@@ -24,8 +24,14 @@
 i3wm_preconfiguracion() {
     echo -e "$VE Generando Pre-Configuraciones de$RO i3wm$CL"
 
+    instalarSoftwareLista "$SOFTLIST/Desktops/x11-base.lst"
+
     ## Al pulsar botón de apagar se suspende
-    sudo sed -r -i "s/^#?\s*HandlePowerKey\s*=.*$/HandlePowerKey=suspend/" /etc/systemd/logind.conf
+    if [[ -f /etc/systemd/logind.conf ]]; then
+        sudo sed -r -i "s/^#?\s*HandlePowerKey\s*=.*$/HandlePowerKey=suspend/" /etc/systemd/logind.conf
+    else
+        echo "Plantear método independiente de systemd"
+    fi
 
     ## Instalo fuentes tipográficas necesarias
     fuentes_repositorios
@@ -33,20 +39,7 @@ i3wm_preconfiguracion() {
 
 i3wm_instalar() {
     echo -e "$VE Preparando para instalar$RO i3wm$CL"
-    instalarSoftware i3 i3-wm i3blocks i3lock i3status suckless-tools rofi
-    instalarSoftware acpi gawk
-
-    ## Notificaciones del escritorio con dunst
-    instalarSoftware dunst
-
-    ## Instalando gestor de archivos xfe
-    instalarSoftware xfe xfe-i18n xfe-themes
-
-    ## Navegador web liviano "surf"
-    instalarSoftware surf
-
-    ## Visor de imágenes nomacs
-    instalarSoftware nomacs
+    instalarSoftwareLista "$SOFTLIST/Desktops/i3wm.lst"
 }
 
 ##
@@ -54,9 +47,7 @@ i3wm_instalar() {
 ##
 i3wm_postconfiguracion() {
     echo -e "$VE Generando Post-Configuraciones$RO i3wm$CL"
-
-    echo -e "$VE Instalando software secundario$CL"
-    instalarSoftware rxvt-unicode-256color compton compton-conf compton-conf-l10n nitrogen thunar ranger w3m tint2 arandr xbacklight gvfs gpicview mplayer cmus zathura xautolock xbindkeys xbindkeys-config pulseaudio volumeicon-alsa alsamixergui xfce4-settings firewall-applet firewall-config firewalld unclutter lxappearance gtk-chtheme qt4-qtconfig pm-utils xfce4-screenshooter parcellite zenity scrot lxpolkit ssh-askpass wireless-tools fonts-powerline xfce4-clipman redshift lm-sensors libsensors4-dev
+    instalarSoftwareLista "$SOFTLIST/Desktops/wm-min-software.lst"
 
     echo -e "$VE Generando archivos de configuración$CL"
     enlazarHome '.config/i3' '.config/tint2' '.config/compton.conf' '.config/conky' '.Xresources' '.config/nitrogen' '.config/i3status' '.config/plank' '.config/rofi'
@@ -65,15 +56,10 @@ i3wm_postconfiguracion() {
         mkdir -p "$HOME/Imágenes/Screenshots"
     fi
 
-    ## Instalando i3pystatus
-    ## libasound2-dev → Necesario para pyalsaaudio
-    ## libiw-dev → Necesario para basiciw
-    instalarSoftware 'python3' 'python3-pip' 'libasound2-dev' 'libiw-dev' \
-    'python3-powerline' 'python3-psutil' 'python3-powerline-taskwarrior' \
-    'fonts-font-awesome'
+    ## Instalo y Configuro Python: Lenguajes-Programacion/python.sh
+    python_instalador
 
-
-    sudo pip3 install --upgrade 'i3pystatus' 'basiciw' 'netifaces' 'colour' \
+    python3Install 'i3pystatus' 'basiciw' 'netifaces' 'colour' \
     'pyalsaaudio' 'fontawesome'
 
     ## Tema Paper para GTK2 (Debe estar instalado)
@@ -83,8 +69,7 @@ i3wm_postconfiguracion() {
         rm -f "$HOME/.local/bin/brillo"
     fi
     ln -s "$HOME/.config/i3/scripts/brillo.py" "$HOME/.local/bin/brillo"
-    chmod +x "$HOME/.local/bin/brillo"
-
+    chmod a+rx "$HOME/.local/bin/brillo"
 }
 
 i3wm_instalador() {
@@ -103,6 +88,7 @@ i3wm_instalador() {
 ## Instalador para el fork de i3 gaps en:
 ## https://github.com/Airblader/i3/tree/gaps
 ## Se usa la rama "gaps" en vez de la rama "gaps-next"
+## Esta función ha quedado obsoleta y por ahora no la actualizaré al no usarla
 ##
 i3wm_gaps_instalador() {
     ## Instalando dependencias

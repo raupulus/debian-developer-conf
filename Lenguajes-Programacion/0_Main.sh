@@ -41,16 +41,23 @@ menuLenguajes() {
     todos_lenguajes() {
         clear
         echo -e "$VE Instalando todos los lenguajes$CL"
-        php_instalador
-        python_instalador
-        ruby_instalador
-        go_instalador
-        c_instalador
-        perl_instalador
+        php_instalador "$1"
+        python_instalador "$1"
+
+        if [[ "$1" != 'prod' ]]; then
+            ruby_instalador
+            go_instalador
+            c_instalador
+            perl_instalador
+        fi
     }
 
     if [[ "$1" = '-a' ]]; then
-        todos_lenguajes
+        if [[ "$2" = 'prod' ]]; then
+            todos_lenguajes 'prod'
+        else
+            todos_lenguajes
+        fi
     else
         while true :; do
             clear

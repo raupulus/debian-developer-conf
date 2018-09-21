@@ -2,16 +2,17 @@
 # -*- ENCODING: UTF-8 -*-
 ##
 ## @author     Raúl Caro Pastorino
-## @copyright  Copyright © 2017 Raúl Caro Pastorino
+## @copyright  Copyright © 2018 Raúl Caro Pastorino
 ## @license    https://wwww.gnu.org/licenses/gpl.txt
-## @email      tecnico@fryntiz.es
-## @web        www.fryntiz.es
-## @github     https://github.com/fryntiz
+## @email      dev@fryntiz.es
+## @web        https://fryntiz.es
 ## @gitlab     https://gitlab.com/fryntiz
+## @github     https://github.com/fryntiz
 ## @twitter    https://twitter.com/fryntiz
 ##
 ##             Guía de estilos aplicada:
-## @style      https://github.com/fryntiz/Bash_Style_Guide
+## @style      https://gitlab.com/fryntiz/bash-style-guide
+##
 
 ############################
 ##     INSTRUCCIONES      ##
@@ -22,7 +23,24 @@
 ############################
 ##       FUNCIONES        ##
 ############################
-# Importa todas las variables al inicio del sistema Operativo
-function instalar_variables() {
+##
+## Establece variables globales en /etc/environment
+##
+variablesGlobales() {
     echo -e "$VE Instalando$RO Variables Globales$VE al sistema$CL"
+    if [[ "$1" = 'pro' ]];then
+        setVariableGlobal 'ENV' 'prod'
+        setVariableGlobal 'DEBIAN_VERSION' 'stable'
+    else
+        setVariableGlobal 'ENV' 'dev'
+    fi
+
+    setVariableGlobal 'LC_ALL' 'es_ES.UTF-8'
+    setVariableGlobal 'LC_CTYPE' 'es_ES.UTF-8'
+    setVariableGlobal 'LC_MESSAGES' 'es_ES.UTF-8'
+}
+
+# Importa todas las variables al inicio del sistema Operativo
+instalar_variables() {
+    variablesGlobales $1
 }

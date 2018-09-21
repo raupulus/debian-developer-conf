@@ -1,21 +1,22 @@
 #!/usr/bin/env bash
 # -*- ENCODING: UTF-8 -*-
 
-
 ## @author     Raúl Caro Pastorino
-## @email      tecnico@fryntiz.es
-## @web        http://www.fryntiz.es
-## @github     https://github.com/fryntiz
+## @email      dev@fryntiz.es
+## @web        https://fryntiz.es
 ## @gitlab     https://gitlab.com/fryntiz
+## @github     https://github.com/fryntiz
 ## @twitter    https://twitter.com/fryntiz
+## @telegram   https://t.me/fryntiz
 
+## @bash        4.2 or later
 ## Create Date: 2018
 ## Project Name: 
 ## Description: 
 ## Dependencies: 
 
 ##             Guía de estilos aplicada:
-## @style      https://github.com/fryntiz/Bash_Style_Guide
+## @style      https://gitlab.com/fryntiz/bash-guide-style
 
 ## Revision 0.01 - File Created
 ## Additional Comments: 
@@ -35,7 +36,6 @@
 ##
 ## You should have received a copy of the GNU General Public License
 ## along with this program.  If not, see <http://www.gnu.org/licenses/>
-
 
 
 ############################
@@ -59,7 +59,7 @@ RO="\033[1;31m"  ## Color Rojo
 VE="\033[1;32m"  ## Color Verde
 CL="\e[0m"       ## Limpiar colores
 
-VERSION="0.0.0"
+VERSION="0.0.1"
 WORKSCRIPT=$PWD  ## Directorio principal del script
 USER=$(whoami)   ## Usuario que ejecuta el script
 
@@ -74,6 +74,5 @@ USER=$(whoami)   ## Usuario que ejecuta el script
 ############################
 ##       EJECUCIÓN        ##
 ############################
-
 
 exit 0
