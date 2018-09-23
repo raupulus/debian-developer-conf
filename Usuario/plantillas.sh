@@ -22,5 +22,8 @@
 ##
 usuario_plantillas() {
     crearBackup "$HOME/Plantillas"
+    if [[ ! -d "$HOME/Plantillas" ]]; then
+        mkdir "$HOME/Plantillas"
+    fi
     enlazarHome 'Plantillas/Genéricas'
 }
