@@ -38,6 +38,8 @@ RO="\033[1;31m"  ## Color Rojo
 VE="\033[1;32m"  ## Color Verde
 CL="\e[0m"       ## Limpiar colores
 
+source '/etc/environment'
+
 WORKSCRIPT=$PWD  ## Directorio principal del script
 USER=$(whoami)   ## Usuario que ejecuta el script
 VERSION='0.8.3'  ## Versión en desarrollo

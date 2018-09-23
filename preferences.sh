@@ -37,8 +37,10 @@ setDistro() {
         getDistrosAvailable
         ## Pido elegir distribución
         echo "$MY_DISTRO"
-        read -p "Introduce tu distribución → " MY_DISTRO
+        read -p "Introduce tu distribución → " input
     done
+
+    MY_DISTRO="$input"
 
     setVariableGlobal 'DISTRO' "$MY_DISTRO"
 }
@@ -52,8 +54,10 @@ setBranch() {
         getDistrosAvailable
         ## Pido elegir distribución
         echo "$MY_BRANCH"
-        read -p "Introduce la rama → " MY_BRANCH
+        read -p "Introduce la rama → " input
     done
+
+    MY_BRANCH="$input"
 
     setVariableGlobal 'BRANCH' "$MY_BRANCH"
 }
