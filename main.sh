@@ -38,7 +38,15 @@ RO="\033[1;31m"  ## Color Rojo
 VE="\033[1;32m"  ## Color Verde
 CL="\e[0m"       ## Limpiar colores
 
-source '/etc/environment'
+## Importo variables globales para evitar conflictos de configuración sin reboot
+if [[ -f '/etc/environment' ]]; then
+    source '/etc/environment'
+fi
+
+## Importo variables locales si existieran, sobreescriben a las globales
+if [[ -f "$WORKSCRIPT/.env" ]]; then
+    source "$WORKSCRIPT/.env"
+fi
 
 WORKSCRIPT=$PWD  ## Directorio principal del script
 USER=$(whoami)   ## Usuario que ejecuta el script
