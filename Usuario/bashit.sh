@@ -34,11 +34,8 @@ bashit_descargar() {
 }
 
 bashit_preconfiguracion() {
-    local paquetes_dependencias='rbenv'
-
-    ## Instalando dependencias
     echo -e "$VE Instalando dependencias de$RO Bashit$CL"
-    instalarSoftware "$paquetes_dependencias"
+    instalarSoftwareLista "$SOFTLIST/Apps/bashit.lst"
 }
 
 bashit_instalar() {
@@ -65,7 +62,7 @@ bashit_instalar() {
 }
 
 bashit_postconfiguracion() {
-    local archivosConfiguracion='.bashrc powerline dunst .dircolors .less .lessfilter .tmux.conf'
+    local archivosConfiguracion='.bashrc dunst .dircolors .less .lessfilter'
 
     ## Crea el backup y enlazar archivos de este repo
     enlazarHome $archivosConfiguracion

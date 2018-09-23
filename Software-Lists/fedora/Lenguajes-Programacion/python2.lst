@@ -26,3 +26,4 @@ python2-virtualenv
 python2-waitress
 python2-pymongo
 python2-scapy
+python2-libtmux
