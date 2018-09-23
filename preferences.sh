@@ -67,8 +67,15 @@ setBranch() {
 ##
 configurePreferences() {
     echo -e "$VE Puedes setear tu mismo las variables en /etc/environment$CL"
-    setDistro
-    setBranch
+    echo -e "$VE También puedes usar .env en este directorio del script$CL"
+
+    if [[ "$MY_DISTRO" = '' ]]; then
+        setDistro
+    fi
+
+    if [[ "$MY_BRANCH" = '' ]]; then
+        setBranch
+    fi
 
     ## Recarga variables del entorno
     source '/etc/environment'
