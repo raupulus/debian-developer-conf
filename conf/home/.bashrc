@@ -306,6 +306,9 @@ alias hc="history -c"
 ## Atajos Generales
 alias pip3="pip3 --disable-pip-version-check"
 
+## Navegar hacia directorios
+alias tg="cd $HOME/git"
+
 ## Otros
 #alias rm="rm -i"
 #alias rm="mv ??????/tmp/deleted_$USER"
