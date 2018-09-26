@@ -30,6 +30,9 @@
 ##
 stable_agregar_llaves() {
     echo -e "$VE Agregando llaves solo para repositorios$RO stable$CL"
+
+    echo -e "$VE Agregando llave para$RO PHP$VE de sury,org$CL"
+    sudo wget -O /etc/apt/trusted.gpg.d/php.gpg https://packages.sury.org/php/apt.gpg
 }
 
 ##
