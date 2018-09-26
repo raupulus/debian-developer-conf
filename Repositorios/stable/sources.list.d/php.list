@@ -1,4 +1,4 @@
 ########################################################
 ##                        PHP                         ##
 ########################################################
-#deb https://packages.sury.org/php/ stretch
+#deb https://packages.sury.org/php/ stretch main
