@@ -67,6 +67,16 @@ atom_postconfiguracion() {
 
     echo -e "$VE Deshabilitando complementos$CL"
     apm disable welcome metrics
+
+    ## Instalando php-integrator-core 2.1.7 para php <7.1
+    echo -e "$VE Instalando$RO php-integrator-core 2.1.7$VE"
+    if [[ -d "$HOME/.atom/packages/php-integrator-base-legacy-php56/core/2.1.7" ]]; then
+        rm -R "$HOME/.atom/packages/php-integrator-base-legacy-php56/core/2.1.7"
+    fi
+    git clone 'https://gitlab.com/Serenata/Serenata' "$HOME/.atom/packages/php-integrator-base-legacy-php56/core/2.1.7"
+    cd "$HOME/.atom/packages/php-integrator-base-legacy-php56/core/2.1.7" || exit 1
+    git checkout b84807f33b77868f115332850113babab095c964
+    composer install
 }
 
 atom_plugins() {
