@@ -25,7 +25,7 @@ pigments
 linter-eslint
 autocomplete-modules
 atom-css-clean
-platformio-atom-ide-terminal
+platformio-ide-terminal
 docblockr
 emmet
 ide-php
