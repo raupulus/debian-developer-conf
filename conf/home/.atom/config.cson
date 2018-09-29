@@ -54,6 +54,7 @@
   "file-icons":
     coloured: true
   "ftp-remote-edit":
+    password: "4ad4494c"
     tree:
       showHiddenFiles: true
   "git-diff":
