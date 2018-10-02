@@ -207,15 +207,15 @@ apache2_postconfiguracion() {
 
     ## Creando directorios de logs
     if [[ ! -d '/var/log/apache2/default' ]]; then
-        mkdir '/var/log/apache2/default'
+        sudo mkdir '/var/log/apache2/default'
     fi
 
     if [[ ! -d '/var/log/apache2/publico.local' ]]; then
-        mkdir '/var/log/apache2/publico.local'
+        sudo mkdir '/var/log/apache2/publico.local'
     fi
 
     if [[ ! -d '/var/log/apache2/privado.local' ]]; then
-        mkdir '/var/log/apache2/privado.local'
+        sudo mkdir '/var/log/apache2/privado.local'
     fi
 
     personalizar_apache
@@ -239,7 +239,17 @@ apache2_ssl() {
 
     ## Genero certificados para localhost en caso de no existir
     local existe=$(sudo ls /etc/apache2/ssl/localhost.key)
+    local existe1=$(sudo ls /etc/apache2/ssl/localhost.csr)
+    local existe2=$(sudo ls /etc/apache2/ssl/localhost.crt)
     if [[ ! "$existe" = '/etc/apache2/ssl/localhost.key' ]]; then
+        if [[ ! "$existe1" = '/etc/apache2/ssl/localhost.csr' ]]; then
+            sudo rm /etc/apache2/ssl/localhost.csr
+        fi
+
+        if [[ ! "$existe2" = '/etc/apache2/ssl/localhost.crt' ]]; then
+            sudo rm /etc/apache2/ssl/localhost.crt
+        fi
+
         sudo openssl genrsa -des3 -out /etc/apache2/ssl/localhost.key 4096
         sudo openssl req -new -key \
             /etc/apache2/ssl/localhost.key \
