@@ -63,9 +63,49 @@ setBranch() {
 }
 
 ##
+## Permite establecer si nos encontramos en un entorno para desarrollo o para
+## producción mediante una variable global $ENV
+##
+setEnv() {
+    while true :; do
+        clear
+
+        local descripcion='Selecciona el entorno:
+            1) Producción
+            2) Desarrollo
+        '
+        opciones "$descripcion"
+
+        echo -e "$RO"
+        read -p '    Acción → ' entrada
+        echo -e "$CL"
+
+        case ${entrada} in
+
+            1) setVariableGlobal 'ENV' "prod";;
+            2) setVariableGlobal 'ENV' "dev";;
+
+            *)  ## Acción ante entrada no válida
+              clear
+              echo ""
+              echo -e "                   $RO ATENCIÓN: Elección no válida$CL";;
+        esac
+    done
+}
+
+##
 ## Configura las Opciones del entorno para usar el script
 ##
 configurePreferences() {
+    ## Recarga variables del entorno
+    source '/etc/environment'
+
+    ##
+    ## Toma las variables desde el archivo .env en la raíz del script
+    ## Esto sobreescribe otros valores existentes que hubiesen en environment
+    ##
+    source "$WORKSCRIPT/.env"
+
     echo -e "$VE Puedes setear tu mismo las variables en /etc/environment$CL"
     echo -e "$VE También puedes usar .env en este directorio del script$CL"
 
@@ -77,6 +117,8 @@ configurePreferences() {
         setBranch
     fi
 
-    ## Recarga variables del entorno
-    source '/etc/environment'
+    if [[ "$ENV" = '' ]]; then
+        setEnv
+    fi
+
 }
