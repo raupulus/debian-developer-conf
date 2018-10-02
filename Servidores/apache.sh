@@ -177,11 +177,16 @@ apache2_postconfiguracion() {
 
         ## Deshabilita Sitios Virtuales (VirtualHost)
         sudo a2dissite '000-default.conf'
+        sudo a2dissite 'default.conf'
+        sudo a2dissite 'default-ssl.conf'
+        sudo a2dissite 'default-tls.conf'
 
-        ## Habilita Sitios Virtuales (VirtualHost)
-        sudo a2ensite 'default.conf'
-        #sudo a2ensite 'publico.conf'
-        sudo a2ensite 'privado.conf'
+        ## Habilita Sitios Virtuales (VirtualHost) para desarrollo
+        if [[ "$ENV" = 'dev' ]]; then
+            sudo a2ensite 'default.conf'
+            sudo a2ensite 'publico.conf'
+            sudo a2ensite 'privado.conf'
+        fi
 
         activar_hosts() {
             echo -e "$VE Añadiendo$RO Sitios Virtuales$AM"
@@ -200,7 +205,59 @@ apache2_postconfiguracion() {
         fi
     }
 
+    ## Creando directorios de logs
+    if [[ ! -d '/var/log/apache2/default' ]]; then
+        mkdir '/var/log/apache2/default'
+    fi
+
+    if [[ ! -d '/var/log/apache2/publico.local' ]]; then
+        mkdir '/var/log/apache2/publico.local'
+    fi
+
+    if [[ ! -d '/var/log/apache2/privado.local' ]]; then
+        mkdir '/var/log/apache2/privado.local'
+    fi
+
     personalizar_apache
+}
+
+apache2_ssl() {
+    ## Instalar módulo SSL
+    sudo a2enmod ssl
+    sudo service apache2 restart
+
+    ## Comprobar que está activo y abierto el puerto
+    netstat -nl | grep 443
+    sudo iptables -nL | grep 443
+
+    ## Crear certificado autofirmado
+    if [[ ! -d /etc/apache2/ssl ]]; then
+        sudo mkdir /etc/apache2/ssl
+    fi
+
+    sudo chmod 700 -R /etc/apache2/ssl
+
+    ## Genero certificados para localhost en caso de no existir
+    local existe=$(sudo ls /etc/apache2/ssl/localhost.key)
+    if [[ ! "$existe" = '/etc/apache2/ssl/localhost.key' ]]; then
+        sudo openssl genrsa -des3 -out /etc/apache2/ssl/localhost.key 4096
+        sudo openssl req -new -key \
+            /etc/apache2/ssl/localhost.key \
+            -out /etc/apache2/ssl/localhost.csr
+
+        sudo openssl x509 -req -days 5000 \
+            -in /etc/apache2/ssl/localhost.csr \
+            -signkey /etc/apache2/ssl/localhost.key \
+            -out /etc/apache2/ssl/localhost.crt
+    fi
+
+    sudo chmod 600 -R /etc/apache2/ssl/
+
+    if [[ "$ENV" = 'dev' ]]; then
+        sudo a2ensite publico-ssl.local.conf
+        sudo a2ensite privado-ssl.local.conf
+        sudo a2ensite default-ssl.conf
+    fi
 }
 
 apache2_instalador() {
