@@ -272,6 +272,8 @@ apache2_instalador() {
     apache2_propietarios
     apache2_permisos
 
+    apache2_ssl
+
     ## Reiniciar servidor Apache para aplicar configuración
     reiniciarServicio apache2
 }
