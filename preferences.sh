@@ -82,8 +82,10 @@ setEnv() {
 
         case ${entrada} in
 
-            1) setVariableGlobal 'ENV' "prod";;
-            2) setVariableGlobal 'ENV' "dev";;
+            1) setVariableGlobal 'ENV' "prod"
+               break;;
+            2) setVariableGlobal 'ENV' "dev"
+               break;;
 
             *)  ## Acción ante entrada no válida
               clear
