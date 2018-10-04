@@ -38,7 +38,7 @@ ohmyzsh_descargar() {
 
 ohmyzsh_preconfiguracion() {
     echo -e "$VE Generando Pre-Configuraciones de$RO ohmyzsh$CL"
-    instalarSoftware 'zsh zsh-antigen zsh-syntax-highlighting'
+    instalarSoftwareLista "$SOFTLIST/Apps/ohmyzsh.lst"
 }
 
 ohmyzsh_instalar() {
@@ -49,7 +49,7 @@ ohmyzsh_instalar() {
 ohmyzsh_postconfiguracion() {
     echo -e "$VE Generando Post-Configuraciones$RO ohmyzsh$CL"
 
-    local archivosConfiguracion='.zshrc .tmux.conf powerline dunst'
+    local archivosConfiguracion='.zshrc dunst'
 
     ## Crea el backup y enlazar archivos de este repo
     enlazarHome "$archivosConfiguracion"

@@ -19,13 +19,13 @@ whitespace
 autocomplete-css
 autocomplete-html
 toggle-quotes
-console-log-atom
+console-log
 file-icons
 pigments
 linter-eslint
 autocomplete-modules
 atom-css-clean
-platformio-atom-ide-terminal
+platformio-ide-terminal
 docblockr
 emmet
 ide-php
@@ -43,3 +43,4 @@ php-integrator-refactoring-legacy-php56
 php-integrator-tooltips-legacy-php56
 hyperclick
 atom-bootstrap3
+ftp-remote-edit

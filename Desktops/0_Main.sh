@@ -24,9 +24,9 @@ source "$WORKSCRIPT/Desktops/xmonad.sh"
 source "$WORKSCRIPT/Desktops/openbox.sh"
 source "$WORKSCRIPT/Desktops/gnome-shell.sh"
 
-###########################
-##       FUNCIONES       ##
-###########################
+############################
+##       FUNCIONES        ##
+############################
 menuDesktops() {
     todos_desktops() {
         clear
@@ -45,9 +45,9 @@ menuDesktops() {
             local descripcion='Menú de Personalización del sistema
                 1) Instalar i3wm
                 2) Instalar Xmonad
-                2) Instalar Openbox
-                2) Instalar Gnome Shell
-                3) Todos los pasos anteriores
+                3) Instalar Openbox
+                4) Instalar Gnome Shell
+                5) Todos los pasos anteriores
 
                 0) Atrás
             '
@@ -62,7 +62,7 @@ menuDesktops() {
                 2)  xmonad_instalador;;       ## Instala xmonad
                 3)  openbox_instalador;;      ## Instala openbox
                 4)  gnome_shell_instalador;;  ## Instala gnome shell
-                3)  todos_desktops;;          ## Todos los pasos anteriores
+                5)  todos_desktops;;          ## Todos los pasos anteriores
 
                 0)  ## SALIR
                     clear

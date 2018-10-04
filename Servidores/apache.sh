@@ -4,10 +4,10 @@
 ## @author     Raúl Caro Pastorino
 ## @copyright  Copyright © 2017 Raúl Caro Pastorino
 ## @license    https://wwww.gnu.org/licenses/gpl.txt
-## @email      tecnico@fryntiz.es
-## @web        www.fryntiz.es
-## @github     https://github.com/fryntiz
+## @email      dev@fryntiz.es
+## @web        https://.fryntiz.es
 ## @gitlab     https://gitlab.com/fryntiz
+## @github     https://github.com/fryntiz
 ## @twitter    https://twitter.com/fryntiz
 ##
 ##             Guía de estilos aplicada:
@@ -35,15 +35,15 @@ apache2_propietarios() {
     echo -e "$VE Añadiendo el usuario al grupo$RO www-data"
     sudo adduser "$USER" 'www-data'
 
-    ## Cada archivo/directorio creado tomará el grupo www-data
-    if [[ -d "/home/$USER/GIT" ]]; then
-        sudo chown -R www-data:www-data "/home/$USER/GIT"
-        sudo chmod g+s -R "/home/$USER/GIT"
-    fi
-
     if [[ -d '/var/www/html' ]]; then
         sudo chown -R www-data:www-data "/home/$USER/GIT"
         sudo chmod g+s -R '/var/www/html'
+    fi
+
+    ## Cada archivo/directorio creado tomará el grupo www-data
+    if [[ -d "/home/$USER/GIT" ]]; then
+        sudo chown -R "$USER":www-data "/home/$USER/GIT"
+        sudo chmod g+s -R "/home/$USER/GIT"
     fi
 
 }
@@ -177,19 +177,31 @@ apache2_postconfiguracion() {
 
         ## Deshabilita Sitios Virtuales (VirtualHost)
         sudo a2dissite '000-default.conf'
+        sudo a2dissite 'default.conf'
+        sudo a2dissite 'default-ssl.conf'
+        sudo a2dissite 'publico.conf'
+        sudo a2dissite 'publico-ssl.conf'
+        sudo a2dissite 'privado.conf'
+        sudo a2dissite 'privado-ssl.conf'
+        sudo a2dissite 'dev.conf'
+        sudo a2dissite 'dev-ssl.conf'
 
-        ## Habilita Sitios Virtuales (VirtualHost)
-        sudo a2ensite 'default.conf'
-        #sudo a2ensite 'publico.conf'
-        sudo a2ensite 'privado.conf'
+        ## Habilita Sitios Virtuales (VirtualHost) para desarrollo
+        if [[ "$ENV" = 'dev' ]]; then
+            sudo a2ensite 'default.conf'
+            sudo a2ensite 'publico.conf'
+            sudo a2ensite 'privado.conf'
+            sudo a2ensite 'dev.conf'
+        fi
 
         activar_hosts() {
             echo -e "$VE Añadiendo$RO Sitios Virtuales$AM"
             echo '127.0.0.1 privado' | sudo tee -a '/etc/hosts'
             echo '127.0.0.1 privado.local' | sudo tee -a '/etc/hosts'
-            echo '127.0.0.1 p.local' | sudo tee -a '/etc/hosts'
             echo '127.0.0.1 publico' | sudo tee -a '/etc/hosts'
             echo '127.0.0.1 publico.local' | sudo tee -a '/etc/hosts'
+            echo '127.0.0.1 dev' | sudo tee -a '/etc/hosts'
+            echo '127.0.0.1 dev.local' | sudo tee -a '/etc/hosts'
         }
 
         read -p " ¿Quieres añadir sitios virtuales a /etc/hosts? s/N → " input
@@ -200,7 +212,73 @@ apache2_postconfiguracion() {
         fi
     }
 
+    ## Creando directorios de logs
+    if [[ ! -d '/var/log/apache2/default' ]]; then
+        sudo mkdir '/var/log/apache2/default'
+    fi
+
+    if [[ ! -d '/var/log/apache2/publico.local' ]]; then
+        sudo mkdir '/var/log/apache2/publico.local'
+    fi
+
+    if [[ ! -d '/var/log/apache2/privado.local' ]]; then
+        sudo mkdir '/var/log/apache2/privado.local'
+    fi
+
+    if [[ ! -d '/var/log/apache2/dev.local' ]]; then
+        sudo mkdir '/var/log/apache2/dev.local'
+    fi
+
     personalizar_apache
+}
+
+apache2_ssl() {
+    ## Instalar módulo SSL
+    sudo a2enmod ssl
+    sudo service apache2 restart
+
+    ## Comprobar que está activo y abierto el puerto
+    netstat -nl | grep 443
+    sudo iptables -nL | grep 443
+
+    ## Crear certificado autofirmado
+    if [[ ! -d /etc/apache2/ssl ]]; then
+        sudo mkdir /etc/apache2/ssl
+    fi
+
+    sudo chmod 700 -R /etc/apache2/ssl
+
+    ## Genero certificados para localhost en caso de no existir
+    local existe=$(sudo ls /etc/apache2/ssl/localhost.key)
+    local existe1=$(sudo ls /etc/apache2/ssl/localhost.csr)
+    local existe2=$(sudo ls /etc/apache2/ssl/localhost.crt)
+    if [[ ! "$existe" = '/etc/apache2/ssl/localhost.key' ]]; then
+        if [[ ! "$existe1" = '/etc/apache2/ssl/localhost.csr' ]]; then
+            sudo rm /etc/apache2/ssl/localhost.csr
+        fi
+
+        if [[ ! "$existe2" = '/etc/apache2/ssl/localhost.crt' ]]; then
+            sudo rm /etc/apache2/ssl/localhost.crt
+        fi
+
+        sudo openssl genrsa -des3 -out /etc/apache2/ssl/localhost.key 4096
+        sudo openssl req -new -key \
+            /etc/apache2/ssl/localhost.key \
+            -out /etc/apache2/ssl/localhost.csr
+
+        sudo openssl x509 -req -days 5000 \
+            -in /etc/apache2/ssl/localhost.csr \
+            -signkey /etc/apache2/ssl/localhost.key \
+            -out /etc/apache2/ssl/localhost.crt
+    fi
+
+    sudo chmod 600 -R /etc/apache2/ssl/
+
+    if [[ "$ENV" = 'dev' ]]; then
+        sudo a2ensite publico-ssl.conf
+        sudo a2ensite privado-ssl.conf
+        sudo a2ensite default-ssl.conf
+    fi
 }
 
 apache2_instalador() {
@@ -214,6 +292,8 @@ apache2_instalador() {
 
     apache2_propietarios
     apache2_permisos
+
+    apache2_ssl
 
     ## Reiniciar servidor Apache para aplicar configuración
     reiniciarServicio apache2

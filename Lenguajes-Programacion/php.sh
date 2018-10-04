@@ -4,14 +4,14 @@
 ## @author     Raúl Caro Pastorino
 ## @copyright  Copyright © 2017 Raúl Caro Pastorino
 ## @license    https://wwww.gnu.org/licenses/gpl.txt
-## @email      tecnico@fryntiz.es
-## @web        www.fryntiz.es
-## @github     https://github.com/fryntiz
+## @email      dev@fryntiz.es
+## @web        https://fryntiz.es
 ## @gitlab     https://gitlab.com/fryntiz
+## @github     https://github.com/fryntiz
 ## @twitter    https://twitter.com/fryntiz
 ##
 ##             Guía de estilos aplicada:
-## @style      https://github.com/fryntiz/Bash_Style_Guide
+## @style      https://gitlab.com/fryntiz/bash-style-guide
 
 ############################
 ##     INSTRUCCIONES      ##
@@ -63,14 +63,17 @@ php_postconfiguracion() {
         echo -e "$VE Estableciendo zona horaria por defecto para PHP$CL"
         sudo sed -r -i "s/^;?\s*date\.timezone\s*=.*$/date\.timezone = 'UTC'/" $PHPINI
 
-        echo -e "$VE Activando Reportar todos los errores → 'error_reporting'$CL"
-        sudo sed -r -i "s/^;?\s*error_reporting\s*=.*$/error_reporting = E_ALL/" $PHPINI
+        ## Configuración para desarrollo
+        if [[ "$ENV" = 'dev' ]]; then
+            echo -e "$VE Activando Reportar todos los errores → 'error_reporting'$CL"
+            sudo sed -r -i "s/^;?\s*error_reporting\s*=.*$/error_reporting = E_ALL/" $PHPINI
 
-        echo -e "$VE Activando Mostrar errores → 'display_errors'$CL"
-        sudo sed -r -i "s/^;?\s*display_errors\s*=.*$/display_errors = On/" $PHPINI
+            echo -e "$VE Activando Mostrar errores → 'display_errors'$CL"
+            sudo sed -r -i "s/^;?\s*display_errors\s*=.*$/display_errors = On/" $PHPINI
 
-        echo -e "$VE Activando Mostrar errores al iniciar → 'display_startup_errors'$CL"
-        sudo sed -r -i "s/^;?\s*display_startup_errors\s*=.*$/display_startup_errors = On/" $PHPINI
+            echo -e "$VE Activando Mostrar errores al iniciar → 'display_startup_errors'$CL"
+            sudo sed -r -i "s/^;?\s*display_startup_errors\s*=.*$/display_startup_errors = On/" $PHPINI
+        fi
 
         echo -e "$VE Tiempo máximo de ejecución 3 minutos → 'max_execution_time'$CL"
         sudo sed -r -i "s/^;?\s*max_execution_time\s*=.*$/max_execution_time = 180/" $PHPINI
@@ -119,7 +122,9 @@ php_postconfiguracion() {
             cp "$WORKSCRIPT/tmp/php_manual.sqlite" "$HOME/.local/share/psysh/php_manual.sqlite"
         }
 
-        psysh
+        if [[ "$ENV" = 'dev' ]]; then
+            psysh
+        fi
     }
 
     ## Preparar archivo con parámetros para xdebug
@@ -144,7 +149,9 @@ php_postconfiguracion() {
         #instalar_php "$V_PHP"
         configurar_php "$V_PHP"
         personalizar_php "$V_PHP"
-        xdebug "$V_PHP"
+        if [[ "$ENV" = 'dev' ]]; then
+            xdebug "$V_PHP"
+        fi
     done
 
     ## Si solo hay una versión de PHP la configura, en otro caso pregunta
@@ -177,7 +184,11 @@ php_postconfiguracion() {
 
     ## Activar módulos
     echo -e "$VE Activando módulos$CL"
-    sudo phpenmod -s 'apache2' 'xdebug'
+    sudo phpenmod 'fileinfo' 'ftp' 'curl' 'mongodb' 'pdo_pgsql' 'pgsql' 'sqlite3'
+
+    if [[ "$ENV" = 'dev' ]]; then
+        sudo phpenmod 'xdebug'
+    fi
 
     echo -e "$VE Desactivando Módulos"
     ## Xdebug para PHP CLI no tiene sentido y ralentiza
@@ -206,7 +217,7 @@ php_instalador() {
     php_postconfiguracion
 
     if [[ "$1" = 'prod' ]]; then
+        ## TODO → Esta función está de más, controlar desde $ENV
         php_produccion
     fi
-
 }

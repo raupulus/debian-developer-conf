@@ -1,0 +1,10 @@
+i3
+i3-ipc
+i3lock
+i3status
+python2-i3ipc
+python3-i3ipc
+python2-psutil
+python3-psutil
+python2-alsaaudio
+python3-alsaaudio

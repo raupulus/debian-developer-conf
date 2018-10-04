@@ -4,14 +4,14 @@
 ## @author     Raúl Caro Pastorino
 ## @copyright  Copyright © 2018 Raúl Caro Pastorino
 ## @license    https://wwww.gnu.org/licenses/gpl.txt
-## @email      tecnico@fryntiz.es
-## @web        www.fryntiz.es
-## @github     https://github.com/fryntiz
+## @email      dev@fryntiz.es
+## @web        https://fryntiz.es
 ## @gitlab     https://gitlab.com/fryntiz
+## @github     https://github.com/fryntiz
 ## @twitter    https://twitter.com/fryntiz
 ##
 ##             Guía de estilos aplicada:
-## @style      https://github.com/fryntiz/Bash_Style_Guide
+## @style      https://gitlab.com/fryntiz/Bash_Style_Guide
 
 ############################
 ##     INSTRUCCIONES      ##
@@ -28,22 +28,98 @@ source "$WORKSCRIPT/Usuario/plantillas.sh"
 source "$WORKSCRIPT/Usuario/programas-default.sh"
 source "$WORKSCRIPT/Usuario/terminales.sh"
 source "$WORKSCRIPT/Usuario/heroku.sh"
+source "$WORKSCRIPT/Usuario/bashit.sh"
+source "$WORKSCRIPT/Usuario/OhMyZsh.sh"
+source "$WORKSCRIPT/Usuario/spacevim.sh"
+source "$WORKSCRIPT/Usuario/vim.sh"
+source "$WORKSCRIPT/Usuario/tmux.sh"
+source "$WORKSCRIPT/Usuario/powerline.sh"
 
 ###########################
 ##       FUNCIONES       ##
 ###########################
 ##
+## Mi generador de proyectos https://github.com/fryntiz/Generador_Proyectos.git
+## Este generador de proyectos crea un script que permite generar la estructura
+## para los proyectos más recurridos por mi (php, python, bash....) y después
+## pregunta si subirlo automáticamente a GitHub
+##
+generador_proyectos() {
+    descargarGIT 'Generador de Proyectos' 'https://github.com/fryntiz/Generador_Proyectos.git' "$WORKSCRIPT/tmp/Generador_Proyectos"
+
+    cd "$WORKSCRIPT/tmp/Generador_Proyectos" || return 1 && ./instalar.sh
+    cd "$WORKSCRIPT" || exit
+}
+##
+## Crea un comando para generar plantillas de archivos
+##
+generador_plantillas() {
+    enlazarHome '.local/bin/nuevo'
+    sudo chmod 755 "/home/${USER}/.local/bin/nuevo"
+    sudo chown ${USER}:${USER} "/home/${USER}/.local/bin/nuevo"
+}
+
+devicons_ls() {
+    descargarGIT 'devicons-ls' 'https://github.com/ryanoasis/devicons-shell.git' "$WORKSCRIPT/tmp/devicons-shell"
+
+    if [[ -f "$HOME/.local/bin/devicons-ls" ]]; then
+        rm -f "$HOME/.local/bin/devicons-ls"
+    fi
+
+    cp "$WORKSCRIPT/tmp/devicons-shell/devicons-ls" "$HOME/.local/bin/devicons-ls"
+}
+
+softwareUsuarioMinimo() {
+    usuario_permisos
+    usuario_programas_default
+    usuario_nano
+    usuario_terminales
+    tmux_Instalador
+    powerline_Instalador
+
+    ## Instalación de Vim o Spacevim
+    while true; do
+        echo -e "$VE ¿Quieres instalar$RO vim$VE o$RO spacevim$CL"
+        echo -e "$RO 1)$VE vim$CL"
+        echo -e "$RO 2)$VE spacevim$CL"
+        read -p "→ " editor
+        case "$editor" in
+            vim | 1)
+                vim_Instalador
+                break;;
+            spacevim | 2)
+                spacevim_Instalador
+                break;;
+            *)  ## Opción errónea
+                clear
+                echo -e "$RO Opción no válida$CL"
+        esac
+    done
+}
+
+softwareUsuarioExtra() {
+    bashit_Instalador
+    ohmyzsh_Instalador
+    usuario_gedit
+    usuario_plantillas
+    usuario_heroku
+    devicons_ls
+
+    ## Mis propias aplicaciones
+    generador_proyectos
+    generador_plantillas
+}
+
+##
 ## Menú instalar todas las configuraciones del usuario
 ##
 menuUsuario() {
-    usuario_permisos
-    usuario_programas_default
+    cd "$WORKSCRIPT" || exit 1
 
-    cd "$WORKSCRIPT"
-
-    usuario_gedit
-    usuario_nano
-    usuario_plantillas
-    usuario_terminales
-    usuario_heroku
+    if [[ "$1" = '-m' ]] || [[ "$1" = '-min' ]]; then
+        softwareUsuarioMinimo
+    else
+        softwareUsuarioMinimo
+        softwareUsuarioExtra
+    fi
 }

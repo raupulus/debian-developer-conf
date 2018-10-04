@@ -1,0 +1,17 @@
+python
+python2
+python3
+python2-pip
+python3-pip
+python2-flake8
+python3-flake8
+python2-pyflakes
+python3-pyflakes
+python2-pydocstyle
+python3-pydocstyle
+python2-virtualenv
+python3-virtualenv
+python2-virtualenv-clone
+python3-virtualenv-clone
+python2-psutil
+python3-psutil

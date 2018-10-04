@@ -73,23 +73,8 @@ vim_preconfiguracion() {
 }
 
 vim_instalar() {
-    echo -e "$VE Preparando para instalar$RO Vim$CL"
-    ## La siguiente variable guarda toda la lista de paquetes desde DPKG
-    local lista_todos_paquetes=(${dpkg-query -W -f='${Installed-Size} ${Package}\n' | sort -n | cut -d" " -f2})
-
-    ## Comprueba si el software está instalado y en caso contrario instala
-    local dependencias=(vim vim-addon-manager vim-addon-mw-utils vim-asciidoc vim-athena vim-autopep8 vim-command-t vim-conque vim-ctrlp vim-editorconfig vim-fugitive vim-gnome vim-gocomplete vim-gtk vim-gtk3 vim-haproxy vim-icinga2 vim-khuno vim-lastplace vim-latexsuite vim-migemo vim-nox vim-pathogen vim-python-jedi vim-rails vim-runtime vim-scripts vim-snipmate vim-snippets vim-syntastic vim-syntax-gtk vim-tabular vim-tjp vim-tlib vim-ultisnips vim-vimerl vim-vimerl-syntax vim-vimoutliner vim-voom vim-youcompleteme exuberant-ctags fonts-powerline powerline)
-    for s in "${dependencias[@]}"; do
-        for x in "${lista_todos_paquetes[@]}"; do
-            if [[ "$s" = "$x" ]]; then
-                echo -e "$RO $s$VE ya estaba instalado$CL"
-                break
-            else
-                instalarSoftware "$s"
-                break
-            fi
-        done
-    done
+    echo -e "$VE Instalando$RO Vim$CL"
+    instalarSoftwareLista "$SOFTLIST/Apps/vim.lst"
 }
 
 vim_postconfiguracion() {

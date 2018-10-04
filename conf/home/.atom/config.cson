@@ -2,6 +2,9 @@
   "aligner-css": {}
   "atom-autocomplete-php":
     binComposer: "composer"
+  "atom-ide-ui":
+    use:
+      "atom-ide-diagnostics-ui": "never"
   "atom-typescript":
     compileOnSave: true
     locale: "es"
@@ -12,6 +15,7 @@
     backgroundStyling: "purple"
     semiColons: true
   core:
+    autoHideMenuBar: true
     disabledPackages: [
       "metrics"
       "welcome"
@@ -35,7 +39,7 @@
     ]
     projectHome: "~/GIT"
     telemetryConsent: "no"
-    warnOnLargeFileLimit: 10
+    warnOnLargeFileLimit: 4
   editor:
     autoIndentOnPaste: true
     fontFamily: "Fira Code, Menlo, Consolas, DejaVu Sans Mono, monospace"
@@ -49,6 +53,10 @@
     userId: "062f83f3-498d-4325-8817-f6e68c469cc9"
   "file-icons":
     coloured: true
+  "ftp-remote-edit":
+    password: "4ad4494c"
+    tree:
+      showHiddenFiles: true
   "git-diff":
     showIconsInEditorGutter: true
   "ide-python":
