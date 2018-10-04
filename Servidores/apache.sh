@@ -35,15 +35,15 @@ apache2_propietarios() {
     echo -e "$VE Añadiendo el usuario al grupo$RO www-data"
     sudo adduser "$USER" 'www-data'
 
-    ## Cada archivo/directorio creado tomará el grupo www-data
-    if [[ -d "/home/$USER/GIT" ]]; then
-        sudo chown -R www-data:www-data "/home/$USER/GIT"
-        sudo chmod g+s -R "/home/$USER/GIT"
-    fi
-
     if [[ -d '/var/www/html' ]]; then
         sudo chown -R www-data:www-data "/home/$USER/GIT"
         sudo chmod g+s -R '/var/www/html'
+    fi
+
+    ## Cada archivo/directorio creado tomará el grupo www-data
+    if [[ -d "/home/$USER/GIT" ]]; then
+        sudo chown -R "$USER":www-data "/home/$USER/GIT"
+        sudo chmod g+s -R "/home/$USER/GIT"
     fi
 
 }
@@ -179,22 +179,29 @@ apache2_postconfiguracion() {
         sudo a2dissite '000-default.conf'
         sudo a2dissite 'default.conf'
         sudo a2dissite 'default-ssl.conf'
-        sudo a2dissite 'default-tls.conf'
+        sudo a2dissite 'publico.conf'
+        sudo a2dissite 'publico-ssl.conf'
+        sudo a2dissite 'privado.conf'
+        sudo a2dissite 'privado-ssl.conf'
+        sudo a2dissite 'dev.conf'
+        sudo a2dissite 'dev-ssl.conf'
 
         ## Habilita Sitios Virtuales (VirtualHost) para desarrollo
         if [[ "$ENV" = 'dev' ]]; then
             sudo a2ensite 'default.conf'
             sudo a2ensite 'publico.conf'
             sudo a2ensite 'privado.conf'
+            sudo a2ensite 'dev.conf'
         fi
 
         activar_hosts() {
             echo -e "$VE Añadiendo$RO Sitios Virtuales$AM"
             echo '127.0.0.1 privado' | sudo tee -a '/etc/hosts'
             echo '127.0.0.1 privado.local' | sudo tee -a '/etc/hosts'
-            echo '127.0.0.1 p.local' | sudo tee -a '/etc/hosts'
             echo '127.0.0.1 publico' | sudo tee -a '/etc/hosts'
             echo '127.0.0.1 publico.local' | sudo tee -a '/etc/hosts'
+            echo '127.0.0.1 dev' | sudo tee -a '/etc/hosts'
+            echo '127.0.0.1 dev.local' | sudo tee -a '/etc/hosts'
         }
 
         read -p " ¿Quieres añadir sitios virtuales a /etc/hosts? s/N → " input
@@ -216,6 +223,10 @@ apache2_postconfiguracion() {
 
     if [[ ! -d '/var/log/apache2/privado.local' ]]; then
         sudo mkdir '/var/log/apache2/privado.local'
+    fi
+
+    if [[ ! -d '/var/log/apache2/dev.local' ]]; then
+        sudo mkdir '/var/log/apache2/dev.local'
     fi
 
     personalizar_apache
