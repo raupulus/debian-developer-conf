@@ -29,3 +29,4 @@ python-virtualenv
 python-waitress
 python-pymongo
 python-scapy
+python-twisted

@@ -18,3 +18,4 @@ python3-setuptools
 python3-virtualenv
 python3-pymongo
 python3-scapy
+python3-twisted
