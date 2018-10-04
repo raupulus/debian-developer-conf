@@ -4,14 +4,14 @@
 ## @author     Raúl Caro Pastorino
 ## @copyright  Copyright © 2017 Raúl Caro Pastorino
 ## @license    https://wwww.gnu.org/licenses/gpl.txt
-## @email      tecnico@fryntiz.es
-## @web        www.fryntiz.es
-## @github     https://github.com/fryntiz
+## @email      dev@fryntiz.es
+## @web        https://fryntiz.es
 ## @gitlab     https://gitlab.com/fryntiz
+## @github     https://github.com/fryntiz
 ## @twitter    https://twitter.com/fryntiz
 ##
 ##             Guía de estilos aplicada:
-## @style      https://github.com/fryntiz/Bash_Style_Guide
+## @style      https://gitlab.com/fryntiz/bash-style-guide
 
 ############################
 ##     INSTRUCCIONES      ##
@@ -50,9 +50,10 @@ fi
 
 WORKSCRIPT=$PWD  ## Directorio principal del script
 USER=$(whoami)   ## Usuario que ejecuta el script
-VERSION='0.8.3'  ## Versión en desarrollo
+VERSION='0.8.4'  ## Versión en desarrollo
 MY_DISTRO="$DISTRO"  ## Distribución sobre la que se ejecuta
 MY_BRANCH="$BRANCH"  ## stable|testing|unstable
+MY_ENV="$ENV"    ## prod|dev
 SOFTLIST="$WORKSCRIPT/Software-Lists/$MY_DISTRO"  ## Ruta hacia listas software
 LOGERROR="$WORKSCRIPT/errores.log"  ## Archivo donde almacenar errores
 DEBUG=false      ## Establece si está el script en modo depuración
