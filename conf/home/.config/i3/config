@@ -84,8 +84,6 @@ assign [class="^[aA]tom"] → $WS2
 for_window [class="^[aA]tom"] focus
 assign [class="^[bB]rackets"] → $WS2
 for_window [class="^[Bb]rackets"] focus
-assign [class="^[gG]eany"] → $WS2
-for_window [class="^[gG]eany"] focus
 
 ## 3
 assign [class="^[fF]irefox"] → $WS3
@@ -141,9 +139,9 @@ for_window [class="Pychess"] focus
 ############         FOCUS DE VENTANAS         ############
 ###########################################################
 bindsym $mod+F1 [class="Firefox"] focus
-bindsym $mod+F2 [class="Atom"] focus
-bindsym $mod+F3 [title="PhpStorm"] focus
-bindsym $mod+F4 [class="Thunar"] focus
+bindsym $mod+F2 [class="PhpStorm"] focus
+bindsym $mod+F3 [title="Atom"] focus
+bindsym $mod+F4 [class="nautilus"] focus
 bindsym $mod+F5 [class="tilix"] focus
 bindsym $mod+F6 [title="PyCharm"] focus
 bindsym $mod+F7 [class="Firefox"] focus
@@ -207,6 +205,10 @@ for_window [class="Unetbootin"] floating enable
 for_window [class="Usb-creator-gtk"] floating enable
 for_window [class="Xfce4-taskmanager"] floating enable
 for_window [title="^Terminator Preferences$"] floating enable
+for_window [title="QOwnNotes"] floating enable, resize set 1000 800
+for_window [title="ARandR"] floating enable, move position 50 50
+for_window [title="^Screen Layout Editor$"] floating enable
+for_window [title="^Instalador de paquetes"] floating enable, move position 50 50
 
 ###########################################################
 ############       VENTANAS NO FLOTANTES       ############
@@ -302,7 +304,9 @@ bar {
     output DVI-D-0
     output LVDS-2
     output VGA
+    output VGA-1
 
+    status_command  i3status
     #status_command  python3 ~/.config/i3/scripts/i3pystatus-min-config.py
 
     ## Deshabilitado iconos en esta segunda barra
@@ -474,10 +478,14 @@ bindsym --release print exec xfce4-screenshooter -fm -s ~/Imágenes/Screenshots/
 bindcode XF86MonBrightnessUp exec --no-startup-id ~/config/.i3/scripts/brillo.py next && notify-send "Brillo Arriba" || notify-send "Error: Brillo Arriba ha fallado"
 bindcode XF86MonBrightnessDown exec --no-startup-id ~/config/.i3/scripts/brillo.py back && notify-send "Brillo Abajo" || notify-send "Error: Brillo Abajo ha fallado"
 
+## Abrir programa de Notas QOwnNotes
+bindsym --release $mod+n exec QOwnNotes
+
+
 ############################################################
 ###############          Autostart        ##################
 ############################################################
-exec --no-startup-id i3-msg 'workspace $WS1; exec thunar;'
+exec --no-startup-id i3-msg 'workspace $WS1; exec nautilus;'
 exec --no-startup-id i3-msg 'workspace $WS1; exec tilix;'
 exec --no-startup-id i3-msg 'workspace $WS3; exec x-www-browser; workspace $WS1'
 exec --no-startup-id i3-msg 'workspace $WS4; exec ~/4_Programas/Telegram/Telegram; workspace $WS1'
