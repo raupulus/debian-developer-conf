@@ -42,8 +42,8 @@ set $WS7 7:
 set $WS8 8:
 
 ## Nombres para cada espacio del monitor 2
-set $WS9 9:HDMI1
-set $WS10 10:HDMI2
+set $WS9 9:
+set $WS10 10:
 
 ## Asigno workspaces a Monitor 1
 #workspace 1 output $mon1
