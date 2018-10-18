@@ -76,6 +76,7 @@
     ]
   "linter-ui-default":
     decorateOnTreeView: "Files and Directories"
+    showPanel: true
   "markdown-preview":
     useGitHubStyle: true
   minimap:
