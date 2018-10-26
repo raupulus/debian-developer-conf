@@ -54,3 +54,5 @@ actualizarSistema() {
         py -3 -m pip_review --local --auto
     fi
 }
+
+actualizarSistema
