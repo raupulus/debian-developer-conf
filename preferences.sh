@@ -28,10 +28,10 @@ getDistrosAvailable() {
 }
 
 setDistro() {
-    while [[ "$MY_DISTRO" != 'debian' ]] &&
-          [[ "$MY_DISTRO" != 'gentoo' ]] &&
-          [[ "$MY_DISTRO" != 'raspbian' ]] &&
-          [[ "$MY_DISTRO" != 'fedora' ]]
+    while [[ "$input" != 'debian' ]] &&
+          [[ "$input" != 'gentoo' ]] &&
+          [[ "$input" != 'raspbian' ]] &&
+          [[ "$input" != 'fedora' ]]
     do
         clear
         getDistrosAvailable
@@ -46,9 +46,9 @@ setDistro() {
 }
 
 setBranch() {
-    while [[ "$MY_BRANCH" != 'stable' ]] &&
-          [[ "$MY_BRANCH" != 'testing' ]] &&
-          [[ "$MY_BRANCH" != 'unstable' ]]
+    while [[ "$input" != 'stable' ]] &&
+          [[ "$input" != 'testing' ]] &&
+          [[ "$input" != 'unstable' ]]
     do
         clear
         getDistrosAvailable
