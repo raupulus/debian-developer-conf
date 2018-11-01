@@ -97,7 +97,7 @@ comunes_download_repositorios() {
     echo -e "$VE Descargando repositorios desde scripts oficiales$CL"
     ## Repositorio de NodeJS Oficial
     echo -e "$VE Agregando repositorio$RO NodeJS$AM Repositorio Oficial$CL"
-    curl -sL https://deb.nodesource.com/setup_10.x | sudo -E bash -
+    curl -sL https://deb.nodesource.com/setup_11.x | sudo -E bash -
 
     ## Riot
     echo -e "$VE Agregando Repositorio para$RO Riot (Matrix)$CL"
