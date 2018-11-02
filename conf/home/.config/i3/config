@@ -481,6 +481,8 @@ bindcode XF86MonBrightnessDown exec --no-startup-id ~/config/.i3/scripts/brillo.
 ## Abrir programa de Notas QOwnNotes
 bindsym --release $mod+n exec QOwnNotes
 
+## Abrir gestor de contraseñas KeePass2
+bindsym --release $mod+k exec keepass2 "$HOME/Documentos/Personal.kdbx"
 
 ############################################################
 ###############          Autostart        ##################
