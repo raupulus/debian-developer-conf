@@ -75,15 +75,15 @@ php_postconfiguracion() {
             sudo sed -r -i "s/^;?\s*display_startup_errors\s*=.*$/display_startup_errors = On/" $PHPINI
         fi
 
-        echo -e "$VE Tiempo máximo de ejecución 3 minutos → 'max_execution_time'$CL"
-        sudo sed -r -i "s/^;?\s*max_execution_time\s*=.*$/max_execution_time = 180/" $PHPINI
+        echo -e "$VE Tiempo máximo de ejecución 5 minutos → 'max_execution_time'$CL"
+        sudo sed -r -i "s/^;?\s*max_execution_time\s*=.*$/max_execution_time = 300/" $PHPINI
 
-        echo -e "$VE Límite de Memoria por script → 'memory_limit = 128M'$CL"
-        sudo sed -r -i "s/^;?\s*memory_limit\s*=.*$/memory_limit = 128M/" $PHPINI
+        echo -e "$VE Límite de Memoria por script → 'memory_limit = 256M'$CL"
+        sudo sed -r -i "s/^;?\s*memory_limit\s*=.*$/memory_limit = 256M/" $PHPINI
 
         ## Límite de archivos
-        echo -e "$VE Tamaño máximo de subida → 'upload_max_filesize = 512M'$CL"
-        sudo sed -r -i "s/^;?\s*upload_max_filesize\s*=.*$/upload_max_filesize = 512M/" $PHPINI
+        echo -e "$VE Tamaño máximo de subida → 'upload_max_filesize = 1024M'$CL"
+        sudo sed -r -i "s/^;?\s*upload_max_filesize\s*=.*$/upload_max_filesize = 1024M/" $PHPINI
 
         echo -e "$VE Tamaño máximo de POST → 'post_max_size = 1024M'$CL"
         sudo sed -r -i "s/^;?\s*post_max_size\s*=.*$/post_max_size = 1024M/" $PHPINI
@@ -169,6 +169,12 @@ php_postconfiguracion() {
             for V_PHP in "${ALL_PHP[@]}"; do
                 if [[ $input = "$V_PHP" ]]; then
                     sudo a2enmod "php$V_PHP"
+
+                    ## Actualizo variables de entorno para la versión elegida.
+                    sudo update-alternatives --set php "/usr/bin/php${V_PHP}"
+                    sudo update-alternatives --set phar "/usr/bin/phar${V_PHP}"
+                    sudo update-alternatives --set phar.phar "/usr/bin/phar.phar${V_PHP}"
+
                     salir='salir'
                     break
                 fi
