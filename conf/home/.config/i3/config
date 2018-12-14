@@ -551,7 +551,6 @@ set $mode_system Sistema: (l) Bloquear, (e) Salir, (s) Suspender, (h) Hibernar, 
 set $i3exit ~/.config/i3/scripts/i3exit.sh
 
 mode "$mode_system" {
-
     bindsym l exec --no-startup-id $i3exit lock, mode "default"
     bindsym e exec --no-startup-id $i3exit logout, mode "default"
     bindsym s exec --no-startup-id $i3exit suspend, mode "default"
@@ -565,6 +564,28 @@ mode "$mode_system" {
 }
 
 bindsym $mod+Escape mode "$mode_system"
+
+############################################################
+###############    MENÚ DE SERVIDORES     ##################
+############################################################
+set $mode_servers A.Apache: (1), E.Apache: (2), A.MariaDB: (3), E.MariaDB: (4), A.PostgreSQL: (5), E.PostgreSQL: (6)
+
+set $servers ~/.config/i3/scripts/servers.sh
+
+mode "$mode_servers" {
+    bindsym 1 exec --no-startup-id $servers apache start, mode "default"
+    bindsym 2 exec --no-startup-id $servers apache stop, mode "default"
+    bindsym 3 exec --no-startup-id $servers mariadb start, mode "default"
+    bindsym 4 exec --no-startup-id $servers mariadb stop, mode "default"
+    bindsym 5 exec --no-startup-id $servers postgresql start, mode "default"
+    bindsym 6 exec --no-startup-id $servers postgresql stop, mode "default"
+
+    # back to normal: Enter or Escape
+    bindsym Return mode "default"
+    bindsym Escape mode "default"
+}
+
+bindsym $mod+F12 mode "$mode_servers"
 
 ############################################################
 ###############           APPLETS         ##################
