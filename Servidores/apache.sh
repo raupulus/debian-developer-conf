@@ -270,6 +270,12 @@ apache2_ssl() {
             -in /etc/apache2/ssl/localhost.csr \
             -signkey /etc/apache2/ssl/localhost.key \
             -out /etc/apache2/ssl/localhost.crt
+
+
+        ## Muevo el .key para quitar que pida la contraseña
+        sudo mv /etc/apache2/ssl/localhost.key /etc/apache2/ssl/localhostBACKUP.key
+        sudo openssl rsa -in /etc/apache2/ssl/localhostBACKUP.key -out /etc/apache2/ssl/localhost.key
+        sudo rm /etc/apache2/ssl/localhostBACKUP.key
     fi
 
     sudo chmod 600 -R /etc/apache2/ssl/

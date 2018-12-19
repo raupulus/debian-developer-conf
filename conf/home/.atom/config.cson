@@ -1,43 +1,5 @@
 "*":
-  "aligner-css": {}
-  "atom-autocomplete-php":
-    binComposer: "composer"
-  "atom-ide-ui":
-    use:
-      "atom-ide-diagnostics-ui": "never"
-  "atom-typescript":
-    compileOnSave: true
-    locale: "es"
-    showSemanticView: true
-  autosave:
-    enabled: true
-  "console-log":
-    backgroundStyling: "purple"
-    semiColons: true
   core:
-    autoHideMenuBar: true
-    disabledPackages: [
-      "metrics"
-      "welcome"
-    ]
-    ignoredNames: [
-      ".git"
-      ".hg"
-      ".svn"
-      ".DS_Store"
-      "._*"
-      "Thumbs.db"
-      "desktop.ini"
-      "*.pdf"
-      "*.url"
-      "*.mp4"
-      "*.m4v"
-      "*.avi"
-      "*.dv"
-      "*.zip"
-      ".tmp"
-    ]
-    projectHome: "~/GIT"
     telemetryConsent: "no"
     warnOnLargeFileLimit: 4
   editor:
@@ -124,18 +86,3 @@
     hideIgnoredNames: true
   welcome:
     showOnStartup: false
-".basic.html.text":
-  editor:
-    tabLength: 2
-".css.source":
-  editor:
-    tabLength: 2
-".json.source":
-  editor:
-    tabLength: 2
-".source.ts":
-  editor:
-    tabLength: 2
-".source.tsx":
-  editor:
-    tabLength: 2
