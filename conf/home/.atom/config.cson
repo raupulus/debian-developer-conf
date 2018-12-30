@@ -3,5 +3,8 @@
     telemetryConsent: "no"
   "exception-reporting":
     userId: "cd10fdd5-f759-4753-afd6-d492e1b835e4"
+  "ftp-remote-edit":
+    config: "209d581622b674385495204ec421f5a26f7d6aaf5dd2b342248ac2c048db373437f503d257edeffc7bb5d88d4ac92341841e5124baf420cbb8f6e80aa075ea14f77346cc336944f9f76816a5e9dc02a2c4d15d58874bee01cd2411029838774807dd4b3956898406f1f34089b14bda33293072647acef933bdf720485c19d7971ccfe924b68026b8893d6021605a1f847f184af29a51bc1585a2c2fe1f"
+    password: "4ad4494c"
   welcome:
     showOnStartup: false

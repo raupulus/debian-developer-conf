@@ -13,6 +13,9 @@ mainFirewall() {
     ## Permito https
     sudo firewall-cmd --zone=public --add-port=443/tcp --permanent
 
+    ## Permito ISPConfig
+    #sudo firewall-cmd --zone=public --add-port=8080/tcp --permanent
+
     ## Permito mumble
     #sudo firewall-cmd --zone=public --add-port=64738/tcp --permanent
     #sudo firewall-cmd --zone=public --add-port=64738/udp --permanent

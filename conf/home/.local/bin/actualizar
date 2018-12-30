@@ -37,6 +37,7 @@ actualizarSistema() {
     if [[ -f '/usr/bin/flatpak' ]]; then
         echo "Actualizando desde FlatPak"
         sudo flatpak update
+	sudo chmod 755 /var/lib/flatpak/app -R
     fi
 
     if [[ -f '/usr/bin/npm' ]] || [[ -f "$HOME/.npm/bin/npm" ]]; then
