@@ -17,3 +17,5 @@ xbitmaps
 xinput
 mesa-utils
 colord
+x11-xserver-utils
+xbase-clients

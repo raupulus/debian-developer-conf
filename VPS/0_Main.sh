@@ -39,16 +39,12 @@ menuVPS() {
     aplicaciones_basicas
 
     instalarSoftwareLista "$WORKSCRIPT/Apps/Packages/vps.lst"
-    instalarSoftwareLista "$WORKSCRIPT/Apps/Packages/developer.lst"
 
     configuracion_git
-    terminales_instalador
 
-    menuServidores -a 'prod'
-    menuLenguajes -a 'prod'
+    #menuServidores -a 'prod'
+    #menuLenguajes -a 'prod'
 
-    bashit_Instalador
-    ohmyzsh_Instalador
     vim_Instalador
 
     ## Específicos de VPS en este directorio
