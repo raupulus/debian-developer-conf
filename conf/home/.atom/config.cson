@@ -1,10 +1,88 @@
 "*":
   core:
     telemetryConsent: "no"
+    warnOnLargeFileLimit: 4
+  editor:
+    autoIndentOnPaste: true
+    fontFamily: "Fira Code, Menlo, Consolas, DejaVu Sans Mono, monospace"
+    fontSize: 17
+    showIndentGuide: true
+    showInvisibles: true
+    softWrap: true
+    softWrapAtPreferredLineLength: true
+    tabLength: 4
   "exception-reporting":
-    userId: "cd10fdd5-f759-4753-afd6-d492e1b835e4"
+  "file-icons":
+    coloured: true
   "ftp-remote-edit":
-    config: "209d581622b674385495204ec421f5a26f7d6aaf5dd2b342248ac2c048db373437f503d257edeffc7bb5d88d4ac92341841e5124baf420cbb8f6e80aa075ea14f77346cc336944f9f76816a5e9dc02a2c4d15d58874bee01cd2411029838774807dd4b3956898406f1f34089b14bda33293072647acef933bdf720485c19d7971ccfe924b68026b8893d6021605a1f847f184af29a51bc1585a2c2fe1f"
+    config: "209d581622b6743854953146de21faa1786028be56c7b502359c8cc204d62c656ff5519f54f8a3a335a7d48b43c33d54841e4c32eab16ccfb2e8b246ff23ea14f7765adb356944f9a62146bcf3d717efdcdf1e41925dfe06d039570c806a3d034ce10f2506c3f441f7b86abeaa06b2157d34206a62dbfe2bbeb0360c4d07cd845199fc3dba8f21a58033276224115fc32f4705bfc216ec4acae294e660d7abb0816108a266d98776729b059803552344053a5dca8826b4785c7c770a820fc5519f2cee551363e7b8878acd7c686b7368dca3fdc9cb401698cbedbcb28afba1dc58ce7f1a2c367bf419ec2c96174e374beb9a25a04c7aa2fd72a4183ffc2dcedb0c39225ecf7ea743adb8ea33e7dc7808b287b49afa50611a5cd777a995b0dbad5672d7eccd10a781873b1c25f9332ec5eb65793f79cad5f7e0026f1b115a3bb4ead49772d98e55b9e45927f114fb36725d005a2f0dbcf275ffc439d48e5d3f8f72e397c885085e89b8977c2493a5c4e31034ce27092ba7ce0bc1cc35e830d79ac64242f3306184f1be93f2a194e15e373d274055c75cb8e32d1383e9c625a2e82a35c903066c024545bf4cc30a5474027844b1584d0546b145657799905fe4d7ab81a4c7c39f55e6b7e62d67661784b0fa553921608d9556587e9a587a0a682510b93c52ce50d8884e0aebe46b8e000d8c79c4fc1f773acb15b9101adaad93d5308092b7c25d3439cc053b227d606ab7957748f7287c4add1178582fc81595c75670f940c138399d47fa0789ff4c2236d091ffdc5cd81efb83569a958c6736d5489385da24d20246a6ee096ebd949fc89338d391b2a5a84228355af2ba2003afaba76b0b989b9d1ded180d2a21d301202ac6cf448c2b67c58fa90cbb780b5203bdfa6df09f462996d4090fd7751996049bd65a4be2e52699f4ed92cb1da776428b7bf547e9d875fbf2556ed5ee742d144a707d479789cf572c41c37b9de46729f26bffa5e97b5816a118626a56ffe497f6712f66a1bc35f6d7df6639384275c39f34277d302b667b9a3072e80125bc7a306b75e02499db29f681c465dd60030c73576cabadb277d8a6301ea8ab4f188e38d07d0a0de103f3b87403c9340fba9387e1599677c5816913b3cc59e8eae752979a2ca612a8580e83b6d04e4bea659ed4b26586712e277a47d7781039ae8890977f83a0b5488a6284f11b800be4a471883c4d6dd821b4965c27753b6379f69ce6ffb3c8959b78babe7a0d36d02abddc7498bf8aa0f24fbdadb0b5684c3b43c5c90e90be733e491e7cab9d40a6e4f1f329753682891616d6f13252d267b178246c0f8c871b07ed0b04ab8578d884acc43d110a0322025b414a4b51810a554f272459a09b6fcd39b4f4c4a2a4a326cba13465b4425d474768f470bc3280df9c1cf3ebaf5c94f4f41315d602cf5431a90177c2c841880df183977afd56d1bd4304ec35f807945667d68e97fbe3c6c112100d6f288c4f0675a6b489e48005cd20c5a1ed3e403b868c00deeda106f501d91f9eba4efb5ffcb51110c1ac59c91a59b801b0c940467cb29d3d82923c3cf5ac7b2bbb32977f540bf06ac77f1d496e8157fc51e52a90c4c9c7ade596bda75e7836f80e5b42f8319d211fc5371964a423c21614762f84198169f0774c94e3898932fd96cc8fb5aba96c375ffc900c35311d358f2c53f796ca5bede4d7fa891591b101da8244c2757a88f3d56e67b9aeb9f7992ce54898e22efb30ff708c0835895f1aee577e642b020087871c97a01741b2cbd0f5cd7b9972033d5e846932a5ce86349c5f74a7337fdb1400e5d707563269dbf255ebe45423b04c983eee7bcae49e80d69ecbe49caf432db1a6ba80bea0a6adcd77b13c3cf6fd2b6c8b3f6c8ecbcfccaddb0526b141b6fa1592106a82b0f9f4a5030bd261583cf5d44ac80b947f1299f8385effec68289220ae5f72111fccc6ca71775ba43be42efb114105676c35ac540c251a2aa30d2a2aaddab339991b1762c660389aa987981e539aac60f5652c2e9dcf65e0a0701b54234e77c5507894879aa4bed8599c047c5372de895e693d6671480eb3ac9e352f94b280e384063f60ff54f1264a373af46bdbef4d0687a93c9c3ddd912517b5fccd11b383a55722046ea1ded2f9cfd625f83ce1699db207b6441cc9a64f33f79712410618321590ea0a07cba1ef68800e6faabc3f28eb00b65dcb5f3a60ad2d5720e8005528e0f2d4487276988a5afc62a2626e2ac6164e6db8701ab5414e73baff519a7d0fd459fbc21717ce6e832e6c539b50073d5d3c404060dae0387149333e91a7693bd15ad5cf962eb9ff324751c40cdf3af6053d1b31e9a9246b9e7c4052af4f870ba9ef3223a11705143d9fa228130d511226afb215b87a84107ad7da809ed1553924f407b4f704ae30291f8c5b883f45a1db4b1c73e28eb9467d987f0d572c8ce30249bf03bea362e4d5079f800ba754612bb9ba287320ef59ab6b485baef594ef26eab4cdf8453763b78508bef0baf91d21341cc11d6415a4c21f9c41341e5dab7346b74234d8936dde8dd4131d69babef16c1ffe49037e428e0527371a3233a230ae115c7919079331bd9f2df766238c2d3fa2b2364e5b7c7f1696fdd5353c0a2a0a73501cb2be1f878d794d31b285c2e7799726f407e3f72c0d5f1709160901e89e16b46c20f3bb3de60ad60b653fd17769d990b87914a389a88c38cd9379e8ee1efd35a6aac0d4b02b84e3ac228c6ef8cd75a131d4324c85d96593b718a8907b7586c27c04e928c42fb1b8cf061c7202b1dfe4adcaebdb25e37f7dd59bfae2667ce35895adbf984e42c0cc0be567555326ec74e08f14db75f7972faed50848089deacd85970e5f538534aa10b016c2113bf9a3f9bf67f4d29c7266de1d5d2c89956a0b07040b71bf7f8e9ec3a5a45c54c58a29e5d88b7b428b0d4745a853eabe9ccb80fd0392d78eaa97ce491f9ab0fe4f672629040db3ed5d80d005007ad5ad47606f3b3fa6761fd2b8c740cb9866d59d97ec0b48e81680ae28c0d694a92f6722619850d6aa25a7120374e2dbe3956d4dd947d2ff1b4e092ce48dd775277c81483d946b14718cc3a41272a1af50"
     password: "4ad4494c"
+    tree:
+      showHiddenFiles: true
+  "git-diff":
+    showIconsInEditorGutter: true
+  "ide-python":
+    pylsPlugins:
+      pydocstyle:
+        enabled: true
+    python: "python3"
+  linter:
+    lintOnChangeInterval: 100
+  "linter-phpcs":
+    autoExecutableSearch: false
+    codeStandardOrConfigFile: "/opt/composer/vendor/yiisoft/yii2-coding-standards/Yii2"
+    executablePath: "/opt/composer/vendor/bin/phpcs"
+    ignorePatterns: [
+      "**/views/**"
+      "**/tests/**"
+    ]
+  "linter-ui-default":
+    decorateOnTreeView: "Files and Directories"
+    panelHeight: 300
+  "markdown-preview":
+    useGitHubStyle: true
+  minimap:
+    absoluteMode: true
+    plugins:
+      "minimap-autohider": true
+      "minimap-autohiderDecorationsZIndex": 0
+  "php-cs-fixer":
+    executablePath: "/opt/composer/vendor/bin/php-cs-fixer"
+    executeOnSave: true
+    pathMode: "intersection"
+  "php-debug":
+    AutoExpandLocals: true
+    currentPanelMode: "bottom"
+  "php-integrator-base-legacy-php56": {}
+  "spell-check":
+    addKnownWords: true
+    grammars: [
+      "source.asciidoc"
+      "source.gfm"
+      "text.git-commit"
+      "text.plain"
+      "text.plain.null-grammar"
+      "text.html"
+      "text.php"
+      "text.python"
+      "text.js"
+    ]
+    localePaths: [
+      "$HOME/.atom/Diccionarios"
+    ]
+    locales: [
+      "es-ES"
+      "es_ES"
+      "es_ES.UTF-8"
+      "en-EN"
+      "en_EN"
+      "en_EN.UTF-8"
+      "Spanish"
+      "English"
+      "English (American)"
+    ]
+  "tree-view":
+    hideIgnoredNames: true
+>>>>>>> c41878a313b48b87dfdeb0dfab9d9bfffa89201b
   welcome:
     showOnStartup: false
