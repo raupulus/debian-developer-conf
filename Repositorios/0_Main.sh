@@ -63,6 +63,7 @@ menuRepositorios() {
     elegirRama() {
         while true; do
             clear
+
             local descripcion='Menú para configurar e integrar repositorios
                 1) Stable
                 2) Testing
@@ -122,12 +123,15 @@ menuRepositorios() {
             fi
         done
 
-        if [[ $version = 'stable' ]] ||
+        if [[ "$BRANCH" = 'stable' ]] ||
+           [[ $version = 'stable' ]] ||
            [[ $(echo $version | cut -d. -f1) = $v_stable ]]; then
             stable_agregar_repositorios
-        elif [[ $version = 'testing' ]]; then
+        elif [[ "$BRANCH" = 'testing' ]] ||
+             [[ $version = 'testing' ]]; then
             testing_agregar_repositorios
-        elif [[ $version = 'unstable' ]]; then
+        elif [[ "$BRANCH" = 'unstable' ]] ||
+             [[ $version = 'unstable' ]]; then
             unstable_agregar_repositorios
         else
             elegirRama
