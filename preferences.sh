@@ -142,4 +142,5 @@ configurePreferences() {
         setEnv
     fi
 
+    variables_lenguaje
 }
