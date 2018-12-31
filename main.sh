@@ -122,7 +122,7 @@ menuPrincipal() {
             5) menuServidores;;            ## Menú de Servidores
             6) menuLenguajes;;
             7) menuUsuario;;
-            8) menuRepositorios -a         ## Todos los pasos
+            8) menuRepositorios           ## Todos los pasos
                menuAplicaciones -a
                instalar_configuraciones
                menuPersonalizacion -a
