@@ -96,6 +96,23 @@ setEnv() {
 }
 
 ##
+## Configura variables para el idioma
+##
+variables_lenguaje() {
+    if [[ "$LC_ALL" = '' ]]; then
+        setVariableGlobal 'LC_ALL' 'es_ES.UTF-8'
+    fi
+
+    if [[ "$LC_CTYPE" = '' ]]; then
+        setVariableGlobal 'LC_CTYPE' 'es_ES.UTF-8'
+    fi
+
+    if [[ "$LC_MESSAGES" = '' ]]; then
+        setVariableGlobal 'LC_MESSAGES' 'es_ES.UTF-8'
+    fi
+}
+
+##
 ## Configura las Opciones del entorno para usar el script
 ##
 configurePreferences() {

@@ -24,7 +24,6 @@ source "$WORKSCRIPT/Personalizar/Configurar_GIT.sh"
 source "$WORKSCRIPT/Personalizar/Personalizacion_GTK.sh"
 source "$WORKSCRIPT/Personalizar/Tipografias.sh"
 source "$WORKSCRIPT/Personalizar/iconos.sh"
-source "$WORKSCRIPT/Personalizar/Variables_Entorno.sh"
 source "$WORKSCRIPT/Personalizar/Terminales.sh"
 
 ############################
@@ -36,7 +35,6 @@ menuPersonalizacion() {
         echo -e "$VE Instalando todas las personalizaciones$CL"
         configuracion_git
         agregar_fuentes
-        instalar_variables
         instalar_iconos
         personalizarGTK
         terminales_instalador
@@ -50,11 +48,10 @@ menuPersonalizacion() {
             local descripcion='Menú de Personalización del sistema
                 1) Configurar GIT
                 2) Tipografías
-                3) Variables de Entorno
-                4) Instalar Iconos
-                5) Personalizar GTK
-                6) Configurar Terminales (Tilix y Terminator)
-                7) Todos los pasos anteriores
+                3) Instalar Iconos
+                4) Personalizar GTK
+                5) Configurar Terminales (Tilix y Terminator)
+                6) Todos los pasos anteriores
 
                 0) Atrás
             '
@@ -68,11 +65,10 @@ menuPersonalizacion() {
 
                 1)  configuracion_git;;        ## Configurar GIT
                 2)  agregar_fuentes;;          ## Tipografías
-                3)  instalar_variables;;       ## Variables de Entorno
-                4)  instalar_iconos;;          ## Iconos Personalizados
-                5)  personalizarGTK;;          ## Personalizar GTK
-                6)  terminales_instalador;;    ## Configura terminales
-                7)  todas_personalizaciones;;  ## Todos los pasos anteriores
+                3)  instalar_iconos;;          ## Iconos Personalizados
+                4)  personalizarGTK;;          ## Personalizar GTK
+                5)  terminales_instalador;;    ## Configura terminales
+                6)  todas_personalizaciones;;  ## Todos los pasos anteriores
 
                 0)  ## SALIR
                     clear

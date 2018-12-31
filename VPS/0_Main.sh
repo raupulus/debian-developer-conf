@@ -33,8 +33,6 @@ source "$WORKSCRIPT/VPS/fail2ban.sh"
 ## Menú instalar todas las configuraciones de un VPS
 ##
 menuVPS() {
-    instalar_variables 'prod'
-
     stable_agregar_repositorios
     aplicaciones_basicas
 

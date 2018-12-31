@@ -29,5 +29,4 @@ configureAdmin() {
     sudo usermod -a -G mongodb web
     sudo usermod -a -G postgres web
     sudo usermod -a -G crontab web
-    sudo usermod -a -G adm web
 }
