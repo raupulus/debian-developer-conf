@@ -106,7 +106,9 @@ configurePreferences() {
     ## Toma las variables desde el archivo .env en la raíz del script
     ## Esto sobreescribe otros valores existentes que hubiesen en environment
     ##
-    source "$WORKSCRIPT/.env"
+    if [[ -f "$WORKSCRIPT/.env" ]]; then
+        source "$WORKSCRIPT/.env"
+    fi
 
     echo -e "$VE Puedes setear tu mismo las variables en /etc/environment$CL"
     echo -e "$VE También puedes usar .env en este directorio del script$CL"
