@@ -43,6 +43,17 @@ fi
 chown web:web -R /home/web/debian-developer-conf
 cd /home/web/debian-developer-conf
 
+# Desactivar ipv6 por completo
+echo 'net.ipv6.conf.all.disable_ipv6=1' >> '/etc/sysctl.conf'
+echo 'net.ipv6.conf.default.disable_ipv6=1' >> '/etc/sysctl.conf'
+echo 'net.ipv6.conf.lo.disable_ipv6=1' >> '/etc/sysctl.conf'
+echo 'net.ipv6.conf.eth0.disable_ipv6=1' >> '/etc/sysctl.conf'
+sysctl -p
+
+# Desactivar ipv6 temporalmente en el momento
+sysctl -w net.ipv6.conf.all.disable_ipv6=1
+sysctl -w net.ipv6.conf.default.disable_ipv6=1
+
 sudo -u web ./main.sh
 
 exit 0
