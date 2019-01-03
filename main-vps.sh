@@ -25,6 +25,7 @@
 
 if [[ $USER != 'root' ]]; then
     echo 'Este script tiene que ser iniciado por root'
+    exit 1
 fi
 
 apt install sudo git
@@ -34,9 +35,14 @@ gpasswd -a web crontab
 gpasswd -a web web
 gpasswd -a web www-data
 
-git clone https://gitlab.com/fryntiz/debian-developer-conf.git /home/web/
+if [[ ! -d /home/web/debian-developer-conf ]]; then
+    git clone https://gitlab.com/fryntiz/debian-developer-conf.git \
+    /home/web/debian-developer-conf
+fi
+
+chown web:web -R /home/web/debian-developer-conf
 cd /home/web/debian-developer-conf
-su web
-./main.sh
+
+sudo -u web ./main.sh
 
 exit 0

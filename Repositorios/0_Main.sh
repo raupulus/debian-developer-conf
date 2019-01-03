@@ -38,12 +38,9 @@ menuRepositorios() {
     ##
     instalar_dependencias() {
         echo -e "$VE Actualizando repositorios por primera vez$CL"
-        sudo apt update >> /dev/null 2>> /dev/null
-        instalarSoftware apt-transport-https && echo -e "$VE Instalado el paquete$RO apt-transport-https$CL" || echo -e "$VE Error al instalar$RO apt-transport-https$CL"
-
-        instalarSoftware dirmngr && echo -e "$VE Instalado el paquete$RO dirmngr$CL" || echo -e "$VE Error al instalar$RO dirmngr$CL"
-        echo -e "$VE Agregando Repositorios$CL"
-
+        actualizarRepositorios
+        instalarSoftware 'apt-transport-https'
+        instalarSoftware 'dirmngr'
         instalarSoftware 'curl'
     }
 
@@ -52,7 +49,6 @@ menuRepositorios() {
     ##
     prepararLlaves() {
         echo -e "$VE Instalando llaves de repositorios$CL"
-
         instalarSoftware debian-keyring
         instalarSoftware pkg-mozilla-archive-keyring
     }

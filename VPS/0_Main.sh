@@ -33,6 +33,14 @@ source "$WORKSCRIPT/VPS/fail2ban.sh"
 ## Menú instalar todas las configuraciones de un VPS
 ##
 menuVPS() {
+    ## Deshabilito actualizaciones automáticas
+    sudo systemctl disable apt-daily
+    sudo systemctl stop apt-daily.timer
+    sudo systemctl stop apt-daily
+    sudo systemctl disable apt-daily-upgrade
+    sudo systemctl stop apt-daily-upgrade.timer
+    sudo systemctl stop apt-daily-upgrade
+
     stable_agregar_repositorios
     aplicaciones_basicas
 
