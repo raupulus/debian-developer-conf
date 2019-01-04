@@ -76,7 +76,6 @@ limpiarCacheUsuario() {
     bleachbit --clean google_chrome.vacuum
     bleachbit --clean google_earth.temporary_files
     bleachbit --clean google_toolbar.search_history
-    bleachbit --clean gpodder.cache
     bleachbit --clean gpodder.vacuum
     bleachbit --clean gwenview.recent_documents
     bleachbit --clean hippo_opensim_viewer.cache
@@ -105,7 +104,6 @@ limpiarCacheUsuario() {
     bleachbit --clean realplayer.cookies
     bleachbit --clean realplayer.history
     bleachbit --clean realplayer.logs
-    bleachbit --clean rhythmbox.cache
     bleachbit --clean rhythmbox.history
     bleachbit --clean screenlets.logs
     bleachbit --clean seamonkey.cache
