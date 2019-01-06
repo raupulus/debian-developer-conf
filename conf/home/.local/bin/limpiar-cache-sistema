@@ -23,6 +23,14 @@
 ############################
 
 limpiarCacheUsuario() {
+    ## Limpio caché de heroku
+    if [[ -d "$HOME/.cache/heroku" ]]; then
+        rm -R "$HOME/.cache/heroku"
+    fi
+
+    ## Limpio todas las papeleras de todos los usuarios
+    sudo find / -name .Trash-1000 2> /dev/null | sudo xargs rm -R 2>> /dev/null
+
     bleachbit --clean adobe_reader.cache
     bleachbit --clean adobe_reader.mru
     bleachbit --clean adobe_reader.tmp
