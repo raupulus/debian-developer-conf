@@ -1,5 +1,8 @@
 "*":
   core:
+    disabledPackages: [
+      "atom-ide-ui"
+    ]
     telemetryConsent: "no"
     warnOnLargeFileLimit: 4
   editor:
@@ -12,6 +15,7 @@
     softWrapAtPreferredLineLength: true
     tabLength: 4
   "exception-reporting":
+    userId: "6f8021cd-9a56-4533-bae5-7dd6c857b144"
   "file-icons":
     coloured: true
   "ftp-remote-edit":
@@ -83,6 +87,5 @@
     ]
   "tree-view":
     hideIgnoredNames: true
->>>>>>> c41878a313b48b87dfdeb0dfab9d9bfffa89201b
   welcome:
     showOnStartup: false
