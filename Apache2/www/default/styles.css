@@ -1,0 +1,112 @@
+@charset "UTF-8";
+/**
+ * @author Raúl Caro Pastorino
+ * @copyright Copyright © 2017 Raúl Caro Pastorino
+ * @license https://www.gnu.org/licenses/gpl-3.0-standalone.html
+ */
+
+
+body {
+    margin: 0;
+    background-color: black;
+    background-image: url('../images/patron.jpg');
+}
+
+
+/*
+Aquí se contienen los estilos generales
+No deben afectar a la aplicación de ningún modo
+*/
+
+
+/*
+***********************
+        Título
+***********************
+ */
+#cajatitulo {
+    margin: 15px 0;
+    width: 100%;
+    text-align: center;
+    background-color: #50c936;
+    border-top: 3px groove #ffe74a;
+    border-bottom: 3px groove #ffe74a;
+}
+
+#cajatitulo #titulo {
+    color: #ff0f00;
+    font-size: 2.4em;
+    text-shadow:
+        2px 2px 2px black,
+        -2px 2px 2px black,
+        2px -2px 2px black,
+        -2px -2px 2px black;
+}
+
+#cajatitulo #subtitulo {
+    color: #fff06a;
+    text-shadow: 2px 2px 2px black;
+}
+
+
+/*
+***********************
+       Contenido
+***********************
+ */
+#cajacontenido {
+    margin: 15px auto;
+    padding: 6px 0;
+    min-width: 300px;
+    max-width: 800px;
+    background-color: #ffffff;
+    border: 3px solid #50c936;
+    border-radius: 8px;
+}
+
+
+/*
+***********************
+        Footer
+***********************
+*/
+#cajafooter {
+    width: 100%;
+    text-align: center;
+    background-color: #ffffff;
+    border-top: 3px solid #50c936;
+    border-bottom: 3px solid #50c936;
+}
+
+#cajafooter footer {
+    margin: auto;
+    min-width: 300px;
+    max-width: 800px;
+}
+
+#cajafooter #autor {
+    font-size: 1.6em;
+    border-bottom: 2px solid black;
+}
+
+#cajafooter #licencia {
+    font-weight: bold;
+    font-style: italic;
+}
+
+#cajafooter #repositorios a {
+    color: orange;
+    font-weight: bolder;
+}
+
+#cajafooter #fecha {
+    color: #ff2600;
+    font-size: 1.6em;
+    border-top: 2px solid black;
+    border-bottom: 2px solid black;
+    text-shadow:
+        1px 1px 1px #000000,
+        -1px 1px 1px #000000,
+        1px -1px 1px #000000,
+        -1px -1px 1px #000000;
+}
