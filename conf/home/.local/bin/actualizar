@@ -54,6 +54,10 @@ actualizarSistema() {
         echo "Actualizando desde PIP Python 3"
         py -3 -m pip_review --local --auto
     fi
+
+    if [[ "$DISTRO" = 'raspbian' ]]; then
+        sudo rpi-update
+    fi
 }
 
 actualizarSistema
