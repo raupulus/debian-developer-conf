@@ -27,10 +27,12 @@ source "$WORKSCRIPT/Repositorios/debian/testing.sh"
 source "$WORKSCRIPT/Repositorios/debian/unstable.sh"
 source "$WORKSCRIPT/Repositorios/debian/comunes.sh"
 
-###########################
-##       FUNCIONES       ##
-###########################
+############################
+##       FUNCIONES        ##
+############################
 agregarRepositoriosDebian() {
+    echo '$VE Configurando Repositorios para$RO Debian$CL'
+
     ##
     ## Instala dependencias para actualizar repositorios e instalar
     ##

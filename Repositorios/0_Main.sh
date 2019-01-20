@@ -27,23 +27,16 @@ source "$WORKSCRIPT/Repositorios/raspbian.sh"
 ###########################
 ##       FUNCIONES       ##
 ###########################
-
-
-
-agregarRepositoriosRaspbian() {
-
-}
-
-agregarRepositoriosFedora() {
-
-}
-
 ##
 ## Menú para configurar e integrar repositorios.
 ## @param $1 -a Si recibe este parámetro lo hará de forma automática
 ##
 menuRepositorios() {
-    agregarRepositoriosDebian
-
-
+    if [[ "$DISTRO" = 'debian' ]];then
+        agregarRepositoriosDebian
+    elif [[ "$DISTRO" = 'raspbian' ]];then
+        agregarRepositoriosRaspbian
+    elif [[ "$DISTRO" = 'fedora' ]];then
+        agregarRepositoriosFedora
+    fi
 }
