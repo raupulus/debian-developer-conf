@@ -54,17 +54,25 @@ VERSION='0.8.6'  ## Versión en desarrollo
 MY_DISTRO="$DISTRO"  ## Distribución sobre la que se ejecuta
 MY_BRANCH="$BRANCH"  ## stable|testing|unstable
 MY_ENV="$ENV"    ## prod|dev desde /etc/environment o .env
-SOFTLIST="$WORKSCRIPT/Software-Lists/$MY_DISTRO"  ## Ruta hacia listas software
 LOGERROR="$WORKSCRIPT/errores.log"  ## Archivo donde almacenar errores
 DEBUG=false      ## Establece si está el script en modo depuración
+
+########################################
+##     IMPORTACIONES PRINCIPALES      ##
+########################################
+source "$WORKSCRIPT/funciones.sh"
+source "$WORKSCRIPT/configuraciones.sh"
+source "$WORKSCRIPT/preferences.sh"
+
+########################################
+##       VARIABLES COMPUESTAS         ##
+########################################
+SOFTLIST="$WORKSCRIPT/Software-Lists/$MY_DISTRO"  ## Ruta hacia listas software
 
 ############################
 ##     IMPORTACIONES      ##
 ############################
-source "$WORKSCRIPT/funciones.sh"
-source "$WORKSCRIPT/configuraciones.sh"
 source "$WORKSCRIPT/limpiador.sh"
-source "$WORKSCRIPT/preferences.sh"
 
 source "$WORKSCRIPT/Apps/0_Main.sh"
 source "$WORKSCRIPT/Personalizar/0_Main.sh"
