@@ -91,7 +91,7 @@ comunes_sources_repositorios() {
         sudo mkdir -p '/etc/apt/sources.list.d'
     fi
 
-    sudo cp $WORKSCRIPT/Repositorios/comunes/sources.list.d/* /etc/apt/sources.list.d/
+    sudo cp $WORKSCRIPT/Repositorios/debian/comunes/sources.list.d/* /etc/apt/sources.list.d/
 }
 
 ##

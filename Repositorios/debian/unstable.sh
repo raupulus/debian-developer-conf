@@ -39,12 +39,12 @@ unstable_sources_repositorios() {
     if [[ ! -d '/etc/apt/sources.list.d' ]]; then
         sudo mkdir -p '/etc/apt/sources.list.d'
     fi
-    sudo cp $WORKSCRIPT/Repositorios/unstable/sources.list.d/* /etc/apt/sources.list.d/
+    sudo cp $WORKSCRIPT/Repositorios/debian/unstable/sources.list.d/* /etc/apt/sources.list.d/
 
     if [[ ! -d '/etc/apt/sources.list' ]]; then
         sudo rm -f '/etc/apt/sources.list'
     fi
-    sudo cp "$WORKSCRIPT/Repositorios/unstable/sources.list" "/etc/apt/sources.list"
+    sudo cp "$WORKSCRIPT/Repositorios/debian/unstable/sources.list" "/etc/apt/sources.list"
 }
 
 ##
