@@ -41,9 +41,10 @@ setDistro() {
     done
 
     MY_DISTRO="$input"
-    DISTRO="$input"
 
     setVariableGlobal 'DISTRO' "$MY_DISTRO"
+
+    DISTRO="$input"
 }
 
 setBranch() {
@@ -59,9 +60,9 @@ setBranch() {
     done
 
     MY_BRANCH="$input"
-    BRANCH="$input"
 
     setVariableGlobal 'BRANCH' "$MY_BRANCH"
+    BRANCH="$input"
 }
 
 ##
