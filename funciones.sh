@@ -407,6 +407,7 @@ setVariableGlobal() {
         echo -e "$VE Seteando globalmente: ${1}=${2}$CL"
         echo "${1}=${2}" | sudo tee -a /etc/environment
         export "${1}=${2}"
+        ${1}=${2}
     fi
 }
 

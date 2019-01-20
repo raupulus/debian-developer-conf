@@ -61,17 +61,17 @@ DEBUG=false      ## Establece si está el script en modo depuración
 ##     IMPORTACIONES PRINCIPALES      ##
 ########################################
 source "$WORKSCRIPT/funciones.sh"
-source "$WORKSCRIPT/configuraciones.sh"
 source "$WORKSCRIPT/preferences.sh"
 
 ########################################
 ##       VARIABLES COMPUESTAS         ##
 ########################################
-SOFTLIST="$WORKSCRIPT/Software-Lists/$MY_DISTRO"  ## Ruta hacia listas software
+SOFTLIST="${WORKSCRIPT}/Software-Lists/${MY_DISTRO}"  ## Ruta a listas de software
 
 ############################
 ##     IMPORTACIONES      ##
 ############################
+source "$WORKSCRIPT/configuraciones.sh"
 source "$WORKSCRIPT/limpiador.sh"
 
 source "$WORKSCRIPT/Apps/0_Main.sh"
