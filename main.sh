@@ -57,20 +57,11 @@ MY_ENV="$ENV"    ## prod|dev desde /etc/environment o .env
 LOGERROR="$WORKSCRIPT/errores.log"  ## Archivo donde almacenar errores
 DEBUG=false      ## Establece si está el script en modo depuración
 
-########################################
-##     IMPORTACIONES PRINCIPALES      ##
-########################################
-source "$WORKSCRIPT/funciones.sh"
-source "$WORKSCRIPT/preferences.sh"
-
-########################################
-##       VARIABLES COMPUESTAS         ##
-########################################
-SOFTLIST="${WORKSCRIPT}/Software-Lists/${MY_DISTRO}"  ## Ruta a listas de software
-
 ############################
 ##     IMPORTACIONES      ##
 ############################
+source "$WORKSCRIPT/funciones.sh"
+source "$WORKSCRIPT/preferences.sh"
 source "$WORKSCRIPT/configuraciones.sh"
 source "$WORKSCRIPT/limpiador.sh"
 
@@ -89,11 +80,19 @@ source "$WORKSCRIPT/VPS/0_Main.sh"
 ###########################
 errores=()
 
+########################################
+##       VARIABLES COMPUESTAS         ##
+########################################
+## Esta función configura las variables globales.
+configurePreferences
+
+## Esta variable depende de ejecutarse primero el script anterior.
+SOFTLIST="${WORKSCRIPT}/Software-Lists/${MY_DISTRO}"  ## Ruta a listas de software
+
+
 ###########################
 ##       FUNCIONES       ##
 ###########################
-configurePreferences
-
 menuPrincipal() {
     while true :; do
         clear
