@@ -29,7 +29,8 @@ apache2_propietarios() {
     ## Cambia el dueño
     echo -e "$VE Asignando dueños$CL"
     sudo chown www-data:www-data -R '/var/www'
-    sudo chown root:www-data '/etc/apache2/ports.conf'
+    sudo chown root:root '/etc/apache2/ports.conf'
+    sudo chmod 750 '/etc/apache2/ports.conf'
 
     ## Agrega el usuario al grupo www-data
     echo -e "$VE Añadiendo el usuario al grupo$RO www-data"
@@ -46,6 +47,10 @@ apache2_propietarios() {
         sudo chmod g+s -R "/home/$USER/GIT"
     fi
 
+    if [[ -d "/home/$USER/git" ]]; then
+        sudo chown -R "$USER":www-data "/home/$USER/git"
+        sudo chmod g+s -R "/home/$USER/git"
+    fi
 }
 
 apache2_permisos() {
