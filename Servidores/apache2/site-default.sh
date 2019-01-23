@@ -16,30 +16,11 @@
 ############################
 ##     INSTRUCCIONES      ##
 ############################
-##
+## Agrega, configura y habilita el sitio por defecto con ssl.
 
 ############################
 ##        FUNCIONES       ##
 ############################
-
-##
-## Añade el directorio con los archivos correspondientes para el sitio.
-##
-apacheDefaultSiteGenerateDir() {
-    ## Copia el contenido WEB a /var/www
-    echo -e "$VE Copiando contenido dentro de /var/www"
-    sudo cp -R $WORKSCRIPT/Apache2/www/* /var/www/
-}
-
-##
-## Agrega las configuraciones para el sitio virtual.
-##
-apacheDefaultSiteGenerateConf() {
-    ## Copia el contenido de configuración a /etc/apache2
-    echo -e "$VE Copiando archivos de configuración dentro de /etc/apache2"
-    sudo cp -R $WORKSCRIPT/Apache2/etc/apache2/* '/etc/apache2/'
-}
-
 ##
 ## Agrega configuraciones de seguridad y permisos para el sitio virtual.
 ##
@@ -47,15 +28,25 @@ apacheDefaultSiteSecurity() {
     ## Crear archivo de usuario con permisos para directorios restringidos
     echo -e "$VE Creando usuario con permisos en apache"
     sudo rm /var/www/.htpasswd 2>> /dev/null
+
     while [[ -z "$input_user" ]]; do
         read -p "Nombre de usuario para acceder al sitio web privado → " input_user
     done
+
     echo -e "$VE Introduce la contraseña para el sitio privado:$RO"
     sudo htpasswd -c /var/www/.htpasswd $input_user
 }
 
 apacheDefaultSiteCreate() {
     ## Todo → Mirar si existe el sitio
+
+
+    apache2AgregarDirectorio 'default'
+    apache2GenerarConfiguracion '??????'
+
+
+
+
 
     apacheDefaultSiteGenerateDir
 
