@@ -22,25 +22,19 @@
 ##        FUNCIONES       ##
 ############################
 apacheDefaultSiteCreate() {
-    ## Todo → Mirar si existe el sitio
+    local nombreSitio='default'
+    local existe=$(apache2ExisteSitioVirtual "${nombreSitio}.conf" "$nombreSitio")
 
+    if [[ $existe != 'true' ]]; then
+        apache2AgregarDirectorio $nombreSitio
+        apache2GenerarConfiguracion "${nombreSitio}.conf" "$nombreSitio"
+    fi
 
-    apache2AgregarDirectorio 'default'
-    apache2GenerarConfiguracion 'default.conf' 'default'
-
-
-
-    apacheDefaultSiteSecurity
 }
 
 
 
-## Pregunta si generar enlace solo cuando falta uno de ellos
-if [[ ! -h "$HOME/git" ]] &&
-   [[ ! -h "$HOME/GIT" ]] &&
-   [[ ! -h "$HOME/web" ]]; then
-    enlaces
-fi
+
 
 ## Deshabilita Sitios Virtuales (VirtualHost)
 sudo a2dissite '000-default.conf'

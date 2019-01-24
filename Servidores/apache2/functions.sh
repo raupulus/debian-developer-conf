@@ -95,3 +95,24 @@ apache2GenerarConfiguracion() {
         echo "$VE No existe el directorio para el sitio$CL"
     fi
 }
+
+##
+## Comprueba si existe el sitio virtual
+## $1 Recibe el nombre del archivo de configuración para el sitio virtual.
+## $2 Recibe el nombre del directorio en /var/www para el sitio virtual.
+## return boolean Devuelve "true" o "false"
+##
+apache2ExisteSitioVirtual() {
+    local conf="/etc/apache2/sites-available/${1}"
+    local dirWeb="/var/www/${2}"
+
+    ## TODO → Controlar distribución para aplicar su ruta
+
+    if [[ -f $conf ]] && [[ -d $dirWeb ]]; then
+        echo 'true'
+        return 1
+    fi
+
+    echo 'false'
+    return 0
+}

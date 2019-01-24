@@ -186,36 +186,35 @@ apacheLimpiarSites() {
 ##
 ## Generar enlaces:
 ## ~/web a /var/www
-## ~/git a /var/www/public/git
+## ~/git a /var/www/private/git
 ##
 apacheGenerarEnlaces() {
-    ## VOY POR AQUÍ:
-    if [[ ! -h "/home/$USER/web" ]]; then
-    ## Controlando que solo lo haga si origen y destino existe → nueva función global.
-
-    echo -e "$VE Puedes generar un enlace en tu home ~/web hacia /var/www/html/Publico"
-    read -p " ¿Quieres generar el enlace? s/N → " input
-    if [[ "$input" = 's' ]] || [[ "$input" = 'S' ]]; then
-        sudo ln -s '/var/www/html/Publico' "/home/$USER/web"
-        sudo chown -R "$USER:www-data" "/home/$USER/web"
-    else
-        echo -e "$VE No se crea enlace desde ~/web a /var/www/html/Publico"
-    fi
+    local rutaEnlaceWeb='/var/www'
 
     clear
-    echo -e "$VE Puedes crear un directorio para repositorios$RO GIT$VE en tu directorio personal"
-    echo -e "$VE Una vez creado se añadirá un enlace al servidor web"
-    echo -e "$VE Este será desde el servidor /var/www/html/Privado/GIT a ~/GIT$RO"
-    read -p " ¿Quieres crear el directorio y generar el enlace? s/N → " input
+
+    ## Creo enlace al directorio web.
+    if [[ ! -h "/home/$USER/web" ]] ||
+       [[ ! -d "$rutaEnlaceWeb" ]]; then
+        echo -e "$VE Creando directorio$RO $HOME/GIT$VE"
+
+        sudo ln -s "$rutaEnlaceWeb" "/home/$USER/web"
+        sudo chown -R "$USER:www-data" "/home/$USER/web"
+    fi
+
+    ## Creo enlace a repositorios "git" en zona privada.
+    if [[ -d "$HOME/git" ]] && [[ ! -h "${rutaEnlaceWeb}/private/git" ]]; then
+        sudo ln -s "$HOME/git" '/var/www/private/git'
+    elif [[ -d "$HOME/GIT" ]] && [[ ! -h "${rutaEnlaceWeb}/private/git" ]]; then
+        sudo ln -s "$HOME/GIT" '/var/www/private/git'
+        sudo ln -s "$HOME/GIT" "$HOME/git"
+    fi
+            echo -e "$VE Creando enlace desde$RO ${HOME$V}/'webE
+             hasta
+
     if [[ "$input" = 's' ]] || [[ "$input" = 'S' ]]; then
         if [[ ! -d "$HOME/GIT" ]]; then
-            echo -e "$VE Creando directorio$RO $HOME/GIT$VE"
             mkdir "$HOME/GIT"
-        fi
-
-        ## Creando enlaces en el directorio Home
-        if [[ ! -h '/var/www/html/Privado/GIT' ]]; then
-            sudo ln -s "$HOME/GIT" '/var/www/html/Privado/GIT'
         fi
 
         if [[ ! -h "$HOME/git" ]] && [[ -h "$HOME/GIT" ]]; then
@@ -240,11 +239,4 @@ apache2_instalar() {
 
     ## Reiniciar servidor Apache para aplicar configuración
     reiniciarServicio apache2
-
-    ## Pregunta si generar enlace solo cuando falta uno de ellos
-    if [[ ! -h "$HOME/git" ]] &&
-       [[ ! -h "$HOME/GIT" ]] &&
-       [[ ! -h "$HOME/web" ]]; then
-        enlaces
-    fi
 }
