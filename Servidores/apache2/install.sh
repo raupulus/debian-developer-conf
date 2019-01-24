@@ -93,12 +93,15 @@ apache2_desactivar_modulos() {
 
 apache2_postconfiguracion() {
     echo -e "$VE Generando Post-Configuraciones de Apache2"
+
+    ## TODO → Controlar distribución, la ruta de destino cambia.
+    sudo cp "$WORKSCRIPT/Apache2/etc/apache2/ports.conf" '/etc/apache2/apache2.conf'
 }
 
 apache2_ssl() {
     ## Instalar módulo SSL
     sudo a2enmod ssl
-    sudo service apache2 restart
+    reiniciarServicio apache2
 
     ## Comprobar que está activo y abierto el puerto
     netstat -nl | grep 443
@@ -150,16 +153,98 @@ apache2_ssl() {
     fi
 }
 
+##
+## Agrega configuraciones de seguridad y permisos para los sitios virtuales.
+##
+apacheDefaultSiteSecurity() {
+    ## Crear archivo de usuario con permisos para directorios restringidos
+    echo -e "$VE Creando usuario con permisos en apache"
+    sudo rm /var/www/.htpasswd 2>> /dev/null
+
+    while [[ -z "$input_user" ]]; do
+        read -p "Nombre de usuario para acceder a los sitios web privado → " input_user
+    done
+
+    echo -e "$VE Introduce la contraseña para los sitios web privados:$RO"
+    sudo htpasswd -c /var/www/.htpasswd $input_user
+}
+
+##
+## Borrar contenido de /var/www
+##
+apacheLimpiarSites() {
+    sudo systemctl stop apache2
+    echo -e "$VE Cuidado, esto puede$RO BORRAR$VE algo valioso$RO"
+    read -p " ¿Quieres borrar todo el directorio /var/www/? s/N → " input
+    if [[ "$input" = 's' ]] || [[ "$input" = 'S' ]]; then
+        sudo rm -R /var/www/*
+    else
+        echo -e "$VE No se borra$RO /var/www$CL"
+    fi
+}
+
+##
+## Generar enlaces:
+## ~/web a /var/www
+## ~/git a /var/www/public/git
+##
+apacheGenerarEnlaces() {
+    ## VOY POR AQUÍ:
+    if [[ ! -h "/home/$USER/web" ]]; then
+    ## Controlando que solo lo haga si origen y destino existe → nueva función global.
+
+    echo -e "$VE Puedes generar un enlace en tu home ~/web hacia /var/www/html/Publico"
+    read -p " ¿Quieres generar el enlace? s/N → " input
+    if [[ "$input" = 's' ]] || [[ "$input" = 'S' ]]; then
+        sudo ln -s '/var/www/html/Publico' "/home/$USER/web"
+        sudo chown -R "$USER:www-data" "/home/$USER/web"
+    else
+        echo -e "$VE No se crea enlace desde ~/web a /var/www/html/Publico"
+    fi
+
+    clear
+    echo -e "$VE Puedes crear un directorio para repositorios$RO GIT$VE en tu directorio personal"
+    echo -e "$VE Una vez creado se añadirá un enlace al servidor web"
+    echo -e "$VE Este será desde el servidor /var/www/html/Privado/GIT a ~/GIT$RO"
+    read -p " ¿Quieres crear el directorio y generar el enlace? s/N → " input
+    if [[ "$input" = 's' ]] || [[ "$input" = 'S' ]]; then
+        if [[ ! -d "$HOME/GIT" ]]; then
+            echo -e "$VE Creando directorio$RO $HOME/GIT$VE"
+            mkdir "$HOME/GIT"
+        fi
+
+        ## Creando enlaces en el directorio Home
+        if [[ ! -h '/var/www/html/Privado/GIT' ]]; then
+            sudo ln -s "$HOME/GIT" '/var/www/html/Privado/GIT'
+        fi
+
+        if [[ ! -h "$HOME/git" ]] && [[ -h "$HOME/GIT" ]]; then
+            sudo ln -s "$HOME/GIT" "$HOME/git"
+        fi
+    else
+        echo -e "$VE No se crea enlaces ni directorio ~/GIT$CL"
+    fi
+}
+
 apache2_instalar() {
+    apacheLimpiarSites
     apache2_descargar
     apache2_preconfiguracion
     apache2_dependencias
     apache2_propietarios
     apache2_permisos
-
+    apache2_activar_modulos
     apache2_desactivar_modulos
     apache2_ssl
+    apacheDefaultSiteSecurity
 
     ## Reiniciar servidor Apache para aplicar configuración
     reiniciarServicio apache2
+
+    ## Pregunta si generar enlace solo cuando falta uno de ellos
+    if [[ ! -h "$HOME/git" ]] &&
+       [[ ! -h "$HOME/GIT" ]] &&
+       [[ ! -h "$HOME/web" ]]; then
+        enlaces
+    fi
 }

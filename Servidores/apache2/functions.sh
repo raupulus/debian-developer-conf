@@ -66,24 +66,32 @@ apache2AgregarDirectorio() {
 ##
 ## Agrega las configuraciones para el sitio virtual.
 ## $1 Recibe el nombre del archivo de configuración para el sitio virtual.
+## $2 Recibe el nombre del directorio en /var/www para el sitio virtual.
 ##
 apache2GenerarConfiguracion() {
     local conf="$1"
+    local site="$2"
 
     if [[ -z $conf ]]; then
         echo "$RO No se ha pasado archivo de configuracion$CL"
         return 1
     fi
 
-    if [[ ! -d $WORKSCRIPT/Apache2/www/${site} ]]; then
-        echo "$VE No existe el directorio para el sitio de apache a copiar$CL"
+    if [[ ! -f "${WORKSCRIPT}/Apache2/etc/apache2/sites-available/${conf}" ]]; then
+        echo "$VE No existe el archivo para el sitio de apache2 a copiar$CL"
+        return 1
     fi
 
-    if [[ -d "/var/www/${site}" ]]; then
-        echo "$VE Ya existe$RO /var/www/${site}$VE, omitiendo$CL"
+    if [[ -f "/etc/apache2/sites-available/${conf}" ]]; then
+        echo "$VE Ya existe$RO /etc/apache2/sites-available/${conf}, omitiendo$CL"
+        return 1
     fi
 
     ## Copia el contenido de configuración a /etc/apache2
-    echo -e "$VE Copiando archivos de configuración dentro de /etc/apache2"
-    sudo cp -R $WORKSCRIPT/Apache2/etc/apache2/* '/etc/apache2/'
+    if [[ -d "/var/www/${site}}" ]]; then
+        echo -e "$VE Copiando archivos de configuración dentro de /etc/apache2"
+        sudo cp -R "${WORKSCRIPT}/Apache2/etc/apache2/sites-available/${conf}" "/etc/apache2/sites-available/${conf}"
+    else
+        echo "$VE No existe el directorio para el sitio$CL"
+    fi
 }
