@@ -37,7 +37,7 @@ actualizarSistema() {
     if [[ -f /usr/bin/emerge ]]; then
         echo "Actualizando desde repositorios Debian"
         sudo emerge --sync
-	sudo emerge -uavDN -keep-going world
+	sudo emerge -uavDN --keep-going world
     fi
 
     if [[ -f '/usr/bin/flatpak' ]]; then
