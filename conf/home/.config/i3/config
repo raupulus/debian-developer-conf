@@ -512,7 +512,7 @@ exec --no-startup-id xfce4-clipman
 exec --no-startup-id dunst
 
 ## Ocultar ratón tras inactividad
-exec --no-startup-id unclutter -idle 0.8
+exec --no-startup-id unclutter -idle 1
 
 ## Configuraciones para X
 exec --no-startup-id xrdb -load ~/.Xresources
