@@ -34,6 +34,12 @@ actualizarSistema() {
         sudo dnf update -y
     fi
 
+    if [[ -f /usr/bin/emerge ]]; then
+        echo "Actualizando desde repositorios Debian"
+        sudo emerge --sync
+	sudo emerge -uavDN -keep-going world
+    fi
+
     if [[ -f '/usr/bin/flatpak' ]]; then
         echo "Actualizando desde FlatPak"
         sudo flatpak update
