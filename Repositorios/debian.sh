@@ -94,39 +94,12 @@ agregarRepositoriosDebian() {
         done
     }
 
-    ## Si la función recibe "-a" indica que detecte de forma automática
-    local unstable=('sid' 'unstable')
-    local testing=('buster' 'buster/testing' 'testing')
-    local version='stable'    ## Indica los repositorios a configurar
 
-    ## Almaceno el primer caracter de la versión ("9" por ejemplo en stable)
-    local v_stable=$(cat /etc/debian_version | cut -d. -f1)
-
-    if [[ -f '/etc/debian_version' ]]; then
-        version=$(cat '/etc/debian_version')
-    else
-        version='stable'
-    fi
-
-    for v in ${testing[@]}; do
-        if [[ $v = $version ]]; then
-            version='testing'
-            break
-        elif [[ $v = $version ]]; then
-            version='unstable'
-            break
-        fi
-    done
-
-    if [[ "$BRANCH" = 'stable' ]] ||
-       [[ $version = 'stable' ]] ||
-       [[ $(echo $version | cut -d. -f1) = $v_stable ]]; then
-        stable_agregar_repositorios
-    elif [[ "$BRANCH" = 'testing' ]] ||
-         [[ $version = 'testing' ]]; then
+    if [[ "$BRANCH" = 'stable' ]]; then
+	stable_agregar_repositorios
+    elif [[ "$BRANCH" = 'testing' ]]; then
         testing_agregar_repositorios
-    elif [[ "$BRANCH" = 'unstable' ]] ||
-         [[ $version = 'unstable' ]]; then
+    elif [[ "$BRANCH" = 'unstable' ]]; then
         unstable_agregar_repositorios
     else
         elegirRama
