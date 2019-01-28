@@ -114,7 +114,7 @@ apache2_preconfiguracion() {
     echo -e "$VE Generando Pre-Configuraciones de$RO Apache2"
 }
 
-apache2_instalar() {
+apache2_instalarSoftware() {
     echo -e "$VE Instalando$RO Apache2$CL"
     local dependencias="apache2 libapache2-mod-perl2 libapache2-mod-php libapache2-mod-python"
     instalarSoftware "$dependencias"
@@ -293,19 +293,27 @@ apache2_ssl() {
 }
 
 apache2_instalador() {
-    apache2_descargar
-    apache2_preconfiguracion
-    apache2_instalar
+    echo "$VE ¿Usar nuevo método para instalar apache?$CL"
+    read -p ' → ' input
 
-    apache2_modulos
+    if [[ $input = 's' ]] || [[ $input = 'S' ]]; then
+        apache2_instalar
+        return 0
+    else
+        apache2_descargar
+        apache2_preconfiguracion
+        apache2_instalarSoftware
 
-    apache2_postconfiguracion
+        apache2_modulos
 
-    apache2_propietarios
-    apache2_permisos
+        apache2_postconfiguracion
 
-    apache2_ssl
+        apache2_propietarios
+        apache2_permisos
 
-    ## Reiniciar servidor Apache para aplicar configuración
-    reiniciarServicio apache2
+        apache2_ssl
+
+        ## Reiniciar servidor Apache para aplicar configuración
+        reiniciarServicio apache2
+    fi
 }

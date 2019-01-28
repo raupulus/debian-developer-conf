@@ -21,7 +21,7 @@
 ############################
 ##        FUNCIONES       ##
 ############################
-apacheDefaultSiteCreate() {
+apachePublicSiteCreate() {
     local nombreSitio='public'
     local existe=$(apache2ExisteSitioVirtual "${nombreSitio}.conf" "$nombreSitio")
 

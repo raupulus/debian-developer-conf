@@ -19,6 +19,14 @@
 ##
 
 ############################
+##     IMPORTACIONES      ##
+############################
+source "$WORKSCRIPT/Servidores/functions.sh"
+source "$WORKSCRIPT/Servidores/site-default.sh"
+source "$WORKSCRIPT/Servidores/site-private.sh"
+source "$WORKSCRIPT/Servidores/site-public.sh"
+
+############################
 ##        FUNCIONES       ##
 ############################
 ##
@@ -248,6 +256,12 @@ apache2_instalar() {
     apache2_ssl
     apacheDefaultSiteSecurity
     apache2GenerarEnlaces
+
+    ## Habilito sitios virtuales.
+    apacheDefaultSiteCreate
+    apachePublicSiteCreate
+    apachePrivateSiteCreate
+
 
     ## Reiniciar servidor Apache para aplicar configuración
     reiniciarServicio apache2
