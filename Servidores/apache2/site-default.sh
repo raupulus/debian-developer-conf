@@ -26,48 +26,21 @@ apacheDefaultSiteCreate() {
     local existe=$(apache2ExisteSitioVirtual "${nombreSitio}.conf" "$nombreSitio")
 
     if [[ $existe != 'true' ]]; then
+        ## Deshabilita Sitios Virtuales (VirtualHost).
+        sudo a2dissite "${nombreSitio}.conf"
+        sudo a2dissite "${nombreSitio}-ssl.conf"
+
+        ## Copia el esqueleto a /var/www
         apache2AgregarDirectorio $nombreSitio
+
+        ## Copia los archivos de configuración.
         apache2GenerarConfiguracion "${nombreSitio}.conf" "$nombreSitio"
+        apache2GenerarConfiguracion "${nombreSitio}-ssl.conf" "$nombreSitio"
+
+        ## Habilita Sitios Virtuales (VirtualHost).
+        sudo a2ensite "${nombreSitio}.conf"
+        sudo a2ensite "${nombreSitio}-ssl.conf"
     fi
 
+    apache2ActivarHost "$nombreSitio"
 }
-
-
-
-
-
-## Deshabilita Sitios Virtuales (VirtualHost)
-sudo a2dissite '000-default.conf'
-sudo a2dissite 'default.conf'
-sudo a2dissite 'default-ssl.conf'
-sudo a2dissite 'publico.conf'
-sudo a2dissite 'publico-ssl.conf'
-sudo a2dissite 'privado.conf'
-sudo a2dissite 'privado-ssl.conf'
-sudo a2dissite 'dev.conf'
-sudo a2dissite 'dev-ssl.conf'
-
-## Habilita Sitios Virtuales (VirtualHost) para desarrollo
-if [[ "$ENV" = 'dev' ]]; then
-    sudo a2ensite 'default.conf'
-    sudo a2ensite 'publico.conf'
-    sudo a2ensite 'privado.conf'
-    sudo a2ensite 'dev.conf'
-fi
-
-activar_hosts() {
-    echo -e "$VE Añadiendo$RO Sitios Virtuales$AM"
-    echo '127.0.0.1 privado' | sudo tee -a '/etc/hosts'
-    echo '127.0.0.1 privado.local' | sudo tee -a '/etc/hosts'
-    echo '127.0.0.1 publico' | sudo tee -a '/etc/hosts'
-    echo '127.0.0.1 publico.local' | sudo tee -a '/etc/hosts'
-    echo '127.0.0.1 dev' | sudo tee -a '/etc/hosts'
-    echo '127.0.0.1 dev.local' | sudo tee -a '/etc/hosts'
-}
-
-read -p " ¿Quieres añadir sitios virtuales a /etc/hosts? s/N → " input
-if [[ "$input" = 's' ]] || [[ "$input" = 'S' ]]; then
-    activar_hosts
-else
-    echo -e "$VE No se añade nada a$RO /etc/hosts$CL"
-fi

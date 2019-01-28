@@ -21,16 +21,23 @@
 ############################
 ##        FUNCIONES       ##
 ############################
-
-
+##
+## Descarga e instala la base para apache2.
+##
 apache2_descargar() {
     echo -e "$VE Descargando$RO Apache2$CL"
 }
 
+##
+## Preconfigura apache2 antes de su instalación.
+##
 apache2_preconfiguracion() {
     echo -e "$VE Generando Pre-Configuraciones de$RO Apache2"
 }
 
+##
+## Instala las dependencias para apache2.
+##
 apache2_dependencias() {
     echo -e "$VE Instalando$RO Apache2$CL"
     local dependencias="apache2 libapache2-mod-perl2 libapache2-mod-php libapache2-mod-python"
@@ -38,6 +45,9 @@ apache2_dependencias() {
     instalarSoftware "$dependencias"
 }
 
+##
+## Asigna propietario a los sitios virtuales y su configuración.
+##
 apache2_propietarios() {
     ## Cambia el dueño
     echo -e "$VE Asignando dueños$CL"
@@ -65,6 +75,9 @@ apache2_propietarios() {
     fi
 }
 
+##
+## Asigna los permisos para los sitios virtuales y la configuración.
+##
 apache2_permisos() {
     echo -e "$VE Asignando permisos$RO Configuración$CL"
     sudo chmod 750 '/etc/apache2/ports.conf'
@@ -80,17 +93,26 @@ apache2_permisos() {
     sudo chmod 755 -R '/etc/apache2/sites-available' '/etc/apache2/sites-enabled'
 }
 
+##
+## Habilita módulos de apache2.
+##
 apache2_activar_modulos() {
     echo -e "$VE Activando módulos$RO"
     sudo a2enmod rewrite
     sudo a2enmod ssl
 }
 
+##
+## Deshabilita módulos de apache2
+##
 apache2_desactivar_modulos() {
     echo -e "$VE Desactivando módulos$RO"
     sudo a2dismod php5
 }
 
+##
+## Aplica configuraciones tras instalar apache2.
+##
 apache2_postconfiguracion() {
     echo -e "$VE Generando Post-Configuraciones de Apache2"
 
@@ -98,6 +120,9 @@ apache2_postconfiguracion() {
     sudo cp "$WORKSCRIPT/Apache2/etc/apache2/ports.conf" '/etc/apache2/apache2.conf'
 }
 
+##
+## Agrega y habilita certificado ssl y módulo.
+##
 apache2_ssl() {
     ## Instalar módulo SSL
     sudo a2enmod ssl
@@ -188,15 +213,13 @@ apacheLimpiarSites() {
 ## ~/web a /var/www
 ## ~/git a /var/www/private/git
 ##
-apacheGenerarEnlaces() {
+apache2GenerarEnlaces() {
     local rutaEnlaceWeb='/var/www'
-
-    clear
 
     ## Creo enlace al directorio web.
     if [[ ! -h "/home/$USER/web" ]] ||
        [[ ! -d "$rutaEnlaceWeb" ]]; then
-        echo -e "$VE Creando directorio$RO $HOME/GIT$VE"
+        echo -e "$VE Creando enlace desde$RO ${HOME$V}/web$VE hasta$RO $rutaEnlaceWeb$CL"
 
         sudo ln -s "$rutaEnlaceWeb" "/home/$USER/web"
         sudo chown -R "$USER:www-data" "/home/$USER/web"
@@ -204,24 +227,12 @@ apacheGenerarEnlaces() {
 
     ## Creo enlace a repositorios "git" en zona privada.
     if [[ -d "$HOME/git" ]] && [[ ! -h "${rutaEnlaceWeb}/private/git" ]]; then
+        echo -e "$VE Creando enlace desde$RO ${HOME$V}/git$VE hasta$RO /var/www/private$CL"
         sudo ln -s "$HOME/git" '/var/www/private/git'
     elif [[ -d "$HOME/GIT" ]] && [[ ! -h "${rutaEnlaceWeb}/private/git" ]]; then
+        echo -e "$VE Creando enlace desde$RO ${HOME$V}/GIT$VE hasta$RO /var/www/private$CL"
         sudo ln -s "$HOME/GIT" '/var/www/private/git'
         sudo ln -s "$HOME/GIT" "$HOME/git"
-    fi
-            echo -e "$VE Creando enlace desde$RO ${HOME$V}/'webE
-             hasta
-
-    if [[ "$input" = 's' ]] || [[ "$input" = 'S' ]]; then
-        if [[ ! -d "$HOME/GIT" ]]; then
-            mkdir "$HOME/GIT"
-        fi
-
-        if [[ ! -h "$HOME/git" ]] && [[ -h "$HOME/GIT" ]]; then
-            sudo ln -s "$HOME/GIT" "$HOME/git"
-        fi
-    else
-        echo -e "$VE No se crea enlaces ni directorio ~/GIT$CL"
     fi
 }
 
@@ -236,7 +247,10 @@ apache2_instalar() {
     apache2_desactivar_modulos
     apache2_ssl
     apacheDefaultSiteSecurity
+    apache2GenerarEnlaces
 
     ## Reiniciar servidor Apache para aplicar configuración
     reiniciarServicio apache2
+
+    ## Instalar Sitios Virtuales
 }

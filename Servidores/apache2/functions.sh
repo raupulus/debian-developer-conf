@@ -116,3 +116,15 @@ apache2ExisteSitioVirtual() {
     echo 'false'
     return 0
 }
+
+##
+## Crea una entrada en /etc/hosts para el sitio pasaddo.
+## $1 Recibe el nombre del archivo hosts.
+##
+apache2ActivarHost() {
+    echo -e "$VE Añadiendo$RO Sitio Virtual$VE al arhcivo$RO /etc/hosts$AM"
+
+    ## TODO → Usar "sed" para añadir el host
+
+    #echo '127.0.0.1 privado' | sudo tee -a '/etc/hosts'
+}
