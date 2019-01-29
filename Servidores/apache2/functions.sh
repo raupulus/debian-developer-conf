@@ -99,7 +99,7 @@ apache2GenerarConfiguracion() {
 
         ## Generando directorio para logs
         if [[ ! -d "/var/log/apache2/${site}.local" ]]; then
-            mkdir "/var/log/apache2/${site}.local"
+            sudo mkdir "/var/log/apache2/${site}.local"
         fi
     else
         echo -e "$VE No existe el directorio para el sitio $site$CL"

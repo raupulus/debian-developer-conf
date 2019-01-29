@@ -27,8 +27,12 @@ apachePrivateSiteCreate() {
 
     if [[ $existe != 'true' ]]; then
         ## Deshabilita Sitios Virtuales (VirtualHost).
-        sudo a2dissite "${nombreSitio}.conf"
-        sudo a2dissite "${nombreSitio}-ssl.conf"
+        if [[ -f "/etc/apache2/sites-available/${nombreSitio}.conf" ]]; then
+            sudo a2dissite "${nombreSitio}.conf"
+        fi
+        if [[ -f "/etc/apache2/sites-available/${nombreSitio}.conf" ]]; then
+            sudo a2dissite "${nombreSitio}-ssl.conf"
+        fi
 
         ## Copia el esqueleto a /var/www
         apache2AgregarDirectorio $nombreSitio
