@@ -302,7 +302,7 @@ apache2_instalador() {
     read -p ' s/N → ' input
 
     if [[ $input = 's' ]] || [[ $input = 'S' ]]; then
-        apache2_instalar
+        apache2Instalar
         return 0
     else
         apache2_descargar
