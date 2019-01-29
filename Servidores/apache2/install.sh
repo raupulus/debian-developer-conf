@@ -128,7 +128,9 @@ apache2Ssl() {
     reiniciarServicio apache2
 
     ## Comprobar que está activo y abierto el puerto
-    netstat -nl | grep 443
+    if [[ -x '/bin/netstat' ]]; then
+        netstat -nl | grep 443
+    fi
     sudo iptables -nL | grep 443
 
     ## Crear certificado autofirmado

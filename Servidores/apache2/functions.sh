@@ -63,8 +63,8 @@ apache2AgregarDirectorio() {
         echo -e "$VE Ya existe$RO /var/www/${site}$VE, omitiendo$CL"
     fi
 
-    echo -e "$VE Copiando contenido dentro de /var/www/${site} $CL"
-    sudo cp -R $WORKSCRIPT/Apache2/www/${site}/* "/var/www/${site}"
+    echo -e "$VE Copiando estructura dentro de /var/www/${site} $CL"
+    sudo cp -R "$WORKSCRIPT/Apache2/www/${site}" "/var/www/${site}"
 }
 
 ##
