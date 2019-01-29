@@ -51,12 +51,12 @@ apache2AgregarDirectorio() {
     local site="$1"
 
     if [[ -z $site ]]; then
-        echo "$RO No se ha pasado sitio a copiar$CL"
+        echo -e "$RO No se ha pasado sitio a copiar$CL"
         return 1
     fi
 
-    if [[ ! -d $WORKSCRIPT/Apache2/www/${site} ]]; then
-        echo -e "$RO No existe el directorio para el sitio de apache a copiar$CL"
+    if [[ ! -d "$WORKSCRIPT/Apache2/www/${site}" ]]; then
+        echo -e "$RO No existe directorio para el sitio de apache$RO $site$CL"
     fi
 
     if [[ -d "/var/www/${site}" ]]; then
@@ -77,17 +77,17 @@ apache2GenerarConfiguracion() {
     local site="$2"
 
     if [[ -z $conf ]]; then
-        echo "$RO No se ha pasado archivo de configuracion$CL"
+        echo -e "$RO No se ha pasado archivo de configuracion$CL"
         return 1
     fi
 
     if [[ ! -f "${WORKSCRIPT}/Apache2/etc/apache2/sites-available/${conf}" ]]; then
-        echo "$VE No existe el archivo para el sitio de apache2 a copiar$CL"
+        echo -e "$VE No existe el archivo para el sitio de apache2 a copiar$CL"
         return 1
     fi
 
     if [[ -f "/etc/apache2/sites-available/${conf}" ]]; then
-        echo "$VE Ya existe$RO /etc/apache2/sites-available/${conf}, omitiendo$CL"
+        echo -e "$VE Ya existe$RO /etc/apache2/sites-available/${conf}, omitiendo$CL"
         return 1
     fi
 
@@ -102,7 +102,7 @@ apache2GenerarConfiguracion() {
             mkdir "/var/log/apache2/${site}-local"
         fi
     else
-        echo "$VE No existe el directorio para el sitio$CL"
+        echo -e "$VE No existe el directorio para el sitio $site$CL"
     fi
 }
 

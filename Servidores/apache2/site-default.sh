@@ -31,7 +31,7 @@ apacheDefaultSiteCreate() {
         sudo a2dissite "${nombreSitio}-ssl.conf"
 
         ## Copia el esqueleto a /var/www
-        apache2AgregarDirectorio $nombreSitio
+        apache2AgregarDirectorio "$nombreSitio"
 
         ## Copia los archivos de configuración.
         apache2GenerarConfiguracion "${nombreSitio}.conf" "$nombreSitio"
@@ -43,7 +43,6 @@ apacheDefaultSiteCreate() {
     fi
 
     apache2ActivarHost "$nombreSitio"
-
     apache2AsignarPropietario "$nombreSitio"
     apache2AsignarPermisos "$nombreSitio"
 }
