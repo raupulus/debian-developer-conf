@@ -211,7 +211,7 @@ apache2GenerarEnlaces() {
     ## Creo enlace al directorio web.
     if [[ ! -h "/home/$USER/web" ]] ||
        [[ ! -d "$rutaEnlaceWeb" ]]; then
-        echo -e "$VE Creando enlace desde$RO ${HOME$V}/web$VE hasta$RO $rutaEnlaceWeb$CL"
+        echo -e "$VE Creando enlace desde$RO ${HOME}/web$VE hasta$RO $rutaEnlaceWeb$CL"
 
         sudo ln -s "$rutaEnlaceWeb" "/home/$USER/web"
         sudo chown -R "$USER:www-data" "/home/$USER/web"

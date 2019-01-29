@@ -56,11 +56,11 @@ apache2AgregarDirectorio() {
     fi
 
     if [[ ! -d $WORKSCRIPT/Apache2/www/${site} ]]; then
-        echo "$VE No existe el directorio para el sitio de apache a copiar$CL"
+        echo -e "$RO No existe el directorio para el sitio de apache a copiar$CL"
     fi
 
     if [[ -d "/var/www/${site}" ]]; then
-        echo "$VE Ya existe$RO /var/www/${site}$VE, omitiendo$CL"
+        echo -e "$VE Ya existe$RO /var/www/${site}$VE, omitiendo$CL"
     fi
 
     echo -e "$VE Copiando contenido dentro de /var/www/${site} $CL"
@@ -126,7 +126,7 @@ apache2ExisteSitioVirtual() {
 ## $1 Recibe el nombre del archivo hosts.
 ##
 apache2ActivarHost() {
-    echo -e "$VE Añadiendo$RO Sitio Virtual$VE al arhcivo$RO /etc/hosts$AM"
+    echo -e "$VE Añadiendo$RO Sitio Virtual$VE al archivo$RO /etc/hosts$AM"
 
     ## TODO → Usar "sed" para añadir el host
 
