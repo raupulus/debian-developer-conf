@@ -32,6 +32,10 @@ limpiarWWW() {
 
     ## TODO → Controlar si es Debian, Fedora o Gentoo (Cambia la ruta).
 
+    if [[ $DISTRO != 'debian' ]] && [[ $DISTRO != 'raspbian' ]]; then
+        return 1
+    fi
+
     if [[ "$input" = 's' ]] || [[ "$input" = 'S' ]]; then
         sudo rm -R /var/www/*
     else
@@ -127,4 +131,37 @@ apache2ActivarHost() {
     ## TODO → Usar "sed" para añadir el host
 
     #echo '127.0.0.1 privado' | sudo tee -a '/etc/hosts'
+}
+
+##
+## Asigna los permisos al sitio recibido como parámetro.
+## $1 Recibe el nombre del directorio web.
+##
+apache2AsignarPropietario() {
+    local dirWeb="$1"
+
+    ## Cambia el dueño
+    echo -e "$VE Asignando dueños$CL"
+
+    if [[ -d "/var/www/${dirWeb}" ]]; then
+        sudo chown -R www-data:www-data "/var/www/${dirWeb}"
+        sudo chmod g+s -R "/var/www/${dirWeb}"
+    fi
+}
+
+##
+## Asigna permisos al sitio virtual y su configuración.
+## $1 Recibe el nombre del directorio en /var/www para el sitio virtual.
+##
+apache2AsignarPermisos() {
+    local dirWeb="/var/www/${1}"
+
+    echo -e "$VE Asignando permisos a$RO Host Virtual$VE de$RO $dirWeb$CL"
+    if [[ -f "/var/www/${dirWeb}/.htpasswd" ]]; then
+        sudo chmod 700 "/var/www/${dirWeb}/.htpasswd"
+    fi
+
+    if [[ -f "/var/www/${dirWeb}/CMS/.htpasswd" ]]; then
+        sudo chmod 700 "/var/www/${dirWeb}/CMS/.htpasswd"
+    fi
 }

@@ -43,4 +43,7 @@ apacheDefaultSiteCreate() {
     fi
 
     apache2ActivarHost "$nombreSitio"
+
+    apache2AsignarPropietario "$nombreSitio"
+    apache2AsignarPermisos "$nombreSitio"
 }

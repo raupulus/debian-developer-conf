@@ -22,6 +22,11 @@
 ## Además se habilitan módulos y se modifican archivos de configuración.
 
 ############################
+##     IMPORTACIONES      ##
+############################
+source "$WORKSCRIPT/Servidores/apache2/install.sh"
+
+############################
 ##        FUNCIONES       ##
 ############################
 
@@ -293,8 +298,8 @@ apache2_ssl() {
 }
 
 apache2_instalador() {
-    echo "$VE ¿Usar nuevo método para instalar apache?$CL"
-    read -p ' → ' input
+    echo -e "$VE ¿Usar nuevo método para instalar apache?$CL"
+    read -p ' s/N → ' input
 
     if [[ $input = 's' ]] || [[ $input = 'S' ]]; then
         apache2_instalar

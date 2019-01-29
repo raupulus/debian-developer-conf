@@ -59,17 +59,11 @@ apache2_dependencias() {
 apache2_propietarios() {
     ## Cambia el dueño
     echo -e "$VE Asignando dueños$CL"
-    sudo chown www-data:www-data -R '/var/www'
     sudo chown root:root '/etc/apache2/ports.conf'
 
     ## Agrega el usuario al grupo www-data
     echo -e "$VE Añadiendo el usuario al grupo$RO www-data"
     sudo adduser "$USER" 'www-data'
-
-    if [[ -d '/var/www/default' ]]; then
-        sudo chown -R www-data:www-data "/home/$USER/GIT"
-        sudo chmod g+s -R '/var/www/default'
-    fi
 
     ## Cada archivo/directorio creado tomará el grupo www-data
     if [[ -d "/home/$USER/GIT" ]]; then
@@ -94,9 +88,6 @@ apache2_permisos() {
     echo -e "$VE Asignando permisos a$RO Hosts Virtuales$CL"
     sudo chmod ug+rw -R /var/www/*
     sudo chmod 700 '/var/www/.htpasswd'
-    sudo chmod 700 '/var/www/private/.htaccess'
-    sudo chmod 700 '/var/www/public/.htaccess'
-    sudo chmod 700 '/var/www/private/CMS/.htaccess'
     sudo chmod 755 '/etc/apache2/'
     sudo chmod 755 -R '/etc/apache2/sites-available' '/etc/apache2/sites-enabled'
 }
@@ -178,21 +169,14 @@ apache2_ssl() {
     fi
 
     sudo chmod 600 -R /etc/apache2/ssl/
-
-    if [[ "$ENV" = 'dev' ]]; then
-        sudo a2ensite publico-ssl.conf
-        sudo a2ensite privado-ssl.conf
-        sudo a2ensite default-ssl.conf
-    fi
 }
 
 ##
 ## Agrega configuraciones de seguridad y permisos para los sitios virtuales.
 ##
-apacheDefaultSiteSecurity() {
+apache2DefaultSiteSecurity() {
     ## Crear archivo de usuario con permisos para directorios restringidos
     echo -e "$VE Creando usuario con permisos en apache"
-    sudo rm /var/www/.htpasswd 2>> /dev/null
 
     while [[ -z "$input_user" ]]; do
         read -p "Nombre de usuario para acceder a los sitios web privado → " input_user
@@ -205,7 +189,7 @@ apacheDefaultSiteSecurity() {
 ##
 ## Borrar contenido de /var/www
 ##
-apacheLimpiarSites() {
+apache2LimpiarSites() {
     sudo systemctl stop apache2
     echo -e "$VE Cuidado, esto puede$RO BORRAR$VE algo valioso$RO"
     read -p " ¿Quieres borrar todo el directorio /var/www/? s/N → " input
@@ -234,10 +218,18 @@ apache2GenerarEnlaces() {
     fi
 
     ## Creo enlace a repositorios "git" en zona privada.
-    if [[ -d "$HOME/git" ]] && [[ ! -h "${rutaEnlaceWeb}/private/git" ]]; then
+    if [[ -d "$HOME/git" ]] &&
+       [[ "$ENV" = 'dev' ]] &&
+       [[ -d "${rutaEnlaceWeb}/private" ]] &&
+       [[ ! -h "${rutaEnlaceWeb}/private/git" ]];
+    then
         echo -e "$VE Creando enlace desde$RO ${HOME$V}/git$VE hasta$RO /var/www/private$CL"
         sudo ln -s "$HOME/git" '/var/www/private/git'
-    elif [[ -d "$HOME/GIT" ]] && [[ ! -h "${rutaEnlaceWeb}/private/git" ]]; then
+    elif [[ -d "$HOME/GIT" ]] &&
+         [[ "$ENV" = 'dev' ]] &&
+         [[ -d "${rutaEnlaceWeb}/private" ]] &&
+         [[ ! -h "${rutaEnlaceWeb}/private/git" ]];
+    then
         echo -e "$VE Creando enlace desde$RO ${HOME$V}/GIT$VE hasta$RO /var/www/private$CL"
         sudo ln -s "$HOME/GIT" '/var/www/private/git'
         sudo ln -s "$HOME/GIT" "$HOME/git"
@@ -245,7 +237,9 @@ apache2GenerarEnlaces() {
 }
 
 apache2_instalar() {
-    apacheLimpiarSites
+    local rutaEnlaceWeb='/var/www'
+
+    apache2LimpiarSites
     apache2_descargar
     apache2_preconfiguracion
     apache2_dependencias
@@ -254,17 +248,22 @@ apache2_instalar() {
     apache2_activar_modulos
     apache2_desactivar_modulos
     apache2_ssl
-    apacheDefaultSiteSecurity
-    apache2GenerarEnlaces
+
+    if [[ ! -f "${rutaEnlaceWeb}/.htpasswd" ]]; then
+        apache2DefaultSiteSecurity
+    fi
 
     ## Habilito sitios virtuales.
     apacheDefaultSiteCreate
     apachePublicSiteCreate
-    apachePrivateSiteCreate
 
+    if [[ "$ENV" = 'dev' ]]; then
+        apachePrivateSiteCreate
+    fi
+
+    ## Genero enlaces.
+    apache2GenerarEnlaces
 
     ## Reiniciar servidor Apache para aplicar configuración
     reiniciarServicio apache2
-
-    ## Instalar Sitios Virtuales
 }
