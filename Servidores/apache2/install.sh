@@ -241,6 +241,10 @@ apache2GenerarEnlaces() {
 apache2Instalar() {
     local rutaEnlaceWeb='/var/www'
 
+    if [[ -f '/etc/apache2/sites-available/000-default.conf' ]]; then
+        sudo a2dissite 000-default.conf
+    fi
+
     apache2LimpiarSites
     apache2Descargar
     apache2Preconfiguracion
