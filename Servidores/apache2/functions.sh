@@ -98,9 +98,9 @@ apache2GenerarConfiguracion() {
         sudo cp -R "${WORKSCRIPT}/Apache2/etc/apache2/sites-available/${conf}" "/etc/apache2/sites-available/${conf}"
 
         ## Generando directorio para logs
-        if [[ ! -d "/var/log/apache2/${site}.local" ]]; then
-            sudo mkdir "/var/log/apache2/${site}.local"
-        fi
+        ##if [[ ! -d "/var/log/apache2/${site}.local" ]]; then
+        sudo mkdir "/var/log/apache2/${site}.local"
+        ##fi
     else
         echo -e "$VE No existe el directorio para el sitio $site$CL"
     fi
