@@ -21,10 +21,10 @@
 ############################
 ##     IMPORTACIONES      ##
 ############################
-source "$WORKSCRIPT/Servidores/functions.sh"
-source "$WORKSCRIPT/Servidores/site-default.sh"
-source "$WORKSCRIPT/Servidores/site-private.sh"
-source "$WORKSCRIPT/Servidores/site-public.sh"
+source "$WORKSCRIPT/Servidores/apache2/functions.sh"
+source "$WORKSCRIPT/Servidores/apache2/site-default.sh"
+source "$WORKSCRIPT/Servidores/apache2/site-private.sh"
+source "$WORKSCRIPT/Servidores/apache2/site-public.sh"
 
 ############################
 ##        FUNCIONES       ##
