@@ -91,15 +91,15 @@ apache2GenerarConfiguracion() {
         return 1
     fi
 
-    if [[ -d "/var/www/${site}}" ]]; then
+    if [[ -d "/var/www/${site}" ]]; then
         echo -e "$VE Copiando archivos de configuración dentro de /etc/apache2"
 
         ## Copia el contenido de configuración a /etc/apache2
         sudo cp -R "${WORKSCRIPT}/Apache2/etc/apache2/sites-available/${conf}" "/etc/apache2/sites-available/${conf}"
 
         ## Generando directorio para logs
-        if [[ ! -d "/var/log/apache2/${site}-local" ]]; then
-            mkdir "/var/log/apache2/${site}-local"
+        if [[ ! -d "/var/log/apache2/${site}.local" ]]; then
+            mkdir "/var/log/apache2/${site}.local"
         fi
     else
         echo -e "$VE No existe el directorio para el sitio $site$CL"
