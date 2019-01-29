@@ -29,9 +29,11 @@ apachePublicSiteCreate() {
         ## Deshabilita Sitios Virtuales (VirtualHost).
         if [[ -f "/etc/apache2/sites-available/${nombreSitio}.conf" ]]; then
             sudo a2dissite "${nombreSitio}.conf"
+            sudo rm "/etc/apache2/sites-available/${nombreSitio}.conf"
         fi
         if [[ -f "/etc/apache2/sites-available/${nombreSitio}.conf" ]]; then
             sudo a2dissite "${nombreSitio}-ssl.conf"
+            sudo rm "/etc/apache2/sites-available/${nombreSitio}-ssl.conf"
         fi
 
         ## Copia el esqueleto a /var/www
