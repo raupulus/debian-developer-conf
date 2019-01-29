@@ -65,6 +65,12 @@ apache2AgregarDirectorio() {
 
     echo -e "$VE Copiando estructura dentro de /var/www/${site} $CL"
     sudo cp -R "$WORKSCRIPT/Apache2/www/${site}" "/var/www/${site}"
+
+    ## Generando directorio para logs
+    ##if [[ ! -d "/var/log/apache2/${site}.local" ]]; then
+    echo -e "$VE Creando directorio para logs /var/log/apache2/${site}.local$CL"
+    sudo mkdir "/var/log/apache2/${site}.local"
+    ##fi
 }
 
 ##
@@ -96,11 +102,6 @@ apache2GenerarConfiguracion() {
 
         ## Copia el contenido de configuración a /etc/apache2
         sudo cp -R "${WORKSCRIPT}/Apache2/etc/apache2/sites-available/${conf}" "/etc/apache2/sites-available/${conf}"
-
-        ## Generando directorio para logs
-        ##if [[ ! -d "/var/log/apache2/${site}.local" ]]; then
-        sudo mkdir "/var/log/apache2/${site}.local"
-        ##fi
     else
         echo -e "$VE No existe el directorio para el sitio $site$CL"
     fi
