@@ -32,21 +32,21 @@ source "$WORKSCRIPT/Servidores/site-public.sh"
 ##
 ## Descarga e instala la base para apache2.
 ##
-apache2_descargar() {
+apache2Descargar() {
     echo -e "$VE Descargando$RO Apache2$CL"
 }
 
 ##
 ## Preconfigura apache2 antes de su instalación.
 ##
-apache2_preconfiguracion() {
+apache2Preconfiguracion() {
     echo -e "$VE Generando Pre-Configuraciones de$RO Apache2"
 }
 
 ##
 ## Instala las dependencias para apache2.
 ##
-apache2_dependencias() {
+apache2Dependencias() {
     echo -e "$VE Instalando$RO Apache2$CL"
     local dependencias="apache2 libapache2-mod-perl2 libapache2-mod-php libapache2-mod-python"
 
@@ -56,7 +56,7 @@ apache2_dependencias() {
 ##
 ## Asigna propietario a los sitios virtuales y su configuración.
 ##
-apache2_propietarios() {
+apache2Propietarios() {
     ## Cambia el dueño
     echo -e "$VE Asignando dueños$CL"
     sudo chown root:root '/etc/apache2/ports.conf'
@@ -80,7 +80,7 @@ apache2_propietarios() {
 ##
 ## Asigna los permisos para los sitios virtuales y la configuración.
 ##
-apache2_permisos() {
+apache2Permisos() {
     echo -e "$VE Asignando permisos$RO Configuración$CL"
     sudo chmod 750 '/etc/apache2/ports.conf'
     sudo chmod 750 '/etc/apache2/apache2.conf'
@@ -95,7 +95,7 @@ apache2_permisos() {
 ##
 ## Habilita módulos de apache2.
 ##
-apache2_activar_modulos() {
+apache2Activar_modulos() {
     echo -e "$VE Activando módulos$RO"
     sudo a2enmod rewrite
     sudo a2enmod ssl
@@ -104,7 +104,7 @@ apache2_activar_modulos() {
 ##
 ## Deshabilita módulos de apache2
 ##
-apache2_desactivar_modulos() {
+apache2Desactivar_modulos() {
     echo -e "$VE Desactivando módulos$RO"
     sudo a2dismod php5
 }
@@ -112,7 +112,7 @@ apache2_desactivar_modulos() {
 ##
 ## Aplica configuraciones tras instalar apache2.
 ##
-apache2_postconfiguracion() {
+apache2Postconfiguracion() {
     echo -e "$VE Generando Post-Configuraciones de Apache2"
 
     ## TODO → Controlar distribución, la ruta de destino cambia.
@@ -122,7 +122,7 @@ apache2_postconfiguracion() {
 ##
 ## Agrega y habilita certificado ssl y módulo.
 ##
-apache2_ssl() {
+apache2Ssl() {
     ## Instalar módulo SSL
     sudo a2enmod ssl
     reiniciarServicio apache2
@@ -236,18 +236,16 @@ apache2GenerarEnlaces() {
     fi
 }
 
-apache2_instalar() {
+apache2Instalar() {
     local rutaEnlaceWeb='/var/www'
 
     apache2LimpiarSites
-    apache2_descargar
-    apache2_preconfiguracion
-    apache2_dependencias
-    apache2_propietarios
-    apache2_permisos
-    apache2_activar_modulos
-    apache2_desactivar_modulos
-    apache2_ssl
+    apache2Descargar
+    apache2Preconfiguracion
+    apache2Dependencias
+    apache2Activar_modulos
+    apache2Desactivar_modulos
+    apache2Ssl
 
     if [[ ! -f "${rutaEnlaceWeb}/.htpasswd" ]]; then
         apache2DefaultSiteSecurity
@@ -263,6 +261,10 @@ apache2_instalar() {
 
     ## Genero enlaces.
     apache2GenerarEnlaces
+
+    ## Propietario y permisos
+    apache2Propietarios
+    apache2Permisos
 
     ## Reiniciar servidor Apache para aplicar configuración
     reiniciarServicio apache2
