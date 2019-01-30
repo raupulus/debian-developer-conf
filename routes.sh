@@ -50,4 +50,3 @@ setAllRoutes() {
 
     routesApache2
 }
-setAllRoutes
