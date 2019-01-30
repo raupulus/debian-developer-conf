@@ -130,14 +130,18 @@ apache2ExisteSitioVirtual() {
 
 ##
 ## Crea una entrada en /etc/hosts para el sitio pasaddo.
-## $1 Recibe el nombre del archivo hosts.
+## $1 Recibe el nombre del sitio virtual.
 ##
 apache2ActivarHost() {
+    local sitioWeb="$1"
+    local entradaHosts=$(cat /etc/hosts | grep "127.0.0.1    ${sitioWeb}.local")
+
     echo -e "$VE Añadiendo$RO Sitio Virtual$VE al archivo$RO /etc/hosts$AM"
 
     ## TODO → Usar "sed" para añadir el host
-
-    #echo '127.0.0.1 privado' | sudo tee -a '/etc/hosts'
+    if [[ "$entradaExtraida" =  "127.0.0.1    ${sitioWeb}.local" ]]; then
+        echo "127.0.0.1    ${sitioWeb}.local" | sudo tee -a '/etc/hosts'
+    fi
 }
 
 ##
