@@ -64,6 +64,10 @@ apache2Propietarios() {
     sudo adduser "$USER" 'www-data'
 
     ## Cada archivo/directorio creado tomará el grupo www-data
+
+    if [[ -d "${DIRWEB}/.htpasswd" ]]; then
+        sudo chown 'www-data:www-data' "${DIRWEB}/.htpasswd"
+
     if [[ -d "${HOME}/GIT" ]]; then
         sudo chown -R "$USER":www-data "${HOME}/GIT"
         sudo chmod g+s -R "${HOME}/GIT"
