@@ -139,7 +139,7 @@ apache2ActivarHost() {
     echo -e "$VE Añadiendo$RO Sitio Virtual$VE al archivo$RO /etc/hosts$AM"
 
     ## TODO → Usar "sed" para añadir el host
-    if [[ "$entradaExtraida" =  "127.0.0.1    ${sitioWeb}.local" ]]; then
+    if [[ "$entradaHosts" != "127.0.0.1    ${sitioWeb}.local" ]]; then
         echo "127.0.0.1    ${sitioWeb}.local" | sudo tee -a '/etc/hosts'
     fi
 }
