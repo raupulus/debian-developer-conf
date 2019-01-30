@@ -21,8 +21,15 @@
 ##       FUNCIONES        ##
 ############################
 getDistrosAvailable() {
+    echo -e "$RO debian$CL"
+    echo -e "$RO gentoo$CL"
+    echo -e "$RO raspbian$CL"
+    echo -e "$RO fedora$CL"
+}
+
+getBranchAvailable() {
     echo -e "$RO debian$VE → stable-testing-unstable$CL"
-    echo -e "$RO gentoo$VE → stable-testing-unstable$CL"
+    echo -e "$RO gentoo$VE → stable-testing$CL"
     echo -e "$RO raspbian$VE → stable-testing-unstable$CL"
     echo -e "$RO fedora$VE → stable$CL"
 }
@@ -51,7 +58,7 @@ setBranch() {
           [[ "$input" != 'unstable' ]]
     do
         clear
-        getDistrosAvailable
+        getBranchAvailable
         ## Pido elegir distribución
         echo "$MY_BRANCH"
         read -p "Introduce la rama → " input

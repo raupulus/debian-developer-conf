@@ -25,21 +25,16 @@
 ## Borra todo el contenido dentro de /var/www
 ##
 limpiarWWW() {
-    sudo systemctl stop apache2
+    pararServicio apache2
 
     echo -e "$VE Cuidado, esto puede$RO BORRAR$VE algo valioso$RO"
-    read -p " ¿Quieres borrar todo el directorio /var/www/? s/N → " input
-
-    ## TODO → Controlar si es Debian, Fedora o Gentoo (Cambia la ruta).
-
-    if [[ $DISTRO != 'debian' ]] && [[ $DISTRO != 'raspbian' ]]; then
-        return 1
-    fi
+    read -p " ¿Quieres borrar todo el directorio ${DIRWEB}/* s/N → " input
 
     if [[ "$input" = 's' ]] || [[ "$input" = 'S' ]]; then
-        sudo rm -R /var/www/*
+        sudo rm -R ${DIRWEB}/*
+        echo -e "$VE Directorio$VE $DIRWEB borrado$CL"
     else
-        echo -e "$VE No se borra$RO /var/www$CL"
+        echo -e "$VE No se borra$RO $DIRWEB$CL"
     fi
 }
 
@@ -56,20 +51,20 @@ apache2AgregarDirectorio() {
     fi
 
     if [[ ! -d "$WORKSCRIPT/Apache2/www/${site}" ]]; then
-        echo -e "$RO No existe directorio para el sitio de apache$RO $site$CL"
+        echo -e "$RO No existe directorio en este script para el sitio de apache$RO $site$CL"
     fi
 
-    if [[ -d "/var/www/${site}" ]]; then
-        echo -e "$VE Ya existe$RO /var/www/${site}$VE, omitiendo$CL"
+    if [[ -d "${DIRWEB}/${site}" ]]; then
+        echo -e "$VE Ya existe$RO ${DIRWEB}/${site}$VE, omitiendo$CL"
     fi
 
-    echo -e "$VE Copiando estructura dentro de /var/www/${site} $CL"
-    sudo cp -R "$WORKSCRIPT/Apache2/www/${site}" "/var/www/${site}"
+    echo -e "$VE Copiando estructura dentro de ${DIRWEB}/${site} $CL"
+    sudo cp -R "$WORKSCRIPT/Apache2/www/${site}" "${DIRWEB}/${site}"
 
     ## Generando directorio para logs
     ##if [[ ! -d "/var/log/apache2/${site}.local" ]]; then
-    echo -e "$VE Creando directorio para logs /var/log/apache2/${site}.local$CL"
-    sudo mkdir "/var/log/apache2/${site}.local"
+    echo -e "$VE Creando directorio para logs ${DIRWEBLOG}/${site}.local$CL"
+    sudo mkdir "${DIRWEBLOG}/${site}.local"
     ##fi
 }
 
@@ -92,16 +87,16 @@ apache2GenerarConfiguracion() {
         return 1
     fi
 
-    if [[ -f "/etc/apache2/sites-available/${conf}" ]]; then
-        echo -e "$VE Ya existe$RO /etc/apache2/sites-available/${conf}, omitiendo$CL"
-        return 1
+    if [[ -f "${APACHECONF}/${conf}" ]]; then
+        echo -e "$VE Ya existe$RO ${APACHECONF}/${conf}, renovando...$CL"
+        sudo rm "${APACHECONF}/${conf}"
     fi
 
-    if [[ -d "/var/www/${site}" ]]; then
-        echo -e "$VE Copiando archivos de configuración dentro de /etc/apache2"
+    if [[ -d "${DIRWEB}/${site}" ]]; then
+        echo -e "$VE Copiando configuración dentro de $APACHECONF$CL"
 
-        ## Copia el contenido de configuración a /etc/apache2
-        sudo cp -R "${WORKSCRIPT}/Apache2/etc/apache2/sites-available/${conf}" "/etc/apache2/sites-available/${conf}"
+        ## Copia el contenido de configuración en apache2
+        sudo cp -R "${WORKSCRIPT}/Apache2/etc/apache2/sites-available/${conf}" "${APACHESITES}/${conf}"
     else
         echo -e "$VE No existe el directorio para el sitio $site$CL"
     fi
@@ -114,12 +109,10 @@ apache2GenerarConfiguracion() {
 ## return boolean Devuelve "true" o "false"
 ##
 apache2ExisteSitioVirtual() {
-    local conf="/etc/apache2/sites-available/${1}"
-    local dirWeb="/var/www/${2}"
+    local conf="${APACHESITES}/${1}"
+    local dirWebHost="${DIRWEB}/${2}"
 
-    ## TODO → Controlar distribución para aplicar su ruta
-
-    if [[ -f $conf ]] && [[ -d $dirWeb ]]; then
+    if [[ -f $conf ]] && [[ -d $dirWebHost ]]; then
         echo 'true'
         return 1
     fi
@@ -134,7 +127,7 @@ apache2ExisteSitioVirtual() {
 ##
 apache2ActivarHost() {
     local sitioWeb="$1"
-    local entradaHosts=$(cat /etc/hosts | grep "127.0.0.1    ${sitioWeb}.local")
+    local entradaHosts=$(cat '/etc/hosts' | grep "127.0.0.1    ${sitioWeb}.local")
 
     echo -e "$VE Añadiendo$RO Sitio Virtual$VE al archivo$RO /etc/hosts$AM"
 
@@ -149,14 +142,14 @@ apache2ActivarHost() {
 ## $1 Recibe el nombre del directorio web.
 ##
 apache2AsignarPropietario() {
-    local dirWeb="$1"
+    local vhostName="$1"
 
     ## Cambia el dueño
     echo -e "$VE Asignando dueños$CL"
 
-    if [[ -d "/var/www/${dirWeb}" ]]; then
-        sudo chown -R www-data:www-data "/var/www/${dirWeb}"
-        sudo chmod g+s -R "/var/www/${dirWeb}"
+    if [[ -d "${DIRWEB}/${vhostName}" ]]; then
+        sudo chown -R www-data:www-data "${DIRWEB}/${vhostName}"
+        sudo chmod g+s -R "${DIRWEB}/${vhostName}"
     fi
 }
 
@@ -165,14 +158,98 @@ apache2AsignarPropietario() {
 ## $1 Recibe el nombre del directorio en /var/www para el sitio virtual.
 ##
 apache2AsignarPermisos() {
-    local dirWeb="/var/www/${1}"
+    local dirWebHost="${DIRWEB}/${1}"
 
-    echo -e "$VE Asignando permisos a$RO Host Virtual$VE de$RO $dirWeb$CL"
-    if [[ -f "/var/www/${dirWeb}/.htpasswd" ]]; then
-        sudo chmod 700 "/var/www/${dirWeb}/.htpasswd"
+    echo -e "$VE Asignando permisos a$RO Host Virtual$VE de$RO $dirWebHost$CL"
+    if [[ -f "${dirWebHost}/.htpasswd" ]]; then
+        sudo chmod 700 "${dirWebHost}/.htpasswd"
     fi
 
-    if [[ -f "/var/www/${dirWeb}/CMS/.htpasswd" ]]; then
-        sudo chmod 700 "/var/www/${dirWeb}/CMS/.htpasswd"
+    if [[ -f "${dirWebHost}/CMS/.htpasswd" ]]; then
+        sudo chmod 700 "${dirWebHost}/CMS/.htpasswd"
+    fi
+}
+
+##
+## Habilita los módulos recibidos como parámetro en apache2
+## $* Lista de módulos
+##
+apache2HabilitarModulo() {
+    if [[ "$MY_DISTRO" = 'debian' ]] || [[ "$MY_DISTRO" = 'raspbian' ]]; then
+        for modulo in $*; do
+            echo -e "$VE Activando módulo:$RO $modulo$CL"
+            sudo a2enmod $modulo
+        done
+    elif [[ "$MY_DISTRO" = 'gentoo' ]]; then
+        for modulo in $*; do
+            echo "no implementado en gentoo"
+        done
+    elif [[ "$MY_DISTRO" = 'fedora' ]]; then
+        for modulo in $*; do
+            echo "no implementado en fedora"
+        done
+    fi
+}
+
+##
+## Deshabilita los módulos recibidos como parámetro en apache2
+## $* Lista de módulos
+##
+apache2DeshabilitarModulo() {
+    if [[ "$MY_DISTRO" = 'debian' ]] || [[ "$MY_DISTRO" = 'raspbian' ]]; then
+        for modulo in $*; do
+            echo -e "$VE Desactivando módulo:$RO $modulo$CL"
+            sudo a2dismod $modulo
+        done
+    elif [[ "$MY_DISTRO" = 'gentoo' ]]; then
+        for modulo in $*; do
+            echo "no implementado en gentoo"
+        done
+    elif [[ "$MY_DISTRO" = 'fedora' ]]; then
+        for modulo in $*; do
+            echo "no implementado en fedora"
+        done
+    fi
+}
+
+##
+## Habilitar los sitios apache2 recibidos.
+## $* Lista de sitios para habilitar.
+##
+apache2HabilitarSitio() {
+    if [[ "$MY_DISTRO" = 'debian' ]] || [[ "$MY_DISTRO" = 'raspbian' ]]; then
+        for sitio in $*; do
+            echo -e "$VE Activando sitio:$RO $sitio$CL"
+            sudo a2dissite $sitio
+        done
+    elif [[ "$MY_DISTRO" = 'gentoo' ]]; then
+        for sitio in $*; do
+            echo "no implementado en gentoo"
+        done
+    elif [[ "$MY_DISTRO" = 'fedora' ]]; then
+        for sitio in $*; do
+            echo "no implementado en fedora"
+        done
+    fi
+}
+
+##
+## Deshabilita los sitios apache2 recibidos.
+## $* Lista de sitios a deshabilitar.
+##
+apache2DeshabilitarSitio() {
+    if [[ "$MY_DISTRO" = 'debian' ]] || [[ "$MY_DISTRO" = 'raspbian' ]]; then
+        for sitio in $*; do
+            echo -e "$VE Desactivando sitio:$RO $sitio$CL"
+            sudo a2dissite $sitio
+        done
+    elif [[ "$MY_DISTRO" = 'gentoo' ]]; then
+        for sitio in $*; do
+            echo "no implementado en gentoo"
+        done
+    elif [[ "$MY_DISTRO" = 'fedora' ]]; then
+        for sitio in $*; do
+            echo "no implementado en fedora"
+        done
     fi
 }

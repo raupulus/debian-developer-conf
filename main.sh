@@ -57,6 +57,9 @@ MY_ENV="$ENV"    ## prod|dev desde /etc/environment o .env
 LOGERROR="$WORKSCRIPT/errores.log"  ## Archivo donde almacenar errores
 DEBUG=false      ## Establece si está el script en modo depuración
 
+## Importo variables con rutas de directorios para configuraciones.
+source "$WORKSCRIPT/routes.sh"
+
 ############################
 ##     IMPORTACIONES      ##
 ############################

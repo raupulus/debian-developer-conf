@@ -365,6 +365,16 @@ reiniciarServicio() {
 }
 
 ##
+## Recibe uno o más nombres de servicios para detenerlos.
+##
+pararServicio() {
+    for x in $*; do
+        echo -e "$RO Deteniendo Servicio: $x$CL"
+        sudo systemctl stop "$x"
+    done
+}
+
+##
 ## Actualiza la lista de repositorios y repara fallos en el si los hubiese
 ##
 prepararInstalador() {

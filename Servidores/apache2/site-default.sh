@@ -27,13 +27,13 @@ apacheDefaultSiteCreate() {
 
     if [[ $existe != 'true' ]]; then
         ## Deshabilita Sitios Virtuales (VirtualHost).
-        if [[ -f "/etc/apache2/sites-available/${nombreSitio}.conf" ]]; then
-            sudo a2dissite "${nombreSitio}.conf"
-            sudo rm "/etc/apache2/sites-available/${nombreSitio}.conf"
+        if [[ -f "${APACHESITES}/${nombreSitio}.conf" ]]; then
+            apache2DeshabilitarSitio "${nombreSitio}.conf"
+            sudo rm "${APACHESITES}/${nombreSitio}.conf"
         fi
-        if [[ -f "/etc/apache2/sites-available/${nombreSitio}.conf" ]]; then
-            sudo a2dissite "${nombreSitio}-ssl.conf"
-            sudo rm "/etc/apache2/sites-available/${nombreSitio}-ssl.conf"
+        if [[ -f "${APACHESITES}/${nombreSitio}.conf" ]]; then
+            apache2DeshabilitarSitio "${nombreSitio}-ssl.conf"
+            sudo rm "${APACHESITES}/${nombreSitio}-ssl.conf"
         fi
 
         ## Copia el esqueleto a /var/www
@@ -44,8 +44,8 @@ apacheDefaultSiteCreate() {
         apache2GenerarConfiguracion "${nombreSitio}-ssl.conf" "$nombreSitio"
 
         ## Habilita Sitios Virtuales (VirtualHost).
-        sudo a2ensite "${nombreSitio}.conf"
-        sudo a2ensite "${nombreSitio}-ssl.conf"
+        apache2HabilitarSitio "${nombreSitio}.conf"
+        apache2HabilitarSitio "${nombreSitio}-ssl.conf"
     fi
 
     apache2ActivarHost "$nombreSitio"
