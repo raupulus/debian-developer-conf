@@ -28,13 +28,13 @@
 routesApache2() {
     if [[ "$DISTRO" = 'debian' ]] || [[ "$DISTRO" = 'raspbian' ]]; then
         echo -e "$VE Configurando directorios apache para $DISTRO$CL"
-        $APACHECONF='/etc/apache2'
-        $DIRWEBLOG='/var/log/apache2'
-        $DIRWEB='/var/www'
-        $APACHESITES="${APACHECONF}/sites-available"
-        $APACHESITESENABLED="${APACHECONF}/sites-enabled"
-        $APACHEPORTSCONF="${APACHECONF}/ports.conf"
-        $APACHEAPACHE2CONF="${APACHECONF}/apache2.conf"
+        APACHECONF='/etc/apache2'
+        DIRWEBLOG='/var/log/apache2'
+        DIRWEB='/var/www'
+        APACHESITES="${APACHECONF}/sites-available"
+        APACHESITESENABLED="${APACHECONF}/sites-enabled"
+        APACHEPORTSCONF="${APACHECONF}/ports.conf"
+        APACHEAPACHE2CONF="${APACHECONF}/apache2.conf"
     elif [[ "$DISTRO" = 'fedora' ]]; then
         echo -e "$VE Configurando directorios apache para $DISTRO$CL"
     elif [[ "$DISTRO" = 'gentoo' ]]; then
