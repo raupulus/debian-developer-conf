@@ -26,5 +26,5 @@
 ##       FUNCIONES        ##
 ############################
 agregarRepositoriosFedora() {
-    echo '$VE Configurando Repositorios para$RO Fedora$CL'
+    echo -e '$VE Configurando Repositorios para$RO Fedora$CL'
 }

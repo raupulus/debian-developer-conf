@@ -92,7 +92,6 @@ configurePreferences
 ## Esta variable depende de ejecutarse primero el script anterior.
 SOFTLIST="${WORKSCRIPT}/Software-Lists/${MY_DISTRO}"  ## Ruta a listas de software
 
-
 ###########################
 ##       FUNCIONES       ##
 ###########################
