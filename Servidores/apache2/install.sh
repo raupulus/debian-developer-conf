@@ -67,6 +67,7 @@ apache2Propietarios() {
 
     if [[ -d "${DIRWEB}/.htpasswd" ]]; then
         sudo chown 'www-data:www-data' "${DIRWEB}/.htpasswd"
+    fi
 
     if [[ -d "${HOME}/GIT" ]]; then
         sudo chown -R "$USER":www-data "${HOME}/GIT"
