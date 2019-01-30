@@ -171,20 +171,6 @@ apache2DefaultSiteSecurity() {
 }
 
 ##
-## Borrar contenido de /var/www
-##
-apache2LimpiarSites() {
-    pararServicio apache2
-    echo -e "$VE Cuidado, esto puede$RO BORRAR$VE algo valioso$RO"
-    read -p " ¿Quieres borrar todo el directorio ${DIRWEB}/? s/N → " input
-    if [[ "$input" = 's' ]] || [[ "$input" = 'S' ]]; then
-        sudo rm -R ${DIRWEB}/*
-    else
-        echo -e "$VE No se borra$RO $DIRWEB$CL"
-    fi
-}
-
-##
 ## Generar enlaces:
 ## ~/web a /var/www
 ## ~/git a /var/www/private/git
@@ -219,6 +205,14 @@ apache2GenerarEnlaces() {
 }
 
 apache2Instalar() {
+    if [[ -z "$DIRWEB" ]] ||
+       [[ -z "$DIRWEBLOG" ]] ||
+       [[ -z "$APACHECONF" ]];
+    then
+        echo -e "$VE No existe directorio de$RO Apache declarado$CL"
+        exit 1
+    fi
+
     if [[ -f "${APACHESITES}/000-default.conf" ]]; then
         apache2DeshabilitarSitio '000-default.conf'
     fi

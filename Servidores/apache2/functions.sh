@@ -24,8 +24,8 @@
 ##
 ## Borra todo el contenido dentro de /var/www
 ##
-limpiarWWW() {
-    pararServicio apache2
+apache2LimpiarSites() {
+    pararServicio 'apache2'
 
     echo -e "$VE Cuidado, esto puede$RO BORRAR$VE algo valioso$RO"
     read -p " ¿Quieres borrar todo el directorio ${DIRWEB}/* s/N → " input
