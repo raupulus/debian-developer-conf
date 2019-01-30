@@ -220,7 +220,7 @@ apache2HabilitarSitio() {
     if [[ "$MY_DISTRO" = 'debian' ]] || [[ "$MY_DISTRO" = 'raspbian' ]]; then
         for sitio in $*; do
             echo -e "$VE Activando sitio:$RO $sitio$CL"
-            sudo a2dissite $sitio
+            sudo a2ensite $sitio
         done
     elif [[ "$MY_DISTRO" = 'gentoo' ]]; then
         for sitio in $*; do

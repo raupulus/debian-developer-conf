@@ -121,9 +121,9 @@ apache2Ssl() {
     sudo chmod 700 -R "${APACHECONF}/ssl"
 
     ## Genero certificados para localhost en caso de no existir
-    local existe=$(sudo ls "${APACHECONF}/ssl/localhost.key")
-    local existe1=$(sudo ls "${APACHECONF}/ssl/localhost.csr")
-    local existe2=$(sudo ls "${APACHECONF}/ssl/localhost.crt")
+    local existe=$(sudo ls "${APACHECONF}/ssl/localhost.key" 2>> /dev/null)
+    local existe1=$(sudo ls "${APACHECONF}/ssl/localhost.csr" 2>> /dev/null)
+    local existe2=$(sudo ls "${APACHECONF}/ssl/localhost.crt" 2>> /dev/null)
     if [[ ! "$existe" = "${APACHECONF}/ssl/localhost.key" ]]; then
         if [[ ! "$existe1" = "${APACHECONF}/ssl/localhost.csr" ]]; then
             sudo rm "${APACHECONF}/ssl/localhost.csr"
