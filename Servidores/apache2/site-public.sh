@@ -11,7 +11,7 @@
 ## @twitter    https://twitter.com/fryntiz
 ##
 ##             Guía de estilos aplicada:
-## @style      https://github.com/fryntiz/Bash_Style_Guide
+## @style      https://gitlab.com/fryntiz/bash-guide-style
 
 ############################
 ##     INSTRUCCIONES      ##

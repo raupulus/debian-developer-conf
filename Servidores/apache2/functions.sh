@@ -11,12 +11,13 @@
 ## @twitter    https://twitter.com/fryntiz
 ##
 ##             Guía de estilos aplicada:
-## @style      https://github.com/fryntiz/Bash_Style_Guide
+## @style      https://gitlab.com/fryntiz/bash-guide-style
 
 ############################
 ##     INSTRUCCIONES      ##
 ############################
-##
+## En este archivo se contienen las funciones auxiliares para el instalador
+## de apache2 y sus sitios virtuales.
 
 ############################
 ##        FUNCIONES       ##
