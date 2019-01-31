@@ -23,7 +23,7 @@
 ############################
 ##     IMPORTACIONES      ##
 ############################
-source "$WORKSCRIPT/Servidores/apache.sh"
+source "$WORKSCRIPT/Servidores/apache2/install.sh"
 source "$WORKSCRIPT/Servidores/bind.sh"
 source "$WORKSCRIPT/Servidores/mariaDB.sh"
 source "$WORKSCRIPT/Servidores/nodejs.sh"

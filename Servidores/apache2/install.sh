@@ -211,7 +211,7 @@ apache2GenerarEnlaces() {
     fi
 }
 
-apache2Instalar() {
+apache2_instalador() {
     if [[ -z "$DIRWEB" ]] ||
        [[ -z "$DIRWEBLOG" ]] ||
        [[ -z "$APACHECONF" ]];
