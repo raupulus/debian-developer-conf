@@ -24,17 +24,13 @@
 ############################
 
 actualizarSistema() {
-    if [[ -f /usr/bin/apt ]]; then
+    if [[ -f '/usr/bin/apt' ]]; then
         echo "Actualizando desde repositorios Debian"
         sudo apt update && sudo apt upgrade -y
-    fi
-
-    if [[ -f '/usr/bin/dnf' ]]; then
+    elif [[ -f '/usr/bin/dnf' ]]; then
         echo "Actualizando desde repositorios Fedora"
         sudo dnf update -y
-    fi
-
-    if [[ -f /usr/bin/emerge ]]; then
+    elif [[ -f '/usr/bin/emerge' ]]; then
         echo "Actualizando desde repositorios Debian"
         sudo emerge --sync
 	sudo emerge -uavDN --keep-going world
@@ -43,7 +39,7 @@ actualizarSistema() {
     if [[ -f '/usr/bin/flatpak' ]]; then
         echo "Actualizando desde FlatPak"
         sudo flatpak update
-        sudo chmod 755 /var/lib/flatpak/app -R
+        sudo chmod 755 -R /var/lib/flatpak/app
     fi
 
     if [[ -f '/usr/bin/npm' ]] || [[ -f "$HOME/.npm/bin/npm" ]]; then
@@ -53,12 +49,14 @@ actualizarSistema() {
 
     if [[ -f '/usr/bin/pip' ]] || [[ -f "$HOME/.local/bin/pip" ]]; then
         echo "Actualizando desde PIP Python 2"
-        pip-review --local --auto
+        #pip-review --local --auto
+        python -m pip_review --local --auto
     fi
 
     if [[ -f '/usr/bin/pip3' ]] || [[ -f "$HOME/.local/bin/pip3" ]]; then
         echo "Actualizando desde PIP Python 3"
-        py -3 -m pip_review --local --auto
+        #py -3 -m pip_review --local --auto
+	python3 -m pip_review --local --auto
     fi
 
     if [[ "$DISTRO" = 'raspbian' ]]; then
