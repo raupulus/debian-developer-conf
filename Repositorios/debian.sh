@@ -31,7 +31,7 @@ source "$WORKSCRIPT/Repositorios/debian/comunes.sh"
 ##       FUNCIONES        ##
 ############################
 agregarRepositoriosDebian() {
-    echo '$VE Configurando Repositorios para$RO Debian$CL'
+    echo -e "$VE Configurando Repositorios para$RO Debian$CL"
 
     ##
     ## Instala dependencias para actualizar repositorios e instalar
@@ -112,4 +112,3 @@ agregarRepositoriosDebian() {
     sudo chmod 744 -R /etc/apt/sources.list.d
     sudo chmod 755 /etc/apt/sources.list.d
 }
-

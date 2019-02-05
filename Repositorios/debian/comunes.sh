@@ -79,6 +79,10 @@ comunes_agregar_llaves() {
     ## Repositorio para Team Viewer
     echo -e "$VE Agregando clave para$RO Team Viewer Repositorio Oficial$CL"
     wget -O - https://download.teamviewer.com/download/linux/signature/TeamViewer2017.asc | sudo apt-key add -
+
+    ## Repositorio para Etcher
+    echo -e "$VE Agregando clave para$RO Etcher$CL"
+    sudo apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 379CE192D401AB61
 }
 
 ##
@@ -121,5 +125,3 @@ comunes_agregar_repositorios() {
     echo -e "$VE Actualizando listas de repositorios definitiva, comprueba que no hay$RO errores$CL"
     actualizarRepositorios
 }
-
-

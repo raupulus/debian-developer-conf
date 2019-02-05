@@ -1,0 +1,5 @@
+########################################################
+##                      ETCHER                        ##
+########################################################
+####sudo apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 379CE192D401AB61
+deb https://deb.etcher.io stable etcher
