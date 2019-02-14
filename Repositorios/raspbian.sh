@@ -67,9 +67,18 @@ agregarRepositoriosRaspbian() {
         sudo cp "$WORKSCRIPT/Repositorios/raspbian/sources.list" "/etc/apt/sources.list"
     }
 
+    ##
+    ## Repositorio de NodeJS Oficial
+    ##
+    raspbian_source_nodejs() {
+        echo -e "$VE Agregando repositorio$RO NodeJS$AM Repositorio Oficial$CL"
+        curl -sL https://deb.nodesource.com/setup_11.x | sudo -E bash -
+    }
+
     instalar_dependencias
     prepararLlaves
     raspbian_sources_repositorios
+    raspbian_source_nodejs
 
     ## Asigna lectura a todos para buscar paquetes sin sudo
     sudo chmod 744 /etc/apt/sources.list
