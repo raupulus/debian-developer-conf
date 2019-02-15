@@ -339,7 +339,7 @@ for ifc in wlan:
         #><span background='"+networkColor+"' >{essid} {bytes_recv:6.1f}KiB {bytes_sent:5.1f}KiB</span>",
 
         format_up = "<span background='"+networkColor+"' color='"+networkColor+"'></span\
-        ><span background='"+networkColor+"' > {bytes_recv:6.1f}K {bytes_sent:5.1f}K</span>",
+        ><span background='"+networkColor+"' > {bytes_recv}K {bytes_sent}K</span>",
 
         format_down = "<span background='"+networkColor+"' color='"+networkColor+"'></span\
         ><span background='"+networkColor+"' ></span>",
@@ -353,11 +353,15 @@ for ifc in ethernet:
         interface = ifc,
 
         color_up = networkFColor,
-        color_down=networkFColor,
-        hints= {"markup": "pango","separator": False,"separator_block_width": 0},
+        color_down = networkFColor,
+        hints = {
+            "markup": "pango",
+            "separator": False,
+            "separator_block_width": 0
+        },
 
         format_up = "<span color='"+networkColor+"'>\uE0B2</span\
-        ><span background='"+networkColor+"' >\uE0A0{bytes_recv:6.1f}K {bytes_sent:5.1f}K</span>",
+        ><span background='"+networkColor+"' >\uE0A0{bytes_recv}K {bytes_sent}K</span>",
 
         format_down = "",
     )
