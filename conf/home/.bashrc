@@ -308,6 +308,8 @@ alias pip3="pip3 --disable-pip-version-check"
 
 ## Navegar hacia directorios
 alias tg="cd $HOME/git"
+alias tw="cd /var/www"
+alias tx="cd $HOME/git/4-Xerintel"
 
 ## Otros
 #alias rm="rm -i"
