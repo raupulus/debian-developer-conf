@@ -317,6 +317,9 @@ alias tx="cd $HOME/git/4-Xerintel"
 #alias cp="cp -i"
 #alias mv="mv -i"
 
+## Aplicaciones renombradas
+alias t="trans :es"
+
 ###################################
 ###  Opciones para bash propias ###
 ###################################
