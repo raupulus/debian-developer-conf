@@ -32,9 +32,4 @@ source "$WORKSCRIPT/Apps/vim.sh"
 ############################
 aplicaciones_usuarios() {
     echo -e "$VE Instalando Aplicaciones específicas para el usuario$RO $USER$CL"
-
-
-
-
-
 }

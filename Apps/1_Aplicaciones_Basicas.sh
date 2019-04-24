@@ -30,7 +30,13 @@ aplicaciones_basicas() {
 
     repararGestorPaquetes
 
-    instalarSoftwareLista "$WORKSCRIPT/Apps/Packages/Software-Basico.lst"
+    instalarSoftwareLista "$SOFTLIST/Basico/audio.lst"
+    instalarSoftwareLista "$SOFTLIST/Basico/compresores.lst"
+    instalarSoftwareLista "$SOFTLIST/Basico/firewall.lst"
+    instalarSoftwareLista "$SOFTLIST/Basico/herramientas.lst"
+    instalarSoftwareLista "$SOFTLIST/Basico/internet.lst"
+    instalarSoftwareLista "$SOFTLIST/Basico/monitores.lst"
+    instalarSoftwareLista "$SOFTLIST/Basico/terminal.lst"
 
     repararGestorPaquetes
 }

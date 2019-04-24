@@ -1,0 +1,6 @@
+iproute
+iptables
+iputils-ping
+firewall-applet
+firewall-config
+firewalld

@@ -1,3 +1,4 @@
+@base-x
 xorg-x11-server-Xorg
 xorg-x11-drv-vesa
 xorg-x11-drv-intel
