@@ -26,11 +26,14 @@ aplicaciones_desarrollo() {
 
     repararGestorPaquetes
 
+    instalarSoftwareLista "$SOFTLIST/Desarrollo/comandos.lst"
+    instalarSoftwareLista "$SOFTLIST/Desarrollo/control-versiones.lst"
     instalarSoftwareLista "$SOFTLIST/Desarrollo/databases.lst"
     instalarSoftwareLista "$SOFTLIST/Desarrollo/diagramas.lst"
     instalarSoftwareLista "$SOFTLIST/Desarrollo/editores.lst"
     instalarSoftwareLista "$SOFTLIST/Desarrollo/ftp.lst"
     instalarSoftwareLista "$SOFTLIST/Desarrollo/ide.lst"
+    instalarSoftwareLista "$SOFTLIST/Desarrollo/nubes.lst"
 
     repararGestorPaquetes
 }
