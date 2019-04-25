@@ -33,7 +33,6 @@ menuPaquetes() {
         clear
         echo -e "$VE Instalando todos los paquetes$CL"
 
-        instalarSoftwareLista "$WORKSCRIPT/Apps/Packages/developer.lst"
         instalarSoftwareLista "$WORKSCRIPT/Apps/Packages/diseño-grafico.lst"
         instalarSoftwareLista "$WORKSCRIPT/Apps/Packages/edicion-multimedia.lst"
         instalarSoftwareLista "$WORKSCRIPT/Apps/Packages/internet.lst"
@@ -57,7 +56,6 @@ menuPaquetes() {
                 6) X11 base (xorg xorg-server...)
                 7) Todos los pasos anteriores
 
-                8) Flatpak
                 9) VPS
 
                 0) Atrás
@@ -78,8 +76,6 @@ menuPaquetes() {
                 6)  instalarSoftwareLista "$WORKSCRIPT/Apps/Packages/x11-base.lst";;
                 7)  todos_paquetes
                     break;;
-                8)  instalarSoftwareFlatPakLista
-                "$WORKSCRIPT/Apps/Packages/flatpak.lst";;
                 9)  instalarSoftwareLista "$WORKSCRIPT/Apps/Packages/vps.lst";;
 
                 0)  ## SALIR
