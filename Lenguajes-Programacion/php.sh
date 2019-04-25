@@ -41,7 +41,7 @@ php_instalar() {
     instalarSoftware "$paquetes_basicos"
 
     echo -e "$VE Instalando$RO paquetes extras$CL"
-    local paquetes_extras="php-gd php-curl php-pgsql php-sqlite3 php-intl php-mbstring php-xml php-xdebug php-json php-zip php-mongodb "
+    local paquetes_extras="php-gd php-curl php-pgsql php-sqlite3 php-intl php-mbstring php-xml php-xdebug php-json php-zip php-mongodb php-imap"
     instalarSoftware "$paquetes_extras"
 
     echo -e "$VE Instalando librerías$CL"
