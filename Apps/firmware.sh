@@ -26,7 +26,11 @@ aplicaciones_firmware() {
 
     repararGestorPaquetes
 
-    #instalarSoftwareLista "$SOFTLIST/Desarrollo/.lst"
+    instalarSoftwareLista "$SOFTLIST/Firmware/basico-libre.lst"
+    instalarSoftwareLista "$SOFTLIST/Firmware/basico-privado.lst"
+    instalarSoftwareLista "$SOFTLIST/Firmware/intel.lst"
+    instalarSoftwareLista "$SOFTLIST/Firmware/nvidia-optimus.lst"
+    instalarSoftwareLista "$SOFTLIST/Firmware/nvidia.lst"
 
     repararGestorPaquetes
 }
