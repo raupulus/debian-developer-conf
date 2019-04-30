@@ -26,7 +26,10 @@ aplicaciones_juegos() {
 
     repararGestorPaquetes
 
-    #instalarSoftwareLista "$SOFTLIST/Desarrollo/.lst"
+    instalarSoftwareLista "$SOFTLIST/Juegos/arcade.lst"
+    instalarSoftwareLista "$SOFTLIST/Juegos/emuladores.lst"
+    instalarSoftwareLista "$SOFTLIST/Juegos/estrategia.lst"
+    instalarSoftwareLista "$SOFTLIST/Juegos/mesa.lst"
 
     repararGestorPaquetes
 }
