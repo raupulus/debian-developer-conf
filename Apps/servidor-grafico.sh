@@ -26,7 +26,8 @@ aplicaciones_servidor_grafico() {
 
     repararGestorPaquetes
 
-    #instalarSoftwareLista "$SOFTLIST/Desarrollo/.lst"
+    instalarSoftwareLista "$SOFTLIST/Servidor-grafico/wayland.lst"
+    instalarSoftwareLista "$SOFTLIST/Servidor-grafico/xorg.lst"
 
     repararGestorPaquetes
 }

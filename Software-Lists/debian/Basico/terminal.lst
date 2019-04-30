@@ -8,3 +8,5 @@ zsh-syntax-highlighting
 tmux
 tmux-plugin-manager
 powerline
+xterm
+colord

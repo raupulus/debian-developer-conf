@@ -37,6 +37,7 @@ aplicaciones_basicas() {
     instalarSoftwareLista "$SOFTLIST/Basico/internet.lst"
     instalarSoftwareLista "$SOFTLIST/Basico/monitores.lst"
     instalarSoftwareLista "$SOFTLIST/Basico/terminal.lst"
+    instalarSoftwareLista "$SOFTLIST/Basico/tipografias.lst"
 
     repararGestorPaquetes
 }
