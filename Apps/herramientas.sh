@@ -26,7 +26,8 @@ aplicaciones_herramientas() {
 
     repararGestorPaquetes
 
-    #instalarSoftwareLista "$SOFTLIST/Desarrollo/.lst"
+    instalarSoftwareLista "$SOFTLIST/Herramientas/archivos.lst"
+    instalarSoftwareLista "$SOFTLIST/Herramientas/sistema.lst"
 
     repararGestorPaquetes
 }

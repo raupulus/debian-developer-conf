@@ -47,10 +47,7 @@ menuPaquetes() {
         while true :; do
             clear
             local descripcion='Menú de Servidores y Lenguajes de programación
-                1) Developer
                 3) Edición Multimedia
-                4) Internet
-                5) Firmware (Controladores)
                 6) X11 base (xorg xorg-server...)
                 7) Todos los pasos anteriores
 
@@ -66,10 +63,7 @@ menuPaquetes() {
 
             case $entrada in
 
-                1)  instalarSoftwareLista "$WORKSCRIPT/Apps/Packages/developer.lst";;
                 3)  instalarSoftwareLista "$WORKSCRIPT/Apps/Packages/edicion-multimedia.lst";;
-                4)  instalarSoftwareLista "$WORKSCRIPT/Apps/Packages/internet.lst";;
-                5)  instalarSoftwareLista "$WORKSCRIPT/Apps/Packages/firmware.lst";;
                 6)  instalarSoftwareLista "$WORKSCRIPT/Apps/Packages/x11-base.lst";;
                 7)  todos_paquetes
                     break;;
