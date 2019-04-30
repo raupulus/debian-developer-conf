@@ -24,6 +24,8 @@ aplicaciones_flatpak() {
     echo -e "$VE Aplicaciones desde Flatpak$CL"
     actualizarRepositorios
 
+    ## TODO → Comprobar si está instalado flatpak, sino pues instalar.
+
     local gimp='https://flathub.org/repo/appstream/org.gimp.GIMP.flatpakref'
     local libreoffice='https://flathub.org/repo/appstream/org.libreoffice.LibreOffice.flatpakref'
     local natron='https://flathub.org/repo/appstream/fr.natron.Natron.flatpakref'

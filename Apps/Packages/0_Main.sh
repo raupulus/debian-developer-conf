@@ -33,7 +33,6 @@ menuPaquetes() {
         clear
         echo -e "$VE Instalando todos los paquetes$CL"
 
-        instalarSoftwareLista "$WORKSCRIPT/Apps/Packages/diseño-grafico.lst"
         instalarSoftwareLista "$WORKSCRIPT/Apps/Packages/edicion-multimedia.lst"
         instalarSoftwareLista "$WORKSCRIPT/Apps/Packages/internet.lst"
         instalarSoftwareLista "$WORKSCRIPT/Apps/Packages/x11-base.lst"
@@ -49,7 +48,6 @@ menuPaquetes() {
             clear
             local descripcion='Menú de Servidores y Lenguajes de programación
                 1) Developer
-                2) Diseño Gráfico
                 3) Edición Multimedia
                 4) Internet
                 5) Firmware (Controladores)
@@ -69,7 +67,6 @@ menuPaquetes() {
             case $entrada in
 
                 1)  instalarSoftwareLista "$WORKSCRIPT/Apps/Packages/developer.lst";;
-                2)  instalarSoftwareLista "$WORKSCRIPT/Apps/Packages/diseño-grafico.lst";;
                 3)  instalarSoftwareLista "$WORKSCRIPT/Apps/Packages/edicion-multimedia.lst";;
                 4)  instalarSoftwareLista "$WORKSCRIPT/Apps/Packages/internet.lst";;
                 5)  instalarSoftwareLista "$WORKSCRIPT/Apps/Packages/firmware.lst";;

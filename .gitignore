@@ -37,6 +37,7 @@ errores.log
 /conf/home/.vim/spec
 /conf/home/.vim/syntax_checkers
 /conf/home/.vim/test
+/conf/home/.vim/ftdetect
 /.idea
 npm-debug.log
 /npm-debug.log

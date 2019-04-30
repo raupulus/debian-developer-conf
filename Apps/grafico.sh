@@ -26,7 +26,12 @@ aplicaciones_grafico() {
 
     repararGestorPaquetes
 
-    #instalarSoftwareLista "$SOFTLIST/Desarrollo/.lst"
+    instalarSoftwareLista "$SOFTLIST/Diseño-grafico/2d.lst"
+    instalarSoftwareLista "$SOFTLIST/Diseño-grafico/3d.lst"
+    instalarSoftwareLista "$SOFTLIST/Diseño-grafico/mapas-de-bits.lst"
+    instalarSoftwareLista "$SOFTLIST/Diseño-grafico/utilidades.lst"
+    instalarSoftwareLista "$SOFTLIST/Diseño-grafico/vectores.lst"
+    instalarSoftwareLista "$SOFTLIST/Diseño-grafico/visores.lst"
 
     repararGestorPaquetes
 }
