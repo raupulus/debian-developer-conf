@@ -26,7 +26,10 @@ aplicaciones_sonido() {
 
     repararGestorPaquetes
 
-    #instalarSoftwareLista "$SOFTLIST/Desarrollo/.lst"
+    instalarSoftwareLista "$SOFTLIST/Sonido/codecs.lst"
+    instalarSoftwareLista "$SOFTLIST/Sonido/conversores.lst"
+    instalarSoftwareLista "$SOFTLIST/Sonido/editores.lst"
+    instalarSoftwareLista "$SOFTLIST/Sonido/reproductores.lst"
 
     repararGestorPaquetes
 }
