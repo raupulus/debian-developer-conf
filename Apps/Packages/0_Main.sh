@@ -33,10 +33,6 @@ menuPaquetes() {
         clear
         echo -e "$VE Instalando todos los paquetes$CL"
 
-        instalarSoftwareLista "$WORKSCRIPT/Apps/Packages/edicion-multimedia.lst"
-        instalarSoftwareLista "$WORKSCRIPT/Apps/Packages/internet.lst"
-        instalarSoftwareLista "$WORKSCRIPT/Apps/Packages/x11-base.lst"
-        instalarSoftwareLista "$WORKSCRIPT/Apps/Packages/firmware.lst"
         instalarSoftwareLista "$WORKSCRIPT/Apps/Packages/vps.lst"
     }
 
@@ -47,11 +43,7 @@ menuPaquetes() {
         while true :; do
             clear
             local descripcion='Menú de Servidores y Lenguajes de programación
-                3) Edición Multimedia
-                6) X11 base (xorg xorg-server...)
-                7) Todos los pasos anteriores
-
-                9) VPS
+                1) VPS
 
                 0) Atrás
             '
@@ -62,12 +54,7 @@ menuPaquetes() {
             echo -e "$CL"
 
             case $entrada in
-
-                3)  instalarSoftwareLista "$WORKSCRIPT/Apps/Packages/edicion-multimedia.lst";;
-                6)  instalarSoftwareLista "$WORKSCRIPT/Apps/Packages/x11-base.lst";;
-                7)  todos_paquetes
-                    break;;
-                9)  instalarSoftwareLista "$WORKSCRIPT/Apps/Packages/vps.lst";;
+                1)  instalarSoftwareLista "$WORKSCRIPT/Apps/Packages/vps.lst";;
 
                 0)  ## SALIR
                     clear

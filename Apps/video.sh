@@ -26,7 +26,10 @@ aplicaciones_video() {
 
     repararGestorPaquetes
 
-    #instalarSoftwareLista "$SOFTLIST/Desarrollo/.lst"
+    instalarSoftwareLista "$SOFTLIST/Video/codecs.lst"
+    instalarSoftwareLista "$SOFTLIST/Video/conversores.lst"
+    instalarSoftwareLista "$SOFTLIST/Video/editores.lst"
+    instalarSoftwareLista "$SOFTLIST/Video/reproductores.lst"
 
     repararGestorPaquetes
 }
