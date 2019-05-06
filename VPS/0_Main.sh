@@ -44,7 +44,7 @@ menuVPS() {
     stable_agregar_repositorios
     aplicaciones_basicas
 
-    instalarSoftwareLista "$WORKSCRIPT/Apps/Packages/vps.lst"
+    instalarSoftwareLista "$SOFTLIST/Vps/basico.lst"
 
     configuracion_git
 
