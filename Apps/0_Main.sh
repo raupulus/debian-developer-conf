@@ -38,8 +38,8 @@ source "$WORKSCRIPT/Apps/servidor-grafico.sh"
 source "$WORKSCRIPT/Apps/sonido.sh"
 source "$WORKSCRIPT/Apps/video.sh"
 source "$WORKSCRIPT/Apps/virtualizacion.sh"
+source "$WORKSCRIPT/Apps/vps.sh"
 source "$WORKSCRIPT/Apps/IDEs/0_Main.sh"
-source "$WORKSCRIPT/Apps/Packages/0_Main.sh"
 
 ############################
 ##       FUNCIONES        ##
@@ -95,6 +95,7 @@ menuAplicaciones() {
                 15) Instalar IDEs
                 16) Instalar Aplicaciones Extras
                 17) Flatpak
+                18) VPS
 
                 0) Atrás
             '
@@ -115,14 +116,15 @@ menuAplicaciones() {
                 7)  aplicaciones_juegos;;
                 8)  aplicaciones_ofimatica;;
                 9)  aplicaciones_pentesting;;
-                10)  aplicaciones_servidor_grafico;;
-                11)  aplicaciones_sonido;;
-                12)  aplicaciones_video;;
-                13)  aplicaciones_virtualizacion;;
-                14)  todas_aplicaciones;;     ## Todas las aplicaciones
-                15)  menuIDES;;               ## Menú para instalar IDEs
-                16)  aplicaciones_extras;;    ## Aplicaciones Extras
-                17)  aplicaciones_flatpak
+                10) aplicaciones_servidor_grafico;;
+                11) aplicaciones_sonido;;
+                12) aplicaciones_video;;
+                13) aplicaciones_virtualizacion;;
+                14) todas_aplicaciones;;     ## Todas las aplicaciones
+                15) menuIDES;;               ## Menú para instalar IDEs
+                16) aplicaciones_extras;;    ## Aplicaciones Extras
+                17) aplicaciones_flatpak;;
+                18) aplicaciones_vps
                     break;;
 
                 0)  ## SALIR
