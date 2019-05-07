@@ -29,6 +29,7 @@ aplicaciones_ofimatica() {
     instalarSoftwareLista "$SOFTLIST/Ofimatica/conversores.lst"
     instalarSoftwareLista "$SOFTLIST/Ofimatica/editores.lst"
     instalarSoftwareLista "$SOFTLIST/Ofimatica/suites.lst"
+    instalarSoftwareLista "$SOFTLIST/Ofimatica/visores.lst"
 
     repararGestorPaquetes
 }

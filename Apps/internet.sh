@@ -26,9 +26,12 @@ aplicaciones_internet() {
 
     repararGestorPaquetes
 
+    instalarSoftwareLista "$SOFTLIST/Internet/correo.lst"
     instalarSoftwareLista "$SOFTLIST/Internet/descargar.lst"
     instalarSoftwareLista "$SOFTLIST/Internet/herramientas.lst"
     instalarSoftwareLista "$SOFTLIST/Internet/navegadores.lst"
+    instalarSoftwareLista "$SOFTLIST/Internet/nubes.lst"
+    instalarSoftwareLista "$SOFTLIST/Internet/redes-sociales.lst"
 
     repararGestorPaquetes
 }
