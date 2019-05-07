@@ -26,3 +26,7 @@ python3-waitress
 python3-pymongo
 python3-scapy
 python3-libtmux
+python3-isort
+python3-wrapt
+python3-astroid
+python3-pylint
