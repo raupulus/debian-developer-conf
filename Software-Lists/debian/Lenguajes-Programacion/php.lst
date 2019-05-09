@@ -1,0 +1,17 @@
+php
+php-cli
+libapache2-mod-php
+php-gd
+php-gmp
+php-curl
+php-pgsql
+php-sqlite3
+php-intl
+php-mbstring
+php-xml
+php-xdebug
+php-json
+php-zip
+php-mongodb
+php-imap
+composer

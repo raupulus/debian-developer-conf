@@ -37,15 +37,8 @@ php_preconfiguracion() {
 
 php_instalar() {
     echo -e "$VE Instalando$RO php$CL"
-    local paquetes_basicos="php php-cli libapache2-mod-php"
-    instalarSoftware "$paquetes_basicos"
 
-    echo -e "$VE Instalando$RO paquetes extras$CL"
-    local paquetes_extras="php-gd php-curl php-pgsql php-sqlite3 php-intl php-mbstring php-xml php-xdebug php-json php-zip php-mongodb php-imap"
-    instalarSoftware "$paquetes_extras"
-
-    echo -e "$VE Instalando librerías$CL"
-    instalarSoftware composer
+    instalarSoftwareLista "$SOFTLIST/Lenguajes-Programacion/php.lst"
 }
 
 php_postconfiguracion() {

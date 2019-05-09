@@ -14,3 +14,5 @@ libiw-dev
 python3-powerline
 python3-psutil
 python3-powerline-taskwarrior
+pipenv
+python3-virtualenv-clone

@@ -4,14 +4,14 @@
 ## @author     Raúl Caro Pastorino
 ## @copyright  Copyright © 2017 Raúl Caro Pastorino
 ## @license    https://wwww.gnu.org/licenses/gpl.txt
-## @email      tecnico@fryntiz.es
-## @web        www.fryntiz.es
+## @email      dev@fryntiz.es
+## @web        https://fryntiz.es
 ## @github     https://github.com/fryntiz
 ## @gitlab     https://gitlab.com/fryntiz
 ## @twitter    https://twitter.com/fryntiz
 ##
 ##             Guía de estilos aplicada:
-## @style      https://github.com/fryntiz/Bash_Style_Guide
+## @style      https://gitlab.com/fryntiz/bash-guide-style
 
 ############################
 ##     INSTRUCCIONES      ##
@@ -27,14 +27,7 @@ ruby_preconfiguracion() {
 
 ruby_instalar() {
     echo -e "$VE Instalando$RO Ruby$CL"
-    instalarSoftware 'ruby' 'ruby-full'
-
-    echo -e "$VE Instalando gestor de paquetes$RO Rbenv$CL"
-    instalarSoftware 'rbenv' 'bundler'
-
-    echo -e "$VE Instalando paquetes complementarios de$RO Ruby$CL"
-    local complementarios='rubygems-integration ruby-base62 ruby-bcrypt ruby-cairo ruby-clutter ruby-color ruby-crack ruby-curses ruby-debian ruby-dbus ruby-http ruby-i18n ruby-inline ruby-indentation ruby-json ruby-mime ruby-mongo ruby-ncurses ruby-nenv ruby-neovim ruby-net-ssh ruby-minitest ruby-password ruby-pg ruby-pkg-config ruby-power-assert ruby-rbpdf ruby-rbpdf-font ruby-sqlite3 ruby-twitter ruby-zip'
-    instalarSoftware "$complementarios"
+    instalarSoftwareLista "$SOFTLIST/Lenguajes-Programacion/ruby.lst"
 }
 
 ruby_postconfiguracion() {
