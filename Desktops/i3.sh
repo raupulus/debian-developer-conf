@@ -33,6 +33,15 @@ i3wm_preconfiguracion() {
         echo "Plantear método independiente de systemd"
     fi
 
+    ## Creo directorios si no existieran
+    if [[ ! -f "$HOME/.local/opt" ]]; then
+      mkdir -p "$HOME/.local/opt"
+    fi
+
+    if [[ ! -f "$HOME/.local/bin" ]]; then
+      mkdir -p "$HOME/.local/bin"
+    fi
+
     ## Instalo fuentes tipográficas necesarias
     fuentes_repositorios
 }
