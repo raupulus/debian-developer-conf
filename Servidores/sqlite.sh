@@ -27,11 +27,7 @@ sqlite_preconfiguracion() {
 
 sqlite_instalar() {
     echo -e "$VE Instalando$RO sqlite$CL"
-    instalarSoftware 'sqlite sqlite3'
-
-    echo -e "$VE Instalando paquetes complementarios de$RO sqlite$CL"
-    local complementarios=''
-    instalarSoftware "$complementarios"
+    instalarSoftwareLista "${SOFTLIST}/Servidores/sqlite.lst"
 }
 
 sqlite_postconfiguracion() {

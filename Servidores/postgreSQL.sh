@@ -32,10 +32,7 @@ postgresql_preconfiguracion() {
 
 postgresql_instalar() {
     echo -e "$VE Instalando$RO PostgreSQL$CL"
-    local dependencias="postgresql postgresql-client postgresql-contrib postgresql-all"
-
-    ## Instalando dependencias
-    instalarSoftware "$dependencias"
+    instalarSoftwareLista "${SOFTLIST}/Servidores/postgresql.lst"
 }
 
 postgresql_postconfiguracion() {
