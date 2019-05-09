@@ -1,3 +1,7 @@
+gstreamer-plugins-bad
+gstreamer-plugins-base
+gstreamer-plugins-ugly
+gstreamer-plugins-good-extras
 gstreamer1-libav
 gstreamer1-plugins-bad-free
 gstreamer1-plugins-bad-free-extras
@@ -8,7 +12,6 @@ gstreamer1-plugins-good
 gstreamer1-plugins-good-extras
 gstreamer1-plugins-ugly
 gstreamer1-plugins-ugly-free
-lame-libs
+gstreamer1-plugins-bad-freeworld
 x264-libs
-faac
-fdk-aac
+gstreamer-ffmpeg
