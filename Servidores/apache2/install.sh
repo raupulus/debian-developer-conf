@@ -212,6 +212,14 @@ apache2GenerarEnlaces() {
 }
 
 apache2_instalador() {
+    apache2Descargar
+    apache2Preconfiguracion
+    apache2Dependencias
+
+    if [[ -d "${DIRWEB}" ]] && [[ ! -f "${DIRWEB}/.htpasswd" ]]; then
+        apache2DefaultSiteSecurity
+    fi
+
     if [[ -z "$DIRWEB" ]] ||
        [[ -z "$DIRWEBLOG" ]] ||
        [[ -z "$APACHECONF" ]];
@@ -225,16 +233,9 @@ apache2_instalador() {
     fi
 
     apache2LimpiarSites
-    apache2Descargar
-    apache2Preconfiguracion
-    apache2Dependencias
     apache2HabilitarModulo 'rewrite' 'ssl'
     apache2DeshabilitarModulo 'php5'
     apache2Ssl
-
-    if [[ ! -f "${DIRWEB}/.htpasswd" ]]; then
-        apache2DefaultSiteSecurity
-    fi
 
     ## Habilito sitios virtuales.
     apacheDefaultSiteCreate

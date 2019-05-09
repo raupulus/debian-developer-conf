@@ -50,7 +50,15 @@ php_postconfiguracion() {
     ##
     configurar_php() {
         echo -e "$VE Preparando configuracion de$RO PHP$CL"
-        local PHPINI="/etc/php/$1/apache2/php.ini"  # Ruta al archivo de configuración de PHP con apache2
+
+        ## Ruta al archivo de configuración de PHP con apache2
+        if [[ "$DISTRO" = 'debian' ]] || [[ "$DISTRO" = 'raspbian' ]]; then
+            local PHPINI="/etc/php/$1/apache2/php.ini"
+        elif [[ "$DISTRO" = 'fedora' ]]; then
+            local PHPINI="/etc/php.ini"
+        elif [[ "$DISTRO" = 'gentoo' ]]; then
+            echo -e "$VE No configurado para gentoo $DISTRO$CL"
+        fi
 
         ## Modificar configuración
         echo -e "$VE Estableciendo zona horaria por defecto para PHP$CL"
@@ -58,6 +66,7 @@ php_postconfiguracion() {
 
         ## Configuración para desarrollo
         if [[ "$ENV" = 'dev' ]]; then
+            echo -e "$VE Configurando PHP para desarrollo$CL"
             echo -e "$VE Activando Reportar todos los errores → 'error_reporting'$CL"
             sudo sed -r -i "s/^;?\s*error_reporting\s*=.*$/error_reporting = E_ALL/" $PHPINI
 
@@ -66,6 +75,17 @@ php_postconfiguracion() {
 
             echo -e "$VE Activando Mostrar errores al iniciar → 'display_startup_errors'$CL"
             sudo sed -r -i "s/^;?\s*display_startup_errors\s*=.*$/display_startup_errors = On/" $PHPINI
+
+        else
+            echo -e "$VE Configurando PHP para producción$CL"
+            echo -e "$VE Desactivando Reportar todos los errores → 'error_reporting'$CL"
+            sudo sed -r -i "s/^;?\s*error_reporting\s*=.*$/error_reporting = E_ALL & ~E_DEPRECATED & ~E_STRICT/" $PHPINI
+
+            echo -e "$VE Desactivando Mostrar errores → 'display_errors'$CL"
+            sudo sed -r -i "s/^;?\s*display_errors\s*=.*$/display_errors = Off/" $PHPINI
+
+            echo -e "$VE Desactivando Mostrar errores al iniciar → 'display_startup_errors'$CL"
+            sudo sed -r -i "s/^;?\s*display_startup_errors\s*=.*$/display_startup_errors = Off/" $PHPINI
         fi
 
         echo -e "$VE Tiempo máximo de ejecución 5 minutos → 'max_execution_time'$CL"
@@ -182,31 +202,21 @@ php_postconfiguracion() {
     fi
 
     ## Activar módulos
-    echo -e "$VE Activando módulos$CL"
-    sudo phpenmod 'fileinfo' 'ftp' 'curl' 'mongodb' 'pdo_pgsql' 'pgsql' 'sqlite3'
+    if [[ -f '/usr/sbin/phpenmod' ]] || [[ -f '/sbin/phpenmod' ]]; then
+        echo -e "$VE Activando módulos$CL"
+        sudo phpenmod 'fileinfo' 'ftp' 'curl' 'mongodb' 'pdo_pgsql' 'pgsql' 'sqlite3'
 
-    if [[ "$ENV" = 'dev' ]]; then
-        sudo phpenmod 'xdebug'
+        if [[ "$ENV" = 'dev' ]]; then
+            sudo phpenmod 'xdebug'
+        fi
+
+        echo -e "$VE Desactivando Módulos"
+        ## Xdebug para PHP CLI no tiene sentido y ralentiza
+        sudo phpdismod -s 'cli' 'xdebug'
     fi
-
-    echo -e "$VE Desactivando Módulos"
-    ## Xdebug para PHP CLI no tiene sentido y ralentiza
-    sudo phpdismod -s 'cli' 'xdebug'
 
     ## Reiniciar apache2 para hacer efectivos los cambios
     reiniciarServicio 'apache2'
-}
-
-php_produccion() {
-    echo -e "$VE Configurando PHP para producción$CL"
-    echo -e "$VE Desactivando Reportar todos los errores → 'error_reporting'$CL"
-    sudo sed -r -i "s/^;?\s*error_reporting\s*=.*$/error_reporting = E_ALL & ~E_DEPRECATED & ~E_STRICT/" $PHPINI
-
-    echo -e "$VE Desactivando Mostrar errores → 'display_errors'$CL"
-    sudo sed -r -i "s/^;?\s*display_errors\s*=.*$/display_errors = Off/" $PHPINI
-
-    echo -e "$VE Desactivando Mostrar errores al iniciar → 'display_startup_errors'$CL"
-    sudo sed -r -i "s/^;?\s*display_startup_errors\s*=.*$/display_startup_errors = Off/" $PHPINI
 }
 
 php_instalador() {
@@ -214,9 +224,4 @@ php_instalador() {
     php_preconfiguracion
     php_instalar
     php_postconfiguracion
-
-    if [[ "$1" = 'prod' ]]; then
-        ## TODO → Esta función está de más, controlar desde $ENV
-        php_produccion
-    fi
 }

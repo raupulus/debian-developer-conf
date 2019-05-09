@@ -37,6 +37,17 @@ routesApache2() {
         APACHEAPACHE2CONF="${APACHECONF}/apache2.conf"
     elif [[ "$DISTRO" = 'fedora' ]]; then
         echo -e "$VE Configurando directorios apache para $DISTRO$CL"
+        APACHECONF='/etc/httpd'
+        DIRWEBLOG='/var/log/httpd'
+        DIRWEB='/var/www'
+        APACHESITES="${APACHECONF}/conf.d/sites-available"
+        APACHESITESENABLED="${APACHECONF}/conf.d"
+        ##APACHEPORTSCONF="${APACHECONF}/ports.conf"
+        ##APACHEAPACHE2CONF="${APACHECONF}/apache2.conf"
+
+        if [[ ! -d "$APACHESITES" ]]; then
+            mkdir -p $APACHESITES
+        fi
     elif [[ "$DISTRO" = 'gentoo' ]]; then
         echo -e "$VE Configurando directorios apache para $DISTRO$CL"
     else
