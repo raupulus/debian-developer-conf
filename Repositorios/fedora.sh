@@ -41,7 +41,6 @@ agregarRepositoriosFedora() {
     ## Atom IDE
     echo -e "$VE Añadiendo Repositorio$RO Atom Editor$CL"
     sudo dnf copr enable mosquito/atom
-    sudo dnf install atom
 
     ## RPMfusion
     echo -e "$VE Añadiendo Repositorio$RO RPMfusion$CL"
