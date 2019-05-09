@@ -1,0 +1,9 @@
+nvidia-texture-tools
+xorg-x11-drv-nvidia
+kmod-nvidia
+pcp-pmda-nvidia-gpu
+xorg-x11-drv-nvidia-cuda-libs
+xorg-x11-drv-nvidia-devel
+xorg-x11-drv-nvidia-cuda
+xorg-x11-drv-nvidia-libs
+akmod-nvidia
