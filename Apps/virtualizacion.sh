@@ -26,7 +26,7 @@ aplicaciones_virtualizacion() {
 
     repararGestorPaquetes
 
-    #instalarSoftwareLista "$SOFTLIST/Desarrollo/.lst"
+    instalarSoftwareLista "$SOFTLIST/Virtualizacion/programas.lst"
 
     repararGestorPaquetes
 }
