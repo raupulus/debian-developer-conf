@@ -39,10 +39,7 @@ mariadb_preconfiguracion() {
 
 mariadb_instalar() {
     echo -e "$VE Instalando$RO mariadb$VE y Complementos$CL"
-    local software_servidor='mariadb-client mariadb-plugin-connect mariadb-server'
-    local software_extra='phpmyadmin libreoffice-mysql-connector'
-
-    instalarSoftware "$software_servidor" "$software_extra"
+    instalarSoftwareLista "${SOFTLIST}/Servidores/mariadb.lst"
 }
 
 mariadb_postconfiguracion() {
