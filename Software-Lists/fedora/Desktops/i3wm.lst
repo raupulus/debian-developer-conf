@@ -8,3 +8,5 @@ python2-psutil
 python3-psutil
 python2-alsaaudio
 python3-alsaaudio
+rofi
+rofi-themes
