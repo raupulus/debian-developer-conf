@@ -44,8 +44,8 @@ agregarRepositoriosFedora() {
     sudo dnf install https://download1.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-$(rpm -E %fedora).noarch.rpm
 
     ## Google Chrome
-    dnf config-manager --set-enabled google-chrome
-    dnf config-manager --set-enabled google-chrome-beta
+    sudo dnf config-manager --set-enabled google-chrome
+    sudo dnf config-manager --set-enabled google-chrome-beta
 
     sudo dnf update --refresh
 }
