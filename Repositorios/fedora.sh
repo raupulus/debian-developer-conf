@@ -30,20 +30,25 @@ agregarRepositoriosFedora() {
     sudo dnf update --refresh
 
     ## Oficiales
+    echo -e "$VE Añadiendo Repositorio$RO fedora-workstation-repositories$CL"
     sudo dnf install fedora-workstation-repositories
 
     ## QownNotes
+    echo -e "$VE Añadiendo Repositorio$RO $CL"
     sudo rpm --import http://download.opensuse.org/repositories/home:/pbek:/QOwnNotes/Fedora_$(rpm -E %fedora)/repodata/repomd.xml.key
     sudo wget http://download.opensuse.org/repositories/home:/pbek:/QOwnNotes/Fedora_$(rpm -E %fedora)/home:pbek:QOwnNotes.repo -O /etc/yum.repos.d/QOwnNotes.repo
 
     ## Atom IDE
+    echo -e "$VE Añadiendo Repositorio$RO Atom Editor$CL"
     sudo dnf copr enable helber/atom
 
     ## RPMfusion
+    echo -e "$VE Añadiendo Repositorio$RO RPMfusion$CL"
     sudo dnf install https://download1.rpmfusion.org/free/fedora/rpmfusion-free-release-$(rpm -E %fedora).noarch.rpm
     sudo dnf install https://download1.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-$(rpm -E %fedora).noarch.rpm
 
     ## Google Chrome
+    echo -e "$VE Añadiendo Repositorio$RO Google Chrome$CL"
     sudo dnf config-manager --set-enabled google-chrome
     sudo dnf config-manager --set-enabled google-chrome-beta
 
