@@ -35,8 +35,7 @@ postfix_preconfiguracion() {
 
 postfix_instalar() {
     echo -e "$VE Instalando$RO postfix$CL"
-    local software='postfix dovecot-imapd dovecot-pop3d dovecot-common bsd-mailx'
-    instalarSoftware "$software"
+    instalarSoftwareLista "${SOFTLIST}/Servidores/postfix.lst"
 }
 
 postfix_postconfiguracion() {

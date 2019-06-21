@@ -21,17 +21,24 @@
 ##       FUNCIONES        ##
 ############################
 getDistrosAvailable() {
+    echo -e "$RO debian$CL"
+    echo -e "$RO gentoo$CL"
+    echo -e "$RO raspbian$CL"
+    echo -e "$RO fedora$CL"
+}
+
+getBranchAvailable() {
     echo -e "$RO debian$VE → stable-testing-unstable$CL"
-    echo -e "$RO gentoo$VE → stable-testing-unstable$CL"
+    echo -e "$RO gentoo$VE → stable-testing$CL"
     echo -e "$RO raspbian$VE → stable-testing-unstable$CL"
     echo -e "$RO fedora$VE → stable$CL"
 }
 
 setDistro() {
-    while [[ "$MY_DISTRO" != 'debian' ]] &&
-          [[ "$MY_DISTRO" != 'gentoo' ]] &&
-          [[ "$MY_DISTRO" != 'raspbian' ]] &&
-          [[ "$MY_DISTRO" != 'fedora' ]]
+    while [[ "$input" != 'debian' ]] &&
+          [[ "$input" != 'gentoo' ]] &&
+          [[ "$input" != 'raspbian' ]] &&
+          [[ "$input" != 'fedora' ]]
     do
         clear
         getDistrosAvailable
@@ -46,12 +53,12 @@ setDistro() {
 }
 
 setBranch() {
-    while [[ "$MY_BRANCH" != 'stable' ]] &&
-          [[ "$MY_BRANCH" != 'testing' ]] &&
-          [[ "$MY_BRANCH" != 'unstable' ]]
+    while [[ "$input" != 'stable' ]] &&
+          [[ "$input" != 'testing' ]] &&
+          [[ "$input" != 'unstable' ]]
     do
         clear
-        getDistrosAvailable
+        getBranchAvailable
         ## Pido elegir distribución
         echo "$MY_BRANCH"
         read -p "Introduce la rama → " input
@@ -96,6 +103,23 @@ setEnv() {
 }
 
 ##
+## Configura variables para el idioma
+##
+variables_lenguaje() {
+    if [[ "$LC_ALL" = '' ]]; then
+        setVariableGlobal 'LC_ALL' 'es_ES.UTF-8'
+    fi
+
+    if [[ "$LC_CTYPE" = '' ]]; then
+        setVariableGlobal 'LC_CTYPE' 'es_ES.UTF-8'
+    fi
+
+    if [[ "$LC_MESSAGES" = '' ]]; then
+        setVariableGlobal 'LC_MESSAGES' 'es_ES.UTF-8'
+    fi
+}
+
+##
 ## Configura las Opciones del entorno para usar el script
 ##
 configurePreferences() {
@@ -106,7 +130,9 @@ configurePreferences() {
     ## Toma las variables desde el archivo .env en la raíz del script
     ## Esto sobreescribe otros valores existentes que hubiesen en environment
     ##
-    source "$WORKSCRIPT/.env"
+    if [[ -f "$WORKSCRIPT/.env" ]]; then
+        source "$WORKSCRIPT/.env"
+    fi
 
     echo -e "$VE Puedes setear tu mismo las variables en /etc/environment$CL"
     echo -e "$VE También puedes usar .env en este directorio del script$CL"
@@ -123,4 +149,5 @@ configurePreferences() {
         setEnv
     fi
 
+    variables_lenguaje
 }

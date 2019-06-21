@@ -33,22 +33,24 @@ source "$WORKSCRIPT/VPS/fail2ban.sh"
 ## Menú instalar todas las configuraciones de un VPS
 ##
 menuVPS() {
-    instalar_variables 'prod'
+    ## Deshabilito actualizaciones automáticas
+    sudo systemctl disable apt-daily
+    sudo systemctl stop apt-daily.timer
+    sudo systemctl stop apt-daily
+    sudo systemctl disable apt-daily-upgrade
+    sudo systemctl stop apt-daily-upgrade.timer
+    sudo systemctl stop apt-daily-upgrade
 
     stable_agregar_repositorios
     aplicaciones_basicas
 
-    instalarSoftwareLista "$WORKSCRIPT/Apps/Packages/vps.lst"
-    instalarSoftwareLista "$WORKSCRIPT/Apps/Packages/developer.lst"
+    instalarSoftwareLista "$SOFTLIST/Vps/basico.lst"
 
     configuracion_git
-    terminales_instalador
 
-    menuServidores -a 'prod'
-    menuLenguajes -a 'prod'
+    #menuServidores -a 'prod'
+    #menuLenguajes -a 'prod'
 
-    bashit_Instalador
-    ohmyzsh_Instalador
     vim_Instalador
 
     ## Específicos de VPS en este directorio

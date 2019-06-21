@@ -1,3 +1,4 @@
+@base-x
 xorg-x11-server-Xorg
 xorg-x11-drv-vesa
 xorg-x11-drv-intel
@@ -16,3 +17,18 @@ mesa-vdpau-drivers
 colord-extra-profiles
 glx-utils
 libglvnd-glx
+kernel-headers
+kernel-devel
+gcc
+ghc
+polkit-gnome
+gnome-keyring
+gnome-keyring-pam
+dconf-editor
+gconf-editor
+gnome-font-viewer
+java-*-openjdk
+nautilus
+nautilus-image-converter
+nautilus-extensions
+nautilus-dropbox 

@@ -27,7 +27,7 @@ mumble_preconfiguracion() {
 
 mumble_instalar() {
     echo -e "$VE Instalando$RO mumble$CL"
-    instalarSoftware 'mumble-server'
+    instalarSoftwareLista "${SOFTLIST}/Servidores/mumble.lst"
 }
 
 mumble_postconfiguracion() {

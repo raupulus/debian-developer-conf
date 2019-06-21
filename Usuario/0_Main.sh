@@ -59,6 +59,26 @@ generador_plantillas() {
     sudo chown ${USER}:${USER} "/home/${USER}/.local/bin/nuevo"
 }
 
+##
+## Enlaza comandos personalizados en ~/.local/bin
+##
+comandosPersonalizados() {
+    ## Actualizar Sistema y Paquetes
+    enlazarHome '.local/bin/actualizar'
+    sudo chmod 755 "/home/${USER}/.local/bin/actualizar"
+    sudo chown ${USER}:${USER} "/home/${USER}/.local/bin/actualizar"
+
+    ## Limpiar caché DNS local
+    enlazarHome '.local/bin/limpiar-cache-dns'
+    sudo chmod 755 "/home/${USER}/.local/bin/limpiar-cache-dns"
+    sudo chown ${USER}:${USER} "/home/${USER}/.local/bin/limpiar-cache-dns"
+
+    ## Limpiar Sistema y aplicaciones de usuario/root
+    enlazarHome '.local/bin/limpiar-cache-sistema'
+    sudo chmod 755 "/home/${USER}/.local/bin/limpiar-cache-sistema"
+    sudo chown ${USER}:${USER} "/home/${USER}/.local/bin/limpiar-cache-sistema"
+}
+
 devicons_ls() {
     descargarGIT 'devicons-ls' 'https://github.com/ryanoasis/devicons-shell.git' "$WORKSCRIPT/tmp/devicons-shell"
 
@@ -108,6 +128,7 @@ softwareUsuarioExtra() {
     ## Mis propias aplicaciones
     generador_proyectos
     generador_plantillas
+    comandosPersonalizados
 }
 
 ##

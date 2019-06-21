@@ -140,4 +140,6 @@ firefox_instalador() {
     ## Instalar Versiones de Firefox
     firefox_developer
     firefox_nightly
+
+    exit 1
 }

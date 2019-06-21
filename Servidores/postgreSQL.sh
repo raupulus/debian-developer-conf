@@ -5,13 +5,13 @@
 ## @copyright  Copyright © 2017 Raúl Caro Pastorino
 ## @license    https://wwww.gnu.org/licenses/gpl.txt
 ## @email      tecnico@fryntiz.es
-## @web        www.fryntiz.es
-## @github     https://github.com/fryntiz
+## @web        https://fryntiz.es
 ## @gitlab     https://gitlab.com/fryntiz
+## @github     https://github.com/fryntiz
 ## @twitter    https://twitter.com/fryntiz
 ##
 ##             Guía de estilos aplicada:
-## @style      https://github.com/fryntiz/Bash_Style_Guide
+## @style      https://gitlab.com/fryntiz/bash-guide-style
 
 ############################
 ##     INSTRUCCIONES      ##
@@ -32,10 +32,7 @@ postgresql_preconfiguracion() {
 
 postgresql_instalar() {
     echo -e "$VE Instalando$RO PostgreSQL$CL"
-    local dependencias="postgresql postgresql-client postgresql-contrib postgresql-all"
-
-    ## Instalando dependencias
-    instalarSoftware "$dependencias"
+    instalarSoftwareLista "${SOFTLIST}/Servidores/postgresql.lst"
 }
 
 postgresql_postconfiguracion() {
@@ -43,19 +40,25 @@ postgresql_postconfiguracion() {
 
     configurar_postgresql() {
         echo -e "$VE Preparando configuracion de$RO postgreSQL$CL"
-        ## FIXME → Detectar todas las versionesde postgresql y aplicar cambios por cada versión encontrada en el sistema.
 
-        ## Versión de PostgreSQL
-        local V_PSQL='9.6'
+        ## Añade a un array todas las versiones de postgreSQL
+        ## existentes en /etc/postgresql
+        local ALL_POSTGRESQL=(`ls /etc/postgresql/`)
 
-        ## Archivo de configuración para postgresql
-        local POSTGRESCONF="/etc/postgresql/$V_PSQL/main/postgresql.conf"
+        ## Configura todas las versiones de postgresql existentes
+        for V_PSQL in "${ALL_POSTGRESQL[@]}"; do
+            echo -e "$VE Configurando$RO postgreSQL$VE versión:$AM $V_PSQL$CL"
 
-        echo -e "$VE Estableciendo intervalstyle = 'iso_8601'$CL"
-        sudo sed -r -i "s/^\s*#?intervalstyle\s*=/intervalstyle = 'iso_8601' #/" "$POSTGRESCONF"
+            ## Archivo de configuración para postgresql
+            local POSTGRESCONF="/etc/postgresql/$V_PSQL/main/postgresql.conf"
+            echo -e "$VE Archivo de configuración$RO $POSTGRESCONF$CL"
 
-        echo -e "$VE Estableciendo timezone = 'UTC'$CL"
-        sudo sed -r -i "s/^\s*#?timezone\s*=/timezone = 'UTC' #/" "$POSTGRESCONF"
+            echo -e "$VE Estableciendo intervalstyle = 'iso_8601'$CL"
+            sudo sed -r -i "s/^\s*#?intervalstyle\s*=.*/intervalstyle = 'iso_8601'/" "$POSTGRESCONF"
+
+            echo -e "$VE Estableciendo timezone = 'UTC'$CL"
+            sudo sed -r -i "s/^\s*#?timezone\s*=.*/timezone = 'UTC'/" "$POSTGRESCONF"
+        done
     }
 
     personalizar_postgresql() {
@@ -67,7 +70,6 @@ postgresql_postconfiguracion() {
     configurar_postgresql
     personalizar_postgresql
 }
-
 
 postgresql_instalador() {
     postgresql_descargar

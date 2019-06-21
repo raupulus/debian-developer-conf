@@ -50,21 +50,23 @@ fi
 
 WORKSCRIPT=$PWD  ## Directorio principal del script
 USER=$(whoami)   ## Usuario que ejecuta el script
-VERSION='0.8.5'  ## Versión en desarrollo
+VERSION='0.8.6'  ## Versión en desarrollo
 MY_DISTRO="$DISTRO"  ## Distribución sobre la que se ejecuta
 MY_BRANCH="$BRANCH"  ## stable|testing|unstable
 MY_ENV="$ENV"    ## prod|dev desde /etc/environment o .env
-SOFTLIST="$WORKSCRIPT/Software-Lists/$MY_DISTRO"  ## Ruta hacia listas software
 LOGERROR="$WORKSCRIPT/errores.log"  ## Archivo donde almacenar errores
 DEBUG=false      ## Establece si está el script en modo depuración
+
+## Importo variables con rutas de directorios para configuraciones.
+source "$WORKSCRIPT/routes.sh"
 
 ############################
 ##     IMPORTACIONES      ##
 ############################
 source "$WORKSCRIPT/funciones.sh"
+source "$WORKSCRIPT/preferences.sh"
 source "$WORKSCRIPT/configuraciones.sh"
 source "$WORKSCRIPT/limpiador.sh"
-source "$WORKSCRIPT/preferences.sh"
 
 source "$WORKSCRIPT/Apps/0_Main.sh"
 source "$WORKSCRIPT/Personalizar/0_Main.sh"
@@ -81,11 +83,21 @@ source "$WORKSCRIPT/VPS/0_Main.sh"
 ###########################
 errores=()
 
+########################################
+##       VARIABLES COMPUESTAS         ##
+########################################
+## Esta función configura las variables globales.
+configurePreferences
+
+## Seteo las rutas para los directorios.
+setAllRoutes
+
+## Esta variable depende de ejecutarse primero el script anterior.
+SOFTLIST="${WORKSCRIPT}/Software-Lists/${MY_DISTRO}"  ## Ruta a listas de software
+
 ###########################
 ##       FUNCIONES       ##
 ###########################
-configurePreferences
-
 menuPrincipal() {
     while true :; do
         clear
@@ -122,7 +134,7 @@ menuPrincipal() {
             5) menuServidores;;            ## Menú de Servidores
             6) menuLenguajes;;
             7) menuUsuario;;
-            8) menuRepositorios -a         ## Todos los pasos
+            8) menuRepositorios           ## Todos los pasos
                menuAplicaciones -a
                instalar_configuraciones
                menuPersonalizacion -a

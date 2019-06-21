@@ -10,6 +10,8 @@ rxvt-unicode
 compton
 nitrogen
 ranger
+rofi
+rofi-themes
 w3m
 w3m-img
 tint2
@@ -47,3 +49,4 @@ redshift
 lm-sensors
 network-manager-applet
 lxrandr
+neofetch

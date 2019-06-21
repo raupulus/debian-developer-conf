@@ -27,11 +27,7 @@ ssh_preconfiguracion() {
 
 ssh_instalar() {
     echo -e "$VE Instalando$RO ssh$CL"
-    instalarSoftware 'ssh'
-
-    echo -e "$VE Instalando paquetes complementarios de$RO ssh$CL"
-    local complementarios='sshpass ssh-cron ssh-askpass'
-    instalarSoftware "$complementarios"
+    instalarSoftwareLista "${SOFTLIST}/Servidores/ssh.lst"
 }
 
 ssh_postconfiguracion() {
@@ -61,9 +57,9 @@ ssh_postconfiguracion() {
     ## /etc/issue -> Mensaje de login para acceso local al equipo (Acceso por TTY)
     ## /etc/issue.net -> Mensaje de login para acceso por red (Acceso por SSH)
     ## /etc/motd -> Mensaje para después del login.
-    echo 'Debian by Fryntiz → dev@fryntiz.es' | sudo tee '/etc/issue'
-    echo 'Debian by Fryntiz → dev@fryntiz.es' | sudo tee '/etc/issue.net'
-    echo 'Has conectado al servidor Debian mantenido por → dev@fryntiz.es' | sudo tee '/etc/motd'
+    echo "$DISTRO by Fryntiz → dev@fryntiz.es" | sudo tee '/etc/issue'
+    echo "$DISTRO by Fryntiz → dev@fryntiz.es" | sudo tee '/etc/issue.net'
+    echo "Has conectado al servidor $DISTRO mantenido por → dev@fryntiz.es" | sudo tee '/etc/motd'
 }
 
 ssh_instalador() {

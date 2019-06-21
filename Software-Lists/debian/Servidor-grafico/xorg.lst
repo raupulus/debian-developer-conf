@@ -1,0 +1,14 @@
+xorg
+xserver-xorg-core
+xserver-xorg-video-vesa
+xserver-xorg-input-synaptics
+xserver-xorg-input-wacom
+xserver-xorg-input-libinput
+xserver-xorg-legacy
+xserver-xorg-video-fbdev
+xinit
+x11-xserver-utils
+xbitmaps
+xinput
+mesa-utils
+xbase-clients

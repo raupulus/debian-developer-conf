@@ -32,8 +32,7 @@ bind_preconfiguracion() {
 
 bind_instalar() {
     echo -e "$VE Instalando$RO Bind 9$CL"
-    local software='bind9 bind9utils'
-    instalarSoftware "$software"
+    instalarSoftwareLista "${SOFTLIST}/Servidores/bind.lst"
 }
 
 bind_postconfiguracion() {

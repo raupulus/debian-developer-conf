@@ -31,7 +31,9 @@ configurar_hosts() {
 
     ## Crea copia del original para mantenerlo siempre
     if [[ ! -f '/etc/hosts.BACKUP' ]]; then
-        sudo mv '/etc/hosts' '/etc/hosts.BACKUP'
+        if [[ -f '/etc/hosts' ]]; then
+            sudo mv '/etc/hosts' '/etc/hosts.BACKUP'
+        fi
     fi
 
     if [[ -f '/etc/hosts.BACKUP' ]]; then

@@ -4,14 +4,14 @@
 ## @author     Raúl Caro Pastorino
 ## @copyright  Copyright © 2017 Raúl Caro Pastorino
 ## @license    https://wwww.gnu.org/licenses/gpl.txt
-## @email      tecnico@fryntiz.es
-## @web        www.fryntiz.es
+## @email      dev@fryntiz.es
+## @web        https://fryntiz.es
 ## @github     https://github.com/fryntiz
 ## @gitlab     https://gitlab.com/fryntiz
 ## @twitter    https://twitter.com/fryntiz
 ##
 ##             Guía de estilos aplicada:
-## @style      https://github.com/fryntiz/Bash_Style_Guide
+## @style      https://gitlab.com/fryntiz/bash-guide-style
 
 #############################
 ##     INSTRUCCIONES       ##
@@ -136,7 +136,7 @@ configurar_github() {
     ## HUB → git-hub tools
     echo -e "$VE Establece https a$RO hub.protocol$CL"
     git config --global hub.protocol https
-    git config --global --add hub.host https://github.com
+    git config --global hub.host https://github.com
 
     cd "$WORKSCRIPT" || return
 }
@@ -177,8 +177,8 @@ configurar_netrc() {
 crear_token() {
     cd "$HOME" || return
     ## Generando TOKEN para GitHub
-    xdg-open "https://github.com/settings/tokens/new?scopes=repo,gist&description=Nuevo_token" > /dev/null 2>&1
-    echo -e "$VE Vete a$RO $URL$VE para crear un token, pulsa en 'Generate token', cópialo y pégalo aquí"
+    echo -e "$VE Crea un token, pulsa en 'Generate token', cópialo y pégalo aquí"
+    xdg-open "https://github.com/settings/tokens/new?scopes=repo,gist&description=Nuevo_token" > /dev/null 2>/dev/null &
     echo -e "$VE Introduce el TOKEN de GitHub generado, pulsa$AM INTRO$VE si no deseas usar ninguno$CL"
     read -p " Token → " TOKEN
 
@@ -199,8 +199,9 @@ crear_token() {
     fi
 
     ## Generando TOKEN para GitLab
-    xdg-open "https://gitlab.com/profile/account" > /dev/null 2>&1
-    echo -e "$VE Genera un nuevo token en la URL que se abrirá en el navegador"
+    echo -e "$AM Una vez introducido el token cierra el navegador para continuar$CL"
+    echo -e "$VE Genera y copia un nuevo token en la URL que se abrirá en el navegador"
+    xdg-open "https://gitlab.com/profile/account" > /dev/null 2>/dev/null &
     echo -e "$VE Introduce el TOKEN de GitLab generado, pulsa$AM INTRO$VE si no deseas usar ninguno$CL"
     read -p " Token → " TOKEN_GITLAB
 

@@ -141,15 +141,15 @@ for_window [class="Pychess"] focus
 bindsym $mod+F1 [class="Firefox"] focus
 bindsym $mod+F2 [class="PhpStorm"] focus
 bindsym $mod+F3 [title="Atom"] focus
-bindsym $mod+F4 [class="nautilus"] focus
-bindsym $mod+F5 [class="tilix"] focus
-bindsym $mod+F6 [title="PyCharm"] focus
-bindsym $mod+F7 [class="Firefox"] focus
-bindsym $mod+F8 [class="Firefox"] focus
-bindsym $mod+F9 [class="Firefox"] focus
-bindsym $mod+F10 [class="Thunderbird"] focus
-bindsym $mod+F11 [class="whatsie"] focus
-bindsym $mod+F12 [class="Telegram"] focus
+#bindsym $mod+F4 [class="nautilus"] focus
+#bindsym $mod+F5 [class="tilix"] focus
+#bindsym $mod+F6 [title="PyCharm"] focus
+#bindsym $mod+F7 [class="Firefox"] focus
+#bindsym $mod+F8 [class="Firefox"] focus
+#bindsym $mod+F9 [class="Firefox"] focus
+#bindsym $mod+F10 [class="Thunderbird"] focus
+#bindsym $mod+F11 [class="whatsie"] focus
+#bindsym $mod+F12 [class="Telegram"] focus
 
 ###########################################################
 ############       Visualización/Pantalla      ############
@@ -254,6 +254,7 @@ bar {
     output DVI-I-1
     output LVDS-1
     output LVDS1
+    output HDMI-1
 
     ## Márgenes de iconos en la bandeja
     tray_padding 1
@@ -300,7 +301,7 @@ bar {
 bar {
     output secundary
     output HDMI1
-    output HDMI-1
+    #output HDMI-1
     output DVI-D-0
     output LVDS-2
     output VGA
@@ -379,6 +380,9 @@ bindsym $mod+a focus parent
 
 ## El foco sobre el contenedor hijo
 #bindsym $mod+d focus child
+
+## Conmutar entre configuraciones de pantalla para varios monitores
+bindsym $mod+F6 exec ~/.config/i3/scripts/togglescreen.sh 2> /tmp/test && notify-send 'Cambio de pantallas' || notify-send 'Configuración de Pantallas no aplicable'
 
 ## Cambiar entre espacioes de trabajo
 bindsym $mod+1 workspace $WS1
@@ -481,6 +485,8 @@ bindcode XF86MonBrightnessDown exec --no-startup-id ~/config/.i3/scripts/brillo.
 ## Abrir programa de Notas QOwnNotes
 bindsym --release $mod+n exec QOwnNotes
 
+## Abrir gestor de contraseñas KeePass2
+bindsym --release $mod+k exec keepass2 "$HOME/Documentos/Personal.kdbx"
 
 ############################################################
 ###############          Autostart        ##################
@@ -506,7 +512,7 @@ exec --no-startup-id xfce4-clipman
 exec --no-startup-id dunst
 
 ## Ocultar ratón tras inactividad
-exec --no-startup-id unclutter -idle 0.8
+exec --no-startup-id unclutter -idle 1
 
 ## Configuraciones para X
 exec --no-startup-id xrdb -load ~/.Xresources
@@ -545,7 +551,6 @@ set $mode_system Sistema: (l) Bloquear, (e) Salir, (s) Suspender, (h) Hibernar, 
 set $i3exit ~/.config/i3/scripts/i3exit.sh
 
 mode "$mode_system" {
-
     bindsym l exec --no-startup-id $i3exit lock, mode "default"
     bindsym e exec --no-startup-id $i3exit logout, mode "default"
     bindsym s exec --no-startup-id $i3exit suspend, mode "default"
@@ -559,6 +564,28 @@ mode "$mode_system" {
 }
 
 bindsym $mod+Escape mode "$mode_system"
+
+############################################################
+###############    MENÚ DE SERVIDORES     ##################
+############################################################
+set $mode_servers A.Apache: (1), E.Apache: (2), A.MariaDB: (3), E.MariaDB: (4), A.PostgreSQL: (5), E.PostgreSQL: (6)
+
+set $servers ~/.config/i3/scripts/servers.sh
+
+mode "$mode_servers" {
+    bindsym 1 exec --no-startup-id $servers apache start, mode "default"
+    bindsym 2 exec --no-startup-id $servers apache stop, mode "default"
+    bindsym 3 exec --no-startup-id $servers mariadb start, mode "default"
+    bindsym 4 exec --no-startup-id $servers mariadb stop, mode "default"
+    bindsym 5 exec --no-startup-id $servers postgresql start, mode "default"
+    bindsym 6 exec --no-startup-id $servers postgresql stop, mode "default"
+
+    # back to normal: Enter or Escape
+    bindsym Return mode "default"
+    bindsym Escape mode "default"
+}
+
+bindsym $mod+F12 mode "$mode_servers"
 
 ############################################################
 ###############           APPLETS         ##################

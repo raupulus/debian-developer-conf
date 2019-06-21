@@ -30,11 +30,7 @@ docker_preconfiguracion() {
 
 docker_instalar() {
     echo -e "$VE Instalando$RO Docker$CL"
-    instalarSoftware 'docker docker-compose docker-engine'
-
-    echo -e "$VE Instalando paquetes complementarios de$RO Docker$CL"
-    local complementarios='debocker'
-    instalarSoftware "$complementarios"
+    instalarSoftwareLista "${SOFTLIST}/Servidores/docker.lst"
 }
 
 docker_postconfiguracion() {

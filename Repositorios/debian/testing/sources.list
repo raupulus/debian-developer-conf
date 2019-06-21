@@ -1,0 +1,56 @@
+########################################################
+##                 OFICIALES DEBIAN                   ##
+########################################################
+##### Repositorio Debian Testing
+deb http://ftp.es.debian.org/debian/ testing main contrib non-free
+deb-src http://ftp.es.debian.org/debian/ testing main contrib non-free
+
+##### Actualizaciones de seguridad Debian Testing
+deb http://security.debian.org/ testing/updates main contrib non-free
+deb-src http://security.debian.org/ testing/updates non-free contrib main
+
+##### Actualizaciones para Testing (Updates)
+deb http://ftp.es.debian.org/debian/ testing-updates non-free contrib main
+deb-src http://ftp.es.debian.org/debian/ testing-updates non-free contrib main
+
+########################################################
+##                      KERNEL                        ##
+########################################################
+# deb http://mirrors.kernel.org/debian testing main contrib non-free
+# deb-src http://mirrors.kernel.org/debian testing main contrib non-free
+
+########################################################
+##                 KERNEL LIQUORIX                    ##
+########################################################
+#### curl https://liquorix.net/linux-liquorix.pub | sudo apt-key add - && sudo apt-get update
+# deb http://liquorix.net/debian sid main
+# deb-src http://liquorix.net/debian sid main
+
+########################################################
+##                 MOZILLA FIREFOX                    ##
+########################################################
+##### apt-get install pkg-mozilla-archive-keyring
+# deb http://mozilla.debian.net/ testing-backports firefox-release
+# deb-src http://mozilla.debian.net/ testing-backports firefox-release
+
+########################################################
+##                MULTIMEDIA testing                  ##
+########################################################
+###### apt-get install deb-multimedia-keyring
+# deb http://www.deb-multimedia.org/ testing non-free main
+
+########################################################
+##                  MULTISYSTEM                       ##
+########################################################
+##### wget -q -O - http://liveusb.info/multisystem/depot/multisystem.asc | sudo apt-key add -
+deb http://liveusb.info/multisystem/depot/ all main
+
+########################################################
+##                     FRYNTIZ                        ##
+########################################################
+### Mi propio repositorio en Launchpad
+### gpg --keyserver keyserver.ubuntu.com --recv-key B5C6D9592512B8CD && gpg -a --export $PUBKRY | sudo apt-key add -
+# deb http://ppa.launchpad.net/fryntiz/webdevtools/ubuntu/ xenial main
+# deb-src http://ppa.launchpad.net/fryntiz/webdevtools/ubuntu/ xenial main
+# deb http://ppa.launchpad.net/fryntiz/pentesting/ubuntu/ xenial main
+# deb-src http://ppa.launchpad.net/fryntiz/pentesting/ubuntu/ xenial main

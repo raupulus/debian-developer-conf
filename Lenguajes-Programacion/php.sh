@@ -37,15 +37,8 @@ php_preconfiguracion() {
 
 php_instalar() {
     echo -e "$VE Instalando$RO php$CL"
-    local paquetes_basicos="php php-cli libapache2-mod-php"
-    instalarSoftware "$paquetes_basicos"
 
-    echo -e "$VE Instalando$RO paquetes extras$CL"
-    local paquetes_extras="php-gd php-curl php-pgsql php-sqlite3 php-intl php-mbstring php-xml php-xdebug php-json php-zip php-mongodb "
-    instalarSoftware "$paquetes_extras"
-
-    echo -e "$VE Instalando librerías$CL"
-    instalarSoftware composer
+    instalarSoftwareLista "$SOFTLIST/Lenguajes-Programacion/php.lst"
 }
 
 php_postconfiguracion() {
@@ -57,7 +50,15 @@ php_postconfiguracion() {
     ##
     configurar_php() {
         echo -e "$VE Preparando configuracion de$RO PHP$CL"
-        local PHPINI="/etc/php/$1/apache2/php.ini"  # Ruta al archivo de configuración de PHP con apache2
+
+        ## Ruta al archivo de configuración de PHP con apache2
+        if [[ "$DISTRO" = 'debian' ]] || [[ "$DISTRO" = 'raspbian' ]]; then
+            local PHPINI="/etc/php/$1/apache2/php.ini"
+        elif [[ "$DISTRO" = 'fedora' ]]; then
+            local PHPINI="/etc/php.ini"
+        elif [[ "$DISTRO" = 'gentoo' ]]; then
+            echo -e "$VE No configurado para gentoo $DISTRO$CL"
+        fi
 
         ## Modificar configuración
         echo -e "$VE Estableciendo zona horaria por defecto para PHP$CL"
@@ -65,6 +66,7 @@ php_postconfiguracion() {
 
         ## Configuración para desarrollo
         if [[ "$ENV" = 'dev' ]]; then
+            echo -e "$VE Configurando PHP para desarrollo$CL"
             echo -e "$VE Activando Reportar todos los errores → 'error_reporting'$CL"
             sudo sed -r -i "s/^;?\s*error_reporting\s*=.*$/error_reporting = E_ALL/" $PHPINI
 
@@ -73,17 +75,28 @@ php_postconfiguracion() {
 
             echo -e "$VE Activando Mostrar errores al iniciar → 'display_startup_errors'$CL"
             sudo sed -r -i "s/^;?\s*display_startup_errors\s*=.*$/display_startup_errors = On/" $PHPINI
+
+        else
+            echo -e "$VE Configurando PHP para producción$CL"
+            echo -e "$VE Desactivando Reportar todos los errores → 'error_reporting'$CL"
+            sudo sed -r -i "s/^;?\s*error_reporting\s*=.*$/error_reporting = E_ALL & ~E_DEPRECATED & ~E_STRICT/" $PHPINI
+
+            echo -e "$VE Desactivando Mostrar errores → 'display_errors'$CL"
+            sudo sed -r -i "s/^;?\s*display_errors\s*=.*$/display_errors = Off/" $PHPINI
+
+            echo -e "$VE Desactivando Mostrar errores al iniciar → 'display_startup_errors'$CL"
+            sudo sed -r -i "s/^;?\s*display_startup_errors\s*=.*$/display_startup_errors = Off/" $PHPINI
         fi
 
-        echo -e "$VE Tiempo máximo de ejecución 3 minutos → 'max_execution_time'$CL"
-        sudo sed -r -i "s/^;?\s*max_execution_time\s*=.*$/max_execution_time = 180/" $PHPINI
+        echo -e "$VE Tiempo máximo de ejecución 5 minutos → 'max_execution_time'$CL"
+        sudo sed -r -i "s/^;?\s*max_execution_time\s*=.*$/max_execution_time = 300/" $PHPINI
 
-        echo -e "$VE Límite de Memoria por script → 'memory_limit = 128M'$CL"
-        sudo sed -r -i "s/^;?\s*memory_limit\s*=.*$/memory_limit = 128M/" $PHPINI
+        echo -e "$VE Límite de Memoria por script → 'memory_limit = 256M'$CL"
+        sudo sed -r -i "s/^;?\s*memory_limit\s*=.*$/memory_limit = 256M/" $PHPINI
 
         ## Límite de archivos
-        echo -e "$VE Tamaño máximo de subida → 'upload_max_filesize = 512M'$CL"
-        sudo sed -r -i "s/^;?\s*upload_max_filesize\s*=.*$/upload_max_filesize = 512M/" $PHPINI
+        echo -e "$VE Tamaño máximo de subida → 'upload_max_filesize = 1024M'$CL"
+        sudo sed -r -i "s/^;?\s*upload_max_filesize\s*=.*$/upload_max_filesize = 1024M/" $PHPINI
 
         echo -e "$VE Tamaño máximo de POST → 'post_max_size = 1024M'$CL"
         sudo sed -r -i "s/^;?\s*post_max_size\s*=.*$/post_max_size = 1024M/" $PHPINI
@@ -169,6 +182,12 @@ php_postconfiguracion() {
             for V_PHP in "${ALL_PHP[@]}"; do
                 if [[ $input = "$V_PHP" ]]; then
                     sudo a2enmod "php$V_PHP"
+
+                    ## Actualizo variables de entorno para la versión elegida.
+                    sudo update-alternatives --set php "/usr/bin/php${V_PHP}"
+                    sudo update-alternatives --set phar "/usr/bin/phar${V_PHP}"
+                    sudo update-alternatives --set phar.phar "/usr/bin/phar.phar${V_PHP}"
+
                     salir='salir'
                     break
                 fi
@@ -183,31 +202,21 @@ php_postconfiguracion() {
     fi
 
     ## Activar módulos
-    echo -e "$VE Activando módulos$CL"
-    sudo phpenmod 'fileinfo' 'ftp' 'curl' 'mongodb' 'pdo_pgsql' 'pgsql' 'sqlite3'
+    if [[ -f '/usr/sbin/phpenmod' ]] || [[ -f '/sbin/phpenmod' ]]; then
+        echo -e "$VE Activando módulos$CL"
+        sudo phpenmod 'fileinfo' 'ftp' 'curl' 'mongodb' 'pdo_pgsql' 'pgsql' 'sqlite3'
 
-    if [[ "$ENV" = 'dev' ]]; then
-        sudo phpenmod 'xdebug'
+        if [[ "$ENV" = 'dev' ]]; then
+            sudo phpenmod 'xdebug'
+        fi
+
+        echo -e "$VE Desactivando Módulos"
+        ## Xdebug para PHP CLI no tiene sentido y ralentiza
+        sudo phpdismod -s 'cli' 'xdebug'
     fi
-
-    echo -e "$VE Desactivando Módulos"
-    ## Xdebug para PHP CLI no tiene sentido y ralentiza
-    sudo phpdismod -s 'cli' 'xdebug'
 
     ## Reiniciar apache2 para hacer efectivos los cambios
     reiniciarServicio 'apache2'
-}
-
-php_produccion() {
-    echo -e "$VE Configurando PHP para producción$CL"
-    echo -e "$VE Desactivando Reportar todos los errores → 'error_reporting'$CL"
-    sudo sed -r -i "s/^;?\s*error_reporting\s*=.*$/error_reporting = E_ALL & ~E_DEPRECATED & ~E_STRICT/" $PHPINI
-
-    echo -e "$VE Desactivando Mostrar errores → 'display_errors'$CL"
-    sudo sed -r -i "s/^;?\s*display_errors\s*=.*$/display_errors = Off/" $PHPINI
-
-    echo -e "$VE Desactivando Mostrar errores al iniciar → 'display_startup_errors'$CL"
-    sudo sed -r -i "s/^;?\s*display_startup_errors\s*=.*$/display_startup_errors = Off/" $PHPINI
 }
 
 php_instalador() {
@@ -215,9 +224,4 @@ php_instalador() {
     php_preconfiguracion
     php_instalar
     php_postconfiguracion
-
-    if [[ "$1" = 'prod' ]]; then
-        ## TODO → Esta función está de más, controlar desde $ENV
-        php_produccion
-    fi
 }

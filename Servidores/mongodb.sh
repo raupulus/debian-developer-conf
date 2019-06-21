@@ -30,11 +30,7 @@ mongodb_preconfiguracion() {
 
 mongodb_instalar() {
     echo -e "$VE Instalando$RO mongodb$CL"
-    instalarSoftware 'mongodb mongodb-clients mongodb-server'
-
-    echo -e "$VE Instalando paquetes complementarios de$RO mongodb$CL"
-    local complementarios='mongo-tools'
-    instalarSoftware "$complementarios"
+    instalarSoftwareLista "${SOFTLIST}/Servidores/mongodb.lst"
 }
 
 mongodb_postconfiguracion() {

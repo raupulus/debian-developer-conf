@@ -25,8 +25,21 @@
 ############################
 source "$WORKSCRIPT/Apps/1_Aplicaciones_Basicas.sh"
 source "$WORKSCRIPT/Apps/2_Aplicaciones_Extras.sh"
+source "$WORKSCRIPT/Apps/desarrollo.sh"
+source "$WORKSCRIPT/Apps/firmware.sh"
+source "$WORKSCRIPT/Apps/flatpak.sh"
+source "$WORKSCRIPT/Apps/grafico.sh"
+source "$WORKSCRIPT/Apps/herramientas.sh"
+source "$WORKSCRIPT/Apps/internet.sh"
+source "$WORKSCRIPT/Apps/juegos.sh"
+source "$WORKSCRIPT/Apps/ofimatica.sh"
+source "$WORKSCRIPT/Apps/pentesting.sh"
+source "$WORKSCRIPT/Apps/servidor-grafico.sh"
+source "$WORKSCRIPT/Apps/sonido.sh"
+source "$WORKSCRIPT/Apps/video.sh"
+source "$WORKSCRIPT/Apps/virtualizacion.sh"
+source "$WORKSCRIPT/Apps/vps.sh"
 source "$WORKSCRIPT/Apps/IDEs/0_Main.sh"
-source "$WORKSCRIPT/Apps/Packages/0_Main.sh"
 
 ############################
 ##       FUNCIONES        ##
@@ -40,8 +53,19 @@ menuAplicaciones() {
         clear
         echo -e "$VE Instalando todas las aplicaciones$CL"
         aplicaciones_basicas
-        aplicaciones_extras -a
-        #menuIDES -a
+        aplicaciones_firmware
+        aplicaciones_desarrollo
+        aplicaciones_grafico
+        aplicaciones_herramientas
+        aplicaciones_internet
+        aplicaciones_juegos
+        aplicaciones_ofimatica
+        aplicaciones_pentesting
+        aplicaciones_servidor_grafico
+        aplicaciones_sonido
+        aplicaciones_video
+        aplicaciones_virtualizacion
+
         menuPaquetes -a
     }
 
@@ -53,12 +77,25 @@ menuAplicaciones() {
             clear
             local descripcion='Menú de aplicaciones
                 1) Aplicaciones Básicas
-                2) Aplicaciones Extras
-                3) Instalar Grupo de aplicaciones
+                2) Firmware
+                3) Desarrollo
+                4) Diseño Gráfico
+                5) Herramientas
+                6) Internet
+                7) Juegos
+                8) Ofimática
+                9) Pentesting
+                10) Servidor Gráfico
+                11) Sonido
+                12) Vídeo
+                13) Virtualización
 
-                4) Todos los pasos anteriores completos
+                14) Todos los pasos anteriores completos
 
-                5) Instalar IDEs
+                15) Instalar IDEs
+                16) Instalar Aplicaciones Extras
+                17) Flatpak
+                18) VPS
 
                 0) Atrás
             '
@@ -71,10 +108,23 @@ menuAplicaciones() {
             case $entrada in
 
                 1)  aplicaciones_basicas;;   ## Aplicaciones Básicas
-                2)  aplicaciones_extras;;    ## Aplicaciones Extras
-                3)  menuPaquetes;;           ## Aplicaciones de por lotes
-                4)  todas_aplicaciones;;     ## Todas las aplicaciones
-                5)  menuIDES                 ## Menú para instalar IDEs
+                2)  aplicaciones_firmware;;
+                3)  aplicaciones_desarrollo;;
+                4)  aplicaciones_grafico;;
+                5)  aplicaciones_herramientas;;
+                6)  aplicaciones_internet;;
+                7)  aplicaciones_juegos;;
+                8)  aplicaciones_ofimatica;;
+                9)  aplicaciones_pentesting;;
+                10) aplicaciones_servidor_grafico;;
+                11) aplicaciones_sonido;;
+                12) aplicaciones_video;;
+                13) aplicaciones_virtualizacion;;
+                14) todas_aplicaciones;;     ## Todas las aplicaciones
+                15) menuIDES;;               ## Menú para instalar IDEs
+                16) aplicaciones_extras;;    ## Aplicaciones Extras
+                17) aplicaciones_flatpak;;
+                18) aplicaciones_vps
                     break;;
 
                 0)  ## SALIR

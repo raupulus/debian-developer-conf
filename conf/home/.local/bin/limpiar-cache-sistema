@@ -1,0 +1,295 @@
+#!/usr/bin/env bash
+# -*- ENCODING: UTF-8 -*-
+##
+## @author     Raúl Caro Pastorino
+## @copyright  Copyright © 2019 Raúl Caro Pastorino
+## @license    https://wwww.gnu.org/licenses/gpl.txt
+## @email      dev@fryntiz.es
+## @web        https://fryntiz.es
+## @gitlab     https://gitlab.com/fryntiz
+## @github     https://github.com/fryntiz
+## @twitter    https://twitter.com/fryntiz
+##
+##             Guía de estilos aplicada:
+## @style      https://github.com/fryntiz/bash-guide-style
+
+############################
+##     INSTRUCCIONES      ##
+############################
+## Limpia todo el caché del sistema y aplicaciones para el usuario y root.
+
+############################
+##       FUNCIONES        ##
+############################
+
+limpiarCacheUsuario() {
+    ## Limpio caché de heroku
+    if [[ -d "$HOME/.cache/heroku" ]]; then
+        rm -R "$HOME/.cache/heroku"
+    fi
+
+    ## Limpio todas las papeleras de todos los usuarios
+    sudo find / -name .Trash-1000 2> /dev/null | sudo xargs rm -R 2>> /dev/null
+
+    bleachbit --clean adobe_reader.cache
+    bleachbit --clean adobe_reader.mru
+    bleachbit --clean adobe_reader.tmp
+    bleachbit --clean amsn.cache
+    bleachbit --clean amsn.chat_logs
+    bleachbit --clean amule.logs
+    bleachbit --clean amule.tmp
+    bleachbit --clean apt.autoclean
+    bleachbit --clean apt.autoremove
+    bleachbit --clean apt.clean
+    bleachbit --clean apt.package_lists
+    bleachbit --clean audacious.cache
+    bleachbit --clean audacious.log
+    bleachbit --clean bash.history
+    bleachbit --clean chromium.cache
+    bleachbit --clean chromium.cookies
+    bleachbit --clean chromium.vacuum
+    bleachbit --clean easytag.history
+    bleachbit --clean easytag.logs
+    bleachbit --clean elinks.history
+    bleachbit --clean emesene.cache
+    bleachbit --clean emesene.logs
+    bleachbit --clean epiphany.cache
+    bleachbit --clean epiphany.cookies
+    bleachbit --clean epiphany.dom
+    bleachbit --clean epiphany.passwords
+    bleachbit --clean epiphany.places
+    bleachbit --clean evolution.cache
+    bleachbit --clean exaile.cache
+    bleachbit --clean exaile.log
+    bleachbit --clean firefox.backup
+    bleachbit --clean firefox.cache
+    bleachbit --clean firefox.cookies
+    bleachbit --clean firefox.crash_reports
+    bleachbit --clean firefox.download_history
+    bleachbit --clean firefox.vacuum
+    bleachbit --clean flash.cache
+    bleachbit --clean flash.cookies
+    bleachbit --clean gedit.recent_documents
+    bleachbit --clean gftp.cache
+    bleachbit --clean gftp.logs
+    bleachbit --clean gimp.tmp
+    bleachbit --clean gl-117.debug_logs
+    bleachbit --clean gnome.run
+    bleachbit --clean gnome.search_history
+    bleachbit --clean google_chrome.cache
+    bleachbit --clean google_chrome.cookies
+    bleachbit --clean google_chrome.dom
+    bleachbit --clean google_chrome.form_history
+    bleachbit --clean google_chrome.search_engines
+    bleachbit --clean google_chrome.vacuum
+    bleachbit --clean google_earth.temporary_files
+    bleachbit --clean google_toolbar.search_history
+    bleachbit --clean gpodder.vacuum
+    bleachbit --clean gwenview.recent_documents
+    bleachbit --clean hippo_opensim_viewer.cache
+    bleachbit --clean hippo_opensim_viewer.logs
+    bleachbit --clean java.cache
+    bleachbit --clean kde.cache
+    bleachbit --clean kde.recent_documents
+    bleachbit --clean kde.tmp
+    bleachbit --clean konqueror.cookies
+    bleachbit --clean konqueror.current_session
+    bleachbit --clean konqueror.url_history
+    bleachbit --clean libreoffice.cache
+    bleachbit --clean libreoffice.history
+    bleachbit --clean links2.history
+    bleachbit --clean nexuiz.cache
+    bleachbit --clean openofficeorg.cache
+    bleachbit --clean openofficeorg.recent_documents
+    bleachbit --clean opera.cache
+    bleachbit --clean opera.cookies
+    bleachbit --clean opera.dom
+    bleachbit --clean opera.download_history
+    bleachbit --clean opera.search_history
+    bleachbit --clean opera.url_history
+    bleachbit --clean pidgin.cache
+    bleachbit --clean pidgin.logs
+    bleachbit --clean realplayer.cookies
+    bleachbit --clean realplayer.history
+    bleachbit --clean realplayer.logs
+    bleachbit --clean rhythmbox.history
+    bleachbit --clean screenlets.logs
+    bleachbit --clean seamonkey.cache
+    bleachbit --clean seamonkey.chat_logs
+    bleachbit --clean seamonkey.cookies
+    bleachbit --clean seamonkey.download_history
+    bleachbit --clean seamonkey.history
+    bleachbit --clean skype.chat_logs
+    bleachbit --clean skype.installers
+    bleachbit --clean sqlite3.history
+    bleachbit --clean system.cache
+    bleachbit --clean system.clipboard
+    bleachbit --clean system.custom
+    bleachbit --clean system.desktop_entry
+    bleachbit --clean system.localizations
+    bleachbit --clean system.memory
+    bleachbit --clean system.recent_documents
+    bleachbit --clean system.rotated_logs
+    bleachbit --clean system.tmp
+    bleachbit --clean system.trash
+    bleachbit --clean thumbnails.cache
+    bleachbit --clean thunderbird.cache
+    bleachbit --clean thunderbird.cookies
+    bleachbit --clean thunderbird.vacuum
+    bleachbit --clean tremulous.cache
+    bleachbit --clean vim.history
+    bleachbit --clean vlc.mru
+    bleachbit --clean vuze.backup_files
+    bleachbit --clean vuze.cache
+    bleachbit --clean vuze.logs
+    bleachbit --clean vuze.tmp
+    bleachbit --clean warzone2100.logs
+    bleachbit --clean wine.tmp
+    bleachbit --clean winetricks.temporary_files
+    bleachbit --clean x11.debug_logs
+    bleachbit --clean xchat.logs
+    bleachbit --clean xine.cache
+    bleachbit --clean yum.clean_all
+    bleachbit --clean yum.vacuum
+}
+
+limpiarCacheRoot() {
+    sudo apt clean
+    sync
+    sudo sync
+    sudo sysctl -w vm.drop_caches=3
+    sleep 3
+    sudo sysctl -w vm.drop_caches=0
+
+    sudo bleachbit --clean adobe_reader.cache
+    sudo bleachbit --clean adobe_reader.mru
+    sudo bleachbit --clean adobe_reader.tmp
+    sudo bleachbit --clean amsn.cache
+    sudo bleachbit --clean amsn.chat_logs
+    sudo bleachbit --clean amule.logs
+    sudo bleachbit --clean amule.tmp
+    sudo bleachbit --clean apt.autoclean
+    sudo bleachbit --clean apt.autoremove
+    sudo bleachbit --clean apt.clean
+    sudo bleachbit --clean apt.package_lists
+    sudo bleachbit --clean audacious.cache
+    sudo bleachbit --clean audacious.log
+    sudo bleachbit --clean bash.history
+    sudo bleachbit --clean chromium.cache
+    sudo bleachbit --clean chromium.cookies
+    sudo bleachbit --clean chromium.vacuum
+    sudo bleachbit --clean easytag.history
+    sudo bleachbit --clean easytag.logs
+    sudo bleachbit --clean elinks.history
+    sudo bleachbit --clean emesene.cache
+    sudo bleachbit --clean emesene.logs
+    sudo bleachbit --clean epiphany.cache
+    sudo bleachbit --clean epiphany.cookies
+    sudo bleachbit --clean epiphany.dom
+    sudo bleachbit --clean epiphany.passwords
+    sudo bleachbit --clean epiphany.places
+    sudo bleachbit --clean evolution.cache
+    sudo bleachbit --clean exaile.cache
+    sudo bleachbit --clean exaile.log
+    sudo bleachbit --clean firefox.backup
+    sudo bleachbit --clean firefox.cache
+    sudo bleachbit --clean firefox.cookies
+    sudo bleachbit --clean firefox.crash_reports
+    sudo bleachbit --clean firefox.download_history
+    sudo bleachbit --clean firefox.vacuum
+    sudo bleachbit --clean flash.cache
+    sudo bleachbit --clean flash.cookies
+    sudo bleachbit --clean gedit.recent_documents
+    sudo bleachbit --clean gftp.cache
+    sudo bleachbit --clean gftp.logs
+    sudo bleachbit --clean gimp.tmp
+    sudo bleachbit --clean gl-117.debug_logs
+    sudo bleachbit --clean gnome.run
+    sudo bleachbit --clean gnome.search_history
+    sudo bleachbit --clean google_chrome.cache
+    sudo bleachbit --clean google_chrome.cookies
+    sudo bleachbit --clean google_chrome.dom
+    sudo bleachbit --clean google_chrome.form_history
+    sudo bleachbit --clean google_chrome.search_engines
+    sudo bleachbit --clean google_chrome.vacuum
+    sudo bleachbit --clean google_earth.temporary_files
+    sudo bleachbit --clean google_toolbar.search_history
+    sudo bleachbit --clean gpodder.cache
+    sudo bleachbit --clean gpodder.vacuum
+    sudo bleachbit --clean gwenview.recent_documents
+    sudo bleachbit --clean hippo_opensim_viewer.cache
+    sudo bleachbit --clean hippo_opensim_viewer.logs
+    sudo bleachbit --clean java.cache
+    sudo bleachbit --clean kde.cache
+    sudo bleachbit --clean kde.recent_documents
+    sudo bleachbit --clean kde.tmp
+    sudo bleachbit --clean konqueror.cookies
+    sudo bleachbit --clean konqueror.current_session
+    sudo bleachbit --clean konqueror.url_history
+    sudo bleachbit --clean libreoffice.cache
+    sudo bleachbit --clean libreoffice.history
+    sudo bleachbit --clean links2.history
+    sudo bleachbit --clean nexuiz.cache
+    sudo bleachbit --clean openofficeorg.cache
+    sudo bleachbit --clean openofficeorg.recent_documents
+    sudo bleachbit --clean opera.cache
+    sudo bleachbit --clean opera.cookies
+    sudo bleachbit --clean opera.dom
+    sudo bleachbit --clean opera.download_history
+    sudo bleachbit --clean opera.search_history
+    sudo bleachbit --clean opera.url_history
+    sudo bleachbit --clean pidgin.cache
+    sudo bleachbit --clean pidgin.logs
+    sudo bleachbit --clean realplayer.cookies
+    sudo bleachbit --clean realplayer.history
+    sudo bleachbit --clean realplayer.logs
+    sudo bleachbit --clean rhythmbox.cache
+    sudo bleachbit --clean rhythmbox.history
+    sudo bleachbit --clean screenlets.logs
+    sudo bleachbit --clean seamonkey.cache
+    sudo bleachbit --clean seamonkey.chat_logs
+    sudo bleachbit --clean seamonkey.cookies
+    sudo bleachbit --clean seamonkey.download_history
+    sudo bleachbit --clean seamonkey.history
+    sudo bleachbit --clean skype.chat_logs
+    sudo bleachbit --clean skype.installers
+    sudo bleachbit --clean sqlite3.history
+    sudo bleachbit --clean system.cache
+    sudo bleachbit --clean system.clipboard
+    sudo bleachbit --clean system.custom
+    sudo bleachbit --clean system.desktop_entry
+    sudo bleachbit --clean system.localizations
+    sudo bleachbit --clean system.memory
+    sudo bleachbit --clean system.recent_documents
+    sudo bleachbit --clean system.rotated_logs
+    sudo bleachbit --clean system.tmp
+    sudo bleachbit --clean system.trash
+    sudo bleachbit --clean thumbnails.cache
+    sudo bleachbit --clean thunderbird.cache
+    sudo bleachbit --clean thunderbird.cookies
+    sudo bleachbit --clean thunderbird.vacuum
+    sudo bleachbit --clean tremulous.cache
+    sudo bleachbit --clean vim.history
+    sudo bleachbit --clean vlc.mru
+    sudo bleachbit --clean vuze.backup_files
+    sudo bleachbit --clean vuze.cache
+    sudo bleachbit --clean vuze.logs
+    sudo bleachbit --clean vuze.tmp
+    sudo bleachbit --clean warzone2100.logs
+    sudo bleachbit --clean wine.tmp
+    sudo bleachbit --clean winetricks.temporary_files
+    sudo bleachbit --clean x11.debug_logs
+    sudo bleachbit --clean xchat.logs
+    sudo bleachbit --clean xine.cache
+    sudo bleachbit --clean yum.clean_all
+    sudo bleachbit --clean yum.vacuum
+}
+
+limpiarCacheSistema() {
+    if [[ -f '/usr/bin/bleachbit' ]]; then
+        limpiarCacheUsuario
+        limpiarCacheRoot
+    fi
+}
+
+limpiarCacheSistema

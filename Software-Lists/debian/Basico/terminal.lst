@@ -1,0 +1,12 @@
+bash
+bash-completion
+command-not-found
+screen
+zsh
+zsh-antigen
+zsh-syntax-highlighting
+tmux
+tmux-plugin-manager
+powerline
+xterm
+colord

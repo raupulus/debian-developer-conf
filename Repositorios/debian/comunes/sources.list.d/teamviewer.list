@@ -1,0 +1,10 @@
+########################################################
+##                    Team Viewer                     ##
+########################################################
+##### wget -O - https://download.teamviewer.com/download/linux/signature/TeamViewer2017.asc | sudo apt-key add -
+deb http://linux.teamviewer.com/deb stable main
+# deb http://linux.teamviewer.com/deb preview main
+
+# deb http://linux.teamviewer.com/deb stable tv14
+# deb http://linux.teamviewer.com/deb preview tv14
+

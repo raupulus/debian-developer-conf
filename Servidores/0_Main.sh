@@ -4,14 +4,14 @@
 ## @author     Raúl Caro Pastorino
 ## @copyright  Copyright © 2017 Raúl Caro Pastorino
 ## @license    https://wwww.gnu.org/licenses/gpl.txt
-## @email      tecnico@fryntiz.es
-## @web        www.fryntiz.es
-## @github     https://github.com/fryntiz
+## @email      dev@fryntiz.es
+## @web        https://fryntiz.es
 ## @gitlab     https://gitlab.com/fryntiz
+## @github     https://github.com/fryntiz
 ## @twitter    https://twitter.com/fryntiz
 ##
 ##             Guía de estilos aplicada:
-## @style      https://github.com/fryntiz/Bash_Style_Guide
+## @style      https://gitlab.com/fryntiz/bash-guide-style
 
 ############################
 ##     INSTRUCCIONES      ##
@@ -23,7 +23,7 @@
 ############################
 ##     IMPORTACIONES      ##
 ############################
-source "$WORKSCRIPT/Servidores/apache.sh"
+source "$WORKSCRIPT/Servidores/apache2/install.sh"
 source "$WORKSCRIPT/Servidores/bind.sh"
 source "$WORKSCRIPT/Servidores/mariaDB.sh"
 source "$WORKSCRIPT/Servidores/nodejs.sh"
@@ -45,23 +45,19 @@ menuServidores() {
     todos_servidores() {
         clear
         echo -e "$VE Instalando todos los servidores$CL"
-        apache2_instalador $1
-        mariadb_instalador $1
-        nodejs_instalador $1
-        postgresql_instalador $1
-        docker_instalador $1
-        ssh_instalador $1
-        mongodb_instalador $1
-        sqlite_instalador $1
+        apache2_instalador
+        mariadb_instalador
+        nodejs_instalador
+        postgresql_instalador
+        docker_instalador
+        ssh_instalador
+        mongodb_instalador
+        sqlite_instalador
     }
 
     ## Si la función recibe "-a" indica que instale todos los servidores
     if [[ "$1" = '-a' ]]; then
-        if [[ "$2" = 'prod' ]]; then
-            todos_servidores 'prod'
-        else
-            todos_servidores
-        fi
+        todos_servidores
     else
         while true :; do
             clear

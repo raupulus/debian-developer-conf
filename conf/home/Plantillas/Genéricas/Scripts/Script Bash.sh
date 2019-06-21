@@ -10,7 +10,7 @@
 ## @telegram   https://t.me/fryntiz
 
 ## @bash        4.2 or later
-## Create Date: 2018
+## Create Date: 2019
 ## Project Name: 
 ## Description: 
 ## Dependencies: 
@@ -22,7 +22,7 @@
 ## Additional Comments: 
 
 ## @license    https://wwww.gnu.org/licenses/gpl.txt
-## @copyright  Copyright © 2018 Raúl Caro Pastorino
+## @copyright  Copyright © 2019 Raúl Caro Pastorino
 ##
 ## This program is free software: you can redistribute it and/or modify
 ## it under the terms of the GNU General Public License as published by
