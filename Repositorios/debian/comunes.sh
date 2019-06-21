@@ -68,9 +68,9 @@ comunes_agregar_llaves() {
 
     ## Repositorio para Tor oficial y estable
     echo -e "$VE Agregando clave para$RO Tor Repositorio$CL"
-    gpg --keyserver keys.gnupg.net --recv A3C4F0F979CAA22CDBA8F512EE8CBC9E886DDD89 && gpg --export A3C4F0F979CAA22CDBA8F512EE8CBC9E886DDD89 | sudo apt-key add -
+    curl https://deb.torproject.org/torproject.org/A3C4F0F979CAA22CDBA8F512EE8CBC9E886DDD89.asc | sudo gpg --import && sudo gpg --export A3C4F0F979CAA22CDBA8F512EE8CBC9E886DDD89 | sudo apt-key add -
     actualizarRepositorios
-    instalarSoftware deb.torproject.org-keyring
+    instalarSoftware 'deb.torproject.org-keyring' 'apt-transport-tor'
 
     ## Repositorio para mongodb
     echo -e "$VE Agregando clave para$RO MongoDB Repositorio Oficial$CL"
@@ -109,7 +109,7 @@ comunes_download_repositorios() {
 
     ## Riot
     echo -e "$VE Agregando Repositorio para$RO Riot (Matrix)$CL"
-    sudo sh -c "echo 'deb https://riot.im/packages/debian/ artful main' > /etc/apt/sources.list.d/matrix-riot-im.list"
+    sudo sh -c "echo '##deb https://riot.im/packages/debian/ artful main' > /etc/apt/sources.list.d/matrix-riot-im.list"
 }
 
 ##
