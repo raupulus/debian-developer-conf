@@ -59,6 +59,11 @@ actualizarSistema() {
 	python3 -m pip_review --local --auto
     fi
 
+    if [[ -f '/usr/bin/composer' ]] || [[ -f "$HOME/.local/bin/composer" ]]; then
+        echo "Actualizando desde Composer"
+        composer global update
+    fi
+
     if [[ "$DISTRO" = 'raspbian' ]]; then
         sudo rpi-update
     fi
