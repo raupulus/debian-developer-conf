@@ -68,7 +68,7 @@ i3wm_postconfiguracion() {
     ## Instalo y Configuro Python: Lenguajes-Programacion/python.sh
     python_instalador
 
-    python3Install 'i3pystatus' 'basiciw' 'netifaces' 'colour' \
+    python3Install 'basiciw' 'netifaces' 'colour' \
     'pyalsaaudio' 'fontawesome'
 
     ## Tema Paper para GTK2 (Debe estar instalado)
