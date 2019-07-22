@@ -34,6 +34,10 @@ stable_agregar_llaves() {
     echo -e "$VE Agregando llave para$RO PHP$VE de sury,org$CL"
     sudo wget -O '/etc/apt/trusted.gpg.d/php.gpg' 'https://packages.sury.org/php/apt.gpg'
     sudo chmod 744 '/etc/apt/trusted.gpg.d/php.gpg'
+
+    ## Agregando llave para Gitlab Runner.
+    echo -e "$VE Agregando llave para$RO PHP$VE de sury,org$CL"
+    curl -L "https://packages.gitlab.com/runner/gitlab-runner/gpgkey" 2> /dev/null | sudo apt-key add - &>/dev/null
 }
 
 ##
