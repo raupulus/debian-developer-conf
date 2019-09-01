@@ -72,7 +72,7 @@ pycharm_postconfiguracion() {
 }
 
 pycharm_pro_instalador() {
-    local version='pycharm-professional-2019.1.1'
+    local version='pycharm-professional-2019.2.1'
 
     echo -e "$VE Comenzando instalación de$RO PyCharm$CL"
 
