@@ -72,17 +72,21 @@ comunes_agregar_llaves() {
     actualizarRepositorios
     instalarSoftware 'deb.torproject.org-keyring' 'apt-transport-tor'
 
-    ## Repositorio para mongodb
+    ## Repositorio para mongodb.
     echo -e "$VE Agregando clave para$RO MongoDB Repositorio Oficial$CL"
     sudo apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv 9DA31620334BD75D9DCB49F368818C72E52529D4
 
-    ## Repositorio para Team Viewer
+    ## Repositorio para Team Viewer.
     echo -e "$VE Agregando clave para$RO Team Viewer Repositorio Oficial$CL"
     wget -O - https://download.teamviewer.com/download/linux/signature/TeamViewer2017.asc | sudo apt-key add -
 
     ## Repositorio para Etcher
     echo -e "$VE Agregando clave para$RO Etcher$CL"
     sudo apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 379CE192D401AB61
+
+    ## Repositorio para editor Atom.
+    echo -e "$VE Agregando clave para el editor$RO Atom$CL"
+    wget -qO - https://packagecloud.io/AtomEditor/atom/gpgkey | sudo apt-key add -
 }
 
 ##
@@ -103,13 +107,16 @@ comunes_sources_repositorios() {
 ##
 comunes_download_repositorios() {
     echo -e "$VE Descargando repositorios desde scripts oficiales$CL"
-    ## Repositorio de NodeJS Oficial
+    ## NodeJS Oficial
     echo -e "$VE Agregando repositorio$RO NodeJS$AM Repositorio Oficial$CL"
     curl -sL https://deb.nodesource.com/setup_11.x | sudo -E bash -
 
     ## Riot
     echo -e "$VE Agregando Repositorio para$RO Riot (Matrix)$CL"
     sudo sh -c "echo '##deb https://riot.im/packages/debian/ artful main' > /etc/apt/sources.list.d/matrix-riot-im.list"
+
+    ## Atom
+    sudo sh -c 'echo "deb [arch=amd64] https://packagecloud.io/AtomEditor/atom/any/ any main" > /etc/apt/sources.list.d/atom.list'
 }
 
 ##
