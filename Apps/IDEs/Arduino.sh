@@ -72,7 +72,7 @@ arduino_postconfiguracion() {
 
 arduino_instalador() {
     echo -e "$VE Comenzando instalación de$RO arduino$CL"
-    local version='arduino-1.8.5'
+    local version='arduino-1.8.10'
 
     arduino_preconfiguracion "$version"
 
