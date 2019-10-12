@@ -53,5 +53,9 @@ agregarRepositoriosFedora() {
     sudo dnf config-manager --set-enabled google-chrome
     sudo dnf config-manager --set-enabled google-chrome-beta
 
+    ## NodeJS
+    echo -e "$VE Añadiendo Repositorio para$RO NodeJS$CL"
+    curl -sL https://rpm.nodesource.com/setup_12.x | bash -
+
     sudo dnf update --refresh
 }
