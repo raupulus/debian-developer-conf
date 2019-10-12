@@ -460,3 +460,15 @@ python3InstallGlobal() {
         sudo pip3 install --upgrade "$x"
     done
 }
+
+##
+## Comprueba si existe el directorio, en caso contrario lo creará.
+## @param $1 Recibe la ruta hacia el directorio que se comprobará/creará.
+##
+dir_exist_or_create() {
+    $dir = $1
+
+    if [[ ! -d "$dir" ]]; then
+        mkdir -p "$dir"
+    fi
+}
