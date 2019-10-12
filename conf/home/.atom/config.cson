@@ -1,4 +1,21 @@
 "*":
+  "atom-ide-vue":
+    validation: {}
+  "atom-material-ui":
+    colors:
+      abaseColor: "#005572"
+      genAccent: true
+      paintCursor: true
+      predefinedColor: "Blue Grey"
+    fonts:
+      fontSize: 15
+    tabs:
+      compactTabs: true
+      noTabMinWidth: true
+      stretchedTabs: true
+      tintedTabBar: true
+    ui:
+      panelShadows: true
   core:
     disabledPackages: [
       "atom-ide-ui"
@@ -10,7 +27,7 @@
   editor:
     autoIndentOnPaste: true
     fontFamily: "Fira Code, Menlo, Consolas, DejaVu Sans Mono, monospace"
-    fontSize: 18
+    fontSize: 15
     showIndentGuide: true
     showInvisibles: true
     softWrap: true
