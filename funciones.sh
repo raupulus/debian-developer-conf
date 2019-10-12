@@ -466,8 +466,9 @@ python3InstallGlobal() {
 ## @param $1 Recibe la ruta hacia el directorio que se comprobará/creará.
 ##
 dir_exist_or_create() {
-    $dir = $1
+    dir="$1"
 
+    echo -e "$VE Creando directorio$RO $dir$CL"
     if [[ ! -d "$dir" ]]; then
         mkdir -p "$dir"
     fi
