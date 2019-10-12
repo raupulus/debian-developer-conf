@@ -25,7 +25,7 @@ aplicaciones_flatpak() {
     actualizarRepositorios
 
     ## Compruebo si está instalado flatpak, sino instenta instalarlo
-    if [[ ! -f '/usr/bin/flatpak']]; then
+    if [[ ! -f '/usr/bin/flatpak' ]]; then
         instalarSoftware 'flatpak'
     fi
 
