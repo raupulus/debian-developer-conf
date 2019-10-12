@@ -94,6 +94,9 @@ atom_instalador() {
         ## Descargar directamente archivo .deb
         ##descargar "atom.deb" "https://atom.io/download/deb"
         ##instalarSoftwareDPKG "$WORKSCRIPT/tmp/atom.deb"
+
+        ## Instalando desde repositorio.
+        instalarSoftware atom
     }
 
     ## Preparando configuración de Atom
