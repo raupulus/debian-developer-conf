@@ -46,6 +46,10 @@ agregarRepositoriosRaspbian() {
         echo -e "$VE Instalando llaves de repositorios$CL"
         instalarSoftware debian-keyring
         instalarSoftware pkg-mozilla-archive-keyring
+
+        ## Agregando llave para Gitlab Runner.
+        echo -e "$VE Agregando llave para$RO Gitlab Runner$CL"
+        curl -L "https://packages.gitlab.com/runner/gitlab-runner/gpgkey" 2> /dev/null | sudo apt-key add - &>/dev/null
     }
 
     ##
