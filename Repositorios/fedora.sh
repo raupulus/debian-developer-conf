@@ -40,7 +40,8 @@ agregarRepositoriosFedora() {
 
     ## Atom IDE
     echo -e "$VE Añadiendo Repositorio$RO Atom Editor$CL"
-    sudo dnf copr enable mosquito/atom
+    sudo rpm --import https://packagecloud.io/AtomEditor/atom/gpgkey
+    sudo sh -c 'echo -e "[Atom]\nname=Atom Editor\nbaseurl=https://packagecloud.io/AtomEditor/atom/el/7/\$basearch\nenabled=1\ngpgcheck=0\nrepo_gpgcheck=1\ngpgkey=https://packagecloud.io/AtomEditor/atom/gpgkey" > /etc/yum.repos.d/atom.repo'
 
     ## RPMfusion
     echo -e "$VE Añadiendo Repositorio$RO RPMfusion$CL"
