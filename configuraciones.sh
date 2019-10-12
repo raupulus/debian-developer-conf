@@ -47,12 +47,24 @@ configurar_hosts() {
 }
 
 ##
+## Crea los directorios básicos para configuraciones.
+##
+crear_directorios() {
+    dir_exist_or_create "$HOME/.local"
+    dir_exist_or_create "$HOME/.local/bin"
+    dir_exist_or_create "$HOME/.local/lib"
+    dir_exist_or_create "$HOME/.local/opt"
+    dir_exist_or_create "$HOME/.local/share"
+}
+
+##
 ## Instalar Todas las configuraciones
 ##
 instalar_configuraciones() {
     cd "$WORKSCRIPT"
 
     configurar_hosts
+    crear_directorios
 
     sudo update-command-not-found >> /dev/null 2>> /dev/null
 }
