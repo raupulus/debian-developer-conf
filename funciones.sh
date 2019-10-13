@@ -201,7 +201,7 @@ instalarSoftwareFlatPak() {
         for programa in $*; do
             echo -e "$VE Instalando $RO $programa$VE desde$RO FlatPak$CL"
             if [[ $programa != '' ]]; then
-                flatpak install "$programa"
+                flatpak install "$programa" --user
             fi
         done
 
@@ -227,7 +227,7 @@ instalarSoftwareFlatPakLista() {
     for x in "${lista_Software[@]}"; do
         if [[ $x != '' ]]; then
             echo -e "$VE Instalando$RO $x$VE desde$RO FlatPak$CL"
-            instalarSoftwareFlatPak "$x"
+            instalarSoftwareFlatPak "$x" --user
         fi
     done
 
