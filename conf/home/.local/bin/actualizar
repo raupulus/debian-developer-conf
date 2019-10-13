@@ -31,7 +31,7 @@ actualizarSistema() {
         echo "Actualizando desde repositorios Fedora"
         sudo dnf update -y
     elif [[ -f '/usr/bin/emerge' ]]; then
-        echo "Actualizando desde repositorios Debian"
+        echo "Actualizando desde repositorios Gentoo"
         sudo emerge --sync
         sudo emerge -uavDN --keep-going world
     fi
