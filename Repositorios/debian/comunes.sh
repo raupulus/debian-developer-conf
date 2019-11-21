@@ -87,6 +87,10 @@ comunes_agregar_llaves() {
     ## Repositorio para editor Atom.
     echo -e "$VE Agregando clave para el editor$RO Atom$CL"
     wget -qO - https://packagecloud.io/AtomEditor/atom/gpgkey | sudo apt-key add -
+
+    ## Repositorio para editor DBeaver.
+    echo -e "$VE Agregando clave para el editor SQL$RO DBeaver$CL"
+    wget -O - https://dbeaver.io/debs/dbeaver.gpg.key | sudo apt-key add -
 }
 
 ##
