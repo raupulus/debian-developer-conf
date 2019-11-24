@@ -91,6 +91,10 @@ comunes_agregar_llaves() {
     ## Repositorio para editor DBeaver.
     echo -e "$VE Agregando clave para el editor SQL$RO DBeaver$CL"
     wget -O - https://dbeaver.io/debs/dbeaver.gpg.key | sudo apt-key add -
+
+    ## Repositorio para editor DBeaver.
+    echo -e "$VE Agregando clave para el editor$RO VS Codium$CL"
+    wget -qO - https://gitlab.com/paulcarroty/vscodium-deb-rpm-repo/raw/master/pub.gpg | sudo apt-key add -
 }
 
 ##
