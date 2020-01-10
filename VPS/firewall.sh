@@ -13,6 +13,9 @@ mainFirewall() {
     ## Permito https
     sudo firewall-cmd --zone=public --add-port=443/tcp --permanent
 
+    ## Permito PostgreSQL
+    #sudo firewall-cmd --zone=public --add-port=5432/tcp --permanent
+
     ## Permito ISPConfig
     #sudo firewall-cmd --zone=public --add-port=8080/tcp --permanent
 
