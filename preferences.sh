@@ -120,6 +120,13 @@ variables_lenguaje() {
 }
 
 ##
+## Añado variables extras para control de programas
+##
+configureGlobalControlVars() {
+    setVariableGlobal 'KEYCOUNTER' 0
+}
+
+##
 ## Configura las Opciones del entorno para usar el script
 ##
 configurePreferences() {
