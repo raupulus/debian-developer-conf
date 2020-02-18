@@ -123,7 +123,7 @@ variables_lenguaje() {
 ## Añado variables extras para control de programas
 ##
 configureGlobalControlVars() {
-    setVariableGlobal 'KEYCOUNTER' 0
+    echo -e "Estableciendo variables globales"
 }
 
 ##
