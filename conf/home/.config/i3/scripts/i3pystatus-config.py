@@ -29,6 +29,8 @@ from time import sleep
 from os import listdir
 import re
 
+#from Models.SocketClient import SocketClient
+
 #######################################
 # #             Variables           # #
 #######################################
@@ -223,6 +225,16 @@ status.register("clock",
     color=verdeC, #clockFColor,
     interval=5,
     on_leftclick="zenity --calendar --text ''",)
+
+## Keycounter ---------------------------------------------------------------
+status.register("text",
+    #text = SocketClient().keycount.get_pulsations_current(),
+    text = 'test',
+    # open terminal window running htop
+    #on_leftclick = "i3-sensible-terminal -e htop",
+    # open i3pystatus github page in firefox
+    #on_rightclick = "firefox --new-window https://github.com/enkore/i3pystatus",
+    )
 
 ## CAL -----------------------------------------------------------------
 #status.register("clock",
