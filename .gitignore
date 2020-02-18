@@ -44,3 +44,4 @@ npm-debug.log
 .ropeproject
 __pycache__
 /.env
+__init__.py
