@@ -4,14 +4,14 @@
 ## @author     Raúl Caro Pastorino
 ## @copyright  Copyright © 2018 Raúl Caro Pastorino
 ## @license    https://wwww.gnu.org/licenses/gpl.txt
-## @email      tecnico@fryntiz.es
-## @web        www.fryntiz.es
-## @github     https://github.com/fryntiz
+## @email      dev@fryntiz.es
+## @web        https://fryntiz.es
 ## @gitlab     https://gitlab.com/fryntiz
+## @github     https://github.com/fryntiz
 ## @twitter    https://twitter.com/fryntiz
 ##
 ##             Guía de estilos aplicada:
-## @style      https://github.com/fryntiz/Bash_Style_Guide
+## @style      https://gitlab.com/fryntiz/bash-guide-style
 
 ############################
 ##     INSTRUCCIONES      ##
@@ -23,11 +23,13 @@
 ############################
 gnome_shell_preconfiguracion() {
     echo -e "$VE Generando Pre-Configuraciones de$RO Gnome Shell$CL"
+    instalarSoftwareLista "$SOFTLIST/Desktops/wayland-base.lst"
+    instalarSoftwareLista "$SOFTLIST/Desktops/x11-base.lst"
 }
 
 gnome_shell_instalar() {
     echo -e "$VE Preparando para instalar$RO Gnome Shell$CL"
-    #instalarSoftware gnome_shell
+    instalarSoftwareLista "$SOFTLIST/Desktops/gnome.lst"
 }
 
 ##
@@ -37,19 +39,18 @@ gnome_shell_postconfiguracion() {
     echo -e "$VE Generando Post-Configuraciones$RO Gnome Shell$CL"
 
     echo -e "$VE Instalando software secundario$CL"
-    #instalarSoftware ''
+    instalarSoftwareLista "$SOFTLIST/Desktops/gnome-extensions.lst"
 
     echo -e "$VE Generando archivos de configuración$CL"
-    #enlazarHome '.config/.gnome_shell'
-
-    ## Compilar
-    gnome_shell --recompile
+    enlazarHome '.config/geany' '.config/gtk-2.0' '.config/gtk-3.0' '.config/gtk-4.0'
 }
 
 gnome_shell_postconfiguracionOpcional() {
     echo -e "$VE Generando Post-Configuraciones Opcionales$RO Gnome Shell$CL"
 
-    instalarSoftware 'gedit' 'gedit-plugins'
+    ## TODO → agregar atajos de teclado.
+    ## TODO → Agregar extensiones a la lista y añadir sus configuraciones.
+    ## TODO → Setear tema personalizado.
 }
 
 gnome_shell_instalador() {

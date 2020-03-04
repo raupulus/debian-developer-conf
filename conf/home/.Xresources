@@ -3,3 +3,13 @@ Xcursor.size: 32
 
 URxvt*depth: 32
 URxvt*background: rgba:0000/0000/0200/c800
+
+! Fonts {{{
+Xft.antialias: true
+Xft.hinting:   true
+Xft.rgba:      rgb
+Xft.hintstyle: hintfull
+Xft.dpi:       220
+! }}}
+
+Xft.dpi: 220

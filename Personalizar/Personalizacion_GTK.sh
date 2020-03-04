@@ -194,6 +194,11 @@ conf_gtk3() {
     enlazarHome '.config/gtk-3.0'
 }
 
+conf_gtk4() {
+    echo -e "$VE Configurando$RO GTK 4$CL"
+    enlazarHome '.config/gtk-4.0'
+}
+
 personalizarGTK() {
     echo -e "$VE Iniciando configuracion de estética general y GTK$CL"
     instalar_flatplat
@@ -204,6 +209,7 @@ personalizarGTK() {
 
     conf_gtk2
     conf_gtk3
+    conf_gtk4
 
     if [[ -f '/usr/bin/gsettings' ]] && [[ -f '/usr/bin/gnome-shell' ]]; then
         preconfiguracion_gnome3
