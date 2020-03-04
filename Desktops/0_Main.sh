@@ -4,14 +4,14 @@
 ## @author     Raúl Caro Pastorino
 ## @copyright  Copyright © 2018 Raúl Caro Pastorino
 ## @license    https://wwww.gnu.org/licenses/gpl.txt
-## @email      tecnico@fryntiz.es
-## @web        www.fryntiz.es
-## @github     https://github.com/fryntiz
+## @email      dev@fryntiz.es
+## @web        https://fryntiz.es
 ## @gitlab     https://gitlab.com/fryntiz
+## @github     https://github.com/fryntiz
 ## @twitter    https://twitter.com/fryntiz
 ##
 ##             Guía de estilos aplicada:
-## @style      https://github.com/fryntiz/Bash_Style_Guide
+## @style      https://gitlab.com/fryntiz/bash-guide-style
 ############################
 ##     INSTRUCCIONES      ##
 ############################
@@ -23,6 +23,7 @@ source "$WORKSCRIPT/Desktops/i3.sh"
 source "$WORKSCRIPT/Desktops/xmonad.sh"
 source "$WORKSCRIPT/Desktops/openbox.sh"
 source "$WORKSCRIPT/Desktops/gnome-shell.sh"
+source "$WORKSCRIPT/Desktops/sway.sh"
 
 ############################
 ##       FUNCIONES        ##
@@ -35,6 +36,7 @@ menuDesktops() {
         xmonad_instalador
         openbox_instalador
         gnome_shell_instalador
+        sway_instalador
     }
 
     if [[ "$1" = '-a' ]]; then
@@ -47,6 +49,7 @@ menuDesktops() {
                 2) Instalar Xmonad
                 3) Instalar Openbox
                 4) Instalar Gnome Shell
+                4) Instalar Sway
                 5) Todos los pasos anteriores
 
                 0) Atrás
@@ -62,7 +65,8 @@ menuDesktops() {
                 2)  xmonad_instalador;;       ## Instala xmonad
                 3)  openbox_instalador;;      ## Instala openbox
                 4)  gnome_shell_instalador;;  ## Instala gnome shell
-                5)  todos_desktops;;          ## Todos los pasos anteriores
+                5)  sway_instalador;;  ## Instala gnome shell
+                6)  todos_desktops;;          ## Todos los pasos anteriores
 
                 0)  ## SALIR
                     clear
