@@ -30,7 +30,6 @@ openbox_preconfiguracion() {
 openbox_instalar() {
     echo -e "$VE Preparando para instalar$RO openbox$CL"
     instalarSoftwareLista "$SOFTLIST/Desktops/openbox.lst"
-    instalarSoftwareLista "$SOFTLIST/Desktops/wm-min-software.lst"
 }
 
 ##
@@ -38,6 +37,7 @@ openbox_instalar() {
 ##
 openbox_postconfiguracion() {
     echo -e "$VE Generando Post-Configuraciones$RO openbox$CL"
+    instalarSoftwareLista "$SOFTLIST/Desktops/wm-min-software.lst"
 }
 
 openbox_instalador() {
