@@ -433,7 +433,7 @@ python2Install() {
     echo -e "$VE Instalando paquete Python$CL"
     for x in $*; do
         echo -e "$RO Instalando $x$CL"
-        pip install --user --upgrade "$x"
+        pip2 install --user --upgrade "$x"
     done
 }
 
