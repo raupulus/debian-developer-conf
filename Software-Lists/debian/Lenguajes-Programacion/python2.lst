@@ -30,3 +30,4 @@ python-waitress
 python-pymongo
 python-scapy
 python-twisted
+python-urllib3

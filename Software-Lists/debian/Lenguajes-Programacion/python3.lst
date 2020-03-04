@@ -19,3 +19,6 @@ python3-virtualenv
 python3-pymongo
 python3-scapy
 python3-twisted
+python3-dotenv
+python3-sqlalchemy
+python3-urllib3
