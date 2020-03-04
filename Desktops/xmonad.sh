@@ -4,14 +4,14 @@
 ## @author     Raúl Caro Pastorino
 ## @copyright  Copyright © 2018 Raúl Caro Pastorino
 ## @license    https://wwww.gnu.org/licenses/gpl.txt
-## @email      tecnico@fryntiz.es
-## @web        www.fryntiz.es
+## @email      dev@fryntiz.es
+## @web        https://fryntiz.es
 ## @github     https://github.com/fryntiz
 ## @gitlab     https://gitlab.com/fryntiz
 ## @twitter    https://twitter.com/fryntiz
 ##
 ##             Guía de estilos aplicada:
-## @style      https://github.com/fryntiz/Bash_Style_Guide
+## @style      https://gitlab.com/fryntiz/bash-guide-style
 
 ############################
 ##     INSTRUCCIONES      ##
@@ -23,11 +23,12 @@
 ############################
 xmonad_preconfiguracion() {
     echo -e "$VE Generando Pre-Configuraciones de$RO xmonad$CL"
+    instalarSoftwareLista "$SOFTLIST/Desktops/x11-base.lst"
 }
 
 xmonad_instalar() {
     echo -e "$VE Preparando para instalar$RO xmonad$CL"
-    instalarSoftware xmonad
+    instalarSoftwareLista "$SOFTLIST/Desktops/xmonad.lst"
 }
 
 ##
@@ -37,7 +38,7 @@ xmonad_postconfiguracion() {
     echo -e "$VE Generando Post-Configuraciones$RO xmonad$CL"
 
     echo -e "$VE Instalando software secundario$CL"
-    instalarSoftware suckless-tools
+    instalarSoftwareLista "$SOFTLIST/Desktops/wm-min-sogtware.lst"
 
     echo -e "$VE Generando archivos de configuración$CL"
     enlazarHome '.config/.xmonad'
