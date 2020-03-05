@@ -5,10 +5,6 @@
 deb http://ftp.es.debian.org/debian/ testing main contrib non-free
 deb-src http://ftp.es.debian.org/debian/ testing main contrib non-free
 
-##### Actualizaciones de seguridad Debian Testing
-deb http://security.debian.org/ testing/updates main contrib non-free
-deb-src http://security.debian.org/ testing/updates non-free contrib main
-
 ##### Actualizaciones para Testing (Updates)
 deb http://ftp.es.debian.org/debian/ testing-updates non-free contrib main
 deb-src http://ftp.es.debian.org/debian/ testing-updates non-free contrib main
@@ -22,7 +18,8 @@ deb-src http://ftp.es.debian.org/debian/ testing-updates non-free contrib main
 ########################################################
 ##                 KERNEL LIQUORIX                    ##
 ########################################################
-#### curl https://liquorix.net/linux-liquorix.pub | sudo apt-key add - && sudo apt-get update
+#### curl httpsR://liquorix.net/linux-liquorix.pub | sudo apt-key add - && sudo
+apt-get update
 # deb http://liquorix.net/debian sid main
 # deb-src http://liquorix.net/debian sid main
 

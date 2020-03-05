@@ -34,14 +34,14 @@ sway_instalar() {
 ## Instalando software extra y configuraciones adicionales
 ##
 sway_postconfiguracion() {
-    echo -e "$VE Generando Post-Configuraciones$RO xmonad$CL"
+    echo -e "$VE Generando Post-Configuraciones$RO sway$CL"
 
     echo -e "$VE Instalando software secundario$CL"
     instalarSoftwareLista "$SOFTLIST/Desktops/wayland-base.lst"
     instalarSoftwareLista "$SOFTLIST/Desktops/wm-min-software-wayland.lst"
 
     echo -e "$VE Generando archivos de configuración$CL"
-    enlazarHome '.config/.sway' '.config/.i3pystatus'
+    enlazarHome '.config/sway' '.config/i3pystatus'
 
     ## Instalo y Configuro Python: Lenguajes-Programacion/python.sh
     python_instalador

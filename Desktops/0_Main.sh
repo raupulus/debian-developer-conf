@@ -49,8 +49,8 @@ menuDesktops() {
                 2) Instalar Xmonad
                 3) Instalar Openbox
                 4) Instalar Gnome Shell
-                4) Instalar Sway
-                5) Todos los pasos anteriores
+                5) Instalar Sway
+                6) Todos los pasos anteriores
 
                 0) Atrás
             '

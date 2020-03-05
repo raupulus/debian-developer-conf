@@ -2,15 +2,15 @@
 # -*- ENCODING: UTF-8 -*-
 ##
 ## @author     Raúl Caro Pastorino
-## @copyright  Copyright © 2018 Raúl Caro Pastorino
+## @copyright  Copyright © 2020 Raúl Caro Pastorino
 ## @license    https://wwww.gnu.org/licenses/gpl.txt
-## @email      tecnico@fryntiz.es
-## @web        www.fryntiz.es
-## @github     https://github.com/fryntiz
+## @email      dev@fryntiz.es
+## @web        https://fryntiz.es
 ## @gitlab     https://gitlab.com/fryntiz
+## @github     https://github.com/fryntiz
 ## @twitter    https://twitter.com/fryntiz
 
-## Referencia oficial: http://i3wm.org/docs/userguide.html
+## Referencia oficial: https://github.com/swaywm/sway/wiki
 
 ## Iconos de ejemplo:
 ##                                    
@@ -28,7 +28,7 @@ set $mod Mod4
 ## Configuración
 set $coordenadas '36.7349439:-6.4253577'  ## Coordenadas
 
-#output eDP-1 scale 0
+#output eDP-1 scale 2
 output eDP-1 pos 0 0 res 3840x2160
 
 ###########################################################
@@ -87,6 +87,8 @@ assign [class="^[aA]tom"] → $WS2
 for_window [class="^[aA]tom"] focus
 assign [class="^[bB]rackets"] → $WS2
 for_window [class="^[Bb]rackets"] focus
+assign [class="[vV][sS][cC]odium"] → $WS2
+for_window [class="[vV][sS][cC]odium"] focus
 
 ## 3
 assign [class="^[fF]irefox"] → $WS3
@@ -545,10 +547,16 @@ bindsym $mod+F12 mode "$mode_servers"
 ###############           APPLETS         ##################
 ############################################################
 ## Dropbox
-exec --no-startup-id python2 /user/bin/dropbox start
+exec --no-startup-id dropbox start
 
-## Synology Cloud Station
+## Synology Drive
 exec --no-startup-id synology-drive
+
+## Nextcloud
+exec --no-startup-id nextcloud
+
+## pCloud
+exec --no-startup-id "$HOME/AppImage/pcloud"
 
 ## Red
 exec --no-startup-id nm-applet
