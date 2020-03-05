@@ -50,7 +50,8 @@ i3wm_postconfiguracion() {
     instalarSoftwareLista "$SOFTLIST/Desktops/wm-min-software.lst"
 
     echo -e "$VE Generando archivos de configuración$CL"
-    enlazarHome '.config/i3' '.config/tint2' '.config/compton.conf' '.config/conky' '.Xresources' '.config/nitrogen' '.config/i3status' '.config/plank' '.config/rofi' '.config/i3pystatus'
+    enlazarHome '.config/i3' '.config/tint2' '.config/compton.conf' '
+    .config/conky' '.Xresources' '.config/nitrogen' '.config/i3status' '.config/plank' '.config/rofi' '.config/i3pystatus' '.scripts'
 
     dir_exist_or_create "$HOME/Imágenes/Screenshots"
 

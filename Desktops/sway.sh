@@ -41,7 +41,7 @@ sway_postconfiguracion() {
     instalarSoftwareLista "$SOFTLIST/Desktops/wm-min-software-wayland.lst"
 
     echo -e "$VE Generando archivos de configuración$CL"
-    enlazarHome '.config/sway' '.config/i3pystatus'
+    enlazarHome '.config/sway' '.config/i3pystatus' '.scripts'
 
     ## Instalo y Configuro Python: Lenguajes-Programacion/python.sh
     python_instalador

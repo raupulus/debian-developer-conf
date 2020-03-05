@@ -223,7 +223,7 @@ for_window [title="^Instalador de paquetes"] floating enable, move position 50 5
 bar {
     ## Monitor para información en la barra de estado
     #status_command  i3status        ## Mostrar status de monitoreo
-    status_command  python3 ~/.config/i3/scripts/i3pystatus-config.py
+    status_command  python3 ~/.config/i3pystatus/config.py
 
     ## Posición donde colocar la barra
     position        bottom           ## Posición Abajo
