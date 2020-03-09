@@ -548,7 +548,11 @@ exec --no-startup-id pulseaudio --start
 ## Fondo de pantalla nitrogen
 exec_always --no-startup-id nitrogen --restore
 exec_always --no-startup-id dunst
-exec_always --no-startup-id xrdb -load ~/.Xresources
+
+
+exec --no-startup-id cp ~/.Xresources /tmp/.Xresources && echo "Xft.dpi: 220" >> /tmp/.Xresources && xrdb -load /tmp/.Xresources
+exec_always --no-startup-id cp ~/.Xresources /tmp/.Xresources && echo "Xft.dpi: $DPI" >> /tmp/.Xresources && xrdb -load /tmp/.Xresources
+
 
 ############################################################
 ###############  MENÚ DE APAGADO/BLOQUEO  ##################
