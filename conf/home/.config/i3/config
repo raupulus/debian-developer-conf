@@ -157,8 +157,13 @@ bindsym $mod+F3 [title="Atom"] focus
 ############       Visualización/Pantalla      ############
 ###########################################################
 ## Establezco a 90 dpi
-exec --no-startup-id xrandr --dpi 90
-exec_always --no-startup-id xrandr --dpi 90
+#exec --no-startup-id xrandr --dpi 90
+#exec_always --no-startup-id xrandr --dpi 90
+#exec --no-startup-id source /etc/environment
+#exec_always --no-startup-id source /etc/environment
+exec --no-startup-id xrandr --dpi ${DPI}
+exec_always --no-startup-id xrandr --dpi ${DPI}
+
 
 ## Fuente para títulos de ventanas usadas en bar {} block below.
 font pango:monospace 8

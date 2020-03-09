@@ -417,10 +417,6 @@ setVariableGlobal() {
         echo -e "$VE Seteando globalmente: ${1}=${2}$CL"
         echo "${1}=${2}" | sudo tee -a /etc/environment
         export "${1}=${2}"
-
-        ## TODO → La siguiente línea se intenta ejecutar como función en
-        ## vez de una asignación de variable.
-        ${1}=${2}
     fi
 }
 

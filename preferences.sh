@@ -171,7 +171,7 @@ configureGlobalControlVars() {
 setHostName() {
     echo -e "Comprobando Hostname"
 
-    if [[ ${hostname} = '' ]]; then
+    if [[ $(hostname) = '' ]]; then
         echo -e "Introduce Hostname"
         read -p ' → ' hostname
         sudo hostname -b "$hostname"
