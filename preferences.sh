@@ -156,7 +156,7 @@ vars_enviroment_displays() {
         setVariableGlobal 'DISPLAY2_DPI' '90'
     fi
 
-    if [[ "$DISPLAY0_RESOLUTION" = '' ]]; then
+    if [[ "$DISPLAY2_RESOLUTION" = '' ]]; then
         setVariableGlobal 'DISPLAY2_RESOLUTION' '1920x1080'
     fi
 }
