@@ -59,6 +59,9 @@ generate_home_structure() {
     dir_exist_or_create "$HOME/.local/share"
 
     dir_exist_or_create "$HOME/.config"
+
+    dir_exist_or_create "$HOME/Imágenes"
+    dir_exist_or_create "$HOME/Imágenes/Screenshots"
 }
 
 ##
