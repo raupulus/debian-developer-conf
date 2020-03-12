@@ -542,6 +542,12 @@ exec --no-startup-id pulseaudio --start
 ## Bluetooth
 exec --no-startup-id blueman-applet
 
+## Configura el touchpad para habilitar teclas y toques con 1,2 y 3 dedos.
+# - 1 dedo click izquierdo
+# - 2 dedos click derecho
+# - 3 dedos click central
+exec --no-startup-id synclient EmulateMidButtonTime=1 VertTwoFingerScroll=1 HorizTwoFingerScroll=1 VertEdgeScroll=1 TapButton1=1 TapButton2=3 TapButton3=2 ClickFinger1=1 ClickFinger2=2 ClickFinger3=3
+
 exec --no-startup-id xbindkeys
 
 ## Ejemplos o ideas
