@@ -490,10 +490,16 @@ bindsym --release $mod+shift+print exec xfce4-screenshooter -cfm
 bindsym --release print exec xfce4-screenshooter -fm -s ~/Imágenes/Screenshots/
 
 ## Brillo de la pantalla
+bindsym XF86MonBrightnessUp exec --no-startup-id brightnessctl s $(($(brightnessctl g) + 5000))
+bindsym XF86MonBrightnessDown exec --no-startup-id brightnessctl s $(($(brightnessctl g) - 5000))
+
+## Brillo de pantalla por defecto al 60%
+exec --no-startup-id brightnessctl s 72000
+
 #bindcode XF86MonBrightnessUp exec --no-startup-id xbacklight -inc 10
 #bindcode XF86MonBrightnessDown exec --no-startup-id xbacklight -dec 10
-bindcode XF86MonBrightnessUp exec --no-startup-id ~/config/.i3/scripts/brillo.py next && notify-send "Brillo Arriba" || notify-send "Error: Brillo Arriba ha fallado"
-bindcode XF86MonBrightnessDown exec --no-startup-id ~/config/.i3/scripts/brillo.py back && notify-send "Brillo Abajo" || notify-send "Error: Brillo Abajo ha fallado"
+#bindcode XF86MonBrightnessUp exec --no-startup-id ~/config/.i3/scripts/brillo.py next && notify-send "Brillo Arriba" || notify-send "Error: Brillo Arriba ha fallado"
+#bindcode XF86MonBrightnessDown exec --no-startup-id ~/config/.i3/scripts/brillo.py back && notify-send "Brillo Abajo" || notify-send "Error: Brillo Abajo ha fallado"
 
 ## Abrir programa de Notas QOwnNotes
 bindsym --release $mod+n exec QOwnNotes
