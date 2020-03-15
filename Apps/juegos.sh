@@ -30,6 +30,7 @@ aplicaciones_juegos() {
     instalarSoftwareLista "$SOFTLIST/Juegos/emuladores.lst"
     instalarSoftwareLista "$SOFTLIST/Juegos/estrategia.lst"
     instalarSoftwareLista "$SOFTLIST/Juegos/mesa.lst"
+    instalarSoftwareLista "$SOFTLIST/Juegos/platforms.lst"
 
     repararGestorPaquetes
 }
