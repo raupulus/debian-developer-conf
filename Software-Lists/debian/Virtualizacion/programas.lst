@@ -1,0 +1,15 @@
+virtualbox
+virt-manager
+qemu
+qemu-block-extra
+qemu-efi
+qemu-efi-arm
+qemu-kvm
+qemu-slof
+qemu-system
+qemu-system-arm
+qemu-system-gui
+qemu-system-ppc
+qemu-system-sparc
+qemu-system-x86
+qemu-utils
