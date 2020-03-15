@@ -553,8 +553,10 @@ exec --no-startup-id blueman-applet
 # - 2 dedos click derecho
 # - 3 dedos click central
 exec --no-startup-id synclient EmulateMidButtonTime=1 VertTwoFingerScroll=1 HorizTwoFingerScroll=1 VertEdgeScroll=1 TapButton1=1 TapButton2=3 TapButton3=2 ClickFinger1=1 ClickFinger2=2 ClickFinger3=3
+exec_always --no-startup-id synclient EmulateMidButtonTime=1 VertTwoFingerScroll=1 HorizTwoFingerScroll=1 VertEdgeScroll=1 TapButton1=1 TapButton2=3 TapButton3=2 ClickFinger1=1 ClickFinger2=2 ClickFinger3=3
 
 exec --no-startup-id xbindkeys
+exec_always --no-startup-id xbindkeys
 
 ## Ejemplos o ideas
 #exec_always --no-startup-id al-polybar-session
