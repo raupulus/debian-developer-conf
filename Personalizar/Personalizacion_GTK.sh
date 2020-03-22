@@ -181,7 +181,7 @@ conf_gnome3() {
 
 preconfiguracion_gnome3() {
     echo -e "$VE Instalando software para configurar$RO Gnome-Shell 3$CL"
-    instalarSoftware 'dconf-cli' 'dconf-editor' 'dconf-gsettings-backend'
+    instalarSoftware 'gconf2 dconf-cli' 'dconf-editor' 'dconf-gsettings-backend'
 }
 
 conf_gtk2() {
