@@ -65,8 +65,6 @@ menuAplicaciones() {
         aplicaciones_sonido
         aplicaciones_video
         aplicaciones_virtualizacion
-
-        menuPaquetes -a
     }
 
     ## Si la función recibe "-a" indica que ejecute todas las aplicaciones
