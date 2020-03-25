@@ -471,6 +471,15 @@ dir_exist_or_create() {
 }
 
 ##
+## Registra un mensaje en el archivo de logs.
+##
+log() {
+    msg="$1"
+    echo -e "$RO Registrando en log:$AM ${msg}$CL"
+    echo "${msg}" >> "${PATH_LOG}"
+}
+
+##
 ## Limpia la pantalla solo cuando estamos en producción pero no cuando
 ## estamos en desarrollo, en ese caso mostrará por completo lo que sucede.
 ##

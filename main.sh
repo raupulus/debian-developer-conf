@@ -82,11 +82,7 @@ source "$WORKSCRIPT/VPS/0_Main.sh"
 ###########################
 ##       VARIABLES       ##
 ###########################
-log 'test log'
 
-########################################
-##       VARIABLES COMPUESTAS         ##
-########################################
 ## Esta función configura las variables globales.
 configurePreferences
 
@@ -95,6 +91,11 @@ setAllRoutes
 
 ## Esta variable depende de ejecutarse primero el script anterior.
 SOFTLIST="${WORKSCRIPT}/Software-Lists/${MY_DISTRO}"  ## Ruta a listas de software
+
+## Registro en logs si se entra en desarrollo.
+if [[ "${DEBUG}" = 'true' ]]; then
+  log 'Se ha ejecutado el script en modo DEBUG'
+fi
 
 ###########################
 ##       FUNCIONES       ##
