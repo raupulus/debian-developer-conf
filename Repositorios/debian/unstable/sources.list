@@ -16,8 +16,7 @@ deb-src http://ftp.es.debian.org/debian/ sid main contrib non-free
 ########################################################
 ##                 KERNEL LIQUORIX                    ##
 ########################################################
-#### curl https://liquorix.net/linux-liquorix.pub | sudo apt-key add - && sudo
-apt-get update
+#### curl https://liquorix.net/linux-liquorix.pub | sudo apt-key add - && sudo apt-get update
 # deb http://liquorix.net/debian sid main
 # deb-src http://liquorix.net/debian sid main
 
