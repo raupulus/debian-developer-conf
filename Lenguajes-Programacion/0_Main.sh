@@ -4,14 +4,14 @@
 ## @author     Raúl Caro Pastorino
 ## @copyright  Copyright © 2018 Raúl Caro Pastorino
 ## @license    https://wwww.gnu.org/licenses/gpl.txt
-## @email      tecnico@fryntiz.es
-## @web        www.fryntiz.es
+## @email      dev@fryntiz.es
+## @web        https://fryntiz.es
 ## @github     https://github.com/fryntiz
 ## @gitlab     https://gitlab.com/fryntiz
 ## @twitter    https://twitter.com/fryntiz
 ##
 ##             Guía de estilos aplicada:
-## @style      https://github.com/fryntiz/Bash_Style_Guide
+## @style      https://github.com/fryntiz/bash-guide-style
 
 ############################
 ##     INSTRUCCIONES      ##
@@ -39,7 +39,7 @@ source "$WORKSCRIPT/Lenguajes-Programacion/perl.sh"
 ##
 menuLenguajes() {
     todos_lenguajes() {
-        clear
+        clear_screen
         echo -e "$VE Instalando todos los lenguajes$CL"
         php_instalador "$1"
         python_instalador "$1"
@@ -60,7 +60,7 @@ menuLenguajes() {
         fi
     else
         while true :; do
-            clear
+            clear_screen
             local descripcion='Menú Lenguajes de programación
                 1) PHP
                 2) Python
@@ -90,7 +90,7 @@ menuLenguajes() {
                     break;;
 
                 0)  ## SALIR
-                    clear
+                    clear_screen
                     echo -e "$RO Se sale del menú$CL"
                     echo ''
                     break;;

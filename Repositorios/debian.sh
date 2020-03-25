@@ -58,7 +58,7 @@ agregarRepositoriosDebian() {
 
     elegirRama() {
         while true; do
-            clear
+            clear_screen
 
             local descripcion='Menú para configurar e integrar repositorios
                 1) Stable
@@ -82,7 +82,7 @@ agregarRepositoriosDebian() {
                     break;;
 
                 0)  ## SALIR
-                    clear
+                    clear_screen
                     echo -e "$RO Se sale del menú$CL"
                     echo ''
                     break;;

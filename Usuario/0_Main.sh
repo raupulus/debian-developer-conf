@@ -111,7 +111,7 @@ softwareUsuarioMinimo() {
                 spacevim_Instalador
                 break;;
             *)  ## Opción errónea
-                clear
+                clear_screen
                 echo -e "$RO Opción no válida$CL"
         esac
     done

@@ -43,7 +43,7 @@ source "$WORKSCRIPT/Servidores/mumble.sh"
 ##
 menuServidores() {
     todos_servidores() {
-        clear
+        clear_screen
         echo -e "$VE Instalando todos los servidores$CL"
         apache2_instalador
         mariadb_instalador
@@ -60,7 +60,7 @@ menuServidores() {
         todos_servidores
     else
         while true :; do
-            clear
+            clear_screen
             local descripcion='Menú de Servidores y Lenguajes de programación
                 1) Apache
                 2) MariaDB
@@ -102,7 +102,7 @@ menuServidores() {
                      break;;
 
                 0)  ## SALIR
-                    clear
+                    clear_screen
                     echo -e "$RO Se sale del menú$CL"
                     echo ''
                     break;;

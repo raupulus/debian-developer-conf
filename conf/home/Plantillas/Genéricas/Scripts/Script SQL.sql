@@ -2,8 +2,8 @@
 -------------------------------------------------------------------------------
 --
 -- Author:       Raúl Caro Pastorino
--- Email Author: tecnico@fryntiz.es
--- Web Author:   http://www.fryntiz.es
+-- Email Author: dev@fryntiz.es
+-- Web Author:   http://https://fryntiz.es
 -- github:       https://github.com/fryntiz
 -- gitlab:       https://gitlab.com/fryntiz
 -- twitter:      https://twitter.com/fryntiz

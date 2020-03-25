@@ -4,14 +4,14 @@
 ## @author     Raúl Caro Pastorino
 ## @copyright  Copyright © 2017 Raúl Caro Pastorino
 ## @license    https://wwww.gnu.org/licenses/gpl.txt
-## @email      tecnico@fryntiz.es
-## @web        www.fryntiz.es
-## @github     https://github.com/fryntiz
+## @email      dev@fryntiz.es
+## @web        https://fryntiz.es
 ## @gitlab     https://gitlab.com/fryntiz
+## @github     https://github.com/fryntiz
 ## @twitter    https://twitter.com/fryntiz
 ##
 ##             Guía de estilos aplicada:
-## @style      https://github.com/fryntiz/Bash_Style_Guide
+## @style      https://github.com/fryntiz/bash-guide-style
 
 ############################
 ##     INSTRUCCIONES      ##
@@ -31,7 +31,7 @@ source "$WORKSCRIPT/Personalizar/Terminales.sh"
 ############################
 menuPersonalizacion() {
     todas_personalizaciones() {
-        clear
+        clear_screen
         echo -e "$VE Instalando todas las personalizaciones$CL"
         configuracion_git
         agregar_fuentes
@@ -44,7 +44,7 @@ menuPersonalizacion() {
         todas_personalizaciones
     else
         while true :; do
-            clear
+            clear_screen
             local descripcion='Menú de Personalización del sistema
                 1) Configurar GIT
                 2) Tipografías
@@ -71,7 +71,7 @@ menuPersonalizacion() {
                 6)  todas_personalizaciones;;  ## Todos los pasos anteriores
 
                 0)  ## SALIR
-                    clear
+                    clear_screen
                     echo -e "$RO Se sale del menú$CL"
                     echo ''
                     break;;

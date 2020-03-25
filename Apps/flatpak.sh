@@ -54,7 +54,7 @@ aplicaciones_flatpak() {
 
 
     while true :; do
-        clear
+        clear_screen
         local descripcion='Menú para instalar paquetes FlatPak
             1) Gimp
             2) LibreOffice
@@ -113,7 +113,7 @@ aplicaciones_flatpak() {
             22)  instalarSoftwareFlatPak $postman;;
 
             0)  ## SALIR
-                clear
+                clear_screen
                 echo -e "$RO Se sale del menú$CL"
                 echo ''
                 break;;

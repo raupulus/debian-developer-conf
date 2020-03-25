@@ -11,7 +11,7 @@
 ## @twitter    https://twitter.com/fryntiz
 ##
 ##             Guía de estilos aplicada:
-## @style      https://github.com/fryntiz/Bash_Style_Guide
+## @style      https://github.com/fryntiz/bash-guide-style
 
 ############################
 ##     INSTRUCCIONES      ##
@@ -40,7 +40,7 @@ setDistro() {
           [[ "$input" != 'raspbian' ]] &&
           [[ "$input" != 'fedora' ]]
     do
-        clear
+        clear_screen
         getDistrosAvailable
         ## Pido elegir distribución
         echo "$MY_DISTRO"
@@ -57,7 +57,7 @@ setBranch() {
           [[ "$input" != 'testing' ]] &&
           [[ "$input" != 'unstable' ]]
     do
-        clear
+        clear_screen
         getBranchAvailable
         ## Pido elegir distribución
         echo "$MY_BRANCH"
@@ -75,7 +75,7 @@ setBranch() {
 ##
 setEnv() {
     while true :; do
-        clear
+        clear_screen
 
         local descripcion='Selecciona el entorno:
             1) Producción
@@ -95,7 +95,7 @@ setEnv() {
                break;;
 
             *)  ## Acción ante entrada no válida
-              clear
+              clear_screen
               echo ""
               echo -e "                   $RO ATENCIÓN: Elección no válida$CL";;
         esac

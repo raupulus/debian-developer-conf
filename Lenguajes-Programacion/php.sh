@@ -175,7 +175,7 @@ php_postconfiguracion() {
         local salir=''
 
         while [[ $salir != 'salir' ]]; do
-            clear
+            clear_screen
             echo -e "$VE Introduce la versión de$RO PHP$VE a utilizar$CL"
             echo -e "$AZ ${ALL_PHP[*]} $RO"  ## Pinta versiones para elegirla
             read -p "    → " input

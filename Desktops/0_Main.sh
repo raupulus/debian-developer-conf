@@ -30,7 +30,7 @@ source "$WORKSCRIPT/Desktops/sway.sh"
 ############################
 menuDesktops() {
     todos_desktops() {
-        clear
+        clear_screen
         echo -e "$VE Instalando todos los Desktops y WM$CL"
         i3wm_instalador
         xmonad_instalador
@@ -43,7 +43,7 @@ menuDesktops() {
         todos_desktops
     else
         while true :; do
-            clear
+            clear_screen
             local descripcion='Menú de Personalización del sistema
                 1) Instalar i3wm
                 2) Instalar Xmonad
@@ -69,7 +69,7 @@ menuDesktops() {
                 6)  todos_desktops;;          ## Todos los pasos anteriores
 
                 0)  ## SALIR
-                    clear
+                    clear_screen
                     echo -e "$RO Se sale del menú$CL"
                     echo ''
                     break;;
