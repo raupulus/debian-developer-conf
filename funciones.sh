@@ -469,3 +469,15 @@ dir_exist_or_create() {
         mkdir -p "$dir"
     fi
 }
+
+##
+## Limpia la pantalla solo cuando estamos en producción pero no cuando
+## estamos en desarrollo, en ese caso mostrará por completo lo que sucede.
+##
+clear_screen() {
+    if [[ "${DEBUG}" = 'true' ]]; then
+        echo -e "$RO -----Aquí habría un salto de terminal -----$CL"
+    else
+        clear
+    fi
+}
