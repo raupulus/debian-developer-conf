@@ -25,6 +25,6 @@
 ############################
 ##       FUNCIONES        ##
 ############################
-agregarRepositoriosFedora() {
+agregarRepositoriosGentoo() {
     echo -e '$VE Configurando Repositorios para$RO Gentoo$CL'
 }

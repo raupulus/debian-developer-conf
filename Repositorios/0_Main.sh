@@ -38,5 +38,7 @@ menuRepositorios() {
         agregarRepositoriosRaspbian
     elif [[ "$DISTRO" = 'fedora' ]];then
         agregarRepositoriosFedora
+    elif [[ "$DISTRO" = 'gentoo' ]];then
+    agregarRepositoriosGentoo
     fi
 }

@@ -41,7 +41,10 @@ agregarRepositoriosDebian() {
         actualizarRepositorios
         instalarSoftware 'apt-transport-https'
         instalarSoftware 'dirmngr'
+        instalarSoftware 'wget'
         instalarSoftware 'curl'
+        instalarSoftware 'gnupg'
+        instalarSoftware 'rng-tools'
     }
 
     ##

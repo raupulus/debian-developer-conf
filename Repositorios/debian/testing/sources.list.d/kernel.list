@@ -1,0 +1,5 @@
+########################################################
+##                      KERNEL                        ##
+########################################################
+# deb http://mirrors.kernel.org/debian testing main contrib non-free
+# deb-src http://mirrors.kernel.org/debian testing main contrib non-free

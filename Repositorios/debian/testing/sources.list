@@ -1,26 +1,17 @@
 ########################################################
 ##                 OFICIALES DEBIAN                   ##
 ########################################################
-##### Repositorio Debian Testing
-deb http://ftp.es.debian.org/debian/ testing main contrib non-free
-deb-src http://ftp.es.debian.org/debian/ testing main contrib non-free
+## Repositorio Debian Testing.
+deb http://deb.debian.org/debian/ testing main contrib non-free
+deb-src http://deb.debian.org/debian/ testing main contrib non-free
 
-##### Actualizaciones para Testing (Updates)
-deb http://ftp.es.debian.org/debian/ testing-updates non-free contrib main
-deb-src http://ftp.es.debian.org/debian/ testing-updates non-free contrib main
+## Actualizaciones para Testing (Updates).
+deb http://deb.debian.org/debian/ testing-updates main contrib non-free
+deb-src http://deb.debian.org/debian/ testing-updates main contrib non-free
 
-########################################################
-##                      KERNEL                        ##
-########################################################
-# deb http://mirrors.kernel.org/debian testing main contrib non-free
-# deb-src http://mirrors.kernel.org/debian testing main contrib non-free
-
-########################################################
-##                 KERNEL LIQUORIX                    ##
-########################################################
-#### curl httpsR://liquorix.net/linux-liquorix.pub | sudo apt-key add - && sudo apt-get update
-# deb http://liquorix.net/debian sid main
-# deb-src http://liquorix.net/debian sid main
+## Actualizaciones de seguridad para testing.
+deb http://deb.debian.org/debian-security testing-security main
+deb-src http://deb.debian.org/debian-security testing-security main
 
 ########################################################
 ##                 MOZILLA FIREFOX                    ##
