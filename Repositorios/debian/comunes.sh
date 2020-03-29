@@ -124,6 +124,9 @@ comunes_agregar_llaves() {
     ## Steam
     echo -e "$VE Agregando clave para $RO Steam$CL"
     sudo apt-key adv --keyserver keyserver.ubuntu.com --recv-keys F24AEA9FB05498B7
+
+    ## QOwnNotes
+    wget http://download.opensuse.org/repositories/home:/pbek:/QOwnNotes/Debian_10/Release.key -O - | sudo apt-key add -
 }
 
 ##
