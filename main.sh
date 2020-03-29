@@ -97,6 +97,11 @@ if [[ "${DEBUG}" = 'true' ]]; then
   log 'Se ha ejecutado el script en modo DEBUG'
 fi
 
+
+## Previene en debian testing (probablemente superiores también) que no pregunte
+## a cada instalación si deseamos reiniciar servicios.
+#export DEBIAN_FRONTEND=noninteractive
+
 ###########################
 ##       FUNCIONES       ##
 ###########################
