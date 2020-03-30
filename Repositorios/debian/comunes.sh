@@ -127,6 +127,9 @@ comunes_agregar_llaves() {
 
     ## QOwnNotes
     wget http://download.opensuse.org/repositories/home:/pbek:/QOwnNotes/Debian_10/Release.key -O - | sudo apt-key add -
+
+    ## Any Desk
+    wget -qO - https://keys.anydesk.com/repos/DEB-GPG-KEY | sudo apt-key add -
 }
 
 ##
