@@ -21,10 +21,12 @@
 ##     IMPORTACIONES      ##
 ############################
 source "$WORKSCRIPT/Personalizar/Configurar_GIT.sh"
-source "$WORKSCRIPT/Personalizar/Personalizacion_GTK.sh"
-source "$WORKSCRIPT/Personalizar/Tipografias.sh"
-source "$WORKSCRIPT/Personalizar/iconos.sh"
+source "$WORKSCRIPT/Personalizar/gtk.sh"
+source "$WORKSCRIPT/Personalizar/fonts.sh"
+source "$WORKSCRIPT/Personalizar/icons.sh"
 source "$WORKSCRIPT/Personalizar/Terminales.sh"
+source "$WORKSCRIPT/Personalizar/cursors.sh"
+source "$WORKSCRIPT/Personalizar/qt.sh"
 
 ############################
 ##       FUNCIONES        ##
@@ -34,9 +36,11 @@ menuPersonalizacion() {
         clear_screen
         echo -e "$VE Instalando todas las personalizaciones$CL"
         configuracion_git
-        agregar_fuentes
-        instalar_iconos
-        personalizarGTK
+        fonts_install
+        icons_install
+        cursors_install
+        gtk_install
+        qt_install
         terminales_instalador
     }
 
@@ -47,11 +51,13 @@ menuPersonalizacion() {
             clear_screen
             local descripcion='Menú de Personalización del sistema
                 1) Configurar GIT
-                2) Tipografías
-                3) Instalar Iconos
-                4) Personalizar GTK
-                5) Configurar Terminales (Tilix y Terminator)
-                6) Todos los pasos anteriores
+                2) Tipografías (Fuentes)
+                3) Iconos
+                4) Cursores
+                5) Personalizar GTK
+                6) Personalizar QT
+                7) Configurar Terminales
+                8) Todos los pasos anteriores
 
                 0) Atrás
             '
@@ -64,11 +70,13 @@ menuPersonalizacion() {
             case $entrada in
 
                 1)  configuracion_git;;        ## Configurar GIT
-                2)  agregar_fuentes;;          ## Tipografías
-                3)  instalar_iconos;;          ## Iconos Personalizados
-                4)  personalizarGTK;;          ## Personalizar GTK
-                5)  terminales_instalador;;    ## Configura terminales
-                6)  todas_personalizaciones;;  ## Todos los pasos anteriores
+                2)  fonts_install;;          ## Tipografías
+                3)  icons_install;;            ## Iconos Personalizados
+                4)  cursors_install;;          ## Cursores Personalizados
+                5)  gtk_install;;              ## Personalizar GTK
+                6)  qt_install;;               ## Personalizar QT
+                7)  terminales_instalador;;    ## Configurar tTerminales
+                8)  todas_personalizaciones;;  ## Todos los pasos anteriores
 
                 0)  ## SALIR
                     clear_screen

@@ -21,26 +21,42 @@
 ############################
 ##       FUNCIONES        ##
 ############################
-instalar_iconos() {
-    echo -e "$VE Instalando iconos personalizados dentro de$RO /usr/share/icons/fryntiz$CL"
-    if [[ -d '/usr/share/icons/fryntiz' ]]; then
-        sudo rm -Rf '/usr/share/icons/fryntiz'
-    fi
-    sudo cp -r "$WORKSCRIPT/conf/usr/share/icons/fryntiz" '/usr/share/icons/fryntiz'
-    sudo chmod 755 -R '/usr/share/icons/fryntiz'
 
-    iconos_paper_theme() {
+icons_debian() {
+    theme_paper() {
         echo -e "$VE Descargando pack de iconos$RO Paper Theme$CL"
-        descargar 'Paper_Theme.deb' 'https://snwh.org/paper/download.php?owner=snwh&ppa=pulp&pkg=paper-gtk-theme,16.04'
+        descargar 'Paper_Theme.deb' 'https://launchpadlibrarian.net/468844787/paper-icon-theme_1.5.728-202003121505~daily~ubuntu18.04.1_all.deb'
 
         echo -e "$VE Instalando iconos$RO Paper_Theme$CL"
         instalarSoftwareDPKG "$WORKSCRIPT/tmp/Paper_Theme.deb"
     }
 
-    iconos_paper_theme
+    theme_paper
 
     ## Establece iconos Paper en uso
     gconftool-2 --type string --set /desktop/gnome/interface/icon_theme 'Paper'
+}
+
+icons_install() {
+    echo -e "$VE Instalando iconos personalizados dentro de$RO /usr/share/icons/fryntiz$CL"
+    if [[ -d '/usr/share/icons/fryntiz' ]]; then
+        sudo rm -Rf '/usr/share/icons/fryntiz'
+    fi
+
+    sudo cp -r "$WORKSCRIPT/conf/usr/share/icons/fryntiz" '/usr/share/icons/fryntiz'
+
+    sudo chmod 755 -R '/usr/share/icons/fryntiz'
+
+
+    if [[ "$DISTRO" = 'debian' ]]; then
+        icons_debian
+    fi
+
+    if [[ "$DISTRO" = 'raspberry' ]]; then
+        icons_debian
+    fi
+
+    instalarSoftwareLista "$SOFTLIST/Personalizar/icons.lst"
 
     ## Lo enlazo para que se usen por defecto con el usuario
     if [[ -d "$HOME/.local/share/icons/default" ]]; then

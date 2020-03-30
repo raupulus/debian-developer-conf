@@ -29,7 +29,7 @@
 fuentes_repositorios() {
     echo -e "$VE Instalando fuentes desde$RO repositorios$CL"
 
-    instalarSoftwareLista "$SOFTLIST/Personalizar/tipografias.lst"
+    instalarSoftwareLista "$SOFTLIST/Personalizar/fonts.lst"
 }
 
 fuentes_download() {
@@ -99,7 +99,7 @@ fuentes_locales() {
     done
 }
 
-agregar_fuentes() {
+fonts_install() {
     echo -e "$VE Añadiendo$RO fuentes Tipográficas$VE al sistema$CL"
 
     fuentes_repositorios
