@@ -11,7 +11,7 @@
 ## @twitter    https://twitter.com/fryntiz
 ##
 ##             Guía de estilos aplicada:
-## @style      https://gitlab.com/fryntiz/Bash_Style_Guide
+## @style      https://gitlab.com/fryntiz/bash-guide-style
 
 ############################
 ##     INSTRUCCIONES      ##
@@ -39,15 +39,15 @@ source "$WORKSCRIPT/Usuario/powerline.sh"
 ##       FUNCIONES       ##
 ###########################
 ##
-## Mi generador de proyectos https://github.com/fryntiz/Generador_Proyectos.git
+## Mi generador de proyectos https://github.com/fryntiz/project-generator
 ## Este generador de proyectos crea un script que permite generar la estructura
 ## para los proyectos más recurridos por mi (php, python, bash....) y después
 ## pregunta si subirlo automáticamente a GitHub
 ##
 generador_proyectos() {
-    descargarGIT 'Generador de Proyectos' 'https://github.com/fryntiz/Generador_Proyectos.git' "$WORKSCRIPT/tmp/Generador_Proyectos"
+    descargarGIT 'Generador de Proyectos' 'https://github.com/fryntiz/project-generator.git' "$WORKSCRIPT/tmp/project-generator"
 
-    cd "$WORKSCRIPT/tmp/Generador_Proyectos" || return 1 && ./instalar.sh
+    cd "$WORKSCRIPT/tmp/project-generator" || return 1 && ./instalar.sh
     cd "$WORKSCRIPT" || exit
 }
 ##

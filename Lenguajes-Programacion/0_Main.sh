@@ -29,6 +29,7 @@ source "$WORKSCRIPT/Lenguajes-Programacion/php.sh"
 source "$WORKSCRIPT/Lenguajes-Programacion/python.sh"
 source "$WORKSCRIPT/Lenguajes-Programacion/ruby.sh"
 source "$WORKSCRIPT/Lenguajes-Programacion/perl.sh"
+source "$WORKSCRIPT/Lenguajes-Programacion/android.sh"
 
 ###########################
 ##       FUNCIONES       ##
@@ -49,6 +50,7 @@ menuLenguajes() {
             go_instalador
             c_instalador
             perl_instalador
+            android_instalador
         fi
     }
 
@@ -68,7 +70,8 @@ menuLenguajes() {
                 4) Go
                 5) C y C++
                 6) Perl
-                7) Todos los pasos anteriores
+                7) Android
+                8) Todos los pasos anteriores
 
                 0) Atrás
             '
@@ -86,7 +89,8 @@ menuLenguajes() {
                 4)  go_instalador;;          ## Instala Go
                 5)  c_instalador;;           ## Instala C y C++
                 6)  perl_instalador;;        ## Instala C y C++
-                7)  todos_lenguajes          ## Todos los lenguajes
+                7)  android_instalador;;     ## Instala Android
+                8)  todos_lenguajes          ## Todos los lenguajes
                     break;;
 
                 0)  ## SALIR
