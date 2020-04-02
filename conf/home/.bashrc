@@ -360,4 +360,12 @@ umask 007
 #    alias ls='devicons-ls'
 #fi
 
-
+###################################
+### Configurando java y android ###
+###################################
+export JAVA_HOME=/usr/lib/jvm/java-14-openjdk-amd64
+export ANDROID_HOME=$HOME/Android/sdk
+export ANDROID_SDK_ROOT=$HOME/Android/sdk
+export ANDROID_AVD_HOME=$HOME/.android/avd
+export PATH=$PATH:$ANDROID_HOME/tools
+export PATH=$PATH:$ANDROID_HOME/platform-tools

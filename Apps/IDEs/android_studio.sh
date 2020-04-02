@@ -46,18 +46,18 @@ android_studio_instalar() {
 
     tar -xvzf "android_studio.tar.gz" 2>> /dev/null
 
-    if [[ -d "$WORKSCRIPT/tmp/android_studio" ]]; then
-        mv "$WORKSCRIPT/tmp/android_studio" "$HOME/.local/opt/android_studio"
+    if [[ -d "$WORKSCRIPT/tmp/android-studio" ]]; then
+        mv "$WORKSCRIPT/tmp/android-studio" "$HOME/.local/opt/android_studio"
     fi
 
     cd "$WORKSCRIPT" || exit 1
 }
 
 android_studio_postconfiguracion() {
-    echo -e "$VE Generando Post-Configuraciones$RO arduino$CL"
+    echo -e "$VE Generando Post-Configuraciones$RO Android Studio$CL"
 
-    echo -e "$VE Generando comando$RO arduino$CL"
-    ln -s "$HOME/.local/opt/android_studio/studio.sh" "$HOME/.local/bin/android_studio"
+    echo -e "$VE Generando comando$RO Android Studio$CL"
+    ln -s "$HOME/.local/opt/android_studio/bin/studio.sh" "$HOME/.local/bin/android_studio"
 }
 
 android_studio_instalador() {
@@ -69,8 +69,7 @@ android_studio_instalador() {
     if [[ -f "$HOME/.local/bin/android_studio" ]] &&
        [[ -d "$HOME/.local/opt/android_studio" ]]
     then
-        echo -e "$VE Ya esta$RO Android Studio$VE instalado en el equipo,
-        omitiendo paso$CL"
+        echo -e "$VE Ya esta$RO Android Studio$VE instalado en el equipo, omitiendo paso$CL"
     else
         if [[ -f "$WORKSCRIPT/tmp/${url}-linux64.tar.xz" ]]; then
             android_studio_instalar "url" || rm -Rf "$WORKSCRIPT/tmp/android_studio.tar.gz"
