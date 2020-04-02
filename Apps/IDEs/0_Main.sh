@@ -30,6 +30,7 @@ source "$WORKSCRIPT/Apps/IDEs/webstorm.sh"
 source "$WORKSCRIPT/Apps/IDEs/netbeans.sh"
 source "$WORKSCRIPT/Apps/IDEs/aptanastudio.sh"
 source "$WORKSCRIPT/Apps/IDEs/Arduino.sh"
+source "$WORKSCRIPT/Apps/IDEs/android_studio.sh"
 
 ############################
 ##       FUNCIONES        ##
@@ -47,6 +48,7 @@ menuIDES() {
         phpstorm_instalador
         ninjaide_instalador
         pycharm_pro_instalador
+        android_studio
     }
 
     ## Si la función recibe "-a" indica que se instalen todos los IDES
@@ -63,7 +65,7 @@ menuIDES() {
                 5) PyCharm Comunidad (No implementado)
                 6) Ninja IDE
                 7) NetBeans (No implementado)
-                8) Aptana Studio (No implementado)
+                8) Android Studio (Experimental)
                 9) Web Storm
                 10) Arduino
                 11) Todos los pasos anteriores
@@ -84,6 +86,7 @@ menuIDES() {
                 4)   pycharm_pro_instalador;;  ##  Instala Pycharm Profesional
                 #5)  ;;  ##
                 6)   ninjaide_instalador;;  ##  Instala Ninja IDE
+                8)   android_instalador; android_studio_instalador;;  ##
                 9)   webstorm_instalador;;  ##
                 10)  arduino_instalador;;  ##
                 11)  todos_IDES  ## Todos los IDES

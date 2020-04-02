@@ -247,7 +247,7 @@ descargar() {
     fi
 
     echo -e "$VE Descargando$RO $1 $CL"
-    local REINTENTOS=10
+    local REINTENTOS=20
     for (( i=1; i<=$REINTENTOS; i++ )); do
         rm -f "$WORKSCRIPT/tmp/$1" 2>> /dev/null
         wget --show-progress "$2" -O "$WORKSCRIPT/tmp/$1" && break
