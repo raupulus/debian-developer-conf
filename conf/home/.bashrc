@@ -282,6 +282,7 @@ alias .....='cd ../../../..'
 ## Git
 alias git="LANG=C git"
 alias glg="git lg"
+alias glf='git lg --show-signature'
 alias gl='git lg'
 alias gh='git hist'
 alias gs='git status'
