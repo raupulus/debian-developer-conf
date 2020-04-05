@@ -361,6 +361,9 @@ umask 007
 #    alias ls='devicons-ls'
 #fi
 
+## Activo gestos en touchpad
+synclient EmulateMidButtonTime=1 TouchpadOff=0 VertTwoFingerScroll=1 HorizTwoFingerScroll=1 VertEdgeScroll=1 TapButton1=1 TapButton2=3 TapButton3=2 ClickFinger1=1 ClickFinger2=2 ClickFinger3=3
+
 ###################################
 ### Configurando java y android ###
 ###################################

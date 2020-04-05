@@ -394,6 +394,10 @@ bindsym $mod+a focus parent
 ## El foco sobre el contenedor hijo
 #bindsym $mod+d focus child
 
+## Recargar la configuración de pantalla actual
+bindsym $mod+F5 exec ~/.config/i3/scripts/togglescreen.sh 'reload' 2> /tmp/test || notify-send 'Configuración de Pantallas no aplicable'
+
+
 ## Conmutar entre configuraciones de pantalla para varios monitores
 bindsym $mod+F6 exec ~/.config/i3/scripts/togglescreen.sh 2> /tmp/test && notify-send 'Cambio de pantallas' || notify-send 'Configuración de Pantallas no aplicable'
 
@@ -552,8 +556,10 @@ exec --no-startup-id blueman-applet
 # - 1 dedo click izquierdo
 # - 2 dedos click derecho
 # - 3 dedos click central
-exec --no-startup-id synclient EmulateMidButtonTime=1 TouchpadOff=0 VertTwoFingerScroll=1 HorizTwoFingerScroll=1 VertEdgeScroll=1 TapButton1=1 TapButton2=3 TapButton3=2 ClickFinger1=1 ClickFinger2=2 ClickFinger3=3 &
-#exec_always --no-startup-id synclient EmulateMidButtonTime=1 TouchpadOff=0 VertTwoFingerScroll=1 HorizTwoFingerScroll=1 VertEdgeScroll=1 TapButton1=1 TapButton2=3 TapButton3=2 ClickFinger1=1 ClickFinger2=2 ClickFinger3=3
+## Establezco configuración al cargar y a los 90 segundos, a veces fallaba...
+exec --no-startup-id synclient EmulateMidButtonTime=1 TouchpadOff=0 VertTwoFingerScroll=1 HorizTwoFingerScroll=1 VertEdgeScroll=1 TapButton1=1 TapButton2=3 TapButton3=2 ClickFinger1=1 ClickFinger2=2 ClickFinger3=3
+exec --no-startup-id sleep 90 && synclient EmulateMidButtonTime=1 TouchpadOff=0 VertTwoFingerScroll=1 HorizTwoFingerScroll=1 VertEdgeScroll=1 TapButton1=1 TapButton2=3 TapButton3=2 ClickFinger1=1 ClickFinger2=2 ClickFinger3=3
+#exec_always --no-startup-id sleep 3 && synclient EmulateMidButtonTime=1 TouchpadOff=0 VertTwoFingerScroll=1 HorizTwoFingerScroll=1 VertEdgeScroll=1 TapButton1=1 TapButton2=3 TapButton3=2 ClickFinger1=1 ClickFinger2=2 ClickFinger3=3
 
 exec --no-startup-id xbindkeys
 exec_always --no-startup-id xbindkeys
