@@ -367,9 +367,13 @@ synclient EmulateMidButtonTime=1 TouchpadOff=0 VertTwoFingerScroll=1 HorizTwoFin
 ###################################
 ### Configurando java y android ###
 ###################################
-export JAVA_HOME=/usr/lib/jvm/java-14-openjdk-amd64
-export ANDROID_HOME=$HOME/Android/sdk
-export ANDROID_SDK_ROOT=$HOME/Android/sdk
+export JAVA_HOME=/usr/lib/jvm/java-8-openjdk-amd64
+export JRE_HOME=/usr/lib/jvm/java-8-openjdk-amd64/jre
+export ANDROID_HOME=$HOME/Android/Sdk
+export ANDROID_SDK_ROOT=$HOME/Android/Sdk
 export ANDROID_AVD_HOME=$HOME/.android/avd
 export PATH=$PATH:$ANDROID_HOME/tools
 export PATH=$PATH:$ANDROID_HOME/platform-tools
+
+#sudo update-alternatives --config java
+#sudo update-alternatives --config javac
