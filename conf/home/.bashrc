@@ -308,9 +308,12 @@ alias hc="history -c"
 alias pip3="pip3 --disable-pip-version-check"
 
 ## Navegar hacia directorios
-alias tg="cd $HOME/git"
 alias tw="cd /var/www"
+alias tg="cd $HOME/git"
 alias tx="cd $HOME/git/4-Xerintel"
+alias tgx="cd $HOME/git/4-Xerintel"
+alias tgl="cd $HOME/git/1-Proyectos/LaGuiaLinux"
+alias tgd="cd $HOME/git/1-Proyectos/DesdeChipiona"
 
 ## Otros
 #alias rm="rm -i"
