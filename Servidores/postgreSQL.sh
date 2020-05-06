@@ -58,17 +58,47 @@ postgresql_postconfiguracion() {
 
             echo -e "$VE Estableciendo timezone = 'UTC'$CL"
             sudo sed -r -i "s/^\s*#?timezone\s*=.*/timezone = 'UTC'/" "$POSTGRESCONF"
+
+
+            local PGHBA="/etc/postgresql/$V_PSQL/main/pg_hba.conf"
+            echo -e "$VE Archivo de configuración$RO $PGHBA$CL"
+
+            ## Permito conectar todos los usuarios en entorno local.
+            sudo sed -r -i "s/^\s*#?local\s*all\s*all\s*peer/local all all trust/" "$PGHBA"
         done
     }
 
     personalizar_postgresql() {
         echo -e "$VE Personalizando$RO postgreSQL$CL"
-        #sudo -u postgres createdb basedatos #Crea la base de datos basedatos
-        #sudo -u postgres createuser -P usuario #Crea el usuario usuario y pide que teclee su contraseña
+    }
+
+    postgresql_users_create() {
+        echo -e "$VE Crear usuario desarrollador$RO dev$CL"
+
+        ## Crea el usuario usuario y pide que teclee su contraseña.
+        sudo -u postgres createuser -P dev
+
+        ## Crea la base de datos basedatos para el usuario.
+        sudo -u postgres createdb dev -O dev
+
+        ## Creo la base de datos para almacenar información del sistema.
+        sudo -u postgres createdb computer -O dev
+
+        ## Asigno permisos para el usuario dev en las DB creadas.
+        sudo -u postgres psql -c "GRANT ALL PRIVILEGES ON DATABASE dev to dev"
+        sudo -u postgres psql -c "GRANT ALL PRIVILEGES ON DATABASE computer to dev"
     }
 
     configurar_postgresql
     personalizar_postgresql
+
+    if [[ $MY_ENV = 'dev' ]]; then
+        read -p '¿Quieres crear usuario desarrollador? s/N → ' input
+
+        if [[ $input = 's' ]] || [[ $input = 'S' ]]; then
+            postgresql_users_create
+        fi
+    fi
 }
 
 postgresql_instalador() {
