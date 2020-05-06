@@ -46,7 +46,7 @@ datos_input() {
 }
 
 gpg_git() {
-    clear
+    clear_screen
     echo -e "$VE Configurando GPG para GIT$CL"
 
     ## Listar claves actuales, si hubiera instaladas en el equipo
@@ -63,7 +63,7 @@ gpg_git() {
        [[ $input = 'y' ]] ||
        [[ $input = 'Y' ]]
     then
-        clear
+        clear_screen
         gpg --list-secret-keys --keyid-format LONG
     else
         echo -e "$VE Se creará una$RO clave GPG$VE única nueva:"

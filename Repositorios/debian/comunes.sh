@@ -87,6 +87,49 @@ comunes_agregar_llaves() {
     ## Repositorio para editor Atom.
     echo -e "$VE Agregando clave para el editor$RO Atom$CL"
     wget -qO - https://packagecloud.io/AtomEditor/atom/gpgkey | sudo apt-key add -
+
+    ## Repositorio para editor DBeaver.
+    echo -e "$VE Agregando clave para el editor SQL$RO DBeaver$CL"
+    wget -O - https://dbeaver.io/debs/dbeaver.gpg.key | sudo apt-key add -
+
+    ## Repositorio para editor VS Codium.
+    echo -e "$VE Agregando clave para el editor$RO VS Codium$CL"
+    wget -qO - https://gitlab.com/paulcarroty/vscodium-deb-rpm-repo/raw/master/pub.gpg | sudo apt-key add -
+
+    ## Google Earth
+    echo -e "$VE Agregando clave para $RO Google Earth$CL"
+    wget -q -O - https://dl.google.com/linux/linux_signing_key.pub | sudo apt-key add -
+
+    ## Sublime Text
+    echo -e "$VE Agregando clave para el editor$RO Sublime Text$CL"
+    wget -qO - https://download.sublimetext.com/sublimehq-pub.gpg | sudo apt-key add -
+
+    ## Skype
+    #echo -e "$VE Agregando clave para $RO Skype$CL"
+    #sudo curl https://packages.microsoft.com/keys/microsoft.asc | sudo gpg --dearmor > microsoft.gpg && sudo mv microsoft.gpg /etc/apt/trusted.gpg.d/microsoft.gpg
+    #sudo chown root:root /etc/apt/trusted.gpg.d/microsoft.gpg && sudo chmod 644 /etc/apt/trusted.gpg.d/microsoft.gpg
+
+    ## GoPass (Gestor de Passwords colectivo)
+    echo -e "$VE Agregando clave para $RO GooPass$CL"
+    wget -q -O- https://api.bintray.com/orgs/gopasspw/keys/gpg/public.key | sudo apt-key add -
+
+    ## Lynis
+    echo -e "$VE Agregando clave para $RO Lynis$CL"
+    sudo wget -O - https://packages.cisofy.com/keys/cisofy-software-public.key | sudo apt-key add -
+
+    ## Spotify
+    echo -e "$VE Agregando clave para $RO Spotify$CL"
+    sudo apt-key adv --keyserver ha.pool.sks-keyservers.net --recv-keys 4773BD5E130D1D45
+
+    ## Steam
+    echo -e "$VE Agregando clave para $RO Steam$CL"
+    sudo apt-key adv --keyserver keyserver.ubuntu.com --recv-keys F24AEA9FB05498B7
+
+    ## QOwnNotes
+    wget http://download.opensuse.org/repositories/home:/pbek:/QOwnNotes/Debian_10/Release.key -O - | sudo apt-key add -
+
+    ## Any Desk
+    wget -qO - https://keys.anydesk.com/repos/DEB-GPG-KEY | sudo apt-key add -
 }
 
 ##

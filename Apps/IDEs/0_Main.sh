@@ -4,14 +4,14 @@
 ## @author     Raúl Caro Pastorino
 ## @copyright  Copyright © 2017 Raúl Caro Pastorino
 ## @license    https://wwww.gnu.org/licenses/gpl.txt
-## @email      tecnico@fryntiz.es
-## @web        www.fryntiz.es
+## @email      dev@fryntiz.es
+## @web        https://fryntiz.es
 ## @github     https://github.com/fryntiz
 ## @gitlab     https://gitlab.com/fryntiz
 ## @twitter    https://twitter.com/fryntiz
 ##
 ##             Guía de estilos aplicada:
-## @style      https://github.com/fryntiz/Bash_Style_Guide
+## @style      https://github.com/fryntiz/bash-guide-style
 
 ############################
 ##     INSTRUCCIONES      ##
@@ -30,6 +30,7 @@ source "$WORKSCRIPT/Apps/IDEs/webstorm.sh"
 source "$WORKSCRIPT/Apps/IDEs/netbeans.sh"
 source "$WORKSCRIPT/Apps/IDEs/aptanastudio.sh"
 source "$WORKSCRIPT/Apps/IDEs/Arduino.sh"
+source "$WORKSCRIPT/Apps/IDEs/android_studio.sh"
 
 ############################
 ##       FUNCIONES        ##
@@ -40,13 +41,14 @@ source "$WORKSCRIPT/Apps/IDEs/Arduino.sh"
 ##
 menuIDES() {
     todos_IDES() {
-        clear
+        clear_screen
         echo -e "$VE Instalando todos los IDES$CL"
         atom_instalador
         brackets_instalador
         phpstorm_instalador
         ninjaide_instalador
         pycharm_pro_instalador
+        android_studio
     }
 
     ## Si la función recibe "-a" indica que se instalen todos los IDES
@@ -54,7 +56,7 @@ menuIDES() {
         todos_IDES
     else
         while true :; do
-            clear
+            clear_screen
             local descripcion='Menú de aplicaciones
                 1) Atom
                 2) Brackets
@@ -63,7 +65,7 @@ menuIDES() {
                 5) PyCharm Comunidad (No implementado)
                 6) Ninja IDE
                 7) NetBeans (No implementado)
-                8) Aptana Studio (No implementado)
+                8) Android Studio (Experimental)
                 9) Web Storm
                 10) Arduino
                 11) Todos los pasos anteriores
@@ -84,13 +86,14 @@ menuIDES() {
                 4)   pycharm_pro_instalador;;  ##  Instala Pycharm Profesional
                 #5)  ;;  ##
                 6)   ninjaide_instalador;;  ##  Instala Ninja IDE
+                8)   android_instalador; android_studio_instalador;;  ##
                 9)   webstorm_instalador;;  ##
                 10)  arduino_instalador;;  ##
                 11)  todos_IDES  ## Todos los IDES
                      break;;
 
                 0)  ## SALIR
-                    clear
+                    clear_screen
                     echo -e "$RO Se sale del menú$CL"
                     echo ''
                     break;;

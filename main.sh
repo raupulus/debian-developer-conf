@@ -43,19 +43,20 @@ if [[ -f '/etc/environment' ]]; then
     source '/etc/environment'
 fi
 
+DEBUG='false'      ## Establece si está el script en modo depuración
+WORKSCRIPT=$PWD  ## Directorio principal del script
+PATH_LOG="$WORKSCRIPT/errores.log"  ## Archivo donde almacenar errores
+
 ## Importo variables locales si existieran, sobreescriben a las globales
-if [[ -f "$WORKSCRIPT/.env" ]]; then
+if [[ -a "$WORKSCRIPT/.env" ]]; then
     source "$WORKSCRIPT/.env"
 fi
 
-WORKSCRIPT=$PWD  ## Directorio principal del script
 USER=$(whoami)   ## Usuario que ejecuta el script
-VERSION='0.8.8'  ## Versión en desarrollo
+VERSION='0.8.9'  ## Versión en desarrollo
 MY_DISTRO="$DISTRO"  ## Distribución sobre la que se ejecuta
 MY_BRANCH="$BRANCH"  ## stable|testing|unstable
 MY_ENV="$ENV"    ## prod|dev desde /etc/environment o .env
-LOGERROR="$WORKSCRIPT/errores.log"  ## Archivo donde almacenar errores
-DEBUG=false      ## Establece si está el script en modo depuración
 
 ## Importo variables con rutas de directorios para configuraciones.
 source "$WORKSCRIPT/routes.sh"
@@ -81,11 +82,7 @@ source "$WORKSCRIPT/VPS/0_Main.sh"
 ###########################
 ##       VARIABLES       ##
 ###########################
-errores=()
 
-########################################
-##       VARIABLES COMPUESTAS         ##
-########################################
 ## Esta función configura las variables globales.
 configurePreferences
 
@@ -95,12 +92,22 @@ setAllRoutes
 ## Esta variable depende de ejecutarse primero el script anterior.
 SOFTLIST="${WORKSCRIPT}/Software-Lists/${MY_DISTRO}"  ## Ruta a listas de software
 
+## Registro en logs si se entra en desarrollo.
+if [[ "${DEBUG}" = 'true' ]]; then
+  log 'Se ha ejecutado el script en modo DEBUG'
+fi
+
+
+## Previene en debian testing (probablemente superiores también) que no pregunte
+## a cada instalación si deseamos reiniciar servicios.
+#export DEBIAN_FRONTEND=noninteractive
+
 ###########################
 ##       FUNCIONES       ##
 ###########################
 menuPrincipal() {
     while true :; do
-        clear
+        clear_screen
 
         local descripcion='Menú Principal
             1) Repositorios
@@ -145,13 +152,13 @@ menuPrincipal() {
             11) menuVPS;;
 
             0) ## SALIR
-              clear
+              clear_screen
               echo -e "$RO Se sale del menú$CL"
               echo ''
               exit 0;;
 
             *)  ## Acción ante entrada no válida
-              clear
+              clear_screen
               echo ""
               echo -e "                   $RO ATENCIÓN: Elección no válida$CL";;
         esac

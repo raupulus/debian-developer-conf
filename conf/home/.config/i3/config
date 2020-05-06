@@ -4,10 +4,10 @@
 ## @author     Raúl Caro Pastorino
 ## @copyright  Copyright © 2018 Raúl Caro Pastorino
 ## @license    https://wwww.gnu.org/licenses/gpl.txt
-## @email      tecnico@fryntiz.es
-## @web        www.fryntiz.es
-## @github     https://github.com/fryntiz
+## @email      dev@fryntiz.es
+## @web        https://fryntiz.es
 ## @gitlab     https://gitlab.com/fryntiz
+## @github     https://github.com/fryntiz
 ## @twitter    https://twitter.com/fryntiz
 
 ## Referencia oficial: http://i3wm.org/docs/userguide.html
@@ -21,9 +21,9 @@
 set $mod Mod4
 
 ## Nombre de monitores 1 y 2:
-set $mon1 DVI-I-1
-set $mon2 DVI-D-0
-#set $mon3 HDMI-0
+set $mon1 $DISPLAY0_NAME
+set $mon2 $DISPLAY1_NAME
+set $mon3 $DISPLAY2_NAME
 
 ## Configuración
 set $coordenadas '36.7349439:-6.4253577'  ## Coordenadas
@@ -84,6 +84,8 @@ assign [class="^[aA]tom"] → $WS2
 for_window [class="^[aA]tom"] focus
 assign [class="^[bB]rackets"] → $WS2
 for_window [class="^[Bb]rackets"] focus
+assign [class="[vV][sS][cC]odium"] → $WS2
+for_window [class="[vV][sS][cC]odium"] focus
 
 ## 3
 assign [class="^[fF]irefox"] → $WS3
@@ -155,8 +157,11 @@ bindsym $mod+F3 [title="Atom"] focus
 ############       Visualización/Pantalla      ############
 ###########################################################
 ## Establezco a 90 dpi
-exec --no-startup-id xrandr --dpi 90
-exec_always --no-startup-id xrandr --dpi 90
+#exec --no-startup-id xrandr --dpi 90
+#exec_always --no-startup-id xrandr --dpi 90
+exec --no-startup-id xrandr --dpi $DPI
+exec_always --no-startup-id xrandr --dpi $DPI
+
 
 ## Fuente para títulos de ventanas usadas en bar {} block below.
 font pango:monospace 8
@@ -221,18 +226,19 @@ for_window [title="^Instalador de paquetes"] floating enable, move position 50 5
 bar {
     ## Monitor para información en la barra de estado
     #status_command  i3status        ## Mostrar status de monitoreo
-    status_command  python3 ~/.config/i3/scripts/i3pystatus-config.py
+    status_command  python3 ~/.config/i3pystatus/config.py
 
     ## Posición donde colocar la barra
     position        bottom           ## Posición Abajo
 
     ## Solo muestra applets/iconos en la barra principal
     tray_output primary
-    tray_output HDMI0
-    tray_output HDMI-0
-    tray_output DVI-I-1
-    tray_output LVDS-1
-    tray_output LVDS1
+    #tray_output $mon1
+    #tray_output $mon3
+    #tray_output HDMI-0
+    #tray_output DVI-I-1
+    #tray_output LVDS-1
+    #tray_output LVDS1
 
 
     ## Fuente
@@ -249,12 +255,15 @@ bar {
 
     ## Salidas donde habilito esta barra
     output primary
-    output HDMI0
-    output HDMI-0
-    output DVI-I-1
-    output LVDS-1
-    output LVDS1
-    output HDMI-1
+    #output $mon2
+    #output $mon1
+    #output $mon3
+    #output HDMI0
+    #output HDMI-0
+    #output DVI-I-1
+    #output LVDS-1
+    #output LVDS1
+    #output HDMI-1
 
     ## Márgenes de iconos en la bandeja
     tray_padding 1
@@ -300,12 +309,16 @@ bar {
 ## Barra solo visible en el segundo monitor
 bar {
     output secundary
+    output $mon2
     output HDMI1
-    #output HDMI-1
+    output HDMI-1
     output DVI-D-0
     output LVDS-2
     output VGA
     output VGA-1
+    output DP-1
+    output DP-2
+
 
     status_command  i3status
     #status_command  python3 ~/.config/i3/scripts/i3pystatus-min-config.py
@@ -380,6 +393,10 @@ bindsym $mod+a focus parent
 
 ## El foco sobre el contenedor hijo
 #bindsym $mod+d focus child
+
+## Recargar la configuración de pantalla actual
+bindsym $mod+F5 exec ~/.config/i3/scripts/togglescreen.sh 'reload' 2> /tmp/test || notify-send 'Configuración de Pantallas no aplicable'
+
 
 ## Conmutar entre configuraciones de pantalla para varios monitores
 bindsym $mod+F6 exec ~/.config/i3/scripts/togglescreen.sh 2> /tmp/test && notify-send 'Cambio de pantallas' || notify-send 'Configuración de Pantallas no aplicable'
@@ -477,10 +494,16 @@ bindsym --release $mod+shift+print exec xfce4-screenshooter -cfm
 bindsym --release print exec xfce4-screenshooter -fm -s ~/Imágenes/Screenshots/
 
 ## Brillo de la pantalla
+bindsym XF86MonBrightnessUp exec --no-startup-id brightnessctl s $(($(brightnessctl g) + 5000))
+bindsym XF86MonBrightnessDown exec --no-startup-id brightnessctl s $(($(brightnessctl g) - 5000))
+
+## Brillo de pantalla por defecto al 60%
+exec --no-startup-id brightnessctl s 72000
+
 #bindcode XF86MonBrightnessUp exec --no-startup-id xbacklight -inc 10
 #bindcode XF86MonBrightnessDown exec --no-startup-id xbacklight -dec 10
-bindcode XF86MonBrightnessUp exec --no-startup-id ~/config/.i3/scripts/brillo.py next && notify-send "Brillo Arriba" || notify-send "Error: Brillo Arriba ha fallado"
-bindcode XF86MonBrightnessDown exec --no-startup-id ~/config/.i3/scripts/brillo.py back && notify-send "Brillo Abajo" || notify-send "Error: Brillo Abajo ha fallado"
+#bindcode XF86MonBrightnessUp exec --no-startup-id ~/config/.i3/scripts/brillo.py next && notify-send "Brillo Arriba" || notify-send "Error: Brillo Arriba ha fallado"
+#bindcode XF86MonBrightnessDown exec --no-startup-id ~/config/.i3/scripts/brillo.py back && notify-send "Brillo Abajo" || notify-send "Error: Brillo Abajo ha fallado"
 
 ## Abrir programa de Notas QOwnNotes
 bindsym --release $mod+n exec QOwnNotes
@@ -521,10 +544,25 @@ exec --no-startup-id xrdb -load ~/.Xresources
 exec --no-startup-id lxpolkit
 
 ## Temperatura de pantalla según zona y hora
-exec --no-startup-id redshift -l $coordenadas -t 5500:4500
+#exec --no-startup-id redshift -l $coordenadas -t 5500:4500
+
+## Servidor de audio Pulseaudio
+exec --no-startup-id pulseaudio --start
+
+## Bluetooth
+exec --no-startup-id blueman-applet
+
+## Configura el touchpad para habilitar teclas y toques con 1,2 y 3 dedos.
+# - 1 dedo click izquierdo
+# - 2 dedos click derecho
+# - 3 dedos click central
+## Establezco configuración al cargar y a los 90 segundos, a veces fallaba...
+exec --no-startup-id synclient EmulateMidButtonTime=1 TouchpadOff=0 VertTwoFingerScroll=1 HorizTwoFingerScroll=1 VertEdgeScroll=1 TapButton1=1 TapButton2=3 TapButton3=2 ClickFinger1=1 ClickFinger2=2 ClickFinger3=3
+exec --no-startup-id sleep 90 && synclient EmulateMidButtonTime=1 TouchpadOff=0 VertTwoFingerScroll=1 HorizTwoFingerScroll=1 VertEdgeScroll=1 TapButton1=1 TapButton2=3 TapButton3=2 ClickFinger1=1 ClickFinger2=2 ClickFinger3=3
+#exec_always --no-startup-id sleep 3 && synclient EmulateMidButtonTime=1 TouchpadOff=0 VertTwoFingerScroll=1 HorizTwoFingerScroll=1 VertEdgeScroll=1 TapButton1=1 TapButton2=3 TapButton3=2 ClickFinger1=1 ClickFinger2=2 ClickFinger3=3
 
 exec --no-startup-id xbindkeys
-exec --no-startup-id pulseaudio --start
+exec_always --no-startup-id xbindkeys
 
 ## Ejemplos o ideas
 #exec_always --no-startup-id al-polybar-session
@@ -541,7 +579,11 @@ exec --no-startup-id pulseaudio --start
 ## Fondo de pantalla nitrogen
 exec_always --no-startup-id nitrogen --restore
 exec_always --no-startup-id dunst
-exec_always --no-startup-id xrdb -load ~/.Xresources
+
+
+exec --no-startup-id cp ~/.Xresources /tmp/.Xresources && echo "Xft.dpi: $DPI" >> /tmp/.Xresources && xrdb -load /tmp/.Xresources
+exec_always --no-startup-id cp ~/.Xresources /tmp/.Xresources && echo "Xft.dpi: $DPI" >> /tmp/.Xresources && xrdb -load /tmp/.Xresources
+
 
 ############################################################
 ###############  MENÚ DE APAGADO/BLOQUEO  ##################
@@ -593,8 +635,14 @@ bindsym $mod+F12 mode "$mode_servers"
 ## Dropbox
 exec --no-startup-id dropbox start
 
-## Synology Cloud Station
-exec --no-startup-id synology-cloud-station-drive
+## Synology Drive
+exec --no-startup-id synology-drive
+
+## Nextcloud
+exec --no-startup-id nextcloud
+
+## pCloud
+exec --no-startup-id "$HOME/AppImage/pcloud"
 
 ## Red
 exec --no-startup-id nm-applet

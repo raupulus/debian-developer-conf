@@ -4,14 +4,14 @@
 ## @author     Raúl Caro Pastorino
 ## @copyright  Copyright © 2017 Raúl Caro Pastorino
 ## @license    https://wwww.gnu.org/licenses/gpl.txt
-## @email      tecnico@fryntiz.es
-## @web        www.fryntiz.es
+## @email      dev@fryntiz.es
+## @web        https://fryntiz.es
 ## @github     https://github.com/fryntiz
 ## @gitlab     https://gitlab.com/fryntiz
 ## @twitter    https://twitter.com/fryntiz
 ##
 ##             Guía de estilos aplicada:
-## @style      https://github.com/fryntiz/Bash_Style_Guide
+## @style      https://github.com/fryntiz/bash-guide-style
 
 ############################
 ##     INSTRUCCIONES      ##
@@ -29,7 +29,7 @@
 fuentes_repositorios() {
     echo -e "$VE Instalando fuentes desde$RO repositorios$CL"
 
-    instalarSoftwareLista "$SOFTLIST/Personalizar/tipografias.lst"
+    instalarSoftwareLista "$SOFTLIST/Personalizar/fonts.lst"
 }
 
 fuentes_download() {
@@ -99,7 +99,7 @@ fuentes_locales() {
     done
 }
 
-agregar_fuentes() {
+fonts_install() {
     echo -e "$VE Añadiendo$RO fuentes Tipográficas$VE al sistema$CL"
 
     fuentes_repositorios

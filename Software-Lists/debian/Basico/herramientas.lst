@@ -1,3 +1,4 @@
+bc
 less
 nano
 mount
@@ -24,3 +25,4 @@ tcl
 xdg-user-dirs
 ntp
 pciutils
+gdebi

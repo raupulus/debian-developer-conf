@@ -201,7 +201,7 @@ instalarSoftwareFlatPak() {
         for programa in $*; do
             echo -e "$VE Instalando $RO $programa$VE desde$RO FlatPak$CL"
             if [[ $programa != '' ]]; then
-                flatpak install "$programa"
+                flatpak install "$programa" --user
             fi
         done
 
@@ -227,7 +227,7 @@ instalarSoftwareFlatPakLista() {
     for x in "${lista_Software[@]}"; do
         if [[ $x != '' ]]; then
             echo -e "$VE Instalando$RO $x$VE desde$RO FlatPak$CL"
-            instalarSoftwareFlatPak "$x"
+            instalarSoftwareFlatPak "$x" --user
         fi
     done
 
@@ -247,7 +247,7 @@ descargar() {
     fi
 
     echo -e "$VE Descargando$RO $1 $CL"
-    local REINTENTOS=10
+    local REINTENTOS=20
     for (( i=1; i<=$REINTENTOS; i++ )); do
         rm -f "$WORKSCRIPT/tmp/$1" 2>> /dev/null
         wget --show-progress "$2" -O "$WORKSCRIPT/tmp/$1" && break
@@ -417,10 +417,6 @@ setVariableGlobal() {
         echo -e "$VE Seteando globalmente: ${1}=${2}$CL"
         echo "${1}=${2}" | sudo tee -a /etc/environment
         export "${1}=${2}"
-
-        ## TODO → La siguiente línea se intenta ejecutar como función en
-        ## vez de una asignación de variable.
-        ${1}=${2}
     fi
 }
 
@@ -433,7 +429,7 @@ python2Install() {
     echo -e "$VE Instalando paquete Python$CL"
     for x in $*; do
         echo -e "$RO Instalando $x$CL"
-        pip install --user --upgrade "$x"
+        pip2 install --user --upgrade "$x"
     done
 }
 
@@ -471,5 +467,26 @@ dir_exist_or_create() {
     echo -e "$VE Creando directorio$RO $dir$CL"
     if [[ ! -d "$dir" ]]; then
         mkdir -p "$dir"
+    fi
+}
+
+##
+## Registra un mensaje en el archivo de logs.
+##
+log() {
+    msg="$1"
+    echo -e "$RO Registrando en log:$AM ${msg}$CL"
+    echo "${msg}" >> "${PATH_LOG}"
+}
+
+##
+## Limpia la pantalla solo cuando estamos en producción pero no cuando
+## estamos en desarrollo, en ese caso mostrará por completo lo que sucede.
+##
+clear_screen() {
+    if [[ "${DEBUG}" = 'true' ]]; then
+        echo -e "$RO -----Aquí habría un salto de terminal -----$CL"
+    else
+        clear
     fi
 }

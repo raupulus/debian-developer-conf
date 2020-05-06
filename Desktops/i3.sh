@@ -11,7 +11,7 @@
 ## @twitter    https://twitter.com/fryntiz
 ##
 ##             Guía de estilos aplicada:
-## @style      https://github.com/fryntiz/Bash_Style_Guide
+## @style      https://github.com/fryntiz/bash-guide-style
 
 ############################
 ##     INSTRUCCIONES      ##
@@ -33,15 +33,6 @@ i3wm_preconfiguracion() {
         echo "Plantear método independiente de systemd"
     fi
 
-    ## Creo directorios si no existieran
-    if [[ ! -f "$HOME/.local/opt" ]]; then
-      mkdir -p "$HOME/.local/opt"
-    fi
-
-    if [[ ! -f "$HOME/.local/bin" ]]; then
-      mkdir -p "$HOME/.local/bin"
-    fi
-
     ## Instalo fuentes tipográficas necesarias
     fuentes_repositorios
 }
@@ -59,15 +50,15 @@ i3wm_postconfiguracion() {
     instalarSoftwareLista "$SOFTLIST/Desktops/wm-min-software.lst"
 
     echo -e "$VE Generando archivos de configuración$CL"
-    enlazarHome '.config/i3' '.config/tint2' '.config/compton.conf' '.config/conky' '.Xresources' '.config/nitrogen' '.config/i3status' '.config/plank' '.config/rofi'
+    enlazarHome '.config/i3' '.config/tint2' '.config/compton.conf' '
+    .config/conky' '.Xresources' '.config/nitrogen' '.config/i3status' '.config/plank' '.config/rofi' '.config/i3pystatus' '.scripts'
 
-    if [[ ! -d "$HOME/Imágenes/Screenshot" ]]; then
-        mkdir -p "$HOME/Imágenes/Screenshots"
-    fi
+    dir_exist_or_create "$HOME/Imágenes/Screenshots"
 
     ## Instalo y Configuro Python: Lenguajes-Programacion/python.sh
     python_instalador
 
+    ## Dependencias para i3pystatus con python.
     python3Install 'basiciw' 'netifaces' 'colour' \
     'pyalsaaudio' 'fontawesome'
 
@@ -91,27 +82,6 @@ i3wm_instalador() {
     ## Configurando Personalizaciones
     conf_gtk2  ## Configura gtk-2.0 desde script → Personalizacion_GTK
     conf_gtk3  ## Configura gtk-3.0 desde script → Personalizacion_GTK
+    conf_gtk4  ## Configura gtk-4.0 desde script → Personalizacion_GTK
 }
 
-##
-## Instalador para el fork de i3 gaps en:
-## https://github.com/Airblader/i3/tree/gaps
-## Se usa la rama "gaps" en vez de la rama "gaps-next"
-## Esta función ha quedado obsoleta y por ahora no la actualizaré al no usarla
-##
-i3wm_gaps_instalador() {
-    ## Instalando dependencias
-    instalarSoftware libxcb-keysyms1-dev libpango1.0-dev libxcb-util0-dev xcb libxcb1-dev libxcb-icccm4-dev libyajl-dev libev-dev libxcb-xkb-dev libxcb-cursor-dev libxkbcommon-dev libxcb-xinerama0-dev libxkbcommon-x11-dev libstartup-notification0-dev libxcb-randr0-dev libxcb-xrm0 libxcb-xrm-dev
-
-    ## Instalo i3gaps desde repositorio GitHub en vez de i3 normal
-    git clone https://www.github.com/Airblader/i3 i3-gaps
-    cd i3-gaps || exit
-    git checkout gaps && git pull
-
-    autoreconf --force --install
-    rm -rf build/
-    mkdir -p build && cd build || exit
-
-    ./configure
-    cd x86_64-pc-linux-gnu && make && sudo make install
-}

@@ -31,15 +31,15 @@ actualizarSistema() {
         echo "Actualizando desde repositorios Fedora"
         sudo dnf update -y
     elif [[ -f '/usr/bin/emerge' ]]; then
-        echo "Actualizando desde repositorios Debian"
+        echo "Actualizando desde repositorios Gentoo"
         sudo emerge --sync
-	sudo emerge -uavDN --keep-going world
+        sudo emerge -uavDN --keep-going world
     fi
 
     if [[ -f '/usr/bin/flatpak' ]]; then
-        echo "Actualizando desde FlatPak"
-        sudo flatpak update
-        sudo chmod 755 -R /var/lib/flatpak/app
+        echo "Actualizando desde FlatPak para el usuario actual"
+        flatpak update --user
+        #sudo chmod 755 -R /var/lib/flatpak/app
     fi
 
     if [[ -f '/usr/bin/npm' ]] || [[ -f "$HOME/.npm/bin/npm" ]]; then
@@ -56,7 +56,7 @@ actualizarSistema() {
     if [[ -f '/usr/bin/pip3' ]] || [[ -f "$HOME/.local/bin/pip3" ]]; then
         echo "Actualizando desde PIP Python 3"
         #py -3 -m pip_review --local --auto
-	python3 -m pip_review --local --auto
+        python3 -m pip_review --local --auto
     fi
 
     if [[ -f '/usr/bin/composer' ]] || [[ -f "$HOME/.local/bin/composer" ]]; then

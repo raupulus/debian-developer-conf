@@ -4,14 +4,14 @@
 ## @author     Raúl Caro Pastorino
 ## @copyright  Copyright © 2017 Raúl Caro Pastorino
 ## @license    https://wwww.gnu.org/licenses/gpl.txt
-## @email      tecnico@fryntiz.es
-## @web        www.fryntiz.es
+## @email      dev@fryntiz.es
+## @web        https://fryntiz.es
 ## @github     https://github.com/fryntiz
 ## @gitlab     https://gitlab.com/fryntiz
 ## @twitter    https://twitter.com/fryntiz
 ##
 ##             Guía de estilos aplicada:
-## @style      https://github.com/fryntiz/Bash_Style_Guide
+## @style      https://github.com/fryntiz/bash-guide-style
 
 ############################
 ##     INSTRUCCIONES      ##
@@ -23,29 +23,15 @@
 ## Además también configura el tema de grub
 
 ############################
+##     IMPORTACIONES      ##
+############################
+source "$WORKSCRIPT/Personalizar/gtk2.sh"
+source "$WORKSCRIPT/Personalizar/gtk3.sh"
+source "$WORKSCRIPT/Personalizar/gtk4.sh"
+
+############################
 ##       FUNCIONES        ##
 ############################
-configurar_cursores() {
-    echo -e "$VE Configurando pack de cursores$CL"
-    instalarSoftware 'crystalcursors'
-
-    update-alternatives --set x-cursor-theme /etc/X11/cursors/crystalblue.theme
-
-    sudo update-alternatives --set x-cursor-theme /etc/X11/cursors/crystalblue.theme
-
-    if [[ ! -d "$HOME/.icons" ]]; then
-        mkdir "$HOME/.icons"
-    fi
-
-    ## Enlazo en el usuario hacia los iconos crystalblue
-    if [[ ! -d "$HOME/.icons/default" ]] &&
-       [[ -f '/etc/X11/cursors/crystalblue.theme' ]]
-    then
-        mkdir "$HOME/.icons/default"
-        ln -s '/etc/X11/cursors/crystalblue.theme' "$HOME/.icons/default/index.theme"
-    fi
-}
-
 configurar_temas() {
     echo -e "$VE Configurando temas GTK$CL"
     instalarSoftware 'gtk2-engines-murrine'
@@ -99,6 +85,7 @@ instalar_flatplat() {
         ## Actualizar repositorio para Flat-Plat
         echo -e "$VE Actualizando Repositorio de$RO Flat-Plat$CL"
         cd "$WORKSCRIPT/tmp/Materia_Theme_Flat-Plat/" || return
+        git checkout -- .
         git pull
         cd "$WORKSCRIPT" || return
     else
@@ -181,29 +168,40 @@ conf_gnome3() {
 
 preconfiguracion_gnome3() {
     echo -e "$VE Instalando software para configurar$RO Gnome-Shell 3$CL"
-    instalarSoftware 'dconf-cli' 'dconf-editor' 'dconf-gsettings-backend'
+    instalarSoftwareLista "$SOFTLIST/Personalizar/gnome_shell.lst"
 }
 
 conf_gtk2() {
     echo -e "$VE Configurando$RO GTK 2$CL"
     enlazarHome '.config/gtk-2.0'
+    gtk2_install
 }
 
 conf_gtk3() {
     echo -e "$VE Configurando$RO GTK 3$CL"
     enlazarHome '.config/gtk-3.0'
+    gtk3_install
 }
 
-personalizarGTK() {
+conf_gtk4() {
+    echo -e "$VE Configurando$RO GTK 4$CL"
+    enlazarHome '.config/gtk-4.0'
+    gtk4_install
+}
+
+gtk_install() {
     echo -e "$VE Iniciando configuracion de estética general y GTK$CL"
+
+    instalarSoftwareLista "$SOFTLIST/Personalizar/gtk.lst"
+
     instalar_flatplat
-    configurar_cursores
     configurar_temas
     configurar_grub
     configurar_fondos
 
     conf_gtk2
     conf_gtk3
+    conf_gtk4
 
     if [[ -f '/usr/bin/gsettings' ]] && [[ -f '/usr/bin/gnome-shell' ]]; then
         preconfiguracion_gnome3

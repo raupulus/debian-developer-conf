@@ -4,8 +4,8 @@
 # @author     Raúl Caro Pastorino
 # @copyright  Copyright © 2018 Raúl Caro Pastorino
 # @license    https://wwww.gnu.org/licenses/gpl.txt
-# @email      tecnico@fryntiz.es
-# @web        www.fryntiz.es
+# @email      dev@fryntiz.es
+# @web        https://fryntiz.es
 # @github     https://github.com/fryntiz
 # @gitlab     https://gitlab.com/fryntiz
 # @twitter    https://twitter.com/fryntiz
@@ -28,6 +28,9 @@ from i3pystatus.updates import aptget
 from time import sleep
 from os import listdir
 import re
+
+# Importo módulos personalizados
+from i3pystatus_modules.SocketClient import SocketClient
 
 #######################################
 # #             Variables           # #
@@ -161,6 +164,9 @@ status.register("text",
     ## Abrir terminal
     on_rightclick = "~/.config/i3/scripts/record.sh stop",
 )
+
+## Keycounter ---------------------------------------------------------------
+status.register(SocketClient)
 
 ## Actualizaciones -----------------------------------------------------
 status.register("updates",

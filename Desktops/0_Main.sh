@@ -4,14 +4,14 @@
 ## @author     Raúl Caro Pastorino
 ## @copyright  Copyright © 2018 Raúl Caro Pastorino
 ## @license    https://wwww.gnu.org/licenses/gpl.txt
-## @email      tecnico@fryntiz.es
-## @web        www.fryntiz.es
-## @github     https://github.com/fryntiz
+## @email      dev@fryntiz.es
+## @web        https://fryntiz.es
 ## @gitlab     https://gitlab.com/fryntiz
+## @github     https://github.com/fryntiz
 ## @twitter    https://twitter.com/fryntiz
 ##
 ##             Guía de estilos aplicada:
-## @style      https://github.com/fryntiz/Bash_Style_Guide
+## @style      https://gitlab.com/fryntiz/bash-guide-style
 ############################
 ##     INSTRUCCIONES      ##
 ############################
@@ -23,31 +23,34 @@ source "$WORKSCRIPT/Desktops/i3.sh"
 source "$WORKSCRIPT/Desktops/xmonad.sh"
 source "$WORKSCRIPT/Desktops/openbox.sh"
 source "$WORKSCRIPT/Desktops/gnome-shell.sh"
+source "$WORKSCRIPT/Desktops/sway.sh"
 
 ############################
 ##       FUNCIONES        ##
 ############################
 menuDesktops() {
     todos_desktops() {
-        clear
+        clear_screen
         echo -e "$VE Instalando todos los Desktops y WM$CL"
         i3wm_instalador
         xmonad_instalador
         openbox_instalador
         gnome_shell_instalador
+        sway_instalador
     }
 
     if [[ "$1" = '-a' ]]; then
         todos_desktops
     else
         while true :; do
-            clear
+            clear_screen
             local descripcion='Menú de Personalización del sistema
                 1) Instalar i3wm
                 2) Instalar Xmonad
                 3) Instalar Openbox
                 4) Instalar Gnome Shell
-                5) Todos los pasos anteriores
+                5) Instalar Sway
+                6) Todos los pasos anteriores
 
                 0) Atrás
             '
@@ -62,10 +65,11 @@ menuDesktops() {
                 2)  xmonad_instalador;;       ## Instala xmonad
                 3)  openbox_instalador;;      ## Instala openbox
                 4)  gnome_shell_instalador;;  ## Instala gnome shell
-                5)  todos_desktops;;          ## Todos los pasos anteriores
+                5)  sway_instalador;;  ## Instala gnome shell
+                6)  todos_desktops;;          ## Todos los pasos anteriores
 
                 0)  ## SALIR
-                    clear
+                    clear_screen
                     echo -e "$RO Se sale del menú$CL"
                     echo ''
                     break;;

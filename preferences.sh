@@ -11,7 +11,7 @@
 ## @twitter    https://twitter.com/fryntiz
 ##
 ##             Guía de estilos aplicada:
-## @style      https://github.com/fryntiz/Bash_Style_Guide
+## @style      https://github.com/fryntiz/bash-guide-style
 
 ############################
 ##     INSTRUCCIONES      ##
@@ -40,7 +40,7 @@ setDistro() {
           [[ "$input" != 'raspbian' ]] &&
           [[ "$input" != 'fedora' ]]
     do
-        clear
+        clear_screen
         getDistrosAvailable
         ## Pido elegir distribución
         echo "$MY_DISTRO"
@@ -57,7 +57,7 @@ setBranch() {
           [[ "$input" != 'testing' ]] &&
           [[ "$input" != 'unstable' ]]
     do
-        clear
+        clear_screen
         getBranchAvailable
         ## Pido elegir distribución
         echo "$MY_BRANCH"
@@ -75,7 +75,7 @@ setBranch() {
 ##
 setEnv() {
     while true :; do
-        clear
+        clear_screen
 
         local descripcion='Selecciona el entorno:
             1) Producción
@@ -95,7 +95,7 @@ setEnv() {
                break;;
 
             *)  ## Acción ante entrada no válida
-              clear
+              clear_screen
               echo ""
               echo -e "                   $RO ATENCIÓN: Elección no válida$CL";;
         esac
@@ -116,6 +116,65 @@ variables_lenguaje() {
 
     if [[ "$LC_MESSAGES" = '' ]]; then
         setVariableGlobal 'LC_MESSAGES' 'es_ES.UTF-8'
+    fi
+}
+
+vars_enviroment_displays() {
+    if [[ "$DPI" = '' ]]; then
+        setVariableGlobal 'DPI' '90'
+    fi
+
+    if [[ "$DISPLAY0_NAME" = '' ]]; then
+        setVariableGlobal 'DISPLAY0_NAME' 'HDMI-0'
+    fi
+
+    if [[ "$DISPLAY0_DPI" = '' ]]; then
+        setVariableGlobal 'DISPLAY0_DPI' '90'
+    fi
+
+    if [[ "$DISPLAY0_RESOLUTION" = '' ]]; then
+        setVariableGlobal 'DISPLAY0_RESOLUTION' '1920x1080'
+    fi
+
+    if [[ "$DISPLAY1_NAME" = '' ]]; then
+        setVariableGlobal 'DISPLAY1_NAME' 'false'
+    fi
+
+    if [[ "$DISPLAY1_DPI" = '' ]]; then
+        setVariableGlobal 'DISPLAY1_DPI' '90'
+    fi
+
+    if [[ "$DISPLAY1_RESOLUTION" = '' ]]; then
+        setVariableGlobal 'DISPLAY1_RESOLUTION' '1920x1080'
+    fi
+
+    if [[ "$DISPLAY2_NAME" = '' ]]; then
+        setVariableGlobal 'DISPLAY2_NAME' 'false'
+    fi
+
+    if [[ "$DISPLAY2_DPI" = '' ]]; then
+        setVariableGlobal 'DISPLAY2_DPI' '90'
+    fi
+
+    if [[ "$DISPLAY2_RESOLUTION" = '' ]]; then
+        setVariableGlobal 'DISPLAY2_RESOLUTION' '1920x1080'
+    fi
+}
+
+##
+## Añado variables extras para control de programas
+##
+configureGlobalControlVars() {
+    echo -e "Estableciendo variables globales"
+}
+
+setHostName() {
+    echo -e "Comprobando Hostname"
+
+    if [[ $(hostname) = '' ]]; then
+        echo -e "Introduce Hostname"
+        read -p ' → ' hostname
+        sudo hostname -b "$hostname"
     fi
 }
 
@@ -150,4 +209,8 @@ configurePreferences() {
     fi
 
     variables_lenguaje
+
+    vars_enviroment_displays
+
+    setHostName
 }

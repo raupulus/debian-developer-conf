@@ -41,7 +41,7 @@ if [[ ! -d /home/web/debian-developer-conf ]]; then
 fi
 
 chown web:web -R /home/web/debian-developer-conf
-cd /home/web/debian-developer-conf
+cd /home/web/debian-developer-conf || exit
 
 # Desactivar ipv6 por completo
 echo 'net.ipv6.conf.all.disable_ipv6=1' >> '/etc/sysctl.conf'

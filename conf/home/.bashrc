@@ -4,14 +4,14 @@
 ## @author     Raúl Caro Pastorino
 ## @copyright  Copyright © 2017 Raúl Caro Pastorino
 ## @license    https://wwww.gnu.org/licenses/gpl.txt
-## @email      tecnico@fryntiz.es
-## @web        www.fryntiz.es
+## @email      dev@fryntiz.es
+## @web        https://fryntiz.es
 ## @github     https://github.com/fryntiz
 ## @gitlab     https://gitlab.com/fryntiz
 ## @twitter    https://twitter.com/fryntiz
 ##
 ##             Guía de estilos aplicada:
-## @style      https://github.com/fryntiz/Bash_Style_Guide
+## @style      https://github.com/fryntiz/bash-guide-style
 
 ###################################
 ###          CONSTANTES         ###
@@ -282,6 +282,7 @@ alias .....='cd ../../../..'
 ## Git
 alias git="LANG=C git"
 alias glg="git lg"
+alias glf='git lg --show-signature'
 alias gl='git lg'
 alias gh='git hist'
 alias gs='git status'
@@ -307,9 +308,12 @@ alias hc="history -c"
 alias pip3="pip3 --disable-pip-version-check"
 
 ## Navegar hacia directorios
-alias tg="cd $HOME/git"
 alias tw="cd /var/www"
+alias tg="cd $HOME/git"
 alias tx="cd $HOME/git/4-Xerintel"
+alias tgx="cd $HOME/git/4-Xerintel"
+alias tgl="cd $HOME/git/1-Proyectos/LaGuiaLinux"
+alias tgd="cd $HOME/git/1-Proyectos/DesdeChipiona"
 
 ## Otros
 #alias rm="rm -i"
@@ -360,4 +364,19 @@ umask 007
 #    alias ls='devicons-ls'
 #fi
 
+## Activo gestos en touchpad
+synclient EmulateMidButtonTime=1 TouchpadOff=0 VertTwoFingerScroll=1 HorizTwoFingerScroll=1 VertEdgeScroll=1 TapButton1=1 TapButton2=3 TapButton3=2 ClickFinger1=1 ClickFinger2=2 ClickFinger3=3
 
+###################################
+### Configurando java y android ###
+###################################
+export JAVA_HOME=/usr/lib/jvm/java-8-openjdk-amd64
+export JRE_HOME=/usr/lib/jvm/java-8-openjdk-amd64/jre
+export ANDROID_HOME=$HOME/Android/Sdk
+export ANDROID_SDK_ROOT=$HOME/Android/Sdk
+export ANDROID_AVD_HOME=$HOME/.android/avd
+export PATH=$PATH:$ANDROID_HOME/tools
+export PATH=$PATH:$ANDROID_HOME/platform-tools
+
+#sudo update-alternatives --config java
+#sudo update-alternatives --config javac

@@ -4,14 +4,14 @@
 ## @author     Raúl Caro Pastorino
 ## @copyright  Copyright © 2017 Raúl Caro Pastorino
 ## @license    https://wwww.gnu.org/licenses/gpl.txt
-## @email      tecnico@fryntiz.es
-## @web        www.fryntiz.es
+## @email      dev@fryntiz.es
+## @web        https://fryntiz.es
 ## @github     https://github.com/fryntiz
 ## @gitlab     https://gitlab.com/fryntiz
 ## @twitter    https://twitter.com/fryntiz
 ##
 ##             Guía de estilos aplicada:
-## @style      https://github.com/fryntiz/Bash_Style_Guide
+## @style      https://github.com/fryntiz/bash-guide-style
 
 ############################
 ##     INSTRUCCIONES      ##
@@ -65,7 +65,7 @@ nodejs_postconfiguracion() {
     export PATH=~/.npm/bin:$PATH
 
     ## Instalando paquetes globales
-    local paquetes='eslint jscs bower compass stylelint bundled typescript ionic'
+    local paquetes='eslint jscs compass stylelint typescript ionic'
     instalarNpmGlobal $paquetes
 
     echo -e "$VE Instalando última versión de$RO npm$VE en directorio local$CL"

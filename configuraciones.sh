@@ -4,19 +4,19 @@
 ## @author     Raúl Caro Pastorino
 ## @copyright  Copyright © 2017 Raúl Caro Pastorino
 ## @license    https://wwww.gnu.org/licenses/gpl.txt
-## @email      tecnico@fryntiz.es
-## @web        www.fryntiz.es
-## @github     https://github.com/fryntiz
+## @email      dev@fryntiz.es
+## @web        https::/fryntiz.es
 ## @gitlab     https://gitlab.com/fryntiz
+## @github     https://github.com/fryntiz
 ## @twitter    https://twitter.com/fryntiz
 ##
 ##             Guía de estilos aplicada:
-## @style      https://github.com/fryntiz/Bash_Style_Guide
+## @style      https://gitlab.com/fryntiz/bash-guide-style
 
 ############################
 ##     INSTRUCCIONES      ##
 ############################
-## Instala configuraciones
+## Instala configuraciones del entorno.
 
 ###########################
 ##       FUNCIONES       ##
@@ -47,24 +47,32 @@ configurar_hosts() {
 }
 
 ##
-## Crea los directorios básicos para configuraciones.
+## Genera la estructura de directorios para el usuario actual en su home.
 ##
-crear_directorios() {
+generate_home_structure() {
+    echo -e "$VE Generando$RO estructura de directorios$CL"
+
     dir_exist_or_create "$HOME/.local"
     dir_exist_or_create "$HOME/.local/bin"
     dir_exist_or_create "$HOME/.local/lib"
     dir_exist_or_create "$HOME/.local/opt"
     dir_exist_or_create "$HOME/.local/share"
+
+    dir_exist_or_create "$HOME/.config"
+
+    dir_exist_or_create "$HOME/Imágenes"
+    dir_exist_or_create "$HOME/Imágenes/Screenshots"
 }
 
 ##
 ## Instalar Todas las configuraciones
 ##
 instalar_configuraciones() {
-    cd "$WORKSCRIPT"
+    cd "$WORKSCRIPT" || exit 1
 
     configurar_hosts
-    crear_directorios
+
+    generate_home_structure
 
     sudo update-command-not-found >> /dev/null 2>> /dev/null
 }
