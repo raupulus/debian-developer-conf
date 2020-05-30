@@ -50,7 +50,7 @@ actualizarSistema() {
     if [[ -f '/usr/bin/pip' ]] || [[ -f "$HOME/.local/bin/pip" ]]; then
         echo "Actualizando desde PIP Python 2"
         #pip-review --local --auto
-        python -m pip_review --local --auto
+        python2 -m pip_review --local --auto
     fi
 
     if [[ -f '/usr/bin/pip3' ]] || [[ -f "$HOME/.local/bin/pip3" ]]; then
