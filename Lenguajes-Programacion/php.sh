@@ -113,7 +113,7 @@ php_postconfiguracion() {
             fi
 
             if [[ ! -f "$WORKSCRIPT/tmp/psysh" ]]; then
-                descargar 'psysh' 'https://git.io/psysh'
+                descargar 'psysh' 'https://psysh.org/psysh'
             fi
 
             cp "$WORKSCRIPT/tmp/psysh" "$HOME/.local/bin/psysh"
