@@ -53,11 +53,13 @@ pycharm_instalar() {
     echo -e "$VE Extrayendo IDE$CL"
     cd "$WORKSCRIPT/tmp/" || return 0
     tar -zxf "${1}.tar.gz" 2>> /dev/null
+
     local directorio="$(ls | grep -E ^pycharm.+[^\.tar\.gz]$)"
-ls
+
     if [[ "$directorio" != '' ]]; then
         mv "$WORKSCRIPT/tmp/$directorio" "$HOME/.local/opt/pycharm"
     fi
+
     cd "$WORKSCRIPT" || exit 1
 }
 
@@ -72,7 +74,7 @@ pycharm_postconfiguracion() {
 }
 
 pycharm_pro_instalador() {
-    local version='pycharm-professional-2020.1.1'
+    local version='pycharm-professional-2020.1.2'
 
     echo -e "$VE Comenzando instalación de$RO PyCharm$CL"
 
