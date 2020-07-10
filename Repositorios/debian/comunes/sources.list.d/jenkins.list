@@ -1,4 +1,5 @@
 ########################################################
-##                       GOCD                         ##
+##                     JENKINS                        ##
 ########################################################
-deb https://download.gocd.org /
+
+deb https://pkg.jenkins.io/debian-stable binary/

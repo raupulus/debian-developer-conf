@@ -133,6 +133,9 @@ comunes_agregar_llaves() {
 
     ## GO CD (Desarrollo continuo)
     curl https://download.gocd.org/GOCD-GPG-KEY.asc | sudo apt-key add -
+
+    ## Jenkins
+    wget -q -O - https://pkg.jenkins.io/debian-stable/jenkins.io.key | sudo apt-key add -
 }
 
 ##
