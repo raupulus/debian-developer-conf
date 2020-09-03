@@ -4,6 +4,8 @@
 mainFirewall() {
     ## Comprobar que existe firewall-cmd
 
+    sudo systemctl start firewalld
+
     ## Permito ssh
     sudo firewall-cmd --zone=public --add-port=22/tcp --permanent
 

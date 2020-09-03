@@ -130,6 +130,12 @@ comunes_agregar_llaves() {
 
     ## Any Desk
     wget -qO - https://keys.anydesk.com/repos/DEB-GPG-KEY | sudo apt-key add -
+
+    ## GO CD (Desarrollo continuo)
+    curl https://download.gocd.org/GOCD-GPG-KEY.asc | sudo apt-key add -
+
+    ## Jenkins
+    wget -q -O - https://pkg.jenkins.io/debian-stable/jenkins.io.key | sudo apt-key add -
 }
 
 ##
