@@ -94,7 +94,8 @@ comunes_agregar_llaves() {
 
     ## Repositorio para editor VS Codium.
     echo -e "$VE Agregando clave para el editor$RO VS Codium$CL"
-    wget -qO - https://gitlab.com/paulcarroty/vscodium-deb-rpm-repo/raw/master/pub.gpg | sudo apt-key add -
+    wget -qO - https://gitlab.com/paulcarroty/vscodium-deb-rpm-repo/raw/master/pub.gpg | gpg --dearmor | sudo dd of=/etc/apt/trusted.gpg.d/vscodium-archive-keyring.gpg
+    sudo chmod ugo+r /etc/apt/trusted.gpg.d/vscodium-archive-keyring.gpg
 
     ## Google Earth
     echo -e "$VE Agregando clave para $RO Google Earth$CL"
