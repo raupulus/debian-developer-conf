@@ -2,5 +2,5 @@
 ##                 KERNEL LIQUORIX                    ##
 ########################################################
 #### curl https://liquorix.net/linux-liquorix.pub | sudo apt-key add - && sudo apt-get update
-# deb http://liquorix.net/debian sid main
-# deb-src http://liquorix.net/debian sid main
+# deb http://liquorix.net/debian testing main
+# deb-src http://liquorix.net/debian testing main

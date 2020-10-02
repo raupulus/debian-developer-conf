@@ -1,0 +1,7 @@
+########################################################
+##                 KERNEL LIQUORIX                    ##
+########################################################
+## curl https://liquorix.net/linux-liquorix.pub | sudo apt-key add - && sudo apt-get update
+## sudo apt-get install linux-image-liquorix-amd64 linux-headers-liquorix-amd64
+# deb http://liquorix.net/debian stable main
+# deb-src http://liquorix.net/debian stable main

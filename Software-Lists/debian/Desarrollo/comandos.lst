@@ -1,3 +1,7 @@
 editorconfig
 pandoc
 shellcheck
+gitlab-cli
+gitk
+git-gui
+git-ftp

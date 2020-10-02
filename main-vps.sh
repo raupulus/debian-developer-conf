@@ -43,6 +43,10 @@ fi
 chown web:web -R /home/web/debian-developer-conf
 cd /home/web/debian-developer-conf || exit
 
+## TODO → Con el "all" ya es suficiente, pero es necesario comprobar que exista
+## la línea ya que al volver a ejecutar script o en algunos servidores ya se
+## encuentra y produce problemas después con firewalld u otros cortafuegos.
+
 # Desactivar ipv6 por completo
 echo 'net.ipv6.conf.all.disable_ipv6=1' >> '/etc/sysctl.conf'
 echo 'net.ipv6.conf.default.disable_ipv6=1' >> '/etc/sysctl.conf'
