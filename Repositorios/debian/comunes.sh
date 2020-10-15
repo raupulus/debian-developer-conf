@@ -72,10 +72,6 @@ comunes_agregar_llaves() {
     actualizarRepositorios
     instalarSoftware 'deb.torproject.org-keyring' 'apt-transport-tor'
 
-    ## Repositorio para mongodb.
-    echo -e "$VE Agregando clave para$RO MongoDB Repositorio Oficial$CL"
-    sudo apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv 9DA31620334BD75D9DCB49F368818C72E52529D4
-
     ## Repositorio para Team Viewer.
     echo -e "$VE Agregando clave para$RO Team Viewer Repositorio Oficial$CL"
     wget -O - https://download.teamviewer.com/download/linux/signature/TeamViewer2017.asc | sudo apt-key add -
