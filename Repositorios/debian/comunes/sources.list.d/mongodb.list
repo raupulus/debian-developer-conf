@@ -1,5 +1,5 @@
 ########################################################
-##                      HEROKU                        ##
+##                     MongoDB                        ##
 ########################################################
 
 deb [ arch=amd64 ] http://repo.mongodb.org/apt/debian buster/mongodb-org/4.4 main
