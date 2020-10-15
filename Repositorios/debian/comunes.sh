@@ -137,6 +137,9 @@ comunes_agregar_llaves() {
 
     ## Jenkins
     wget -q -O - https://pkg.jenkins.io/debian-stable/jenkins.io.key | sudo apt-key add -
+
+    ## MongoDB
+    wget -qO - https://www.mongodb.org/static/pgp/server-4.4.asc | sudo apt-key add -
 }
 
 ##
