@@ -72,10 +72,6 @@ comunes_agregar_llaves() {
     actualizarRepositorios
     instalarSoftware 'deb.torproject.org-keyring' 'apt-transport-tor'
 
-    ## Repositorio para mongodb.
-    echo -e "$VE Agregando clave para$RO MongoDB Repositorio Oficial$CL"
-    sudo apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv 9DA31620334BD75D9DCB49F368818C72E52529D4
-
     ## Repositorio para Team Viewer.
     echo -e "$VE Agregando clave para$RO Team Viewer Repositorio Oficial$CL"
     wget -O - https://download.teamviewer.com/download/linux/signature/TeamViewer2017.asc | sudo apt-key add -
@@ -96,6 +92,8 @@ comunes_agregar_llaves() {
     echo -e "$VE Agregando clave para el editor$RO VS Codium$CL"
     wget -qO - https://gitlab.com/paulcarroty/vscodium-deb-rpm-repo/raw/master/pub.gpg | gpg --dearmor | sudo dd of=/etc/apt/trusted.gpg.d/vscodium-archive-keyring.gpg
     sudo chmod ugo+r /etc/apt/trusted.gpg.d/vscodium-archive-keyring.gpg
+    #sudo touch /etc/apt/apt.conf.d/99verify-peer.conf
+    #echo "Acquire { https::Verify-Peer false }" | sudo tee /etc/apt/apt.conf.d/99verify-peer.conf
 
     ## Google Earth
     echo -e "$VE Agregando clave para $RO Google Earth$CL"
@@ -127,16 +125,24 @@ comunes_agregar_llaves() {
     sudo apt-key adv --keyserver keyserver.ubuntu.com --recv-keys F24AEA9FB05498B7
 
     ## QOwnNotes
+    echo -e "$VE Agregando clave para $RO QOwnNotes$CL"
     wget http://download.opensuse.org/repositories/home:/pbek:/QOwnNotes/Debian_10/Release.key -O - | sudo apt-key add -
 
     ## Any Desk
+    echo -e "$VE Agregando clave para $RO Any Desk$CL"
     wget -qO - https://keys.anydesk.com/repos/DEB-GPG-KEY | sudo apt-key add -
 
     ## GO CD (Desarrollo continuo)
+    echo -e "$VE Agregando clave para $RO GO CD$CL"
     curl https://download.gocd.org/GOCD-GPG-KEY.asc | sudo apt-key add -
 
     ## Jenkins
+    echo -e "$VE Agregando clave para $RO Jenkins$CL"
     wget -q -O - https://pkg.jenkins.io/debian-stable/jenkins.io.key | sudo apt-key add -
+
+    ## MongoDB
+    echo -e "$VE Agregando clave para $RO MongoDB$CL"
+    wget -qO - https://www.mongodb.org/static/pgp/server-4.4.asc | sudo apt-key add -
 }
 
 ##
@@ -159,13 +165,14 @@ comunes_download_repositorios() {
     echo -e "$VE Descargando repositorios desde scripts oficiales$CL"
     ## NodeJS Oficial
     echo -e "$VE Agregando repositorio$RO NodeJS$AM Repositorio Oficial$CL"
-    curl -sL https://deb.nodesource.com/setup_12.x | sudo -E bash -
+    curl -sL https://deb.nodesource.com/setup_current.x | sudo -E bash -
 
     ## Riot
     echo -e "$VE Agregando Repositorio para$RO Riot (Matrix)$CL"
     sudo sh -c "echo '##deb https://riot.im/packages/debian/ artful main' > /etc/apt/sources.list.d/matrix-riot-im.list"
 
     ## Atom
+    echo -e "$VE Agregando Repositorio para$RO Editor Atom$CL"
     sudo sh -c 'echo "deb [arch=amd64] https://packagecloud.io/AtomEditor/atom/any/ any main" > /etc/apt/sources.list.d/atom.list'
 }
 

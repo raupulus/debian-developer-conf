@@ -35,6 +35,9 @@ mongodb_instalar() {
 
 mongodb_postconfiguracion() {
     echo -e "$VE Generando Post-Configuraciones de$RO mongodb$CL"
+    sudo systemctl start mongod || sudo systemctl daemon-reload && sudo systemctl start mongod
+    sudo systemctl status mongod
+    sudo systemctl enable mongod
 }
 
 mongodb_instalador() {
