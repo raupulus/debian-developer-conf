@@ -143,6 +143,10 @@ comunes_agregar_llaves() {
     ## MongoDB
     echo -e "$VE Agregando clave para $RO MongoDB$CL"
     wget -qO - https://www.mongodb.org/static/pgp/server-4.4.asc | sudo apt-key add -
+
+    ## Beekeeper Studio (Gestionar Bases de Datos)
+    echo -e "$VE Agregando clave para $RO Beekeeper Studio$CL"
+    wget --quiet -O - https://bintray.com/user/downloadSubjectPublicKey?username=bintray | sudo apt-key add -
 }
 
 ##
