@@ -41,6 +41,12 @@ php_instalar() {
     instalarSoftwareLista "$SOFTLIST/Lenguajes-Programacion/php.lst"
 }
 
+php_composer_latest_install() {
+    echo -e "$VE Instalando la última versión de$RO Composer$CL"
+    php -r "copy('https://getcomposer.org/installer', '/tmp/composer-setup.php');"
+    sudo php '/tmp/composer-setup.php' --install-dir='/usr/bin/' --filename='composer-latest'
+}
+
 php_postconfiguracion() {
     echo -e "$VE Generando Post-Configuraciones de php"
 
@@ -224,4 +230,7 @@ php_instalador() {
     php_preconfiguracion
     php_instalar
     php_postconfiguracion
+
+    ## Instalo la última versión de composer
+    php_composer_latest_install
 }
