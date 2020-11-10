@@ -43,6 +43,8 @@ if [[ -f '/etc/environment' ]]; then
     source '/etc/environment'
 fi
 
+DEBIAN_FRONTEND=noninteractive  ## Deshabilita carteles del instalador
+
 DEBUG='false'      ## Establece si está el script en modo depuración
 WORKSCRIPT=$PWD  ## Directorio principal del script
 PATH_LOG="$WORKSCRIPT/errores.log"  ## Archivo donde almacenar errores
