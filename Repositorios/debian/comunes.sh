@@ -147,6 +147,11 @@ comunes_agregar_llaves() {
     ## Beekeeper Studio (Gestionar Bases de Datos)
     echo -e "$VE Agregando clave para $RO Beekeeper Studio$CL"
     wget --quiet -O - https://bintray.com/user/downloadSubjectPublicKey?username=bintray | sudo apt-key add -
+
+    ## Sury (Paquetes PHP)
+    echo -e "$VE Agregando llave para$RO PHP$VE de sury,org$CL"
+    sudo wget -O '/etc/apt/trusted.gpg.d/php.gpg' 'https://packages.sury.org/php/apt.gpg'
+    sudo chmod 744 '/etc/apt/trusted.gpg.d/php.gpg'
 }
 
 ##
@@ -178,6 +183,11 @@ comunes_download_repositorios() {
     ## Atom
     echo -e "$VE Agregando Repositorio para$RO Editor Atom$CL"
     sudo sh -c 'echo "deb [arch=amd64] https://packagecloud.io/AtomEditor/atom/any/ any main" > /etc/apt/sources.list.d/atom.list'
+
+    ## Sury (Paquetes PHP)
+    #echo "deb https://packages.sury.org/php/ $(lsb_release -sc) main" | sudo tee /etc/apt/sources.list.d/php.list
+    echo "deb https://packages.sury.org/php/ buster main" | sudo tee /etc/apt/sources.list.d/php.list
+
 }
 
 ##
