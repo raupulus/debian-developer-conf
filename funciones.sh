@@ -61,7 +61,7 @@ opciones() {
 instalarSoftware() {
     if [[ "$MY_DISTRO" = 'debian' ]] || [[ "$MY_DISTRO" = 'raspbian' ]]; then
         for programa in $*; do
-            sudo apt install -y "$programa"
+            sudo DEBIAN_FRONTEND=noninteractive apt-get install -y "$programa"
         done
     elif [[ "$MY_DISTRO" = 'gentoo' ]]; then
         for programa in $*; do
@@ -82,7 +82,7 @@ instalarSoftware() {
 actualizarSoftware() {
     if [[ "$MY_DISTRO" = 'debian' ]] || [[ "$MY_DISTRO" = 'raspbian' ]]; then
         for programa in $*; do
-            sudo apt upgrade -y "$programa"
+            sudo DEBIAN_FRONTEND=noninteractive apt-get upgrade -y "$programa"
         done
     elif [[ "$MY_DISTRO" = 'gentoo' ]]; then
         for programa in $*; do
@@ -106,7 +106,7 @@ instalarSoftwareDPKG() {
 
     ## Intenta reparar el gestor de paquetes tras instalar, por si hubiese
     ## habido errores en el proceso de instalación ya que son paquetes externos.
-    sudo apt install -f -y
+    sudo DEBIAN_FRONTEND=noninteractive apt-get install -f -y
 }
 
 ##
@@ -162,8 +162,8 @@ instalarSoftwareLista() {
 repararGestorPaquetes() {
     echo -e "$VE Comprobando estado del$RO Gestor de paquetes$VE (Paciencia)$CL"
     if [[ "$MY_DISTRO" = 'debian' ]] || [[ "$MY_DISTRO" = 'raspbian' ]]; then
-        sudo apt --fix-broken install -y >> /dev/null 2>> /dev/null
-        sudo apt install -f -y >> /dev/null 2>> /dev/null
+        sudo DEBIAN_FRONTEND=noninteractive apt-get --fix-broken install -y >> /dev/null 2>> /dev/null
+        sudo DEBIAN_FRONTEND=noninteractive apt-get install -f -y >> /dev/null 2>> /dev/null
     fi
 }
 
@@ -173,7 +173,7 @@ repararGestorPaquetes() {
 actualizarRepositorios() {
     echo -e "$VE Actualizando listas de$RO Repositorios$VE (Paciencia)$CL"
     if [[ "$MY_DISTRO" = 'debian' ]] || [[ "$MY_DISTRO" = 'raspbian' ]]; then
-        sudo apt update
+        sudo DEBIAN_FRONTEND=noninteractive apt-get update
     elif [[ "$MY_DISTRO" = 'gentoo' ]]; then
         sudo emerge --sync
     elif [[ "$MY_DISTRO" = 'fedora' ]]; then
@@ -343,13 +343,13 @@ enlazarHome() {
 }
 
 ##
-## Recibe uno o más paquetes para eliminarse con dpkg mediante "apt purge -y"
+## Recibe uno o más paquetes para eliminarse con dpkg mediante "apt-get purge -y"
 ## @param $* Recibe los paquetes que necesite y los borra
 ##
 desinstalar_paquetes() {
     for x in $*; do
         echo -e "$RO Borrando x$CL"
-        sudo apt purge -y x
+        sudo DEBIAN_FRONTEND=noninteractive apt-get purge -y x
     done
 }
 
@@ -379,8 +379,8 @@ pararServicio() {
 ##
 prepararInstalador() {
     echo -e "$VE Se actualizarán las$RO listas de repositorios$CL"
-    sudo apt update
-    sudo apt install -f -y
+    sudo DEBIAN_FRONTEND=noninteractive apt-get update
+    sudo DEBIAN_FRONTEND=noninteractive apt-get install -f -y
 }
 
 ##
