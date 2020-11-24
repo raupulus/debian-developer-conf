@@ -14,6 +14,15 @@ php-json
 php-zip
 php-mongodb
 php-imap
+php-http-httplug
+php-http-message-factory
+php-http-promise
+php-http-psr7-integration-tests
+php-httpful
+php-pecl-http
+php-psr-http-client
+php-psr-http-factory
+php-psr-http-message
 composer
 php5.6
 libapache2-mod-php5.6
