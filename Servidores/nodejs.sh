@@ -65,7 +65,7 @@ nodejs_postconfiguracion() {
     export PATH=~/.npm/bin:$PATH
 
     ## Instalando paquetes globales
-    local paquetes='eslint jscs compass stylelint typescript ionic'
+    local paquetes='eslint jscs compass stylelint typescript @ionic/cli http-server @typescript-eslint/eslint-plugin cordova-res cordova@latest eslint-plugin-html @vue/cli'
     instalarNpmGlobal $paquetes
 
     echo -e "$VE Instalando última versión de$RO npm$VE en directorio local$CL"

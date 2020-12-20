@@ -41,6 +41,12 @@ php_instalar() {
     instalarSoftwareLista "$SOFTLIST/Lenguajes-Programacion/php.lst"
 }
 
+php_composer_latest_install() {
+    echo -e "$VE Instalando la última versión de$RO Composer$CL"
+    php -r "copy('https://getcomposer.org/installer', '/tmp/composer-setup.php');"
+    sudo php '/tmp/composer-setup.php' --install-dir='/usr/bin/' --filename='composer-latest'
+}
+
 php_postconfiguracion() {
     echo -e "$VE Generando Post-Configuraciones de php"
 
@@ -76,6 +82,19 @@ php_postconfiguracion() {
             echo -e "$VE Activando Mostrar errores al iniciar → 'display_startup_errors'$CL"
             sudo sed -r -i "s/^;?\s*display_startup_errors\s*=.*$/display_startup_errors = On/" $PHPINI
 
+            echo -e "$VE Tiempo máximo de ejecución 5 minutos → 'max_execution_time'$CL"
+            sudo sed -r -i "s/^;?\s*max_execution_time\s*=.*$/max_execution_time = 300/" $PHPINI
+
+            echo -e "$VE Límite de Memoria por script → 'memory_limit = 512M'$CL"
+            sudo sed -r -i "s/^;?\s*memory_limit\s*=.*$/memory_limit = 512M/" $PHPINI
+
+            ## Límite de archivos
+            echo -e "$VE Tamaño máximo de subida → 'upload_max_filesize = 10240M'$CL"
+            sudo sed -r -i "s/^;?\s*upload_max_filesize\s*=.*$/upload_max_filesize = 10240M/" $PHPINI
+
+            echo -e "$VE Tamaño máximo de POST → 'post_max_size = 10240M'$CL"
+            sudo sed -r -i "s/^;?\s*post_max_size\s*=.*$/post_max_size = 10240M/" $PHPINI
+
         else
             echo -e "$VE Configurando PHP para producción$CL"
             echo -e "$VE Desactivando Reportar todos los errores → 'error_reporting'$CL"
@@ -86,20 +105,20 @@ php_postconfiguracion() {
 
             echo -e "$VE Desactivando Mostrar errores al iniciar → 'display_startup_errors'$CL"
             sudo sed -r -i "s/^;?\s*display_startup_errors\s*=.*$/display_startup_errors = Off/" $PHPINI
+
+            echo -e "$VE Tiempo máximo de ejecución 5 minutos → 'max_execution_time'$CL"
+            sudo sed -r -i "s/^;?\s*max_execution_time\s*=.*$/max_execution_time = 120/" $PHPINI
+
+            echo -e "$VE Límite de Memoria por script → 'memory_limit = 128M'$CL"
+            sudo sed -r -i "s/^;?\s*memory_limit\s*=.*$/memory_limit = 128M/" $PHPINI
+
+            ## Límite de archivos
+            echo -e "$VE Tamaño máximo de subida → 'upload_max_filesize = 1024M'$CL"
+            sudo sed -r -i "s/^;?\s*upload_max_filesize\s*=.*$/upload_max_filesize = 1024M/" $PHPINI
+
+            echo -e "$VE Tamaño máximo de POST → 'post_max_size = 1024M'$CL"
+            sudo sed -r -i "s/^;?\s*post_max_size\s*=.*$/post_max_size = 1024M/" $PHPINI
         fi
-
-        echo -e "$VE Tiempo máximo de ejecución 5 minutos → 'max_execution_time'$CL"
-        sudo sed -r -i "s/^;?\s*max_execution_time\s*=.*$/max_execution_time = 300/" $PHPINI
-
-        echo -e "$VE Límite de Memoria por script → 'memory_limit = 256M'$CL"
-        sudo sed -r -i "s/^;?\s*memory_limit\s*=.*$/memory_limit = 256M/" $PHPINI
-
-        ## Límite de archivos
-        echo -e "$VE Tamaño máximo de subida → 'upload_max_filesize = 1024M'$CL"
-        sudo sed -r -i "s/^;?\s*upload_max_filesize\s*=.*$/upload_max_filesize = 1024M/" $PHPINI
-
-        echo -e "$VE Tamaño máximo de POST → 'post_max_size = 1024M'$CL"
-        sudo sed -r -i "s/^;?\s*post_max_size\s*=.*$/post_max_size = 1024M/" $PHPINI
     }
 
     personalizar_php() {
@@ -224,4 +243,7 @@ php_instalador() {
     php_preconfiguracion
     php_instalar
     php_postconfiguracion
+
+    ## Instalo la última versión de composer
+    php_composer_latest_install
 }

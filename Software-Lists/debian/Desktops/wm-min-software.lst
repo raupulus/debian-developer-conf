@@ -57,3 +57,16 @@ lxrandr
 volti
 neofetch
 xfce4-taskmanager
+policykit-1-gnome
+desktop-base
+blueman
+sbc-tools
+libsbc1
+playerctl
+udisks2-zram
+udisks2-vdo
+udisks2-lvm2
+udisks2-btrfs
+udisks2-bcache
+udiskie
+libblockdev-crypto2

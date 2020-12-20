@@ -1,7 +1,2 @@
-net-tools
-traceroute
-tcptraceroute
 wget
-wireless-tools
-network-manager
 curl

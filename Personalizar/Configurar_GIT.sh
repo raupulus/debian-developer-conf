@@ -107,6 +107,16 @@ configurar_git() {
     git config --global gui.encoding utf-8
     git config --global help.autocorrect 1  ## Activa corrector de comandos
 
+    if [[-f '/usr/bin/meld' ]]; then
+        git config --global diff.tool meld
+        git config --global difftool.meld.path "/usr/bin/meld"
+        git config --global difftool.prompt false
+
+        git config --global merge.tool meld
+        git config --global mergetool.meld.path "/usr/bin/meld"
+        git config --global mergetool.prompt false
+    fi
+
     ## Preguntar si se desea configurar GPG
     echo -e "$VE ¿Quieres configurar una clave$RO GPG$VE para firmar?$CL"
     read -p 'Introduce una opción y/N → ' input

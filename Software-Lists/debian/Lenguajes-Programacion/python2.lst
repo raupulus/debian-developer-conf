@@ -31,3 +31,14 @@ python-pymongo
 python-scapy
 python-twisted
 python-urllib3
+python-anyjson
+python-arrow
+python-babel
+python-babel-localedata
+python-migrate
+python-sqlalchemy-utils
+python-sqlkit
+python-sqlkit-doc
+python-sqlparse
+python-tempita
+sqlacodegen
