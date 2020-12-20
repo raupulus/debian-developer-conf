@@ -27,6 +27,7 @@ source "$WORKSCRIPT/Personalizar/icons.sh"
 source "$WORKSCRIPT/Personalizar/Terminales.sh"
 source "$WORKSCRIPT/Personalizar/cursors.sh"
 source "$WORKSCRIPT/Personalizar/qt.sh"
+source "$WORKSCRIPT/Personalizar/services.sh"
 
 ############################
 ##       FUNCIONES        ##
@@ -42,6 +43,7 @@ menuPersonalizacion() {
         gtk_install
         qt_install
         terminales_instalador
+        services_enable_disable
     }
 
     if [[ "$1" = '-a' ]]; then
@@ -57,7 +59,8 @@ menuPersonalizacion() {
                 5) Personalizar GTK
                 6) Personalizar QT
                 7) Configurar Terminales
-                8) Todos los pasos anteriores
+                8) Habilitar/Deshabilitar Servicios al iniciar
+                9) Todos los pasos anteriores
 
                 0) Atrás
             '
@@ -75,8 +78,9 @@ menuPersonalizacion() {
                 4)  cursors_install;;          ## Cursores Personalizados
                 5)  gtk_install;;              ## Personalizar GTK
                 6)  qt_install;;               ## Personalizar QT
-                7)  terminales_instalador;;    ## Configurar tTerminales
-                8)  todas_personalizaciones;;  ## Todos los pasos anteriores
+                7)  terminales_instalador;;    ## Configurar Terminales
+                8)  services_enable_disable;;  ## Configurar servicios
+                9)  todas_personalizaciones;;  ## Todos los pasos anteriores
 
                 0)  ## SALIR
                     clear_screen
