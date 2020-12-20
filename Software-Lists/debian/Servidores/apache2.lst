@@ -2,3 +2,10 @@ apache2
 libapache2-mod-perl2
 libapache2-mod-php
 libapache2-mod-python
+certbot
+python3-certbot-apache
+python3-certbot-dns-cloudflare
+python3-certbot-dns-digitalocean
+python3-certbot-dns-dnsimple
+python3-certbot-dns-google
+python3-certbot-dns-ovh
