@@ -26,3 +26,14 @@ xdg-user-dirs
 ntp
 pciutils
 gdebi
+synaptic
+cryptsetup
+cryptmount
+gparted
+fscrypt
+telnet
+sysstat
+flatpak
+gnupg2
+gitlab-cli
+gitlab-shell
