@@ -45,6 +45,11 @@ agregarRepositoriosDebian() {
         instalarSoftware 'curl'
         instalarSoftware 'gnupg'
         instalarSoftware 'rng-tools'
+
+        ## Habilito software para arquitectura de 32 bits
+        sudo dpkg --add-architecture i386
+
+        actualizarRepositorios
     }
 
     ##
@@ -99,7 +104,7 @@ agregarRepositoriosDebian() {
 
 
     if [[ "$BRANCH" = 'stable' ]]; then
-	stable_agregar_repositorios
+        stable_agregar_repositorios
     elif [[ "$BRANCH" = 'testing' ]]; then
         testing_agregar_repositorios
     elif [[ "$BRANCH" = 'unstable' ]]; then
