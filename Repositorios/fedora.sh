@@ -27,11 +27,15 @@
 ############################
 agregarRepositoriosFedora() {
     echo -e "$VE Configurando Repositorios para$RO Fedora$CL"
-    sudo dnf update --refresh
+    sudo dnf update --refresh -y
+
+    echo -e "$VE Configurando Repositorios para$RO Fedora$CL"
+    instalarSoftware 'wget' 'alien' 'sudo' 'git'
+
 
     ## Oficiales
     echo -e "$VE Añadiendo Repositorio$RO fedora-workstation-repositories$CL"
-    sudo dnf install fedora-workstation-repositories
+    instalarSoftware fedora-workstation-repositories
 
     ## QownNotes
     echo -e "$VE Añadiendo Repositorio$RO $CL"
@@ -45,8 +49,9 @@ agregarRepositoriosFedora() {
 
     ## RPMfusion
     echo -e "$VE Añadiendo Repositorio$RO RPMfusion$CL"
-    sudo dnf install https://download1.rpmfusion.org/free/fedora/rpmfusion-free-release-$(rpm -E %fedora).noarch.rpm
-    sudo dnf install https://download1.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-$(rpm -E %fedora).noarch.rpm
+    instalarSoftware https://download1.rpmfusion.org/free/fedora/rpmfusion-free-release-$(rpm -E %fedora).noarch.rpm
+    instalarSoftware https://download1.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-$(rpm -E %fedora).noarch.rpm
+    #sudo dnf config-manager rpmfusion-nonfree-nvidia-driver --set-enabled
 
     ## Google Chrome
     echo -e "$VE Añadiendo Repositorio$RO Google Chrome$CL"
@@ -57,5 +62,9 @@ agregarRepositoriosFedora() {
     echo -e "$VE Añadiendo Repositorio para$RO NodeJS$CL"
     curl -sL https://rpm.nodesource.com/setup_12.x | bash -
 
-    sudo dnf update --refresh
+    ## Gitlab Runner
+    echo -e "$VE Añadiendo Repositorio$RO Gitlab Runner$CL"
+    curl -L https://packages.gitlab.com/install/repositories/runner/gitlab-runner/script.rpm.sh | sudo bash
+
+    sudo dnf update --refresh -y
 }
