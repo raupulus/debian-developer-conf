@@ -34,6 +34,7 @@ aplicaciones_desarrollo() {
     instalarSoftwareLista "$SOFTLIST/Desarrollo/ftp.lst"
     instalarSoftwareLista "$SOFTLIST/Desarrollo/ide.lst"
     instalarSoftwareLista "$SOFTLIST/Desarrollo/nubes.lst"
+    instalarSoftwareLista "$SOFTLIST/Desarrollo/android.lst"
 
     repararGestorPaquetes
 }

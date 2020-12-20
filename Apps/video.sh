@@ -30,6 +30,7 @@ aplicaciones_video() {
     instalarSoftwareLista "$SOFTLIST/Video/conversores.lst"
     instalarSoftwareLista "$SOFTLIST/Video/editores.lst"
     instalarSoftwareLista "$SOFTLIST/Video/reproductores.lst"
+    instalarSoftwareLista "$SOFTLIST/Video/record_screen.lst"
 
     repararGestorPaquetes
 }
