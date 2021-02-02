@@ -25,7 +25,8 @@
 source "$WORKSCRIPT/Repositorios/debian/stable.sh"
 source "$WORKSCRIPT/Repositorios/debian/testing.sh"
 source "$WORKSCRIPT/Repositorios/debian/unstable.sh"
-source "$WORKSCRIPT/Repositorios/debian/comunes.sh"
+source "$WORKSCRIPT/Repositorios/debian/common_vps.sh"
+source "$WORKSCRIPT/Repositorios/debian/common.sh"
 
 ############################
 ##       FUNCIONES        ##
@@ -102,18 +103,24 @@ agregarRepositoriosDebian() {
         done
     }
 
+    ## Is a VPS
+    if [[ "$BRANCH" = 'stable' ] && ["$MY_ENV" = 'prod' ] ]; then
+        vps_add_repositories
+        common_vps_add_repository
+    else; then  ## Not a VPS
+        if [[ "$BRANCH" = 'stable' ]]; then
+            stable_agregar_repositorios
+        elif [[ "$BRANCH" = 'testing' ]]; then
+            testing_agregar_repositorios
+        elif [[ "$BRANCH" = 'unstable' ]]; then
+            unstable_agregar_repositorios
+        else
+            elegirRama
+        fi
 
-    if [[ "$BRANCH" = 'stable' ]]; then
-        stable_agregar_repositorios
-    elif [[ "$BRANCH" = 'testing' ]]; then
-        testing_agregar_repositorios
-    elif [[ "$BRANCH" = 'unstable' ]]; then
-        unstable_agregar_repositorios
-    else
-        elegirRama
+        common_vps_add_repositories
+        common_add_repositories
     fi
-
-    comunes_agregar_repositorios
 
     ## Asigna lectura a todos para buscar paquetes sin sudo
     sudo chmod 744 /etc/apt/sources.list
