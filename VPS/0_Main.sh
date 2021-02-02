@@ -22,8 +22,8 @@
 ##     IMPORTACIONES      ##
 ############################
 source "$WORKSCRIPT/VPS/firewall.sh"
-source "$WORKSCRIPT/VPS/idioma_hora.sh"
-source "$WORKSCRIPT/VPS/administrador.sh"
+source "$WORKSCRIPT/VPS/internationalization_and_timezone.sh"
+source "$WORKSCRIPT/VPS/administrator.sh"
 source "$WORKSCRIPT/VPS/fail2ban.sh"
 
 ###########################
