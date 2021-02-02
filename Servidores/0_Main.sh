@@ -45,7 +45,7 @@ menuServidores() {
     todos_servidores() {
         clear_screen
         echo -e "$VE Instalando todos los servidores$CL"
-        apache2_instalador
+        apache2_installer
         mariadb_instalador
         nodejs_instalador
         postgresql_instalador
@@ -86,7 +86,7 @@ menuServidores() {
 
             case $entrada in
 
-                1)  apache2_instalador;;     ## Instala Apache2
+                1)  apache2_installer;;     ## Instala Apache2
                 2)  mariadb_instalador;;     ## Instala MariaDB
                 3)  nodejs_instalador;;      ## Instala NodeJS
                 4)  postgresql_instalador;;  ## Instala PostgreSQL

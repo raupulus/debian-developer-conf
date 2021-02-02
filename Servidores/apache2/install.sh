@@ -71,9 +71,10 @@ apache2Propietarios() {
         sudo chown 'www-data:www-data' "${DIRWEB}/.htpasswd"
     fi
 
-    if [[ -d "${HOME}/GIT" ]]; then
-        sudo chown -R "$USER":www-data "${HOME}/GIT"
-        sudo chmod g+s -R "${HOME}/GIT"
+    ## Adopto directorio de repositorios git
+    if [[ ! -d '/var/git' ]]; then
+        sudo chown -R "$USER":www-data '/var/git'
+        sudo chmod g+s -R '/var/git'
     fi
 
     if [[ -d "${HOME}/git" ]]; then
@@ -127,34 +128,38 @@ apache2Ssl() {
 
     sudo chmod 700 -R "${APACHECONF}/ssl"
 
-    ## Genero certificados para localhost en caso de no existir
-    local existe=$(sudo ls "${APACHECONF}/ssl/localhost.key" 2>> /dev/null)
-    local existe1=$(sudo ls "${APACHECONF}/ssl/localhost.csr" 2>> /dev/null)
-    local existe2=$(sudo ls "${APACHECONF}/ssl/localhost.crt" 2>> /dev/null)
-    if [[ ! "$existe" = "${APACHECONF}/ssl/localhost.key" ]]; then
-        if [[ ! "$existe1" = "${APACHECONF}/ssl/localhost.csr" ]]; then
-            sudo rm "${APACHECONF}/ssl/localhost.csr"
+    ## Solo autofirmo certificados cuando no estoy en producción.
+    if [["$MY_ENV" != 'prod' ]]; then
+        ## Genero certificados para localhost en caso de no existir
+        local existe=$(sudo ls "${APACHECONF}/ssl/localhost.key" 2>> /dev/null)
+        local existe1=$(sudo ls "${APACHECONF}/ssl/localhost.csr" 2>> /dev/null)
+        local existe2=$(sudo ls "${APACHECONF}/ssl/localhost.crt" 2>> /dev/null)
+
+        if [[ ! "$existe" = "${APACHECONF}/ssl/localhost.key" ]]; then
+            if [[ ! "$existe1" = "${APACHECONF}/ssl/localhost.csr" ]]; then
+                sudo rm "${APACHECONF}/ssl/localhost.csr"
+            fi
+
+            if [[ ! "$existe2" = "${APACHECONF}/ssl/localhost.crt" ]]; then
+                sudo rm "${APACHECONF}/ssl/localhost.crt"
+            fi
+
+            sudo openssl genrsa -des3 -out ${APACHECONF}/ssl/localhost.key 4096
+            sudo openssl req -new -key \
+                ${APACHECONF}/ssl/localhost.key \
+                -out ${APACHECONF}/ssl/localhost.csr
+
+            sudo openssl x509 -req -days 5000 \
+                -in ${APACHECONF}/ssl/localhost.csr \
+                -signkey ${APACHECONF}/ssl/localhost.key \
+                -out ${APACHECONF}/ssl/localhost.crt
+
+
+            ## Muevo el .key para quitar que pida la contraseña
+            sudo mv "${APACHECONF}/ssl/localhost.key" "${APACHECONF}/ssl/localhostBACKUP.key"
+            sudo openssl rsa -in "${APACHECONF}/ssl/localhostBACKUP.key" -out "${APACHECONF}/ssl/localhost.key"
+            sudo rm "${APACHECONF}/ssl/localhostBACKUP.key"
         fi
-
-        if [[ ! "$existe2" = "${APACHECONF}/ssl/localhost.crt" ]]; then
-            sudo rm "${APACHECONF}/ssl/localhost.crt"
-        fi
-
-        sudo openssl genrsa -des3 -out ${APACHECONF}/ssl/localhost.key 4096
-        sudo openssl req -new -key \
-            ${APACHECONF}/ssl/localhost.key \
-            -out ${APACHECONF}/ssl/localhost.csr
-
-        sudo openssl x509 -req -days 5000 \
-            -in ${APACHECONF}/ssl/localhost.csr \
-            -signkey ${APACHECONF}/ssl/localhost.key \
-            -out ${APACHECONF}/ssl/localhost.crt
-
-
-        ## Muevo el .key para quitar que pida la contraseña
-        sudo mv "${APACHECONF}/ssl/localhost.key" "${APACHECONF}/ssl/localhostBACKUP.key"
-        sudo openssl rsa -in "${APACHECONF}/ssl/localhostBACKUP.key" -out "${APACHECONF}/ssl/localhost.key"
-        sudo rm "${APACHECONF}/ssl/localhostBACKUP.key"
     fi
 
     sudo chmod 600 -R "${APACHECONF}/ssl/"
@@ -200,18 +205,10 @@ apache2GenerarEnlaces() {
     then
         echo -e "$VE Creando enlace desde$RO ${HOME}/git$VE hasta$RO ${DIRWEB}/private$CL"
         sudo ln -s "$HOME/git" "${DIRWEB}/private/git"
-    elif [[ -d "$HOME/GIT" ]] &&
-         [[ "$ENV" = 'dev' ]] &&
-         [[ -d "${DIRWEB}/private" ]] &&
-         [[ ! -h "${DIRWEB}/private/git" ]];
-    then
-        echo -e "$VE Creando enlace desde$RO ${HOME$V}/GIT$VE hasta$RO ${DIRWEB}/private$CL"
-        sudo ln -s "$HOME/GIT" "${DIRWEB}/private/git"
-        sudo ln -s "$HOME/GIT" "$HOME/git"
     fi
 }
 
-apache2_instalador() {
+apache2_installer() {
     apache2Descargar
     apache2Preconfiguracion
     apache2Dependencias
@@ -237,11 +234,10 @@ apache2_instalador() {
     apache2DeshabilitarModulo 'php5'
     apache2Ssl
 
-    ## Habilito sitios virtuales.
-    apacheDefaultSiteCreate
-    apachePublicSiteCreate
-
+    ## Habilito sitios virtuales solo en desarrollo.
     if [[ "$ENV" = 'dev' ]]; then
+        apacheDefaultSiteCreate
+        apachePublicSiteCreate
         apachePrivateSiteCreate
     fi
 

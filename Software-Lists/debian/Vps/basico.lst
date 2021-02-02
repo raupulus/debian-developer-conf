@@ -2,3 +2,5 @@ git
 gitlab-cli
 pssh
 ssh
+ca-certificates
+apt-transport-https
