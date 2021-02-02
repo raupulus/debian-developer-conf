@@ -28,20 +28,28 @@ if [[ $USER != 'root' ]]; then
     exit 1
 fi
 
-apt install sudo git
-adduser web
-gpasswd -a web sudo
-gpasswd -a web crontab
-gpasswd -a web web
-gpasswd -a web www-data
 
-if [[ ! -d /home/web/debian-developer-conf ]]; then
-    git clone https://gitlab.com/fryntiz/debian-developer-conf.git \
-    /home/web/debian-developer-conf
+read -p "    Nombre del usuario principal → " username
+
+#TODO → Asegurar que no pasa en blanco, comprobar mejor esta parte y volver a pedir
+if [[ "$username" != '' ] && [[ "$username" != ' ' ]]; then
+    username='admin'
 fi
 
-chown web:web -R /home/web/debian-developer-conf
-cd /home/web/debian-developer-conf || exit
+apt install sudo git
+adduser $username
+gpasswd -a $username sudo
+gpasswd -a $username crontab
+gpasswd -a $username web
+gpasswd -a $username www-data
+
+if [[ ! -d '/home/web/debian-developer-conf' ]]; then
+    git clone https://gitlab.com/fryntiz/debian-developer-conf.git \
+    "/home/$username/debian-developer-conf"
+fi
+
+chown "$username:$username" -R "/home/$username/debian-developer-conf"
+cd "/home/$username/debian-developer-conf" || exit
 
 ## TODO → Con el "all" ya es suficiente, pero es necesario comprobar que exista
 ## la línea ya que al volver a ejecutar script o en algunos servidores ya se
@@ -58,6 +66,6 @@ sysctl -p
 sysctl -w net.ipv6.conf.all.disable_ipv6=1
 sysctl -w net.ipv6.conf.default.disable_ipv6=1
 
-sudo -u web ./main.sh
+sudo -u $username ./main.sh
 
 exit 0
