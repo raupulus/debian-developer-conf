@@ -4,14 +4,14 @@
 ## @author     Raúl Caro Pastorino
 ## @copyright  Copyright © 2018 Raúl Caro Pastorino
 ## @license    https://wwww.gnu.org/licenses/gpl.txt
-## @email      dev@fryntiz.es
+## @email      raul@fryntiz.dev
 ## @web        https://fryntiz.es
 ## @github     https://github.com/fryntiz
 ## @gitlab     https://gitlab.com/fryntiz
 ## @twitter    https://twitter.com/fryntiz
 ##
 ##             Guía de estilos aplicada:
-## @style      https://github.com/fryntiz/bash-guide-style
+## @style      https://gitlab.com/fryntiz/bash-guide-style
 
 ############################
 ##     INSTRUCCIONES      ##
@@ -57,9 +57,9 @@ ssh_postconfiguracion() {
     ## /etc/issue -> Mensaje de login para acceso local al equipo (Acceso por TTY)
     ## /etc/issue.net -> Mensaje de login para acceso por red (Acceso por SSH)
     ## /etc/motd -> Mensaje para después del login.
-    echo "$DISTRO by Fryntiz → dev@fryntiz.es" | sudo tee '/etc/issue'
-    echo "$DISTRO by Fryntiz → dev@fryntiz.es" | sudo tee '/etc/issue.net'
-    echo "Has conectado al servidor $DISTRO mantenido por → dev@fryntiz.es" | sudo tee '/etc/motd'
+    echo "$DISTRO by Fryntiz → raul@fryntiz.dev" | sudo tee '/etc/issue'
+    echo "$DISTRO by Fryntiz → raul@fryntiz.dev" | sudo tee '/etc/issue.net'
+    echo "Has conectado al servidor $DISTRO mantenido por → raul@fryntiz.dev" | sudo tee '/etc/motd'
 }
 
 ssh_instalador() {

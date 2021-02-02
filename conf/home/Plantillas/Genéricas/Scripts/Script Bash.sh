@@ -2,7 +2,7 @@
 # -*- ENCODING: UTF-8 -*-
 
 ## @author     Raúl Caro Pastorino
-## @email      dev@fryntiz.es
+## @email      raul@fryntiz.dev
 ## @web        https://fryntiz.es
 ## @gitlab     https://gitlab.com/fryntiz
 ## @github     https://github.com/fryntiz
