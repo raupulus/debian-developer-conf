@@ -49,7 +49,7 @@ menuServidores() {
         mariadb_instalador
         nodejs_instalador
         postgresql_instalador
-        docker_instalador
+        docker_installer
         ssh_instalador
         mongodb_instalador
         sqlite_instalador
@@ -90,7 +90,7 @@ menuServidores() {
                 2)  mariadb_instalador;;     ## Instala MariaDB
                 3)  nodejs_instalador;;      ## Instala NodeJS
                 4)  postgresql_instalador;;  ## Instala PostgreSQL
-                5)  docker_instalador;;      ## Instala Docker
+                5)  docker_installer;;      ## Instala Docker
                 6)  ssh_instalador;;         ## Instala Ssh
                 7)  mongodb_instalador;;     ## Instala MongoDB
                 8)  sqlite_instalador;;      ## Instala Sqlite

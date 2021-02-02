@@ -1,4 +1,6 @@
 docker
 docker-compose
-docker-engine
 debocker
+containerd
+docker-clean
+python3-docker

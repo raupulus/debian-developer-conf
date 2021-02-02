@@ -104,10 +104,10 @@ agregarRepositoriosDebian() {
     }
 
     ## Is a VPS
-    if [[ "$BRANCH" = 'stable' ] && ["$MY_ENV" = 'prod' ] ]; then
+    if [[ "$BRANCH" = 'stable' ]] && [["$MY_ENV" = 'prod' ]]; then
         vps_add_repositories
         common_vps_add_repository
-    else; then  ## Not a VPS
+    else  ## Not a VPS
         if [[ "$BRANCH" = 'stable' ]]; then
             stable_agregar_repositorios
         elif [[ "$BRANCH" = 'testing' ]]; then
