@@ -16,11 +16,12 @@
 ############################
 ##      INSTRUCTIONS      ##
 ############################
-## Menú principal para configurar un VPS
+## Main Menú to prepare and configure VPS
 
 ############################
 ##     IMPORTACIONES      ##
 ############################
+source "$WORKSCRIPT/VPS/user_admin.sh"
 source "$WORKSCRIPT/VPS/firewall.sh"
 source "$WORKSCRIPT/VPS/internationalization_and_timezone.sh"
 source "$WORKSCRIPT/VPS/administrator.sh"
