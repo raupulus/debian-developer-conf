@@ -10,11 +10,11 @@
 ## @github     https://github.com/fryntiz
 ## @twitter    https://twitter.com/fryntiz
 ##
-##             Guía de estilos aplicada:
+##             Applied Style Guide:
 ## @style      https://gitlab.com/fryntiz/bash-style-guide
 
 ############################
-##     INSTRUCCIONES      ##
+##      INSTRUCTIONS      ##
 ############################
 ## Prepara un VPS recién creado antes de ejecutar el script principal.
 ## Este script debe ejecutarse como root.

@@ -8,12 +8,13 @@
 ## @web        https://fryntiz.es
 ## @github     https://github.com/fryntiz
 ## @gitlab     https://gitlab.com/fryntiz
+## @twitter    https://twitter.com/fryntiz
 ##
-##             Guía de estilos aplicada:
+##             Applied Style Guide:
 ## @style      https://gitlab.com/fryntiz/bash-guide-style
 
 ############################
-##     INSTRUCCIONES      ##
+##      INSTRUCTIONS      ##
 ############################
 ## Este script instala siempre las aplicaciones que considero básicas en un
 ## sistema operativo para trabajar y desarrollar.

@@ -10,11 +10,11 @@
 ## @gitlab     https://gitlab.com/fryntiz
 ## @twitter    https://twitter.com/fryntiz
 ##
-##             Guía de estilos aplicada:
+##             Applied Style Guide:
 ## @style      https://gitlab.com/fryntiz/bash-guide-style
 
 ############################
-##     INSTRUCCIONES      ##
+##      INSTRUCTIONS      ##
 ############################
 ## Instala, configura y personaliza el SGBD para bases de datos MariaDB tanto
 ## cliente como servidor y phpmyadmin para gesión via interfaz web.
@@ -23,7 +23,7 @@
 ## nombre para este "dev" y contraseña "dev"
 
 ############################
-##        FUNCIONES       ##
+##        FUNCTIONS       ##
 ############################
 
 mariadb_descargar() {

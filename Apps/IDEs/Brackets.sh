@@ -10,11 +10,11 @@
 ## @gitlab     https://gitlab.com/fryntiz
 ## @twitter    https://twitter.com/fryntiz
 ##
-##             Guía de estilos aplicada:
+##             Applied Style Guide:
 ## @style      https://gitlab.com/fryntiz/bash-guide-style
 
 ############################
-##     INSTRUCCIONES      ##
+##      INSTRUCTIONS      ##
 ############################
 ## Instala el Editor/IDE Brackets en el sistema resolviendo dependencias y
 ## descargándolo desde su sitio oficial.

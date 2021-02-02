@@ -10,11 +10,11 @@
 ## @github     https://github.com/fryntiz
 ## @twitter    https://twitter.com/fryntiz
 ##
-##             Guía de estilos aplicada:
+##             Applied Style Guide:
 ## @style      https://gitlab.com/fryntiz/bash-guide-style
 
 ############################
-##     INSTRUCCIONES      ##
+##      INSTRUCTIONS      ##
 ############################
 ## Este script prepara el sistema, instala y configura apache2.
 ## También agrega los sitios virtuales desde una plantilla básica.
@@ -29,7 +29,7 @@ source "$WORKSCRIPT/Servidores/apache2/site-private.sh"
 source "$WORKSCRIPT/Servidores/apache2/site-public.sh"
 
 ############################
-##        FUNCIONES       ##
+##        FUNCTIONS       ##
 ############################
 ##
 ## Descarga e instala la base para apache2.

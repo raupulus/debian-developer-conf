@@ -10,11 +10,11 @@
 ## @gitlab     https://gitlab.com/fryntiz
 ## @twitter    https://twitter.com/fryntiz
 ##
-##             Guía de estilos aplicada:
+##             Applied Style Guide:
 ## @style      https://gitlab.com/fryntiz/bash-guide-style
 
 ############################
-##     INSTRUCCIONES      ##
+##      INSTRUCTIONS      ##
 ############################
 ## Antes de bloquear toma una captura de la pantalla y la difumina para luego
 ## usarla de fondo de pantalla en el bloqueador

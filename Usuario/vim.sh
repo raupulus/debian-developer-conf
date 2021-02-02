@@ -10,11 +10,11 @@
 ## @gitlab     https://gitlab.com/fryntiz
 ## @twitter    https://twitter.com/fryntiz
 ##
-##             Guía de estilos aplicada:
+##             Applied Style Guide:
 ## @style      https://gitlab.com/fryntiz/bash-guide-style
 
 ############################
-##     INSTRUCCIONES      ##
+##      INSTRUCTIONS      ##
 ############################
 ## Instala vim de forma global al sistema y lo configura para el usuario que
 ## ha ejecutado el script generando perfil de color, correccion de sintaxis y

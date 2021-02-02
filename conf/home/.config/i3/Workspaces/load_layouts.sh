@@ -10,11 +10,11 @@
 ## @gitlab     https://gitlab.com/fryntiz
 ## @twitter    https://twitter.com/fryntiz
 ##
-##             Guía de estilos aplicada:
+##             Applied Style Guide:
 ## @style      https://gitlab.com/fryntiz/bash-guide-style
 
 ############################
-##     INSTRUCCIONES      ##
+##      INSTRUCTIONS      ##
 ############################
 ## Carga los espacios de trabajo adjuntos en este mismo directorio en formato
 ## JSON conteniendo toda la información sobre el posicionamiento de cada

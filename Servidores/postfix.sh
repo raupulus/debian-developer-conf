@@ -10,18 +10,18 @@
 ## @github     https://github.com/fryntiz
 ## @twitter    https://twitter.com/fryntiz
 ##
-##             Guía de estilos aplicada:
+##             Applied Style Guide:
 ## @style      https://gitlab.com/fryntiz/bash-guide-style
 
 ############################
-##     INSTRUCCIONES      ##
+##      INSTRUCTIONS      ##
 ############################
 ## Instala un servidor postfix + dovecot
 ## Usuario: postfix
 ## Grupo: postfix
 
 ############################
-##        FUNCIONES       ##
+##        FUNCTIONS       ##
 ############################
 
 postfix_descargar() {

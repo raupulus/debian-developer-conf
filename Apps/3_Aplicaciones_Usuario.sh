@@ -9,11 +9,11 @@
 ## @github     https://github.com/fryntiz
 ## @gitlab     https://gitlab.com/fryntiz
 ##
-##             Guía de estilos aplicada:
+##             Applied Style Guide:
 ## @style      https://gitlab.com/fryntiz/bash-guide-style
 
 ############################
-##     INSTRUCCIONES      ##
+##      INSTRUCTIONS      ##
 ############################
 ## Instala software que se configura para cada usuario de forma independiente
 ## y necesitará ser ejecutado una vez por cada usuario que quiera implementar

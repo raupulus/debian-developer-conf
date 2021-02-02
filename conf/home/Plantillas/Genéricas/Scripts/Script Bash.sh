@@ -15,7 +15,7 @@
 ## Description: 
 ## Dependencies: 
 
-##             Guía de estilos aplicada:
+##             Applied Style Guide:
 ## @style      https://gitlab.com/fryntiz/bash-guide-style
 
 ## Revision 0.01 - File Created
@@ -39,7 +39,7 @@
 
 
 ############################
-##     INSTRUCCIONES      ##
+##      INSTRUCTIONS      ##
 ############################
 
 ############################

@@ -9,11 +9,11 @@
 ## @github     https://github.com/fryntiz
 ## @gitlab     https://gitlab.com/fryntiz
 ##
-##             Guía de estilos aplicada:
+##             Applied Style Guide:
 ## @style      https://gitlab.com/fryntiz/bash-guide-style
 
 ############################
-##     INSTRUCCIONES      ##
+##      INSTRUCTIONS      ##
 ############################
 ## Este script enlaza la instalación de todas las aplicaciones opcionales
 ## que podían ser interesante instalar en uno u otro momento.

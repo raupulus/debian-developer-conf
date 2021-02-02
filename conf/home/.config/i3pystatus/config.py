@@ -10,7 +10,7 @@
 # @gitlab     https://gitlab.com/fryntiz
 # @twitter    https://twitter.com/fryntiz
 
-# Guía de estilos aplicada: PEP8
+# Applied Style Guide: PEP8
 
 #######################################
 # #           Descripción           # #

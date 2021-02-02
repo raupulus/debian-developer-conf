@@ -10,17 +10,17 @@
 ## @github     https://github.com/fryntiz
 ## @twitter    https://twitter.com/fryntiz
 ##
-##             Guía de estilos aplicada:
+##             Applied Style Guide:
 ## @style      https://gitlab.com/fryntiz/bash-guide-style
 
 ############################
-##     INSTRUCCIONES      ##
+##      INSTRUCTIONS      ##
 ############################
 ## Contiene las rutas hacia directorios de configuraciones que pueden variar
 ## entre distribuciones.
 
 ############################
-##        FUNCIONES       ##
+##        FUNCTIONS       ##
 ############################
 ##
 ## Configura las rutas a directorios de apache.

@@ -10,17 +10,17 @@
 ## @gitlab     https://gitlab.com/fryntiz
 ## @twitter    https://twitter.com/fryntiz
 ##
-##             Guía de estilos aplicada:
+##             Applied Style Guide:
 ## @style      https://gitlab.com/fryntiz/bash-guide-style
 
 ############################
-##     INSTRUCCIONES      ##
+##      INSTRUCTIONS      ##
 ############################
 ## Instala NodeJS, su gestor de paquetes NPM y además una serie de paquetes
 ## globales para corrección de sintaxis entre otras utilidades.
 
 ############################
-##        FUNCIONES       ##
+##        FUNCTIONS       ##
 ############################
 
 nodejs_descargar() {

@@ -10,16 +10,16 @@
 ## @github     https://github.com/fryntiz
 ## @twitter    https://twitter.com/fryntiz
 ##
-##             Guía de estilos aplicada:
+##             Applied Style Guide:
 ## @style      https://gitlab.com/fryntiz/bash-guide-style
 
 ############################
-##     INSTRUCCIONES      ##
+##      INSTRUCTIONS      ##
 ############################
 ## Instala y configura postgreSQL tanto la parte cliente como el servidor.
 
 ############################
-##        FUNCIONES       ##
+##        FUNCTIONS       ##
 ############################
 
 postgresql_descargar() {

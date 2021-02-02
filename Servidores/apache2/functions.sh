@@ -10,17 +10,17 @@
 ## @github     https://github.com/fryntiz
 ## @twitter    https://twitter.com/fryntiz
 ##
-##             Guía de estilos aplicada:
+##             Applied Style Guide:
 ## @style      https://gitlab.com/fryntiz/bash-guide-style
 
 ############################
-##     INSTRUCCIONES      ##
+##      INSTRUCTIONS      ##
 ############################
 ## En este archivo se contienen las funciones auxiliares para el instalador
 ## de apache2 y sus sitios virtuales.
 
 ############################
-##        FUNCIONES       ##
+##        FUNCTIONS       ##
 ############################
 ##
 ## Borra todo el contenido dentro de /var/www
