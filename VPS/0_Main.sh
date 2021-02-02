@@ -42,17 +42,20 @@ menuVPS() {
     sudo systemctl stop apt-daily-upgrade.timer
     sudo systemctl stop apt-daily-upgrade
 
-    stable_agregar_repositorios
-    aplicaciones_basicas
+    ## Añado repositorios
+    vps_add_repositories
+    common_vps_add_repositories
 
-    instalarSoftwareLista "$SOFTLIST/Vps/basico.lst"
+    ## Instalo aplicaciones para VPS
+    apps_vps
 
+    ## Configuro git
     configuracion_git
 
     #menuServidores -a 'prod'
     #menuLenguajes -a 'prod'
 
-    vim_Instalador
+    #vim_Instalador
 
     ## Específicos de VPS en este directorio
     mainFirewall
@@ -63,6 +66,7 @@ menuVPS() {
     ## Protección contra ataques e intentos de crackeo
     fail2ban_instalador
 
-    ## Configura el usuario "web" como administrador
+    ## Configura el usuario "admin" como administrador
     configureAdmin
+    user_admin_installer
 }

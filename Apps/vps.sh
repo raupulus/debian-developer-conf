@@ -20,7 +20,7 @@
 ###########################
 ##       FUNCIONES       ##
 ###########################
-aplicaciones_vps() {
+apps_vps() {
     echo -e "$VE Aplicaciones para VPS$CL"
     actualizarRepositorios
 
