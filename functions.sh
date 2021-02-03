@@ -493,11 +493,11 @@ clear_screen() {
 
 ##
 ## Añade dentro de /bin/ los scripts recibidos
-## @param  $*  String  Nombres de scripts dentro de conf/bin/
+## @param  $*  String  Nombres de scripts dentro de conf/bin/ sin la extensión.
 ##
 addScriptToBin() {
     for script in $*; do
-        sudo cp "{$WORKSCRIPT}/conf/bin/${script}" "/bin/${script}"
+        sudo cp "{$WORKSCRIPT}/conf/bin/${script}.sh" "/bin/${script}"
         sudo chmod 755 -R "/bin/${script}"
     done
 }
