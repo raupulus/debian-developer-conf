@@ -57,6 +57,7 @@ postfix_postconfiguracion() {
         ## Configuración Dovecot
         sudo sed -r -i "s/^#?\s*disable_plaintext_auth =/disable_plaintext_auth = no/" "$dovecotconf"
         echo "localhost $dominio" | sudo tee -a /etc/hosts
+        echo "localhost $dominio" | sudo tee -a /etc/hosts.local
 
         ## Reconfigurar postfix y comprobar datos
         sudo dpkg-reconfigure postfix
