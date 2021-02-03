@@ -68,10 +68,10 @@ source "$WORKSCRIPT/routes.sh"
 ############################
 source "$WORKSCRIPT/functions.sh"
 source "$WORKSCRIPT/preferences.sh"
-source "$WORKSCRIPT/configuraciones.sh"
 source "$WORKSCRIPT/limpiador.sh"
 
 source "$WORKSCRIPT/Apps/0_Main.sh"
+source "$WORKSCRIPT/configurations/0_Main.sh"
 source "$WORKSCRIPT/Personalizar/0_Main.sh"
 source "$WORKSCRIPT/Servidores/0_Main.sh"
 source "$WORKSCRIPT/Repositorios/0_Main.sh"
@@ -114,8 +114,8 @@ menuPrincipal() {
         local descripcion='Menú Principal
             1) Repositorios
             2) Aplicaciones
-            3) Configuraciones
-            4) Personalización
+            3) Configuraciones del Sistema
+            4) Personalización del Entorno
             5) Servidores
             6) Lenguajes de Programación
             7) Configurar este Usuario
@@ -138,14 +138,14 @@ menuPrincipal() {
 
             1) menuRepositorios;;          ## Menú de Repositorios
             2) menuAplicaciones;;          ## Menú de Aplicaciones
-            3) instalar_configuraciones;;  ## Menú de Configuraciones
+            3) menu_configurations;;        ## Menú de Configuraciones
             4) menuPersonalizacion;;       ## Menú de Personalización
             5) menuServidores;;            ## Menú de Servidores
             6) menuLenguajes;;
             7) menuUsuario;;
             8) menuRepositorios           ## Todos los pasos
                menuAplicaciones -a
-               instalar_configuraciones
+               menu_configurations -a
                menuPersonalizacion -a
                menuServidores -a
                menuLenguajes -a;;
