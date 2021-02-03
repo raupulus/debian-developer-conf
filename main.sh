@@ -47,7 +47,7 @@ DEBIAN_FRONTEND=noninteractive  ## Deshabilita carteles del instalador
 
 DEBUG='false'      ## Establece si está el script en modo depuración
 WORKSCRIPT=$PWD  ## Directorio principal del script
-PATH_LOG="$WORKSCRIPT/errores.log"  ## Archivo donde almacenar errores
+PATH_LOG="$WORKSCRIPT/errors.log"  ## Archivo donde almacenar errores
 
 ## Importo variables locales si existieran, sobreescriben a las globales
 if [[ -a "$WORKSCRIPT/.env" ]]; then
@@ -66,7 +66,7 @@ source "$WORKSCRIPT/routes.sh"
 ############################
 ##     IMPORTACIONES      ##
 ############################
-source "$WORKSCRIPT/funciones.sh"
+source "$WORKSCRIPT/functions.sh"
 source "$WORKSCRIPT/preferences.sh"
 source "$WORKSCRIPT/configuraciones.sh"
 source "$WORKSCRIPT/limpiador.sh"
