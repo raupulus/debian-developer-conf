@@ -34,6 +34,7 @@ source "$WORKSCRIPT/Usuario/spacevim.sh"
 source "$WORKSCRIPT/Usuario/vim.sh"
 source "$WORKSCRIPT/Usuario/tmux.sh"
 source "$WORKSCRIPT/Usuario/powerline.sh"
+source "$WORKSCRIPT/Usuario/directories.sh"
 
 ###########################
 ##       FUNCIONES       ##
@@ -91,6 +92,7 @@ devicons_ls() {
 
 softwareUsuarioMinimo() {
     usuario_permisos
+    user_directories
     usuario_programas_default
     usuario_nano
     usuario_terminales
