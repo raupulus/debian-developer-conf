@@ -51,7 +51,7 @@ apache2AgregarDirectorio() {
         return 1
     fi
 
-    if [[ ! -d "$WORKSCRIPT/Apache2/www/${site}" ]]; then
+    if [[ ! -d "$WORKSCRIPT/conf/var/www/${site}" ]]; then
         echo -e "$RO No existe directorio en este script para el sitio de apache$RO $site$CL"
     fi
 
@@ -60,7 +60,7 @@ apache2AgregarDirectorio() {
     fi
 
     echo -e "$VE Copiando estructura dentro de ${DIRWEB}/${site} $CL"
-    sudo cp -R "$WORKSCRIPT/Apache2/www/${site}" "${DIRWEB}/${site}"
+    sudo cp -R "$WORKSCRIPT/conf/var/www/${site}" "${DIRWEB}/${site}"
 
     ## Generando directorio para logs
     ##if [[ ! -d "/var/log/apache2/${site}.local" ]]; then
@@ -83,7 +83,7 @@ apache2GenerarConfiguracion() {
         return 1
     fi
 
-    if [[ ! -f "${WORKSCRIPT}/Apache2/etc/apache2/sites-available/${conf}" ]]; then
+    if [[ ! -f "${WORKSCRIPT}/conf/etc/apache2/sites-available/${conf}" ]]; then
         echo -e "$VE No existe el archivo para el sitio de apache2 a copiar$CL"
         return 1
     fi
@@ -97,7 +97,7 @@ apache2GenerarConfiguracion() {
         echo -e "$VE Copiando configuración dentro de $APACHECONF$CL"
 
         ## Copia el contenido de configuración en apache2
-        sudo cp -R "${WORKSCRIPT}/Apache2/etc/apache2/sites-available/${conf}" "${APACHESITES}/${conf}"
+        sudo cp -R "${WORKSCRIPT}/conf/etc/apache2/sites-available/${conf}" "${APACHESITES}/${conf}"
     else
         echo -e "$VE No existe el directorio para el sitio $site$CL"
     fi
@@ -123,18 +123,27 @@ apache2ExisteSitioVirtual() {
 }
 
 ##
-## Crea una entrada en /etc/hosts para el sitio pasaddo.
+## Crea una entrada en /etc/hosts para el sitio pasado.
 ## $1 Recibe el nombre del sitio virtual.
 ##
 apache2ActivarHost() {
     local sitioWeb="$1"
     local entradaHosts=$(cat '/etc/hosts' | grep "127.0.0.1    ${sitioWeb}.local")
 
-    echo -e "$VE Añadiendo$RO Sitio Virtual$VE al archivo$RO /etc/hosts$AM"
+    echo -e "$VE Añadiendo$RO Sitio Virtual$VE al archivo$RO /etc/hosts$AM y $RO /etc/hosts.local"
 
     ## TODO → Usar "sed" para añadir el host
     if [[ "$entradaHosts" != "127.0.0.1    ${sitioWeb}.local" ]]; then
         echo "127.0.0.1    ${sitioWeb}.local" | sudo tee -a '/etc/hosts'
+    fi
+
+    local entradaHostsLocal=$(cat '/etc/hosts.local' | grep "127.0.0.1    ${sitioWeb}.local")
+
+    echo -e "$VE Añadiendo$RO Sitio Virtual$VE al archivo$RO /etc/hosts$AM"
+
+    ## TODO → Usar "sed" para añadir el host local
+    if [[ "$entradaHostsLocal" != "127.0.0.1    ${sitioWeb}.local" ]]; then
+        echo "127.0.0.1    ${sitioWeb}.local" | sudo tee -a '/etc/hosts.local'
     fi
 }
 

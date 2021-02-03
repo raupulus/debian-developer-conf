@@ -34,23 +34,50 @@ source "$WORKSCRIPT/Servidores/apache2/site-public.sh"
 ##
 ## Descarga e instala la base para apache2.
 ##
-apache2Descargar() {
+apache2_download() {
     echo -e "$VE Descargando$RO Apache2$CL"
 }
 
 ##
 ## Preconfigura apache2 antes de su instalación.
 ##
-apache2Preconfiguracion() {
+apache2_before_install() {
     echo -e "$VE Generando Pre-Configuraciones de$RO Apache2"
 }
 
 ##
 ## Instala las dependencias para apache2.
 ##
-apache2Dependencias() {
+apache2_install() {
     echo -e "$VE Instalando$RO Apache2$CL"
+
     instalarSoftwareLista "${SOFTLIST}/Servidores/apache2.lst"
+}
+
+##
+## Acciones después de instalar apache2
+##
+apache2_after_install() {
+    echo -e "$VE Acciones tras instalar$RO Apache2$CL"
+
+    ## Configuración de puertos usados por apache.
+    sudo cp "$WORKSCRIPT/conf/etc/apache2/ports.conf" "$APACHEPORTSCONF"
+
+    ## Creo almacenamiento para aplicaciones
+    if [[ ! -d '/var/www/storage' ]]; then
+        sudo mkdir '/var/www/storage'
+        sudo chown www-data:www-data -R '/var/www/storage'
+        sudo chmod 660 -R '/var/www/storage'
+        sudo chmod ug+s -R '/var/www/storage'
+        sudo su root -c "umask 117 -R /var/www/storage"
+    fi
+
+    ## Preparo configuración de módulos disponibles en apache2.
+    sudo cp ${WORKSCRIPT}/conf/etc/apache2/mods-available/* "$APACHEMODS"
+
+    if [[ -d "/et" ]]; then
+        sudo chown 'www-data:www-data' "${DIRWEB}/.htpasswd"
+    fi
 }
 
 ##
@@ -60,6 +87,8 @@ apache2Propietarios() {
     ## Cambia el dueño
     echo -e "$VE Asignando dueños$CL"
     sudo chown root:root "$APACHEPORTSCONF"
+    sudo chown root:root -R "$APACHEMODS"
+
 
     ## Agrega el usuario al grupo www-data
     echo -e "$VE Añadiendo el usuario al grupo$RO www-data"
@@ -72,14 +101,17 @@ apache2Propietarios() {
     fi
 
     ## Adopto directorio de repositorios git
-    if [[ ! -d '/var/git' ]]; then
+    if [[ -d '/var/git' ]]; then
         sudo chown -R "$USER":www-data '/var/git'
+        sudo chmod 770 -R '/var/git'
         sudo chmod g+s -R '/var/git'
+        sudo su root -c "umask 117 -R /var/www/storage"
     fi
 
     if [[ -d "${HOME}/git" ]]; then
         sudo chown -R "$USER":www-data "${HOME}/git"
         sudo chmod g+s -R "${HOME}/git"
+        sudo su root -c "umask 117 -R ${HOME}/git"
     fi
 }
 
@@ -88,23 +120,17 @@ apache2Propietarios() {
 ##
 apache2Permisos() {
     echo -e "$VE Asignando permisos$RO Configuración$CL"
-    sudo chmod 750 "$APACHEPORTSCONF"
+    sudo chmod 755 "$APACHEPORTSCONF"
     sudo chmod 750 "$APACHEAPACHE2CONF"
+    sudo chmod 644 -R "$APACHEMODS"
+    sudo chmod 755 "$APACHEMODS"
+
 
     echo -e "$VE Asignando permisos a$RO Hosts Virtuales$CL"
     sudo chmod ug+rw -R ${DIRWEB}/*
     sudo chmod 700 "${DIRWEB}/.htpasswd"
     sudo chmod 755 "${APACHECONF}/"
     sudo chmod 755 -R "$APACHESITES" "$APACHESITESENABLED"
-}
-
-##
-## Aplica configuraciones tras instalar apache2.
-##
-apache2Postconfiguracion() {
-    echo -e "$VE Generando Post-Configuraciones de Apache2"
-
-    sudo cp "$WORKSCRIPT/Apache2/etc/apache2/ports.conf" "$APACHEAPACHE2CONF"
 }
 
 ##
@@ -129,7 +155,7 @@ apache2Ssl() {
     sudo chmod 700 -R "${APACHECONF}/ssl"
 
     ## Solo autofirmo certificados cuando no estoy en producción.
-    if [["$MY_ENV" != 'prod' ]]; then
+    if [[ "$MY_ENV" != 'prod' ]]; then
         ## Genero certificados para localhost en caso de no existir
         local existe=$(sudo ls "${APACHECONF}/ssl/localhost.key" 2>> /dev/null)
         local existe1=$(sudo ls "${APACHECONF}/ssl/localhost.csr" 2>> /dev/null)
@@ -194,7 +220,7 @@ apache2GenerarEnlaces() {
         echo -e "$VE Creando enlace desde$RO ${HOME}/web$VE hasta$RO $DIRWEB$CL"
 
         sudo ln -s "$DIRWEB" "${HOME}/web"
-        sudo chown -R "$USER:www-data" "${HOME}/web"
+        sudo chown "$USER:www-data" "${HOME}/web"
     fi
 
     ## Creo enlace a repositorios "git" en zona privada.
@@ -209,9 +235,10 @@ apache2GenerarEnlaces() {
 }
 
 apache2_installer() {
-    apache2Descargar
-    apache2Preconfiguracion
-    apache2Dependencias
+    apache2_download
+    apache2_before_install
+    apache2_install
+    apache2_after_install
 
     if [[ -d "${DIRWEB}" ]] && [[ ! -f "${DIRWEB}/.htpasswd" ]]; then
         apache2DefaultSiteSecurity
@@ -230,7 +257,13 @@ apache2_installer() {
     fi
 
     apache2LimpiarSites
-    apache2HabilitarModulo 'rewrite' 'ssl'
+    apache2HabilitarModulo rewrite ssl access_compat authn_file filter \
+           negotiation autoindex env python socache_shmcb alias auth authz_core \
+           deflate filter perl reqtimeout ssl auth_basic authz_host dir mime \
+           status authn_core authz_user dnssd mpm_prefork setenvif proxy_http2 \
+           headers http2 suexec status deflate auth_digest auth_basic cgi fcgid \
+           proxy proxy_fcgi proxy_http evasive
+
     apache2DeshabilitarModulo 'php5'
     apache2Ssl
 
