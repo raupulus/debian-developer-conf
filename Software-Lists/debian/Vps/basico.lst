@@ -13,3 +13,4 @@ curl
 gnupg
 rng-tools
 tar
+ntp
