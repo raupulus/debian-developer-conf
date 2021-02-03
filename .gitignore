@@ -18,6 +18,8 @@ conf/home/.vim/bundle/*
 conf/home/.vim/sessions/*
 errores.log
 /errores.log
+errors.log
+/errors.log
 /conf/home/.atom/Diccionarios
 /conf/home/.vim/UltiSnips
 /conf/home/.vim/after
