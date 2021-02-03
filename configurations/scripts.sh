@@ -26,4 +26,8 @@ configurations_scripts() {
     echo -e "$VE Añadiendo scripts a$RO /bin$CL"
 
     addScriptToBin '??????'
+
+    if [[ "${MY_DISTRO}" = 'raspbian' ]]; then
+        echo -e "$VE Añadiendo scripts de raspbian a$RO /bin$CL"
+    fi
 }
