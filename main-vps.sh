@@ -19,6 +19,22 @@
 ## Prepara un VPS recién creado antes de ejecutar el script principal.
 ## Este script debe ejecutarse como root.
 
+## Importo variables globales para evitar conflictos de configuración sin reboot
+if [[ -f '/etc/environment' ]]; then
+    source '/etc/environment'
+fi
+
+DEBUG='false'      ## Establece si está el script en modo depuración
+WORKSCRIPT=$PWD  ## Directorio principal del script
+PATH_LOG="$WORKSCRIPT/errors.log"  ## Archivo donde almacenar errores
+
+## Importo variables locales si existieran, sobreescriben a las globales
+if [[ -a "$WORKSCRIPT/.env" ]]; then
+    source "$WORKSCRIPT/.env"
+fi
+
+source "$WORKSCRIPT/functions.sh"
+
 ###########################
 ##       FUNCIONES       ##
 ###########################
@@ -28,6 +44,8 @@ if [[ $USER != 'root' ]]; then
     exit 1
 fi
 
+## Instala el software dependiente.
+instalarSoftware sudo git curl wget
 
 read -p "    Nombre del usuario principal → " username
 
@@ -36,16 +54,16 @@ if [[ "$username" != '' ] && [[ "$username" != ' ' ]]; then
     username='admin'
 fi
 
-apt install sudo git
 adduser $username
 gpasswd -a $username sudo
 gpasswd -a $username crontab
-gpasswd -a $username web
+gpasswd -a $username $username
+gpasswd -a $username go
 gpasswd -a $username www-data
 
-if [[ ! -d '/home/web/debian-developer-conf' ]]; then
+if [[ ! -d "/home/${username}/debian-developer-conf" ]]; then
     git clone https://gitlab.com/fryntiz/debian-developer-conf.git \
-    "/home/$username/debian-developer-conf"
+    "/home/${username}/debian-developer-conf"
 fi
 
 chown "$username:$username" -R "/home/$username/debian-developer-conf"
