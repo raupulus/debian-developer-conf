@@ -22,7 +22,8 @@
 ##       FUNCTIONS       ##
 ###########################
 
-## Este script solo informa de los demás, para cuando no los recuerde
-## Traer scripts de mi repo → https://gitlab.com/fryntiz/shellscript/-/tree/master
-## implementar script para gestionar servidores
-## Añadir scripts exclusivos de raspberry
+## En caso de no recibir parámetros, saldrá
+if [[ $# = 0 ]]; then
+    echo 'no hay parámetros'
+    return 1
+fi
