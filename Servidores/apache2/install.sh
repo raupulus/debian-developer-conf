@@ -96,7 +96,7 @@ apache2Propietarios() {
 
     ## Cada archivo/directorio creado tomará el grupo www-data
 
-    if [[ -d "${DIRWEB}/.htpasswd" ]]; then
+    if [[ -d "${DIRWEB}" ]] && [[ -f "${DIRWEB}/.htpasswd" ]]; then
         sudo chown 'www-data:www-data' "${DIRWEB}/.htpasswd"
     fi
 

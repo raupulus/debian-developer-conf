@@ -143,6 +143,9 @@ apache2ActivarHost() {
 
     ## TODO → Usar "sed" para añadir el host local
     if [[ "$entradaHostsLocal" != "127.0.0.1    ${sitioWeb}.local" ]]; then
+        if [[ ! -f '/etc/hosts.local' ]]; then
+            sudo touch '/etc/hosts.local'
+        fi
         echo "127.0.0.1    ${sitioWeb}.local" | sudo tee -a '/etc/hosts.local'
     fi
 }
