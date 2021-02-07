@@ -20,7 +20,7 @@
 ##
 ## Configurar editor de terminal, nano
 ##
-usuario_nano() {
+user_nano_installer() {
     echo -e "$VE Configurando editor$RO nano$CL"
 
     if [[ -d "$HOME/.nano" ]] && [[ ! -d "$HOME/.nano/.git" ]]; then

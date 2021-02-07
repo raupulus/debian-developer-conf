@@ -68,7 +68,7 @@ usuario_tilix() {
     wget -qO $HOME"/.config/tilix/schemes/dracula.json" https://git.io/v7QaT
 }
 
-usuario_terminales() {
+user_terminals_installer() {
     echo -e "$VE Configurando terminales$CL"
     usuario_tilix
     usuario_interprete

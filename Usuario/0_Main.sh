@@ -94,8 +94,8 @@ softwareUsuarioMinimo() {
     usuario_permisos
     user_directories
     usuario_programas_default
-    usuario_nano
-    usuario_terminales
+    user_nano_installer
+    user_terminals_installer
     tmux_Instalador
     powerline_Instalador
 
@@ -107,7 +107,7 @@ softwareUsuarioMinimo() {
         read -p "→ " editor
         case "$editor" in
             vim | 1)
-                vim_Instalador
+                vim_installer
                 break;;
             spacevim | 2)
                 spacevim_Instalador
