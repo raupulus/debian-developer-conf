@@ -81,6 +81,31 @@ gocd_after_install() {
     sudo update-ca-certificates -f
 
 
+    ## Creo tabla para postgresql
+    echo -e "$VE Creando DB en$RO Postgresql$VE y asignándole$RO Usuario$CL"
+
+    while [[ -z "$gocd_database_user" ]]; do
+        read -p " Introduce un usuario para la nueva DB gocd → " gocd_database_user
+    done
+
+    while [[ -z "$gocd_database_password" ]]; do
+        read -p " Introduce una contraseña para la nueva DB gocd → " gocd_database_password
+    done
+
+    sudo -u postgres psql -c CREATE ROLE "${gocd_database_user}" PASSWORD "${gocd_database_password}" NOSUPERUSER NOCREATEDB NOCREATEROLE INHERIT LOGIN;
+
+    sudo -u postgres psql -c CREATE DATABASE "gocd" ENCODING="UTF8" TEMPLATE="template0";
+
+    sudo -u postgres psql -c GRANT ALL PRIVILEGES ON DATABASE "gocd" TO "${gocd_database_user}";
+
+    ## TODO → Actualmente se usa así en el servidor de pruebas, no debe ser SUPERUSER
+    sudo -u postgres psql -c ALTER ROLE "${gocd_database_user}" SUPERUSER;
+
+
+
+
+
+
 
     # MENSAJES PARA HACER MANUALMENTE EN LA INTERFAZ
     # TODO → ESTO SE PUEDE HACER DESDE ARCHIVOS SEGURO, MIRAR
