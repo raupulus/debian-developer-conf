@@ -24,6 +24,21 @@ gocd_download() {
 gocd_before_install() {
     echo -e "$VE Generando Pre-Configuraciones de$RO GoCD$CL"
 
+    ## Comprueba si postgresql está instalado o pregunta si instalarlo
+    if [[ ! -f '/usr/bin/psql' ]]; then
+        echo -e "$RO Postgresql no está instalado en el sistema!!!$CL"
+
+        sleep 2
+
+        while [[ -z "$input_user" ]]; do
+            read -p " ¿Quieres instalar postgresql? s/N → " input_user
+        done
+
+        if [[ "$input_user" = 's' ]] || [[ "$input_user" = 'S' ]]; then
+            postgresql_installer
+        fi
+    fi
+
     sudo groupadd gocd
     sudo usermod -a -G gocd "$USER"
 
@@ -62,12 +77,13 @@ gocd_after_install() {
     echo ""
     read -p "Pulsa cualquier INTRO para continuar" nullparam
 
-
     echo -e "$VE Actualizando$RO certificados$CL"
     sudo update-ca-certificates -f
 
 
 
+    # MENSAJES PARA HACER MANUALMENTE EN LA INTERFAZ
+    # TODO → ESTO SE PUEDE HACER DESDE ARCHIVOS SEGURO, MIRAR
     Entrar a la url **/go/admin/security/auth_configs**
     id → file_authentication
     plugin id → Password File Authentication
@@ -83,6 +99,15 @@ gocd_after_install() {
 gocd_installer() {
     gocd_download
     gocd_before_install
+
+    ## Compruebo si está postgresql o aborta instalación
+    if [[ ! -f '/usr/bin/psql' ]]; then
+        echo -e "$VE Es necesario tener instalado$RO PostgreSql$CL"
+        echo -e "$VE Para otro tipo de configuración deberá continuar$RO Manualmente$CL"
+        echo -e "$RO ABORTANDO INSTALACIÓN DE GOCD!!!$CL"
+        return 0
+    fi
+
     gocd_install
     gocd_after_install
 }

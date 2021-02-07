@@ -49,7 +49,7 @@ menuServidores() {
         apache2_installer
         mariadb_instalador
         nodejs_instalador
-        postgresql_instalador
+        postgresql_installer
         docker_installer
         ssh_instalador
         mongodb_instalador
@@ -91,7 +91,7 @@ menuServidores() {
                 1)  apache2_installer;;      ## Instala Apache2
                 2)  mariadb_instalador;;     ## Instala MariaDB
                 3)  nodejs_instalador;;      ## Instala NodeJS
-                4)  postgresql_instalador;;  ## Instala PostgreSQL
+                4)  postgresql_installer;;  ## Instala PostgreSQL
                 5)  docker_installer;;       ## Instala Docker
                 6)  ssh_instalador;;         ## Instala Ssh
                 7)  mongodb_instalador;;     ## Instala MongoDB

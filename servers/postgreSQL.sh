@@ -101,7 +101,7 @@ postgresql_postconfiguracion() {
     fi
 }
 
-postgresql_instalador() {
+postgresql_installer() {
     postgresql_descargar
     postgresql_preconfiguracion
     postgresql_instalar
