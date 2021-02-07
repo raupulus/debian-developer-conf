@@ -2,7 +2,7 @@
 # -*- ENCODING: UTF-8 -*-
 ##
 ## @author     Raúl Caro Pastorino
-## @copyright  Copyright © 2018 Raúl Caro Pastorino
+## @copyright  Copyright © 2021 Raúl Caro Pastorino
 ## @license    https://wwww.gnu.org/licenses/gpl.txt
 ## @email      raul@fryntiz.dev
 ## @web        https://fryntiz.es
@@ -20,6 +20,8 @@
 ##
 ## Configurar editor de terminal, nano
 ##
-root_nano() {
-    echo -e "$VE Configurando editor$RO nano$CL"
+root_vim() {
+    echo -e "$VE Configurando editor$RO vim$CL"
+
+    sudo -u root bash $WORKSCRIPT/main.sh 'vim'
 }

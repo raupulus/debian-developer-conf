@@ -21,10 +21,11 @@
 ############################
 ##     IMPORTACIONES      ##
 ############################
-source "$WORKSCRIPT/Root/nano.sh"
-source "$WORKSCRIPT/Root/permisos.sh"
-source "$WORKSCRIPT/Root/programas-default.sh"
-source "$WORKSCRIPT/Root/terminales.sh"
+source "$WORKSCRIPT/root/nano.sh"
+source "$WORKSCRIPT/root/permisos.sh"
+source "$WORKSCRIPT/root/programas-default.sh"
+source "$WORKSCRIPT/root/terminales.sh"
+source "$WORKSCRIPT/root/vim.sh"
 
 ###########################
 ##       FUNCIONES       ##
@@ -32,7 +33,7 @@ source "$WORKSCRIPT/Root/terminales.sh"
 ##
 ## Menú instalar todas las configuraciones del Root
 ##
-menuRoot() {
+menu_root() {
     echo -e "$RO No implementado$CL"
     echo -e "$RO Simulando scripts (no es real esta parte)$CL"
 
@@ -42,5 +43,6 @@ menuRoot() {
     cd "$WORKSCRIPT"
 
     root_nano
+    root_vim
     root_terminales
 }

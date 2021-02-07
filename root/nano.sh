@@ -18,22 +18,10 @@
 ############################
 
 ##
-## Elegir intérprete de comandos entre los actuales instalados del sistema
-## Contempla bash y zsh, por defecto si no está zsh configurará solo para bash
+## Configurar editor de terminal, nano
 ##
-root_interprete() {
-    echo -e "$VE Configurando terminal$CL"
-}
+root_nano() {
+    echo -e "$VE Configurando editor$RO nano$CL"
 
-##
-## Personaliza terminal tilix
-##
-root_tilix() {
-     echo -e "$VE Configurando tilix$CL"
-}
-
-root_terminales() {
-    echo -e "$VE Configurando terminales$CL"
-    root_tilix
-    root_interprete
+    sudo -u root bash $WORKSCRIPT/main.sh 'nano'
 }
