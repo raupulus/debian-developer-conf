@@ -45,13 +45,17 @@ actualizarSistema() {
     if [[ -f '/usr/bin/npm' ]] || [[ -f "$HOME/.npm/bin/npm" ]]; then
         echo "Actualizando desde NPM"
         npm update -g
+
+        if [[ -f "$HOME/.npm/bin/npm" ]]; then
+            npm install -g npm
+        fi
     fi
 
-    if [[ -f '/usr/bin/pip' ]] || [[ -f "$HOME/.local/bin/pip" ]]; then
-        echo "Actualizando desde PIP Python 2"
-        #pip-review --local --auto
-        python2 -m pip_review --local --auto
-    fi
+    #if [[ -f '/usr/bin/pip' ]] || [[ -f "$HOME/.local/bin/pip" ]]; then
+    #    echo "Actualizando desde PIP Python 2"
+    #    #pip-review --local --auto
+    #    python2 -m pip_review --local --auto
+    #fi
 
     if [[ -f '/usr/bin/pip3' ]] || [[ -f "$HOME/.local/bin/pip3" ]]; then
         echo "Actualizando desde PIP Python 3"
@@ -67,6 +71,38 @@ actualizarSistema() {
     if [[ "$DISTRO" = 'raspbian' ]]; then
         sudo rpi-update
     fi
+
+    ## Intenta actualizar hosts y hosts.deny
+    echo -e "$VE Configurar archivo$RO /etc/hosts$CL"
+
+    ## La primera vez se traslada a un archivo que se usará para local.
+    if [[ ! -f '/etc/hosts.local' ]] && [[ -f '/etc/hosts' ]]; then
+        sudo cp '/etc/hosts' '/etc/hosts.local'
+    fi
+
+    ## Crea copia del último archivo antes de actualizar
+    if [[ -f '/etc/hosts' ]]; then
+        sudo mv '/etc/hosts' '/etc/hosts.BACKUP'
+    fi
+
+    if [[ ! -f '/etc/hosts' ]]; then
+        sudo touch '/etc/hosts'
+    fi
+
+    if [[ -f '/etc/hosts.local' ]]; then
+            sudo cat '/etc/hosts.local' | sudo tee "/etc/hosts"
+    else
+        echo -e "$VE Existe algún problema con el archivo$RO /etc/hosts.local$CL"
+        echo -e "$VE Te recomiendo revisar esto manualmente$CL"
+    fi
+
+    echo -e "$VE Descargando actualización de$RO Hosts Bloqueados$CL"
+    sudo wget https://hosts.ubuntu101.co.za/hosts -O '/tmp/hosts' && sudo cat '/tmp/hosts' | sudo tee -a '/etc/hosts'
+
+    echo '' && echo ''
+
+    echo -e "$VE Descargando actualización de$RO Hosts Denegados$CL"
+    sudo wget https://hosts.ubuntu101.co.za/superhosts.deny -O '/etc/hosts.deny'
 }
 
 actualizarSistema
