@@ -55,7 +55,7 @@ if [[ -a "$WORKSCRIPT/.env" ]]; then
 fi
 
 USER=$(whoami)   ## Usuario que ejecuta el script
-VERSION='0.8.13'  ## Versión en desarrollo
+VERSION='0.8.14'  ## Versión en desarrollo
 MY_DISTRO="$DISTRO"  ## Distribución sobre la que se ejecuta
 MY_BRANCH="$BRANCH"  ## stable|testing|unstable
 MY_ENV="$ENV"    ## prod|dev desde /etc/environment o .env
