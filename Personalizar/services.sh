@@ -34,6 +34,4 @@ services_enable_disable() {
 
     sudo systemctl disable unattended-upgrades.service
     sudo systemctl stop unattended-upgrades.service
-
-
 }
