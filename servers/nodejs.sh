@@ -46,7 +46,7 @@ nodejs_preconfiguracion() {
 
 nodejs_instalar() {
     echo -e "$VE Instalando$RO NodeJS$CL"
-    instalarSoftwareLista "${SOFTLIST}/Servidores/nodejs.lst"
+    instalarSoftwareLista "${SOFTLIST}/servers/nodejs.lst"
 }
 
 nodejs_postconfiguracion() {

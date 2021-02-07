@@ -27,7 +27,7 @@ ssh_preconfiguracion() {
 
 ssh_instalar() {
     echo -e "$VE Instalando$RO ssh$CL"
-    instalarSoftwareLista "${SOFTLIST}/Servidores/ssh.lst"
+    instalarSoftwareLista "${SOFTLIST}/servers/ssh.lst"
 }
 
 ssh_postconfiguracion() {

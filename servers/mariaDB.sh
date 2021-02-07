@@ -39,7 +39,7 @@ mariadb_preconfiguracion() {
 
 mariadb_instalar() {
     echo -e "$VE Instalando$RO mariadb$VE y Complementos$CL"
-    instalarSoftwareLista "${SOFTLIST}/Servidores/mariadb.lst"
+    instalarSoftwareLista "${SOFTLIST}/servers/mariadb.lst"
 }
 
 mariadb_postconfiguracion() {

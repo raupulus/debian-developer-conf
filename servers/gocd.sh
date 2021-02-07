@@ -40,7 +40,7 @@ gocd_before_install() {
 
 gocd_install() {
     echo -e "$VE Instalando$RO GoCD$CL"
-    instalarSoftwareLista "${SOFTLIST}/Servidores/gocd.lst"
+    instalarSoftwareLista "${SOFTLIST}/servers/gocd.lst"
 }
 
 gocd_after_install() {

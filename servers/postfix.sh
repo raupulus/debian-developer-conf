@@ -35,7 +35,7 @@ postfix_preconfiguracion() {
 
 postfix_instalar() {
     echo -e "$VE Instalando$RO postfix$CL"
-    instalarSoftwareLista "${SOFTLIST}/Servidores/postfix.lst"
+    instalarSoftwareLista "${SOFTLIST}/servers/postfix.lst"
 }
 
 postfix_postconfiguracion() {

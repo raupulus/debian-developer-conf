@@ -32,7 +32,7 @@ postgresql_preconfiguracion() {
 
 postgresql_instalar() {
     echo -e "$VE Instalando$RO PostgreSQL$CL"
-    instalarSoftwareLista "${SOFTLIST}/Servidores/postgresql.lst"
+    instalarSoftwareLista "${SOFTLIST}/servers/postgresql.lst"
 }
 
 postgresql_postconfiguracion() {

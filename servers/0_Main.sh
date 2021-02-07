@@ -23,17 +23,17 @@
 ############################
 ##     IMPORTACIONES      ##
 ############################
-source "$WORKSCRIPT/Servidores/apache2/install.sh"
-source "$WORKSCRIPT/Servidores/bind.sh"
-source "$WORKSCRIPT/Servidores/mariaDB.sh"
-source "$WORKSCRIPT/Servidores/nodejs.sh"
-source "$WORKSCRIPT/Servidores/postgreSQL.sh"
-source "$WORKSCRIPT/Servidores/docker.sh"
-source "$WORKSCRIPT/Servidores/ssh.sh"
-source "$WORKSCRIPT/Servidores/mongodb.sh"
-source "$WORKSCRIPT/Servidores/sqlite.sh"
-source "$WORKSCRIPT/Servidores/mumble.sh"
-source "$WORKSCRIPT/Servidores/gocd.sh"
+source "$WORKSCRIPT/servers/apache2/install.sh"
+source "$WORKSCRIPT/servers/bind.sh"
+source "$WORKSCRIPT/servers/mariaDB.sh"
+source "$WORKSCRIPT/servers/nodejs.sh"
+source "$WORKSCRIPT/servers/postgreSQL.sh"
+source "$WORKSCRIPT/servers/docker.sh"
+source "$WORKSCRIPT/servers/ssh.sh"
+source "$WORKSCRIPT/servers/mongodb.sh"
+source "$WORKSCRIPT/servers/sqlite.sh"
+source "$WORKSCRIPT/servers/mumble.sh"
+source "$WORKSCRIPT/servers/gocd.sh"
 
 ###########################
 ##       FUNCIONES       ##
@@ -76,7 +76,7 @@ menuServidores() {
                 10) Bind 9
                 11) Mumble
                 12) Postfix y Dovecot (Mail)
-                13) GoCD (Client y Server)
+                13) GoCD (Agent y Server)
 
                 0) Atrás
             '

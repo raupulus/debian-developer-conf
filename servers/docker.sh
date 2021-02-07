@@ -62,7 +62,7 @@ docker_before_install() {
 
 docker_install() {
     echo -e "$VE Instalando$RO Docker$CL"
-    instalarSoftwareLista "${SOFTLIST}/Servidores/docker.lst"
+    instalarSoftwareLista "${SOFTLIST}/servers/docker.lst"
 }
 
 docker_after_install() {

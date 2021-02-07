@@ -23,10 +23,10 @@
 ############################
 ##     IMPORTACIONES      ##
 ############################
-source "$WORKSCRIPT/Servidores/apache2/functions.sh"
-source "$WORKSCRIPT/Servidores/apache2/site-default.sh"
-source "$WORKSCRIPT/Servidores/apache2/site-private.sh"
-source "$WORKSCRIPT/Servidores/apache2/site-public.sh"
+source "$WORKSCRIPT/servers/apache2/functions.sh"
+source "$WORKSCRIPT/servers/apache2/site-default.sh"
+source "$WORKSCRIPT/servers/apache2/site-private.sh"
+source "$WORKSCRIPT/servers/apache2/site-public.sh"
 
 ############################
 ##        FUNCTIONS       ##
@@ -51,7 +51,7 @@ apache2_before_install() {
 apache2_install() {
     echo -e "$VE Instalando$RO Apache2$CL"
 
-    instalarSoftwareLista "${SOFTLIST}/Servidores/apache2.lst"
+    instalarSoftwareLista "${SOFTLIST}/servers/apache2.lst"
 }
 
 ##

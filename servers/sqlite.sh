@@ -27,7 +27,7 @@ sqlite_preconfiguracion() {
 
 sqlite_instalar() {
     echo -e "$VE Instalando$RO sqlite$CL"
-    instalarSoftwareLista "${SOFTLIST}/Servidores/sqlite.lst"
+    instalarSoftwareLista "${SOFTLIST}/servers/sqlite.lst"
 }
 
 sqlite_postconfiguracion() {

@@ -27,7 +27,7 @@ nginx_before_install() {
 
 nginx_install() {
     echo -e "$VE Instalando$RO Nginx$CL"
-    instalarSoftwareLista "${SOFTLIST}/Servidores/nginx.lst"
+    instalarSoftwareLista "${SOFTLIST}/servers/nginx.lst"
 }
 
 nginx_after_install() {

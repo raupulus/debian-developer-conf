@@ -30,7 +30,7 @@ mongodb_preconfiguracion() {
 
 mongodb_instalar() {
     echo -e "$VE Instalando$RO mongodb$CL"
-    instalarSoftwareLista "${SOFTLIST}/Servidores/mongodb.lst"
+    instalarSoftwareLista "${SOFTLIST}/servers/mongodb.lst"
 }
 
 mongodb_postconfiguracion() {
