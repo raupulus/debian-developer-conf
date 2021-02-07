@@ -4,17 +4,17 @@
 ## @author     Raúl Caro Pastorino
 ## @copyright  Copyright © 2017 Raúl Caro Pastorino
 ## @license    https://wwww.gnu.org/licenses/gpl.txt
-## @email      dev@fryntiz.es
+## @email      raul@fryntiz.dev
 ## @web        https://fryntiz.es
 ## @gitlab     https://gitlab.com/fryntiz
 ## @github     https://github.com/fryntiz
 ## @twitter    https://twitter.com/fryntiz
 ##
-##             Guía de estilos aplicada:
+##             Applied Style Guide:
 ## @style      https://gitlab.com/fryntiz/bash-guide-style
 
 ############################
-##     INSTRUCCIONES      ##
+##      INSTRUCTIONS      ##
 ############################
 ## Instala python 2, python 3, Django y gestor de paquete pip para ambas
 ## versiones de php.
@@ -22,7 +22,7 @@
 ## de estilos para PEP8 principalmente.
 
 ############################
-##        FUNCIONES       ##
+##        FUNCTIONS       ##
 ############################
 
 python_descargar() {

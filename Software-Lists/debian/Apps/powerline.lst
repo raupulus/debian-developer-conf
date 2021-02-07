@@ -4,3 +4,5 @@ python-powerline
 python-powerline-taskwarrior
 python3-powerline
 python3-powerline-taskwarrior
+powerline-gitstatus
+python3-powerline-gitstatus

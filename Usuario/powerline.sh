@@ -4,17 +4,17 @@
 ## @author     Raúl Caro Pastorino
 ## @copyright  Copyright © 2018 Raúl Caro Pastorino
 ## @license    https://wwww.gnu.org/licenses/gpl.txt
-## @email      dev@fryntiz.es
+## @email      raul@fryntiz.dev
 ## @web        https://fryntiz.es
 ## @gitlab     https://gitlab.com/fryntiz
 ## @github     https://github.com/fryntiz
 ## @twitter    https://twitter.com/fryntiz
 ##
-##             Guía de estilos aplicada:
+##             Applied Style Guide:
 ## @style      https://gitlab.com/fryntiz/Bash_Style_Guide
 
 ############################
-##     INSTRUCCIONES      ##
+##      INSTRUCTIONS      ##
 ############################
 ## Instala powerline de forma global al sistema y lo configura para el usuario que
 ## ha ejecutado el script generando perfil de color, correccion de sintaxis y

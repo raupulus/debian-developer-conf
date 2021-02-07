@@ -3,7 +3,13 @@
 
 mainFirewall() {
     enableFirewalldAndConfigure() {
-        ## Comprobar que existe firewall-cmd
+        ## Comprobar que existe firewall-cmd (/usr/bin/firewall-cmd)
+
+        ## Permito ssh
+        sudo firewall-cmd --zone=public --add-service=ssh --permanent
+        sudo firewall-cmd --zone=public --add-service=ssh
+
+        sleep 2
 
         ## Inicio ahora el cortafuegos
         sudo systemctl start firewalld
@@ -14,7 +20,7 @@ mainFirewall() {
         #sudo firewall-cmd --set-default-zone=dmz
         #sudo firewall-cmd --zone=dmz --add-interface=eth0
 
-        ## Permito ssh
+        ## Permito ssh de nuevo, previene desconexión en terminal activo
         sudo firewall-cmd --zone=public --add-service=ssh --permanent
         sudo firewall-cmd --zone=public --add-service=ssh
 
@@ -61,6 +67,10 @@ mainFirewall() {
         ## Permito MySQL
         sudo firewall-cmd --zone=public --add-service=mysql --permanent
         sudo firewall-cmd --zone=public --add-service=mysql
+
+        ## Go-CD
+        sudo firewall-cmd --zone=public --add-port=8153/tcp --permanent
+        sudo firewall-cmd --zone=public --add-port=8154/tcp --permanent
     }
 
     ## TOFIX → Los servidores pueden dar problemas al configurar por ssh.
@@ -68,7 +78,7 @@ mainFirewall() {
         #nohup enableFirewalldAndConfigure > firewallConfigLog.out &
         enableFirewalldAndConfigure
         echo -e "$VE Esperando a terminar de configurar Firewall$CL"
-        #sleep 20
+        sleep 5
     else
         enableFirewalldAndConfigure
     fi

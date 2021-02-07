@@ -4,26 +4,27 @@
 ## @author     Raúl Caro Pastorino
 ## @copyright  Copyright © 2018 Raúl Caro Pastorino
 ## @license    https://wwww.gnu.org/licenses/gpl.txt
-## @email      dev@fryntiz.es
+## @email      raul@fryntiz.dev
 ## @web        https://fryntiz.es
 ## @gitlab     https://gitlab.com/fryntiz
 ## @github     https://github.com/fryntiz
 ## @twitter    https://twitter.com/fryntiz
 ##
-##             Guía de estilos aplicada:
-## @style      https://github.com/fryntiz/bash-guide-style
+##             Applied Style Guide:
+## @style      https://gitlab.com/fryntiz/bash-guide-style
 
 ############################
-##     INSTRUCCIONES      ##
+##      INSTRUCTIONS      ##
 ############################
-## Menú principal para configurar un VPS
+## Main Menú to prepare and configure VPS
 
 ############################
 ##     IMPORTACIONES      ##
 ############################
+source "$WORKSCRIPT/VPS/user_admin.sh"
 source "$WORKSCRIPT/VPS/firewall.sh"
-source "$WORKSCRIPT/VPS/idioma_hora.sh"
-source "$WORKSCRIPT/VPS/administrador.sh"
+source "$WORKSCRIPT/VPS/internationalization_and_timezone.sh"
+source "$WORKSCRIPT/VPS/administrator.sh"
 source "$WORKSCRIPT/VPS/fail2ban.sh"
 
 ###########################
@@ -41,17 +42,24 @@ menuVPS() {
     sudo systemctl stop apt-daily-upgrade.timer
     sudo systemctl stop apt-daily-upgrade
 
-    stable_agregar_repositorios
-    aplicaciones_basicas
+    ## Añado repositorios
+    vps_add_repositories
+    common_vps_add_repositories
 
-    instalarSoftwareLista "$SOFTLIST/Vps/basico.lst"
+    ## Instalo aplicaciones para VPS
+    apps_vps
 
+    ## Configuro git
     configuracion_git
 
     #menuServidores -a 'prod'
     #menuLenguajes -a 'prod'
 
-    vim_Instalador
+    ## Configuraciones del sistema (configurations: scripts, crons, hosts)
+    menu_configurations -a
+
+    ## Configuro root
+    menu_root -a
 
     ## Específicos de VPS en este directorio
     mainFirewall
@@ -62,6 +70,7 @@ menuVPS() {
     ## Protección contra ataques e intentos de crackeo
     fail2ban_instalador
 
-    ## Configura el usuario "web" como administrador
+    ## Configura el usuario "admin" como administrador
     configureAdmin
+    user_admin_installer
 }

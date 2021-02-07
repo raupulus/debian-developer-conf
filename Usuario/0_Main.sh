@@ -4,17 +4,17 @@
 ## @author     Raúl Caro Pastorino
 ## @copyright  Copyright © 2018 Raúl Caro Pastorino
 ## @license    https://wwww.gnu.org/licenses/gpl.txt
-## @email      dev@fryntiz.es
+## @email      raul@fryntiz.dev
 ## @web        https://fryntiz.es
 ## @gitlab     https://gitlab.com/fryntiz
 ## @github     https://github.com/fryntiz
 ## @twitter    https://twitter.com/fryntiz
 ##
-##             Guía de estilos aplicada:
+##             Applied Style Guide:
 ## @style      https://gitlab.com/fryntiz/bash-guide-style
 
 ############################
-##     INSTRUCCIONES      ##
+##      INSTRUCTIONS      ##
 ############################
 ## Menú principal para configurar al usuario
 
@@ -34,6 +34,7 @@ source "$WORKSCRIPT/Usuario/spacevim.sh"
 source "$WORKSCRIPT/Usuario/vim.sh"
 source "$WORKSCRIPT/Usuario/tmux.sh"
 source "$WORKSCRIPT/Usuario/powerline.sh"
+source "$WORKSCRIPT/Usuario/directories.sh"
 
 ###########################
 ##       FUNCIONES       ##
@@ -91,9 +92,10 @@ devicons_ls() {
 
 softwareUsuarioMinimo() {
     usuario_permisos
+    user_directories
     usuario_programas_default
-    usuario_nano
-    usuario_terminales
+    user_nano_installer
+    user_terminals_installer
     tmux_Instalador
     powerline_Instalador
 
@@ -105,7 +107,7 @@ softwareUsuarioMinimo() {
         read -p "→ " editor
         case "$editor" in
             vim | 1)
-                vim_Instalador
+                vim_installer
                 break;;
             spacevim | 2)
                 spacevim_Instalador

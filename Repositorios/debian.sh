@@ -4,17 +4,17 @@
 ## @author     Raúl Caro Pastorino
 ## @copyright  Copyright © 2019 Raúl Caro Pastorino
 ## @license    https://wwww.gnu.org/licenses/gpl.txt
-## @email      dev@fryntiz.es
+## @email      raul@fryntiz.dev
 ## @web        https://fryntiz.es
 ## @gitlab     https://gitlab.com/fryntiz
 ## @github     https://github.com/fryntiz
 ## @twitter    https://twitter.com/fryntiz
 ##
-##             Guía de estilos aplicada:
+##             Applied Style Guide:
 ## @style      https://gitlab.com/fryntiz/bash-guide-style
 
 ############################
-##     INSTRUCCIONES      ##
+##      INSTRUCTIONS      ##
 ############################
 ## Prepara y configura los repositorios para cualquiera de las distintas
 ## ramas que hay en Debian.
@@ -25,7 +25,8 @@
 source "$WORKSCRIPT/Repositorios/debian/stable.sh"
 source "$WORKSCRIPT/Repositorios/debian/testing.sh"
 source "$WORKSCRIPT/Repositorios/debian/unstable.sh"
-source "$WORKSCRIPT/Repositorios/debian/comunes.sh"
+source "$WORKSCRIPT/Repositorios/debian/common_vps.sh"
+source "$WORKSCRIPT/Repositorios/debian/common.sh"
 
 ############################
 ##       FUNCIONES        ##
@@ -102,18 +103,24 @@ agregarRepositoriosDebian() {
         done
     }
 
+    ## Is a VPS
+    if [[ "$BRANCH" = 'stable' ]] && [["$MY_ENV" = 'prod' ]]; then
+        vps_add_repositories
+        common_vps_add_repository
+    else  ## Not a VPS
+        if [[ "$BRANCH" = 'stable' ]]; then
+            stable_agregar_repositorios
+        elif [[ "$BRANCH" = 'testing' ]]; then
+            testing_agregar_repositorios
+        elif [[ "$BRANCH" = 'unstable' ]]; then
+            unstable_agregar_repositorios
+        else
+            elegirRama
+        fi
 
-    if [[ "$BRANCH" = 'stable' ]]; then
-        stable_agregar_repositorios
-    elif [[ "$BRANCH" = 'testing' ]]; then
-        testing_agregar_repositorios
-    elif [[ "$BRANCH" = 'unstable' ]]; then
-        unstable_agregar_repositorios
-    else
-        elegirRama
+        common_vps_add_repositories
+        common_add_repositories
     fi
-
-    comunes_agregar_repositorios
 
     ## Asigna lectura a todos para buscar paquetes sin sudo
     sudo chmod 744 /etc/apt/sources.list

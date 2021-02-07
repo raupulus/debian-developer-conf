@@ -4,17 +4,17 @@
 ## @author     Raúl Caro Pastorino
 ## @copyright  Copyright © 2017 Raúl Caro Pastorino
 ## @license    https://wwww.gnu.org/licenses/gpl.txt
-## @email      dev@fryntiz.es
+## @email      raul@fryntiz.dev
 ## @web        https://fryntiz.es
 ## @gitlab     https://gitlab.com/fryntiz
 ## @github     https://github.com/fryntiz
 ## @twitter    https://twitter.com/fryntiz
 ##
-##             Guía de estilos aplicada:
+##             Applied Style Guide:
 ## @style      https://gitlab.com/fryntiz/bash-style-guide
 
 ############################
-##     INSTRUCCIONES      ##
+##      INSTRUCTIONS      ##
 ############################
 ## Script principal
 ## Desde aquí se llamaran a todos los demás scripts separando
@@ -47,7 +47,7 @@ DEBIAN_FRONTEND=noninteractive  ## Deshabilita carteles del instalador
 
 DEBUG='false'      ## Establece si está el script en modo depuración
 WORKSCRIPT=$PWD  ## Directorio principal del script
-PATH_LOG="$WORKSCRIPT/errores.log"  ## Archivo donde almacenar errores
+PATH_LOG="$WORKSCRIPT/errors.log"  ## Archivo donde almacenar errores
 
 ## Importo variables locales si existieran, sobreescriben a las globales
 if [[ -a "$WORKSCRIPT/.env" ]]; then
@@ -55,7 +55,7 @@ if [[ -a "$WORKSCRIPT/.env" ]]; then
 fi
 
 USER=$(whoami)   ## Usuario que ejecuta el script
-VERSION='0.8.12'  ## Versión en desarrollo
+VERSION='0.8.13'  ## Versión en desarrollo
 MY_DISTRO="$DISTRO"  ## Distribución sobre la que se ejecuta
 MY_BRANCH="$BRANCH"  ## stable|testing|unstable
 MY_ENV="$ENV"    ## prod|dev desde /etc/environment o .env
@@ -66,19 +66,19 @@ source "$WORKSCRIPT/routes.sh"
 ############################
 ##     IMPORTACIONES      ##
 ############################
-source "$WORKSCRIPT/funciones.sh"
+source "$WORKSCRIPT/functions.sh"
 source "$WORKSCRIPT/preferences.sh"
-source "$WORKSCRIPT/configuraciones.sh"
 source "$WORKSCRIPT/limpiador.sh"
 
 source "$WORKSCRIPT/Apps/0_Main.sh"
+source "$WORKSCRIPT/configurations/0_Main.sh"
 source "$WORKSCRIPT/Personalizar/0_Main.sh"
-source "$WORKSCRIPT/Servidores/0_Main.sh"
+source "$WORKSCRIPT/servers/0_Main.sh"
 source "$WORKSCRIPT/Repositorios/0_Main.sh"
 source "$WORKSCRIPT/Lenguajes-Programacion/0_Main.sh"
 source "$WORKSCRIPT/Desktops/0_Main.sh"
 source "$WORKSCRIPT/Usuario/0_Main.sh"
-source "$WORKSCRIPT/Root/0_Main.sh"
+source "$WORKSCRIPT/root/0_Main.sh"
 source "$WORKSCRIPT/VPS/0_Main.sh"
 
 ###########################
@@ -105,6 +105,24 @@ fi
 #export DEBIAN_FRONTEND=noninteractive
 
 ###########################
+##      PARAMETERS       ##
+###########################
+if [[ "$1" = 'vim' ]]; then
+    vim_installer
+    exit 0
+fi
+
+if [[ "$1" = 'nano' ]]; then
+    user_nano_installer
+    exit 0
+fi
+
+if [[ "$1" = 'terminals' ]]; then
+    user_terminals_installer
+    exit 0
+fi
+
+###########################
 ##       FUNCIONES       ##
 ###########################
 menuPrincipal() {
@@ -114,8 +132,8 @@ menuPrincipal() {
         local descripcion='Menú Principal
             1) Repositorios
             2) Aplicaciones
-            3) Configuraciones
-            4) Personalización
+            3) Configuraciones del Sistema
+            4) Personalización del Entorno
             5) Servidores
             6) Lenguajes de Programación
             7) Configurar este Usuario
@@ -138,19 +156,19 @@ menuPrincipal() {
 
             1) menuRepositorios;;          ## Menú de Repositorios
             2) menuAplicaciones;;          ## Menú de Aplicaciones
-            3) instalar_configuraciones;;  ## Menú de Configuraciones
+            3) menu_configurations;;        ## Menú de Configuraciones
             4) menuPersonalizacion;;       ## Menú de Personalización
             5) menuServidores;;            ## Menú de Servidores
             6) menuLenguajes;;
             7) menuUsuario;;
             8) menuRepositorios           ## Todos los pasos
                menuAplicaciones -a
-               instalar_configuraciones
+               menu_configurations -a
                menuPersonalizacion -a
                menuServidores -a
                menuLenguajes -a;;
             9) menuDesktops;;
-            10) menuRoot;;
+            10) menu_root;;
             11) menuVPS;;
 
             0) ## SALIR

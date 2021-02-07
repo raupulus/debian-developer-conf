@@ -2,7 +2,7 @@
 # -*- ENCODING: UTF-8 -*-
 
 ## @author     Raúl Caro Pastorino
-## @email      dev@fryntiz.es
+## @email      raul@fryntiz.dev
 ## @web        https://fryntiz.es
 ## @gitlab     https://gitlab.com/fryntiz
 ## @github     https://github.com/fryntiz
@@ -15,7 +15,7 @@
 ## Description: 
 ## Dependencies: 
 
-##             Guía de estilos aplicada:
+##             Applied Style Guide:
 ## @style      https://gitlab.com/fryntiz/bash-guide-style
 
 ## Revision 0.01 - File Created
@@ -39,7 +39,7 @@
 
 
 ############################
-##     INSTRUCCIONES      ##
+##      INSTRUCTIONS      ##
 ############################
 
 ############################

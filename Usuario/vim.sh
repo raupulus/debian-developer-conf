@@ -4,17 +4,17 @@
 ## @author     Raúl Caro Pastorino
 ## @copyright  Copyright © 2017 Raúl Caro Pastorino
 ## @license    https://wwww.gnu.org/licenses/gpl.txt
-## @email      dev@fryntiz.es
+## @email      raul@fryntiz.dev
 ## @web        https://fryntiz.es
 ## @github     https://github.com/fryntiz
 ## @gitlab     https://gitlab.com/fryntiz
 ## @twitter    https://twitter.com/fryntiz
 ##
-##             Guía de estilos aplicada:
-## @style      https://github.com/fryntiz/bash-guide-style
+##             Applied Style Guide:
+## @style      https://gitlab.com/fryntiz/bash-guide-style
 
 ############################
-##     INSTRUCCIONES      ##
+##      INSTRUCTIONS      ##
 ############################
 ## Instala vim de forma global al sistema y lo configura para el usuario que
 ## ha ejecutado el script generando perfil de color, correccion de sintaxis y
@@ -25,7 +25,7 @@
 ############################
 ##       FUNCIONES        ##
 ############################
-vim_preconfiguracion() {
+vim_before_install() {
     echo -e "$VE Generando Pre-Configuraciones de$RO Vim$CL"
 
     ## Si el directorio de configuración para vim es un enlace, se borra
@@ -72,12 +72,12 @@ vim_preconfiguracion() {
     vundle_descargar
 }
 
-vim_instalar() {
+vim_install() {
     echo -e "$VE Instalando$RO Vim$CL"
     instalarSoftwareLista "$SOFTLIST/Apps/vim.lst"
 }
 
-vim_postconfiguracion() {
+vim_after_install() {
     echo -e "$VE Generando Post-Configuraciones$RO Vim$CL"
 
     ## Configura todos los complementos
@@ -98,11 +98,14 @@ vim_postconfiguracion() {
     vim_plugins
 }
 
-vim_Instalador() {
+##
+## Instalador para vim
+##
+vim_installer() {
     echo -e "$VE Comenzando instalación de$RO Vim$CL"
 
-    vim_preconfiguracion
+    vim_before_install
 
-    vim_instalar
-    vim_postconfiguracion
+    vim_install
+    vim_after_install
 }

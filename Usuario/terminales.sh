@@ -4,17 +4,17 @@
 ## @author     Raúl Caro Pastorino
 ## @copyright  Copyright © 2018 Raúl Caro Pastorino
 ## @license    https://wwww.gnu.org/licenses/gpl.txt
-## @email      dev@fryntiz.es
+## @email      raul@fryntiz.dev
 ## @web        https://fryntiz.es
 ## @github     https://github.com/fryntiz
 ## @gitlab     https://gitlab.com/fryntiz
 ## @twitter    https://twitter.com/fryntiz
 ##
-##             Guía de estilos aplicada:
-## @style      https://github.com/fryntiz/bash-guide-style
+##             Applied Style Guide:
+## @style      https://gitlab.com/fryntiz/bash-guide-style
 
 ############################
-##     INSTRUCCIONES      ##
+##      INSTRUCTIONS      ##
 ############################
 
 ##
@@ -68,7 +68,7 @@ usuario_tilix() {
     wget -qO $HOME"/.config/tilix/schemes/dracula.json" https://git.io/v7QaT
 }
 
-usuario_terminales() {
+user_terminals_installer() {
     echo -e "$VE Configurando terminales$CL"
     usuario_tilix
     usuario_interprete

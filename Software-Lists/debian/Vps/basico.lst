@@ -1,4 +1,16 @@
+coreutils
 git
 gitlab-cli
 pssh
 ssh
+ca-certificates
+apt-transport-https
+firewalld
+apt-transport-https
+dirmngr
+wget
+curl
+gnupg
+rng-tools
+tar
+ntp

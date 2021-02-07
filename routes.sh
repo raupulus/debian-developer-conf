@@ -4,23 +4,23 @@
 ## @author     Raúl Caro Pastorino
 ## @copyright  Copyright © 2019 Raúl Caro Pastorino
 ## @license    https://wwww.gnu.org/licenses/gpl.txt
-## @email      dev@fryntiz.es
+## @email      raul@fryntiz.dev
 ## @web        https://.fryntiz.es
 ## @gitlab     https://gitlab.com/fryntiz
 ## @github     https://github.com/fryntiz
 ## @twitter    https://twitter.com/fryntiz
 ##
-##             Guía de estilos aplicada:
-## @style      https://github.com/fryntiz/bash-guide-style
+##             Applied Style Guide:
+## @style      https://gitlab.com/fryntiz/bash-guide-style
 
 ############################
-##     INSTRUCCIONES      ##
+##      INSTRUCTIONS      ##
 ############################
 ## Contiene las rutas hacia directorios de configuraciones que pueden variar
 ## entre distribuciones.
 
 ############################
-##        FUNCIONES       ##
+##        FUNCTIONS       ##
 ############################
 ##
 ## Configura las rutas a directorios de apache.
@@ -35,6 +35,8 @@ routesApache2() {
         APACHESITESENABLED="${APACHECONF}/sites-enabled"
         APACHEPORTSCONF="${APACHECONF}/ports.conf"
         APACHEAPACHE2CONF="${APACHECONF}/apache2.conf"
+        APACHEMODS="${APACHECONF}/mods-available"
+        APACHEMODSENABLED="${APACHECONF}/mods-enabled"
     elif [[ "$DISTRO" = 'fedora' ]]; then
         echo -e "$VE Configurando directorios apache para $DISTRO$CL"
         APACHECONF='/etc/httpd'
@@ -42,11 +44,19 @@ routesApache2() {
         DIRWEB='/var/www'
         APACHESITES="${APACHECONF}/conf.d/sites-available"
         APACHESITESENABLED="${APACHECONF}/conf.d"
-        ##APACHEPORTSCONF="${APACHECONF}/ports.conf"
-        ##APACHEAPACHE2CONF="${APACHECONF}/apache2.conf"
+
+        # TODO → Estas rutas hay que verificarlas
+        APACHEPORTSCONF="${APACHECONF}/ports.conf"
+        APACHEAPACHE2CONF="${APACHECONF}/apache2.conf"
+        APACHEMODS="${APACHECONF}/mods-available"
+        APACHEMODSENABLED="${APACHECONF}/mods-enabled"
 
         if [[ ! -d "$APACHESITES" ]]; then
             mkdir -p $APACHESITES
+        fi
+
+        if [[ ! -d "$APACHEMODS" ]]; then
+            mkdir -p $APACHEMODS
         fi
     elif [[ "$DISTRO" = 'gentoo' ]]; then
         echo -e "$VE Configurando directorios apache para $DISTRO$CL"

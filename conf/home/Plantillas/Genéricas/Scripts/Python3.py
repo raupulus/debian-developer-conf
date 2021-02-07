@@ -2,7 +2,7 @@
 # -*- encoding: utf-8 -*-
 
 # @author     Raúl Caro Pastorino
-# @email      dev@fryntiz.es
+# @email      raul@fryntiz.dev
 # @web        https://fryntiz.es
 # @gitlab     https://gitlab.com/fryntiz
 # @github     https://github.com/fryntiz
@@ -36,7 +36,7 @@
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>
 
-# Guía de estilos aplicada: PEP8
+# Applied Style Guide: PEP8
 
 #######################################
 # #           Descripción           # #
