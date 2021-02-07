@@ -55,7 +55,11 @@ menuVPS() {
     #menuServidores -a 'prod'
     #menuLenguajes -a 'prod'
 
-    #vim_Instalador
+    ## Configuraciones del sistema (configurations: scripts, crons, hosts)
+    menu_configurations -a
+
+    ## Configuro root
+    menu_root -a
 
     ## Específicos de VPS en este directorio
     mainFirewall
