@@ -98,27 +98,32 @@ gocd_after_install() {
 
     sudo -u postgres psql -c GRANT ALL PRIVILEGES ON DATABASE "gocd" TO "${gocd_database_user}";
 
-    ## TODO → Actualmente se usa así en el servidor de pruebas, no debe ser SUPERUSER
+    ## TOFIX → Actualmente se usa así en el servidor de pruebas, no debe ser SUPERUSER
     sudo -u postgres psql -c ALTER ROLE "${gocd_database_user}" SUPERUSER;
 
 
-
-
-
+    echo -e "$VE Configurando archivos de servidor para usar la nueva db$RO postgresql$CL"
+    GO_SERVER_CONFIG='/usr/share/go-server/wrapper-config/wrapper-properties.conf'
+    echo '## Database' | sudo tee -a GO_SERVER_CONFIG
+    echo 'db.driver=org.postgresql.Driver' | sudo tee -a GO_SERVER_CONFIG
+    echo "db.user=${gocd_database_user}" | sudo tee -a GO_SERVER_CONFIG
+    echo "db.password=${gocd_database_password}" | sudo tee -a GO_SERVER_CONFIG
 
 
     # MENSAJES PARA HACER MANUALMENTE EN LA INTERFAZ
     # TODO → ESTO SE PUEDE HACER DESDE ARCHIVOS SEGURO, MIRAR
-    Entrar a la url **/go/admin/security/auth_configs**
-    id → file_authentication
-    plugin id → Password File Authentication
-    password file path → /etc/go/authentication
-    Allow only known users to login → False
+    echo -e "$RO Ya solo queda configurar manualmente desde el dashboard las siguientes cosas:$CL"
+    echo ""
+    echo -e "$VE Entrar a la url$RO /go/admin/security/auth_configs$CL"
+    echo -e "$VE id →$RO file_authentication$CL"
+    echo -e "$VE plugin id →$RO Password File Authentication$CL"
+    echo -e "$VE password file path →$RO /etc/go/authentication$CL"
+    echo -e "$VE Allow only known users to login →$RO False$CL"
+    echo ""
+    echo -e "$VE Entrar en configuración y cambiar storage de artifacts al
+    siguiente →$RO :8153/go/admin/config/server#!artifact-management$CL"
 
-
-    Cambiar el directorio de artifacts en la configuración:
-    :8153/go/admin/config/server#!artifact-management
-
+    read -p " Pulse intro para terminar y volver al menú" nullparam
 }
 
 gocd_installer() {
@@ -135,4 +140,8 @@ gocd_installer() {
 
     gocd_install
     gocd_after_install
+
+    reiniciarServicio 'go-server'
+    sleep 5
+    reiniciarServicio 'go-agent'
 }
