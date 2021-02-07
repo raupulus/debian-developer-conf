@@ -78,7 +78,7 @@ source "$WORKSCRIPT/Repositorios/0_Main.sh"
 source "$WORKSCRIPT/Lenguajes-Programacion/0_Main.sh"
 source "$WORKSCRIPT/Desktops/0_Main.sh"
 source "$WORKSCRIPT/Usuario/0_Main.sh"
-source "$WORKSCRIPT/Root/0_Main.sh"
+source "$WORKSCRIPT/root/0_Main.sh"
 source "$WORKSCRIPT/VPS/0_Main.sh"
 
 ###########################
@@ -103,6 +103,24 @@ fi
 ## Previene en debian testing (probablemente superiores también) que no pregunte
 ## a cada instalación si deseamos reiniciar servicios.
 #export DEBIAN_FRONTEND=noninteractive
+
+###########################
+##      PARAMETERS       ##
+###########################
+if [[ "$1" = 'vim' ]]; then
+    vim_installer
+    exit 0
+fi
+
+if [[ "$1" = 'nano' ]]; then
+    user_nano_installer
+    exit 0
+fi
+
+if [[ "$1" = 'terminals' ]]; then
+    user_terminals_installer
+    exit 0
+fi
 
 ###########################
 ##       FUNCIONES       ##
@@ -150,7 +168,7 @@ menuPrincipal() {
                menuServidores -a
                menuLenguajes -a;;
             9) menuDesktops;;
-            10) menuRoot;;
+            10) menu_root;;
             11) menuVPS;;
 
             0) ## SALIR
