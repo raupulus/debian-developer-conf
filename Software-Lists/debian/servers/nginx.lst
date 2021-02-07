@@ -1,1 +1,8 @@
 nginx
+certbot
+python3-certbot-nginx
+python3-certbot-dns-cloudflare
+python3-certbot-dns-digitalocean
+python3-certbot-dns-dnsimple
+python3-certbot-dns-google
+python3-certbot-dns-ovh
