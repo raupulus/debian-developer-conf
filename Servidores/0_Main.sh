@@ -88,19 +88,20 @@ menuServidores() {
 
             case $entrada in
 
-                1)  apache2_installer;;     ## Instala Apache2
+                1)  apache2_installer;;      ## Instala Apache2
                 2)  mariadb_instalador;;     ## Instala MariaDB
                 3)  nodejs_instalador;;      ## Instala NodeJS
                 4)  postgresql_instalador;;  ## Instala PostgreSQL
-                5)  docker_installer;;      ## Instala Docker
+                5)  docker_installer;;       ## Instala Docker
                 6)  ssh_instalador;;         ## Instala Ssh
                 7)  mongodb_instalador;;     ## Instala MongoDB
                 8)  sqlite_instalador;;      ## Instala Sqlite
-                9) todos_servidores;;          ## Todos los servidores
+                9) todos_servidores;;        ## Todos los servidores
 
                 10)  bind_instalador;;       ## Instala Bind
                 11)  mumble_instalador;;     ## Instala Mumble
-                12)  postfix_instalador    ## Instala Servidor Mail
+                11)  postfix_instalador;;    ## Instala Mumble
+                12)  gocd_installer          ## Instala Servidor Mail
                      break;;
 
                 0)  ## SALIR
