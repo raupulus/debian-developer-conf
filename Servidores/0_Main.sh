@@ -33,6 +33,7 @@ source "$WORKSCRIPT/Servidores/ssh.sh"
 source "$WORKSCRIPT/Servidores/mongodb.sh"
 source "$WORKSCRIPT/Servidores/sqlite.sh"
 source "$WORKSCRIPT/Servidores/mumble.sh"
+source "$WORKSCRIPT/Servidores/gocd.sh"
 
 ###########################
 ##       FUNCIONES       ##
@@ -75,6 +76,7 @@ menuServidores() {
                 10) Bind 9
                 11) Mumble
                 12) Postfix y Dovecot (Mail)
+                13) GoCD (Client y Server)
 
                 0) Atrás
             '
