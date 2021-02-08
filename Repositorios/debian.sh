@@ -27,6 +27,7 @@ source "$WORKSCRIPT/Repositorios/debian/testing.sh"
 source "$WORKSCRIPT/Repositorios/debian/unstable.sh"
 source "$WORKSCRIPT/Repositorios/debian/common_vps.sh"
 source "$WORKSCRIPT/Repositorios/debian/common.sh"
+source "$WORKSCRIPT/Repositorios/debian/vps.sh"
 
 ############################
 ##       FUNCIONES        ##
