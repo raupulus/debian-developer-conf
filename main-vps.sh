@@ -73,6 +73,7 @@ if [[ ! -d "/home/${username}/debian-developer-conf" ]]; then
 fi
 
 chown "$username:$username" -R "/home/$username/debian-developer-conf"
+chmod 755 -R "/home/${username}/debian-developer-conf"
 cd "/home/$username/debian-developer-conf" || exit
 
 ## TODO → Con el "all" ya es suficiente, pero es necesario comprobar que exista
@@ -90,7 +91,6 @@ sysctl -p
 sysctl -w net.ipv6.conf.all.disable_ipv6=1
 sysctl -w net.ipv6.conf.default.disable_ipv6=1
 
-cd /home/${username}/debian-developer-conf
 su $username ./main.sh
 
 exit 0
