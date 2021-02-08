@@ -361,6 +361,7 @@ git clone https://github.com/fryntiz/debian-developer-conf
 ## Comenzar con el script como root en vps
 
 ```bash
+apt install git wget
 wget https://raw.githubusercontent.com/fryntiz/debian-developer-conf/dev/main-vps.sh -O /tmp/main-vps.sh
 cd /tmp
 chmod ugo+x main-vps.sh

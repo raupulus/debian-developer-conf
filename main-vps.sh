@@ -41,33 +41,22 @@ if [[ $USER != 'root' ]]; then
     exit 1
 fi
 
-##
-## Recibe uno o más parámetros con el nombre de los programas a instalar
-## @param  $*  String  Nombre de programas a instalar
-##
-instalarSoftware() {
-    if [[ "$MY_DISTRO" = 'debian' ]] || [[ "$MY_DISTRO" = 'raspbian' ]]; then
-        for programa in $*; do
-            sudo DEBIAN_FRONTEND=noninteractive apt-get install -y "$programa"
-        done
-    elif [[ "$MY_DISTRO" = 'gentoo' ]]; then
-        for programa in $*; do
-            sudo emerge "$programa"
-        done
-    elif [[ "$MY_DISTRO" = 'fedora' ]]; then
-        for programa in $*; do
-            sudo dnf install -y "$programa"
-        done
-    fi
-}
+if [[ ! -f '/usr/bin/git' ]]; then
+    echo 'Se necesita tener instalado "git"'
+    echo 'Prueba con tu gestor de paquetes, por ejemplo: apt install git'
+    exit 1
+fi
 
-## Instala el software dependiente.
-instalarSoftware sudo git curl wget
+if [[ ! -f '/usr/bin/wget' ]]; then
+    echo 'Se necesita tener instalado "wget"'
+    echo 'Prueba con tu gestor de paquetes, por ejemplo: apt install wget'
+    exit 1
+fi
 
 read -p "    Nombre del usuario principal → " username
 
 #TODO → Asegurar que no pasa en blanco, comprobar mejor esta parte y volver a pedir
-if [[ "$username" != '' ]] && [[ "$username" != ' ' ]]; then
+if [[ "$username" = '' ]] && [[ "$username" = ' ' ]]; then
     username='admin'
 fi
 
