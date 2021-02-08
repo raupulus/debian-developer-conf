@@ -90,7 +90,7 @@ sysctl -p
 sysctl -w net.ipv6.conf.all.disable_ipv6=1
 sysctl -w net.ipv6.conf.default.disable_ipv6=1
 
-cd /home/${username}
-sudo -u $username ./main.sh
+cd /home/${username}/debian-developer-conf
+su $username ./main.sh
 
 exit 0

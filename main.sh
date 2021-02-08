@@ -122,6 +122,14 @@ if [[ "$1" = 'terminals' ]]; then
     exit 0
 fi
 
+
+###########################
+##     DEPENDENCIES      ##
+###########################
+if [[ ! -f '/usr/bin/sudo' ]]; then
+    instalarSoftware sudo
+fi
+
 ###########################
 ##       FUNCIONES       ##
 ###########################
