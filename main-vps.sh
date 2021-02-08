@@ -67,7 +67,7 @@ instalarSoftware sudo git curl wget
 read -p "    Nombre del usuario principal → " username
 
 #TODO → Asegurar que no pasa en blanco, comprobar mejor esta parte y volver a pedir
-if [[ "$username" != '' ] && [[ "$username" != ' ' ]]; then
+if [[ "$username" != '' ]] && [[ "$username" != ' ' ]]; then
     username='admin'
 fi
 
