@@ -353,6 +353,16 @@ Instala y configura i3 Window Manager personalizando la barra de estado con i3py
 
 ### Openbox
 
-## Comenzar con el script
+## Comenzar con el script como usuario normal
 
-git clone https://github.com/fryntiz/debian-developer-conf $HOME/
+cd $HOME
+git clone https://github.com/fryntiz/debian-developer-conf
+
+## Comenzar con el script como root en vps
+
+```bash
+wget https://raw.githubusercontent.com/fryntiz/debian-developer-conf/dev/main-vps.sh -O /tmp/main-vps.sh
+cd /tmp
+chmod ugo+x main-vps.sh
+./main-vps.sh
+```

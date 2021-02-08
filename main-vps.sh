@@ -41,6 +41,26 @@ if [[ $USER != 'root' ]]; then
     exit 1
 fi
 
+##
+## Recibe uno o más parámetros con el nombre de los programas a instalar
+## @param  $*  String  Nombre de programas a instalar
+##
+instalarSoftware() {
+    if [[ "$MY_DISTRO" = 'debian' ]] || [[ "$MY_DISTRO" = 'raspbian' ]]; then
+        for programa in $*; do
+            sudo DEBIAN_FRONTEND=noninteractive apt-get install -y "$programa"
+        done
+    elif [[ "$MY_DISTRO" = 'gentoo' ]]; then
+        for programa in $*; do
+            sudo emerge "$programa"
+        done
+    elif [[ "$MY_DISTRO" = 'fedora' ]]; then
+        for programa in $*; do
+            sudo dnf install -y "$programa"
+        done
+    fi
+}
+
 ## Instala el software dependiente.
 instalarSoftware sudo git curl wget
 
