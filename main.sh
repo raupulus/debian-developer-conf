@@ -127,7 +127,9 @@ fi
 ##     DEPENDENCIES      ##
 ###########################
 if [[ ! -f '/usr/bin/sudo' ]]; then
-    instalarSoftware sudo
+    echo 'Necesitas instalar "sudo"'
+    echo 'Hazlo con tu gestor de paquetes, por ejemplo: apt install sudo'
+    exit 1
 fi
 
 ###########################
