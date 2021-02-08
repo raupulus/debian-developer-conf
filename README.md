@@ -352,3 +352,7 @@ Instala y configura i3 Window Manager personalizando la barra de estado con i3py
 ### Xmonad
 
 ### Openbox
+
+## Comenzar con el script
+
+git clone https://github.com/fryntiz/debian-developer-conf $HOME/

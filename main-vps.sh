@@ -26,14 +26,11 @@ fi
 
 DEBUG='false'      ## Establece si está el script en modo depuración
 WORKSCRIPT=$PWD  ## Directorio principal del script
-PATH_LOG="$WORKSCRIPT/errors.log"  ## Archivo donde almacenar errores
 
 ## Importo variables locales si existieran, sobreescriben a las globales
 if [[ -a "$WORKSCRIPT/.env" ]]; then
     source "$WORKSCRIPT/.env"
 fi
-
-source "$WORKSCRIPT/functions.sh"
 
 ###########################
 ##       FUNCIONES       ##
@@ -84,6 +81,7 @@ sysctl -p
 sysctl -w net.ipv6.conf.all.disable_ipv6=1
 sysctl -w net.ipv6.conf.default.disable_ipv6=1
 
+cd /home/${username}
 sudo -u $username ./main.sh
 
 exit 0
