@@ -105,15 +105,15 @@ agregarRepositoriosDebian() {
     }
 
     ## Is a VPS
-    if [[ "$BRANCH" = 'stable' ]] && [["$MY_ENV" = 'prod' ]]; then
+    if [[ "$MY_BRANCH" = 'stable' ]] && [[ "$MY_ENV" = 'prod' ]]; then
         vps_add_repositories
         common_vps_add_repository
     else  ## Not a VPS
-        if [[ "$BRANCH" = 'stable' ]]; then
+        if [[ "$MY_BRANCH" = 'stable' ]]; then
             stable_agregar_repositorios
-        elif [[ "$BRANCH" = 'testing' ]]; then
+        elif [[ "$MY_BRANCH" = 'testing' ]]; then
             testing_agregar_repositorios
-        elif [[ "$BRANCH" = 'unstable' ]]; then
+        elif [[ "$MY_BRANCH" = 'unstable' ]]; then
             unstable_agregar_repositorios
         else
             elegirRama
