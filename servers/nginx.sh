@@ -32,6 +32,33 @@ nginx_install() {
 
 nginx_after_install() {
     echo -e "$VE Generando Post-Configuraciones de$RO Nginx$CL"
+
+    ## Creo almacenamiento para aplicaciones
+    if [[ ! -d '/var/www/storage' ]]; then
+        sudo mkdir '/var/www/storage'
+        sudo chown www-data:www-data -R '/var/www/storage'
+        sudo chmod 660 -R '/var/www/storage'
+        sudo chmod ug+s -R '/var/www/storage'
+        sudo umask 117 -R '/var/www/storage'
+    fi
+
+    ## Creo lugar para sitios públicos
+    if [[ ! -d '/var/www/public' ]]; then
+        sudo mkdir '/var/www/public'
+        sudo chown www-data:www-data -R '/var/www/public'
+        sudo chmod 660 -R '/var/www/public'
+        sudo chmod ug+s -R '/var/www/public'
+        sudo umask 117 -R '/var/www/public'
+    fi
+
+    ## Creo lugar para sitios privados
+    if [[ ! -d '/var/www/private' ]]; then
+        sudo mkdir '/var/www/private'
+        sudo chown www-data:www-data -R '/var/www/private'
+        sudo chmod 660 -R '/var/www/private'
+        sudo chmod ug+s -R '/var/www/private'
+        sudo umask 117 -R '/var/www/private'
+    fi
 }
 
 nginx_installer() {

@@ -69,13 +69,31 @@ apache2_after_install() {
         sudo chown www-data:www-data -R '/var/www/storage'
         sudo chmod 660 -R '/var/www/storage'
         sudo chmod ug+s -R '/var/www/storage'
-        sudo su root -c "umask 117 -R /var/www/storage"
+        sudo umask 117 -R '/var/www/storage'
+    fi
+
+    ## Creo lugar para sitios públicos
+    if [[ ! -d '/var/www/public' ]]; then
+        sudo mkdir '/var/www/public'
+        sudo chown www-data:www-data -R '/var/www/public'
+        sudo chmod 660 -R '/var/www/public'
+        sudo chmod ug+s -R '/var/www/public'
+        sudo umask 117 -R '/var/www/public'
+    fi
+
+    ## Creo lugar para sitios privados
+    if [[ ! -d '/var/www/private' ]]; then
+        sudo mkdir '/var/www/private'
+        sudo chown www-data:www-data -R '/var/www/private'
+        sudo chmod 660 -R '/var/www/private'
+        sudo chmod ug+s -R '/var/www/private'
+        sudo umask 117 -R '/var/www/private'
     fi
 
     ## Preparo configuración de módulos disponibles en apache2.
     sudo cp ${WORKSCRIPT}/conf/etc/apache2/mods-available/* "$APACHEMODS"
 
-    if [[ -d "/et" ]]; then
+    if [[ -f "${DIRWEB}/.htpasswd" ]]; then
         sudo chown 'www-data:www-data' "${DIRWEB}/.htpasswd"
     fi
 }
