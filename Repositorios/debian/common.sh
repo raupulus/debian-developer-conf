@@ -82,11 +82,6 @@ common_add_key() {
     echo -e "$VE Agregando clave para $RO Beekeeper Studio$CL"
     wget --quiet -O - https://bintray.com/user/downloadSubjectPublicKey?username=bintray | sudo apt-key add -
 
-    ## Sury (Paquetes PHP)
-    echo -e "$VE Agregando llave para$RO PHP$VE de sury,org$CL"
-    sudo wget -O '/etc/apt/trusted.gpg.d/php.gpg' 'https://packages.sury.org/php/apt.gpg'
-    sudo chmod 744 '/etc/apt/trusted.gpg.d/php.gpg'
-
     ## Lynis
     echo -e "$VE Agregando clave para $RO Lynis$CL"
     sudo wget -O - https://packages.cisofy.com/keys/cisofy-software-public.key | sudo apt-key add -

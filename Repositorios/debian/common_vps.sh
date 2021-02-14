@@ -73,6 +73,11 @@ common_vps_add_keys() {
     ## Jenkins
     echo -e "$VE Agregando clave para $RO Jenkins$CL"
     wget -q -O - https://pkg.jenkins.io/debian-stable/jenkins.io.key | sudo apt-key add -
+
+    ## Sury (Paquetes PHP)
+    echo -e "$VE Agregando llave para$RO PHP$VE de sury,org$CL"
+    sudo wget -O '/etc/apt/trusted.gpg.d/php.gpg' 'https://packages.sury.org/php/apt.gpg'
+    sudo chmod 744 '/etc/apt/trusted.gpg.d/php.gpg'
 }
 
 ##
@@ -85,6 +90,7 @@ common_vps_download_repositories() {
     curl -sL https://deb.nodesource.com/setup_current.x | sudo -E bash -
 
     ## Sury (Paquetes PHP)
+    echo -e "$VE Agregando repositorio$RO NodeJS$AM Repositorio Oficial$CL"
     #echo "deb https://packages.sury.org/php/ $(lsb_release -sc) main" | sudo tee /etc/apt/sources.list.d/php.list
     echo "deb https://packages.sury.org/php/ buster main" | sudo tee /etc/apt/sources.list.d/php.list
 }
