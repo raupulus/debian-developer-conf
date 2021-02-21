@@ -26,7 +26,7 @@
 ##       FUNCIONES        ##
 ############################
 agregarRepositoriosRaspbian() {
-    echo -e '$VE Configurando Repositorios para$RO Raspbian$CL'
+    echo -e "$VE Configurando Repositorios para$RO Raspbian$CL"
 
     ##
     ## Instala dependencias para actualizar repositorios e instalar
