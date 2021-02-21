@@ -65,7 +65,7 @@ agregarRepositoriosRaspbian() {
         fi
         sudo cp $WORKSCRIPT/Repositorios/raspbian/sources.list.d/* /etc/apt/sources.list.d/
 
-        if [[ ! -d '/etc/apt/sources.list' ]]; then
+        if [[ -f '/etc/apt/sources.list' ]]; then
             sudo rm -f '/etc/apt/sources.list'
         fi
         sudo cp "$WORKSCRIPT/Repositorios/raspbian/sources.list" "/etc/apt/sources.list"
@@ -76,7 +76,7 @@ agregarRepositoriosRaspbian() {
     ##
     raspbian_source_nodejs() {
         echo -e "$VE Agregando repositorio$RO NodeJS$AM Repositorio Oficial$CL"
-        curl -sL https://deb.nodesource.com/setup_11.x | sudo -E bash -
+        curl -sL https://deb.nodesource.com/setup_15.x | sudo -E bash -
     }
 
     instalar_dependencias

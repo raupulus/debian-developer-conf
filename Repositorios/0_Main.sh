@@ -42,7 +42,7 @@ menuRepositorios() {
         sudo rm -vf '/etc/apt/trusted.gpg.d/microsoft.gpg'
         sudo touch '/etc/apt/trusted.gpg.d/microsoft.gpg'
         sudo chattr +i '/etc/apt/trusted.gpg.d/microsoft.gpg'
-        lsattr '/etc/apt/trusted.gpg.d/microsoft.gpg'
+        sudo lsattr '/etc/apt/trusted.gpg.d/microsoft.gpg'
     fi
 
     if [[ "$DISTRO" = 'debian' ]]; then
