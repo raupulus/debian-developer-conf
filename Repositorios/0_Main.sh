@@ -32,13 +32,26 @@ source "$WORKSCRIPT/Repositorios/raspbian.sh"
 ## @param $1 -a Si recibe este parámetro lo hará de forma automática
 ##
 menuRepositorios() {
-    if [[ "$DISTRO" = 'debian' ]];then
+    ## Quito repositorios de vscode
+    if [[ -f '/etc/apt/sources.list.d/vscode.list' ]]; then
+        sudo rm -f '/etc/apt/sources.list.d/vscode.list'
+    fi
+
+    ## Quito firma de vscode y la bloqueo.
+    if [[ -f '/etc/apt/trusted.gpg.d/microsoft.gpg' ]]; then
+        sudo rm -vf '/etc/apt/trusted.gpg.d/microsoft.gpg'
+        sudo touch '/etc/apt/trusted.gpg.d/microsoft.gpg'
+        sudo chattr +i '/etc/apt/trusted.gpg.d/microsoft.gpg'
+        lsattr '/etc/apt/trusted.gpg.d/microsoft.gpg'
+    fi
+
+    if [[ "$DISTRO" = 'debian' ]]; then
         agregarRepositoriosDebian
-    elif [[ "$DISTRO" = 'raspbian' ]];then
+    elif [[ "$DISTRO" = 'raspbian' ]]; then
         agregarRepositoriosRaspbian
-    elif [[ "$DISTRO" = 'fedora' ]];then
+    elif [[ "$DISTRO" = 'fedora' ]]; then
         agregarRepositoriosFedora
-    elif [[ "$DISTRO" = 'gentoo' ]];then
+    elif [[ "$DISTRO" = 'gentoo' ]]; then
     agregarRepositoriosGentoo
     fi
 }
