@@ -34,15 +34,15 @@ source "$WORKSCRIPT/Repositorios/raspbian.sh"
 menuRepositorios() {
     ## Quito repositorios de vscode
     if [[ -f '/etc/apt/sources.list.d/vscode.list' ]]; then
-        sudo rm -f '/etc/apt/sources.list.d/vscode.list'
+        sudo rm -f '/etc/apt/sources.list.d/vscode.list' 2> /dev/null
     fi
 
     ## Quito firma de vscode y la bloqueo.
     if [[ -f '/etc/apt/trusted.gpg.d/microsoft.gpg' ]]; then
-        sudo rm -vf '/etc/apt/trusted.gpg.d/microsoft.gpg'
-        sudo touch '/etc/apt/trusted.gpg.d/microsoft.gpg'
-        sudo chattr +i '/etc/apt/trusted.gpg.d/microsoft.gpg'
-        sudo lsattr '/etc/apt/trusted.gpg.d/microsoft.gpg'
+        sudo rm -vf '/etc/apt/trusted.gpg.d/microsoft.gpg' 2> /dev/null
+        sudo touch '/etc/apt/trusted.gpg.d/microsoft.gpg' 2> /dev/null
+        sudo chattr +i '/etc/apt/trusted.gpg.d/microsoft.gpg' 2> /dev/null
+        sudo lsattr '/etc/apt/trusted.gpg.d/microsoft.gpg' 2> /dev/null
     fi
 
     if [[ "$DISTRO" = 'debian' ]]; then
