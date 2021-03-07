@@ -93,6 +93,7 @@ agregarRepositoriosRaspbian() {
     prepararLlaves
     raspbian_sources_repositorios
     raspbian_source_nodejs
+    raspbian_source_piaware
 
     ## Asigna lectura a todos para buscar paquetes sin sudo
     sudo chmod 744 /etc/apt/sources.list
