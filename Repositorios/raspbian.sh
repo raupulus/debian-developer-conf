@@ -80,6 +80,15 @@ agregarRepositoriosRaspbian() {
         curl -sL https://deb.nodesource.com/setup_15.x | sudo -E bash -
     }
 
+    ##
+    ## Repositorio oficial de Flightaware
+    ##
+    raspbian_source_piaware() {
+        wget https://flightaware.com/adsb/piaware/files/packages/pool/piaware/p/piaware-support/piaware-repository_4.0_all.deb -O /tmp/piaware-repository.deb
+
+        sudo dpkg -i /tmp/piaware-repository.deb
+    }
+
     instalar_dependencias
     prepararLlaves
     raspbian_sources_repositorios
