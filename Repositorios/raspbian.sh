@@ -50,6 +50,11 @@ agregarRepositoriosRaspbian() {
         ## Agregando llave para Gitlab Runner.
         echo -e "$VE Agregando llave para$RO Gitlab Runner$CL"
         curl -L "https://packages.gitlab.com/runner/gitlab-runner/gpgkey" 2> /dev/null | sudo apt-key add - &>/dev/null
+
+        ## Sury (Paquetes PHP)
+        echo -e "$VE Agregando llave para$RO PHP$VE de sury,org$CL"
+        sudo wget -O '/etc/apt/trusted.gpg.d/php.gpg' 'https://packages.sury.org/php/apt.gpg'
+        sudo chmod 744 '/etc/apt/trusted.gpg.d/php.gpg'
     }
 
     ##
@@ -70,6 +75,11 @@ agregarRepositoriosRaspbian() {
         fi
 
         sudo cp "$WORKSCRIPT/Repositorios/raspbian/sources.list" "/etc/apt/sources.list"
+
+        ## Sury (Paquetes PHP)
+        echo -e "$VE Agregando repositorio$RO Sury$AM Repositorio Oficial$CL"
+        #echo "deb https://packages.sury.org/php/ $(lsb_release -sc) main" | sudo tee /etc/apt/sources.list.d/php.list
+        echo "deb https://packages.sury.org/php/ buster main" | sudo tee /etc/apt/sources.list.d/php.list
     }
 
     ##
@@ -77,7 +87,7 @@ agregarRepositoriosRaspbian() {
     ##
     raspbian_source_nodejs() {
         echo -e "$VE Agregando repositorio$RO NodeJS$AM Repositorio Oficial$CL"
-        curl -sL https://deb.nodesource.com/setup_15.x | sudo -E bash -
+        curl -sL https://deb.nodesource.com/setup_current.x | sudo -E bash -
     }
 
     ##

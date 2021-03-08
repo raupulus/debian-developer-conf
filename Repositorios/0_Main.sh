@@ -52,6 +52,6 @@ menuRepositorios() {
     elif [[ "$DISTRO" = 'fedora' ]]; then
         agregarRepositoriosFedora
     elif [[ "$DISTRO" = 'gentoo' ]]; then
-    agregarRepositoriosGentoo
+        agregarRepositoriosGentoo
     fi
 }

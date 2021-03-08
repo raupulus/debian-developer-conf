@@ -60,7 +60,7 @@ agregarRepositoriosFedora() {
 
     ## NodeJS
     echo -e "$VE Añadiendo Repositorio para$RO NodeJS$CL"
-    curl -sL https://rpm.nodesource.com/setup_12.x | bash -
+    curl -sL https://deb.nodesource.com/setup_current.x | sudo -E bash -
 
     ## Gitlab Runner
     echo -e "$VE Añadiendo Repositorio$RO Gitlab Runner$CL"
