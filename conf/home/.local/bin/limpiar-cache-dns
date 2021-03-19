@@ -23,11 +23,15 @@
 ##       FUNCIONES        ##
 ############################
 limpiarCacheDNS() {
-    sudo systemd-resolve --flush-caches
-    sudo systemctl restart dnsmasq
-    sudo service network-manager restart
+    sudo systemd-resolve --flush-caches 2> /dev/null
+    sudo systemctl restart dnsmasq 2> /dev/null
+    sudo killall -USR2 systemd-resolved 2> /dev/null
+
+    sudo service network-manager restart 2> /dev/null
     sudo service networking restart
-    sudo systemd-resolve --statistics
+    sudo systemd-resolve --statistics  2> /dev/null
+
+    echo "Se han limpiado las DNS"
 }
 
 limpiarCacheDNS
