@@ -103,6 +103,22 @@ actualizarSistema() {
 
     echo -e "$VE Descargando actualización de$RO Hosts Denegados$CL"
     sudo wget https://hosts.ubuntu101.co.za/superhosts.deny -O '/etc/hosts.deny'
+
+    if [[ -f '/etc/hosts' ]]; then
+        sudo chmod ugo+r '/etc/hosts'
+    fi
+
+    if [[ -f '/etc/hosts.local' ]]; then
+        sudo chmod ugo+r '/etc/hosts.local'
+    fi
+
+    if [[ -f '/etc/hosts.deny' ]]; then
+        sudo chmod ugo+r '/etc/hosts.deny'
+    fi
+
+    if [[ -f '/etc/hosts.allow' ]]; then
+        sudo chmod ugo+r '/etc/hosts.allow'
+    fi
 }
 
 actualizarSistema
