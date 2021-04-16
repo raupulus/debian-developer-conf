@@ -29,7 +29,6 @@ conf/home/.vim/autoload
 conf/home/.vim/.netrwhist
 /conf/home/.vim/vimoutlinerrc
 conf/home/.vim/vimoutlinerrc
-
 /.idea
 npm-debug.log
 /npm-debug.log

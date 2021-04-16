@@ -1,1 +1,10 @@
 translate-shell
+tesseract-ocr
+tesseract-ocr-eng
+tesseract-ocr-spa
+tesseract-ocr-script-eng
+tesseract-ocr-script-spa
+gimagereader
+lios
+python3-tesserocr
+yagf
