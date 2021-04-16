@@ -46,14 +46,11 @@ vim_before_install() {
         ## Creando archivos de colores, por defecto usara "monokai"
         echo -e "$VE Descargando colores para sintaxis$AM"
 
-        if [[ ! -f "$HOME/.vim/colors/wombat.vim" ]]; then
-            descargarTo 'http://www.vim.org/scripts/download_script.php?src_id=6657' "$HOME/.vim/colors/wombat.vim"
+        echo -e "$VE Descargando Tema$RO Monokai$AM"
+        if [[ ! -f "$HOME/.vim/colors/monokai.vim" ]]; then
+            descargarTo 'https://raw.githubusercontent.com/sickill/vim-monokai/master/colors/monokai.vim' "$HOME/.vim/colors/monokai.vim"
         fi
 
-        echo -e "$VE Descargando Tema$RO Monokai$AM"
-        if [[ ! -f "$HOME/.vim/colors/monokai1.vim" ]]; then
-            descargarTo 'https://raw.githubusercontent.com/lsdr/monokai/master/colors/monokai.vim' "$HOME/.vim/colors/monokai_1.vim"
-        fi
         echo -e "$VE Se ha concluido la instalacion de temas de colores$CL"
     }
 
@@ -68,6 +65,15 @@ vim_before_install() {
             echo -e "$VE Vundle ya está instalado$CL"
         fi
     }
+
+    if [[ -d "${HOME}/.vim/bundle/vim-prettier" ]] &&
+       [[ -x '/usr/bin/npm' || -x $HOME/.npm/bin/npm ]]; then
+        current=$(pwd)
+
+        cd "${HOME}/.vim/bundle/vim-prettier"
+        npm install --legacy-peer-deps
+        cd $current
+    fi
 
     vundle_descargar
 }
@@ -85,7 +91,9 @@ vim_after_install() {
 
     ## Funcion para instalar todos los plugins
     vim_plugins() {
-        local plugins_vim=(align closetag powerline youcompleteme xmledit autopep8 python-jedi python-indent utilsinps utl rails snippets fugitive ctrlp tlib tabular sintastic detectindent closetag align syntastic)
+        #local plugins_vim=(align closetag powerline youcompleteme xmledit autopep8 python-jedi python-indent utilsinps utl rails snippets fugitive ctrlp tlib tabular sintastic detectindent closetag align syntastic)
+
+        local plugins_vim=(powerline, autopep8)
 
         for plugin in "${plugins_vim[@]}"; do
             echo -e "$VE Activando el plugin$MA →$RO $plugin $AM"
@@ -94,6 +102,8 @@ vim_after_install() {
         done
         echo -e "$VE Todos los plugins activados$CL"
     }
+
+
 
     vim_plugins
 }

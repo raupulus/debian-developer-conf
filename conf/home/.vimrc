@@ -1,226 +1,201 @@
-set nocompatible
-filetype off
+set encoding=utf-8
+
+" Muestra el número de línea
+set number
+
+" Muestra último comando introducido
+set showcmd
+
+" Habilita sintaxis
 syntax on
-set expandtab
-set tabstop=4
-retab
-set shiftwidth=4
-set hlsearch
-set paste
-set ic
+syntax enable
+
+" Esquema de colores
+"colorscheme industry
 color monokai
 colorscheme monokai
-set number
-set laststatus=2
-set encoding=utf-8
-filetype plugin indent on
-set fdm=syntax
-set foldlevelstart=20
 
+" Tabulaciones
+set tabstop=4
+
+" Copia la identación de la línea actual a la siguiente línea
+set autoindent
+
+" Convertir tabulaciones en espacios
+set expandtab
+set softtabstop=4
+
+" Identa según el tipo de archivo, carga desde ~/.vim/indent/*
+if has("autocmd")
+  filetype plugin indent on
+endif
+
+" Remarcar línea actual
+set cursorline
+
+" Ancho de contenido para escribir, muestra línea
+set textwidth=120
+
+" Color de la línea que delimita la columna
+set colorcolumn=80
+
+" Ajustar palabras visualmente
+set wrap
+
+" Ajustar salto de línea
+set linebreak
+set textwidth=0
+set wrapmargin=0
+
+" Ajustar salto de línea si son largas pero permite mantener algunas
+set formatoptions+=l
+
+" Menú grafico para autocompletar comandos
+set wildmenu
+
+" Redibujar pantalla solo cuando es necesario, esto aumenta rendimiento en algunos escenarios como macros
+set lazyredraw
+
+" Resaltar parejas corchetes, llaves y paréntesis [{()}] al poner el cursor encima
+set showmatch
+
+" Activa crear parejas de corchetes, llaves y paréntesis [{()}] al abrirlas
+"let g:AutoPairsFlyMode = 1
+"let g:AutoPairsShortcutBackInsert = '<M-b>'
+
+" Buscar a medida que se escribe
+set incsearch
+
+" Buscar, resaltar coincidencias
+set hlsearch
+
+" Buscar, no distingue mayúsculas/minúsculas
+set ignorecase
+set ic
+
+" Mapea tecla espacio e intro para dejar de resaltar coincidencias
+nnoremap <leader><space> :nohlsearch<CR>
+nnoremap <CR> :nohlsearch<cr>
+
+" Habilita pliegues/folding
+set foldenable
+
+" Nivel de pliegues/folds
+set foldlevelstart=10
+
+" pliegues/Folds anidados
+set foldnestmax=10
+
+" Asigno la tecla espacio para abrir/cerrar pliegues/folds
+nnoremap <space> za
+
+" Plegar/folding en función a la sintaxis
+set foldmethod=syntax
+
+" Movimiento vertical sobre la línea visual, si una línea es larga no parte al bajar
+nnoremap j gj
+nnoremap k gk
+
+" Selecciona el último bloque que se insertó en el último modo "insert"
+nnoremap gV `[v`]
+
+" Permite cambiar el cursor en modo tmux
+if exists('$TMUX')
+    let &t_SI = "\<Esc>Ptmux;\<Esc>\<Esc>]50;CursorShape=1\x7\<Esc>\\"
+    let &t_EI = "\<Esc>Ptmux;\<Esc>\<Esc>]50;CursorShape=0\x7\<Esc>\\"
+else
+    let &t_SI = "\<Esc>]50;CursorShape=1\x7"
+    let &t_EI = "\<Esc>]50;CursorShape=0\x7"
+endif
+
+" Modifico el directorio de archivos temporales para no dejar sucio el directorio de trabajo
+set backup
+set backupdir=~/.vim-tmp,~/.tmp,~/tmp,/var/tmp,/tmp
+set backupskip=/tmp/*,/private/tmp/*
+set directory=~/.vim-tmp,~/.tmp,~/tmp,/var/tmp,/tmp
+set writebackup
+
+" Función para cambiar entre número y número relativo
+function! ToggleNumber()
+    if(&relativenumber == 1)
+        set norelativenumber
+        set number
+    else
+        set relativenumber
+    endif
+endfunc
+
+" Elimina los espacios al final del archivo.
+function! <SID>StripTrailingWhitespaces()
+    " save last search & cursor position
+    let _s=@/
+    let l = line(".")
+    let c = col(".")
+    %s/\s\+$//e
+    let @/=_s
+    call cursor(l, c)
+endfunction
+
+" importa la barra de powerline
 python3 from powerline.vim import setup as powerline_setup
 python3 powerline_setup()
 python3 del powerline_setup
 
-let python_highlight_all=1
-let NERDTreeIgnore=['\.pyc$', '\~$'] "ignore files in NERDTree
+" Powerline, activa la barra (si se quita, la barra desaparece)
+set laststatus=2
 
-set rtp+=~/.vim/bundle/Vundle.vim
-call vundle#begin()
-Plugin 'VundleVim/Vundle.vim'
-Plugin 'jistr/vim-nerdtree-tabs'
-Plugin 'vim-airline/vim-airline'
-Plugin 'vim-airline/vim-airline-themes'
-Plugin 'scrooloose/syntastic'
-Plugin 'jnurmine/Zenburn'
-Plugin 'altercation/vim-colors-solarized'
-Plugin 'seebi/dircolors-solarized'
-Plugin 'terryma/vim-multiple-cursors'
-Plugin 'christoomey/vim-tmux-navigator'
-Plugin 'kien/ctrlp.vim'
-Plugin 'jiangmiao/auto-pairs'
-Plugin 'Lokaltog/vim-easymotion'
-Plugin 'scrooloose/nerdtree'
-Plugin 'xolox/vim-session'
-Plugin 'xolox/vim-misc'
-Plugin 'majutsushi/tagbar'
-Plugin 'airblade/vim-gitgutter'
-Plugin 'tpope/vim-endwise'
-Plugin 'xolox/vim-easytags'
-Plugin 'tomasr/molokai'
-Plugin 'vimoutliner/vimoutliner'
-Plugin 'lifepillar/pgsql.vim'
-Plugin 'ivalkeen/vim-simpledb'
-Plugin 'von-forks/vim-bracketed-paste'
+" <Esc> cambia al modo Normal inmediatamente:
+set timeoutlen=250
 
-" Ultimos añadidos
-Plugin 'yegappan/mru'
-Plugin 'tomtom/tcomment_vim'
-Plugin 'tmhedberg/matchit'
-Plugin 'squizlabs/PHP_CodeSniffer'
-Plugin 'phpmd/phpmd'
-Plugin 'ternjs/tern_for_vim'
-Plugin 'pangloss/vim-javascript'
-Plugin 'jelera/vim-javascript-syntax'
-Plugin 'nathanaelkane/vim-indent-guides'
-Plugin 'Raimondi/delimitMate'
-Plugin 'leafgarland/typescript-vim'
-call vundle#end()
-
-
-
-"prettier
-"run prettier before saving
-let g:prettier#autoformat = 0
-autocmd BufWritePre *.jsx,*.js,*.json,*.css,*.scss,*.less,*.graphql Prettier
-
-"ctrlp filter
-let g:ctrlp_custom_ignore = 'node_modules\|DS_Store\|git'
-
-
-
-set showcmd                     " display incomplete commands
-
-set foldlevelstart=20           " se empieza con todos los pliegues desplegados
-
-" Whitespace
-set tabstop=4 shiftwidth=4      " a tab is two spaces (or set this to 4)
-set expandtab                   " use spaces, not tabs (optional)
-
-" Joining lines
-if v:version > 703 || v:version == 703 && has("patch541")
-  set formatoptions+=j          " Delete comment char when joining commented lines
-endif
-set nojoinspaces                " Use only 1 space after "." when joining lines, not 2
-
-" Indicator chars
+" Carácteres para indicar/visualizar tipos especiales o invisibles (intro, espacio)
 set listchars=tab:▸\ ,trail:•,extends:❯,precedes:❮
 set showbreak=↪
 set list
 
-" Avoid showing trailing whitespace when in insert mode
-autocmd InsertEnter * :set listchars-=trail:•
-autocmd InsertLeave * :set listchars+=trail:•
-
-" Searching
-set hlsearch                    " highlight matches
-set incsearch                   " incremental searching
-set ignorecase                  " searches are case insensitive...
-set smartcase                   " ... unless they contain at least one capital letter
-
-set wrap
-set linebreak
-set nolist
-set wrapmargin=0
-set textwidth=0
-set colorcolumn=80
-set autoindent
-set smarttab
-set scrolloff=3
-
-" <Esc> pasa a modo Normal inmediatamente:
-set timeoutlen=250
-
-" make Python follow PEP8 ( http://www.python.org/dev/peps/pep-0008/ )
-autocmd FileType python setl softtabstop=4 tabstop=4 shiftwidth=4 textwidth=79
-
-" Treat JSON files like JavaScript
+" Tratar archivos json como javascript
 autocmd BufNewFile,BufRead *.json setf javascript
 
-" Some file types use real tabs
+" Tipos de archivos que deberán usar tabs reales
 autocmd FileType {make,gitconfig,apache} set noexpandtab
 
-" clear the search buffer when hitting return
-nnoremap <CR> :nohlsearch<cr>
+" Autoidentar al pegar contenido
+set paste
 
-" toggle the current fold
-nnoremap <Space> za
+" Convertir tabs en espacios
+set et|retab
+retab
 
-command! KillWhitespace :normal :%s/ *$//g<cr><c-o><cr>
+" Destacar syntaxis de python
+let python_highlight_all=1
 
-" With a map leader it's possible to do extra key combinations
-" like <leader>w saves the current file
-let mapleader = ","
-let g:mapleader = ","
+" Prettier, formatea archivos al modificar o guardarlos
+let g:prettier#autoformat = 1
+let g:prettier#exec_cmd_async = 1
+autocmd BufWritePre,InsertLeave *.jsx,*.js,*.json,*.css,*.scss,*.less,*.graphql,*.ts,*.css,*.scss,*.md,*.vue PrettierAsync
 
-" NOTICE: Really useful!
 
-" In visual mode when you press * or # to search for the current selection
-vnoremap <silent> * :call VisualSelection('f')<CR>
-vnoremap <silent> # :call VisualSelection('b')<CR>
+" NetRw configuración del explorador de archivo
+let g:netrw_banner = 0
+let g:netrw_liststyle = 3
+let g:netrw_browse_split = 4
+let g:netrw_altv = 1
+let g:netrw_winsize = 25
+augroup ProjectDrawer
+  " Abrir automáticamente netrw al abrir el editor
+  "autocmd!
+  "autocmd VimEnter * :Vexplore
+augroup END
 
-" When you press gv you vimgrep after the selected text
-vnoremap <silent> gv :call VisualSelection('gv')<CR>
 
-" Some useful keys for vimgrep
-map <leader>g :vimgrep // **/*.<left><left><left><left><left><left><left>
-map <leader><space> :vimgrep // <C-R>%<C-A><right><right><right><right><right><right><right><right><right>
-
-" When you press <leader>r you can search and replace the selected text
-vnoremap <silent> <leader>r :call VisualSelection('replace')<CR>
-
-" Bash like keys for the command line
-cnoremap <C-A>        <Home>
-cnoremap <C-E>        <End>
-cnoremap <C-K>        <C-U>
-
-cnoremap <C-P> <Up>
-cnoremap <C-N> <Down>
-
-" Tab navigation
-nnoremap th  :tabfirst<CR>
-nnoremap tj  :tabnext<CR>
-nnoremap tk  :tabprev<CR>
-nnoremap tl  :tablast<CR>
-nnoremap tt  :tabedit<Space>
-"nnoremap tn  :tabnext<Space>
-nnoremap tm  :tabm<Space>
-nnoremap tx  :tabclose<CR>
-" Alternatively use
-"nnoremap th :tabnext<CR>
-"nnoremap tl :tabprev<CR>
-nnoremap tn :tabnew<CR>
-
-" Navigation using Alt-num on console
-nnoremap <Esc>1 1gt
-nnoremap <Esc>2 2gt
-nnoremap <Esc>3 3gt
-nnoremap <Esc>4 4gt
-nnoremap <Esc>5 5gt
-nnoremap <Esc>6 6gt
-nnoremap <Esc>7 7gt
-nnoremap <Esc>8 8gt
-nnoremap <Esc>9 9gt
-nnoremap <Esc>0 10gt
-
-" Navigation using Alt-num on GUI
-nnoremap <A-1> 1gt
-nnoremap <A-2> 2gt
-nnoremap <A-3> 3gt
-nnoremap <A-4> 4gt
-nnoremap <A-5> 5gt
-nnoremap <A-6> 6gt
-nnoremap <A-7> 7gt
-nnoremap <A-8> 8gt
-nnoremap <A-9> 9gt
-nnoremap <A-0> 10gt
-
-" Press F12 to switch to cp850 encoding
-nnoremap <F12> :e ++enc=cp850<CR>
-
-let g:session_autosave = 'yes'
-let g:session_autoload = 'yes'
-
-" Make YCM compatible with UltiSnips
-let g:ycm_key_list_select_completion = ['<s-tab>', '<Down>', '<C-j>']
-let g:ycm_key_list_previous_completion = ['<c-tab>', '<Up>', '<C-k>']
-
-" Better key bindings for UltiSnipsExpandTrigger
-let g:UltiSnipsExpandTrigger = "<tab>"
-let g:UltiSnipsJumpForwardTrigger = "<tab>"
-let g:UltiSnipsJumpBackwardTrigger = "<s-tab>"
-let g:UltiSnipsListSnippets = "<c-l>"
-
-" Open TagBar
-nmap <F8> :TagbarToggle<CR>
-
-let g:sql_type_default = 'pgsql'
+" Plugins externos
+set rtp+=~/.vim/bundle/Vundle.vim
+call vundle#begin()
+Plugin 'VundleVim/Vundle.vim'
+Plugin 'sheerun/vim-polyglot'  " Resaltado de sintaxis para muchos lenguajes
+Plugin 'prettier/vim-prettier' " Formatea contenido, principalmente js/css
+Plugin 'jiangmiao/auto-pairs' " Cierra parejas [](){}... → No me funciona
+Plugin 'tpope/vim-surround' " Cierra parejas de etiquetas <p></p> → No me funciona
+Plugin 'airblade/vim-gitgutter' " Añade información sobre líneas git modificadas
+Plugin 'tpope/vim-fugitive' " Añade comandos e información de git (Gstatus,Gblame, Gcommit, Gpush... https://github.com/tpope/vim-fugitive)
+Plugin 'tpope/vim-vinegar' " Ventana actual :Explore, Horizontal:Sexplore, Vertical :Vexplore
+call vundle#end()
