@@ -52,11 +52,51 @@ gnome_shell_postconfiguracionOpcional() {
     #gsettings list-recursively org.gnome.shell.keybindings
     #gsettings list-recursively org.gnome.desktop.wm.keybindings
 
+    ## Ver valores posibles de una propiedad
+    #gsettings range org.gnome.desktop.wm.preferences visual-bell-type
+
     # Teclas especiales
-    # <Control>,<Shift>,<Alt>,<Super>,Right,Left
+    # <Control>,<Shift>,<Alt>,<Super>,Right,Left,Up,Down,Tab
 
+    ## Cantidad de escritorios
+    gsettings set org.gnome.desktop.wm.preferences num-workspaces '10'
 
-    ## Toggle pantalla completa
+    ## No mostrar iconos en el escritorio
+    gsettings set org.gnome.desktop.background show-desktop-icons 'false'
+
+    ## Calendario
+    gsettings set org.gnome.desktop.calendar show-weekdate 'false'
+    gsettings set org.gnome.desktop.datetime automatic-timezone 'false'
+
+    ##################
+    ## Ventanas y escritorios
+    #################
+
+    ## Minimizar al dock
+    org.gnome.desktop.wm.keybindings minimize ['<Super>comma']
+
+    ## Bloquear ventana mostrándose siempre encima de las demás
+    gsettings set org.gnome.desktop.wm.keybindings always-on-top "['<Super><Shift>U']"
+
+    ## Redimensionar
+    org.gnome.desktop.wm.keybindings begin-resize ['<Alt>F8']
+
+    ## Mover
+    org.gnome.desktop.wm.keybindings begin-move ['<Alt>F7']
+
+    ## Cambiar fuente de entrad de teclado
+    org.gnome.desktop.wm.keybindings switch-input-source ['<Super>space', 'XF86Keyboard']
+
+    ## Abrir menú de la ventana
+    org.gnome.desktop.wm.keybindings activate-window-menu ['<Alt>space']
+
+    ## Configuración de mutter
+    gsettings set org.gnome.mutter center-new-windows "true"
+    gsettings set org.gnome.mutter dynamic-workspaces "false"
+    gsettings set org.gnome.mutter edge-tiling "true"
+    gsettings set org.gnome.mutter workspaces-only-on-primary "true"
+
+    ## Toggle ventana a pantalla completa y maximizada
     gsettings set org.gnome.desktop.wm.keybindings toggle-maximized "['<Super>f']"
     gsettings set org.gnome.desktop.wm.keybindings toggle-fullscreen "['<Super><Shift>f']"
 
@@ -66,6 +106,8 @@ gnome_shell_postconfiguracionOpcional() {
     ## Diálogo para ejecutar
     gsettings set org.gnome.desktop.wm.keybindings panel-run-dialog "['<Alt>F2']"
 
+    ## Switch entre aplicaciones abiertas
+    gsettings set org.gnome.desktop.wm.keybindings switch-applications "['<Super>Tab']"
 
     ## Mover entre escritorios
     gsettings set org.gnome.desktop.wm.keybindings move-to-workspace-1 "['<Super><Shift>1']"
@@ -91,25 +133,47 @@ gnome_shell_postconfiguracionOpcional() {
     gsettings set org.gnome.desktop.wm.keybindings switch-to-workspace-9 "['<Super>9']"
     gsettings set org.gnome.desktop.wm.keybindings switch-to-workspace-10 "['<Super>0']"
 
+    ## Mueve la ventana a media pantalla ocupando todo el alto
+    gsettings set org.gnome.mutter.keybindings toggle-tiled-right "['<Shift><Super>Right']"
+    gsettings set org.gnome.mutter.keybindings toggle-tiled-left "['<Shift><Super>Left']"
+
+    ## Maximiza la ventana en el eje vertical
+    gsettings set org.gnome.desktop.wm.keybindings maximize-vertically "['<Super><Shift>Up']"
+
+    ## Maximiza la ventana en el eje horizontal
+    gsettings set org.gnome.desktop.wm.keybindings maximize-horizontally "['<Super><Shift>Down']"
+
+    ## Pegar a la parte de arriba
+    gsettings set org.gnome.desktop.wm.keybindings move-to-side-n "['<Super><Control>Up']"
+
+    ## Pegar al lateral derecho
+    gsettings set org.gnome.desktop.wm.keybindings move-to-side-e "['<Super><Control>Right']"
+
+    ## Pegar a la parte de abajo
+    gsettings set org.gnome.desktop.wm.keybindings move-to-side-s "['<Super><Control>Down']"
+
+    ## Pegar al lateral izquierdo
+    gsettings set org.gnome.desktop.wm.keybindings move-to-side-w "['<Super><Control>Left']"
+
+    ## Mueve al centro de la pantalla
+    gsettings set org.gnome.desktop.wm.keybindings move-to-center "['<Super><Control>Space']"
+
+    ## Mover a esquina arriba a la izquierda
+    gsettings set org.gnome.desktop.wm.keybindings move-to-corner-nw "['<Super><Shift>UpLeft']"
+
+    ## Mover a esquina arriba a la derecha
+    gsettings set org.gnome.desktop.wm.keybindings move-to-corner-ne "['<Super><Shift>Up']"
+
+    ## Mover a esquina abajo a la izquierda
+    gsettings set org.gnome.desktop.wm.keybindings move-to-corner-sw  "['<Super><Shift>Up']"
+
+    ## Mover a esquina abajo a la derecha
+    gsettings set org.gnome.desktop.wm.keybindings move-to-corner-se "['<Super><Shift>Up']"
+
     ##################
-    ## Otras configuraciones
-    #################
-
-    ## Deshabilitar scroll natural para no invertir mouse
-    gsettings set org.gnome.desktop.peripherals.mouse natural-scroll 'false'
-
-
-
-
-
-
-
-
-    ##################
-    ##
-    #################
     ## Anulo configuraciones que no necesito
-    gsettings set org.gnome.desktop.wm.keybindings switch-to-workspace-up  "[]"
+    #################
+    gsettings set org.gnome.desktop.wm.keybindings switch-to-workspace-up "[]"
     gsettings set org.gnome.desktop.wm.keybindings switch-to-workspace-right "[]"
     gsettings set org.gnome.desktop.wm.keybindings switch-to-workspace-down "[]"
     gsettings set org.gnome.desktop.wm.keybindings switch-to-workspace-left "[]"
@@ -127,128 +191,66 @@ gnome_shell_postconfiguracionOpcional() {
     gsettings set org.gnome.desktop.wm.keybindings maximize "[]"
     gsettings set org.gnome.desktop.wm.keybindings unmaximize "[]"
     gsettings set org.gnome.desktop.wm.keybindings switch-input-source-backward "[]"
+    gsettings set org.gnome.desktop.wm.keybindings switch-windows "[]"
+    gsettings set org.gnome.desktop.wm.keybindings show-desktop "[]"
+    gsettings set org.gnome.desktop.wm.keybindings switch-group-backward "[]"
+    gsettings set org.gnome.desktop.wm.keybindings panel-main-menu "[]"
+    gsettings set org.gnome.desktop.wm.keybindings switch-panels "[]"
+    gsettings set org.gnome.desktop.wm.keybindings cycle-windows "[]"
+    gsettings set org.gnome.desktop.wm.keybindings cycle-panels "[]"
+    gsettings set org.gnome.desktop.wm.keybindings cycle-windows-backward "[]"
+    gsettings set org.gnome.desktop.wm.keybindings cycle-panels-backward "[]"
+    gsettings set org.gnome.desktop.wm.keybindings cycle-group-backward "[]"
+    gsettings set org.gnome.desktop.wm.keybindings cycle-group "[]"
+    gsettings set org.gnome.desktop.wm.keybindings switch-group "[]"
+    gsettings set org.gnome.desktop.wm.keybindings switch-applications-backward "[]"
+    gsettings set org.gnome.desktop.wm.keybindings switch-windows-backward "[]"
+    gsettings set org.gnome.desktop.wm.keybindings toggle-above "[]"
+    gsettings set org.gnome.mutter.keybindings tab-popup-cancel "[]"
+    gsettings set org.gnome.mutter.keybindings tab-popup-select "[]"
+    gsettings set org.gnome.mutter.keybindings rotate-monitor "[]"
+    gsettings set org.gnome.mutter.keybindings switch-monitor "[]"
+    gsettings set org.gnome.mutter.wayland.keybindings switch-to-session-1 "[]"
+    gsettings set org.gnome.mutter.wayland.keybindings switch-to-session-2 "[]"
+    gsettings set org.gnome.mutter.wayland.keybindings switch-to-session-3 "[]"
+    gsettings set org.gnome.mutter.wayland.keybindings switch-to-session-4 "[]"
+    gsettings set org.gnome.mutter.wayland.keybindings switch-to-session-5 "[]"
+    gsettings set org.gnome.mutter.wayland.keybindings switch-to-session-6 "[]"
+    gsettings set org.gnome.mutter.wayland.keybindings switch-to-session-7 "[]"
+    gsettings set org.gnome.mutter.wayland.keybindings switch-to-session-8 "[]"
+    gsettings set org.gnome.mutter.wayland.keybindings switch-to-session-9 "[]"
+    gsettings set org.gnome.mutter.wayland.keybindings switch-to-session-10 "[]"
+    gsettings set org.gnome.mutter.wayland.keybindings switch-to-session-11 "[]"
+    gsettings set org.gnome.mutter.wayland.keybindings switch-to-session-12 "[]"
+    gsettings set org.gnome.mutter.wayland.keybindings restore-shortcuts "[]"
     gsettings set org.gnome.desktop.wm.keybindings  "[]"
     gsettings set org.gnome.desktop.wm.keybindings  "[]"
+    gsettings set org.gnome.desktop.wm.keybindings  "[]"
+    gsettings set org.gnome.desktop.wm.keybindings  "[]"
+    gsettings set org.gnome.desktop.wm.keybindings  "[]"
+    gsettings set org.gnome.desktop.wm.keybindings set-spew-mark "[]"
+    gsettings set org.gnome.desktop.wm.keybindings raise-or-lower "[]"
+    gsettings set org.gnome.desktop.wm.keybindings raise "[]"
+    gsettings set org.gnome.desktop.wm.keybindings toggle-shaded "[]"
+    gsettings set org.gnome.desktop.wm.keybindings lower "[]"
+    gsettings set org.gnome.shell.keybindings focus-active-notification "[]"
+    gsettings set org.gnome.shell.keybindings open-application-menu "[]"
+    gsettings set org.gnome.shell.keybindings toggle-message-tray "[]"
+    gsettings set org.gnome.shell.keybindings toggle-application-view "[]"
+    gsettings set org.gnome.shell.keybindings toggle-overview "[]"
+    gsettings set org.gnome.shell.keybindings shift-overview-up "[]"
+    gsettings set org.gnome.shell.keybindings shift-overview-down "[]"
+    gsettings set org.gnome.shell.keybindings switch-to-application-1 "[]"
+    gsettings set org.gnome.shell.keybindings switch-to-application-2 "[]"
+    gsettings set org.gnome.shell.keybindings switch-to-application-3 "[]"
+    gsettings set org.gnome.shell.keybindings switch-to-application-4 "[]"
+    gsettings set org.gnome.shell.keybindings switch-to-application-5 "[]"
+    gsettings set org.gnome.shell.keybindings switch-to-application-6 "[]"
+    gsettings set org.gnome.shell.keybindings switch-to-application-7 "[]"
+    gsettings set org.gnome.shell.keybindings switch-to-application-8 "[]"
+    gsettings set org.gnome.shell.keybindings switch-to-application-9 "[]"
 
 
-## Setear
-org.gnome.desktop.wm.keybindings minimize ['<Super>comma']
-
-## Anular
-org.gnome.desktop.wm.keybindings show-desktop @as []
-org.gnome.desktop.wm.keybindings switch-group-backward ['<Shift><Super>Above_Tab', '<Shift><Alt>Above_Tab']
-
-
-## Anotar
-org.gnome.desktop.wm.keybindings begin-resize ['<Alt>F8']
-org.gnome.desktop.wm.keybindings begin-move ['<Alt>F7']
-org.gnome.desktop.wm.keybindings switch-input-source ['<Super>space', 'XF86Keyboard']
-org.gnome.desktop.wm.keybindings activate-window-menu ['<Alt>space']
-
-
-
-
-
-
-
-
-
-## Mover a esquina arriba a la izquierda
-gsettings set org.gnome.desktop.wm.keybindings move-to-corner-nw "['<Super><Shift>Up']"
-
-## Mover a esquina arriba a la derecha
-gsettings set org.gnome.desktop.wm.keybindings move-to-corner-ne "['<Super><Shift>Up']"
-
-## Mover a esquina abajo a la izquierda
-gsettings set org.gnome.desktop.wm.keybindings move-to-corner-sw  "['<Super><Shift>Up']"
-
-## Mover a esquina abajo a la derecha
-gsettings set org.gnome.desktop.wm.keybindings move-to-corner-se "['<Super><Shift>Up']"
-
-
-## Pegar al lateral derecho
-gsettings set org.gnome.desktop.wm.keybindings move-to-side-e "['<Super><Shift>Up']"
-
-## Pegar a la parte de abajo
-gsettings set org.gnome.desktop.wm.keybindings move-to-side-s "['<Super><Shift>Up']"
-
-## Mueve al centro de la pantalla
-gsettings set org.gnome.desktop.wm.keybindings move-to-center "['<Super><Shift>Up']"
-
-## Pegar al lateral izquierdo
-gsettings set org.gnome.desktop.wm.keybindings move-to-side-w "['<Super><Shift>Up']"
-
-## Pegar a la parte de arriba
-gsettings set org.gnome.desktop.wm.keybindings move-to-side-n "['<Super><Shift>Up']"
-
-
-
-
-## Maximiza la ventana en el eje vertical
-gsettings set org.gnome.desktop.wm.keybindings maximize-vertically "['<Super><Shift>Up']"
-
-## Maximiza la ventana en el eje horizontal
-gsettings set org.gnome.desktop.wm.keybindings maximize-horizontally "['<Super><Shift>Up']"
-
-
-
-
-
-gsettings set org.gnome.desktop.wm.keybindings always-on-top "['<Super><Shift>Up']"
-
-gsettings set org.gnome.desktop.wm.keybindings switch-applications "['<Super><Shift>Up']"
-gsettings set org.gnome.desktop.wm.keybindings switch-windows "['<Super><Shift>Up']"
-
-
-
-
-
-
-
-
-
-
-
-org.gnome.desktop.wm.keybindings set-spew-mark @as []
-org.gnome.desktop.wm.keybindings switch-windows-backward @as []
-org.gnome.desktop.wm.keybindings panel-main-menu ['<Alt>F1']
-org.gnome.desktop.wm.keybindings raise-or-lower @as []
-org.gnome.desktop.wm.keybindings cycle-windows-backward ['<Shift><Alt>Escape']
-org.gnome.desktop.wm.keybindings raise @as []
-org.gnome.desktop.wm.keybindings toggle-shaded @as []
-org.gnome.desktop.wm.keybindings cycle-group-backward ['<Shift><Alt>F6']
-org.gnome.desktop.wm.keybindings cycle-panels-backward ['<Shift><Control><Alt>Escape']
-org.gnome.desktop.wm.keybindings switch-applications-backward @as []
-org.gnome.desktop.wm.keybindings cycle-group ['<Alt>F6']
-org.gnome.desktop.wm.keybindings switch-group ['<Super>Above_Tab', '<Alt>Above_Tab']
-
-org.gnome.desktop.wm.keybindings cycle-panels ['<Control><Alt>Escape']
-org.gnome.desktop.wm.keybindings lower @as []
-org.gnome.desktop.wm.keybindings toggle-above @as []
-org.gnome.desktop.wm.keybindings switch-panels ['<Control><Alt>Tab']
-org.gnome.desktop.wm.keybindings cycle-windows ['<Alt>Escape']
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    #/org/gnome/desktop/wm/keybindings/
-    #/org/gnome/mutter/keybindings/
-    #/org/gnome/mutter/wayland/keybindings/
-    #/org/gnome/settings-daemon/plugins/media-keys/
-
-    ## TODO → agregar atajos de teclado.
     ## TODO → Agregar extensiones a la lista y añadir sus configuraciones.
     ## TODO → Setear tema personalizado.
 }

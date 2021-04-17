@@ -103,18 +103,25 @@ instalar_flatplat() {
 }
 
 conf_gnome3() {
-    echo -e "$VE Configurando gtk3$CL"
-    gsettings set org.gnome.desktop.interface gtk-theme "Flat-Plat-compact"
+    echo -e "$VE Configurando gtk3/gtk4$CL"
     gsettings set org.gnome.desktop.interface clock-format "24h"
     gsettings set org.gnome.desktop.interface clock-show-date "true"
     gsettings set org.gnome.desktop.interface clock-show-seconds "false"
-    gsettings set org.gnome.desktop.interface cursor-theme "crystalblue"
+    gsettings set org.gnome.desktop.interface gtk-theme "Paper"
+    gsettings set org.gnome.desktop.interface icon-theme "Paper"
+    gsettings set org.gnome.desktop.interface cursor-theme "Oxygen_Blue"
+    #gsettings set org.gnome.desktop.interface cursor-theme "crystalblue"
     gsettings set org.gnome.desktop.interface enable-animations "false"
     gsettings set org.gnome.desktop.interface toolkit-accessibility "false"
+    gsettings set org.gnome.desktop.interface show-battery-percentage "true"
+    gsettings set org.gnome.desktop.interface cursor-size "32"
+    gsettings set org.gnome.desktop.interface font-hinting "full"
+    gsettings set org.gnome.desktop.interface toolbar-icons-size "small"
 
     gsettings set org.gnome.desktop.session idle-delay "720"
     gsettings set org.gnome.desktop.search-providers disable-external "true"
 
+    ## Privacidad
     gsettings set org.gnome.desktop.privacy hide-identity "true"
     gsettings set org.gnome.desktop.privacy old-files-age "14"
     gsettings set org.gnome.desktop.privacy recent-files-max-age "-1"
@@ -124,7 +131,58 @@ conf_gnome3() {
     gsettings set org.gnome.desktop.privacy report-technical-problems "false"
     gsettings set org.gnome.desktop.privacy send-software-usage-stats "false"
     gsettings set org.gnome.desktop.privacy show-full-name-in-top-bar "false"
+    gsettings set org.gnome.desktop.privacy disable-microphone 'false'
+    gsettings set org.gnome.desktop.privacy usb-protection-level 'lockscreen'
+    gsettings set org.gnome.desktop.privacy disable-sound-output 'false'
+    gsettings set org.gnome.desktop.privacy remember-app-usage 'true'
+    gsettings set org.gnome.desktop.privacy disable-camera 'true'
+    gsettings set org.gnome.desktop.privacy report-technical-problems 'false'
+    gsettings set org.gnome.desktop.privacy usb-protection 'true'
 
+    ## Salvapantallas
+    gsettings set org.gnome.desktop.screensaver user-switch-enabled 'true'
+    gsettings set org.gnome.desktop.screensaver color-shading-type 'solid'
+    gsettings set org.gnome.desktop.screensaver embedded-keyboard-command ''
+    gsettings set org.gnome.desktop.screensaver embedded-keyboard-enabled 'false'
+    gsettings set org.gnome.desktop.screensaver status-message-enabled 'true'
+    gsettings set org.gnome.desktop.screensaver show-full-name-in-top-bar 'true'
+    gsettings set org.gnome.desktop.screensaver logout-command ''
+    #org.gnome.desktop.screensaver picture-uri 'file:///usr/share/backgrounds/f34/default/f34.xml'
+    gsettings set org.gnome.desktop.screensaver idle-activation-enabled 'true'
+    gsettings set org.gnome.desktop.screensaver lock-enabled 'true'
+    gsettings set org.gnome.desktop.screensaver logout-enabled 'false'
+    gsettings set org.gnome.desktop.screensaver primary-color '#023c88'
+    gsettings set org.gnome.desktop.screensaver logout-delay 'uint32 7200'
+    gsettings set org.gnome.desktop.screensaver picture-opacity '100'
+    gsettings set org.gnome.desktop.screensaver picture-options 'zoom'
+    gsettings set org.gnome.desktop.screensaver lock-delay 'uint32 0'
+    gsettings set org.gnome.desktop.screensaver secondary-color '#5789ca'
+
+
+    ## Bloqueo de dispositivos
+    gsettings set org.gnome.desktop.lockdown mount-removable-storage-devices-as-read-only 'false'
+    gsettings set org.gnome.desktop.lockdown disable-command-line 'false'
+    gsettings set org.gnome.desktop.lockdown disable-log-out 'false'
+    gsettings set org.gnome.desktop.lockdown disable-printing 'false'
+    gsettings set org.gnome.desktop.lockdown disable-lock-screen 'false'
+    gsettings set org.gnome.desktop.lockdown disable-print-setup 'false'
+    gsettings set org.gnome.desktop.lockdown disable-user-switching 'false'
+    gsettings set org.gnome.desktop.lockdown disable-application-handlers 'false'
+    gsettings set org.gnome.desktop.lockdown disable-save-to-disk 'false'
+    gsettings set org.gnome.desktop.lockdown user-administration-disabled 'false'
+
+    ## Montaje automático de dispositivos
+    gsettings set org.gnome.desktop.media-handling autorun-never 'true'
+    gsettings set org.gnome.desktop.media-handling autorun-x-content-open-folder '[]'
+    gsettings set org.gnome.desktop.media-handling automount-open 'false'
+    gsettings set org.gnome.desktop.media-handling autorun-x-content-ignore '[]'
+    gsettings set org.gnome.desktop.media-handling automount 'false'
+
+    ## Notificaciones
+    gsettings set org.gnome.desktop.notifications show-banners 'true'
+    gsettings set org.gnome.desktop.notifications show-in-lock-screen 'false'
+
+    ## Teclado
     gsettings set org.gnome.desktop.peripherals.keyboard delay "300"
     gsettings set org.gnome.desktop.peripherals.keyboard repeat "true"
     gsettings set org.gnome.desktop.peripherals.keyboard repeat-interval "20"
@@ -132,38 +190,74 @@ conf_gnome3() {
     gsettings set org.gnome.desktop.peripherals.touchpad edge-scrolling-enabled "true"
     gsettings set org.gnome.desktop.peripherals.touchpad speed "0.2"
     gsettings set org.gnome.desktop.peripherals.trackball accel-profile "adaptative"
+    gsettings set org.gnome.desktop.peripherals.keyboard numlock-state 'true'
+    gsettings set org.gnome.desktop.peripherals.keyboard remember-numlock-state 'false'
 
-    gsettings set org.gnome.desktop.notifications show-in-lock-screen "false"
+    ## Ratón
+    gsettings set org.gnome.desktop.peripherals.mouse natural-scroll 'false'
 
-    gsettings set org.gnome.desktop.media-handling automount "false"
-    gsettings set org.gnome.desktop.media-handling automount-open "false"
-    gsettings set org.gnome.desktop.media-handling autorun-never "true"
+    ## Eventos de Sonido
+    gsettings set org.gnome.desktop.sound event-sounds 'false'
+    gsettings set org.gnome.desktop.sound input-feedback-sounds 'false'
+    gsettings set org.gnome.desktop.sound allow-volume-above-100-percent 'true'
 
-    gsettings set org.gnome.desktop.input-sources  "[('xkb', 'es'), ('xkb', 'gb+dvorak')]"
+    ## Nautilus
+    gsettings set org.gnome.nautilus.compression default-compression-format "7z"
+    gsettings set org.gnome.nautilus.preferences show-directory-item-counts "local-only"
+    gsettings set org.gnome.nautilus.preferences default-folder-viewer 'icon-view'
+    gsettings set org.gnome.nautilus.preferences show-image-thumbnails 'local-only'
+    gsettings set org.gnome.nautilus.preferences show-create-link 'true'
 
-    gsettings set org.gnome.desktop.archives default-format "7zip"
 
+
+
+    ## Aplicaciones por defecto
+    gsettings set org.gnome.desktop.default-applications.terminal 'exec-arg' "tilix"
     gsettings set org.gnome.desktop.default-applications.terminal 'exec' "tilix"
+    gsettings set org.gnome.desktop.default-applications.office.calendar exec 'thunderbird-wayland'
 
-    gsettings set org.gnome.mutter center-new-windows "true"
-    gsettings set org.gnome.mutter dynamic-workspaces "true"
-    gsettings set org.gnome.mutter edge-tiling "true"
-    gsettings set org.gnome.mutter workspaces-only-on-primary "true"
 
-    gsettings set org.gnome.nautilus.desktop home-icon-visible "false"
-    gsettings set org.gnome.nautilus.desktop volumes-visible "false"
 
-    gsettings set org.gnome.nm-applet suppress-wireless-networks-available "true"
 
-    gsettings set org.gnome.settings-daemon.peripherals.keyboard numlock-state "on"
-    gsettings set org.gnome.settings-daemon.peripherals.keyboard remember-numlock-state "false"
+
 
     ## Plugins
-    gsettings set org.gnome.settings-daemon.plugins.xsettings antialiasing "rgba"
-    gsettings set org.gnome.settings-daemon.plugins.xsettings hinting "full"
+    #gsettings set org.gnome.settings-daemon.plugins.xsettings antialiasing "rgba"
 
     gsettings set org.gnome.settings-daemon.plugins.power power-button-action "suspend"
-    gsettings set org.gnome.settings-daemon.plugins.power sleep-inactive-ac-timeout "3600"
+    #gsettings set org.gnome.settings-daemon.plugins.power sleep-inactive-ac-timeout "3600"
+
+
+    gsettings set org.gnome.nm-applet suppress-wireless-networks-available "true"
+    gsettings set org.gnome.desktop.input-sources  "[('xkb', 'es'), ('xkb', 'gb+dvorak')]"
+
+
+
+
+    ## Gedit
+    org.gnome.gedit.preferences.editor tabs-size 'uint32 4'
+
+
+#org.gnome.gedit
+#org.gnome.gnome-screenshot
+#org.gnome.login-screen
+#org.gnome.mutter
+#org.gnome.nautilus
+#org.gnome.nm-applet
+#org.gnome.online-accounts
+#org.gnome.SessionManager
+#org.gnome.settings-daemon.plugins.power
+#org.gnome.settings-daemon.plugins.xsettings
+#org.gnome.shell
+#org.gnome.software
+#org.gnome.system.locale
+#org.gnome.system.location
+#org.gnome.tweaks
+#org.gnome.Weather
+#org.gnome.system.smb
+
+
+
 }
 
 preconfiguracion_gnome3() {
