@@ -23,6 +23,12 @@ flat-remix-gtk2-theme
 flat-remix-gtk3-theme
 flat-remix-icon-theme
 flat-remix-theme
-
-
-
+gedit
+gedit-plugins
+gedit-color-schemes
+gedit-plugin-bracketcompletion
+gedit-plugin-codecomment
+gedit-plugin-drawspaces
+gedit-plugin-editorconfig
+gedit-plugin-findinfiles
+gedit-plugin-git

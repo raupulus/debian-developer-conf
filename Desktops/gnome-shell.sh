@@ -73,22 +73,22 @@ gnome_shell_postconfiguracionOpcional() {
     #################
 
     ## Minimizar al dock
-    org.gnome.desktop.wm.keybindings minimize ['<Super>comma']
+    gsettings set org.gnome.desktop.wm.keybindings minimize "['<Super>comma']"
 
     ## Bloquear ventana mostrándose siempre encima de las demás
     gsettings set org.gnome.desktop.wm.keybindings always-on-top "['<Super><Shift>U']"
 
     ## Redimensionar
-    org.gnome.desktop.wm.keybindings begin-resize ['<Alt>F8']
+    gsettings set org.gnome.desktop.wm.keybindings begin-resize "['<Alt>F8']"
 
     ## Mover
-    org.gnome.desktop.wm.keybindings begin-move ['<Alt>F7']
+    gsettings set org.gnome.desktop.wm.keybindings begin-move "['<Alt>F7']"
 
     ## Cambiar fuente de entrad de teclado
-    org.gnome.desktop.wm.keybindings switch-input-source ['<Super>space', 'XF86Keyboard']
+    gsettings set org.gnome.desktop.wm.keybindings switch-input-source "['<Super>space', 'XF86Keyboard']"
 
     ## Abrir menú de la ventana
-    org.gnome.desktop.wm.keybindings activate-window-menu ['<Alt>space']
+    gsettings set org.gnome.desktop.wm.keybindings activate-window-menu "['<Alt>space']"
 
     ## Configuración de mutter
     gsettings set org.gnome.mutter center-new-windows "true"
@@ -159,16 +159,16 @@ gnome_shell_postconfiguracionOpcional() {
     gsettings set org.gnome.desktop.wm.keybindings move-to-center "['<Super><Control>Space']"
 
     ## Mover a esquina arriba a la izquierda
-    gsettings set org.gnome.desktop.wm.keybindings move-to-corner-nw "['<Super><Shift>UpLeft']"
+    gsettings set org.gnome.desktop.wm.keybindings move-to-corner-nw "['<Super>UpLeft']"
 
     ## Mover a esquina arriba a la derecha
-    gsettings set org.gnome.desktop.wm.keybindings move-to-corner-ne "['<Super><Shift>Up']"
+    gsettings set org.gnome.desktop.wm.keybindings move-to-corner-ne "['<Super>UpRight']"
 
     ## Mover a esquina abajo a la izquierda
-    gsettings set org.gnome.desktop.wm.keybindings move-to-corner-sw  "['<Super><Shift>Up']"
+    gsettings set org.gnome.desktop.wm.keybindings move-to-corner-sw  "['<Super>DownLeft']"
 
     ## Mover a esquina abajo a la derecha
-    gsettings set org.gnome.desktop.wm.keybindings move-to-corner-se "['<Super><Shift>Up']"
+    gsettings set org.gnome.desktop.wm.keybindings move-to-corner-se "['<Super>DownRight']"
 
     ##################
     ## Anulo configuraciones que no necesito
@@ -223,11 +223,6 @@ gnome_shell_postconfiguracionOpcional() {
     gsettings set org.gnome.mutter.wayland.keybindings switch-to-session-11 "[]"
     gsettings set org.gnome.mutter.wayland.keybindings switch-to-session-12 "[]"
     gsettings set org.gnome.mutter.wayland.keybindings restore-shortcuts "[]"
-    gsettings set org.gnome.desktop.wm.keybindings  "[]"
-    gsettings set org.gnome.desktop.wm.keybindings  "[]"
-    gsettings set org.gnome.desktop.wm.keybindings  "[]"
-    gsettings set org.gnome.desktop.wm.keybindings  "[]"
-    gsettings set org.gnome.desktop.wm.keybindings  "[]"
     gsettings set org.gnome.desktop.wm.keybindings set-spew-mark "[]"
     gsettings set org.gnome.desktop.wm.keybindings raise-or-lower "[]"
     gsettings set org.gnome.desktop.wm.keybindings raise "[]"
@@ -249,10 +244,6 @@ gnome_shell_postconfiguracionOpcional() {
     gsettings set org.gnome.shell.keybindings switch-to-application-7 "[]"
     gsettings set org.gnome.shell.keybindings switch-to-application-8 "[]"
     gsettings set org.gnome.shell.keybindings switch-to-application-9 "[]"
-
-
-    ## TODO → Agregar extensiones a la lista y añadir sus configuraciones.
-    ## TODO → Setear tema personalizado.
 }
 
 gnome_shell_instalador() {

@@ -52,11 +52,15 @@ routesApache2() {
         APACHEMODSENABLED="${APACHECONF}/mods-enabled"
 
         if [[ ! -d "$APACHESITES" ]]; then
-            mkdir -p $APACHESITES
+            sudo mkdir -p $APACHESITES
+            sudo chmod 750 $APACHESITES
+            sudo chown :www-data $APACHESITES
         fi
 
         if [[ ! -d "$APACHEMODS" ]]; then
-            mkdir -p $APACHEMODS
+            sudo mkdir -p $APACHEMODS
+            sudo chmod 750 $APACHEMODS
+            sudo chown :www-data $APACHEMODS
         fi
     elif [[ "$DISTRO" = 'gentoo' ]]; then
         echo -e "$VE Configurando directorios apache para $DISTRO$CL"
