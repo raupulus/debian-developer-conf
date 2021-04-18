@@ -203,10 +203,40 @@ conf_gnome3() {
 
     ## Nautilus
     gsettings set org.gnome.nautilus.compression default-compression-format "7z"
+    gsettings set org.gnome.nautilus.icon-view captions "['size', 'none', 'none']"
+    gsettings set org.gnome.nautilus.icon-view default-zoom-level 'large'
+    gsettings set org.gnome.nautilus.icon-view text-ellipsis-limit "['3']"
     gsettings set org.gnome.nautilus.preferences show-directory-item-counts "local-only"
     gsettings set org.gnome.nautilus.preferences default-folder-viewer 'icon-view'
     gsettings set org.gnome.nautilus.preferences show-image-thumbnails 'local-only'
     gsettings set org.gnome.nautilus.preferences show-create-link 'true'
+    gsettings set org.gnome.nautilus.window-state sidebar-width "241"
+    gsettings set org.gnome.nautilus.window-state start-with-location-bar "true"
+    gsettings set org.gnome.nautilus.window-state initial-size "(1174, 827)"
+    gsettings set org.gnome.nautilus.window-state start-with-sidebar "true"
+    gsettings set org.gnome.nautilus.window-state maximized "false"
+    gsettings set org.gnome.nautilus.preferences search-filter-time-type 'last_modified'
+    gsettings set org.gnome.nautilus.preferences default-sort-order 'name'
+    gsettings set org.gnome.nautilus.preferences open-folder-on-dnd-hover "true"
+    gsettings set org.gnome.nautilus.preferences default-sort-in-reverse-order "false"
+    gsettings set org.gnome.nautilus.preferences show-hidden-files "false"
+    gsettings set org.gnome.nautilus.preferences tabs-open-position 'after-current-tab'
+    gsettings set org.gnome.nautilus.preferences always-use-location-entry "false"
+    gsettings set org.gnome.nautilus.preferences search-view 'list-view'
+    gsettings set org.gnome.nautilus.preferences thumbnail-limit "uint64 50"
+    gsettings set org.gnome.nautilus.preferences mouse-back-button "8"
+    gsettings set org.gnome.nautilus.preferences click-policy 'double'
+    gsettings set org.gnome.nautilus.preferences mouse-forward-button "9"
+    gsettings set org.gnome.nautilus.preferences mouse-use-extra-buttons "true"
+    gsettings set org.gnome.nautilus.preferences show-delete-permanently "false"
+    gsettings set org.gnome.nautilus.preferences use-experimental-views "false"
+    gsettings set org.gnome.nautilus.preferences fts-enabled "true"
+    gsettings set org.gnome.nautilus.preferences default-folder-viewer 'icon-view'
+    gsettings set org.gnome.nautilus.preferences install-mime-activation "true"
+    gsettings set org.gnome.nautilus.list-view default-zoom-level 'standard'
+    gsettings set org.gnome.nautilus.list-view use-tree-view "false"
+    gsettings set org.gnome.nautilus.list-view default-visible-columns "['name', 'size', 'date_modified', 'starred']"
+    gsettings set org.gnome.nautilus.list-view default-column-order "['name', 'size', 'type', 'owner', 'group', 'permissions', 'mime_type', 'where', 'date_modified', 'date_modified_with_time', 'date_accessed', 'date_created', 'recency', 'starred']"
 
 
 
@@ -217,7 +247,8 @@ conf_gnome3() {
     gsettings set org.gnome.desktop.default-applications.office.calendar exec 'thunderbird-wayland'
 
 
-
+    ## Geoposicionamiento
+    gsettings set org.gnome.system.location enabled "false"
 
 
 
@@ -235,26 +266,95 @@ conf_gnome3() {
 
 
     ## Gedit
-    org.gnome.gedit.preferences.editor tabs-size 'uint32 4'
+    gsettings set org.gnome.gedit.plugins active-plugins "['filebrowser', 'git', 'drawspaces', 'time', 'pythonconsole', 'terminal', 'quickhighlight', 'spell', 'externaltools', 'smartspaces', 'commander', 'docinfo', 'findinfiles', 'modelines', 'bracketcompletion', 'wordcompletion', 'colorpicker', 'codecomment']"
+    gsettings set org.gnome.gedit.preferences.editor auto-save-interval "uint32 10"
+    gsettings set org.gnome.gedit.preferences.editor wrap-last-split-mode 'word'
+    gsettings set org.gnome.gedit.preferences.editor use-default-font "true"
+    gsettings set org.gnome.gedit.preferences.editor tabs-size "uint32 4"
+    gsettings set org.gnome.gedit.preferences.editor auto-save "false"
+    gsettings set org.gnome.gedit.preferences.editor background-pattern 'none'
+    gsettings set org.gnome.gedit.preferences.editor smart-home-end 'after'
+    gsettings set org.gnome.gedit.preferences.editor search-highlighting "true"
+    gsettings set org.gnome.gedit.preferences.editor scheme 'monokai-extended'
+    gsettings set org.gnome.gedit.preferences.editor editor-font 'Monospace 12'
+    gsettings set org.gnome.gedit.preferences.editor bracket-matching "true"
+    gsettings set org.gnome.gedit.preferences.editor syntax-highlighting "true"
+    gsettings set org.gnome.gedit.preferences.editor display-right-margin "true"
+    gsettings set org.gnome.gedit.preferences.editor insert-spaces "true"
+    gsettings set org.gnome.gedit.preferences.editor max-undo-actions "2000"
+    gsettings set org.gnome.gedit.preferences.editor restore-cursor-position "true"
+    gsettings set org.gnome.gedit.preferences.editor highlight-current-line "true"
+    gsettings set org.gnome.gedit.preferences.editor display-line-numbers "true"
+    gsettings set org.gnome.gedit.preferences.editor auto-indent "true"
+    gsettings set org.gnome.gedit.preferences.editor wrap-mode 'word'
+    gsettings set org.gnome.gedit.preferences.editor ensure-trailing-newline "true"
+    gsettings set org.gnome.gedit.preferences.editor right-margin-position "uint32 120"
+    gsettings set org.gnome.gedit.preferences.editor create-backup-copy "false"
+    gsettings set org.gnome.gedit.preferences.encodings candidate-encodings "['']"
+    gsettings set org.gnome.gedit.preferences.print print-header "true"
+    gsettings set org.gnome.gedit.preferences.print print-font-header-pango 'Sans 11'
+    gsettings set org.gnome.gedit.preferences.print print-line-numbers "uint32 0"
+    gsettings set org.gnome.gedit.preferences.print print-font-numbers-pango 'Sans 8'
+    gsettings set org.gnome.gedit.preferences.print margin-top "15.0"
+    gsettings set org.gnome.gedit.preferences.print margin-left "25.0"
+    gsettings set org.gnome.gedit.preferences.print margin-right "25.0"
+    gsettings set org.gnome.gedit.preferences.print print-font-body-pango 'Monospace 9'
+    gsettings set org.gnome.gedit.preferences.print print-syntax-highlighting "true"
+    gsettings set org.gnome.gedit.preferences.print margin-bottom "25.0"
+    gsettings set org.gnome.gedit.preferences.print print-wrap-mode 'word'
+    gsettings set org.gnome.gedit.preferences.ui statusbar-visible "true"
+    gsettings set org.gnome.gedit.preferences.ui bottom-panel-visible "false"
+    gsettings set org.gnome.gedit.preferences.ui side-panel-visible "false"
+    gsettings set org.gnome.gedit.preferences.ui show-tabs-mode 'auto'
+    gsettings set org.gnome.gedit.state.file-chooser filter-id "0"
+    gsettings set org.gnome.gedit.state.file-chooser open-recent "true"
+    gsettings set org.gnome.gedit.state.history-entry replace-with-entry "['']"
+    gsettings set org.gnome.gedit.state.history-entry search-for-entry "['']"
+    gsettings set org.gnome.gedit.state.window bottom-panel-size "140"
+    gsettings set org.gnome.gedit.state.window side-panel-size "200"
+    gsettings set org.gnome.gedit.state.window side-panel-active-page 'GeditWindowDocumentsPanel'
+    gsettings set org.gnome.gedit.state.window bottom-panel-active-page 'GeditPythonConsolePanel'
+    gsettings set org.gnome.gedit.state.window size "(900, 700)"
+    gsettings set org.gnome.gedit.state.window state "87168"
 
+    ## nm-applet
+    gsettings set org.gnome.nm-applet show-applet "true"
+    gsettings set org.gnome.nm-applet disable-disconnected-notifications "false"
+    gsettings set org.gnome.nm-applet disable-wifi-create "false"
+    gsettings set org.gnome.nm-applet suppress-wireless-networks-available "true"
+    gsettings set org.gnome.nm-applet disable-vpn-notifications "false"
+    gsettings set org.gnome.nm-applet disable-connected-notifications "false"
+    gsettings set org.gnome.nm-applet stamp "0"
 
-#org.gnome.gedit
-#org.gnome.gnome-screenshot
-#org.gnome.login-screen
-#org.gnome.mutter
-#org.gnome.nautilus
-#org.gnome.nm-applet
-#org.gnome.online-accounts
-#org.gnome.SessionManager
-#org.gnome.settings-daemon.plugins.power
-#org.gnome.settings-daemon.plugins.xsettings
-#org.gnome.shell
-#org.gnome.software
-#org.gnome.system.locale
-#org.gnome.system.location
-#org.gnome.tweaks
-#org.gnome.Weather
-#org.gnome.system.smb
+    ## Energía
+    gsettings set org.gnome.settings-daemon.plugins.power idle-dim "true"
+    gsettings set org.gnome.settings-daemon.plugins.power sleep-inactive-battery-type 'suspend'
+    gsettings set org.gnome.settings-daemon.plugins.power idle-brightness "30"
+    gsettings set org.gnome.settings-daemon.plugins.power ambient-enabled "true"
+    gsettings set org.gnome.settings-daemon.plugins.power sleep-inactive-ac-type 'nothing'
+    gsettings set org.gnome.settings-daemon.plugins.power sleep-inactive-battery-timeout "1200"
+    gsettings set org.gnome.settings-daemon.plugins.power sleep-inactive-ac-timeout "3600"
+    gsettings set org.gnome.settings-daemon.plugins.power power-button-action 'suspend'
+
+    ## Gnome Tweaks
+    gsettings set org.gnome.tweaks show-extensions-notice "false"
+
+    ## Gnome Weather
+    gsettings set org.gnome.Weather automatic-location "false"
+
+    ## Gnome Software
+    gsettings set org.gnome.software download-updates-notify "false"
+    gsettings set org.gnome.software download-updates "false"
+    gsettings set org.gnome.software show-nonfree-prompt "true"
+    gsettings set org.gnome.software show-ratings "true"
+    gsettings set org.gnome.software refresh-when-metered "false"
+    gsettings set org.gnome.software show-nonfree-ui "true"
+    gsettings set org.gnome.software prompt-for-nonfree "true"
+    gsettings set org.gnome.software first-run "false"
+    gsettings set org.gnome.software allow-updates "false"
+    gsettings set org.gnome.software install-bundles-system-wide "true"
+    gsettings set org.gnome.software enable-repos-dialog "true"
+    gsettings set org.gnome.software show-upgrade-prerelease "true"
 
 
 
