@@ -633,13 +633,13 @@ bindsym $mod+F12 mode "$mode_servers"
 ###############           APPLETS         ##################
 ############################################################
 ## Dropbox
-exec --no-startup-id dropbox start
+#exec --no-startup-id dropbox start
 
 ## Synology Drive
 exec --no-startup-id synology-drive
 
 ## Nextcloud
-exec --no-startup-id nextcloud
+#exec --no-startup-id nextcloud
 
 ## pCloud
 exec --no-startup-id "$HOME/AppImage/pcloud"
@@ -679,7 +679,8 @@ bindsym PowerOff exec --no-startup-id i3lock; pm-suspend
 
 ## Bloquear pantalla
 bindsym $mod+p exec "~/.config/i3/scripts/lock_and_blur.sh"
-exec xautolock -detectsleep -time 15 -locker "~/.config/i3/scripts/lock_and_blur.sh" -notify 30 -notifier "notify-send -u critical -t 10000 -- 'Bloqueando pantalla en 30 seconds'"
+exec xautolock -detectsleep -time 15 -locker "~/.config/i3/scripts/lock_and_blur
+.sh" -notify 30 -notifier "notify-send -u critical -t 10000 -- 'Bloqueando pantalla en 30 segundos'"
 
 ###########################################################
 ############         TECLAS MULTIMEDIA         ############
