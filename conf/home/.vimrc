@@ -59,6 +59,12 @@ set lazyredraw
 " Resaltar parejas corchetes, llaves y paréntesis [{()}] al poner el cursor encima
 set showmatch
 
+" Desactivo clipboard de vim para copiar en portapapeles del sistema
+set clipboard+=unnamed
+
+" Habilito el portapapeles y selección con el ratón
+set mouse=a
+
 " Activa crear parejas de corchetes, llaves y paréntesis [{()}] al abrirlas
 "let g:AutoPairsFlyMode = 1
 "let g:AutoPairsShortcutBackInsert = '<M-b>'
