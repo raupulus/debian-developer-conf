@@ -31,12 +31,12 @@ esac
 ## No añadir líneas duplicadas o que comienzan con espacios al historial.
 HISTCONTROL=ignoreboth
 
-## Agregar al archivo de histoarial (En vez de sobreescribirlo)
+## Agregar al archivo de historial (En vez de sobreescribirlo)
 shopt -s histappend
 
 ## Longitud del Historial
-HISTSIZE=2000
-HISTFILESIZE=8000
+HISTSIZE=3000
+HISTFILESIZE=12000
 
 ## Comprobar tamaño de ventana tras cada comando (Actualiza "LINES" y "COLUMNS")
 shopt -s checkwinsize
@@ -64,12 +64,12 @@ force_color_prompt=yes
 
 if [[ -n "$force_color_prompt" ]]; then
     if [[ -x /usr/bin/tput ]] && tput setaf 1 >&/dev/null; then
-    ## We have color support; assume it's compliant with Ecma-48
-    ## (ISO/IEC-6429). (Lack of such support is extremely rare, and such
-    ## a case would tend to support setf rather than setaf.)
-    color_prompt=yes
+        ## We have color support; assume it's compliant with Ecma-48
+        ## (ISO/IEC-6429). (Lack of such support is extremely rare, and such
+        ## a case would tend to support setf rather than setaf.)
+        color_prompt=yes
     else
-    color_prompt=
+        color_prompt=
     fi
 fi
 
@@ -82,6 +82,7 @@ else
     #PS1='${debian_chroot:+($debian_chroot)}\u@\h:\w\$ '
     PS1='bash;$(__git_ps1 " (%s))"'
 fi
+
 unset color_prompt force_color_prompt
 
 ## Si estamos con Xterm establece el título (original → user@host:dir)
@@ -125,7 +126,7 @@ fi
 ###            COLOR            ###
 ###################################
 ## Habilita el soporte de color para "ls" y algunos alias
-if [[ -x /usr/bin/dircolors ]]; then
+if [[ -x '/usr/bin/dircolors' ]]; then
     test -r ~/.dircolors && eval "$(dircolors -b ~/.dircolors)" || eval "$(dircolors -b)"
     alias ls='ls --color=auto'
     alias dir='dir --color=auto'
@@ -155,7 +156,7 @@ fi
 
 ## Compatibilidad con terminal "Tilix"
 if [[ "$TILIX_ID" ]] || [[ "$VTE_VERSION" ]]; then
-    source /etc/profile.d/vte.sh
+    source /etc/profile.d/vte.sh 2>/dev/null
 fi
 
 ## Ruta para npm en $HOME de usuario
@@ -192,8 +193,12 @@ fi
 ###     Exportando variables    ###
 ###################################
 ## Exportar editor de terminal
-#export EDITOR="nano -c"
-export EDITOR="vim"
+if [[ -x '/usr/bin/vim' ]]; then
+    export EDITOR='vim'
+elif [[ -x '/usr/bin/nano' ]]; then
+    export EDITOR='nano -c'
+fi
+
 export GIT_PS1_SHOWDIRTYSTATE=1
 export _JAVA_OPTIONS='-Dawt.useSystemAAFontSettings=on'
 
@@ -261,7 +266,9 @@ if [[ -f ~/.bash_it/bash_it.sh ]]; then
     ## export BASH_IT_AUTOMATIC_RELOAD_AFTER_CONFIG_CHANGE=1
 
     ## Cargar Bash-it
-    source "$BASH_IT"/bash_it.sh
+    if [[ -d "${BASH_IT}" && -f "${BASH_IT}/bash_it.sh" ]]; then
+        source "${BASH_IT}/bash_it.sh"
+    fi
 fi
 
 ###################################
@@ -322,7 +329,14 @@ alias tgd="cd $HOME/git/1-Proyectos/DesdeChipiona"
 #alias mv="mv -i"
 
 ## Aplicaciones renombradas
-alias t="trans :es"
+if [[ -x '/usr/bin/trans' ]]; then
+    alias t="trans :es"
+fi
+
+## Reproducción de voz
+if [[ -x '/usr/bin/espeak' ]]; then
+    alias espeaker='espeak -ves+f2 -s150 -p80'
+fi
 
 ###################################
 ###  Opciones para bash propias ###
@@ -365,7 +379,9 @@ umask 007
 #fi
 
 ## Activo gestos en touchpad
-synclient EmulateMidButtonTime=1 TouchpadOff=0 VertTwoFingerScroll=1 HorizTwoFingerScroll=1 VertEdgeScroll=1 TapButton1=1 TapButton2=3 TapButton3=2 ClickFinger1=1 ClickFinger2=2 ClickFinger3=3
+if [[ -x '/usr/bin/synclient' ]]; then
+    synclient EmulateMidButtonTime=1 TouchpadOff=0 VertTwoFingerScroll=1 HorizTwoFingerScroll=1 VertEdgeScroll=1 TapButton1=1 TapButton2=3 TapButton3=2 ClickFinger1=1 ClickFinger2=2 ClickFinger3=3
+fi
 
 ###################################
 ### Configurando java y android ###
