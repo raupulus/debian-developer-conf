@@ -553,7 +553,7 @@ exec --no-startup-id dropbox start
 exec --no-startup-id synology-drive
 
 ## Nextcloud
-exec --no-startup-id nextcloud
+#exec --no-startup-id nextcloud
 
 ## pCloud
 exec --no-startup-id "$HOME/AppImage/pcloud"
