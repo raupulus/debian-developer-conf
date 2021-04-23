@@ -43,17 +43,24 @@ fuentes_download() {
         sudo mkdir '/usr/share/fonts/Inconsolata'
     fi
 
-    sudo cp "$WORKSCRIPT/tmp/Inconsolata Nerd Font Complete.otf" '/usr/share/fonts/Inconsolata/'
+    if [[ ! -f '/usr/share/fonts/Inconsolata/Complete.otf' ]]; then
+        sudo cp "$WORKSCRIPT/tmp/Inconsolata Nerd Font Complete.otf" '/usr/share/fonts/Inconsolata/'
+    fi
 
-    sudo cp "$WORKSCRIPT/tmp/Inconsolata Nerd Font Complete Mono.otf" '/usr/share/fonts/Inconsolata/'
+    if [[ ! -f '/usr/share/fonts/Inconsolata/Mono.otf' ]]; then
+        sudo cp "$WORKSCRIPT/tmp/Inconsolata Nerd Font Complete Mono.otf" '/usr/share/fonts/Inconsolata/'
+    fi
 
-    sudo chmod 755 -R '/usr/share/fonts/Inconsolata'
+    sudo chmod ugo+r -R '/usr/share/fonts/Inconsolata'
 
     if [[ ! -d '/usr/share/fonts/Powerline' ]]; then
         sudo mkdir '/usr/share/fonts/Powerline'
     fi
 
-    sudo cp "$WORKSCRIPT/tmp/Inconsolata-dz for Powerline.otf" '/usr/share/fonts/Powerline/'
+    if [[ ! -f '/usr/share/fonts/Powerline/Inconsolata-dz for Powerline.otf' ]]; then
+        sudo cp "$WORKSCRIPT/tmp/Inconsolata-dz for Powerline.otf" '/usr/share/fonts/Powerline/'
+    fi
+
 
     sudo chmod 755 -R '/usr/share/fonts/Powerline'
 }
