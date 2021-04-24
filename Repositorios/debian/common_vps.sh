@@ -80,6 +80,7 @@ common_vps_add_keys() {
     sudo chmod 744 '/etc/apt/trusted.gpg.d/php.gpg'
 
     ## NodeJS
+    echo -e "$VE Agregando llave para$RO Nodejs$CL"
     curl -fsSL https://deb.nodesource.com/gpgkey/nodesource.gpg.key | sudo apt-key add -
 }
 
