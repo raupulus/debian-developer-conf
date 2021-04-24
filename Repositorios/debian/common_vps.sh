@@ -78,6 +78,9 @@ common_vps_add_keys() {
     echo -e "$VE Agregando llave para$RO PHP$VE de sury,org$CL"
     sudo wget -O '/etc/apt/trusted.gpg.d/php.gpg' 'https://packages.sury.org/php/apt.gpg'
     sudo chmod 744 '/etc/apt/trusted.gpg.d/php.gpg'
+
+    ## NodeJS
+    curl -fsSL https://deb.nodesource.com/gpgkey/nodesource.gpg.key | sudo apt-key add -
 }
 
 ##
