@@ -30,7 +30,7 @@ source "$WORKSCRIPT/Usuario/terminales.sh"
 source "$WORKSCRIPT/Usuario/heroku.sh"
 source "$WORKSCRIPT/Usuario/bashit.sh"
 source "$WORKSCRIPT/Usuario/OhMyZsh.sh"
-source "$WORKSCRIPT/Usuario/spacevim.sh"
+#source "$WORKSCRIPT/Usuario/spacevim.sh"
 source "$WORKSCRIPT/Usuario/vim.sh"
 source "$WORKSCRIPT/Usuario/tmux.sh"
 source "$WORKSCRIPT/Usuario/powerline.sh"
@@ -98,25 +98,26 @@ softwareUsuarioMinimo() {
     user_terminals_installer
     tmux_Instalador
     powerline_Instalador
+    vim_installer
 
     ## Instalación de Vim o Spacevim
-    while true; do
-        echo -e "$VE ¿Quieres instalar$RO vim$VE o$RO spacevim$CL"
-        echo -e "$RO 1)$VE vim$CL"
-        echo -e "$RO 2)$VE spacevim$CL"
-        read -p "→ " editor
-        case "$editor" in
-            vim | 1)
-                vim_installer
-                break;;
-            spacevim | 2)
-                spacevim_Instalador
-                break;;
-            *)  ## Opción errónea
-                clear_screen
-                echo -e "$RO Opción no válida$CL"
-        esac
-    done
+    #while true; do
+    #    echo -e "$VE ¿Quieres instalar$RO vim$VE o$RO spacevim$CL"
+    #    echo -e "$RO 1)$VE vim$CL"
+    #    echo -e "$RO 2)$VE spacevim$CL"
+    #    read -p "→ " editor
+    #    case "$editor" in
+    #        vim | 1)
+    #            vim_installer
+    #            break;;
+    #        spacevim | 2)
+    #            spacevim_Instalador
+    #            break;;
+    #        *)  ## Opción errónea
+    #            clear_screen
+    #            echo -e "$RO Opción no válida$CL"
+    #    esac
+    #done
 }
 
 softwareUsuarioExtra() {
