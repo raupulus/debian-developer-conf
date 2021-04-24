@@ -113,18 +113,18 @@ fonts_install() {
     fuentes_download
     fuentes_locales
 
-    if [[ -d "$WORKSCRIPT/tmp/nerd-fonts/.git" ]]; then
-        fuentes_nerdfonts
-    else
-        echo -e "$VE ¿Instalar$RO Nerd-Fonts$VE, ocupará más de 1GB (y su descarga)?"
-        read -p ' s/N → ' SN
+    #if [[ -d "$WORKSCRIPT/tmp/nerd-fonts/.git" ]]; then
+    #    fuentes_nerdfonts
+    #else
+    #    echo -e "$VE ¿Instalar$RO Nerd-Fonts$VE, ocupará más de 1GB (y su descarga)?"
+    #    read -p ' s/N → ' SN
 
-        if [[ "$SN" = 'y' ]] ||
-           [[ "$SN" = 'Y' ]] ||
-           [[ "$SN" = 's' ]] ||
-           [[ "$SN" = 'S' ]]
-        then
-            fuentes_nerdfonts
-        fi
-    fi
+    #    if [[ "$SN" = 'y' ]] ||
+    #       [[ "$SN" = 'Y' ]] ||
+    #       [[ "$SN" = 's' ]] ||
+    #       [[ "$SN" = 'S' ]]
+    #    then
+    #        fuentes_nerdfonts
+    #    fi
+    #fi
 }
