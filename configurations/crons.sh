@@ -25,6 +25,6 @@
 configurations_crons() {
     echo -e "$VE Instalando tareas$RO Cron$CL"
 
-    sudo cp "{$WORKSCRIPT}/conf/etc/cron.d/*" '/etc/cron.d'
+    sudo cp "${WORKSCRIPT}/conf/etc/cron.d/*" '/etc/cron.d'
     sudo chmod 644 -R /etc/cron.d/*
 }
