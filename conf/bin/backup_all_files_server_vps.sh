@@ -67,9 +67,11 @@ USER=$(whoami)   ## Usuario que ejecuta el script
 ##       VARIABLES        ##
 ############################
 
-FILES_EXCLUDES='' #TODO → Implementar exclusiones
+FILES_EXCLUDES='node_modules' #TODO → Implementar exclusiones
 
 PATHS_BACKUPS=('/etc' '/var/www/storage' '/var/lib/go-server' '/usr/share/go-server' '/var/lib/go-agent' '/usr/share/go-agent')
+
+PATHS_BACKUPS_FILES=() #TODO → Implementar backups de archivos concretos, go-server y go-client no se necesita salvar al completo
 
 ## Archivo en el que se guardarán logs
 PATH_LOG='/var/log'
@@ -96,24 +98,24 @@ createDirectories() {
 
     ## Creo el directorio temporal si no existe o limpio su contenido.
     if [[ ! -d "${PATH_TMP_PREPARE_BACKUP}" ]]; then
-        sudo mkdir -p "${PATH_TMP_PREPARE_BACKUP}"
+        mkdir -p "${PATH_TMP_PREPARE_BACKUP}"
     else
-        sudo rm -Rf "${PATH_TMP_PREPARE_BACKUP}"
+        rm -Rf "${PATH_TMP_PREPARE_BACKUP}"
     fi
 
     ## Directorio para guardar el backup final.
     if [[ ! -d "${PATH_STORE_BACKUP}" ]]; then
-        sudo mkdir -p "${PATH_STORE_BACKUP}"
+        mkdir -p "${PATH_STORE_BACKUP}"
     fi
 
     ## Directorio para guardar logs
     if [[ ! -d "${PATH_LOG}" ]]; then
-        sudo mkdir -p "${PATH_LOG}"
+        mkdir -p "${PATH_LOG}"
     fi
 
     ## Crea el archivo de logs si no existe
     if [[ ! -f "${LOG_FILE}" ]]; then
-        sudo touch "${LOG_FILE}"
+        touch "${LOG_FILE}"
     fi
 }
 
@@ -134,7 +136,8 @@ copyFilesToWorkPath() {
             #TODO → copiar con "rsync" excluyendo archivos
             #rsync -a --exclude={'file1.txt','dir1/*','dir2'} "${DIR}/" "${PATH_TMP_PREPARE_BACKUP}/"
 
-            rsync -a "${DIR}" "${PATH_TMP_PREPARE_BACKUP}/"
+            mkdir -p "${PATH_TMP_PREPARE_BACKUP}/${DIR}"
+            rsync -a "${DIR}" "${PATH_TMP_PREPARE_BACKUP}/${DIR}/"
 
         else
             echo -e "${RO}No existe el directorio ${DIR}${CL}"
@@ -152,7 +155,7 @@ compressAndMoveBackup() {
     echo "Comprimiendo Backup" >> $LOG_FILE
 
     ## Comprimiendo backup
-    tar czvf "${PATH_TMP_PREPARE_BACKUP}/${BACKUP_NAME}.tar.gz" "${PATH_STORE_BACKUP}"
+    tar czvf "${PATH_STORE_BACKUP}/${BACKUP_NAME}.tar.gz" "${PATH_TMP_PREPARE_BACKUP}"
 }
 
 ##
@@ -163,7 +166,7 @@ cleanWorkPath() {
         echo -e "${VE}Limpiando directorio de trabajo${CL}"
         echo 'Limpiando directorio de trabajo' >> $LOG_FILE
 
-        sudo rm -rf "${PATH_TMP_PREPARE_BACKUP}"
+        rm -rf "${PATH_TMP_PREPARE_BACKUP}"
     fi
 }
 
