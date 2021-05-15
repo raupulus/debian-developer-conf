@@ -3,12 +3,12 @@
 --
 -- Author:       Raúl Caro Pastorino
 -- Email Author: raul@fryntiz.dev
--- Web Author:   http://https://fryntiz.es
--- github:       https://github.com/fryntiz
+-- Web Author:   http://fryntiz.es
 -- gitlab:       https://gitlab.com/fryntiz
+-- github:       https://github.com/fryntiz
 -- twitter:      https://twitter.com/fryntiz
 --
--- Create Date: 2019
+-- Create Date: 2021
 -- Project Name: 
 -- Description: 
 --
@@ -19,7 +19,7 @@
 --
 -------------------------------------------------------------------------------
 --
--- Copyright (C) 2019  Raúl Caro Pastorino
+-- Copyright (C) 2021  Raúl Caro Pastorino
 --
 -- This program is free software: you can redistribute it and/or modify
 -- it under the terms of the GNU General Public License as published by
