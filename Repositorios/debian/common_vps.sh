@@ -81,6 +81,7 @@ common_vps_add_keys() {
 
     ## NodeJS
     echo -e "$VE Agregando llave para$RO Nodejs$CL"
+    sudo apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 1655A0AB68576280
     curl -fsSL https://deb.nodesource.com/gpgkey/nodesource.gpg.key | sudo apt-key add -
 }
 
