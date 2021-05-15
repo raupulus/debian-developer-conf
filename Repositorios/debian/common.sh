@@ -49,7 +49,8 @@ common_add_key() {
 
     ## Repositorio para Etcher
     echo -e "$VE Agregando clave para$RO Etcher$CL"
-    sudo apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 379CE192D401AB61
+    #sudo apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 379CE192D401AB61
+    curl -1sLf "https://dl.cloudsmith.io/public/balena/etcher/gpg.70528471AFF9A051.key" | sudo apt-key add -
 
     ## Repositorio para editor Atom.
     echo -e "$VE Agregando clave para el editor$RO Atom$CL"
