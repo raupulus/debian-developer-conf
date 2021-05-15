@@ -101,6 +101,7 @@ createDirectories() {
         mkdir -p "${PATH_TMP_PREPARE_BACKUP}"
     else
         rm -Rf "${PATH_TMP_PREPARE_BACKUP}"
+        mkdir -p "${PATH_TMP_PREPARE_BACKUP}"
     fi
 
     ## Directorio para guardar el backup final.
