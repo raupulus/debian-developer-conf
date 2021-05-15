@@ -80,7 +80,7 @@ common_add_key() {
 
     ## Beekeeper Studio (Gestionar Bases de Datos)
     echo -e "$VE Agregando clave para $RO Beekeeper Studio$CL"
-    wget --quiet -O - https://bintray.com/user/downloadSubjectPublicKey?username=bintray | sudo apt-key add -
+    wget --quiet -O - https://deb.beekeeperstudio.io/beekeeper.key | sudo apt-key add -
 
     ## Lynis
     echo -e "$VE Agregando clave para $RO Lynis$CL"

@@ -2,3 +2,4 @@
 ##                Beekeeper Studio                    ##
 ########################################################
 deb https://dl.bintray.com/beekeeper-studio/releases disco main
+deb https://deb.beekeeperstudio.io stable main
