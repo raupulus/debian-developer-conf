@@ -58,6 +58,7 @@ function scripts_info_general() {
     scripts_create_info 'php_version_select' 'Permite elegir entre versiones de php para cambiarla tanto en la versión del lenguaje como en apache'
     scripts_create_info 'telegram_send_message' 'Envía un mensaje por telegram con o sin adjunto'
     scripts_create_info 'telegram_send_message_watch_file' 'Envía un mensaje por telegram solo cuando ha cambiado el contenido comparando su hash'
+    scripts_create_info 'backup_all_files_server_vps' 'Crea una copia de seguridad de los archivos importantes en un servidor VPS'
 }
 
 function scripts_info_raspberry() {

@@ -42,6 +42,7 @@ function configurations_scripts_generic() {
     addScriptToBin 'scripts_info'
     addScriptToBin 'telegram_send_message'
     addScriptToBin 'telegram_send_message_watch_file'
+    addScriptToBin 'backup_all_files_server_vps'
 }
 
 configurations_scripts() {
