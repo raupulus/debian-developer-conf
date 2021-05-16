@@ -41,6 +41,14 @@
 ############################
 ##      INSTRUCTIONS      ##
 ############################
+##
+## Genera un backup de los directorios establecidos en la lista comprimiendo
+## y organizando en un directorio el resultado de los backups.
+##
+## Parámetros que puede recibir
+## $1 → Tipo de acción (-p para setear propietario del grupo de backups por defecto)
+## $2 → Valor para la acción de $1
+##
 
 ############################
 ##     IMPORTACIONES      ##
@@ -63,7 +71,7 @@ VERSION="0.0.1"
 WORKSCRIPT=$PWD  ## Directorio principal del script
 USER=$(whoami)   ## Usuario que ejecuta el script
 
-## Compruebo en este pungo si es root quien lo ejecuta o aborta el script.
+## Compruebo en este punto si es root quien lo ejecuta o aborta el script.
 if [[ "${USER}" != 'root' ]]; then
     echo -e "${RO}Este script solo se puede ejecutar como root, prueba con sudo.${CL}"
     exit 1
@@ -92,6 +100,8 @@ PATH_STORE_BACKUP='/var/backups/vps-files-backups'
 ## Nombre del backup resultante
 BACKUP_NAME="Backup-$(date +%F_%X)"
 
+## Número de días para mantener los backups.
+DAYS_OF_SAVE_BACKUPS=120
 
 ############################
 ##       FUNCIONES        ##
@@ -177,22 +187,75 @@ cleanWorkPath() {
     fi
 }
 
+##
+## Elimina las copias de seguridad viejas
+##
+deleteOldBackups() {
+    echo -e "${VE}Eliminando backups con más de ${RO}${DAYS_OF_SAVE_BACKUPS}${VE} días${CL}"
+    echo "Eliminando backups con más de ${DAYS_OF_SAVE_BACKUPS} días" >> $LOG_FILE
+    find "${PATH_STORE_BACKUP}" -type f -prune -mtime +$DAYS_OF_SAVE_BACKUPS -exec rm -f {} \;
+}
+
+##
+## Prepara los permisos para el directorio de backups y los backups en si.
+##
+fixPermissions() {
+    echo -e "${VE}Securizando directorio de backups${CL}"
+    echo 'Securizando directorio de backups' >> $LOG_FILE
+
+    ## Directorio para los backups.
+    chmod 750 -R "${PATH_STORE_BACKUP}"
+    umask 027 -R "${PATH_STORE_BACKUP}"
+}
+
+##
+## Establece un grupo por defecto para los directorios de backups
+##
+## $1 Es el nombre del grupo.
+##
+setDefaultGroup() {
+    local group="$1"
+
+    echo -e "${VE}Estableciendo backups para el grupo: ${RO}${group}${CL}"
+    echo -e "Estableciendo backups para el grupo: ${group}" >> LOG_FILE
+
+    ## Directorio para las bases de datos postgresql.
+    chown :$group -R "${PATH_STORE_BACKUP}"
+    chmod g+s -R "${PATH_STORE_BACKUP}"
+
+    ## Establezco el grupo por defecto para todos los subdirectorios.
+    find "${PATH_STORE_BACKUP}" -type d -exec chmod g+s {} +
+}
+
 ############################
 ##       EJECUCIÓN        ##
 ############################
 
-#TODO → Comprobar dependencias: rsync, sudo,
-#TODO → Comprobar si es root quien lo ejecuta.
+#TODO → Comprobar dependencias: rsync, tar
 
 START_TIME=$(date +%F_%X)
 echo >> $LOG_FILE
 echo '-----------------------------------------' >> $LOG_FILE
 echo "Start: ${START_TIME}" >> $LOG_FILE
 
-createDirectories
-copyFilesToWorkPath
-compressAndMoveBackup
-cleanWorkPath
+if [[ "$1" = '-p' ]]; then
+    if [[ -z "$2" ]]; then
+        echo -e "${RO}Se necesita pasar el nombre del grupo: -p mygroup${CL}"
+        exit 1
+    fi
+
+    createDirectories
+    setDefaultGroup $2
+    fixPermissions
+else
+    createDirectories
+    copyFilesToWorkPath
+    compressAndMoveBackup
+    cleanWorkPath
+    fixPermissions
+fi
+
+
 
 FINISH_TIME=$(date +%F_%X)
 
