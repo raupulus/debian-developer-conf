@@ -9,7 +9,7 @@
 ## @twitter    https://twitter.com/fryntiz
 ## @telegram   https://t.me/fryntiz
 
-## @bash        4.2 or later
+## @bash        5.1 or later
 ## Create Date: 2021
 ## Project Name:
 ## Description:
@@ -62,6 +62,12 @@ CL="\e[0m"       ## Limpiar colores
 VERSION="0.0.1"
 WORKSCRIPT=$PWD  ## Directorio principal del script
 USER=$(whoami)   ## Usuario que ejecuta el script
+
+## Compruebo en este pungo si es root quien lo ejecuta o aborta el script.
+if [[ "${USER}" != 'root' ]]; then
+    echo -e "${RO}Este script solo se puede ejecutar como root, prueba con sudo.${CL}"
+    exit 1
+fi
 
 ############################
 ##       VARIABLES        ##
