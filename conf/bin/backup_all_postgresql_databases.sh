@@ -9,7 +9,7 @@
 ## @twitter    https://twitter.com/fryntiz
 ## @telegram   https://t.me/fryntiz
 
-## @bash        4.2 or later
+## @bash        5.1 or later
 ## Create Date: 2021
 ## Project Name:
 ## Description:
@@ -41,6 +41,19 @@
 ############################
 ##      INSTRUCTIONS      ##
 ############################
+##
+## Genera una copia de seguridad por cada base de datos postgresql en un
+## archivo comprimido en tar.gz independiente por cada una de ellas y además
+## agrupadas en un directorio con el nombre de la base de datos.
+## También se limpian los backups que tienen muchos días de obsoletos
+##
+## Parámetros que puede recibir
+## $1 → Tipo de acción (-p para setear propietario del grupo de backups por defecto)
+## $2 → Valor para la acción de $1
+##
+## Para restaurar una db:
+## su postgres -c 'pg_restore -p 5432 --role=owner2 -d db_name db_name.sql'
+## su postgres -c 'pg_restore --no-owner -d db_name db_name.sql'
 
 ############################
 ##     IMPORTACIONES      ##
@@ -63,6 +76,12 @@ VERSION="0.0.1"
 WORKSCRIPT=$PWD  ## Directorio principal del script
 USER=$(whoami)   ## Usuario que ejecuta el script
 
+## Compruebo en este pungo si es root quien lo ejecuta o aborta el script.
+if [[ "${USER}" != 'root' ]]; then
+    echo -e "${RO}Este script solo se puede ejecutar como root, prueba con sudo.${CL}"
+    exit 1
+fi
+
 ############################
 ##       VARIABLES        ##
 ############################
@@ -74,8 +93,11 @@ LOG_FILE="${PATH_LOG}/postgresql-db-backup.log"
 ## Directorio temporal para preparar el backup.
 PATH_TMP_PREPARE_BACKUP='/tmp/postgresql-prepare-backup'
 
+## Ruta dónde se almacenan los backups para las bases de datos.
+PATH_STORE_DATABASES='/var/backups/databases'
+
 ## Ruta para guardar el backup final.
-PATH_STORE_BACKUP='/var/backups/databases/postgresql'
+PATH_STORE_BACKUP="${PATH_STORE_DATABASES}/postgresql"
 
 ## Fecha del backup para concatenarla en el nombre.
 BACKUP_DATE="$(date +%F_%X)"
@@ -84,7 +106,7 @@ BACKUP_DATE="$(date +%F_%X)"
 DAYS_OF_SAVE_BACKUPS=120
 
 ## Nombres de las bases de datos. TODO → Mirar role, a ver como generalizarlo
-DATABASES=$(psql -l -t | cut -d'|' -f1 | sed -e 's/ //g' -e '/^$/d')
+DATABASES=$(su postgres -c "psql -l -t" | cut -d'|' -f1 | sed -e 's/ //g' -e '/^$/d')
 
 ############################
 ##       FUNCIONES        ##
@@ -122,15 +144,17 @@ createDirectories() {
 ##
 dump_databases() {
     for db in $DATABASES; do
-        if [
-            [ "${db}" != 'postgres' ] &&
-            [ "${db}" != 'template0' ] &&
-            [ "${db}" != 'template1' ] &&
-            [ "${db}" != 'template_postgis' ]
-        ]; then
+        if [[ "${db}" != 'postgres' ]] &&
+           [[ "${db}" != 'template0' ]] &&
+           [[ "${db}" != 'template1' ]] &&
+           [[ "${db}" != 'template2' ]] &&
+           [[ "${db}" != 'template_postgis' ]]; then
+
         echo -e "${VE}Exportando DB: ${RO}${db}${CL}"
 
-        pg_dump $db > "${PATH_TMP_PREPARE_BACKUP}/${db}_${BACKUP_DATE}.sql"
+        local parameters='--no-owner --no-privileges'
+
+        su postgres -c "pg_dump ${db} ${parameters}" > "${PATH_TMP_PREPARE_BACKUP}/${db}_${BACKUP_DATE}.sql"
 
         compressAndMoveBackup "${PATH_TMP_PREPARE_BACKUP}/${db}_${BACKUP_DATE}.sql" "${db}"
       fi
@@ -150,8 +174,15 @@ compressAndMoveBackup() {
     echo -e "${VE}Comprimiendo DB Postgresql: ${RO}${DB_NAME}${CL}"
     echo "Comprimiendo DB Postgresql: ${DB_NAME}" >> $LOG_FILE
 
+    ## Creo el directorio para agrupar los backups de la db destino
+    if [[ ! -d "${PATH_STORE_BACKUP}/${DB_NAME}" ]]; then
+        mkdir -p "${PATH_STORE_BACKUP}/${DB_NAME}"
+    fi
+
+    local parameters='--force --best -c'
+
     ## Comprimiendo backup
-    tar czvf "${PATH_STORE_BACKUP}/${DB_NAME}_${BACKUP_DATE}.tar.gz" "${FILE_TO_COMPRESS}"
+    gzip $parameters "${FILE_TO_COMPRESS}" > "${PATH_STORE_BACKUP}/${DB_NAME}/${DB_NAME}_${BACKUP_DATE}.gz"
 }
 
 ##
@@ -170,22 +201,77 @@ cleanWorkPath() {
 ## Elimina las copias de seguridad viejas
 ##
 deleteOldBackups() {
+    echo -e "${VE}Eliminando backups con más de ${RO}${DAYS_OF_SAVE_BACKUPS}${VE} días${CL}"
+    echo "Eliminando backups con más de ${DAYS_OF_SAVE_BACKUPS} días" >> $LOG_FILE
     find "${PATH_STORE_BACKUP}" -type f -prune -mtime +$DAYS_OF_SAVE_BACKUPS -exec rm -f {} \;
+}
+
+##
+## Prepara los permisos para el directorio de backups y los backups en si.
+##
+fixPermissions() {
+    echo -e "${VE}Securizando directorio de backups${CL}"
+    echo 'Securizando directorio de backups' >> $LOG_FILE
+
+    ## Directorio para todas las bases de datos.
+    chmod 750 "${PATH_STORE_DATABASES}"
+    umask 027 "${PATH_STORE_DATABASES}"
+
+    ## Directorio para las bases de datos postgresql.
+    chmod 750 -R "${PATH_STORE_BACKUP}"
+    umask 027 -R "${PATH_STORE_BACKUP}"
+}
+
+##
+## Establece un grupo por defecto para los directorios de backups
+##
+## $1 Es el nombre del grupo.
+##
+setDefaultGroup() {
+    local group="$1"
+
+    echo -e "${VE}Estableciendo backups para el grupo: ${RO}${group}${CL}"
+    echo -e "Estableciendo backups para el grupo: ${group}" >> LOG_FILE
+
+    ## Directorio para todas las bases de datos.
+    chown :$group "${PATH_STORE_DATABASES}"
+    chmod g+s "${PATH_STORE_DATABASES}"
+
+    ## Directorio para las bases de datos postgresql.
+    chown :$group -R "${PATH_STORE_BACKUP}"
+    chmod g+s -R "${PATH_STORE_BACKUP}"
+
+    ## Establezco el grupo por defecto para todos los subdirectorios.
+    find "${PATH_STORE_BACKUP}" -type d -exec chmod g+s {} +
 }
 
 ############################
 ##       EJECUCIÓN        ##
 ############################
 
+#TODO → Comprobar dependencias: gzip, pg_dump
+
 START_TIME=$(date +%F_%X)
 echo >> $LOG_FILE
 echo '-----------------------------------------' >> $LOG_FILE
 echo "Start: ${START_TIME}" >> $LOG_FILE
 
-createDirectories
-dump_databases
-cleanWorkPath
-deleteOldBackups
+if [[ "$1" = '-p' ]]; then
+    if [[ -z "$2" ]]; then
+        echo -e "${RO}Se necesita pasar el nombre del grupo: -p mygroup${CL}"
+        exit 1
+    fi
+
+    createDirectories
+    setDefaultGroup $2
+    fixPermissions
+else
+    createDirectories
+    dump_databases
+    cleanWorkPath
+    deleteOldBackups
+    fixPermissions
+fi
 
 FINISH_TIME=$(date +%F_%X)
 
