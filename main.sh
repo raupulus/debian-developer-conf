@@ -80,6 +80,7 @@ source "$WORKSCRIPT/Desktops/0_Main.sh"
 source "$WORKSCRIPT/Usuario/0_Main.sh"
 source "$WORKSCRIPT/root/0_Main.sh"
 source "$WORKSCRIPT/VPS/0_Main.sh"
+source "$WORKSCRIPT/raspberry/0_Main.sh"
 
 ###########################
 ##       VARIABLES       ##
@@ -152,6 +153,7 @@ menuPrincipal() {
             9) Desktops
             10) Configurar root
             11) Configurar VPS
+            12) Configurar Raspberry (Scripts adicionales)
 
             0) Salir
         '
@@ -180,6 +182,7 @@ menuPrincipal() {
             9) menuDesktops;;
             10) menu_root;;
             11) menuVPS;;
+            12) menu_raspberry;;
 
             0) ## SALIR
               clear_screen

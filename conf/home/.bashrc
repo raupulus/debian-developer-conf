@@ -396,3 +396,5 @@ export PATH=$PATH:$ANDROID_HOME/platform-tools
 
 #sudo update-alternatives --config java
 #sudo update-alternatives --config javac
+
+
