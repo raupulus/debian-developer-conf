@@ -24,7 +24,8 @@
 
 ## En caso de no recibir parámetros, saldrá
 if [[ $# = 0 ]]; then
-    echo 'no hay parámetros'
+    echo 'No hay parámetros, se espera la versión como único parámetro.'
+    echo 'Ejemplo: php_version_select 7.4'
     exit 1
 fi
 
