@@ -25,5 +25,17 @@
 ## En caso de no recibir parámetros, saldrá
 if [[ $# = 0 ]]; then
     echo 'no hay parámetros'
-    return 1
+    exit 1
 fi
+
+setVersion() {
+  version="$1"
+
+  sudo update-alternatives --set php "/usr/bin/php${version}"
+  sudo update-alternatives --set phar "/usr/bin/phar${version}"
+  sudo update-alternatives --set phar.phar "/usr/bin/phar.phar${version}"
+}
+
+setVersion $1
+
+exit 0
