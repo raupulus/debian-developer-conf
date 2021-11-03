@@ -98,7 +98,7 @@ PATH_TMP_PREPARE_BACKUP='/tmp/vps-prepare-backup'
 PATH_STORE_BACKUP='/var/backups/vps-files-backups'
 
 ## Nombre del backup resultante
-BACKUP_NAME="Backup-$(date +%F_%X)"
+BACKUP_NAME="Backup-$(date +%F_%H.%M.%S)"
 
 ## Número de días para mantener los backups.
 DAYS_OF_SAVE_BACKUPS=120

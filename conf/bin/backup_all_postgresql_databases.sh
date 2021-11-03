@@ -100,7 +100,7 @@ PATH_STORE_DATABASES='/var/backups/databases'
 PATH_STORE_BACKUP="${PATH_STORE_DATABASES}/postgresql"
 
 ## Fecha del backup para concatenarla en el nombre.
-BACKUP_DATE="$(date +%F_%X)"
+BACKUP_DATE="$(date +%F_%H.%M.%S)"
 
 ## Número de días para mantener los backups.
 DAYS_OF_SAVE_BACKUPS=120
