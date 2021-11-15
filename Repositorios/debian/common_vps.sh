@@ -97,7 +97,7 @@ common_vps_download_repositories() {
     ## Sury (Paquetes PHP)
     echo -e "$VE Agregando repositorio$RO Sury$AM Repositorio Oficial$CL"
     #echo "deb https://packages.sury.org/php/ $(lsb_release -sc) main" | sudo tee /etc/apt/sources.list.d/php.list
-    echo "deb https://packages.sury.org/php/ buster main" | sudo tee /etc/apt/sources.list.d/php.list
+    echo "deb https://packages.sury.org/php/ bullseye main" | sudo tee /etc/apt/sources.list.d/php.list
 }
 
 ##
