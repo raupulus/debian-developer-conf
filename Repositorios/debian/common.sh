@@ -97,7 +97,7 @@ common_add_key() {
 
     ## QOwnNotes
     echo -e "$VE Agregando clave para $RO QOwnNotes$CL"
-    wget http://download.opensuse.org/repositories/home:/pbek:/QOwnNotes/Debian_10/Release.key -O - | sudo apt-key add -
+    wget http://download.opensuse.org/repositories/home:/pbek:/QOwnNotes/Debian_11/Release.key -O - | sudo apt-key add -
 }
 
 ##

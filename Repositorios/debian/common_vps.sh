@@ -68,7 +68,7 @@ common_vps_add_keys() {
 
     ## MongoDB
     echo -e "$VE Agregando clave para $RO MongoDB$CL"
-    wget -qO - https://www.mongodb.org/static/pgp/server-4.4.asc | sudo apt-key add -
+    wget -qO - https://www.mongodb.org/static/pgp/server-5.0.asc | sudo apt-key add -
 
     ## Jenkins
     echo -e "$VE Agregando clave para $RO Jenkins$CL"
