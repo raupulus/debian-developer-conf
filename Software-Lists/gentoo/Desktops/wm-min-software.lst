@@ -25,7 +25,6 @@ app-text/zathura
 x11-misc/xautolock
 x11-misc/unclutter
 x11-misc/xbindkeys
-media-sound/pulseaudio
 media-sound/pavucontrol
 media-sound/volumeicon
 media-sound/alsamixergui

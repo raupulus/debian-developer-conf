@@ -558,7 +558,7 @@ exec --no-startup-id lxpolkit
 #exec --no-startup-id redshift -l $coordenadas -t 5500:4500
 
 ## Servidor de audio Pulseaudio
-exec --no-startup-id pulseaudio --start
+#exec --no-startup-id pulseaudio --start
 
 ## Bluetooth
 exec --no-startup-id blueman-applet
