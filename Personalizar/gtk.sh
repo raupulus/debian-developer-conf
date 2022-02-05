@@ -114,7 +114,7 @@ conf_gnome3() {
     gsettings set org.gnome.desktop.interface enable-animations "false"
     gsettings set org.gnome.desktop.interface toolkit-accessibility "false"
     gsettings set org.gnome.desktop.interface show-battery-percentage "true"
-    gsettings set org.gnome.desktop.interface cursor-size "32"
+    gsettings set org.gnome.desktop.interface cursor-size "40"
     gsettings set org.gnome.desktop.interface font-hinting "full"
     gsettings set org.gnome.desktop.interface toolbar-icons-size "small"
 
