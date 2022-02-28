@@ -2,23 +2,23 @@
 ##                 OFICIALES DEBIAN                   ##
 ########################################################
 ##### Repositorio Debian Estable
-deb http://ftp.es.debian.org/debian/ stable main contrib non-free
-deb-src http://ftp.es.debian.org/debian/ stable main contrib non-free
+deb http://deb.debian.org/debian/ stable main contrib non-free
+deb-src http://deb.debian.org/debian/ stable main contrib non-free
+
+##### Actualizaciones para stable (Updates)
+deb http://deb.debian.org/debian/ stable-updates main contrib non-free
+deb-src http://deb.debian.org/debian/ stable-updates main contrib non-free
 
 ##### Actualizaciones de seguridad Debian Estable
-deb http://security.debian.org/ stable/updates main contrib non-free
-deb-src http://security.debian.org/ stable/updates non-free contrib main
-
-##### Actualizaciones para Stretch (Updates)
-deb http://ftp.es.debian.org/debian/ stable-updates non-free contrib main
-deb-src http://ftp.es.debian.org/debian/ stable-updates non-free contrib main
+deb http://security.debian.org/debian-security bullseye-security main contrib non-free
+deb http://deb.debian.org/debian bullseye-proposed-updates main contrib non-free
 
 ########################################################
 ##                 STRETCH BACKPORTS                  ##
 ########################################################
 ##### apt-get install debian-keyring
-#deb http://ftp.es.debian.org/debian/ stretch-backports main contrib non-free
-#deb-src http://ftp.es.debian.org/debian/ stretch-backports main contrib non-free
+deb http://ftp.debian.org/debian bullseye-backports main
+deb-src http://ftp.debian.org/debian bullseye-backports main
 
 ########################################################
 ##                 MOZILLA FIREFOX                    ##
