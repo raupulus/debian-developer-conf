@@ -1,0 +1,14 @@
+x11-base/xorg-server
+x11-base/xorg-x11
+x11-base/xorg-drivers
+media-libs/mesa
+x11-apps/mesa-progs
+app-eselect/eselect-mesa
+media-libs/openal
+virtual/opengl
+x11-misc/virtualgl
+app-eselect/eselect-opengl
+sys-kernel/linux-firmware
+x11-drivers/xf86-video-intel
+x11-misc/driconf
+media-libs/libtxc_dxtn

@@ -64,6 +64,8 @@ routesApache2() {
         fi
     elif [[ "$DISTRO" = 'gentoo' ]]; then
         echo -e "$VE Configurando directorios apache para $DISTRO$CL"
+    elif [[ "$DISTRO" = 'macos' ]]; then
+      echo -e "$VE Configurando directorios apache para $DISTRO$CL"
     else
         echo -e "$VE No se puede configurar rutas de apache$CL"
         exit 1

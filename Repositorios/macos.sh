@@ -1,0 +1,78 @@
+#!/usr/bin/env bash
+# -*- ENCODING: UTF-8 -*-
+##
+## @author     Raúl Caro Pastorino
+## @copyright  Copyright © 2022 Raúl Caro Pastorino
+## @license    https://wwww.gnu.org/licenses/gpl.txt
+## @email      raul@fryntiz.dev
+## @web        https://fryntiz.es
+## @gitlab     https://gitlab.com/fryntiz
+## @github     https://github.com/fryntiz
+## @twitter    https://twitter.com/fryntiz
+##
+##             Applied Style Guide:
+## @style      https://gitlab.com/fryntiz/bash-guide-style
+
+############################
+##      INSTRUCTIONS      ##
+############################
+## Prepara y configura los repositorios para la última versión de Macos Stable.
+
+############################
+##     IMPORTACIONES      ##
+############################
+
+############################
+##       FUNCIONES        ##
+############################
+agregarRepositoriosMacos() {
+    echo -e '$VE Configurando Repositorios para$RO Macos'
+
+    ## Preparar xcode
+    xcode-select --install
+
+    ## Instalar Homebrew
+    ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+
+    ## Verificar instalación de Homebrew
+    brew doctor
+
+    ## Instalo herramientas
+    brew install wget
+
+    ## Añado más repositorios a HomeBrew
+    brew tap homebrew/cask-versions
+
+    ## Cakebrew (Gui para homebrew) https://www.cakebrew.com/
+    brew install --cask cakebrew
+
+    ## Instalo llavero gpg: https://gist.github.com/troyfontaine/18c9146295168ee9ca2b30c00bd1b41e
+    brew install gpg2 gnupg pinentry-mac
+
+    if [[ ! -d $HOME/.gnupg ]]; then
+        mkdir "${HOME}/.gnupg"
+    fi
+
+    # This tells gpg to use the gpg-agent
+    echo 'use-agent' > "${HOME}/.gnupg/gpg.conf"
+    sudo chmod 700 "${HOME}/.gnupg"
+
+    if [[ ! -f "${HOME}/.bashrc" ]]; then
+        echo 'export GPG_TTY=$(tty)' > "${HOME}/.bashrc"
+    else
+      echo
+        #TODO COMPROBAR SI LO CONTIENE
+    fi
+
+    if [[ ! -f "${HOME}/.zshrc" ]]; then
+        echo 'export GPG_TTY=$(tty)' > "${HOME}/.zshrc"
+    else
+        echo
+        #TODO COMPROBAR SI LO CONTIENE
+    fi
+
+    # TODO Comprobar intérprete
+    source "${HOME}/.bashrc"
+    #source "${HOME}/.zshrc"
+
+}

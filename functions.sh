@@ -71,6 +71,10 @@ instalarSoftware() {
         for programa in $*; do
             sudo dnf install -y "$programa"
         done
+    elif [[ "$MY_DISTRO" = 'macos' ]]; then
+        for programa in $*; do
+            brew install "$programa"
+        done
     fi
 }
 
@@ -91,6 +95,10 @@ actualizarSoftware() {
     elif [[ "$MY_DISTRO" = 'fedora' ]]; then
         for programa in $*; do
             sudo dnf upgrade -y "$programa"
+        done
+    elif [[ "$MY_DISTRO" = 'macos' ]]; then
+        for programa in $*; do
+            brew upgrade "$programa"
         done
     fi
 }
@@ -149,6 +157,10 @@ instalarSoftwareLista() {
         for x in "${lista_Software[@]}"; do
              instalarSoftware "$x"
         done
+    elif [[ "$MY_DISTRO" = 'macos' ]]; then
+            for x in "${lista_Software[@]}"; do
+                 instalarSoftware "$x"
+            done
     fi
 
     repararGestorPaquetes
@@ -178,6 +190,8 @@ actualizarRepositorios() {
         sudo emerge --sync
     elif [[ "$MY_DISTRO" = 'fedora' ]]; then
         sudo dnf update
+    elif [[ "$MY_DISTRO" = 'fedora' ]]; then
+        brew update
     fi
 }
 

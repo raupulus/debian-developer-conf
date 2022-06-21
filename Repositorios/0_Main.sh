@@ -23,6 +23,7 @@
 source "$WORKSCRIPT/Repositorios/debian.sh"
 source "$WORKSCRIPT/Repositorios/fedora.sh"
 source "$WORKSCRIPT/Repositorios/raspbian.sh"
+source "$WORKSCRIPT/Repositorios/macos.sh"
 
 ###########################
 ##       FUNCIONES       ##
@@ -53,5 +54,7 @@ menuRepositorios() {
         agregarRepositoriosFedora
     elif [[ "$DISTRO" = 'gentoo' ]]; then
         agregarRepositoriosGentoo
+    elif [[ "$DISTRO" = 'macos' ]]; then
+        agregarRepositoriosMacos
     fi
 }

@@ -25,6 +25,7 @@ getDistrosAvailable() {
     echo -e "$RO gentoo$CL"
     echo -e "$RO raspbian$CL"
     echo -e "$RO fedora$CL"
+    echo -e "$RO macos$CL"
 }
 
 getBranchAvailable() {
@@ -32,13 +33,15 @@ getBranchAvailable() {
     echo -e "$RO gentoo$VE → stable-testing$CL"
     echo -e "$RO raspbian$VE → stable-testing-unstable$CL"
     echo -e "$RO fedora$VE → stable$CL"
+    echo -e "$RO macos$VE → stable$CL"
 }
 
 setDistro() {
     while [[ "$input" != 'debian' ]] &&
           [[ "$input" != 'gentoo' ]] &&
           [[ "$input" != 'raspbian' ]] &&
-          [[ "$input" != 'fedora' ]]
+          [[ "$input" != 'fedora' ]] &&
+          [[ "$input" != 'macos' ]]
     do
         clear_screen
         getDistrosAvailable
