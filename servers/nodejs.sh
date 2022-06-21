@@ -65,7 +65,7 @@ nodejs_postconfiguracion() {
     export PATH=~/.npm/bin:$PATH
 
     ## Instalando paquetes globales
-    local paquetes='eslint jscs compass stylelint typescript @ionic/cli http-server @typescript-eslint/eslint-plugin cordova-res cordova@latest eslint-plugin-html @vue/cli'
+    local paquetes='eslint jscs compass stylelint typescript @ionic/cli http-server @typescript-eslint/eslint-plugin cordova-res cordova@latest eslint-plugin-html @vue/cli @angular/cli ios-sim'
     instalarNpmGlobal $paquetes
 
     echo -e "$VE Instalando última versión de$RO npm$VE en directorio local$CL"
@@ -75,17 +75,9 @@ nodejs_postconfiguracion() {
     npm update -g
 }
 
-nodejs_angular() {
-    echo -e "$VE Instalando Angular$CL"
-    instalarNpmGlobal @angular/cli
-}
-
 nodejs_instalador() {
     nodejs_descargar
     nodejs_preconfiguracion
     nodejs_instalar
     nodejs_postconfiguracion
-
-    ## Se instalan paquetes adicionales
-    nodejs_angular
 }
