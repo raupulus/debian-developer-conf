@@ -42,7 +42,7 @@ TOKEN_GITLAB=""
 datos_input() {
     ## Se entiende que tiene el mismo usuario para GitHub y para GitLab
     read -p "Introduce el usuario de GitHub y GitLab → " usuario_git
-    read -p "Introduce el correo electronico → " correo_git
+    read -p "Introduce el correo electrónico → " correo_git
 }
 
 gpg_git() {
@@ -55,7 +55,7 @@ gpg_git() {
     gpg --list-secret-keys --keyid-format LONG
 
     ## Advertencia al firmar sin interfaz gráfica
-    echo -e "$RO Recuerda añadir a ~/bash_profile:$AM export GPG_TTY=$(tty)$RO si no tienes interfaz gráfica, de lo contrario dará error al firmar$CL"
+    echo -e "$RO Recuerda añadir a ~/bash_profile:$AM 'export GPG_TTY=\$(tty)' $RO si no tienes interfaz gráfica, de lo contrario dará error al firmar$CL"
 
     ## Usar clave o crear una
     echo -e "$VE ¿Usar una clave existente?$RO"
