@@ -31,6 +31,10 @@ function configurations_scripts_raspberry() {
     #addScriptToBin 'rpi_control_fan_temp_gpio'
 }
 
+function configurations_scripts_macos() {
+    echo -e "$VE Añadiendo scripts para $ROmacos$CL"
+}
+
 function configurations_scripts_generic() {
     addScriptToBin 'check_apache_and_start'
     addScriptToBin 'check_mysql_and_start'
@@ -48,7 +52,11 @@ function configurations_scripts_generic() {
 configurations_scripts() {
     echo -e "$VE Añadiendo scripts a$RO /bin$CL"
 
-    configurations_scripts_generic
+    if [[ "${DISTRO}" = 'macos' ]]; then
+        configurations_scripts_macos
+    else
+        configurations_scripts_generic
+    fi
 
     if [[ "${MY_DISTRO}" = 'raspbian' ]]; then
         echo -e "$VE Añadiendo scripts de raspbian a$RO /bin$CL"
