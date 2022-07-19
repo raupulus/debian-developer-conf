@@ -44,6 +44,8 @@ ohmyzsh_preconfiguracion() {
 ohmyzsh_instalar() {
     echo -e "$VE Instalar$RO OhMyZsh$CL"
     ## La instalación en este caso se hace al mismo tiempo de la descarga.
+
+    instalarSoftware 'tmux'
 }
 
 ohmyzsh_postconfiguracion() {

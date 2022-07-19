@@ -52,7 +52,8 @@ export TERM=screen-256color
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git tmux command-not-found composer history-substring-search vi-mode zsh-syntax-highlighting z)
+#plugins=(git tmux command-not-found composer history-substring-search vi-mode zsh-syntax-highlighting z)
+plugins=(git command-not-found composer history-substring-search vi-mode z)
 
 # Configuración de usuario
 
@@ -90,8 +91,8 @@ export LESS_TERMCAP_so=$(tput bold; tput setaf 16; tput setab 4)
 export LESS_TERMCAP_ue=$'\E[0m'           # end underline
 export LESS_TERMCAP_us=$'\E[04;38;5;146m' # begin underline
 
-eval `lesspipe`
-eval `dircolors ~/.dircolors`
+#eval `lesspipe`
+#eval `dircolors ~/.dircolors`
 
 # Set personal aliases, overriding those provided by oh-my-zsh libs,
 # plugins, and themes. Aliases can be placed here, though oh-my-zsh
@@ -160,3 +161,13 @@ fi
 ###################################
 #Exportar editor de terminal
 export EDITOR="vim"
+
+###################################
+### Incluyo configuración extra ###
+###################################
+if [[ -f ~/.zshrc_custom ]]; then ## Comprobar si existe para el usuario
+    source $HOME/.zshrc_custom
+else
+    touch "$HOME/.zshrc_custom"
+    echo '## Añade en este archivo tus personalizaciones' >> "$HOME/.zshrc_custom"
+fi
