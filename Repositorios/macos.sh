@@ -43,6 +43,9 @@ agregarRepositoriosMacos() {
     ## Añado más repositorios a HomeBrew
     brew tap homebrew/cask-versions
 
+    ## Repositorio de mongodb https://www.mongodb.com/docs/manual/tutorial/install-mongodb-on-os-x/
+    brew tap mongodb/brew
+
     ## Cakebrew (Gui para homebrew) https://www.cakebrew.com/
     brew install --cask cakebrew
 
@@ -75,4 +78,7 @@ agregarRepositoriosMacos() {
     source "${HOME}/.bashrc"
     #source "${HOME}/.zshrc"
 
+
+    ## Si locate no tiene base de datos
+    sudo launchctl load -w /System/Library/LaunchDaemons/com.apple.locate.plist 2> /dev/null
 }

@@ -33,8 +33,10 @@ mariadb_descargar() {
 mariadb_preconfiguracion() {
     echo -e "$VE Generando Pre-Configuraciones de$RO mariadb"
 
-    sudo groupadd mysql
-    sudo usermod -a -G mysql "$USER"
+    if [[ $DISTRO != 'macos' ]]; then
+        sudo groupadd mysql
+        sudo usermod -a -G mysql "$USER"
+    fi
 }
 
 mariadb_instalar() {
@@ -47,11 +49,36 @@ mariadb_postconfiguracion() {
 
     local FILE_CONF='/etc/mysql/mariadb.conf.d/50-server.cnf'
 
-    echo -e "$VE Estableciendo character-set-server = utf8mb4$CL"
-    sudo sed -r -i "s/^\s*#?\s*character-set-server\s*=.*/character-set-server  = utf8mb4/" "$FILE_CONF"
+    if [[ $DISTRO = 'macos' ]]; then
+        FILE_CONF='/opt/homebrew/etc/my.cnf.d/custom.cnf'
 
-    echo -e "$VE Estableciendo collation-server = utf8mb4_general_ci$CL"
-    sudo sed -r -i "s/^\s*#?\s*collation-server\s*=.*/collation-server      = utf8mb4_general_ci/" "$FILE_CONF"
+        if [[ ! -f $FILE_CONF ]]; then
+            sudo touch $FILE_CONF
+            sudo chmod 644 $FILE_CONF
+            sudo chown "${USER}:admin" $FILE_CONF
+            cat "${WORKSCRIPT}/conf/etc/mysql/mariadb.conf.d/50-server.cnf" >> $FILE_CONF
+        fi
+
+        mysql.server start
+        brew services start mariadb
+        mysql_install_db
+        mysql_upgrade
+        #sudo mariadb-secure-installation
+
+        echo -e "$VE Estableciendo character-set-server = utf8mb4$CL"
+        sudo sed -r -i'' "s/^\s*#?\s*character-set-server\s*=.*/character-set-server  = utf8mb4/" "$FILE_CONF"
+
+        echo -e "$VE Estableciendo collation-server = utf8mb4_general_ci$CL"
+        sudo sed -r -i'' "s/^\s*#?\s*collation-server\s*=.*/collation-server      = utf8mb4_general_ci/" "$FILE_CONF"
+    else
+        echo -e "$VE Estableciendo character-set-server = utf8mb4$CL"
+        sudo sed -r -i "s/^\s*#?\s*character-set-server\s*=.*/character-set-server  = utf8mb4/" "$FILE_CONF"
+
+        echo -e "$VE Estableciendo collation-server = utf8mb4_general_ci$CL"
+        sudo sed -r -i "s/^\s*#?\s*collation-server\s*=.*/collation-server      = utf8mb4_general_ci/" "$FILE_CONF"
+    fi
+
+
 
     ## Plantea la creación de un usuario llamado "dev" para desarrollar
     crearUsuario() {

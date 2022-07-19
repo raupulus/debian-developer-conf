@@ -22,39 +22,35 @@
 ##       FUNCIONES        ##
 ############################
 
-dbeaver_descargar() {
-    descargar 'dbeaver.deb' 'https://dbeaver.jkiss.org/files/dbeaver-ce_latest_amd64.deb'
-}
+dbeaver_install_linux() {
 
-dbeaver_preconfiguracion() {
+    if [[ -f "$WORKSCRIPT/tmp/dbeaver.deb" ]]; then
+        descargar 'dbeaver.deb' 'https://dbeaver.jkiss.org/files/dbeaver-ce_latest_amd64.deb'
+    fi
+
     echo -e "$VE Generando Pre-Configuraciones de$RO DBeaver$CL"
     instalarSoftware 'default-jre-headless'
-}
 
-dbeaver_instalar() {
     echo -e "$VE Instalando$RO DBeaver$CL"
     sudo dpkg -i "$WORKSCRIPT/tmp/dbeaver.deb" && sudo apt install -f -y
+
 }
 
-dbeaver_postconfiguracion() {
-    echo -e "$VE Generando Post-Configuraciones$RO DBeaver$CL"
+dbeaver_install_macos() {
+    echo -e "$VE Instalando$RO DBeaver$CL"
+    brew install --cask dbeaver-community
 }
 
-dbeaver_instalador() {
+dbeaver_install() {
     echo -e "$VE Comenzando instalación de$RO DBeaver$CL"
 
     dbeaver_preconfiguracion
 
-    if [[ -f '/usr/bin/dbeaver' ]]; then
+    if [[ $DISTRO != 'macos' && -f '/usr/bin/dbeaver' ]]; then
         echo -e "$VE Ya esta$RO Dbeaver$VE instalado en el equipo, omitiendo paso$CL"
     else
-        if [[ -f "$WORKSCRIPT/tmp/dbeaver.deb" ]]; then
-            dbeaver_instalar
-        else
-            dbeaver_descargar
-            dbeaver_instalar
-        fi
+
+        dbeaver_install_macos
     fi
 
-    dbeaver_postconfiguracion
 }

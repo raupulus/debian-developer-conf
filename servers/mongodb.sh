@@ -24,20 +24,28 @@ mongodb_descargar() {
 mongodb_preconfiguracion() {
     echo -e "$VE Generando Pre-Configuraciones de$RO mongodb$CL"
 
-    sudo groupadd mongodb
-    sudo usermod -a -G mongodb "$USER"
+    if [[ $DISTRO != 'macos' ]]; then
+        sudo groupadd mongodb
+        sudo usermod -a -G mongodb "$USER"
+    fi
 }
 
 mongodb_instalar() {
     echo -e "$VE Instalando$RO mongodb$CL"
     instalarSoftwareLista "${SOFTLIST}/servers/mongodb.lst"
+    mongod --config /opt/homebrew/etc/mongod.conf --fork
 }
 
 mongodb_postconfiguracion() {
     echo -e "$VE Generando Post-Configuraciones de$RO mongodb$CL"
-    sudo systemctl start mongod || sudo systemctl daemon-reload && sudo systemctl start mongod
-    sudo systemctl status mongod
-    sudo systemctl enable mongod
+
+    if [[ $DISTRO = 'macos' ]]; then
+        brew services start mongodb-community
+    else
+        sudo systemctl start mongod || sudo systemctl daemon-reload && sudo systemctl start mongod
+        sudo systemctl status mongod
+        sudo systemctl enable mongod
+    fi
 }
 
 mongodb_instalador() {

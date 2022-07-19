@@ -67,7 +67,7 @@ aplicaciones_extras() {
 
             case $entrada in
 
-                1)  dbeaver_instalador;;
+                1)  dbeaver_install;;
                 2)  gitkraken_instalador;;
                 3)  haroopad_instalador;;
                 4)  pencilProject_instalador;;
