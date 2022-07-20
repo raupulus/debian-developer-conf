@@ -34,6 +34,16 @@ agregarRepositoriosMacos() {
     ## Instalar Homebrew
     ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
 
+    ## Declaro tty para firmas gpg si hiciera falta
+    export GPG_TTY=$(tty)
+
+    if [[ !-d ~/.gnupg/gpg-agent.conf ]];then
+        echo 'pinentry-program /usr/local/bin/pinentry-mac' > ~/.gnupg/gpg-agent.conf
+    fi
+
+    ## Aseguro que se encuentra el ejecutable "brew"
+    eval "$(/opt/homebrew/bin/brew shellenv)"
+
     ## Verificar instalación de Homebrew
     brew doctor
 
@@ -61,14 +71,14 @@ agregarRepositoriosMacos() {
     sudo chmod 700 "${HOME}/.gnupg"
 
     if [[ ! -f "${HOME}/.bashrc" ]]; then
-        echo 'export GPG_TTY=$(tty)' > "${HOME}/.bashrc"
+        echo 'GPG_TTY=$(tty)' > "${HOME}/.bashrc"
     else
       echo
         #TODO COMPROBAR SI LO CONTIENE
     fi
 
     if [[ ! -f "${HOME}/.zshrc" ]]; then
-        echo 'export GPG_TTY=$(tty)' > "${HOME}/.zshrc"
+        echo 'GPG_TTY=$(tty)' > "${HOME}/.zshrc"
     else
         echo
         #TODO COMPROBAR SI LO CONTIENE
