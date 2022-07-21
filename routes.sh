@@ -65,7 +65,16 @@ routesApache2() {
     elif [[ "$DISTRO" = 'gentoo' ]]; then
         echo -e "$VE Configurando directorios apache para $DISTRO$CL"
     elif [[ "$DISTRO" = 'macos' ]]; then
-      echo -e "$VE Configurando directorios apache para $DISTRO$CL"
+        echo -e "$VE Configurando directorios apache para $DISTRO$CL"
+        APACHECONF='/opt/homebrew/etc/httpd'
+        DIRWEBLOG='/var/log/apache2'
+        DIRWEB="/opt/homebrew/opt/httpd"
+        APACHESITES="${APACHECONF}/vhosts.conf"
+        APACHESITESENABLED=""
+        APACHEPORTSCONF="${APACHECONF}/ports.conf"
+        APACHEAPACHE2CONF="${APACHECONF}/httpd.conf"
+        APACHEMODS=""
+        APACHEMODSENABLED=""
     else
         echo -e "$VE No se puede configurar rutas de apache$CL"
         exit 1

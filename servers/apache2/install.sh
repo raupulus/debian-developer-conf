@@ -43,6 +43,21 @@ apache2_download() {
 ##
 apache2_before_install() {
     echo -e "$VE Generando Pre-Configuraciones de$RO Apache2"
+
+    if [[ $DISTRO = 'macos' ]]; then
+        sudo apachectl stop 2> /dev/null
+
+        ## Evita reinicios por scripts del apache que trae el sistema.
+        sudo launchctl unload -w /System/Library/LaunchDaemons/org.apache.httpd.plist 2>/dev/null
+
+
+        ## Crea el grupo para apache y asigna al usuario actual.
+        sudo dscl . -create /Groups/www-data
+        sudo dscl . -create /Groups/www-data name www-data
+
+        ## Añade el usuario actual al nuevo grupo para apache.
+        sudo dseditgroup -o edit -a $USER -t user www-data
+    fi
 }
 
 ##
@@ -60,41 +75,69 @@ apache2_install() {
 apache2_after_install() {
     echo -e "$VE Acciones tras instalar$RO Apache2$CL"
 
-    ## Configuración de puertos usados por apache.
-    sudo cp "$WORKSCRIPT/conf/etc/apache2/ports.conf" "$APACHEPORTSCONF"
+    if [[ $DISTRO = 'macos' ]]; then
+        brew services start httpd
+
+        if [[ !-f $APACHESITES ]];then
+            sudo touch $APACHESITES
+            sudo chmod ${USER}:admin $APACHESITES
+        fi
+
+        if [[ !-f $APACHEPORTSCONF ]];then
+            sudo touch $APACHEPORTSCONF
+            sudo cp "$WORKSCRIPT/conf/etc/apache2/ports.conf" "$APACHEPORTSCONF"
+            sudo chmod ${USER}:admin $APACHESITES
+        fi
+
+
+    else
+        ## Configuración de puertos usados por apache.
+        sudo cp "$WORKSCRIPT/conf/etc/apache2/ports.conf" "$APACHEPORTSCONF"
+
+        ## Preparo configuración de módulos disponibles en apache2.
+        sudo cp ${WORKSCRIPT}/conf/etc/apache2/mods-available/* "$APACHEMODS"
+    fi
 
     ## Creo almacenamiento para aplicaciones
-    if [[ ! -d '/var/www/storage' ]]; then
-        sudo mkdir '/var/www/storage'
-        sudo chown www-data:www-data -R '/var/www/storage'
-        sudo chmod 770 -R '/var/www/storage'
-        sudo chmod ug+s -R '/var/www/storage'
-        sudo umask 117 -R '/var/www/storage'
+    if [[ ! -d "${DIRWEB}/storage" ]]; then
+        sudo mkdir "${DIRWEB}/storage"
+        sudo chown www-data:www-data -R "${DIRWEB}/storage"
+        sudo chmod 770 -R "${DIRWEB}/storage"
+        sudo chmod ug+s -R "${DIRWEB}/storage"
+        sudo umask 117 -R "${DIRWEB}/storage"
     fi
 
     ## Creo lugar para sitios públicos
-    if [[ ! -d '/var/www/public' ]]; then
-        sudo mkdir '/var/www/public'
-        sudo chown www-data:www-data -R '/var/www/public'
-        sudo chmod 770 -R '/var/www/public'
-        sudo chmod ug+s -R '/var/www/public'
-        sudo umask 117 -R '/var/www/public'
+    if [[ ! -d "${DIRWEB}/public" ]]; then
+        sudo mkdir "${DIRWEB}/public"
+        sudo chown ${USER}:www-data -R "${DIRWEB}/public"
+        sudo chmod 770 -R "${DIRWEB}/public"
+        sudo chmod ug+s -R "${DIRWEB}/public"
+        sudo umask 117 -R "${DIRWEB}/public"
+    fi
+
+    ## Creo lugar para sitios públicos
+    if [[ ! -d "${DIRWEB}/public/default" ]]; then
+        sudo mkdir "${DIRWEB}/public/default"
+        sudo chown ${USER}:www-data -R "${DIRWEB}/public/default"
+        sudo chmod 770 -R "${DIRWEB}/public/default"
+        sudo chmod ug+s -R "${DIRWEB}/public/default"
+        sudo umask 117 -R "${DIRWEB}/public/default"
+
+        echo '<h1>Sitio por defecto Creado</h1>' > "${DIRWEB}/public/default/index.html"
     fi
 
     ## Creo lugar para sitios privados
-    if [[ ! -d '/var/www/private' ]]; then
-        sudo mkdir '/var/www/private'
-        sudo chown www-data:www-data -R '/var/www/private'
-        sudo chmod 770 -R '/var/www/private'
-        sudo chmod ug+s -R '/var/www/private'
-        sudo umask 117 -R '/var/www/private'
+    if [[ ! -d "${DIRWEB}/private" ]]; then
+        sudo mkdir "${DIRWEB}/private"
+        sudo chown ${USER}:www-data -R "${DIRWEB}/private"
+        sudo chmod 770 -R "${DIRWEB}/private"
+        sudo chmod ug+s -R "${DIRWEB}/private"
+        sudo umask 117 -R "${DIRWEB}/private"
     fi
 
-    ## Preparo configuración de módulos disponibles en apache2.
-    sudo cp ${WORKSCRIPT}/conf/etc/apache2/mods-available/* "$APACHEMODS"
-
     if [[ -f "${DIRWEB}/.htpasswd" ]]; then
-        sudo chown 'www-data:www-data' "${DIRWEB}/.htpasswd"
+        sudo chown ${USER}::www-data "${DIRWEB}/.htpasswd"
     fi
 }
 
@@ -163,6 +206,7 @@ apache2Ssl() {
     if [[ -x '/bin/netstat' ]]; then
         netstat -nl | grep 443
     fi
+
     sudo iptables -nL | grep 443
 
     ## Crear certificado autofirmado
@@ -287,17 +331,21 @@ apache2_installer() {
 
     ## Habilito sitios virtuales solo en desarrollo.
     if [[ "$ENV" = 'dev' ]]; then
-        apacheDefaultSiteCreate
-        apachePublicSiteCreate
-        apachePrivateSiteCreate
+        if [[ $DISTRO != 'macos' ]]; then
+            apacheDefaultSiteCreate
+            apachePublicSiteCreate
+            apachePrivateSiteCreate
+        fi
     fi
 
     ## Genero enlaces.
     apache2GenerarEnlaces
 
     ## Propietario y permisos
-    apache2Propietarios
-    apache2Permisos
+    if [[ $DISTRO != 'macos' ]]; then
+        apache2Propietarios
+        apache2Permisos
+    fi
 
     ## Reiniciar servidor Apache para aplicar configuración
     reiniciarServicio 'apache2'

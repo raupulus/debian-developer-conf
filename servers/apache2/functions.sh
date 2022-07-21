@@ -28,7 +28,7 @@
 apache2LimpiarSites() {
     pararServicio 'apache2'
 
-    echo -e "$VE Cuidado, esto puede$RO BORRAR$VE algo valioso$RO"
+    echo -e "$VE Cuidado, esto puede$RO BORRAR$VE algo valioso$RO$CL"
     read -p " ¿Quieres borrar todo el directorio ${DIRWEB}/* s/N → " input
 
     if [[ "$input" = 's' ]] || [[ "$input" = 'S' ]]; then
@@ -146,6 +146,7 @@ apache2ActivarHost() {
         if [[ ! -f '/etc/hosts.local' ]]; then
             sudo touch '/etc/hosts.local'
         fi
+
         echo "127.0.0.1    ${sitioWeb}.local" | sudo tee -a '/etc/hosts.local'
     fi
 }
@@ -188,18 +189,22 @@ apache2AsignarPermisos() {
 ## $* Lista de módulos
 ##
 apache2HabilitarModulo() {
-    if [[ "$MY_DISTRO" = 'debian' ]] || [[ "$MY_DISTRO" = 'raspbian' ]]; then
+    if [[ "$DISTRO" = 'debian' ]] || [[ "$DISTRO" = 'raspbian' ]]; then
         for modulo in $*; do
             echo -e "$VE Activando módulo:$RO $modulo$CL"
             sudo a2enmod $modulo
         done
-    elif [[ "$MY_DISTRO" = 'gentoo' ]]; then
+    elif [[ "$DISTRO" = 'gentoo' ]]; then
         for modulo in $*; do
             echo "no implementado en gentoo"
         done
-    elif [[ "$MY_DISTRO" = 'fedora' ]]; then
+    elif [[ "$DISTRO" = 'fedora' ]]; then
         for modulo in $*; do
             echo "no implementado en fedora"
+        done
+    elif [[ "$DISTRO" = 'macos' ]]; then
+        for modulo in $*; do
+            echo "No necesario en macos, se habilita en configuracion httpd.conf"
         done
     fi
 }
@@ -221,6 +226,10 @@ apache2DeshabilitarModulo() {
     elif [[ "$MY_DISTRO" = 'fedora' ]]; then
         for modulo in $*; do
             echo "no implementado en fedora"
+        done
+    elif [[ "$DISTRO" = 'macos' ]]; then
+        for modulo in $*; do
+            echo "No necesario en macos"
         done
     fi
 }
