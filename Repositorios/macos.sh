@@ -37,7 +37,7 @@ agregarRepositoriosMacos() {
     ## Declaro tty para firmas gpg si hiciera falta
     export GPG_TTY=$(tty)
 
-    if [[ !-d ~/.gnupg/gpg-agent.conf ]];then
+    if [[ ! -d "${HOME}/.gnupg/gpg-agent.conf" ]];then
         echo 'pinentry-program /usr/local/bin/pinentry-mac' > ~/.gnupg/gpg-agent.conf
     fi
 
@@ -51,6 +51,7 @@ agregarRepositoriosMacos() {
     brew install wget
 
     ## Añado más repositorios a HomeBrew
+    brew tap homebrew/core
     brew tap homebrew/cask-versions
 
     ## Repositorio de mongodb https://www.mongodb.com/docs/manual/tutorial/install-mongodb-on-os-x/
@@ -60,7 +61,7 @@ agregarRepositoriosMacos() {
     brew install --cask cakebrew
 
     ## Instalo llavero gpg: https://gist.github.com/troyfontaine/18c9146295168ee9ca2b30c00bd1b41e
-    brew install gpg2 gnupg pinentry-mac
+    brew install gnupg pinentry-mac gpg-suite
 
     if [[ ! -d $HOME/.gnupg ]]; then
         mkdir "${HOME}/.gnupg"

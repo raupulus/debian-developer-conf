@@ -63,7 +63,7 @@ mariadb_postconfiguracion() {
         brew services start mariadb
         mysql_install_db
         mysql_upgrade
-        #sudo mariadb-secure-installation
+        sudo mariadb-secure-installation
 
         echo -e "$VE Estableciendo character-set-server = utf8mb4$CL"
         sudo sed -r -i'' "s/^\s*#?\s*character-set-server\s*=.*/character-set-server  = utf8mb4/" "$FILE_CONF"

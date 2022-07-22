@@ -68,8 +68,8 @@ routesApache2() {
         echo -e "$VE Configurando directorios apache para $DISTRO$CL"
         APACHECONF='/opt/homebrew/etc/httpd'
         DIRWEBLOG='/var/log/apache2'
-        DIRWEB="/opt/homebrew/opt/httpd"
-        APACHESITES="${APACHECONF}/vhosts.conf"
+        DIRWEB="/Users/${USER}/www"
+        APACHESITES="${APACHECONF}/extra/httpd-vhosts.conf"
         APACHESITESENABLED=""
         APACHEPORTSCONF="${APACHECONF}/ports.conf"
         APACHEAPACHE2CONF="${APACHECONF}/httpd.conf"

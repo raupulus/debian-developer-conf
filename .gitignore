@@ -36,3 +36,4 @@ npm-debug.log
 __pycache__
 /.env
 __init__.py
+.DS_Store
