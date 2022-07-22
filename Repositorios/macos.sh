@@ -70,9 +70,13 @@ agregarRepositoriosMacos() {
     # This tells gpg to use the gpg-agent
     echo 'use-agent' > "${HOME}/.gnupg/gpg.conf"
     sudo chmod 700 "${HOME}/.gnupg"
+    export GPG_TTY=$(tty)
+
+    #echo "test" | gpg --clearsign
 
     if [[ ! -f "${HOME}/.bashrc" ]]; then
         echo 'GPG_TTY=$(tty)' > "${HOME}/.bashrc"
+        echo 'export GPG_TTY' >> "${HOME}/.bashrc"
     else
       echo
         #TODO COMPROBAR SI LO CONTIENE
@@ -80,6 +84,7 @@ agregarRepositoriosMacos() {
 
     if [[ ! -f "${HOME}/.zshrc" ]]; then
         echo 'GPG_TTY=$(tty)' > "${HOME}/.zshrc"
+        echo 'export GPG_TTY' >> "${HOME}/.zshrc"
     else
         echo
         #TODO COMPROBAR SI LO CONTIENE
