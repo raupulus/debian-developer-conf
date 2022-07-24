@@ -53,6 +53,7 @@ agregarRepositoriosMacos() {
     ## Añado más repositorios a HomeBrew
     brew tap homebrew/core
     brew tap homebrew/cask-versions
+    brew tap shivammathur/php
 
     ## Repositorio de mongodb https://www.mongodb.com/docs/manual/tutorial/install-mongodb-on-os-x/
     brew tap mongodb/brew
