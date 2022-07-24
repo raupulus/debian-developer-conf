@@ -185,6 +185,12 @@ setHostName() {
 ## Configura las Opciones del entorno para usar el script
 ##
 configurePreferences() {
+
+    if [[ ! -f '/etc/environment' ]]; then
+        sudo touch '/etc/environment'
+        sudo chmod 644 '/etc/environment'
+    fi
+
     ## Recarga variables del entorno
     source '/etc/environment'
 
