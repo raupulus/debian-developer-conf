@@ -162,6 +162,15 @@ fi
 #Exportar editor de terminal
 export EDITOR="vim"
 
+## Ruta para npm en $HOME de usuario
+if [[ -d "$HOME/.npm/lib" ]] &&
+   [[ -d "$HOME/.npm/bin" ]]
+then
+    export NODE_PATH=~/.npm/lib/node_modules:$NODE_PATH
+    export PATH=~/.npm/bin:$PATH
+fi
+
+
 ###################################
 ### Incluyo configuración extra ###
 ###################################
@@ -171,3 +180,4 @@ else
     touch "$HOME/.zshrc_custom"
     echo '## Añade en este archivo tus personalizaciones' >> "$HOME/.zshrc_custom"
 fi
+

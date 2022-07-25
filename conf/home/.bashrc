@@ -161,8 +161,7 @@ fi
 
 ## Ruta para npm en $HOME de usuario
 if [[ -d "$HOME/.npm/lib" ]] &&
-   [[ -d "$HOME/.npm/bin" ]] &&
-   [[ -x '/usr/bin/node' ]]
+   [[ -d "$HOME/.npm/bin" ]]
 then
     export NODE_PATH=~/.npm/lib/node_modules:$NODE_PATH
     export PATH=~/.npm/bin:$PATH
