@@ -48,7 +48,7 @@ postgresql_postconfiguracion() {
         ## Añade a un array todas las versiones de postgreSQL
         ## existentes en /etc/postgresql
 
-        if [[ $DISRTRO = 'macos' ]]; then
+        if [[ $DISTRO = 'macos' ]]; then
             #TODO: reutilizar función de php para editar con sed
             #TODO: buscar ruta hacia los archivos de configuración
 
@@ -102,7 +102,7 @@ postgresql_postconfiguracion() {
     personalizar_postgresql() {
         echo -e "$VE Personalizando$RO postgreSQL$CL"
 
-        if [[ $DISRTRO = 'macos' ]]; then
+        if [[ $DISTRO = 'macos' ]]; then
             createuser -P postgres
             createdb postgres -O postgres 2> /dev/null
         fi
@@ -111,7 +111,7 @@ postgresql_postconfiguracion() {
     postgresql_users_create() {
         echo -e "$VE Crear usuario desarrollador$RO dev$CL"
 
-        if [[ $DISRTRO = 'macos' ]]; then
+        if [[ $DISTRO = 'macos' ]]; then
             createuser -P dev
             createdb dev -O dev
             createdb computer -O dev
