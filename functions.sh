@@ -551,3 +551,23 @@ addScriptToBin() {
         done
     fi
 }
+
+##
+## Reemplaza según un patrón cadenas dentro de un archivo
+## $1 Patrón para reemplazar la cadena.
+## $2 Archivo sobre el que se actúa
+##
+strFileReplace() {
+    PATTERN=$1
+    FILE=$2
+
+    if [[ -z $PATTERN ]] || [[ -z $FILE ]];then
+        return
+    fi
+
+    if [[ $DISTRO = 'macos' ]]; then
+        sudo sed -r -E -i '' "${PATTERN}" "${FILE}"
+    else
+        sudo sed -r -i "${PATTERN}" "${FILE}"
+    fi
+}

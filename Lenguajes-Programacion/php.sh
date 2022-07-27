@@ -57,26 +57,6 @@ php_parse_phpini_dev() {
         return
     fi
 
-    ##
-    ## Reemplaza según un patrón cadenas dentro de un archivo
-    ## $1 Patrón para reemplazar la cadena.
-    ## $2 Archivo sobre el que se actúa
-    ##
-    strFileReplace() {
-        PATTERN=$1
-        FILE=$2
-
-        if [[ -z $PATTERN ]] || [[ -z $FILE ]];then
-            return
-        fi
-
-        if [[ $DISTRO = 'macos' ]]; then
-            sudo sed -r -E -i '' "${PATTERN}" "${FILE}"
-        else
-            sudo sed -r -i "${PATTERN}" "${FILE}"
-        fi
-    }
-
     strFileReplace 's/^#?[[:space:]]*LoadModule php8_module.*$/LoadModule php8_module /opt/homebrew/Cellar/php@8.0/8.0.21/lib/httpd/modules/libphp.so/g' $PHPINI
 
 
