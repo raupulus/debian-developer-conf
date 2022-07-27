@@ -542,8 +542,12 @@ addScriptToBin() {
 
     // TODO: Revisar si en macos, esto cambiará de ruta
 
-    for script in $*; do
-        sudo cp "${WORKSCRIPT}/conf/bin/${script}.sh" "/bin/${script}"
-        sudo chmod 755 -R "/bin/${script}"
-    done
+    if [[ $DISTRO = 'macos' ]]; then
+        echo 'Scripts no implementados para macos'
+    else
+        for script in $*; do
+            sudo cp "${WORKSCRIPT}/conf/bin/${script}.sh" "/bin/${script}"
+            sudo chmod 755 -R "/bin/${script}"
+        done
+    fi
 }
