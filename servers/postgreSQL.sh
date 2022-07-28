@@ -103,7 +103,7 @@ postgresql_postconfiguracion() {
         echo -e "$VE Personalizando$RO postgreSQL$CL"
 
         if [[ $DISTRO = 'macos' ]]; then
-            createuser -P postgres
+            createuser -s postgres -w
             createdb postgres -O postgres 2> /dev/null
         fi
     }
