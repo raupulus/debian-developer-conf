@@ -22,6 +22,10 @@
 ##       FUNCIONES        ##
 ############################
 
+icons_mac() {
+    echo -e "$VE Preparando Iconos para$RO Macos$CL"
+}
+
 icons_debian() {
     theme_paper() {
         echo -e "$VE Descargando pack de iconos$RO Paper Theme$CL"
@@ -37,7 +41,7 @@ icons_debian() {
     gconftool-2 --type string --set /desktop/gnome/interface/icon_theme 'Paper'
 }
 
-icons_install() {
+icons_generic() {
     echo -e "$VE Instalando iconos personalizados dentro de$RO /usr/share/icons/fryntiz$CL"
     if [[ -d '/usr/share/icons/fryntiz' ]]; then
         sudo rm -Rf '/usr/share/icons/fryntiz'
@@ -67,5 +71,13 @@ icons_install() {
 
     if [[ -d '/usr/share/icons/Paper' ]]; then
         ln -s '/usr/share/icons/Paper/index.theme' "$HOME/.local/share/icons/default/index.theme"
+    fi
+}
+
+icons_install() {
+    if [[ "${DISTRO}" = 'macos' ]]; then
+        icons_mac
+    else
+        icons_generic
     fi
 }

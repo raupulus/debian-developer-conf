@@ -34,6 +34,7 @@ source "$WORKSCRIPT/servers/mongodb.sh"
 source "$WORKSCRIPT/servers/sqlite.sh"
 source "$WORKSCRIPT/servers/mumble.sh"
 source "$WORKSCRIPT/servers/gocd.sh"
+source "$WORKSCRIPT/servers/nginx.sh"
 
 ###########################
 ##       FUNCIONES       ##
@@ -76,7 +77,8 @@ menuServidores() {
                 10) Bind 9
                 11) Mumble
                 12) Postfix y Dovecot (Mail)
-                13) GoCD (Agent y Server)
+                13) Nginx
+                14) GoCD (Agent y Server)
 
                 0) Atrás
             '
@@ -100,8 +102,9 @@ menuServidores() {
 
                 10)  bind_instalador;;       ## Instala Bind
                 11)  mumble_instalador;;     ## Instala Mumble
-                11)  postfix_instalador;;    ## Instala Mumble
-                12)  gocd_installer          ## Instala Servidor Mail
+                12)  postfix_instalador;;    ## Instala Mumble
+                13)  nginx_installer;;       ## Instala Nginx
+                14)  gocd_installer          ## Instala Servidor Mail
                      break;;
 
                 0)  ## SALIR

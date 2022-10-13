@@ -47,6 +47,55 @@ php_composer_latest_install() {
     sudo php '/tmp/composer-setup.php' --install-dir='/usr/bin/' --filename='composer-latest'
 }
 
+##
+## Recibe la ruta del phpini en modo desarrollo y lo configura.
+## @param $1 La ruta hacia el phpini a configurar.
+php_parse_phpini_dev() {
+    local PHPINI=$1
+
+    if [[ ! -f $PHPINI ]]; then
+        return
+    fi
+
+    strFileReplace 's/^#?[[:space:]]*LoadModule php8_module.*$/LoadModule php8_module /opt/homebrew/Cellar/php@8.0/8.0.21/lib/httpd/modules/libphp.so/g' $PHPINI
+
+
+    echo -e "$VE Estableciendo zona horaria por defecto para PHP$CL"
+    strFileReplace 's/^;?[[:space:]]*date\.timezone[[:space:]]*=.*$/date\.timezone = "UTC"/g' $PHPINI
+    #sudo sed -r -i '' "s/^;?\s*date\.timezone\s*=.*$/date\.timezone = 'UTC'/" $PHPINI
+
+    echo -e "$VE Configurando PHP para desarrollo$CL"
+    echo -e "$VE Activando Reportar todos los errores → 'error_reporting'$CL"
+    strFileReplace 's/^;?[[:space:]]*error_reporting[[:space:]]*=.*$/error_reporting = E_ALL/g' $PHPINI
+    #sudo sed -r -i '' "s/^;?\s*error_reporting\s*=.*$/error_reporting = E_ALL/" $PHPINI
+
+    echo -e "$VE Activando Mostrar errores → 'display_errors'$CL"
+    strFileReplace 's/^;?[[:space:]]*display_errors[[:space:]]*=.*$/display_errors = On/g' $PHPINI
+    #sudo sed -r -i '' "s/^;?\s*display_errors\s*=.*$/display_errors = On/" $PHPINI
+
+    echo -e "$VE Activando Mostrar errores al iniciar → 'display_startup_errors'$CL"
+    strFileReplace 's/^;?[[:space:]]*display_startup_errors[[:space:]]*=.*$/display_startup_errors = On/g' $PHPINI
+    #sudo sed -r -i '' "s/^;?\s*display_startup_errors\s*=.*$/display_startup_errors = On/" $PHPINI
+
+    echo -e "$VE Tiempo máximo de ejecución 5 minutos → 'max_execution_time'$CL"
+    strFileReplace 's/^;?[[:space:]]*max_execution_time[[:space:]]*=.*$/max_execution_time = 60/g' $PHPINI
+    #sudo sed -r -i '' "s/^;?\s*max_execution_time\s*=.*$/max_execution_time = 300/" $PHPINI
+
+    echo -e "$VE Límite de Memoria por script → 'memory_limit = 512M'$CL"
+    strFileReplace 's/^;?[[:space:]]*memory_limit[[:space:]]*=.*$/memory_limit = 512M/g' $PHPINI
+    #sudo sed -r -i '' "s/^;?\s*memory_limit\s*=.*$/memory_limit = 512M/" $PHPINI
+
+    ## Límite de archivos
+    echo -e "$VE Tamaño máximo de subida → 'upload_max_filesize = 10240M'$CL"
+    strFileReplace 's/^;?[[:space:]]*upload_max_filesize[[:space:]]*=.*$/upload_max_filesize = 10240M/g' $PHPINI
+    #sudo sed -r -i '' "s/^;?\s*upload_max_filesize\s*=.*$/upload_max_filesize = 10240M/" $PHPINI
+
+    echo -e "$VE Tamaño máximo de POST → 'post_max_size = 10240M'$CL"
+    strFileReplace 's/^;?[[:space:]]*post_max_size[[:space:]]*=.*$/post_max_size = 10240M/g' $PHPINI
+    #sudo sed -r -i '' "s/^;?\s*post_max_size\s*=.*$/post_max_size = 10240M/" $PHPINI
+
+}
+
 php_postconfiguracion() {
     echo -e "$VE Generando Post-Configuraciones de php"
 
@@ -64,37 +113,16 @@ php_postconfiguracion() {
             local PHPINI="/etc/php.ini"
         elif [[ "$DISTRO" = 'gentoo' ]]; then
             echo -e "$VE No configurado para gentoo $DISTRO$CL"
+            return
         fi
 
         ## Modificar configuración
         echo -e "$VE Estableciendo zona horaria por defecto para PHP$CL"
-        sudo sed -r -i "s/^;?\s*date\.timezone\s*=.*$/date\.timezone = 'UTC'/" $PHPINI
+        sudo sed -r -i "s/^;?[[:space:]]*date\.timezone[[:space:]]*=.*$/date\.timezone = 'UTC'/" $PHPINI
 
         ## Configuración para desarrollo
         if [[ "$ENV" = 'dev' ]]; then
-            echo -e "$VE Configurando PHP para desarrollo$CL"
-            echo -e "$VE Activando Reportar todos los errores → 'error_reporting'$CL"
-            sudo sed -r -i "s/^;?\s*error_reporting\s*=.*$/error_reporting = E_ALL/" $PHPINI
-
-            echo -e "$VE Activando Mostrar errores → 'display_errors'$CL"
-            sudo sed -r -i "s/^;?\s*display_errors\s*=.*$/display_errors = On/" $PHPINI
-
-            echo -e "$VE Activando Mostrar errores al iniciar → 'display_startup_errors'$CL"
-            sudo sed -r -i "s/^;?\s*display_startup_errors\s*=.*$/display_startup_errors = On/" $PHPINI
-
-            echo -e "$VE Tiempo máximo de ejecución 5 minutos → 'max_execution_time'$CL"
-            sudo sed -r -i "s/^;?\s*max_execution_time\s*=.*$/max_execution_time = 300/" $PHPINI
-
-            echo -e "$VE Límite de Memoria por script → 'memory_limit = 512M'$CL"
-            sudo sed -r -i "s/^;?\s*memory_limit\s*=.*$/memory_limit = 512M/" $PHPINI
-
-            ## Límite de archivos
-            echo -e "$VE Tamaño máximo de subida → 'upload_max_filesize = 10240M'$CL"
-            sudo sed -r -i "s/^;?\s*upload_max_filesize\s*=.*$/upload_max_filesize = 10240M/" $PHPINI
-
-            echo -e "$VE Tamaño máximo de POST → 'post_max_size = 10240M'$CL"
-            sudo sed -r -i "s/^;?\s*post_max_size\s*=.*$/post_max_size = 10240M/" $PHPINI
-
+            php_parse_phpini_dev $PHPINI
         else
             echo -e "$VE Configurando PHP para producción$CL"
             echo -e "$VE Desactivando Reportar todos los errores → 'error_reporting'$CL"
@@ -176,6 +204,10 @@ php_postconfiguracion() {
     ## Añade a un array todas las versiones de PHP encontradas en /etc/php
     local ALL_PHP=(`ls /etc/php/`)
 
+    if [[ $DISTRO = 'macos' ]];then
+        ALL_PHP=(`ls /opt/homebrew/etc/php`)
+    fi
+
     ## Configura todas las versiones de php existentes
     for V_PHP in "${ALL_PHP[@]}"; do
         #instalar_php "$V_PHP"
@@ -238,7 +270,33 @@ php_postconfiguracion() {
     reiniciarServicio 'apache2'
 }
 
+php_macos_installer() {
+    php_descargar
+    php_preconfiguracion
+    php_instalar
+
+    brew services stop php@8.1 2> /dev/null
+    brew services start php@8.0
+    brew services start php@7.3
+
+    # TODO: Configurar xdebug
+    # TODO: configurar todos los php.ini, refactorizar función para ENV=dev
+
+    ## Fuerzo cambiar dos veces, la primera vez parece que crea php.ini en
+    ## ¢versiones obsoletas que vienen de otros paquetes, como la 7.3
+    brew unlink php && brew link --overwrite --force php@7.3
+    brew unlink php && brew link --overwrite --force php@8.0
+
+    php_parse_phpini_dev '/opt/homebrew/etc/php/7.3/php.ini'
+    php_parse_phpini_dev '/opt/homebrew/etc/php/8.0/php.ini'
+}
+
 php_instalador() {
+    if [[ $DISTRO = 'macos' ]];then
+        php_macos_installer
+        return
+    fi
+
     php_descargar
     php_preconfiguracion
     php_instalar

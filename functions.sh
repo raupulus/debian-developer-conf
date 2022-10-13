@@ -59,17 +59,21 @@ opciones() {
 ## @param  $*  String  Nombre de programas a instalar
 ##
 instalarSoftware() {
-    if [[ "$MY_DISTRO" = 'debian' ]] || [[ "$MY_DISTRO" = 'raspbian' ]]; then
+    if [[ "$DISTRO" = 'debian' ]] || [[ "$DISTRO" = 'raspbian' ]]; then
         for programa in $*; do
             sudo DEBIAN_FRONTEND=noninteractive apt-get install -y "$programa"
         done
-    elif [[ "$MY_DISTRO" = 'gentoo' ]]; then
+    elif [[ "$DISTRO" = 'gentoo' ]]; then
         for programa in $*; do
             sudo emerge "$programa"
         done
-    elif [[ "$MY_DISTRO" = 'fedora' ]]; then
+    elif [[ "$DISTRO" = 'fedora' ]]; then
         for programa in $*; do
             sudo dnf install -y "$programa"
+        done
+    elif [[ "$DISTRO" = 'macos' ]]; then
+        for programa in $*; do
+            brew install "$programa"
         done
     fi
 }
@@ -80,17 +84,21 @@ instalarSoftware() {
 ## @param  $*  String  Nombres de programas para ser actualizados
 ##
 actualizarSoftware() {
-    if [[ "$MY_DISTRO" = 'debian' ]] || [[ "$MY_DISTRO" = 'raspbian' ]]; then
+    if [[ "$DISTRO" = 'debian' ]] || [[ "$DISTRO" = 'raspbian' ]]; then
         for programa in $*; do
             sudo DEBIAN_FRONTEND=noninteractive apt-get upgrade -y "$programa"
         done
-    elif [[ "$MY_DISTRO" = 'gentoo' ]]; then
+    elif [[ "$DISTRO" = 'gentoo' ]]; then
         for programa in $*; do
             sudo emerge -vDuN "$programa"
         done
-    elif [[ "$MY_DISTRO" = 'fedora' ]]; then
+    elif [[ "$DISTRO" = 'fedora' ]]; then
         for programa in $*; do
             sudo dnf upgrade -y "$programa"
+        done
+    elif [[ "$DISTRO" = 'macos' ]]; then
+        for programa in $*; do
+            brew upgrade "$programa"
         done
     fi
 }
@@ -123,7 +131,7 @@ instalarSoftwareLista() {
 
     lista_Software=$(cat $1)
 
-    if [[ "$MY_DISTRO" = 'debian' ]] || [[ "$MY_DISTRO" = 'raspbian' ]]; then
+    if [[ "$DISTRO" = 'debian' ]] || [[ "$DISTRO" = 'raspbian' ]]; then
         ## Paquetes a instalar
         ## La siguiente variable guarda toda la lista de paquetes desde DPKG
         local lista_todos_paquetes=(${dpkg-query -W -f='${Installed-Size} ${Package}\n' | sort -n | cut -d" " -f2})
@@ -141,11 +149,15 @@ instalarSoftwareLista() {
                 fi
             done
         done
-    elif [[ "$MY_DISTRO" = 'gentoo' ]]; then
+    elif [[ "$DISTRO" = 'gentoo' ]]; then
         for x in "${lista_Software[@]}"; do
             instalarSoftware "$x"
         done
-    elif [[ "$MY_DISTRO" = 'fedora' ]]; then
+    elif [[ "$DISTRO" = 'fedora' ]]; then
+        for x in "${lista_Software[@]}"; do
+             instalarSoftware "$x"
+        done
+    elif [[ "$DISTRO" = 'macos' ]]; then
         for x in "${lista_Software[@]}"; do
              instalarSoftware "$x"
         done
@@ -172,12 +184,14 @@ repararGestorPaquetes() {
 ##
 actualizarRepositorios() {
     echo -e "$VE Actualizando listas de$RO Repositorios$VE (Paciencia)$CL"
-    if [[ "$MY_DISTRO" = 'debian' ]] || [[ "$MY_DISTRO" = 'raspbian' ]]; then
+    if [[ "$DISTRO" = 'debian' ]] || [[ "$DISTRO" = 'raspbian' ]]; then
         sudo DEBIAN_FRONTEND=noninteractive apt-get update
-    elif [[ "$MY_DISTRO" = 'gentoo' ]]; then
+    elif [[ "$DISTRO" = 'gentoo' ]]; then
         sudo emerge --sync
-    elif [[ "$MY_DISTRO" = 'fedora' ]]; then
+    elif [[ "$DISTRO" = 'fedora' ]]; then
         sudo dnf update
+    elif [[ "$DISTRO" = 'macos' ]]; then
+        brew update
     fi
 }
 
@@ -187,7 +201,7 @@ actualizarRepositorios() {
 ## @param  $*  String  Nombres de programas para ser instalados
 ##
 instalarSoftwareFlatPak() {
-    if [[ ! -x '/usr/bin/flatpak' ]]; then
+    if [[ ! -x '/usr/bin/flatpak' ]] || [[ $DISTRO = 'macos' ]]; then
         instalarSoftware 'flatpak'
     fi
 
@@ -217,7 +231,7 @@ instalarSoftwareFlatPak() {
 ## @param  $1  String  Ruta del archivo lista con los paquetes
 instalarSoftwareFlatPakLista() {
     ## Paquetes a instalar
-    if [[ $1 = '' ]]; then
+    if [[ $1 = '' ]] || [[ $DISTRO = 'macos' ]]; then
         echo -e "$VE No hay paquete a instalar$CL"
         return 1
     fi
@@ -347,10 +361,17 @@ enlazarHome() {
 ## @param $* Recibe los paquetes que necesite y los borra
 ##
 desinstalar_paquetes() {
-    for x in $*; do
-        echo -e "$RO Borrando x$CL"
-        sudo DEBIAN_FRONTEND=noninteractive apt-get purge -y x
-    done
+    if [[ $DISTRO = 'macos' ]]; then
+         for x in $*; do
+             echo -e "$RO Borrando x$CL"
+             brew remove "${x}"
+         done
+    else
+        for x in $*; do
+            echo -e "$RO Borrando x$CL"
+            sudo DEBIAN_FRONTEND=noninteractive apt-get purge -y x
+        done
+    fi
 }
 
 ##
@@ -358,20 +379,35 @@ desinstalar_paquetes() {
 ## @param $* Recibe los servicios que necesite reiniciar
 ##
 reiniciarServicio() {
-    for x in $*; do
-        echo -e "$RO Reiniciando $x$CL"
-        sudo systemctl restart "$x"
-    done
+
+    if [[ $DISTRO = 'macos' ]]; then
+        for x in $*; do
+            echo -e "$RO Reiniciando $x$CL"
+            brew services restart "${x}"
+        done
+    else
+        for x in $*; do
+            echo -e "$RO Reiniciando $x$CL"
+            sudo systemctl restart "$x"
+        done
+    fi
 }
 
 ##
 ## Recibe uno o más nombres de servicios para detenerlos.
 ##
 pararServicio() {
-    for x in $*; do
-        echo -e "$RO Deteniendo Servicio: $x$CL"
-        sudo systemctl stop "$x"
-    done
+     if [[ $DISTRO = 'macos' ]]; then
+         for x in $*; do
+             echo -e "$RO Deteniendo Servicio: $x$CL"
+             brew services stop "${x}"
+         done
+    else
+        for x in $*; do
+            echo -e "$RO Deteniendo Servicio: $x$CL"
+            sudo systemctl stop "$x"
+        done
+    fi
 }
 
 ##
@@ -379,8 +415,11 @@ pararServicio() {
 ##
 prepararInstalador() {
     echo -e "$VE Se actualizarán las$RO listas de repositorios$CL"
-    sudo DEBIAN_FRONTEND=noninteractive apt-get update
-    sudo DEBIAN_FRONTEND=noninteractive apt-get install -f -y
+
+    if [[ $DISTRO = 'debian' ]] || [[ $DISTRO = 'raspbian' ]];then
+        sudo DEBIAN_FRONTEND=noninteractive apt-get update
+        sudo DEBIAN_FRONTEND=noninteractive apt-get install -f -y
+    fi
 }
 
 ##
@@ -427,6 +466,7 @@ setVariableGlobal() {
 ##
 python2Install() {
     echo -e "$VE Instalando paquete Python$CL"
+
     for x in $*; do
         echo -e "$RO Instalando $x$CL"
         pip2 install --user --upgrade "$x"
@@ -439,6 +479,7 @@ python2Install() {
 ##
 python3Install() {
     echo -e "$VE Instalando paquete Python$CL"
+
     for x in $*; do
         echo -e "$RO Instalando $x$CL"
         pip3 install --user --upgrade "$x"
@@ -451,6 +492,7 @@ python3Install() {
 ##
 python3InstallGlobal() {
     echo -e "$VE Instalando paquete Python de forma global$CL"
+
     for x in $*; do
         echo -e "$RO Instalando $x$CL"
         sudo pip3 install --upgrade "$x"
@@ -465,6 +507,7 @@ dir_exist_or_create() {
     dir="$1"
 
     echo -e "$VE Creando directorio$RO $dir$CL"
+
     if [[ ! -d "$dir" ]]; then
         mkdir -p "$dir"
     fi
@@ -496,8 +539,35 @@ clear_screen() {
 ## @param  $*  String  Nombres de scripts dentro de conf/bin/ sin la extensión.
 ##
 addScriptToBin() {
-    for script in $*; do
-        sudo cp "{$WORKSCRIPT}/conf/bin/${script}.sh" "/bin/${script}"
-        sudo chmod 755 -R "/bin/${script}"
-    done
+
+    // TODO: Revisar si en macos, esto cambiará de ruta
+
+    if [[ $DISTRO = 'macos' ]]; then
+        echo 'Scripts no implementados para macos'
+    else
+        for script in $*; do
+            sudo cp "${WORKSCRIPT}/conf/bin/${script}.sh" "/bin/${script}"
+            sudo chmod 755 -R "/bin/${script}"
+        done
+    fi
+}
+
+##
+## Reemplaza según un patrón cadenas dentro de un archivo
+## $1 Patrón para reemplazar la cadena.
+## $2 Archivo sobre el que se actúa
+##
+strFileReplace() {
+    PATTERN=$1
+    FILE=$2
+
+    if [[ -z $PATTERN ]] || [[ -z $FILE ]];then
+        return
+    fi
+
+    if [[ $DISTRO = 'macos' ]]; then
+        sudo sed -r -E -i '' "${PATTERN}" "${FILE}"
+    else
+        sudo sed -r -i "${PATTERN}" "${FILE}"
+    fi
 }

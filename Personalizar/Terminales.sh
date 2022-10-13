@@ -22,17 +22,17 @@
 ##       FUNCIONES        ##
 ############################
 
-terminales_preconfiguracion() {
+terminals_preconfiguration() {
     echo -e "$VE Generando Pre-Configuraciones de$RO terminales$CL"
     instalarSoftware 'dconf-cli'
 }
 
-terminales_instalar() {
+terminals_generic() {
     echo -e "$VE Preparando para instalar$RO terminales$CL"
     instalarSoftware tilix terminator
 }
 
-terminales_postconfiguracion() {
+terminals_postconfiguration() {
     echo -e "$VE Generando Post-Configuraciones$RO terminales$CL"
 
     ## Crear backup: dconf dump /com/gexperts/Tilix/ > ~/Debian_Developer_Init/conf/tilix.conf
@@ -71,10 +71,18 @@ terminales_postconfiguracion() {
     fi
 }
 
+terminals_macos() {
+    echo -e "$RO IMPLEMENTAR TERMINALES PARA MACOS$CL"
+}
+
 terminales_instalador() {
     echo -e "$VE Comenzando instalación de$RO terminales$CL"
 
-    terminales_preconfiguracion
-    terminales_instalar
-    terminales_postconfiguracion
+    if [[ "${DISTRO}" = 'macos' ]]; then
+        terminals_macos
+    else
+        terminals_preconfiguration
+        terminals_generic
+        terminals_postconfiguration
+    fi
 }

@@ -24,5 +24,8 @@
 
 grub_install() {
     echo -e "$VE Personalizando $RO GRUB$CL"
-    instalarSoftwareLista "$SOFTLIST/Personalizar/grub.lst"
+
+    if [[ -f "$SOFTLIST/Personalizar/grub.lst" ]]; then
+        instalarSoftwareLista "$SOFTLIST/Personalizar/grub.lst"
+    fi
 }

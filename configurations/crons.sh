@@ -25,6 +25,10 @@
 configurations_crons() {
     echo -e "$VE Instalando tareas$RO Cron$CL"
 
-    sudo cp "{$WORKSCRIPT}/conf/etc/cron.d/*" '/etc/cron.d'
-    sudo chmod 644 -R /etc/cron.d/*
+    if [[ "${DISTRO}" = 'macos' ]]; then
+        echo "Tareas cron para mac aún no planteadas"
+    else
+        sudo cp "${WORKSCRIPT}/conf/etc/cron.d/*" '/etc/cron.d'
+        sudo chmod 644 -R /etc/cron.d/*
+    fi
 }

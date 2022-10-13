@@ -28,7 +28,7 @@
 - unclutter → Oculta el ratón mientras no se utiliza
 - parcellite → Portapapeles
 - zenity → Calendario
-- pulseaudio → Servidor de sonido
+- pipewire → Servidor de sonido
 - firewalld → Cortafuegos con interfaz gráfica y applet
 - xfce4-settings → Configuración de XFCE4 (para gtk2)
 - lxappearance → Configuración de gtk por lxde

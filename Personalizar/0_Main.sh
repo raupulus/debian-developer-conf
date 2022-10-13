@@ -40,10 +40,15 @@ menuPersonalizacion() {
         fonts_install
         icons_install
         cursors_install
-        gtk_install
-        qt_install
+
         terminales_instalador
         services_enable_disable
+
+        if [[ "${DISTRO}" != 'macos' ]]; then
+            gtk_install
+            qt_install
+        fi
+
     }
 
     if [[ "$1" = '-a' ]]; then

@@ -24,7 +24,10 @@
 
 configuration_command_not_found() {
     echo -e "$VE Actualizando$RO Command not Found$CL"
-    sudo update-command-not-found >> /dev/null 2>> /dev/null
+
+    if [[ -f '/usr/sbin/update-command-not-found' ]]; then
+        sudo update-command-not-found >> /dev/null 2>> /dev/null
+    fi
 }
 
 configurations_generic() {

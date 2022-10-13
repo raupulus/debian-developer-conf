@@ -26,12 +26,19 @@ services_enable_disable() {
     echo -e "$VE Habilitando servicios al iniciar$CL"
 
     echo -e "$VE Deshabilitando servicios al iniciar$CL"
-    sudo systemctl disable apt-daily.timer
-    sudo systemctl stop apt-daily.timer
 
-    sudo systemctl disable apt-daily-upgrade.timer
-    sudo systemctl stop apt-daily-upgrade.timer
+    ## TODO → Buscar cómo gestionar en macos y crear función global en functions.sh
 
-    sudo systemctl disable unattended-upgrades.service
-    sudo systemctl stop unattended-upgrades.service
+    if [[ "${DISTRO}" = 'macos' ]]; then
+        echo -e "$RO IMPLEMENTAR SERVICIOS PARA MACOS$CL"
+    else
+        sudo systemctl disable apt-daily.timer
+        sudo systemctl stop apt-daily.timer
+
+        sudo systemctl disable apt-daily-upgrade.timer
+        sudo systemctl stop apt-daily-upgrade.timer
+
+        sudo systemctl disable unattended-upgrades.service
+        sudo systemctl stop unattended-upgrades.service
+    fi
 }

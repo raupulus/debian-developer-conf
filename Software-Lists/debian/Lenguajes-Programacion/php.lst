@@ -185,6 +185,7 @@ php5.6-xml
 php5.6-xmlrpc
 php5.6-xsl
 php5.6-zip
+php5.6-imagick
 php7.3
 libapache2-mod-php7.3
 libphp7.3-embed
@@ -238,6 +239,7 @@ php7.3-pspell
 php7.3-snmp
 php7.3-xmlrpc
 php7.3-xsl
+php7.3-imagick
 php7.4
 libapache2-mod-php7.4
 libphp7.4-embed
@@ -274,6 +276,7 @@ php7.4-xml
 php7.4-xmlrpc
 php7.4-xsl
 php7.4-zip
+php7.4-imagick
 php8.0
 libapache2-mod-php8.0
 libphp8.0-embed
@@ -308,3 +311,4 @@ php8.0-xdebug
 php8.0-xml
 php8.0-xsl
 php8.0-zip
+php8.0-imagick

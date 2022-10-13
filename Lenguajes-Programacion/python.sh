@@ -57,7 +57,7 @@ python_postconfiguracion() {
         echo -e "$VE Preparando configuracion de$RO Python3$CL"
         echo -e "$VE Instalando dependencias para Python 3$CL"
 
-        python3Install 'python-language-server[all]' 'virtualenvwrapper' 'pip-review'
+        python3Install 'python-language-server[all]' 'virtualenvwrapper' 'pip-review' 'serial' 'sqlalchemy' 'python-dotenv' 'requests'
     }
 
     personalizar_python2() {

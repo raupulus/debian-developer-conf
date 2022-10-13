@@ -89,14 +89,22 @@ menuAplicaciones() {
                 13) Virtualización
 
                 14) Todos los pasos anteriores completos
+            '
 
+            # Opciones solo para Linux
+            if [[ "${DISTRO}" != 'macos' ]]; then
+                descripcion="${descripcion}
                 15) Instalar IDEs
                 16) Instalar Aplicaciones Extras
                 17) Flatpak
                 18) VPS
+                "
+            fi
 
+            descripcion="${descripcion}
                 0) Atrás
-            '
+                "
+
             opciones "$descripcion"
 
             echo -e "$RO"

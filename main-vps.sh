@@ -26,14 +26,11 @@ fi
 
 DEBUG='false'      ## Establece si está el script en modo depuración
 WORKSCRIPT=$PWD  ## Directorio principal del script
-PATH_LOG="$WORKSCRIPT/errors.log"  ## Archivo donde almacenar errores
 
 ## Importo variables locales si existieran, sobreescriben a las globales
 if [[ -a "$WORKSCRIPT/.env" ]]; then
     source "$WORKSCRIPT/.env"
 fi
-
-source "$WORKSCRIPT/functions.sh"
 
 ###########################
 ##       FUNCIONES       ##
@@ -44,13 +41,22 @@ if [[ $USER != 'root' ]]; then
     exit 1
 fi
 
-## Instala el software dependiente.
-instalarSoftware sudo git curl wget
+if [[ ! -f '/usr/bin/git' ]]; then
+    echo 'Se necesita tener instalado "git"'
+    echo 'Prueba con tu gestor de paquetes, por ejemplo: apt install git'
+    exit 1
+fi
+
+if [[ ! -f '/usr/bin/wget' ]]; then
+    echo 'Se necesita tener instalado "wget"'
+    echo 'Prueba con tu gestor de paquetes, por ejemplo: apt install wget'
+    exit 1
+fi
 
 read -p "    Nombre del usuario principal → " username
 
 #TODO → Asegurar que no pasa en blanco, comprobar mejor esta parte y volver a pedir
-if [[ "$username" != '' ] && [[ "$username" != ' ' ]]; then
+if [[ "$username" = '' ]] && [[ "$username" = ' ' ]]; then
     username='admin'
 fi
 
@@ -67,6 +73,7 @@ if [[ ! -d "/home/${username}/debian-developer-conf" ]]; then
 fi
 
 chown "$username:$username" -R "/home/$username/debian-developer-conf"
+chmod 755 -R "/home/${username}/debian-developer-conf"
 cd "/home/$username/debian-developer-conf" || exit
 
 ## TODO → Con el "all" ya es suficiente, pero es necesario comprobar que exista
@@ -84,6 +91,6 @@ sysctl -p
 sysctl -w net.ipv6.conf.all.disable_ipv6=1
 sysctl -w net.ipv6.conf.default.disable_ipv6=1
 
-sudo -u $username ./main.sh
+su $username ./main.sh
 
 exit 0

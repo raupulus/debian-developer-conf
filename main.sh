@@ -55,7 +55,7 @@ if [[ -a "$WORKSCRIPT/.env" ]]; then
 fi
 
 USER=$(whoami)   ## Usuario que ejecuta el script
-VERSION='0.8.13'  ## Versión en desarrollo
+VERSION='0.8.14'  ## Versión en desarrollo
 MY_DISTRO="$DISTRO"  ## Distribución sobre la que se ejecuta
 MY_BRANCH="$BRANCH"  ## stable|testing|unstable
 MY_ENV="$ENV"    ## prod|dev desde /etc/environment o .env
@@ -80,6 +80,7 @@ source "$WORKSCRIPT/Desktops/0_Main.sh"
 source "$WORKSCRIPT/Usuario/0_Main.sh"
 source "$WORKSCRIPT/root/0_Main.sh"
 source "$WORKSCRIPT/VPS/0_Main.sh"
+source "$WORKSCRIPT/raspberry/0_Main.sh"
 
 ###########################
 ##       VARIABLES       ##
@@ -122,6 +123,16 @@ if [[ "$1" = 'terminals' ]]; then
     exit 0
 fi
 
+
+###########################
+##     DEPENDENCIES      ##
+###########################
+if [[ ! -f '/usr/bin/sudo' ]]; then
+    echo 'Necesitas instalar "sudo"'
+    echo 'Hazlo con tu gestor de paquetes, por ejemplo: apt install sudo'
+    exit 1
+fi
+
 ###########################
 ##       FUNCIONES       ##
 ###########################
@@ -142,6 +153,7 @@ menuPrincipal() {
             9) Desktops
             10) Configurar root
             11) Configurar VPS
+            12) Configurar Raspberry (Scripts adicionales)
 
             0) Salir
         '
@@ -170,6 +182,7 @@ menuPrincipal() {
             9) menuDesktops;;
             10) menu_root;;
             11) menuVPS;;
+            12) menu_raspberry;;
 
             0) ## SALIR
               clear_screen

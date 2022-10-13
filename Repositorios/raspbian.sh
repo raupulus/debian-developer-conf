@@ -26,7 +26,7 @@
 ##       FUNCIONES        ##
 ############################
 agregarRepositoriosRaspbian() {
-    echo '$VE Configurando Repositorios para$RO Raspbian$CL'
+    echo -e "$VE Configurando Repositorios para$RO Raspbian$CL"
 
     ##
     ## Instala dependencias para actualizar repositorios e instalar
@@ -50,6 +50,11 @@ agregarRepositoriosRaspbian() {
         ## Agregando llave para Gitlab Runner.
         echo -e "$VE Agregando llave para$RO Gitlab Runner$CL"
         curl -L "https://packages.gitlab.com/runner/gitlab-runner/gpgkey" 2> /dev/null | sudo apt-key add - &>/dev/null
+
+        ## Sury (Paquetes PHP)
+        echo -e "$VE Agregando llave para$RO PHP$VE de sury,org$CL"
+        sudo wget -O '/etc/apt/trusted.gpg.d/php.gpg' 'https://packages.sury.org/php/apt.gpg'
+        sudo chmod 744 '/etc/apt/trusted.gpg.d/php.gpg'
     }
 
     ##
@@ -65,10 +70,16 @@ agregarRepositoriosRaspbian() {
         fi
         sudo cp $WORKSCRIPT/Repositorios/raspbian/sources.list.d/* /etc/apt/sources.list.d/
 
-        if [[ ! -d '/etc/apt/sources.list' ]]; then
+        if [[ -f '/etc/apt/sources.list' ]]; then
             sudo rm -f '/etc/apt/sources.list'
         fi
+
         sudo cp "$WORKSCRIPT/Repositorios/raspbian/sources.list" "/etc/apt/sources.list"
+
+        ## Sury (Paquetes PHP)
+        echo -e "$VE Agregando repositorio$RO Sury$AM Repositorio Oficial$CL"
+        #echo "deb https://packages.sury.org/php/ $(lsb_release -sc) main" | sudo tee /etc/apt/sources.list.d/php.list
+        echo "deb https://packages.sury.org/php/ buster main" | sudo tee /etc/apt/sources.list.d/php.list
     }
 
     ##
@@ -76,13 +87,23 @@ agregarRepositoriosRaspbian() {
     ##
     raspbian_source_nodejs() {
         echo -e "$VE Agregando repositorio$RO NodeJS$AM Repositorio Oficial$CL"
-        curl -sL https://deb.nodesource.com/setup_11.x | sudo -E bash -
+        curl -sL https://deb.nodesource.com/setup_current.x | sudo -E bash -
+    }
+
+    ##
+    ## Repositorio oficial de Flightaware
+    ##
+    raspbian_source_piaware() {
+        wget https://flightaware.com/adsb/piaware/files/packages/pool/piaware/p/piaware-support/piaware-repository_4.0_all.deb -O /tmp/piaware-repository.deb
+
+        sudo dpkg -i /tmp/piaware-repository.deb
     }
 
     instalar_dependencias
     prepararLlaves
     raspbian_sources_repositorios
     raspbian_source_nodejs
+    raspbian_source_piaware
 
     ## Asigna lectura a todos para buscar paquetes sin sudo
     sudo chmod 744 /etc/apt/sources.list

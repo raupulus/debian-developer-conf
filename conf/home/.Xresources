@@ -1,5 +1,5 @@
 Xcursor.theme: x-cursor-theme
-Xcursor.size: 32
+Xcursor.size: 40
 
 URxvt*depth: 32
 URxvt*background: rgba:0000/0000/0200/c800

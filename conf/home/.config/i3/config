@@ -245,7 +245,7 @@ bar {
     #font pango:terminus, awesome 9
     #font pango:Inconsolata-dz for Powerline, ZektonLt Bold 11
     #font pango:DejaVu Sans Mono for Powerline Bold 11
-    font pango:DejaVu Sans Mono for Powerline, PowerlineSymbols, FontAwesome, Linux Libertine Mono O Bold 11
+    font pango:DejaVu Sans Mono for Powerline, PowerlineSymbols, FontAwesome, Linux Libertine Mono O Bold 9
     #font pango:Droid Sans Mono for Powerline 11
     #font pango:ZektonLt Bold 11
     #font pango:Inconsolata Nerd Font Complete Mono 10
@@ -255,6 +255,16 @@ bar {
 
     ## Salidas donde habilito esta barra
     output primary
+    output secundary
+    #output $mon2
+    output HDMI1
+    output HDMI-1
+    output DVI-D-0
+    output LVDS-2
+    output VGA
+    output VGA-1
+    output DP-1
+    output DP-2
     #output $mon2
     #output $mon1
     #output $mon3
@@ -266,7 +276,7 @@ bar {
     #output HDMI-1
 
     ## Márgenes de iconos en la bandeja
-    tray_padding 1
+    tray_padding 2
 
     ## Deshabilita el número en el nombre de los espacios de trabajo
     #strip_workspace_numbers yes
@@ -308,16 +318,17 @@ bar {
 
 ## Barra solo visible en el segundo monitor
 bar {
-    output secundary
-    output $mon2
-    output HDMI1
-    output HDMI-1
-    output DVI-D-0
-    output LVDS-2
-    output VGA
-    output VGA-1
-    output DP-1
-    output DP-2
+    output $mon3
+    #output secundary
+    #output $mon2
+    #output HDMI1
+    #output HDMI-1
+    #output DVI-D-0
+    #output LVDS-2
+    #output VGA
+    #output VGA-1
+    #output DP-1
+    #output DP-2
 
 
     status_command  i3status
@@ -547,7 +558,7 @@ exec --no-startup-id lxpolkit
 #exec --no-startup-id redshift -l $coordenadas -t 5500:4500
 
 ## Servidor de audio Pulseaudio
-exec --no-startup-id pulseaudio --start
+#exec --no-startup-id pulseaudio --start
 
 ## Bluetooth
 exec --no-startup-id blueman-applet
@@ -633,13 +644,13 @@ bindsym $mod+F12 mode "$mode_servers"
 ###############           APPLETS         ##################
 ############################################################
 ## Dropbox
-exec --no-startup-id dropbox start
+#exec --no-startup-id dropbox start
 
 ## Synology Drive
 exec --no-startup-id synology-drive
 
 ## Nextcloud
-exec --no-startup-id nextcloud
+#exec --no-startup-id nextcloud
 
 ## pCloud
 exec --no-startup-id "$HOME/AppImage/pcloud"
@@ -679,7 +690,7 @@ bindsym PowerOff exec --no-startup-id i3lock; pm-suspend
 
 ## Bloquear pantalla
 bindsym $mod+p exec "~/.config/i3/scripts/lock_and_blur.sh"
-exec xautolock -detectsleep -time 15 -locker "~/.config/i3/scripts/lock_and_blur.sh" -notify 30 -notifier "notify-send -u critical -t 10000 -- 'Bloqueando pantalla en 30 seconds'"
+exec xautolock -detectsleep -time 15 -locker "~/.config/i3/scripts/lock_and_blur.sh" -notify 30 -notifier "notify-send -u critical -t 10000 -- 'Bloqueando pantalla en 30 segundos'"
 
 ###########################################################
 ############         TECLAS MULTIMEDIA         ############
@@ -701,3 +712,6 @@ bindsym XF86AudioNext exec playerctl next
 ###########################################################
 ############               PRUEBAS             ############
 ###########################################################
+
+bindsym $mod+F10 exec "mpv ~/tmp/avast-amenaza.ogg"
+bindsym $mod+F9 exec "mpv ~/tmp/grillos.ogg"

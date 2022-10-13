@@ -49,7 +49,8 @@ common_add_key() {
 
     ## Repositorio para Etcher
     echo -e "$VE Agregando clave para$RO Etcher$CL"
-    sudo apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 379CE192D401AB61
+    #sudo apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 379CE192D401AB61
+    curl -1sLf "https://dl.cloudsmith.io/public/balena/etcher/gpg.70528471AFF9A051.key" | sudo apt-key add -
 
     ## Repositorio para editor Atom.
     echo -e "$VE Agregando clave para el editor$RO Atom$CL"
@@ -80,12 +81,7 @@ common_add_key() {
 
     ## Beekeeper Studio (Gestionar Bases de Datos)
     echo -e "$VE Agregando clave para $RO Beekeeper Studio$CL"
-    wget --quiet -O - https://bintray.com/user/downloadSubjectPublicKey?username=bintray | sudo apt-key add -
-
-    ## Sury (Paquetes PHP)
-    echo -e "$VE Agregando llave para$RO PHP$VE de sury,org$CL"
-    sudo wget -O '/etc/apt/trusted.gpg.d/php.gpg' 'https://packages.sury.org/php/apt.gpg'
-    sudo chmod 744 '/etc/apt/trusted.gpg.d/php.gpg'
+    wget --quiet -O - https://deb.beekeeperstudio.io/beekeeper.key | sudo apt-key add -
 
     ## Lynis
     echo -e "$VE Agregando clave para $RO Lynis$CL"
@@ -101,7 +97,7 @@ common_add_key() {
 
     ## QOwnNotes
     echo -e "$VE Agregando clave para $RO QOwnNotes$CL"
-    wget http://download.opensuse.org/repositories/home:/pbek:/QOwnNotes/Debian_10/Release.key -O - | sudo apt-key add -
+    wget http://download.opensuse.org/repositories/home:/pbek:/QOwnNotes/Debian_11/Release.key -O - | sudo apt-key add -
 }
 
 ##

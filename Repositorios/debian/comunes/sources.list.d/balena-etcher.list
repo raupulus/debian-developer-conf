@@ -1,0 +1,7 @@
+########################################################
+##                      ETCHER                        ##
+########################################################
+####curl -1sLf "https://dl.cloudsmith.io/public/balena/etcher/gpg.70528471AFF9A051.key" | sudo apt-key add -
+
+deb https://dl.cloudsmith.io/public/balena/etcher/deb/debian bullseye main
+deb-src https://dl.cloudsmith.io/public/balena/etcher/deb/debian bullseye main

@@ -52,14 +52,29 @@ routesApache2() {
         APACHEMODSENABLED="${APACHECONF}/mods-enabled"
 
         if [[ ! -d "$APACHESITES" ]]; then
-            mkdir -p $APACHESITES
+            sudo mkdir -p $APACHESITES
+            sudo chmod 750 $APACHESITES
+            sudo chown :www-data $APACHESITES
         fi
 
         if [[ ! -d "$APACHEMODS" ]]; then
-            mkdir -p $APACHEMODS
+            sudo mkdir -p $APACHEMODS
+            sudo chmod 750 $APACHEMODS
+            sudo chown :www-data $APACHEMODS
         fi
     elif [[ "$DISTRO" = 'gentoo' ]]; then
         echo -e "$VE Configurando directorios apache para $DISTRO$CL"
+    elif [[ "$DISTRO" = 'macos' ]]; then
+        echo -e "$VE Configurando directorios apache para $DISTRO$CL"
+        APACHECONF='/opt/homebrew/etc/httpd'
+        DIRWEBLOG='/var/log/apache2'
+        DIRWEB="/Users/${USER}/www"
+        APACHESITES="${APACHECONF}/extra/httpd-vhosts.conf"
+        APACHESITESENABLED=""
+        APACHEPORTSCONF="${APACHECONF}/ports.conf"
+        APACHEAPACHE2CONF="${APACHECONF}/httpd.conf"
+        APACHEMODS=""
+        APACHEMODSENABLED=""
     else
         echo -e "$VE No se puede configurar rutas de apache$CL"
         exit 1

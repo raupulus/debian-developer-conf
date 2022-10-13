@@ -31,7 +31,6 @@ xautolock
 unclutter
 xbindkeys
 xbindkeys-config
-pulseaudio
 volumeicon-alsa
 alsamixergui
 xfce4-settings
@@ -70,3 +69,8 @@ udisks2-btrfs
 udisks2-bcache
 udiskie
 libblockdev-crypto2
+pipewire
+pipewire-pulse
+gstreamer1.0-pipewire
+libspa-0.2-bluetooth
+wireplumber
