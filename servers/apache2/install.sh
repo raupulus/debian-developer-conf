@@ -387,7 +387,7 @@ apache2_macos_installer() {
     which apachectl
 
     sudo apachectl -k start
-    brew services start httpd
+    sudo brew services start httpd
 
     ## Comprobar problemas al iniciar apache, monitorizar:
     #tail -n 500 -f /opt/homebrew/var/log/httpd/error_log
