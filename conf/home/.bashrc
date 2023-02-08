@@ -24,6 +24,7 @@ USER="$(whoami)" ## Nombre del usuario
 
 # Entorno
 export LANG=es_ES.UTF-8
+export LANGUAGE=es_ES.UTF-8
 export LC_ALL=es_ES.UTF-8
 export LC_CTYPE=es_ES.UTF-8
 export LC_MESSAGES=es_ES.UTF-8
@@ -54,122 +55,6 @@ if [[ -z "${debian_chroot:-}" ]] && [[ -r /etc/debian_chroot ]]; then
     #debian_chroot="$(whoami) >>"
 fi
 
-
-###################################
-###           bash-it           ###
-###################################
-
-## 
-## Carga la configuración de Bash-it
-##
-prepareBashIt() {
-    ## En caso de no ser ejecutado de forma interactiva se sale sin hacer nada
-    case $- in
-    *i*) ;;
-        *) return;;
-    esac
-    
-    ## Directorio con la configuración para bash_it
-    export BASH_IT="$HOME/.bash_it"
-
-    ## Tema de bash que será cargado desde $HOME/.bash_it/themes/
-    export BASH_IT_THEME='powerline-multiline'
-    #export BASH_IT_THEME='iterate'
-
-    ## (Advanced): Change this to the name of your remote repo if you
-    ## cloned bash-it with a remote other than origin such as `bash-it`.
-    ## export BASH_IT_REMOTE='bash-it'
-
-    ## Your place for hosting Git repos. I use this for private repos.
-    #export GIT_HOSTING='usuario@servidor'
-
-    ## Change this to your console based IRC client of choice.
-    #export IRC_CLIENT='irssi'
-
-    ## Set this to the command you use for todo.txt-cli
-    #export TODO="t"
-
-    ## Set this to false to turn off version control status checking within the prompt for all themes
-    export SCM_CHECK=true
-
-    ## Set Xterm/screen/Tmux title with only a short hostname.
-    ## Uncomment this (or set SHORT_HOSTNAME to something else),
-    ## Will otherwise fall back on $HOSTNAME.
-    #export SHORT_HOSTNAME=$(hostname -s)
-
-    ## Set Xterm/screen/Tmux title with only a short username.
-    ## Uncomment this (or set SHORT_USER to something else),
-    ## Will otherwise fall back on $USER.
-    #export SHORT_USER=${USER:0:8}
-
-    ## Set Xterm/screen/Tmux title with shortened command and directory.
-    ## Uncomment this to set.
-    export SHORT_TERM_LINE=true
-
-    ## Set vcprompt executable path for scm advance info in prompt (demula theme)
-    ## https://github.com/djl/vcprompt
-    #export VCPROMPT_EXECUTABLE=~/.vcprompt/bin/vcprompt
-
-    ## (Advanced): Uncomment this to make Bash-it reload itself automatically
-    ## after enabling or disabling aliases, plugins, and completions.
-    export BASH_IT_AUTOMATIC_RELOAD_AFTER_CONFIG_CHANGE=1
-
-    plugins=(git command-not-found composer history-substring-search vi-mode z ssh man javascript python docker node sudo )
-
-
-    ## Cargar Bash-it
-    if [[ -d "${BASH_IT}" && -f "${BASH_IT}/bash_it.sh" ]]; then
-        source "${BASH_IT}/bash_it.sh"
-    fi
-    
-}
-
-## Si estamos con Xterm establece el título (original → user@host:dir)
-case "$TERM" in
-xterm*|rxvt*)
-    PS1="%~ $"
-    ;;
-*)
-    ;;
-esac
-
-## Establece aviso elegante (sin color, o si "queremos" color)
-case "$TERM" in
-    xterm-color) color_prompt=yes;;
-esac
-
-## Avisos de color si el terminal puede convertirlos.
-force_color_prompt=yes
-
-if [[ -n "$force_color_prompt" ]]; then
-    if [[ -x /usr/bin/tput ]] && tput setaf 1 >& /dev/null; then
-        ## We have color support; assume it's compliant with Ecma-48
-        ## (ISO/IEC-6429). (Lack of such support is extremely rare, and such
-        ## a case would tend to support setf rather than setaf.)
-        color_prompt=yes
-    else
-        color_prompt=
-    fi
-fi
-
-if [[ "$color_prompt" = 'yes' ]]; then
-    #PS1='${debian_chroot:+($debian_chroot)}\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\]\$ '
-
-    ## La siguiente línea está modificada para que muestre la ruta en otra línea y solo el usuario actual
-    PS1='\n\[\033[01;37m\]Estás en:\[\033[00m\] \[\033[01;33m\]\w\[\033[00m\]$(__git_ps1 " (%s)")\n\[\033[01;32m\]\u\[\033[00m\] \[\033[01;31m\]>>\[\033[00m\] '
-else
-    #PS1='${debian_chroot:+($debian_chroot)}\u@\h:\w\$ '
-    PS1="%~ $"
-fi
-
-unset color_prompt force_color_prompt
-
-##
-## Prompt liviano, para chroot y/o conexiones ssh por ejemplo
-##
-preparePromptLight() {
-    echo ''
-}
 
 ###################################
 ###       Rutas a binarios      ###
@@ -257,45 +142,7 @@ elif [[ -x '/usr/bin/nano' ]]; then
     export EDITOR='nano -c'
 fi
 
-###################################
-###           PROMPT            ###
-###################################
 
-if [[ $IS_CHROOT -eq 1 ]]; then ## En caso de estar por chroot
-    debian_chroot="$(whoami) >>"
-elif [[ $SSH_CONNECTION ]]; then ## En caso de ser conexión remota ssh (NO COMPROBADO BIEN, REVISAR!!!!)
-    echo 'SSH CONNECTION'
-    debian_chroot="$(whoami) >>"
-elif [[ -f $HOME/.bash_it/bash_it.sh ]]; then ## En caso de tener bashit
-    prepareBashIt
-else ## En cualquier otro caso
-    debian_chroot="$(whoami) >>"
-    preparePromptLight
-fi
-
-###################################
-### Mensaje al iniciar terminal ###
-###################################
-
-if [[ -n $SSH_CONNECTION ]]; then
-    echo ''
-elif [[ -f '/usr/bin/neofetch' ]] || [[ -f '/opt/homebrew/bin/neofetch' ]]; then
-    neofetch
-elif [[ -f '/usr/bin/screenfetch' ]]; then
-    screenfetch
-fi
-
-if [[ -f '/usr/bin/fryntiz' ]]; then
-    echo -e "      \033[1;31m Para utilizar el menú interactivo usa el comando \033[1;32m\"fryntiz\" \033[1;00m"
-fi
-
-if [[ -x "$HOME/.local/bin/proyecto" ]]; then
-    echo -e "$VE Con el comando$RO proyecto$VE puedes generar un proyecto nuevo$CL"
-fi
-
-if [[ -x "$HOME/.local/bin/nuevo" ]]; then
-    echo -e "$VE Usando el comando$RO nuevo$VE generas un archivo desde la plantilla$CL"
-fi
 
 ###################################
 ###            ALIAS            ###
@@ -392,7 +239,7 @@ export GIT_PS1_SHOWDIRTYSTATE=1
 # Para que las aplicaciones Java se vean mejor:
 export _JAVA_OPTIONS='-Dawt.useSystemAAFontSettings=on'
 
-#export LESSCHARSET=UTF-8
+export LESSCHARSET=UTF-8
 
 ## Less Colors for Man Pages
 
@@ -453,3 +300,139 @@ if [[ "$(/usr/bin/tty)" == "/dev/tty1" ]] && [[ -x '/usr/bin/screen' ]]; then
 fi
 
 
+###################################
+###           bash-it           ###
+###################################
+
+###################################
+### Mensaje al iniciar terminal ###
+###################################
+
+if [[ -n $SSH_CONNECTION ]]; then
+    echo ''
+elif [[ -f '/usr/bin/neofetch' ]] || [[ -f '/opt/homebrew/bin/neofetch' ]]; then
+    neofetch
+elif [[ -f '/usr/bin/screenfetch' ]]; then
+    screenfetch
+fi
+
+if [[ -f '/usr/bin/fryntiz' ]]; then
+    echo -e "      \033[1;31m Para utilizar el menú interactivo usa el comando \033[1;32m\"fryntiz\" \033[1;00m"
+fi
+
+if [[ -x "$HOME/.local/bin/proyecto" ]]; then
+    echo -e "$VE Con el comando$RO proyecto$VE puedes generar un proyecto nuevo$CL"
+fi
+
+if [[ -x "$HOME/.local/bin/nuevo" ]]; then
+    echo -e "$VE Usando el comando$RO nuevo$VE generas un archivo desde la plantilla$CL"
+fi
+
+###################################
+###           PROMPT            ###
+###################################
+
+if [[ $IS_CHROOT -eq 1 ]]; then ## En caso de estar por chroot
+    debian_chroot="$(whoami) >>"
+elif [[ -n $SSH_CONNECTION ]]; then ## En caso de ser conexión remota ssh (NO COMPROBADO BIEN, REVISAR!!!!)
+    echo 'SSH CONNECTION'
+    debian_chroot="$(whoami) >>"
+elif [[ -f $HOME/.bash_it/bash_it.sh ]]; then ## En caso de tener bashit
+    ## En caso de no ser ejecutado de forma interactiva se sale sin hacer nada
+    case $- in
+    *i*) ;;
+        *) return;;
+    esac
+    
+    ## Directorio con la configuración para bash_it
+    export BASH_IT="$HOME/.bash_it"
+
+    ## Tema de bash que será cargado desde $HOME/.bash_it/themes/
+    export BASH_IT_THEME='powerline-multiline'
+    #export BASH_IT_THEME='iterate'
+
+    ## (Advanced): Change this to the name of your remote repo if you
+    ## cloned bash-it with a remote other than origin such as `bash-it`.
+    ## export BASH_IT_REMOTE='bash-it'
+
+    ## Your place for hosting Git repos. I use this for private repos.
+    #export GIT_HOSTING='usuario@servidor'
+
+    ## Change this to your console based IRC client of choice.
+    #export IRC_CLIENT='irssi'
+
+    ## Set this to the command you use for todo.txt-cli
+    #export TODO="t"
+
+    ## Set this to false to turn off version control status checking within the prompt for all themes
+    export SCM_CHECK=true
+
+    ## Set Xterm/screen/Tmux title with only a short hostname.
+    ## Uncomment this (or set SHORT_HOSTNAME to something else),
+    ## Will otherwise fall back on $HOSTNAME.
+    #export SHORT_HOSTNAME=$(hostname -s)
+
+    ## Set Xterm/screen/Tmux title with only a short username.
+    ## Uncomment this (or set SHORT_USER to something else),
+    ## Will otherwise fall back on $USER.
+    #export SHORT_USER=${USER:0:8}
+
+    ## Set Xterm/screen/Tmux title with shortened command and directory.
+    ## Uncomment this to set.
+    export SHORT_TERM_LINE=true
+
+    ## Set vcprompt executable path for scm advance info in prompt (demula theme)
+    ## https://github.com/djl/vcprompt
+    #export VCPROMPT_EXECUTABLE=~/.vcprompt/bin/vcprompt
+
+    ## (Advanced): Uncomment this to make Bash-it reload itself automatically
+    ## after enabling or disabling aliases, plugins, and completions.
+    #export BASH_IT_AUTOMATIC_RELOAD_AFTER_CONFIG_CHANGE=1
+
+    #plugins=(git command-not-found composer history-substring-search vi-mode z ssh man javascript python docker node sudo )
+
+    ## Cargar Bash-it
+    if [[ -d "${BASH_IT}" && -f "${BASH_IT}/bash_it.sh" ]]; then
+        source $BASH_IT/bash_it.sh
+    fi
+else ## En cualquier otro caso
+    ## Si estamos con Xterm establece el título (original → user@host:dir)
+    case "$TERM" in
+    xterm*|rxvt*)
+        PS1="%~ $"
+        ;;
+    *)
+        ;;
+    esac
+
+    ## Establece aviso elegante (sin color, o si "queremos" color)
+    case "$TERM" in
+        xterm-color) color_prompt=yes;;
+    esac
+
+    ## Avisos de color si el terminal puede convertirlos.
+    force_color_prompt=yes
+
+    if [[ -n "$force_color_prompt" ]]; then
+        if [[ -x /usr/bin/tput ]] && tput setaf 1 >& /dev/null; then
+            ## We have color support; assume it's compliant with Ecma-48
+            ## (ISO/IEC-6429). (Lack of such support is extremely rare, and such
+            ## a case would tend to support setf rather than setaf.)
+            color_prompt=yes
+        else
+            color_prompt=
+        fi
+    fi
+
+    if [[ "$color_prompt" = 'yes' ]]; then
+        #PS1='${debian_chroot:+($debian_chroot)}\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\]\$ '
+
+        ## La siguiente línea está modificada para que muestre la ruta en otra línea y solo el usuario actual
+        PS1='\n\[\033[01;37m\]Estás en:\[\033[00m\] \[\033[01;33m\]\w\[\033[00m\]$(__git_ps1 " (%s)")\n\[\033[01;32m\]\u\[\033[00m\] \[\033[01;31m\]>>\[\033[00m\] '
+    else
+        #PS1='${debian_chroot:+($debian_chroot)}\u@\h:\w\$ '
+        PS1="%~ $"
+    fi
+
+    unset color_prompt force_color_prompt
+fi
