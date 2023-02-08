@@ -22,26 +22,58 @@ CL="\e[0m"       ## Limpiar colores
 
 USER="$(whoami)" ## Nombre del usuario
 
-## En caso de no ser ejecutado de forma interactiva se sale sin hacer nada
-case $- in
-    *i*) ;;
-      *) return;;
-esac
+# Entorno
+export LANG=es_ES.UTF-8
+export LC_ALL=es_ES.UTF-8
+export LC_CTYPE=es_ES.UTF-8
+export LC_MESSAGES=es_ES.UTF-8
+
+## No comprobar el correo del sistema al abrir terminal.
+unset MAILCHECK
+
+## No añadir líneas duplicadas o que comienzan con espacios al historial.
+HISTCONTROL=ignoreboth
+
+## Agregar al archivo de historial (En vez de sobreescribirlo)
+shopt -s histappend
+
+## Longitud del Historial
+HISTSIZE=3000
+HISTFILESIZE=12000
+
+## Comprobar tamaño de ventana tras cada comando (Actualiza "LINES" y "COLUMNS")
+shopt -s checkwinsize
+
+IS_CHROOT=0
+
+## Variable que identifica el chroot (se usa en el prompt)
+## TODO: Buscar forma más genérica entre sistemas, solo funciona en debian
+if [[ -z "${debian_chroot:-}" ]] && [[ -r /etc/debian_chroot ]]; then
+    #debian_chroot=$(cat /etc/debian_chroot)
+    $IS_CHROOT=1
+    #debian_chroot="$(whoami) >>"
+fi
+
 
 ###################################
 ###           bash-it           ###
 ###################################
 
-## Deshabilita el prompt (Nombre de usuario y máquina)
-#prompt_context(){}
-
-## Comprobar si está instalado para el usuario
-if [[ -f $HOME/.bash_it/bash_it.sh ]]; then
+## 
+## Carga la configuración de Bash-it
+##
+prepareBashIt() {
+    ## En caso de no ser ejecutado de forma interactiva se sale sin hacer nada
+    case $- in
+    *i*) ;;
+        *) return;;
+    esac
+    
     ## Directorio con la configuración para bash_it
     export BASH_IT="$HOME/.bash_it"
 
     ## Tema de bash que será cargado desde $HOME/.bash_it/themes/
-    BASH_IT_THEME='powerline-multiline'
+    export BASH_IT_THEME='powerline-multiline'
     #export BASH_IT_THEME='iterate'
 
     ## (Advanced): Change this to the name of your remote repo if you
@@ -55,7 +87,7 @@ if [[ -f $HOME/.bash_it/bash_it.sh ]]; then
     #export IRC_CLIENT='irssi'
 
     ## Set this to the command you use for todo.txt-cli
-    export TODO="t"
+    #export TODO="t"
 
     ## Set this to false to turn off version control status checking within the prompt for all themes
     export SCM_CHECK=true
@@ -80,35 +112,26 @@ if [[ -f $HOME/.bash_it/bash_it.sh ]]; then
 
     ## (Advanced): Uncomment this to make Bash-it reload itself automatically
     ## after enabling or disabling aliases, plugins, and completions.
-    ## export BASH_IT_AUTOMATIC_RELOAD_AFTER_CONFIG_CHANGE=1
+    export BASH_IT_AUTOMATIC_RELOAD_AFTER_CONFIG_CHANGE=1
+
+    plugins=(git command-not-found composer history-substring-search vi-mode z ssh man javascript python docker node sudo )
+
 
     ## Cargar Bash-it
     if [[ -d "${BASH_IT}" && -f "${BASH_IT}/bash_it.sh" ]]; then
         source "${BASH_IT}/bash_it.sh"
     fi
-fi
+    
+}
 
-## No comprobar el correo del sistema al abrir terminal.
-unset MAILCHECK
-
-## No añadir líneas duplicadas o que comienzan con espacios al historial.
-HISTCONTROL=ignoreboth
-
-## Agregar al archivo de historial (En vez de sobreescribirlo)
-shopt -s histappend
-
-## Longitud del Historial
-HISTSIZE=3000
-HISTFILESIZE=12000
-
-## Comprobar tamaño de ventana tras cada comando (Actualiza "LINES" y "COLUMNS")
-shopt -s checkwinsize
-
-## Variable que identifica el chroot (se usa en el prompt)
-if [[ -z "${debian_chroot:-}" ]] && [[ -r /etc/debian_chroot ]]; then
-    #debian_chroot=$(cat /etc/debian_chroot)
-    debian_chroot="$(whoami)-->"
-fi
+## Si estamos con Xterm establece el título (original → user@host:dir)
+case "$TERM" in
+xterm*|rxvt*)
+    PS1="%~ $"
+    ;;
+*)
+    ;;
+esac
 
 ## Establece aviso elegante (sin color, o si "queremos" color)
 case "$TERM" in
@@ -119,7 +142,7 @@ esac
 force_color_prompt=yes
 
 if [[ -n "$force_color_prompt" ]]; then
-    if [[ -x /usr/bin/tput ]] && tput setaf 1 >&/dev/null; then
+    if [[ -x /usr/bin/tput ]] && tput setaf 1 >& /dev/null; then
         ## We have color support; assume it's compliant with Ecma-48
         ## (ISO/IEC-6429). (Lack of such support is extremely rare, and such
         ## a case would tend to support setf rather than setaf.)
@@ -136,26 +159,27 @@ if [[ "$color_prompt" = 'yes' ]]; then
     PS1='\n\[\033[01;37m\]Estás en:\[\033[00m\] \[\033[01;33m\]\w\[\033[00m\]$(__git_ps1 " (%s)")\n\[\033[01;32m\]\u\[\033[00m\] \[\033[01;31m\]>>\[\033[00m\] '
 else
     #PS1='${debian_chroot:+($debian_chroot)}\u@\h:\w\$ '
-    PS1='bash;"%~ $"'
+    PS1="%~ $"
 fi
-
 
 unset color_prompt force_color_prompt
 
-## Si estamos con Xterm establece el título (original → user@host:dir)
-case "$TERM" in
-xterm*|rxvt*)
-    PS1="%~ $"
-    ;;
-*)
-    ;;
-esac
+##
+## Prompt liviano, para chroot y/o conexiones ssh por ejemplo
+##
+preparePromptLight() {
+    echo ''
+}
 
 ###################################
 ###       Rutas a binarios      ###
 ###################################
 if [[ -d $HOME/bin ]]; then
     PATH=$PATH:$HOME/bin
+fi
+
+if [[ -d $HOME/.bin ]]; then
+    PATH=$PATH:$HOME/.bin
 fi
 
 if [[ -d $HOME/.local/bin ]]; then
@@ -188,10 +212,6 @@ export GCC_COLORS='error=01;31:warning=01;35:note=01;36:caret=01;32:locus=01:quo
 if [[ -f $HOME/.bash_aliases ]]; then
     . $HOME/.bash_aliases
 fi
-
-# You may need to manually set your language environment
-# export LANG=en_US.UTF-8
-
 
 ## Habilitar Autocompletado, se obtiene de "sources /etc/bash.bashrc)"
 if ! shopt -oq posix; then
@@ -235,6 +255,22 @@ if [[ -x '/usr/bin/vim' ]]; then
     export EDITOR='vim'
 elif [[ -x '/usr/bin/nano' ]]; then
     export EDITOR='nano -c'
+fi
+
+###################################
+###           PROMPT            ###
+###################################
+
+if [[ $IS_CHROOT -eq 1 ]]; then ## En caso de estar por chroot
+    debian_chroot="$(whoami) >>"
+elif [[ $SSH_CONNECTION ]]; then ## En caso de ser conexión remota ssh (NO COMPROBADO BIEN, REVISAR!!!!)
+    echo 'SSH CONNECTION'
+    debian_chroot="$(whoami) >>"
+elif [[ -f $HOME/.bash_it/bash_it.sh ]]; then ## En caso de tener bashit
+    prepareBashIt
+else ## En cualquier otro caso
+    debian_chroot="$(whoami) >>"
+    preparePromptLight
 fi
 
 ###################################
@@ -356,7 +392,7 @@ export GIT_PS1_SHOWDIRTYSTATE=1
 # Para que las aplicaciones Java se vean mejor:
 export _JAVA_OPTIONS='-Dawt.useSystemAAFontSettings=on'
 
-export LESSCHARSET=UTF-8
+#export LESSCHARSET=UTF-8
 
 ## Less Colors for Man Pages
 
@@ -392,10 +428,8 @@ export PATH=$PATH:$ANDROID_HOME/platform-tools
 ## Permisos por defecto para nuevos archivos
 umask 007
 
-export KEYTIMEOUT=1
-
-# Rutas a ejecutables
-export PATH="/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/bin/X11:/usr/games:/usr/local/games:$HOME/.local/bin"
+# Rutas a ejecutables: CUIDADO!!
+#export PATH="$PATH:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/bin/X11:/usr/games:/usr/local/games:$HOME/.local/bin"
 
 ###################################
 ### Incluyo configuración extra ###
@@ -417,3 +451,5 @@ fi
 if [[ "$(/usr/bin/tty)" == "/dev/tty1" ]] && [[ -x '/usr/bin/screen' ]]; then
     exec /usr/bin/screen
 fi
+
+
