@@ -387,7 +387,7 @@ apache2_macos_installer() {
     which apachectl
 
     sudo apachectl -k start
-    brew services start httpd
+    sudo brew services start httpd
 
     ## Comprobar problemas al iniciar apache, monitorizar:
     #tail -n 500 -f /opt/homebrew/var/log/httpd/error_log
@@ -463,7 +463,18 @@ apache2_installer() {
     apache2GenerarEnlaces
 
     ## Propietario y permisos
-    if [[ $DISTRO != 'macos' ]]; then
+    if [[ $DISTRO = 'macos' ]]; then
+        if [[ ! -d "${DIRWEB}/adminer" ]]; then
+            mkdir "${DIRWEB}/adminer"
+        fi
+
+        ## Instalación de adminer
+        #curl -s -o "${DIRWEB}/adminer/index.php" -L "https://github.com/vrana/adminer/releases/download/v4.8.1/adminer-4.8.1.php"
+        curl -s -o "${DIRWEB}/adminer/index.php" -L "http://www.adminer.org/latest.php"
+        curl -o "${DIRWEB}/adminer/adminer.css" https://raw.githubusercontent.com/pappu687/adminer-theme/master/adminer.css
+
+
+    else
         apache2Propietarios
         apache2Permisos
     fi

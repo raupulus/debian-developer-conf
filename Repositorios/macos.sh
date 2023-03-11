@@ -48,7 +48,10 @@ agregarRepositoriosMacos() {
     brew doctor
 
     ## Instalo herramientas
-    brew install wget
+    brew install wget zlib libidn
+
+    export LDFLAGS="-L/opt/homebrew/opt/zlib/lib"
+    export CPPFLAGS="-I/opt/homebrew/opt/zlib/include"
 
     ## Añado más repositorios a HomeBrew
     brew tap homebrew/core

@@ -57,6 +57,7 @@ php_parse_phpini_dev() {
         return
     fi
 
+    ## TOFIX: Esta línea da error "sed: 1: "s/^#?[[:space:]]*LoadMo ...": bad flag in substitute command: 'o'"
     strFileReplace 's/^#?[[:space:]]*LoadModule php8_module.*$/LoadModule php8_module /opt/homebrew/Cellar/php@8.0/8.0.21/lib/httpd/modules/libphp.so/g' $PHPINI
 
 
@@ -283,9 +284,39 @@ php_macos_installer() {
     # TODO: configurar todos los php.ini, refactorizar función para ENV=dev
 
     ## Fuerzo cambiar dos veces, la primera vez parece que crea php.ini en
-    ## ¢versiones obsoletas que vienen de otros paquetes, como la 7.3
-    brew unlink php && brew link --overwrite --force php@7.3
-    brew unlink php && brew link --overwrite --force php@8.0
+    ## versiones obsoletas que vienen de otros paquetes, como la 7.3
+    #$(brew --prefix php@7.3)/bin/pecl
+    #$(brew --prefix php@7.3)/bin/pear
+    #brew unlink php && brew link --overwrite --force php@7.3
+    pecl clear-cache
+    rm -Rf /private/tmp/pear/cache/*
+    rm -Rf /private/tmp/pear/download/*
+    rm -Rf /private/tmp/pear/temp/*
+
+    pecl update-channels
+    brew unlink php && brew unlink php@7.3 && brew link php@7.3 --dry-run && brew link --overwrite --force php@7.3
+    pecl install pecl_http
+
+
+    pecl clear-cache
+    rm -Rf /private/tmp/pear/cache/*
+    rm -Rf /private/tmp/pear/download/*
+    rm -Rf /private/tmp/pear/temp/*
+
+    #/opt/homebrew/opt/zlib/lib
+    #/opt/homebrew/Cellar/curl/7.84.0/lib
+    #/opt/homebrew/Cellar/curl/7.84.0/lib
+    #/opt/homebrew/var/homebrew/linked/libevent/lib
+    #/opt/homebrew/Cellar/icu4c/70.1/lib
+    #/opt/homebrew/var/homebrew/linked/libidn2/lib
+    #/opt/homebrew/var/homebrew/linked/libidn/lib
+    #libidnkit2   ????
+    #libidnkit   ????
+    #pecl install pecl_http --with-zlib-dir=/usr/local/Cellar/zlib/1.2.11/include
+    #brew unlink php && brew link --overwrite --force php@8.0
+    brew unlink php && brew unlink php@8.0 && brew link php@8.0 --dry-run && brew link --overwrite --force php@8.0
+    #pecl update-channels
+    #pecl install pecl_http
 
     php_parse_phpini_dev '/opt/homebrew/etc/php/7.3/php.ini'
     php_parse_phpini_dev '/opt/homebrew/etc/php/8.0/php.ini'
