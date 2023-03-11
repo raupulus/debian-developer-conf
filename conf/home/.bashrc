@@ -255,13 +255,13 @@ export LESS_TERMCAP_us=$'\E[04;38;5;146m' ## begin underline
 ###################################
 ### Configurando java y android ###
 ###################################
-export JAVA_HOME=/usr/lib/jvm/java-8-openjdk-amd64
-export JRE_HOME=/usr/lib/jvm/java-8-openjdk-amd64/jre
-export ANDROID_HOME=$HOME/Android/Sdk
-export ANDROID_SDK_ROOT=$HOME/Android/Sdk
-export ANDROID_AVD_HOME=$HOME/.android/avd
-export PATH=$PATH:$ANDROID_HOME/tools
-export PATH=$PATH:$ANDROID_HOME/platform-tools
+#export JAVA_HOME=/usr/lib/jvm/java-8-openjdk-amd64
+#export JRE_HOME=/usr/lib/jvm/java-8-openjdk-amd64/jre
+#export ANDROID_HOME=$HOME/Android/Sdk
+#export ANDROID_SDK_ROOT=$HOME/Android/Sdk
+#export ANDROID_AVD_HOME=$HOME/.android/avd
+#export PATH=$PATH:$ANDROID_HOME/tools
+#export PATH=$PATH:$ANDROID_HOME/platform-tools
 
 #sudo update-alternatives --config java
 #sudo update-alternatives --config javac
