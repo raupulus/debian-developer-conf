@@ -5,13 +5,13 @@
 ## @copyright  Copyright © 2017 Raúl Caro Pastorino
 ## @license    https://wwww.gnu.org/licenses/gpl.txt
 ## @email      raul@fryntiz.dev
-## @web        https://fryntiz.es
+## @web        https://raupulus.dev
 ## @github     https://github.com/fryntiz
-## @gitlab     https://gitlab.com/fryntiz
-## @twitter    https://twitter.com/fryntiz
+## @gitlab     https://gitlab.com/raupulus
+## @twitter    https://twitter.com/raupulus
 ##
 ##             Applied Style Guide:
-## @style      https://gitlab.com/fryntiz/bash-guide-style
+## @style      https://gitlab.com/raupulus/bash-guide-style
 
 #############################
 ##     INSTRUCCIONES       ##

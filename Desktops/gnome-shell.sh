@@ -4,14 +4,14 @@
 ## @author     Raúl Caro Pastorino
 ## @copyright  Copyright © 2018 Raúl Caro Pastorino
 ## @license    https://wwww.gnu.org/licenses/gpl.txt
-## @email      raul@fryntiz.dev
-## @web        https://fryntiz.es
-## @gitlab     https://gitlab.com/fryntiz
-## @github     https://github.com/fryntiz
-## @twitter    https://twitter.com/fryntiz
+## @email      public@raupulus.dev
+## @web        https://raupulus.dev
+## @gitlab     https://gitlab.com/raupulus
+## @github     https://github.com/raupulus
+## @twitter    https://twitter.com/raupulus
 ##
 ##             Applied Style Guide:
-## @style      https://gitlab.com/fryntiz/bash-guide-style
+## @style      https://gitlab.com/raupulus/bash-guide-style
 
 ############################
 ##      INSTRUCTIONS      ##
@@ -34,13 +34,13 @@
 gnome_shell_create_custom_shortcut() {
     ## Comando de gsettings para la configuración de atajos personalizados
     CMD_GSETTINGS="gsettings set org.gnome.settings-daemon.plugins.media-keys.custom-keybinding"
-    
+
     ## Ruta base para los atajos personalizados
     KEY_PATH_BASE="/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings"
-     
+
     # Almaceno todos los atajos ya existentes
     EXISTED_PATHS=$(gsettings get org.gnome.settings-daemon.plugins.media-keys custom-keybindings)
-     
+
     ## Busco cuantas combinaciones de teclas hay definidas para crear un nuevo valor como índice para la nueva
     NEW_KEY_INDEX=$(dconf list /org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/ | wc -l)
 
@@ -55,7 +55,7 @@ gnome_shell_create_custom_shortcut() {
 
     ## Agrega el nuevo directorio para los atajos
     gsettings set org.gnome.settings-daemon.plugins.media-keys custom-keybindings "${NEW_PATHS}"
-     
+
     if [[ $# -eq 3 ]]; then
         ## Establece el nombre
         $CMD_GSETTINGS:$NEW_KEY_PATH name "$1"
@@ -66,7 +66,7 @@ gnome_shell_create_custom_shortcut() {
         ## Establece teclas
         $CMD_GSETTINGS:$NEW_KEY_PATH binding "$3"
     fi
-     
+
     #########################################################################################
     # Alternatively, you can put the gsetting key value to set literally to avoid parameters typing errors.
     # $CMD_GSETTINGS:$NEW_KEY_PATH name "Select an area to screenshot"

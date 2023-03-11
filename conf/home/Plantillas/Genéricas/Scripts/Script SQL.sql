@@ -2,20 +2,20 @@
 -------------------------------------------------------------------------------
 --
 -- Author:       Raúl Caro Pastorino
--- Email Author: raul@fryntiz.dev
+-- Email Author: public@raupulus.dev
 -- Web Author:   http://fryntiz.es
--- gitlab:       https://gitlab.com/fryntiz
--- github:       https://github.com/fryntiz
--- twitter:      https://twitter.com/fryntiz
+-- gitlab:       https://gitlab.com/raupulus
+-- github:       https://github.com/raupulus
+-- twitter:      https://twitter.com/raupulus
 --
 -- Create Date: 2021
--- Project Name: 
--- Description: 
+-- Project Name:
+-- Description:
 --
--- Dependencies: 
+-- Dependencies:
 --
 -- Revision 0.01 - File Created
--- Additional Comments: 
+-- Additional Comments:
 --
 -------------------------------------------------------------------------------
 --

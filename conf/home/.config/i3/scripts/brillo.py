@@ -2,11 +2,11 @@
 # -*- encoding: utf-8 -*-
 
 # @author     Raúl Caro Pastorino
-# @email      raul@fryntiz.dev
-# @web        http://https://fryntiz.es
-# @github     https://github.com/fryntiz
-# @gitlab     https://gitlab.com/fryntiz
-# @twitter    https://twitter.com/fryntiz
+# @email      public@raupulus.dev
+# @web        http://https://raupulus.dev
+# @github     https://github.com/raupulus
+# @gitlab     https://gitlab.com/raupulus
+# @twitter    https://twitter.com/raupulus
 
 # Create Date: 11/06/2018
 # Project Name: Brillo para intel_backlight

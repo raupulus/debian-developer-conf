@@ -4,14 +4,14 @@
 ## @author     Raúl Caro Pastorino
 ## @copyright  Copyright © 2017 Raúl Caro Pastorino
 ## @license    https://wwww.gnu.org/licenses/gpl.txt
-## @email      raul@fryntiz.dev
-## @web        https://fryntiz.es
-## @gitlab     https://gitlab.com/fryntiz
-## @github     https://github.com/fryntiz
-## @twitter    https://twitter.com/fryntiz
+## @email      public@raupulus.dev
+## @web        https://raupulus.dev
+## @gitlab     https://gitlab.com/raupulus
+## @github     https://github.com/raupulus
+## @twitter    https://twitter.com/raupulus
 ##
 ##             Applied Style Guide:
-## @style      https://gitlab.com/fryntiz/bash-style-guide
+## @style      https://gitlab.com/raupulus/bash-style-guide
 
 ############################
 ##      INSTRUCTIONS      ##
@@ -68,7 +68,7 @@ gpasswd -a $username go
 gpasswd -a $username www-data
 
 if [[ ! -d "/home/${username}/debian-developer-conf" ]]; then
-    git clone https://gitlab.com/fryntiz/debian-developer-conf.git \
+    git clone https://gitlab.com/raupulus/debian-developer-conf.git \
     "/home/${username}/debian-developer-conf"
 fi
 

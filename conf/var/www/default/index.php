@@ -11,7 +11,7 @@
         <meta charset="utf-8">
         <title>Servidor WEB Apache2 en localhost</title>
         <meta name="description" content="Servidor WEB Apache2 en localhost"/>
-        <meta name="keywords" content="programa, script, php, programación, Raúl Caro Pastorino, Fryntiz"/>
+        <meta name="keywords" content="programa, script, php, programación, Raúl Caro Pastorino, Raupulus"/>
         <meta name="author" content="Raúl Caro Pastorino"/>
         <link rel="shortcut icon" href="./favicon.ico"/>
         <link rel="shortcut icon" href="./favicon.png"/>
@@ -67,9 +67,9 @@
                 </p>
 
                 <p id="repositorios">
-                    <a href="https://gitlab.com/fryntiz" title="Repositorios Oficiales de Raúl Caro Pastorino" target="_blank">Repositorios en GitLab Oficial del desarrollador</a>
+                    <a href="https://gitlab.com/raupulus" title="Repositorios Oficiales de Raúl Caro Pastorino" target="_blank">Repositorios en GitLab Oficial del desarrollador</a>
 
-                    <a href="https://github.com/fryntiz" title="Repositorios Oficiales de Raúl Caro Pastorino" target="_blank">Repositorios en GitHub Oficial del desarrollador</a>
+                    <a href="https://github.com/raupulus" title="Repositorios Oficiales de Raúl Caro Pastorino" target="_blank">Repositorios en GitHub Oficial del desarrollador</a>
                 </p>
 
                 <p id="fecha">

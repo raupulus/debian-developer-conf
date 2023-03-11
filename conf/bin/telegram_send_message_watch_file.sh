@@ -4,14 +4,14 @@
 ## @author     Raúl Caro Pastorino
 ## @copyright  Copyright © 2021 Raúl Caro Pastorino
 ## @license    https://wwww.gnu.org/licenses/gpl.txt
-## @email      raul@fryntiz.dev
-## @web        https://fryntiz.es
-## @gitlab     https://gitlab.com/fryntiz
-## @github     https://github.com/fryntiz
-## @twitter    https://twitter.com/fryntiz
+## @email      public@raupulus.dev
+## @web        https://raupulus.dev
+## @gitlab     https://gitlab.com/raupulus
+## @github     https://github.com/raupulus
+## @twitter    https://twitter.com/raupulus
 ##
 ##             Applied Style Guide:
-## @style      https://gitlab.com/fryntiz/bash-guide-style
+## @style      https://gitlab.com/raupulus/bash-guide-style
 
 ############################
 ##      INSTRUCTIONS      ##
@@ -33,7 +33,7 @@
 file="${1}"
 md5_new="$(md5sum ${file})"
 md5_validate="false"
-group='Fryntiz_IOT'
+group='Raupulus_IOT'
 
 ## Compruebo si existe suma de verificación md5 o la creo.
 if [[ -f "${file}.md5" ]];then

@@ -2,21 +2,21 @@
 # -*- encoding: utf-8 -*-
 
 # @author     Raúl Caro Pastorino
-# @email      raul@fryntiz.dev
-# @web        https://fryntiz.es
-# @gitlab     https://gitlab.com/fryntiz
-# @github     https://github.com/fryntiz
-# @twitter    https://twitter.com/fryntiz
-# @telegram   https://t.me/fryntiz
+# @email      public@raupulus.dev
+# @web        https://raupulus.dev
+# @gitlab     https://gitlab.com/raupulus
+# @github     https://github.com/raupulus
+# @twitter    https://twitter.com/raupulus
+# @telegram   https://t.me/raupulus_diffusion
 
 # Create Date: 2021
-# Project Name: 
-# Description: 
+# Project Name:
+# Description:
 #
-# Dependencies: 
+# Dependencies:
 #
 # Revision 0.01 - File Created
-# Additional Comments: 
+# Additional Comments:
 
 # @copyright  Copyright © 2021 Raúl Caro Pastorino
 # @license    https://wwww.gnu.org/licenses/gpl.txt
@@ -62,4 +62,3 @@ sleep = time.sleep
 
 def mifuncion():
     pass
-

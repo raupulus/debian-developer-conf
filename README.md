@@ -5,7 +5,7 @@
 Script para tener un entorno funcional en poco tiempo y además tener
 sincronizada la configuración de distintos dispositivos con los que trabajo.
 
-Este script prepará completamente el entorno de programación, aplicaciones,
+Este script prepara completamente el entorno de programación, aplicaciones,
 servidores, comandos personalizados, interfaz gráfica, plantillas y repositorios en Debian Stable.
 
 ![Imagen de previsualización](docs/Preview.png)
@@ -49,7 +49,7 @@ reportarlo para su corrección.
 ## Objetivos
 
 Crear un entorno de trabajo personalizado para desarrollar aplicaciones web
-según las preferencias del autor (https://github.com/fryntiz).
+según las preferencias del autor (https://github.com/raupulus).
 
 Se plantea lo más modular que me ha sido posible para que en algunos casos no
 sea necesario ejecutar el script completo y solo la parte que realmente
@@ -122,7 +122,7 @@ Primero instalamos GIT
 Clonamos el repositorio actual en nuestro equipo
 
 ```bash
-    git clone https://github.com/fryntiz/debian-developer-conf.git
+    git clone https://github.com/raupulus/debian-developer-conf.git
 ```
 
 Entramos y ejecutamos el script principal
@@ -339,7 +339,7 @@ Sección opcional que permite instalar y dejar configurado automáticamente el
 estcritorio o window manager elegido.
 
 Puedes leer más sobre los escritorios desde aquí:
-https://github.com/fryntiz/debian-developer-conf/Personalizar/Desktops/README.md
+https://github.com/raupulus/debian-developer-conf/Personalizar/Desktops/README.md
 
 ### i3 Window Manager
 
@@ -357,14 +357,14 @@ Instala y configura i3 Window Manager personalizando la barra de estado con i3py
 
 ```bash
 cd $HOME
-git clone https://github.com/fryntiz/debian-developer-conf
+git clone https://github.com/raupulus/debian-developer-conf
 ```
 
 ## Comenzar con el script como root en vps
 
 ```bash
 apt install git wget sudo
-wget https://raw.githubusercontent.com/fryntiz/debian-developer-conf/master/main-vps.sh -O /tmp/main-vps.sh
+wget https://raw.githubusercontent.com/raupulus/debian-developer-conf/master/main-vps.sh -O /tmp/main-vps.sh
 cd /tmp
 chmod ugo+x main-vps.sh
 ./main-vps.sh

@@ -4,14 +4,14 @@
 ## @author     Raúl Caro Pastorino
 ## @copyright  Copyright © 2018 Raúl Caro Pastorino
 ## @license    https://wwww.gnu.org/licenses/gpl.txt
-## @email      raul@fryntiz.dev
-## @web        https://fryntiz.es
-## @github     https://github.com/fryntiz
-## @gitlab     https://gitlab.com/fryntiz
-## @twitter    https://twitter.com/fryntiz
+## @email      public@raupulus.dev
+## @web        https://raupulus.dev
+## @github     https://github.com/raupulus
+## @gitlab     https://gitlab.com/raupulus
+## @twitter    https://twitter.com/raupulus
 ##
 ##             Applied Style Guide:
-## @style      https://gitlab.com/fryntiz/bash-guide-style
+## @style      https://gitlab.com/raupulus/bash-guide-style
 
 ############################
 ##      INSTRUCTIONS      ##
@@ -57,9 +57,9 @@ ssh_postconfiguracion() {
     ## /etc/issue -> Mensaje de login para acceso local al equipo (Acceso por TTY)
     ## /etc/issue.net -> Mensaje de login para acceso por red (Acceso por SSH)
     ## /etc/motd -> Mensaje para después del login.
-    echo "$DISTRO by Fryntiz → raul@fryntiz.dev" | sudo tee '/etc/issue'
-    echo "$DISTRO by Fryntiz → raul@fryntiz.dev" | sudo tee '/etc/issue.net'
-    echo "Has conectado al servidor $DISTRO mantenido por → raul@fryntiz.dev" | sudo tee '/etc/motd'
+    echo "$DISTRO by Fryntiz → public@raupulus.dev" | sudo tee '/etc/issue'
+    echo "$DISTRO by Fryntiz → public@raupulus.dev" | sudo tee '/etc/issue.net'
+    echo "Has conectado al servidor $DISTRO mantenido por → public@raupulus.dev" | sudo tee '/etc/motd'
 }
 
 ssh_instalador() {

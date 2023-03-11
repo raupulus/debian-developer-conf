@@ -4,14 +4,14 @@
 ## @author     Raúl Caro Pastorino
 ## @copyright  Copyright © 2018 Raúl Caro Pastorino
 ## @license    https://wwww.gnu.org/licenses/gpl.txt
-## @email      raul@fryntiz.dev
+## @email      public@raupulus.dev
 ## @web        http://fryntiz.es
-## @github     https://github.com/fryntiz
-## @gitlab     https://gitlab.com/fryntiz
-## @twitter    https://twitter.com/fryntiz
+## @github     https://github.com/raupulus
+## @gitlab     https://gitlab.com/raupulus
+## @twitter    https://twitter.com/raupulus
 ##
 ##             Applied Style Guide:
-## @style      https://gitlab.com/fryntiz/bash-guide-style
+## @style      https://gitlab.com/raupulus/bash-guide-style
 
 ############################
 ##      INSTRUCTIONS      ##

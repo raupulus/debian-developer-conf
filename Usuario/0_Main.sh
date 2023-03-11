@@ -4,14 +4,14 @@
 ## @author     Raúl Caro Pastorino
 ## @copyright  Copyright © 2018 Raúl Caro Pastorino
 ## @license    https://wwww.gnu.org/licenses/gpl.txt
-## @email      raul@fryntiz.dev
-## @web        https://fryntiz.es
-## @gitlab     https://gitlab.com/fryntiz
-## @github     https://github.com/fryntiz
-## @twitter    https://twitter.com/fryntiz
+## @email      public@raupulus.dev
+## @web        https://raupulus.dev
+## @gitlab     https://gitlab.com/raupulus
+## @github     https://github.com/raupulus
+## @twitter    https://twitter.com/raupulus
 ##
 ##             Applied Style Guide:
-## @style      https://gitlab.com/fryntiz/bash-guide-style
+## @style      https://gitlab.com/raupulus/bash-guide-style
 
 ############################
 ##      INSTRUCTIONS      ##
@@ -40,13 +40,13 @@ source "$WORKSCRIPT/Usuario/directories.sh"
 ##       FUNCIONES       ##
 ###########################
 ##
-## Mi generador de proyectos https://github.com/fryntiz/project-generator
+## Mi generador de proyectos https://github.com/raupulus/project-generator
 ## Este generador de proyectos crea un script que permite generar la estructura
 ## para los proyectos más recurridos por mi (php, python, bash....) y después
 ## pregunta si subirlo automáticamente a GitHub
 ##
 generador_proyectos() {
-    descargarGIT 'Generador de Proyectos' 'https://github.com/fryntiz/project-generator.git' "$WORKSCRIPT/tmp/project-generator"
+    descargarGIT 'Generador de Proyectos' 'https://github.com/raupulus/project-generator.git' "$WORKSCRIPT/tmp/project-generator"
 
     cd "$WORKSCRIPT/tmp/project-generator" || return 1 && ./instalar.sh
     cd "$WORKSCRIPT" || exit

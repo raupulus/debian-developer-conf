@@ -2,12 +2,12 @@
 # -*- ENCODING: UTF-8 -*-
 
 ## @author     Raúl Caro Pastorino
-## @email      raul@fryntiz.dev
-## @web        https://fryntiz.es
-## @gitlab     https://gitlab.com/fryntiz
-## @github     https://github.com/fryntiz
-## @twitter    https://twitter.com/fryntiz
-## @telegram   https://t.me/fryntiz
+## @email      public@raupulus.dev
+## @web        https://raupulus.dev
+## @gitlab     https://gitlab.com/raupulus
+## @github     https://github.com/raupulus
+## @twitter    https://twitter.com/raupulus
+## @telegram   https://t.me/raupulus_diffusion
 
 ## @bash        5.1 or later
 ## Create Date: 2022
@@ -16,7 +16,7 @@
 ## Dependencies:
 
 ##             Applied Style Guide:
-## @style      https://gitlab.com/fryntiz/bash-guide-style
+## @style      https://gitlab.com/raupulus/bash-guide-style
 
 ## Revision 0.01 - File Created
 ## Additional Comments:

@@ -4,14 +4,14 @@
 ## @author     Raúl Caro Pastorino
 ## @copyright  Copyright © 2017 Raúl Caro Pastorino
 ## @license    https://wwww.gnu.org/licenses/gpl.txt
-## @email      raul@fryntiz.dev
-## @web        https://fryntiz.es
-## @github     https://github.com/fryntiz
-## @gitlab     https://gitlab.com/fryntiz
-## @twitter    https://twitter.com/fryntiz
+## @email      public@raupulus.dev
+## @web        https://raupulus.dev
+## @github     https://github.com/raupulus
+## @gitlab     https://gitlab.com/raupulus
+## @twitter    https://twitter.com/raupulus
 ##
 ##             Applied Style Guide:
-## @style      https://gitlab.com/fryntiz/bash-guide-style
+## @style      https://gitlab.com/raupulus/bash-guide-style
 
 ############################
 ##      INSTRUCTIONS      ##
@@ -47,7 +47,7 @@ configurar_grub() {
 }
 
 configurar_fondos() {
-    descargarGIT 'Temas Debian' 'https://github.com/fryntiz/Art-for-Debian.git' "$WORKSCRIPT/tmp/Art-for-Debian"
+    descargarGIT 'Temas Debian' 'https://github.com/raupulus/Art-for-Debian.git' "$WORKSCRIPT/tmp/Art-for-Debian"
 
     cd "$WORKSCRIPT/tmp/Art-for-Debian/Temas_Completos/DebBlood" || return 1 && ./install.sh
     cd "$WORKSCRIPT" || return 1

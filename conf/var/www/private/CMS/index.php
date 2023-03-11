@@ -11,7 +11,7 @@
     <meta charset="utf-8">
     <title>Gestores de contenido</title>
     <meta name="description" content="Gestores de contenido"/>
-    <meta name="keywords" content="programa, script, php, programación, Raúl Caro Pastorino, Fryntiz"/>
+    <meta name="keywords" content="programa, script, php, programación, Raúl Caro Pastorino, Raupulus"/>
     <meta name="author" content="Raúl Caro Pastorino"/>
 </head>
 <body>
