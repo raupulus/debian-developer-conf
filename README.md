@@ -8,7 +8,7 @@ sincronizada la configuración de distintos dispositivos con los que trabajo.
 Este script prepara completamente el entorno de programación, aplicaciones,
 servidores, comandos personalizados, interfaz gráfica, plantillas y repositorios en Debian Stable.
 
-![Imagen de previsualización](docs/Preview.png)
+![Imagen de previsualización](docs/Preview.jpg)
 
 Todas las configuraciones y elecciones se han establecido a mi gusto, puedes
 personalizar cualquier parte que decidas para este script bajo la misma
@@ -57,7 +57,7 @@ necesitas (si fuese el caso).
 
 Previsualización de menú para aplicaciones:
 
-![Imagen de previsualización 1](docs/Apps.png)
+![Imagen de previsualización 1](docs/Apps.jpg)
 
 Estos son los principales objetivos:
 
@@ -282,7 +282,7 @@ que van en ~/.local/share/applications
 iniciar el script.
 - Servidores → Instala y configura servidores.
 - Lenguajes-Programacion → Instala y configura lenguajes de programación.
-- Repositorios → Contiene las listas de repositorios para añadirlas al sistema 
+- Repositorios → Contiene las listas de repositorios para añadirlas al sistema
 cuando se elige la opción de agregar repositorios.
 - Desktops → Instala y configura escritorios o window manager
 
