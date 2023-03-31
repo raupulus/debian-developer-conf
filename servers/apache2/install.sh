@@ -414,7 +414,7 @@ apache2_installer() {
 
     if [[ $DISTRO = 'macos' ]]; then
         apache2_macos_installer
-        mysql -u dev -p < /opt/homebrew/Cellar/phpmyadmin/5.2.0/share/phpmyadmin/sql/create_tables.sql
+        mysql -u dev -p < /opt/homebrew/share/phpmyadmin/sql/create_tables.sql
         return
     fi
 
