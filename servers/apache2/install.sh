@@ -414,6 +414,9 @@ apache2_installer() {
 
     if [[ $DISTRO = 'macos' ]]; then
         apache2_macos_installer
+
+        echo -e "$VE Creando base de datos para$RO phpMyAdmin$CL"
+        echo -e "$VE Introduce la contraseña de$RO MySQL:$CL"
         mysql -u dev -p < /opt/homebrew/share/phpmyadmin/sql/create_tables.sql
         return
     fi
