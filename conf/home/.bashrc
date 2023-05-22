@@ -108,7 +108,7 @@ elif [[ -f /etc/bash_completion ]]; then
 fi
 
 ## Compatibilidad con terminal "Tilix"
-if [[ "$TILIX_ID" ]] || [[ "$VTE_VERSION" ]]; then
+if [[ "$TILIX_ID" ]] || [[ "$VTE_VERSION" ]] && [[ -f "/etc/profile.d/vte.sh" ]]; then
     source /etc/profile.d/vte.sh 2>/dev/null
 fi
 
@@ -333,6 +333,7 @@ fi
 ###################################
 
 if [[ $IS_CHROOT -eq 1 ]]; then ## En caso de estar por chroot
+    echo 'CHROOT CONNECTION'
     debian_chroot="$(whoami) >>"
 elif [[ -n $SSH_CONNECTION ]]; then ## En caso de ser conexión remota ssh (NO COMPROBADO BIEN, REVISAR!!!!)
     echo 'SSH CONNECTION'
