@@ -106,9 +106,9 @@ fi
 
 ## Habilitar Autocompletado, se obtiene de "sources /etc/bash.bashrc)"
 if ! shopt -oq posix; then
-  if [[ -f /usr/share/bash-completion/bash_completion ]]; then
+  if [[ -f /usr/share/bash-completion/bash_completion ]] && [[ -x /usr/share/bash-completion/bash_completion ]]; then
     . /usr/share/bash-completion/bash_completion
-elif [[ -f /etc/bash_completion ]]; then
+elif [[ -f /etc/bash_completion ]] && [[ -x /etc/bash_completion ]]; then
     . /etc/bash_completion
   fi
 fi
@@ -253,9 +253,15 @@ export LESS_TERMCAP_mb=$'\E[01;31m'       ## begin blinking
 export LESS_TERMCAP_md=$'\E[01;38;5;74m'  ## begin bold
 export LESS_TERMCAP_me=$'\E[0m'           ## end mode
 export LESS_TERMCAP_se=$'\E[0m'           ## end standout-mode
-export LESS_TERMCAP_so=$(tput bold; tput setaf 16; tput setab 4)
 export LESS_TERMCAP_ue=$'\E[0m'           ## end underline
 export LESS_TERMCAP_us=$'\E[04;38;5;146m' ## begin underline
+
+
+if [[ $IS_CHROOT -eq 1 ]] || [[ -n $SSH_CONNECTION ]]; then
+    echo ''
+else
+    export LESS_TERMCAP_so=$(tput bold; tput setaf 16; tput setab 4)
+fi
 
 
 ###################################
@@ -345,10 +351,10 @@ fi
 ###################################
 
 if [[ $IS_CHROOT -eq 1 ]]; then ## En caso de estar por chroot
-    echo 'CHROOT CONNECTION'
+    #echo 'CHROOT CONNECTION'
     debian_chroot="$(whoami) >>"
 elif [[ -n $SSH_CONNECTION ]]; then ## En caso de ser conexión remota ssh (NO COMPROBADO BIEN, REVISAR!!!!)
-    echo 'SSH CONNECTION'
+    #echo 'SSH CONNECTION'
 
     if [ "$color_prompt" = yes ]; then
         PS1='\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[01;31m\]> '
@@ -415,18 +421,20 @@ elif [[ -f $HOME/.bash_it/bash_it.sh ]]; then ## En caso de tener bashit
     fi
 else ## En cualquier otro caso
     ## Si estamos con Xterm establece el título (original → user@host:dir)
-    case "$TERM" in
-    xterm*|rxvt*)
-        PS1="%~ $"
-        ;;
-    *)
-        ;;
-    esac
+    if [ $TERM ]; then
+        case "$TERM" in
+        xterm*|rxvt*)
+            PS1="%~ $"
+            ;;
+        *)
+            ;;
+        esac
 
-    ## Establece aviso elegante (sin color, o si "queremos" color)
-    case "$TERM" in
-        xterm-color) color_prompt=yes;;
-    esac
+        ## Establece aviso elegante (sin color, o si "queremos" color)
+        case "$TERM" in
+            xterm-color) color_prompt=yes;;
+        esac
+    fi
 
     ## Avisos de color si el terminal puede convertirlos.
     force_color_prompt=yes
@@ -451,6 +459,8 @@ else ## En cualquier otro caso
         #PS1='${debian_chroot:+($debian_chroot)}\u@\h:\w\$ '
         PS1="%~ $"
     fi
+
+    PS1=">"
 
     unset color_prompt force_color_prompt
 fi
