@@ -56,6 +56,12 @@ if [[ -z "${debian_chroot:-}" ]] && [[ -r /etc/debian_chroot ]]; then
 fi
 
 
+## PROMPT base, se modificará posteriormente según el entorno
+if [[ -n $SSH_CONNECTION ]]; then
+    PS1='~$'
+fi
+
+
 ###################################
 ###       Rutas a binarios      ###
 ###################################
@@ -204,7 +210,7 @@ alias tgd="cd $HOME/git/1-Projects/DesdeChipiona"
 ## Python
 alias pip3="pip3 --disable-pip-version-check"
 alias pip=pip3
-alias python=python3.9
+#alias python=python3.9
 
 ## Aplicaciones renombradas
 if [[ -x '/usr/bin/trans' ]]; then
@@ -316,17 +322,23 @@ elif [[ -f '/usr/bin/screenfetch' ]]; then
     screenfetch
 fi
 
-if [[ -f '/usr/bin/fryntiz' ]]; then
-    echo -e "      \033[1;31m Para utilizar el menú interactivo usa el comando \033[1;32m\"fryntiz\" \033[1;00m"
+## Mensajes adicionales según el modo de conexión
+if [[ -n $SSH_CONNECTION ]]; then
+    echo ''
+else
+    if [[ -f '/usr/bin/fryntiz' ]]; then
+        echo -e "      \033[1;31m Para utilizar el menú interactivo usa el comando \033[1;32m\"fryntiz\" \033[1;00m"
+    fi
+
+    if [[ -x "$HOME/.local/bin/proyecto" ]]; then
+        echo -e "$VE Con el comando$RO proyecto$VE puedes generar un proyecto nuevo$CL"
+    fi
+
+    if [[ -x "$HOME/.local/bin/nuevo" ]]; then
+        echo -e "$VE Usando el comando$RO nuevo$VE generas un archivo desde la plantilla$CL"
+    fi
 fi
 
-if [[ -x "$HOME/.local/bin/proyecto" ]]; then
-    echo -e "$VE Con el comando$RO proyecto$VE puedes generar un proyecto nuevo$CL"
-fi
-
-if [[ -x "$HOME/.local/bin/nuevo" ]]; then
-    echo -e "$VE Usando el comando$RO nuevo$VE generas un archivo desde la plantilla$CL"
-fi
 
 ###################################
 ###           PROMPT            ###
@@ -337,7 +349,7 @@ if [[ $IS_CHROOT -eq 1 ]]; then ## En caso de estar por chroot
     debian_chroot="$(whoami) >>"
 elif [[ -n $SSH_CONNECTION ]]; then ## En caso de ser conexión remota ssh (NO COMPROBADO BIEN, REVISAR!!!!)
     echo 'SSH CONNECTION'
-    debian_chroot="$(whoami) >>"
+    PS1="$(whoami)~$"
 elif [[ -f $HOME/.bash_it/bash_it.sh ]]; then ## En caso de tener bashit
     ## En caso de no ser ejecutado de forma interactiva se sale sin hacer nada
     case $- in
