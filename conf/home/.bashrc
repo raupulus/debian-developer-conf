@@ -58,7 +58,7 @@ fi
 
 ## PROMPT base, se modificará posteriormente según el entorno
 if [[ -n $SSH_CONNECTION ]]; then
-    PS1='~$'
+    PS1='~$ '
 fi
 
 
@@ -349,7 +349,12 @@ if [[ $IS_CHROOT -eq 1 ]]; then ## En caso de estar por chroot
     debian_chroot="$(whoami) >>"
 elif [[ -n $SSH_CONNECTION ]]; then ## En caso de ser conexión remota ssh (NO COMPROBADO BIEN, REVISAR!!!!)
     echo 'SSH CONNECTION'
-    PS1="$(whoami)~$"
+
+    if [ "$color_prompt" = yes ]; then
+        PS1='\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[01;31m\]> '
+    else
+        PS1='\u@\h:\w> '
+    fi
 elif [[ -f $HOME/.bash_it/bash_it.sh ]]; then ## En caso de tener bashit
     ## En caso de no ser ejecutado de forma interactiva se sale sin hacer nada
     case $- in
