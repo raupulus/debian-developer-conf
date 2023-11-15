@@ -74,7 +74,7 @@ pycharm_postconfiguracion() {
 }
 
 pycharm_pro_instalador() {
-    local version='pycharm-professional-2021.3.1'
+    local version='pycharm-professional-2023.2.5'
 
     echo -e "$VE Comenzando instalación de$RO PyCharm$CL"
 
