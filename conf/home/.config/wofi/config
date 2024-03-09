@@ -1,0 +1,7 @@
+hide_scroll=true
+mode=run
+width=18%
+lines=20
+line_wrap=word
+term=foot
+location=center

@@ -11,6 +11,9 @@
 ## @twitter    https://twitter.com/raupulus
 
 ## Referencia oficial: https://github.com/swaywm/sway/wiki
+## Referencia Debian: https://wiki.debian.org/sway
+
+include /etc/sway/config.d/*
 
 ## Iconos de ejemplo:
 ##                                    
@@ -31,6 +34,15 @@ set $coordenadas '36.7349439:-6.4253577'  ## Coordenadas
 #output eDP-1 scale 2
 #output eDP-1 pos 0 0 res 3840x2160
 output eDP-1 pos 0 0 res 1920x1080
+
+
+## Terminal por defecto
+set $term tilix
+
+# Default wallpaper (more resolutions are available in /usr/share/backgrounds/sway/)
+output * bg /usr/share/backgrounds/sway/Sway_Wallpaper_Blue_1920x1080.png fill
+#output * bg ~/image/backgrounds/desktop.jpg fill
+
 
 ###########################################################
 ############        Espacios de trabajo        ############
@@ -407,6 +419,9 @@ bindsym $mod+Shift+q kill
 bindsym $mod+d exec j4-dmenu-desktop
 
 #bindsym $mod+shift+d exec rofi -combi-modi window,drun,ssh -theme Paper -font "hack 10" -show combi
+set $menu wofi -show run
+bindsym $mod+shift+d exec $menu
+
 bindsym $mod+m exec --no-startup-id ~/.config/i3/scripts/rofr.sh -r
 bindsym $mod+shift+d exec --no-startup-id ~/.config/i3/scripts/rofr.sh -r
 
@@ -417,19 +432,20 @@ bindsym $mod+shift+d exec --no-startup-id ~/.config/i3/scripts/rofr.sh -r
 bindsym $mod+Control+space exec --no-startup-id ~/.config/i3/scripts/keyboard.sh
 
 ## Captura un área de la pantalla seleccionada al portapapeles
-bindsym --release shift+Print exec xfce4-screenshooter -crm
+#bindsym --release shift+Print exec xfce4-screenshooter -crm
+bindsym Shift+Print exec grim - | wl-copy
 
 ## Captura un área de la pantalla a Imágenes
-bindsym --release Control+shift+Print exec xfce4-screenshooter -rm -s ~/Imágenes/Screenshots/
+bindsym Control+Shift+Print exec grim ~/Imágenes/Screenshots/
 
 ## Captura de Ventana actual
-bindsym --release $mod+print exec xfce4-screenshooter -wm -s ~/Imágenes/Screenshots/
+#bindsym $mod+print exec xfce4-screenshooter -wm -s ~/Imágenes/Screenshots/
 
 ## Captura de Pantalla Completa al portapapeles
-bindsym --release $mod+shift+print exec xfce4-screenshooter -cfm
+bindsym $mod+shift+print exec grim -o $(swaymsg -t get_outputs | jq -r '.[] | select(.focused) | .name') - | wl-copy
 
 ## Captura de Pantalla Completa
-bindsym --release print exec xfce4-screenshooter -fm -s ~/Imágenes/Screenshots/
+#bindsym --release print exec xfce4-screenshooter -fm -s ~/Imágenes/Screenshots/
 
 ## Brillo de la pantalla
 #bindcode XF86MonBrightnessUp exec --no-startup-id xbacklight -inc 10
@@ -438,20 +454,17 @@ bindsym --release print exec xfce4-screenshooter -fm -s ~/Imágenes/Screenshots/
 #bindcode XF86MonBrightnessDown exec --no-startup-id ~/config/.i3/scripts/brillo.py back && notify-send "Brillo Abajo" || notify-send "Error: Brillo Abajo ha fallado"
 
 ## Abrir programa de Notas QOwnNotes
-bindsym --release $mod+n exec QOwnNotes
+bindsym $mod+n exec QOwnNotes
 
 ## Abrir gestor de contraseñas KeePass2
-bindsym --release $mod+k exec keepass2 "$HOME/Documentos/Personal.kdbx"
+bindsym $mod+k exec keepass2 "$HOME/Documentos/Personal.kdbx"
 
 ############################################################
 ###############          Autostart        ##################
 ############################################################
-exec --no-startup-id i3-msg 'workspace $WS1; exec nautilus;'
-exec --no-startup-id i3-msg 'workspace $WS1; exec tilix;'
-exec --no-startup-id i3-msg 'workspace $WS3; exec x-www-browser; workspace $WS1'
-#exec --no-startup-id i3-msg 'workspace $WS4; exec corebird; workspace $WS1'
-#exec --no-startup-id i3-msg 'workspace $WS4; exec whatsie; workspace $WS1'
-#exec --no-startup-id i3-msg 'workspace $WS4; exec thunderbird; workspace $WS1'
+exec swaymsg 'workspace $WS1; exec nautilus;'
+exec swaymsg 'workspace $WS1; exec tilix;'
+exec swaymsg 'workspace $WS3; exec x-www-browser; workspace $WS1'
 
 ## Fondo de pantalla nitrogen
 #exec --no-startup-id nitrogen --restore
@@ -466,11 +479,11 @@ exec --no-startup-id xfce4-clipman
 #exec --no-startup-id dunst
 
 ## Ocultar ratón tras inactividad
-exec --no-startup-id unclutter -idle 1
+exec unclutter -idle 1
 
 ## Configuraciones para X
 #exec --no-startup-id xrdb -load ~/.Xresources
-exec --no-startup-id xrdb ~/.Xresources
+#exec --no-startup-id xrdb ~/.Xresources
 
 ## Authentication agent
 exec --no-startup-id lxpolkit
@@ -478,7 +491,7 @@ exec --no-startup-id lxpolkit
 ## Temperatura de pantalla según zona y hora
 #exec --no-startup-id redshift -l $coordenadas -t 5500:4500
 
-exec --no-startup-id xbindkeys
+#exec --no-startup-id xbindkeys
 #exec --no-startup-id pulseaudio --start
 
 ## Ejemplos o ideas
@@ -497,7 +510,7 @@ exec --no-startup-id xbindkeys
 #exec_always --no-startup-id nitrogen --restore
 #exec_always --no-startup-id dunst
 #exec_always --no-startup-id xrdb -load ~/.Xresources
-exec_always --no-startup-id xrdb ~/.Xresources
+#exec_always --no-startup-id xrdb ~/.Xresources
 
 ############################################################
 ###############  MENÚ DE APAGADO/BLOQUEO  ##################
@@ -556,10 +569,10 @@ bindsym $mod+F12 mode "$mode_servers"
 #exec --no-startup-id nextcloud
 
 ## pCloud
-exec --no-startup-id "$HOME/AppImage/pcloud"
+exec "$HOME/AppImage/pcloud"
 
 ## Red
-exec --no-startup-id nm-applet
+exec nm-applet --indicator
 
 ## Transparencias de ventanas y menús mediante Compton
 #exec --no-startup-id compton -cCGb
@@ -568,10 +581,10 @@ exec --no-startup-id nm-applet
 #exec --no-startup-id numlockx on
 
 ## Applet de Volumen
-exec --no-startup-id volumeicon
+#exec --no-startup-id volumeicon
 
 ## Applet de Firewalld
-exec --no-startup-id firewall-applet
+exec firewall-applet
 
 ## Applet de Impresora
 #exec --no-startup-id system-config-printer-applet
@@ -580,20 +593,35 @@ exec --no-startup-id firewall-applet
 ##############   Recargar/Bloquear/Salir    ################
 ############################################################
 ## Recargar el archivo de configuración
-#bindsym $mod+Shift+c swaymsg reload
+bindsym $mod+Shift+c reload
 
-## Reiniciar i3 conservando la sesión
+## Reiniciar Sway conservando la sesión
 bindsym $mod+Shift+r exec swaymsg reload
 
-## Salir de i3 (logs you out of your X session)
-bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'Si pulsas sobre salir se cerrará todo lo que tengas abierto. ¿Realmente quieres salir?' -b 'Si, exit i3' 'i3-msg exit'"
+# Salir de sway (logs you out of your Wayland session)
+bindsym $mod+Shift+e exec swaymsg exit
 
 ## Suspender al pulsar botón de apagado
 #bindsym PowerOff exec --no-startup-id i3lock; pm-suspend
+bindsym $mod+Shift+z exec systemctl suspend
+
 
 ## Bloquear pantalla
-bindsym $mod+p exec "~/.config/i3/scripts/lock_and_blur.sh"
-exec xautolock -detectsleep -time 15 -locker "~/.config/i3/scripts/lock_and_blur.sh" -notify 30 -notifier "notify-send -u critical -t 10000 -- 'Bloqueando pantalla en 30 seconds'"
+#bindsym $mod+p exec "~/.config/i3/scripts/lock_and_blur.sh"
+#exec xautolock -detectsleep -time 15 -locker "~/.config/i3/scripts/lock_and_blur.sh" -notify 30 -notifier "notify-send -u critical -t 10000 -- 'Bloqueando pantalla en 30 seconds'"
+
+
+#set $lock swaylock -f -c 000000
+#set $lock swaylock -C ~/.config/swaylock/config
+bindsym $mod+p exec "~/.config/sway/scripts/lock_and_blur.sh"
+
+#exec swayidle -w "~/.config/i3/scripts/lock_and_blur.sh"
+#exec swayidle -w \
+#  timeout 900 'swaylock -C ~/.config/swaylock/config' \
+#  timeout 1800 'swaymsg "output * power off"' resume 'swaymsg "output * power on"' \
+#  before-sleep 'swaylock -C ~/.config/swaylock/config'
+
+
 
 ###########################################################
 ############         TECLAS MULTIMEDIA         ############

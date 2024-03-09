@@ -1,0 +1,3 @@
+ignore-empty-password
+daemonize
+image='/tmp/screen_lock_sway.png'
