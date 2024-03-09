@@ -71,16 +71,6 @@ set $WS10 10:
 #workspace $WS9 output $mon2
 #workspace $WS10 output $mon2
 
-## Cargando desde JSON
-## Generar: i3-save-tree --workspace 2:TERM > ~/.config/i3/workspace_2.json
-## Limpiar: tail -n +2 ~/.config/i3/Workspaces/workspace_2.json | fgrep -v '// splitv' | sed 's|//||g' > ~/.config/i3/Workspaces/workspace_2.json
-
-#exec --no-startup-id ~/.config/i3/Workspaces/load_layouts.sh
-
-## Establecer monitores HDMI al conectarse:
-#exec --no-startup-id xrandr --output eDP1-1 --primary
-#exec --no-startup-id xrandr --output HDMI-1 --secundary
-
 ###########################################################
 ############ Ubicacion de ventanas por defecto ############
 ###########################################################
@@ -233,8 +223,6 @@ for_window [title="^Instalador de paquetes"] floating enable, move position 50 5
 ############################################################
 ## Barra para monitor principal
 
-
-
 bar {
     ## Monitor para información en la barra de estado
     #status_command  i3status        ## Mostrar status de monitoreo
@@ -292,7 +280,7 @@ bar {
 input * xkb_layout "es"
 #input * xkb_variant "colemak,,typewriter"
 #input * xkb_options "grp:win_space_toggle"
-input "MANUFACTURER1 Keyboard" xkb_model "pc101"
+#input "MANUFACTURER1 Keyboard" xkb_model "pc101"
 
 
 ############################################################
@@ -345,7 +333,7 @@ bindsym $mod+a focus parent
 #bindsym $mod+d focus child
 
 ## Conmutar entre configuraciones de pantalla para varios monitores
-bindsym $mod+F6 exec ~/.config/i3/scripts/togglescreen.sh 2> /tmp/test && notify-send 'Cambio de pantallas' || notify-send 'Configuración de Pantallas no aplicable'
+#bindsym $mod+F6 exec ~/.config/i3/scripts/togglescreen.sh 2> /tmp/test && notify-send 'Cambio de pantallas' || notify-send 'Configuración de Pantallas no aplicable'
 
 ## Cambiar entre espacioes de trabajo
 bindsym $mod+1 workspace $WS1
@@ -404,7 +392,7 @@ mode "resize" {
 bindsym $mod+r mode "resize"
 
 ## Abrir terminal con $mod+Intro
-#bindsym $mod+Return exec ~/.config/i3/scripts/i3-shell.sh
+#bindsym $mod+Return exec ~/.config/sway/scripts/shell.sh
 bindsym $mod+Return exec tilix
 
 ## Cerrar ventana actual con $mod+shift+q
@@ -417,7 +405,7 @@ bindsym $mod+m exec wofi -show run
 #############       Bindings Propios      ##################
 ############################################################
 ## Alternar entre teclado "es-querty" y "dvorak"
-bindsym $mod+Control+space exec --no-startup-id ~/.config/i3/scripts/keyboard.sh
+bindsym $mod+Control+space exec ~/.config/sway/scripts/keyboard.sh
 
 ## Captura un área de la pantalla seleccionada al portapapeles
 #bindsym --release shift+Print exec xfce4-screenshooter -crm
@@ -473,8 +461,11 @@ seat seat0 hide_cursor 1000
 #exec --no-startup-id xrdb -load ~/.Xresources
 #exec --no-startup-id xrdb ~/.Xresources
 
-## Authentication agent
+## Authentication agent and keyring
 exec --no-startup-id lxpolkit
+exec dbus-update-activation-environment --all
+exec gnome-keyring-daemon --start --components=secrets
+exec export $(gnome-keyring-daemon)
 
 ## Temperatura de pantalla según zona y hora
 #exec --no-startup-id redshift -l $coordenadas -t 5500:4500
@@ -560,7 +551,8 @@ bindsym $mod+F12 mode "$mode_servers"
 exec "$HOME/AppImage/pcloud"
 
 ## Red
-exec nm-applet --indicator
+#exec nm-applet --indicator
+exec nm-tray
 
 ## Transparencias de ventanas y menús mediante Compton
 #exec --no-startup-id compton -cCGb
@@ -590,20 +582,15 @@ bindsym $mod+Shift+r exec swaymsg reload
 bindsym $mod+Shift+e exec swaymsg exit
 
 ## Suspender al pulsar botón de apagado
-#bindsym PowerOff exec --no-startup-id i3lock; pm-suspend
 bindsym $mod+Shift+z exec systemctl suspend
 
 
 ## Bloquear pantalla
-#bindsym $mod+p exec "~/.config/i3/scripts/lock_and_blur.sh"
-#exec xautolock -detectsleep -time 15 -locker "~/.config/i3/scripts/lock_and_blur.sh" -notify 30 -notifier "notify-send -u critical -t 10000 -- 'Bloqueando pantalla en 30 seconds'"
-
-
 #set $lock swaylock -f -c 000000
 #set $lock swaylock -C ~/.config/swaylock/config
 bindsym $mod+p exec "~/.config/sway/scripts/lock_and_blur.sh"
 
-#exec swayidle -w "~/.config/i3/scripts/lock_and_blur.sh"
+#exec swayidle -w "~/.config/sway/scripts/lock_and_blur.sh"
 #exec swayidle -w \
 #  timeout 900 'swaylock -C ~/.config/swaylock/config' \
 #  timeout 1800 'swaymsg "output * power off"' resume 'swaymsg "output * power on"' \

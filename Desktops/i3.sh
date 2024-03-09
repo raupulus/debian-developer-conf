@@ -68,6 +68,7 @@ i3wm_postconfiguracion() {
     if [[ -f "$HOME/.local/bin/brillo" ]]; then
         rm -f "$HOME/.local/bin/brillo"
     fi
+
     ln -s "$HOME/.config/i3/scripts/brillo.py" "$HOME/.local/bin/brillo"
     chmod a+rx "$HOME/.local/bin/brillo"
 }

@@ -23,7 +23,8 @@
 ############################
 case "$1" in
     lock) ~/.config/sway/scripts/lock_and_blur.sh ;;
-    logout) i3-msg exit;;
+    reload) swaymsg reload;;
+    logout) swaymsg exit;;
     suspend) lock && systemctl suspend;;
     hibernate) lock && systemctl hibernate;;
     reboot) systemctl reboot;;

@@ -41,7 +41,9 @@ sway_postconfiguracion() {
     instalarSoftwareLista "$SOFTLIST/Desktops/wm-min-software-wayland.lst"
 
     echo -e "$VE Generando archivos de configuración$CL"
-    enlazarHome '.config/sway' '.config/i3pystatus' '.scripts' '.Xresources' '.config/wofi' '.config/swaylock'
+    enlazarHome '.config/sway' '.config/i3pystatus' '.scripts' '.Xresources' '.config/wofi' '.config/swaylock' '.config/waybar' '.config/nwg-drawer' '.config/nwg-launchers'
+
+    dir_exist_or_create "$HOME/Imágenes/Screenshots"
 
     ## Instalo y Configuro Python: Lenguajes-Programacion/python.sh
     python_instalador
@@ -49,6 +51,9 @@ sway_postconfiguracion() {
     ## Dependencias para i3pystatus con python.
     python3Install 'basiciw' 'netifaces' 'colour' \
     'pyalsaaudio' 'fontawesome'
+
+    ## Tema Paper para GTK2 (Debe estar instalado)
+    gconftool-2 --type string --set /desktop/gnome/interface/icon_theme 'Paper'
 }
 
 sway_postconfiguracionOpcional() {

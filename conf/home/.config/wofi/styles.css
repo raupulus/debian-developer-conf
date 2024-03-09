@@ -1,25 +1,41 @@
 * {
-    border: none;
+    font-family: JetBrainsMono;
+    color: #e5e9f0;
+    background: transparent;
+    font-size: 1.8rem;
 }
 
-window {
-    font-size: 24px;
-    font-family: "Ubuntu";
-    background-color: #2e3440;
-    color: #8fbcbb;
-    border-bottom: 3px solid #5e81ac;
-}
-
-#entry:selected {
-    background-color: #bf616a;
-}
-
-#text:selected {
-    background-color: #bf616a;
-    color: white;
+#window {
+    background: rgba(41, 46, 66, 0.7);
+    margin: auto;
+    padding: 10px;
+    border-radius: 20px;
+    border: 5px solid rgba(255, 67, 67, 0.79);
 }
 
 #input {
+    padding: 10px;
+    margin-bottom: 10px;
+    border-radius: 15px;
+}
+
+#outer-box {
+    padding: 20px;
+}
+
+#img {
+    margin-right: 6px;
+}
+
+#entry {
+    padding: 10px;
+    border-radius: 15px;
+}
+
+#entry:selected {
     background-color: #2e3440;
-    color: white;
+}
+
+#text {
+    margin: 2px;
 }
