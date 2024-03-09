@@ -528,7 +528,6 @@ bindsym --release $mod+k exec keepass2 "$HOME/Documentos/Personal.kdbx"
 exec --no-startup-id i3-msg 'workspace $WS1; exec nautilus;'
 exec --no-startup-id i3-msg 'workspace $WS1; exec tilix;'
 exec --no-startup-id i3-msg 'workspace $WS3; exec x-www-browser; workspace $WS1'
-exec --no-startup-id i3-msg 'workspace $WS4; exec ~/4_Programas/Telegram/Telegram; workspace $WS1'
 #exec --no-startup-id i3-msg 'workspace $WS4; exec corebird; workspace $WS1'
 #exec --no-startup-id i3-msg 'workspace $WS4; exec whatsie; workspace $WS1'
 #exec --no-startup-id i3-msg 'workspace $WS4; exec thunderbird; workspace $WS1'
@@ -647,7 +646,7 @@ bindsym $mod+F12 mode "$mode_servers"
 #exec --no-startup-id dropbox start
 
 ## Synology Drive
-exec --no-startup-id synology-drive
+#exec --no-startup-id synology-drive
 
 ## Nextcloud
 #exec --no-startup-id nextcloud

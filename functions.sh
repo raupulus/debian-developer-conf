@@ -469,7 +469,7 @@ python2Install() {
 
     for x in $*; do
         echo -e "$RO Instalando $x$CL"
-        pip2 install --user --upgrade "$x"
+        #pip2 install --user --upgrade "$x"
     done
 }
 
@@ -482,7 +482,7 @@ python3Install() {
 
     for x in $*; do
         echo -e "$RO Instalando $x$CL"
-        pip3 install --user --upgrade "$x"
+        pip3 install --user --upgrade --break-system-packages "$x"
     done
 }
 
@@ -495,7 +495,7 @@ python3InstallGlobal() {
 
     for x in $*; do
         echo -e "$RO Instalando $x$CL"
-        sudo pip3 install --upgrade "$x"
+        sudo pip3 install --upgrade --break-system-packages "$x"
     done
 }
 

@@ -72,9 +72,9 @@ python_postconfiguracion() {
         python3Install 'https://github.com/google/closure-linter/zipball/master'
     }
 
-    configurar_python2
+    #configurar_python2
     configurar_python3
-    personalizar_python2
+    #personalizar_python2
     personalizar_python3
 
     ## Variable global que indica que instale los paquetes como usuario en home

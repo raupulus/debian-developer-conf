@@ -30,7 +30,7 @@ deb-src http://deb.debian.org/debian/ testing-updates main contrib non-free
 ##                  MULTISYSTEM                       ##
 ########################################################
 ##### wget -q -O - http://liveusb.info/multisystem/depot/multisystem.asc | sudo apt-key add -
-deb http://liveusb.info/multisystem/depot/ all main
+#deb http://liveusb.info/multisystem/depot/ all main
 
 ########################################################
 ##                     FRYNTIZ                        ##

@@ -72,7 +72,7 @@ common_vps_add_keys() {
 
     ## Jenkins
     echo -e "$VE Agregando clave para $RO Jenkins$CL"
-    wget -q -O - https://pkg.jenkins.io/debian-stable/jenkins.io.key | sudo apt-key add -
+    sudo wget -O /usr/share/keyrings/jenkins-keyring.asc https://pkg.jenkins.io/debian/jenkins.io-2023.key
 
     ## Sury (Paquetes PHP)
     echo -e "$VE Agregando llave para$RO PHP$VE de sury,org$CL"

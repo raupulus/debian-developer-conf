@@ -310,7 +310,10 @@ apache2GenerarEnlaces() {
 
 apache2_macos_installer() {
     sudo apachectl stop 2>/dev/null
-    sudo launchctl unload /System/Library/LaunchDaemons/org.apache.httpd.plist 2>/dev/null
+
+    if [[ -f "/System/Library/LaunchDaemons/org.apache.httpd.plist" ]]; then
+        sudo launchctl unload /System/Library/LaunchDaemons/org.apache.httpd.plist 2>/dev/null
+    fi
 
     if [[ -d "${HOME}/git" ]]; then
         sudo chown -R ${USER}:staff "${HOME}/git"

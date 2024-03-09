@@ -29,7 +29,8 @@ set $mod Mod4
 set $coordenadas '36.7349439:-6.4253577'  ## Coordenadas
 
 #output eDP-1 scale 2
-output eDP-1 pos 0 0 res 3840x2160
+#output eDP-1 pos 0 0 res 3840x2160
+output eDP-1 pos 0 0 res 1920x1080
 
 ###########################################################
 ############        Espacios de trabajo        ############
@@ -448,7 +449,6 @@ bindsym --release $mod+k exec keepass2 "$HOME/Documentos/Personal.kdbx"
 exec --no-startup-id i3-msg 'workspace $WS1; exec nautilus;'
 exec --no-startup-id i3-msg 'workspace $WS1; exec tilix;'
 exec --no-startup-id i3-msg 'workspace $WS3; exec x-www-browser; workspace $WS1'
-exec --no-startup-id i3-msg 'workspace $WS4; exec ~/4_Programas/Telegram/Telegram; workspace $WS1'
 #exec --no-startup-id i3-msg 'workspace $WS4; exec corebird; workspace $WS1'
 #exec --no-startup-id i3-msg 'workspace $WS4; exec whatsie; workspace $WS1'
 #exec --no-startup-id i3-msg 'workspace $WS4; exec thunderbird; workspace $WS1'
@@ -547,10 +547,10 @@ bindsym $mod+F12 mode "$mode_servers"
 ###############           APPLETS         ##################
 ############################################################
 ## Dropbox
-exec --no-startup-id dropbox start
+#exec --no-startup-id dropbox start
 
 ## Synology Drive
-exec --no-startup-id synology-drive
+#exec --no-startup-id synology-drive
 
 ## Nextcloud
 #exec --no-startup-id nextcloud
