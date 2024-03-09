@@ -35,10 +35,6 @@ set $coordenadas '36.7349439:-6.4253577'  ## Coordenadas
 #output eDP-1 pos 0 0 res 3840x2160
 output eDP-1 pos 0 0 res 1920x1080
 
-
-## Terminal por defecto
-set $term tilix
-
 # Default wallpaper (more resolutions are available in /usr/share/backgrounds/sway/)
 output * bg /usr/share/backgrounds/sway/Sway_Wallpaper_Blue_1920x1080.png fill
 #output * bg ~/image/backgrounds/desktop.jpg fill
@@ -303,20 +299,20 @@ input "MANUFACTURER1 Keyboard" xkb_model "pc101"
 #############     Bindings del Sistema    ##################
 ############################################################
 ## Navegar entre las ventanas $mod+[jkln] o $mod+[←↓→]
-bindsym $mod+j focus left
-bindsym $mod+k focus down
-bindsym $mod+l focus up
-bindsym $mod+ntilde focus right
+#bindsym $mod+j focus left
+#bindsym $mod+k focus down
+#bindsym $mod+l focus up
+#bindsym $mod+ntilde focus right
 bindsym $mod+Left focus left
 bindsym $mod+Down focus down
 bindsym $mod+Up focus up
 bindsym $mod+Right focus right
 
 ## Mover una ventana $mod+shift+[jkln] o $mod+shift+[←↓→]
-bindsym $mod+Shift+j move left
-bindsym $mod+Shift+k move down
-bindsym $mod+Shift+l move up
-bindsym $mod+Shift+ntilde move right
+#bindsym $mod+Shift+j move left
+#bindsym $mod+Shift+k move down
+#bindsym $mod+Shift+l move up
+#bindsym $mod+Shift+ntilde move right
 bindsym $mod+Shift+Left move left
 bindsym $mod+Shift+Down move down
 bindsym $mod+Shift+Up move up
@@ -409,21 +405,13 @@ bindsym $mod+r mode "resize"
 
 ## Abrir terminal con $mod+Intro
 #bindsym $mod+Return exec ~/.config/i3/scripts/i3-shell.sh
-bindsym $mod+Return exec i3-sensible-terminal
+bindsym $mod+Return exec tilix
 
 ## Cerrar ventana actual con $mod+shift+q
 bindsym $mod+Shift+q kill
 
-## Abrir dmenu (Lanzador de programas)
-#bindsym $mod+d exec i3-dmenu-desktop ## Antes dmenu_run
-bindsym $mod+d exec j4-dmenu-desktop
-
-#bindsym $mod+shift+d exec rofi -combi-modi window,drun,ssh -theme Paper -font "hack 10" -show combi
-set $menu wofi -show run
-bindsym $mod+shift+d exec $menu
-
-bindsym $mod+m exec --no-startup-id ~/.config/i3/scripts/rofr.sh -r
-bindsym $mod+shift+d exec --no-startup-id ~/.config/i3/scripts/rofr.sh -r
+## Abrir Menú de programas (Lanzador de programas)
+bindsym $mod+m exec wofi -show run
 
 ############################################################
 #############       Bindings Propios      ##################
@@ -457,7 +445,7 @@ bindsym $mod+shift+print exec grim -o $(swaymsg -t get_outputs | jq -r '.[] | se
 bindsym $mod+n exec QOwnNotes
 
 ## Abrir gestor de contraseñas KeePass2
-bindsym $mod+k exec keepass2 "$HOME/Documentos/Personal.kdbx"
+#bindsym $mod+k exec keepass2 "$HOME/Documentos/Personal.kdbx"
 
 ############################################################
 ###############          Autostart        ##################
@@ -473,13 +461,13 @@ exec swaymsg 'workspace $WS3; exec x-www-browser; workspace $WS1'
 #exec --no-startup-id parcellite
 
 #Portapapeles de XFCE (permite guardar capturas de pantalla): xfce4-clipman
-exec --no-startup-id xfce4-clipman
+#exec --no-startup-id xfce4-clipman
 
 ## Mensajes emergentes
 #exec --no-startup-id dunst
 
 ## Ocultar ratón tras inactividad
-exec unclutter -idle 1
+seat seat0 hide_cursor 1000
 
 ## Configuraciones para X
 #exec --no-startup-id xrdb -load ~/.Xresources
@@ -517,15 +505,15 @@ exec --no-startup-id lxpolkit
 ############################################################
 set $mode_system Sistema: (l) Bloquear, (e) Salir, (s) Suspender, (h) Hibernar, (r) Reiniciar, (Shift+s) Apagar
 
-set $i3exit ~/.config/i3/scripts/i3exit.sh
+set $exit ~/.config/sway/scripts/exit.sh
 
 mode "$mode_system" {
-    bindsym l exec --no-startup-id $i3exit lock, mode "default"
-    bindsym e exec --no-startup-id $i3exit logout, mode "default"
-    bindsym s exec --no-startup-id $i3exit suspend, mode "default"
-    bindsym h exec --no-startup-id $i3exit hibernate, mode "default"
-    bindsym r exec --no-startup-id $i3exit reboot, mode "default"
-    bindsym Shift+s exec --no-startup-id $i3exit shutdown, mode "default"
+    bindsym l exec $exit lock, mode "default"
+    bindsym e exec $exit logout, mode "default"
+    bindsym s exec $exit suspend, mode "default"
+    bindsym h exec $exit hibernate, mode "default"
+    bindsym r exec $exit reboot, mode "default"
+    bindsym Shift+s exec $exit shutdown, mode "default"
 
     # back to normal: Enter or Escape
     bindsym Return mode "default"
@@ -539,15 +527,15 @@ bindsym $mod+Escape mode "$mode_system"
 ############################################################
 set $mode_servers A.Apache: (1), E.Apache: (2), A.MariaDB: (3), E.MariaDB: (4), A.PostgreSQL: (5), E.PostgreSQL: (6)
 
-set $servers ~/.config/i3/scripts/servers.sh
+set $servers ~/.config/sway/scripts/servers.sh
 
 mode "$mode_servers" {
-    bindsym 1 exec --no-startup-id $servers apache start, mode "default"
-    bindsym 2 exec --no-startup-id $servers apache stop, mode "default"
-    bindsym 3 exec --no-startup-id $servers mariadb start, mode "default"
-    bindsym 4 exec --no-startup-id $servers mariadb stop, mode "default"
-    bindsym 5 exec --no-startup-id $servers postgresql start, mode "default"
-    bindsym 6 exec --no-startup-id $servers postgresql stop, mode "default"
+    bindsym 1 exec $servers apache start, mode "default"
+    bindsym 2 exec $servers apache stop, mode "default"
+    bindsym 3 exec $servers mariadb start, mode "default"
+    bindsym 4 exec $servers mariadb stop, mode "default"
+    bindsym 5 exec $servers postgresql start, mode "default"
+    bindsym 6 exec $servers postgresql stop, mode "default"
 
     # back to normal: Enter or Escape
     bindsym Return mode "default"

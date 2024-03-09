@@ -539,9 +539,6 @@ clear_screen() {
 ## @param  $*  String  Nombres de scripts dentro de conf/bin/ sin la extensión.
 ##
 addScriptToBin() {
-
-    // TODO: Revisar si en macos, esto cambiará de ruta
-
     if [[ $DISTRO = 'macos' ]]; then
         echo 'Scripts no implementados para macos'
     else
