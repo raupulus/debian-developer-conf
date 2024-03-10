@@ -14,7 +14,7 @@ grim
 wl-clipboard
 clipman
 xdg-desktop-portal-wlr
-lightdm
+gdm3
 lxpolkit
 keepass2
 tilix
@@ -22,3 +22,5 @@ wdisplays
 gnome-keyring
 nm-tray
 nm-tray-l10n
+pavucontrol
+lm-sensors

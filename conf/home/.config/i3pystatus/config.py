@@ -247,12 +247,32 @@ status.register("clock",
 #)
 
 ## ALSA SOUND ----------------------------------------------------------
+"""
 status.register("alsa",
     on_leftclick = "amixer set Master toggle",
     #on_upscroll = "amixer set Master 10%+",
     #on_downscroll = "amixer set Master 10%-",
     on_rightclick = "pavucontrol",
     color = alsaFColor,
+    color_muted = '#E06C75',
+    #format_muted=' [muted]',
+    #format=" {volume}%",
+    hints= {"markup": "pango","separator": False,"separator_block_width": 0},
+    format = "<span background='"+tempColor+"' color='"+alsaColor+"'></span\
+             ><span background='"+alsaColor+"' > {volume}% </span>",
+
+    format_muted = "<span background='"+tempColor+"' color='"+alsaColor+"'></span\
+             ><span background='"+alsaColor+"' > [muted] </span>",
+    )
+"""
+
+## Pulseaudio ----------------------------------------------------------
+status.register("pulseaudio",
+    #on_leftclick = "amixer set Master toggle",
+    #on_upscroll = "amixer set Master 10%+",
+    #on_downscroll = "amixer set Master 10%-",
+    on_rightclick = "pavucontrol",
+    color_unmuted = alsaFColor,
     color_muted = '#E06C75',
     #format_muted=' [muted]',
     #format=" {volume}%",
