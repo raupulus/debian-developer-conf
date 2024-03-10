@@ -1,7 +1,7 @@
 hide_scroll=true
 show=drun
-width=40%
-height=60%
+width=50%
+height=70%
 lines=8
 line_wrap=word
 term=tilix

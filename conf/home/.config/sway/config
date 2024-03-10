@@ -399,7 +399,8 @@ bindsym $mod+Return exec tilix
 bindsym $mod+Shift+q kill
 
 ## Abrir Menú de programas (Lanzador de programas)
-bindsym $mod+m exec wofi -show run
+bindsym $mod+m exec wofi -s ~/.config/wofi/styles.css
+bindsym $mod+c exec wofi -show run
 
 ############################################################
 #############       Bindings Propios      ##################
