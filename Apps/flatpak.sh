@@ -51,7 +51,8 @@ aplicaciones_flatpak() {
     local riot='https://flathub.org/repo/appstream/im.riot.Riot.flatpakref'
     local discord='https://flathub.org/repo/appstream/com.discordapp.Discord.flatpakref'
     local postman='https://flathub.org/repo/appstream/com.getpostman.Postman.flatpakref'
-
+    local yuzu='https://flathub.org/repo/appstream/org.yuzu_emu.yuzu.flatpakref'
+    local obs='https://flathub.org/repo/appstream/com.obsproject.Studio.flatpakref'
 
     while true :; do
         clear_screen
@@ -78,6 +79,8 @@ aplicaciones_flatpak() {
             20) Riot
             21) Discord
             22) Postman
+            23) Yuzu
+            24) Obs
 
             0) Atrás
         '
@@ -111,6 +114,8 @@ aplicaciones_flatpak() {
             20)  instalarSoftwareFlatPak $riot;;
             21)  instalarSoftwareFlatPak $discord;;
             22)  instalarSoftwareFlatPak $postman;;
+            23)  instalarSoftwareFlatPak $yuzu;;
+            24)  instalarSoftwareFlatPak $obs;;
 
             0)  ## SALIR
                 clear_screen
