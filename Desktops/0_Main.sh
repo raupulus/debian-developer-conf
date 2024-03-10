@@ -45,11 +45,11 @@ menuDesktops() {
         while true :; do
             clear_screen
             local descripcion='Menú de Personalización del sistema
-                1) Instalar i3wm
-                2) Instalar Xmonad
-                3) Instalar Openbox
-                4) Instalar Gnome Shell
-                5) Instalar Sway
+                1) Instalar Sway
+                2) Instalar i3wm (x11)
+                3) Instalar Xmonad (x11)
+                4) Instalar Openbox (x11)
+                5) Instalar Gnome Shell
                 6) Todos los pasos anteriores
 
                 0) Atrás
@@ -61,11 +61,11 @@ menuDesktops() {
             echo -e "$CL"
 
             case $entrada in
-                1)  i3wm_instalador;;         ## Instala i3wm
-                2)  xmonad_instalador;;       ## Instala xmonad
-                3)  openbox_instalador;;      ## Instala openbox
-                4)  gnome_shell_instalador;;  ## Instala gnome shell
-                5)  sway_instalador;;  ## Instala gnome shell
+                1)  sway_instalador;;         ## Instala Sway
+                2)  i3wm_instalador;;         ## Instala i3wm
+                3)  xmonad_instalador;;       ## Instala xmonad
+                4)  openbox_instalador;;      ## Instala openbox
+                5)  gnome_shell_instalador;;  ## Instala gnome shell
                 6)  todos_desktops;;          ## Todos los pasos anteriores
 
                 0)  ## SALIR

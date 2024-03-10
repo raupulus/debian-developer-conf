@@ -16,10 +16,8 @@
 ############################
 ##      INSTRUCTIONS      ##
 ############################
-## Instala python 2, python 3, Django y gestor de paquete pip para ambas
-## versiones de php.
-## Además instala paquetes básicos recurridos, correctores de sintaxis y reglas
-## de estilos para PEP8 principalmente.
+## Instala python 3 y gestor de paquete pip
+## Además instala paquetes básicos recurridos, correctores de sintaxis y reglas de estilos para PEP8 principalmente.
 
 ############################
 ##        FUNCTIONS       ##
@@ -38,7 +36,7 @@ python_preconfiguracion() {
 }
 
 python_instalar() {
-    echo -e "$VE Instalando$RO Python y Django$CL"
+    echo -e "$VE Instalando$RO Python$CL"
     ## Instalar python y gestor de paquetes
     instalarSoftwareLista "$SOFTLIST/Lenguajes-Programacion/python.lst"
 }
@@ -46,24 +44,11 @@ python_instalar() {
 python_postconfiguracion() {
     echo -e "$VE Generando Post-Configuraciones de python"
 
-    configurar_python2() {
-        echo -e "$VE Preparando configuracion de$RO Python2$CL"
-        instalarSoftwareLista "$SOFTLIST/Lenguajes-Programacion/python2.lst"
-
-        python2Install 'python-language-server[all]' 'virtualenvwrapper' 'pip-review'
-    }
-
     configurar_python3() {
         echo -e "$VE Preparando configuracion de$RO Python3$CL"
         echo -e "$VE Instalando dependencias para Python 3$CL"
 
-        python3Install 'python-language-server[all]' 'virtualenvwrapper' 'pip-review' 'serial' 'sqlalchemy' 'python-dotenv' 'requests'
-    }
-
-    personalizar_python2() {
-        echo -e "$VE Personalizando$RO Python y Django$CL"
-        ## Closure linter
-        python2Install 'https://github.com/google/closure-linter/zipball/master'
+        python3Install 'python-language-server[all]' 'virtualenvwrapper' 'pip-review' 'serial' 'sqlalchemy' 'python-dotenv' 'requests' 'keyboard' 'mouse'
     }
 
     personalizar_python3() {
@@ -72,9 +57,7 @@ python_postconfiguracion() {
         python3Install 'https://github.com/google/closure-linter/zipball/master'
     }
 
-    #configurar_python2
     configurar_python3
-    #personalizar_python2
     personalizar_python3
 
     ## Variable global que indica que instale los paquetes como usuario en home
