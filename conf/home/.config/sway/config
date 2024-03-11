@@ -276,6 +276,9 @@ bar {
 
 }
 
+#exec waybar -c ~/.config/waybar/raupulus/config -s ~/.config/waybar/raupulus/style.css
+#exec waybar -c ~/.config/waybar/raupulus_vertical/config -s ~/.config/waybar/raupulus_vertical/style.css
+
 #exec waybar -c ~/.config/waybar/awe/config -s ~/.config/waybar/awe/style.css
 #exec waybar -c ~/.config/waybar/bluish/config -s ~/.config/waybar/bluish/style.css
 #exec waybar -c ~/.config/waybar/colorful/config -s ~/.config/waybar/colorful/style.css
