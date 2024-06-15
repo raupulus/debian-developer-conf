@@ -4,7 +4,7 @@
     "experimental": true,
     "height": 32,
     "margin": "3, 50, 1, 50",
-    "modules-left": ["sway/workspaces", "cpu", "memory", "disk", "custom/recorder", "custom/audiorec"],
+    "modules-left": ["sway/workspaces", "cpu", "temperature", "memory", "disk", "custom/recorder", "custom/audiorec"],
     "modules-center": ["sway/window"],
     "modules-right": ["tray", "backlight", "idle_inhibitor", "pulseaudio", "network", "battery", "clock", "custom/power"],
 
@@ -61,9 +61,10 @@
     },
 
     "temperature": {
+        "thermal-zone": 1,
         "critical-threshold": 80,
-	"format-critical": "{temperatureC}° ",
-	"format": "{temperatureC}° "
+        "format-critical": " {temperatureC}°",
+        "format": " {temperatureC}°"
     },
 
     "network": {
@@ -73,10 +74,10 @@
         "format-wifi": "{icon} ({signalStrength}%)",
         "format-icons": {
             "wifi": ["睊", "直" ,""],
-            "ethernet": [""],
-            "disconnected": [""]
+            "ethernet": [""],
+            "disconnected": ["⚠"]
         },
-        "on-click": "tilix nmtui",
+        "on-click": "tilix ip add",
         "tooltip-format": "{ifname}: {ipaddr}",
     },
 
@@ -84,13 +85,13 @@
       // "scroll-step": 1, // %, can be a float
       "format": "{icon} {volume}% {format_source}",
       "format-bluetooth": "{icon} {volume}% {format_source}",
-      "format-bluetooth-muted": " {format_source}",
-      "format-muted": "  {format_source}",
+      "format-bluetooth-muted": " {format_source}",
+      "format-muted": "  {format_source}",
       "format-source": " {volume}%",
       "format-source-muted": "",
       "format-icons": {
         "headphone": "",
-        "hands-free": "",
+        "hands-free": "",
         "headset": "🎧",
         "phone": "",
         "portable": "",
@@ -171,8 +172,8 @@
     },
 
     "custom/power": {
-        "format":"⏻",
-        "on-click": "exec ~/.config/waybar/scripts/power-menu.sh",
+    	"format": "⏻",
+    	"on-click": "swaynag -t warning -m 'Power Menu Options' -b 'Shutdown'  'shutdown -h now' -b 'Restart' 'shutdown -r now' -b 'Logout' 'swaymsg exit' -b 'Hibernate' 'systemctl hibernate' --background=#005566 --button-background=#009999 --button-border=#002b33 --border-bottom=#002b33",
         "tooltip": false,
     },
 }

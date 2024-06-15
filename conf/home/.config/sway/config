@@ -220,9 +220,12 @@ for_window [title="^Instalador de paquetes"] floating enable, move position 50 5
 ###########################################################
 
 ############################################################
-###############            i3bar          ##################
+###############            Barras         ##################
 ############################################################
 ## Barra para monitor principal
+
+## Monitor Principal
+bar swaybar_command waybar -c $HOME/.config/waybar/raupulus/config -s $HOME/.config/waybar/raupulus/style.css
 
 bar {
     ## Monitor para información en la barra de estado
@@ -565,15 +568,6 @@ exec "$HOME/AppImage/pcloud"
 ## Red
 #exec nm-applet --indicator
 exec nm-tray
-
-## Transparencias de ventanas y menús mediante Compton
-#exec --no-startup-id compton -cCGb
-
-## Teclado Numérico
-#exec --no-startup-id numlockx on
-
-## Applet de Volumen
-#exec --no-startup-id volumeicon
 
 ## Applet de Firewalld
 exec firewall-applet

@@ -1,44 +1,15 @@
 {
-    "layer": "bottom",
-    "position": "top",
-    "height": 10,
-    "width": 1350,
-    "margin": "3, 0, 2, 0",
-    "modules-left": ["custom/launcher", "sway/workspaces", "cpu", "memory", "disk", "custom/recorder", "custom/audiorec"],
-    "modules-center": ["mpd"],
-    "modules-right": ["tray", "backlight", "idle_inhibitor", "pulseaudio", "network", "battery", "clock", "custom/power"],
-
-    "sway/workspaces": {
-        "format": "{icon}",
-        "format-icons": {
-            "1": "♠",
-            "2": "♥",
-            "3": "♦",
-            "4": "♣",
-            "5": "₿",
-            "6": "⟠",
-            "7": "₮",
-            "8": "Ð",
-            "urgent": "",
-            "focused": "",
-            "default": ""
-        }
-    },
-
-    "custom/launcher": {
-        "format":"⋏",
-        "on-click": "exec wofi -c ~/.config/wofi/config -I",
-        "tooltip": false,
-    },
-
-    "sway/window": {
-        "max-length": 25,
-        "tooltip": false
-    },
+    "layer": "dock",
+    "position": "left",
+    "experimental": true,
+    "width": 32,
+    "modules-left": ["cpu", "temperature", "memory", "disk"],
+    "modules-center": ["sway/workspaces"],
+    "modules-right": ["tray", "backlight", "pulseaudio", "network", "battery", "clock", "custom/power"],
 
     "clock": {
         "interval": 1,
-        "locale": "C", 
+        "locale": "C",
         "format": "{:%I:%M %p}",
         "format-alt": " {:%a,%b %d}" // Icon: calendar-alt
     },
@@ -52,7 +23,7 @@
 
     "memory": {
         "interval": 30,
-        "format": " {used:0.2f}GB",
+        "format": " {used:0.1f}G",
 
         "max-length": 10,
         "tooltip": false,
@@ -76,9 +47,10 @@
     },
 
     "temperature": {
+        "thermal-zone": 1,
         "critical-threshold": 80,
-	"format-critical": "{temperatureC}° ",
-	"format": "{temperatureC}° "
+        "format-critical": " {temperatureC}°",
+        "format": " {temperatureC}°"
     },
 
     "network": {
@@ -88,10 +60,10 @@
         "format-wifi": "{icon} ({signalStrength}%)",
         "format-icons": {
             "wifi": ["睊", "直" ,""],
-            "ethernet": [""],
-            "disconnected": [""]
+            "ethernet": [""],
+            "disconnected": ["⚠"]
         },
-        "on-click": "kitty nmtui",
+        "on-click": "tilix ip add",
         "tooltip-format": "{ifname}: {ipaddr}",
     },
 
@@ -99,13 +71,13 @@
       // "scroll-step": 1, // %, can be a float
       "format": "{icon} {volume}% {format_source}",
       "format-bluetooth": "{icon} {volume}% {format_source}",
-      "format-bluetooth-muted": " {format_source}",
-      "format-muted": "  {format_source}",
+      "format-bluetooth-muted": " {format_source}",
+      "format-muted": "  {format_source}",
       "format-source": " {volume}%",
       "format-source-muted": "",
       "format-icons": {
         "headphone": "",
-        "hands-free": "",
+        "hands-free": "",
         "headset": "🎧",
         "phone": "",
         "portable": "",
@@ -132,11 +104,12 @@
     },
 
     "tray": {
-        "icon-size": 15
+        "icon-size": 18
     },
 
     "disk": {
-        "format": " {free}" 
+        "format": " {specific_free:0.1f}" ,
+        "unit": "GB"
     },
 
     "custom/recorder": {
@@ -185,8 +158,8 @@
     },
 
     "custom/power": {
-        "format":"⏻",
-        "on-click": "exec ~/.config/waybar/scripts/power-menu.sh",
+    	"format": "⏻",
+    	"on-click": "swaynag -t warning -m 'Power Menu Options' -b 'Shutdown'  'shutdown -h now' -b 'Restart' 'shutdown -r now' -b 'Logout' 'swaymsg exit' -b 'Hibernate' 'systemctl hibernate' --background=#005566 --button-background=#009999 --button-border=#002b33 --border-bottom=#002b33",
         "tooltip": false,
     },
 }

@@ -103,7 +103,7 @@
         "format-ethernet": " {ifname}: {ipaddr}/{cidr}", // Icon: ethernet
         "format-disconnected": "⚠ Disconnected",
         "tooltip-format": "{ifname}: {ipaddr}",
-        "on-click": "kitty -e 'nmtui'",
+        "on-click": "tilix -e 'nmtui'",
     },
 
     "network#vpn": {
