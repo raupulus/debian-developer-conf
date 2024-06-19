@@ -66,16 +66,16 @@ mariadb_postconfiguracion() {
         sudo mariadb-secure-installation
 
         echo -e "$VE Estableciendo character-set-server = utf8mb4$CL"
-        sudo sed -r -i'' "s/^\s*#?\s*character-set-server\s*=.*/character-set-server  = utf8mb4/" "$FILE_CONF"
+        strFileReplace "s/^\s*#?\s*character-set-server\s*=.*/character-set-server  = utf8mb4/" "$FILE_CONF"
 
         echo -e "$VE Estableciendo collation-server = utf8mb4_general_ci$CL"
-        sudo sed -r -i'' "s/^\s*#?\s*collation-server\s*=.*/collation-server      = utf8mb4_general_ci/" "$FILE_CONF"
+        strFileReplace "s/^\s*#?\s*collation-server\s*=.*/collation-server      = utf8mb4_general_ci/" "$FILE_CONF"
     else
         echo -e "$VE Estableciendo character-set-server = utf8mb4$CL"
-        sudo sed -r -i "s/^\s*#?\s*character-set-server\s*=.*/character-set-server  = utf8mb4/" "$FILE_CONF"
+        strFileReplace "s/^\s*#?\s*character-set-server\s*=.*/character-set-server  = utf8mb4/" "$FILE_CONF"
 
         echo -e "$VE Estableciendo collation-server = utf8mb4_general_ci$CL"
-        sudo sed -r -i "s/^\s*#?\s*collation-server\s*=.*/collation-server      = utf8mb4_general_ci/" "$FILE_CONF"
+        strFileReplace "s/^\s*#?\s*collation-server\s*=.*/collation-server      = utf8mb4_general_ci/" "$FILE_CONF"
     fi
 
 
