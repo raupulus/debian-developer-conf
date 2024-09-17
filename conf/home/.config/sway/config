@@ -37,7 +37,7 @@ output eDP-1 pos 0 0 res 1920x1080
 
 # Default wallpaper (more resolutions are available in /usr/share/backgrounds/sway/)
 output * bg /usr/share/backgrounds/sway/Sway_Wallpaper_Blue_1920x1080.png fill
-#output * bg ~/image/backgrounds/desktop.jpg fill
+#output * bg ~/Imágenes/backgrounds/desktop.jpg fill
 
 
 ###########################################################
@@ -136,15 +136,17 @@ assign [class="Oracle VM VirtualBox"] → $WS7
 for_window [class="Oracle VM VirtualBox"] focus
 
 ## 8
-assign [class="Pychess"] → $WS7
+assign [class="Pychess"] → $WS8
 for_window [class="Pychess"] focus
+assign [class="Steam"] → $WS8
+for_window [class="Steam"] focus
 
 ###########################################################
 ############         FOCUS DE VENTANAS         ############
 ###########################################################
 bindsym $mod+F1 [class="Firefox"] focus
 bindsym $mod+F2 [class="PhpStorm"] focus
-bindsym $mod+F3 [title="Atom"] focus
+#bindsym $mod+F3 [title="Atom"] focus
 #bindsym $mod+F4 [class="nautilus"] focus
 #bindsym $mod+F5 [class="tilix"] focus
 #bindsym $mod+F6 [title="PyCharm"] focus
@@ -158,9 +160,9 @@ bindsym $mod+F3 [title="Atom"] focus
 ###########################################################
 ############       Visualización/Pantalla      ############
 ###########################################################
-## Establezco a 130 dpi
-exec --no-startup-id xrandr --dpi 140
-exec_always --no-startup-id xrandr --dpi 140
+## Establezco DPI
+exec --no-startup-id xrandr --dpi 96
+exec_always --no-startup-id xrandr --dpi 96
 
 ## Fuente para títulos de ventanas usadas en bar {} block below.
 font pango:monospace 9
@@ -200,7 +202,6 @@ for_window [class="Imagewriter"] floating enable
 for_window [class="^Gpick$"] floating enable
 for_window [class="^Gnome-font-viewer$"] floating enable
 for_window [class="Lxappearance|lxappearance"] floating enable, move position 290 150
-for_window [class="Nitrogen"] floating enable, move position 50 50
 for_window [class="SimpleScreenRecorder"] floating enable
 for_window [class="Kazam"] floating enable
 for_window [class="System-config-printer"] floating enable
@@ -210,7 +211,7 @@ for_window [class="Usb-creator-gtk"] floating enable
 for_window [class="Xfce4-taskmanager"] floating enable
 for_window [title="^Terminator Preferences$"] floating enable
 for_window [title="QOwnNotes"] floating enable, resize set 1000 800
-for_window [title="ARandR"] floating enable, move position 50 50
+for_window [title="wdisplays"] floating enable, move position 50% 50%
 for_window [title="^Screen Layout Editor$"] floating enable
 for_window [title="^Instalador de paquetes"] floating enable, move position 50 50
 
@@ -226,6 +227,7 @@ for_window [title="^Instalador de paquetes"] floating enable, move position 50 5
 bar {
     ## Monitor para información en la barra de estado
     #status_command  i3status        ## Mostrar status de monitoreo
+    #status_command  python3 ~/.config/i3pystatus/config.py
     status_command  python3 ~/.config/i3pystatus/config.py
 
     ## Posición donde colocar la barra
@@ -273,6 +275,15 @@ bar {
     }
 
 }
+
+#exec waybar -c ~/.config/waybar/raupulus/config -s ~/.config/waybar/raupulus/style.css
+#exec waybar -c ~/.config/waybar/raupulus_vertical/config -s ~/.config/waybar/raupulus_vertical/style.css
+
+#exec waybar -c ~/.config/waybar/awe/config -s ~/.config/waybar/awe/style.css
+#exec waybar -c ~/.config/waybar/bluish/config -s ~/.config/waybar/bluish/style.css
+#exec waybar -c ~/.config/waybar/colorful/config -s ~/.config/waybar/colorful/style.css
+#exec waybar -c ~/.config/waybar/minimal/config -s ~/.config/waybar/minimal/style.css
+#exec waybar -c ~/.config/waybar/vertical/config -s ~/.config/waybar/vertical/style.css
 
 ############################################################
 #############     Bindings del Sistema    ##################

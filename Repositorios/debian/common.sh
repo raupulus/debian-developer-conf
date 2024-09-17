@@ -60,6 +60,15 @@ common_add_key() {
     echo -e "$VE Agregando clave para el editor SQL$RO DBeaver$CL"
     wget -O - https://dbeaver.io/debs/dbeaver.gpg.key | sudo apt-key add -
 
+    ## Vscode
+    echo -e "$VE Agregando clave para el editor $RO VsCode$CL"
+    sudo wget -qO- https://packages.microsoft.com/keys/microsoft.asc | sudo gpg --dearmor > packages.microsoft.gpg
+    sudo install -D -o root -g root -m 644 packages.microsoft.gpg /etc/apt/keyrings/packages.microsoft.gpg
+    sudo sh -c 'echo "deb [arch=amd64,arm64,armhf signed-by=/etc/apt/keyrings/packages.microsoft.gpg] https://packages.microsoft.com/repos/code stable main" > /etc/apt/sources.list.d/vscode.list'
+    sudo rm -f packages.microsoft.gpg
+    sudo chmod ugo+r /etc/apt/sources.list.d/vscode.list
+
+
     ## Repositorio para editor VS Codium.
     echo -e "$VE Agregando clave para el editor$RO VS Codium$CL"
     wget -qO - https://gitlab.com/paulcarroty/vscodium-deb-rpm-repo/raw/master/pub.gpg | gpg --dearmor | sudo dd of=/etc/apt/trusted.gpg.d/vscodium-archive-keyring.gpg
