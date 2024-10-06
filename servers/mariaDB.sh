@@ -60,7 +60,7 @@ mariadb_postconfiguracion() {
         fi
 
         mysql.server start
-        brew services start mariadb
+        brew services start mariadb@11.2
         mysql_install_db
         mysql_upgrade
         sudo mariadb-secure-installation

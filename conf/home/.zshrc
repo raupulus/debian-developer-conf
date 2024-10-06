@@ -417,3 +417,4 @@ fi
 if [[ "$(/usr/bin/tty)" == "/dev/tty1" ]] && [[ -x '/usr/bin/screen' ]]; then
     exec /usr/bin/screen
 fi
+
