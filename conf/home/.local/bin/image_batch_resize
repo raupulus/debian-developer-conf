@@ -1,0 +1,90 @@
+#!/usr/bin/env python3
+
+"""
+Este script redimensiona imágenes en un directorio dado según los parámetros especificados.
+
+Parámetros:
+<directorio_entrada> : Ruta al directorio que contiene las imágenes a procesar.
+--width=ANCHURA : Lista de anchuras separadas por comas para redimensionar las imágenes. Ejemplo: --width=300,200,100
+--height=ALTURA : Lista de alturas separadas por comas para redimensionar las imágenes. Ejemplo: --height=150,100
+--format=FORMATO : Formato de salida para las imágenes redimensionadas. Por defecto es 'webp'. Ejemplo: --format=png
+
+Funcionamiento:
+1. Verifica que el archivo sea una imagen antes de procesarlo.
+2. Redimensiona la imagen a las diferentes dimensiones especificadas, manteniendo la proporción si solo se proporciona una dimensión.
+3. Guarda las imágenes redimensionadas en un subdirectorio llamado 'images_resized' dentro del mismo directorio de entrada.
+4. Añade un sufijo al nombre del archivo de salida indicando la dimensión usada (e.g., _300px.webp).
+"""
+
+import os
+import sys
+from PIL import Image
+
+def is_image(file_path):
+    try:
+        with Image.open(file_path) as img:
+            return True
+    except (IOError, ValueError):
+        return False
+
+def resize_image(image_path, output_dir, sizes, output_format='webp'):
+    with Image.open(image_path) as img:
+        for size in sizes:
+            output_width, output_height = size
+
+            width, height = img.size
+            if output_width and not output_height:
+                output_height = int((output_width / width) * height)
+            elif output_height and not output_width:
+                output_width = int((output_height / height) * width)
+
+            resized_img = img.resize((output_width, output_height), Image.Resampling.LANCZOS)
+
+            base_name = os.path.basename(image_path)
+            name, ext = os.path.splitext(base_name)
+            suffix = f"{output_width}px" if output_width else f"{output_height}px"
+            new_image_path = os.path.join(output_dir, f"{name}_{suffix}.{output_format}")
+
+            resized_img.save(new_image_path, output_format.upper())
+            print(f'Resized and saved {new_image_path}')
+
+def main():
+    if len(sys.argv) < 2:
+        print("Uso: python resize_images.py <directorio_entrada> [--width=ANCHURA | --height=ALTURA] [--format=FORMATO]")
+        sys.exit(1)
+
+    path_source = sys.argv[1]
+    if not os.path.isdir(path_source):
+        print(f"El directorio {path_source} no existe.")
+        sys.exit(1)
+
+    output_sizes = []
+    output_format = 'webp'
+
+    for arg in sys.argv[2:]:
+        if arg.startswith("--width="):
+            widths = arg.split("=")[1].split(",")
+            output_sizes.extend([(int(width), None) for width in widths])
+        elif arg.startswith("--height="):
+            heights = arg.split("=")[1].split(",")
+            output_sizes.extend([(None, int(height)) for height in heights])
+        elif arg.startswith("--format="):
+            output_format = arg.split("=")[1].lower()
+
+    if not output_sizes:
+        print("Debes especificar al menos width o height.")
+        sys.exit(1)
+
+    output_dir = os.path.join(path_source, "images_resized")
+    os.makedirs(output_dir, exist_ok=True)
+
+    for file_name in os.listdir(path_source):
+        file_path = os.path.join(path_source, file_name)
+        if os.path.isfile(file_path) and is_image(file_path):
+            try:
+                resize_image(file_path, output_dir, output_sizes, output_format)
+            except Exception as e:
+                print(f"Error procesando el archivo {file_name}: {e}")
+
+if __name__ == "__main__":
+    main()
