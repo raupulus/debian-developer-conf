@@ -6,14 +6,14 @@ Este script redimensiona imágenes en un directorio dado según los parámetros 
 Parámetros:
 <directorio_entrada> : Ruta al directorio que contiene las imágenes a procesar.
 --width=ANCHURA : Lista de anchuras separadas por comas para redimensionar las imágenes. Ejemplo: --width=300,200,100
---height=ALTURA : Lista de alturas separadas por comas para redimensionar las imágenes. Ejemplo: --height=150,100
+--height=ALTURA : Lista de alturas separadas por comas para redimensionar las imágenes. Ejemplo: --height=250
 --format=FORMATO : Formato de salida para las imágenes redimensionadas. Por defecto es 'webp'. Ejemplo: --format=png
 
 Funcionamiento:
 1. Verifica que el archivo sea una imagen antes de procesarlo.
-2. Redimensiona la imagen a las diferentes dimensiones especificadas, manteniendo la proporción si solo se proporciona una dimensión.
-3. Guarda las imágenes redimensionadas en un subdirectorio llamado 'images_resized' dentro del mismo directorio de entrada.
-4. Añade un sufijo al nombre del archivo de salida indicando la dimensión usada (e.g., _300px.webp).
+2. Redimensiona la imagen a las dimensiones especificadas (solo se puede escoger width o height).
+3. Guarda las imágenes redimensionadas en un subdirectorio llamado 'images_resized' en el directorio de entrada.
+4. Añade un sufijo al nombre del archivo de salida indicando la dimensión solicitada (e.g., nombreoriginal_300px.webp).
 """
 
 import os
@@ -27,26 +27,25 @@ def is_image(file_path):
     except (IOError, ValueError):
         return False
 
-def resize_image(image_path, output_dir, sizes, output_format='webp'):
+def resize_image(image_path, output_dir, dimension, is_width, output_format='webp'):
     with Image.open(image_path) as img:
-        for size in sizes:
-            output_width, output_height = size
+        width, height = img.size
+        if is_width:
+            output_width = dimension
+            output_height = int((output_width / width) * height)
+        else:
+            output_height = dimension
+            output_width = int((output_height / height) * width)
 
-            width, height = img.size
-            if output_width and not output_height:
-                output_height = int((output_width / width) * height)
-            elif output_height and not output_width:
-                output_width = int((output_height / height) * width)
+        resized_img = img.resize((output_width, output_height), Image.Resampling.LANCZOS)
 
-            resized_img = img.resize((output_width, output_height), Image.Resampling.LANCZOS)
+        base_name = os.path.basename(image_path)
+        name, ext = os.path.splitext(base_name)
+        suffix = f"_{dimension}px"
+        new_image_path = os.path.join(output_dir, f"{name}{suffix}.{output_format}")
 
-            base_name = os.path.basename(image_path)
-            name, ext = os.path.splitext(base_name)
-            suffix = f"{output_width}px" if output_width else f"{output_height}px"
-            new_image_path = os.path.join(output_dir, f"{name}_{suffix}.{output_format}")
-
-            resized_img.save(new_image_path, output_format.upper())
-            print(f'Resized and saved {new_image_path}')
+        resized_img.save(new_image_path, output_format.upper())
+        print(f'Resized and saved {new_image_path}')
 
 def main():
     if len(sys.argv) < 2:
@@ -58,20 +57,29 @@ def main():
         print(f"El directorio {path_source} no existe.")
         sys.exit(1)
 
-    output_sizes = []
+    dimension = None
+    is_width = None
     output_format = 'webp'
 
     for arg in sys.argv[2:]:
         if arg.startswith("--width="):
+            if dimension is not None:
+                print("Debes especificar solo width o height, no ambos.")
+                sys.exit(1)
             widths = arg.split("=")[1].split(",")
-            output_sizes.extend([(int(width), None) for width in widths])
+            dimension = [int(width) for width in widths]  # Recibimos una lista de anchuras
+            is_width = True
         elif arg.startswith("--height="):
+            if dimension is not None:
+                print("Debes especificar solo width o height, no ambos.")
+                sys.exit(1)
             heights = arg.split("=")[1].split(",")
-            output_sizes.extend([(None, int(height)) for height in heights])
+            dimension = [int(height) for height in heights]  # Recibimos una lista de alturas
+            is_width = False
         elif arg.startswith("--format="):
             output_format = arg.split("=")[1].lower()
 
-    if not output_sizes:
+    if dimension is None:
         print("Debes especificar al menos width o height.")
         sys.exit(1)
 
@@ -82,7 +90,8 @@ def main():
         file_path = os.path.join(path_source, file_name)
         if os.path.isfile(file_path) and is_image(file_path):
             try:
-                resize_image(file_path, output_dir, output_sizes, output_format)
+                for dim in dimension:
+                    resize_image(file_path, output_dir, dim, is_width, output_format)
             except Exception as e:
                 print(f"Error procesando el archivo {file_name}: {e}")
 
