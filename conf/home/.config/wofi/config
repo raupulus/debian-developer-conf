@@ -1,5 +1,5 @@
 hide_scroll=true
-show=drun
+show=drun #drun: desktop aplicaciones, run: todos los ejecutables, dmenu: inspirado en dmenu
 width=50%
 height=70%
 line_wrap=word
@@ -12,7 +12,7 @@ layer=overlay
 allow_images=true
 #sort_order=alphabetical
 gtk_dark=true
-prompt=Esperando tus órdenes
+prompt=Esperando órdenes de @raupulus
 image_size=28
 display_generic=false
 location=center
