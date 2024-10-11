@@ -2,7 +2,7 @@
 # -*- encoding: utf-8 -*-
 
 import socket
-import sys
+import json
 from i3pystatus import IntervalModule
 
 class SocketClient(IntervalModule):
@@ -24,30 +24,37 @@ class SocketClient(IntervalModule):
         try:
             sock.connect(server_address)
         except socket.error as msg:
-            return None
+            return "N/D"
 
         try:
             # Pido cantidad de pulsaciones actual
             message = b'pulsations_current'
-            #print('Enviando {!r}'.format(message))
             sock.sendall(message)
 
             # Recibo la cantidad de pulsaciones
             data = sock.recv(2048)
-            #print('Recibido {!r}'.format(data.decode("utf-8")))
+            response = data.decode("utf-8")
 
-            # Devuelvo las pulsaciones.
-            return str(data.decode("utf-8"))
+            try:
+                # Parsear el JSON
+                json_data = json.loads(response)
+                pulsations_total = json_data["session"]["pulsations_total"]
+                pulsations_current = json_data["streak"]["pulsations_current"]
+                pulsation_average = json_data["streak"]["pulsation_average"]
+
+                # Formatear la cadena
+                formatted_output = f"{pulsations_current}/{pulsation_average}AVG/{pulsations_total}T"
+                return formatted_output
+
+            except (json.JSONDecodeError, KeyError):
+                return "N/D"
 
         finally:
-            #print('closing socket')
-           sock.close()
+            sock.close()
 
     def run(self):
-        if self.get_pulsations_current():
-            text = ' ' + self.get_pulsations_current()
-        else:
-            text = ''
+        pulsations_info = self.get_pulsations_current()
+        text = f' {pulsations_info}'
 
         self.output = {
             "full_text": text,
