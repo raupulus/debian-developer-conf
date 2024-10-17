@@ -169,6 +169,11 @@ vars_enviroment_displays() {
 ##
 configureGlobalControlVars() {
     echo -e "Estableciendo variables globales"
+
+    if [[ "$ENV" = 'prod' ]]; then
+        setVariableGlobal 'NODE_ENV' 'production'
+    fi
+
 }
 
 setHostName() {
