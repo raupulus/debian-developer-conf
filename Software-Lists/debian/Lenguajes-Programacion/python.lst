@@ -53,3 +53,4 @@ python3-sqlalchemy-utils
 python3-sqlparse
 python3-tempita
 python3-tz
+python-is-python3
