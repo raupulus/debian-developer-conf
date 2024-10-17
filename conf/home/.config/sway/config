@@ -423,20 +423,20 @@ bindsym $mod+c exec wofi -show run
 bindsym $mod+Control+space exec ~/.config/sway/scripts/keyboard.sh
 
 ## Captura un área de la pantalla seleccionada al portapapeles
-#bindsym --release shift+Print exec xfce4-screenshooter -crm
-bindsym Shift+Print exec grim - | wl-copy
+bindsym --release shift+Print exec grimshot save area - | wl-copy
 
-## Captura un área de la pantalla a Imágenes
-bindsym Control+Shift+Print exec grim ~/Imágenes/Screenshots/
+## Captura un área de la pantalla a Descargas
+bindsym Control+Shift+Print exec grimshot save area "$HOME/Descargas/$(date +'%Y-%m-%d_%H-%M-%S').png"
 
-## Captura de Ventana actual
-#bindsym $mod+print exec xfce4-screenshooter -wm -s ~/Imágenes/Screenshots/
+## Captura de Ventana actual y la guarda en Descargas
+bindsym $mod+Print exec grimshot save window "$HOME/Descargas/$(date +'%Y-%m-%d_%H-%M-%S').png"
 
 ## Captura de Pantalla Completa al portapapeles
-bindsym $mod+shift+print exec grim -o $(swaymsg -t get_outputs | jq -r '.[] | select(.focused) | .name') - | wl-copy
+bindsym $mod+shift+Print exec grimshot save screen - | wl-copy
 
-## Captura de Pantalla Completa
-#bindsym --release print exec xfce4-screenshooter -fm -s ~/Imágenes/Screenshots/
+## Captura de Pantalla Completa y la guarda en Descargas
+bindsym --release print exec grimshot save screen "$HOME/Descargas/$(date +'%Y-%m-%d_%H-%M-%S').png"
+
 
 ## Brillo de la pantalla
 #bindcode XF86MonBrightnessUp exec --no-startup-id xbacklight -inc 10

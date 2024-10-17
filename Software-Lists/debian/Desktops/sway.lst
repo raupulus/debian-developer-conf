@@ -10,7 +10,7 @@ wofi
 wofi-pass
 brightnessctl
 slurp
-grim
+grimshot
 wl-clipboard
 clipman
 xdg-desktop-portal-wlr
@@ -24,3 +24,4 @@ nm-tray
 nm-tray-l10n
 pavucontrol
 lm-sensors
+sxiv
