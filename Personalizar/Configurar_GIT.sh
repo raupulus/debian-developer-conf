@@ -109,6 +109,7 @@ configurar_git() {
     git config --global color.ui true
     git config --global gui.encoding utf-8
     git config --global help.autocorrect 1  ## Activa corrector de comandos
+    git config --global init.defaultBranch main
 
     if [[ -f '/usr/bin/meld' ]]; then
         git config --global diff.tool meld
