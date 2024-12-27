@@ -13,6 +13,11 @@
 ##             Applied Style Guide:
 ## @style      https://gitlab.com/raupulus/bash-guide-style
 
+## Previene problemas con scp al producirse salidas no deseadas cuando se establece la conexión
+if [[ -n $SSH_CONNECTION ]] && [[ $- != *i* ]]; then
+    return
+fi
+
 ###################################
 ###          CONSTANTES         ###
 ###################################
