@@ -39,7 +39,6 @@ aplicaciones_flatpak() {
     local brackets='https://flathub.org/repo/appstream/io.brackets.Brackets.flatpakref'
     local arduino='https://flathub.org/repo/appstream/cc.arduino.arduinoide.flatpakref'
     local dbeaver='https://flathub.org/repo/appstream/io.dbeaver.DBeaverCommunity.flatpakref'
-    local atom='https://flathub.org/repo/appstream/io.atom.Atom.flatpakref'
     local mumble='https://flathub.org/repo/appstream/info.mumble.Mumble.flatpakref'
     local synfig='https://flathub.org/repo/appstream/org.synfig.SynfigStudio.flatpakref'
     local xnconvert='https://flathub.org/repo/appstream/com.xnview.XnConvert.flatpakref'
@@ -67,7 +66,6 @@ aplicaciones_flatpak() {
             8) Brackets
             9) Arduino
             10) DBeaver
-            11) Atom
             12) Mumble
             13) Synfig
             14) XnConvert
@@ -102,7 +100,6 @@ aplicaciones_flatpak() {
             8)  instalarSoftwareFlatPak $brackets;;
             9)  instalarSoftwareFlatPak $arduino;;
             10)  instalarSoftwareFlatPak $dbeaver;;
-            11)  instalarSoftwareFlatPak $atom;;
             12)  instalarSoftwareFlatPak $mumble;;
             13)  instalarSoftwareFlatPak $synfig;;
             14)  instalarSoftwareFlatPak $xnconvert;;

@@ -32,6 +32,14 @@ if [[ -a "$WORKSCRIPT/.env" ]]; then
     source "$WORKSCRIPT/.env"
 fi
 
+if [[ -f "$HOME/.gnupg" ]]; then
+    chmod -R 700 "$HOME/.gnupg"
+fi
+
+if [[ -f "/etc/apt/keyrings" ]]; then
+    sudo install -m 0755 -d /etc/apt/keyrings
+fi
+
 ###########################
 ##       FUNCIONES       ##
 ###########################

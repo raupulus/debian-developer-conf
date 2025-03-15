@@ -1,7 +1,7 @@
 ########################################################
 ##                      ETCHER                        ##
 ########################################################
-####curl -1sLf "https://dl.cloudsmith.io/public/balena/etcher/gpg.70528471AFF9A051.key" | sudo apt-key add -
+# sudo curl -fsSL https://dl.cloudsmith.io/public/balena/etcher/gpg.70528471AFF9A051.key | sudo gpg --dearmor -o /usr/share/keyrings/balena-etcher.gpg && sudo chmod go+r /usr/share/keyrings/balena-etcher.gpg
 
-deb https://dl.cloudsmith.io/public/balena/etcher/deb/debian bullseye main
-deb-src https://dl.cloudsmith.io/public/balena/etcher/deb/debian bullseye main
+deb [signed-by=/usr/share/keyrings/balena-etcher.gpg] https://dl.cloudsmith.io/public/balena/etcher/deb/debian bookworm main
+deb-src [signed-by=/usr/share/keyrings/balena-etcher.gpg] https://dl.cloudsmith.io/public/balena/etcher/deb/debian bookworm main

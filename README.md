@@ -63,7 +63,7 @@ Estos son los principales objetivos:
 
 - Configurar terminales, bash y zsh
 - Instalar tipografías
-- Instalar editores Brackets, Atom, ninja IDE y Vim con sus personalizaciones
+- Instalar editores Intellij, ninja IDE y Vim con sus personalizaciones
 - Instalar IDEs si el usuario lo elige
 - Configurar sistema y variables globales
 - Ampliar repositorios desde fuentes estables y fiables
@@ -301,7 +301,6 @@ Dentro de Apps/
 
 ![Previsualización Menú IDEs](docs/IDEs.png)
 
-  - Atom_IDE.sh → Instala el editor ATOM con su configuración y complementos
   - Brackets.sh → Instala y configura Brackets
   - Ninja-IDE.sh → Instala y configura Ninja IDE
   - aptanastudio.sh → (No implementado aún, en proceso)

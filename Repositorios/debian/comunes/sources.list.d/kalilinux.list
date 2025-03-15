@@ -1,6 +1,6 @@
 ########################################################
 ##                    KALI LINUX                      ##
 ########################################################
-##### sudo apt-key adv --keyserver pgp.mit.edu --recv-keys ED444FF07D8D0BF6
-#deb http://http.kali.org/kali kali-rolling main contrib non-free
-#deb-src http://http.kali.org/kali kali-rolling main contrib non-free
+##### sudo curl -fsSL https://archive.kali.org/archive-key.asc | sudo gpg --dearmor -o /usr/share/keyrings/kali-archive-key.gpg && sudo chmod go+r /usr/share/keyrings/kali-archive-key.gpg
+#deb [signed-by=/usr/share/keyrings/kali-archive-key.gpg] http://http.kali.org/kali kali-rolling main contrib non-free non-free-firmware
+#deb-src [signed-by=/usr/share/keyrings/kali-archive-key.gpg] http://http.kali.org/kali kali-rolling main contrib non-free non-free-firmware

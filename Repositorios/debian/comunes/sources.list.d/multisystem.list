@@ -1,0 +1,5 @@
+########################################################
+##                  MULTISYSTEM                       ##
+########################################################
+##### wget -q -O - http://liveusb.info/multisystem/depot/multisystem.asc | gpg --dearmor | sudo tee /etc/apt/trusted.gpg.d/multisystem.gpg > /dev/null
+#deb [signed-by=/usr/share/keyrings/multisystem.gpg] http://liveusb.info/multisystem/depot/ all main

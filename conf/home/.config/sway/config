@@ -146,7 +146,7 @@ for_window [class="Steam"] focus
 ###########################################################
 bindsym $mod+F1 [class="Firefox"] focus
 bindsym $mod+F2 [class="PhpStorm"] focus
-#bindsym $mod+F3 [title="Atom"] focus
+#bindsym $mod+F3 [title="Vscode"] focus
 #bindsym $mod+F4 [class="nautilus"] focus
 #bindsym $mod+F5 [class="tilix"] focus
 #bindsym $mod+F6 [title="PyCharm"] focus

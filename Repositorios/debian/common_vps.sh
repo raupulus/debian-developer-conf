@@ -40,7 +40,7 @@ common_vps_add_keys() {
 
     ## Heroku
     echo -e "$VE Agregando clave para$RO Heroku$CL"
-    curl -L https://cli-assets.heroku.com/apt/release.key | sudo apt-key add -
+    curl -fsSL https://cli-assets.heroku.com/channels/stable/apt/release.key | gpg --dearmor | sudo tee /usr/share/keyrings/heroku.gpg >/dev/null && sudo chmod go+r /usr/share/keyrings/heroku.gpg
 
     ## Mi propio repositorio en launchpad
     echo -e "$VE Agregando clave para$RO Fryntiz Repositorio$CL"
@@ -54,7 +54,7 @@ common_vps_add_keys() {
 
     ## Repositorio para Tor oficial y estable
     echo -e "$VE Agregando clave para$RO Tor Repositorio$CL"
-    curl https://deb.torproject.org/torproject.org/A3C4F0F979CAA22CDBA8F512EE8CBC9E886DDD89.asc | sudo gpg --import && sudo gpg --export A3C4F0F979CAA22CDBA8F512EE8CBC9E886DDD89 | sudo apt-key add -
+    wget -qO- https://deb.torproject.org/torproject.org/A3C4F0F979CAA22CDBA8F512EE8CBC9E886DDD89.asc | gpg --dearmor | sudo tee /usr/share/keyrings/deb.torproject.org-keyring.gpg >/dev/null && sudo chmod go+r /usr/share/keyrings/deb.torproject.org-keyring.gpg
     actualizarRepositorios
     instalarSoftware 'deb.torproject.org-keyring' 'apt-transport-tor'
 
@@ -64,11 +64,11 @@ common_vps_add_keys() {
 
     ## GO CD (Desarrollo continuo)
     echo -e "$VE Agregando clave para $RO GO CD$CL"
-    curl https://download.gocd.org/GOCD-GPG-KEY.asc | sudo apt-key add -
+    curl https://download.gocd.org/GOCD-GPG-KEY.asc | sudo gpg --dearmor -o /etc/apt/keyrings/gocd.gpg && sudo chmod a+r /etc/apt/keyrings/gocd.gpg
 
     ## MongoDB
     echo -e "$VE Agregando clave para $RO MongoDB$CL"
-    wget -qO - https://www.mongodb.org/static/pgp/server-5.0.asc | sudo apt-key add -
+    curl -fsSL https://www.mongodb.org/static/pgp/server-8.0.asc | sudo gpg -o /usr/share/keyrings/mongodb-server-8.0.gpg --dearmor && sudo chmod go+r /usr/share/keyrings/mongodb-server-8.0.gpg
 
     ## Jenkins
     echo -e "$VE Agregando clave para $RO Jenkins$CL"
@@ -76,8 +76,10 @@ common_vps_add_keys() {
 
     ## Sury (Paquetes PHP)
     echo -e "$VE Agregando llave para$RO PHP$VE de sury,org$CL"
-    sudo wget -O '/etc/apt/trusted.gpg.d/php.gpg' 'https://packages.sury.org/php/apt.gpg'
-    sudo chmod 744 '/etc/apt/trusted.gpg.d/php.gpg'
+    #sudo wget -O '/etc/apt/trusted.gpg.d/php.gpg' 'https://packages.sury.org/php/apt.gpg'
+    #sudo chmod 744 '/etc/apt/trusted.gpg.d/php.gpg'
+    sudo curl -sSLo /tmp/debsuryorg-archive-keyring.deb https://packages.sury.org/debsuryorg-archive-keyring.deb
+    sudo dpkg -i /tmp/debsuryorg-archive-keyring.deb
 
     ## NodeJS
     echo -e "$VE Agregando llave para$RO Nodejs$CL"
@@ -97,7 +99,8 @@ common_vps_download_repositories() {
     ## Sury (Paquetes PHP)
     echo -e "$VE Agregando repositorio$RO Sury$AM Repositorio Oficial$CL"
     #echo "deb https://packages.sury.org/php/ $(lsb_release -sc) main" | sudo tee /etc/apt/sources.list.d/php.list
-    echo "deb https://packages.sury.org/php/ bullseye main" | sudo tee /etc/apt/sources.list.d/php.list
+    #echo "deb https://packages.sury.org/php/ bullseye main" | sudo tee /etc/apt/sources.list.d/php.list
+    sudo sh -c 'echo "deb [signed-by=/usr/share/keyrings/debsuryorg-archive-keyring.gpg] https://packages.sury.org/php/ $(lsb_release -sc) main" > /etc/apt/sources.list.d/php.list'
 }
 
 ##

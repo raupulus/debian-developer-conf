@@ -46,6 +46,14 @@ usuario_interprete() {
     ## Cambiar enlace por defecto desde sh a bash
     sudo rm '/bin/sh'
     sudo ln -s "/bin/$shell" '/bin/sh'
+
+    if [[ ! -f "$HOME/.bashrc_custom" ]]; then
+        touch "$HOME/.bashrc_custom"
+    fi
+
+    if [[ ! -f "$HOME/.zshrc_custom" ]]; then
+        touch "$HOME/.zshrc_custom"
+    fi
 }
 
 ##

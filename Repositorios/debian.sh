@@ -42,6 +42,8 @@ agregarRepositoriosDebian() {
         echo -e "$VE Actualizando repositorios por primera vez$CL"
         actualizarRepositorios
         instalarSoftware 'apt-transport-https'
+        instalarSoftware 'ca-certificates'
+        instalarSoftware 'lsb-release'
         instalarSoftware 'dirmngr'
         instalarSoftware 'wget'
         instalarSoftware 'curl'

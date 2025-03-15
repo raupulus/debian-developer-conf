@@ -2,35 +2,22 @@
 ##                 OFICIALES DEBIAN                   ##
 ########################################################
 ## Repositorio Debian Testing.
-deb http://deb.debian.org/debian/ testing main contrib non-free
-deb-src http://deb.debian.org/debian/ testing main contrib non-free
+deb http://deb.debian.org/debian/ testing main contrib non-free non-free-firmware
+deb-src http://deb.debian.org/debian/ testing main contrib non-free non-free-firmware
 
 ## Actualizaciones para Testing (Updates).
-deb http://deb.debian.org/debian/ testing-updates main contrib non-free
-deb-src http://deb.debian.org/debian/ testing-updates main contrib non-free
+deb http://deb.debian.org/debian/ testing-updates main contrib non-free non-free-firmware
+deb-src http://deb.debian.org/debian/ testing-updates main contrib non-free non-free-firmware
 
 ## Actualizaciones de seguridad para testing.
-#deb http://deb.debian.org/debian-security testing-security main
-#deb-src http://deb.debian.org/debian-security testing-security main
-
-########################################################
-##                 MOZILLA FIREFOX                    ##
-########################################################
-##### apt-get install pkg-mozilla-archive-keyring
-# deb http://mozilla.debian.net/ testing-backports firefox-release
-# deb-src http://mozilla.debian.net/ testing-backports firefox-release
+deb http://deb.debian.org/debian-security testing-security main non-free-firmware
+deb-src http://deb.debian.org/debian-security testing-security main non-free-firmware
 
 ########################################################
 ##                MULTIMEDIA testing                  ##
 ########################################################
 ###### apt-get install deb-multimedia-keyring
 # deb http://www.deb-multimedia.org/ testing non-free main
-
-########################################################
-##                  MULTISYSTEM                       ##
-########################################################
-##### wget -q -O - http://liveusb.info/multisystem/depot/multisystem.asc | sudo apt-key add -
-#deb http://liveusb.info/multisystem/depot/ all main
 
 ########################################################
 ##                     FRYNTIZ                        ##

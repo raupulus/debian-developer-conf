@@ -58,6 +58,10 @@ if [[ -f "$HOME/.gnupg" ]]; then
     chmod -R 700 "$HOME/.gnupg"
 fi
 
+if [[ -f "/etc/apt/keyrings" ]]; then
+    sudo install -m 0755 -d /etc/apt/keyrings
+fi
+
 
 USER=$(whoami)   ## Usuario que ejecuta el script
 VERSION='0.8.14'  ## Versión en desarrollo

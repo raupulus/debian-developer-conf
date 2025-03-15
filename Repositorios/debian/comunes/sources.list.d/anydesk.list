@@ -1,1 +1,6 @@
-deb http://deb.anydesk.com/ all main
+########################################################
+##                     Any Desk                       ##
+########################################################
+# sudo curl -fsSL https://keys.anydesk.com/repos/DEB-GPG-KEY | sudo gpg --dearmor -o /etc/apt/keyrings/keys.anydesk.com.gpg && sudo chmod go+r /etc/apt/keyrings/keys.anydesk.com.gpg
+
+deb [signed-by=/etc/apt/keyrings/keys.anydesk.com.gpg] https://deb.anydesk.com all main

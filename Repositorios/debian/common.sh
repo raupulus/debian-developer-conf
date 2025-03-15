@@ -25,40 +25,21 @@
 ## Añade llaves oficiales para cada repositorio común
 ##
 common_add_key() {
-    ## Riot
-    echo -e "$VE Agregando clave para$RO Riot$CL"
-    curl -L https://riot.im/packages/debian/repo-key.asc | sudo apt-key add -
-
-    ## Multisystem
-    echo -e "$VE Agregando clave para$RO Multisystem$CL"
-    sudo wget -q -O - http://liveusb.info/multisystem/depot/multisystem.asc | sudo apt-key add -
-
-    ## Virtualbox Oficial
-    echo -e "$VE Agregando clave para$RO Virtualbox$CL"
-    sudo wget https://www.virtualbox.org/download/oracle_vbox_2016.asc -O '/tmp/oracle_vbox.asc'
-    sudo apt-key add '/tmp/oracle_vbox.asc'
-    sudo rm '/tmp/oracle_vbox.asc'
+    ## Multisystem (Problema en descargar clave, nunca responde su servidor para el .asc)
+    #echo -e "$VE Agregando clave para$RO Multisystem$CL"
+    #wget -q -O - http://liveusb.info/multisystem/depot/multisystem.asc | gpg --dearmor | sudo tee /etc/apt/trusted.gpg.d/multisystem.gpg > /dev/null
 
     ## Kali Linux
     echo -e "$VE Agregando clave para$RO Kali Linux$CL"
-    sudo apt-key adv --keyserver pgp.mit.edu --recv-keys ED444FF07D8D0BF6
+    sudo curl -fsSL https://archive.kali.org/archive-key.asc | sudo gpg --dearmor -o /usr/share/keyrings/kali-archive-key.gpg && sudo chmod go+r /usr/share/keyrings/kali-archive-key.gpg
 
-    ## Repositorio para Team Viewer.
-    echo -e "$VE Agregando clave para$RO Team Viewer Repositorio Oficial$CL"
-    wget -O - https://download.teamviewer.com/download/linux/signature/TeamViewer2017.asc | sudo apt-key add -
-
-    ## Repositorio para Etcher
+    ## Repositorio para Balena Etcher
     echo -e "$VE Agregando clave para$RO Etcher$CL"
-    #sudo apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 379CE192D401AB61
-    curl -1sLf "https://dl.cloudsmith.io/public/balena/etcher/gpg.70528471AFF9A051.key" | sudo apt-key add -
-
-    ## Repositorio para editor Atom.
-    echo -e "$VE Agregando clave para el editor$RO Atom$CL"
-    wget -qO - https://packagecloud.io/AtomEditor/atom/gpgkey | sudo apt-key add -
+    sudo curl -fsSL https://dl.cloudsmith.io/public/balena/etcher/gpg.70528471AFF9A051.key | sudo gpg --dearmor -o /usr/share/keyrings/balena-etcher.gpg && sudo chmod go+r /usr/share/keyrings/balena-etcher.gpg
 
     ## Repositorio para editor DBeaver.
     echo -e "$VE Agregando clave para el editor SQL$RO DBeaver$CL"
-    wget -O - https://dbeaver.io/debs/dbeaver.gpg.key | sudo apt-key add -
+    sudo curl -fsSL https://dbeaver.io/debs/dbeaver.gpg.key | sudo gpg --dearmor -o /usr/share/keyrings/dbeaver.gpg && sudo chmod go+r /usr/share/keyrings/dbeaver.gpg
 
     ## Vscode
     echo -e "$VE Agregando clave para el editor $RO VsCode$CL"
@@ -68,7 +49,6 @@ common_add_key() {
     sudo rm -f packages.microsoft.gpg
     sudo chmod ugo+r /etc/apt/sources.list.d/vscode.list
 
-
     ## Repositorio para editor VS Codium.
     echo -e "$VE Agregando clave para el editor$RO VS Codium$CL"
     wget -qO - https://gitlab.com/paulcarroty/vscodium-deb-rpm-repo/raw/master/pub.gpg | gpg --dearmor | sudo dd of=/etc/apt/trusted.gpg.d/vscodium-archive-keyring.gpg
@@ -76,37 +56,19 @@ common_add_key() {
     #sudo touch /etc/apt/apt.conf.d/99verify-peer.conf
     #echo "Acquire { https::Verify-Peer false }" | sudo tee /etc/apt/apt.conf.d/99verify-peer.conf
 
-    ## Google Earth
-    echo -e "$VE Agregando clave para $RO Google Earth$CL"
-    wget -q -O - https://dl.google.com/linux/linux_signing_key.pub | sudo apt-key add -
-
-    ## Sublime Text
-    echo -e "$VE Agregando clave para el editor$RO Sublime Text$CL"
-    wget -qO - https://download.sublimetext.com/sublimehq-pub.gpg | sudo apt-key add -
-
     ## Any Desk
     echo -e "$VE Agregando clave para $RO Any Desk$CL"
-    wget -qO - https://keys.anydesk.com/repos/DEB-GPG-KEY | sudo apt-key add -
+    sudo curl -fsSL https://keys.anydesk.com/repos/DEB-GPG-KEY | sudo gpg --dearmor -o /etc/apt/keyrings/keys.anydesk.com.gpg && sudo chmod go+r /etc/apt/keyrings/keys.anydesk.com.gpg
 
     ## Beekeeper Studio (Gestionar Bases de Datos)
     echo -e "$VE Agregando clave para $RO Beekeeper Studio$CL"
-    wget --quiet -O - https://deb.beekeeperstudio.io/beekeeper.key | sudo apt-key add -
-
-    ## Lynis
-    echo -e "$VE Agregando clave para $RO Lynis$CL"
-    sudo wget -O - https://packages.cisofy.com/keys/cisofy-software-public.key | sudo apt-key add -
-
-    ## Spotify
-    echo -e "$VE Agregando clave para $RO Spotify$CL"
-    sudo apt-key adv --keyserver ha.pool.sks-keyservers.net --recv-keys 4773BD5E130D1D45
-
-    ## Steam
-    echo -e "$VE Agregando clave para $RO Steam$CL"
-    sudo apt-key adv --keyserver keyserver.ubuntu.com --recv-keys F24AEA9FB05498B7
+    #wget --quiet -O - https://deb.beekeeperstudio.io/beekeeper.key | sudo apt-key add -
+    curl -fsSL https://deb.beekeeperstudio.io/beekeeper.key | sudo gpg --dearmor --output /usr/share/keyrings/beekeeper.gpg \
+      && sudo chmod go+r /usr/share/keyrings/beekeeper.gpg
 
     ## QOwnNotes
     echo -e "$VE Agregando clave para $RO QOwnNotes$CL"
-    wget http://download.opensuse.org/repositories/home:/pbek:/QOwnNotes/Debian_11/Release.key -O - | sudo apt-key add -
+    curl -fsSL http://download.opensuse.org/repositories/home:/pbek:/QOwnNotes/Debian_12/Release.key | gpg --dearmor | sudo tee /etc/apt/keyrings/qownnotes.gpg > /dev/null && sudo chmod u=rw,go=r /etc/apt/keyrings/qownnotes.gpg
 }
 
 ##
@@ -127,14 +89,6 @@ common_sources_repositories() {
 ##
 common_download_repositories() {
     echo -e "$VE Descargando repositorios desde scripts oficiales$CL"
-
-    ## Riot
-    echo -e "$VE Agregando Repositorio para$RO Riot (Matrix)$CL"
-    sudo sh -c "echo '##deb https://riot.im/packages/debian/ artful main' > /etc/apt/sources.list.d/matrix-riot-im.list"
-
-    ## Atom
-    echo -e "$VE Agregando Repositorio para$RO Editor Atom$CL"
-    sudo sh -c 'echo "deb [arch=amd64] https://packagecloud.io/AtomEditor/atom/any/ any main" > /etc/apt/sources.list.d/atom.list'
 }
 
 ##

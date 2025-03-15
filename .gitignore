@@ -36,3 +36,4 @@ __pycache__
 /.env
 __init__.py
 .DS_Store
+/wget-log*

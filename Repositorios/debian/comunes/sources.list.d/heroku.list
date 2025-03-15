@@ -1,5 +1,6 @@
 ########################################################
 ##                      HEROKU                        ##
 ########################################################
-####curl -L https://cli-assets.heroku.com/apt/release.key | sudo apt-key add -
-deb https://cli-assets.heroku.com/branches/stable/apt ./
+#### curl -fsSL https://cli-assets.heroku.com/channels/stable/apt/release.key | gpg --dearmor | sudo tee /usr/share/keyrings/heroku.gpg > /dev/null && sudo chmod go+r /usr/share/keyrings/heroku.gpg
+
+deb [signed-by=/usr/share/keyrings/heroku.gpg] https://cli-assets.heroku.com/channels/stable/apt/ /
