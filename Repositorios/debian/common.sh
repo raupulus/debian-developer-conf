@@ -31,19 +31,19 @@ common_add_key() {
 
     ## Kali Linux
     echo -e "$VE Agregando clave para$RO Kali Linux$CL"
-    sudo curl -fsSL https://archive.kali.org/archive-key.asc | sudo gpg --dearmor -o /usr/share/keyrings/kali-archive-key.gpg && sudo chmod go+r /usr/share/keyrings/kali-archive-key.gpg
+    sudo curl -fsSL https://archive.kali.org/archive-key.asc | sudo gpg --dearmor  -o /usr/share/keyrings/kali-archive-key.gpg && sudo chmod go+r /usr/share/keyrings/kali-archive-key.gpg
 
     ## Repositorio para Balena Etcher
     echo -e "$VE Agregando clave para$RO Etcher$CL"
-    sudo curl -fsSL https://dl.cloudsmith.io/public/balena/etcher/gpg.70528471AFF9A051.key | sudo gpg --dearmor -o /usr/share/keyrings/balena-etcher.gpg && sudo chmod go+r /usr/share/keyrings/balena-etcher.gpg
+    sudo curl -fsSL https://dl.cloudsmith.io/public/balena/etcher/gpg.70528471AFF9A051.key | sudo gpg --dearmor  -o /usr/share/keyrings/balena-etcher.gpg && sudo chmod go+r /usr/share/keyrings/balena-etcher.gpg
 
     ## Repositorio para editor DBeaver.
     echo -e "$VE Agregando clave para el editor SQL$RO DBeaver$CL"
-    sudo curl -fsSL https://dbeaver.io/debs/dbeaver.gpg.key | sudo gpg --dearmor -o /usr/share/keyrings/dbeaver.gpg && sudo chmod go+r /usr/share/keyrings/dbeaver.gpg
+    sudo curl -fsSL https://dbeaver.io/debs/dbeaver.gpg.key | sudo gpg --dearmor  -o /usr/share/keyrings/dbeaver.gpg && sudo chmod go+r /usr/share/keyrings/dbeaver.gpg
 
     ## Vscode
     echo -e "$VE Agregando clave para el editor $RO VsCode$CL"
-    sudo wget -qO- https://packages.microsoft.com/keys/microsoft.asc | sudo gpg --dearmor > packages.microsoft.gpg
+    sudo wget -qO- https://packages.microsoft.com/keys/microsoft.asc | sudo gpg --dearmor  > packages.microsoft.gpg
     sudo install -D -o root -g root -m 644 packages.microsoft.gpg /etc/apt/keyrings/packages.microsoft.gpg
     sudo sh -c 'echo "deb [arch=amd64,arm64,armhf signed-by=/etc/apt/keyrings/packages.microsoft.gpg] https://packages.microsoft.com/repos/code stable main" > /etc/apt/sources.list.d/vscode.list'
     sudo rm -f packages.microsoft.gpg
@@ -51,7 +51,7 @@ common_add_key() {
 
     ## Repositorio para editor VS Codium.
     echo -e "$VE Agregando clave para el editor$RO VS Codium$CL"
-    wget -qO - https://gitlab.com/paulcarroty/vscodium-deb-rpm-repo/raw/master/pub.gpg | gpg --dearmor | sudo dd of=/etc/apt/trusted.gpg.d/vscodium-archive-keyring.gpg
+    wget -qO - https://gitlab.com/paulcarroty/vscodium-deb-rpm-repo/raw/master/pub.gpg | gpg --dearmor  | sudo dd of=/etc/apt/trusted.gpg.d/vscodium-archive-keyring.gpg
     sudo chmod ugo+r /etc/apt/trusted.gpg.d/vscodium-archive-keyring.gpg
     #sudo touch /etc/apt/apt.conf.d/99verify-peer.conf
     #echo "Acquire { https::Verify-Peer false }" | sudo tee /etc/apt/apt.conf.d/99verify-peer.conf
@@ -63,12 +63,14 @@ common_add_key() {
     ## Beekeeper Studio (Gestionar Bases de Datos)
     echo -e "$VE Agregando clave para $RO Beekeeper Studio$CL"
     #wget --quiet -O - https://deb.beekeeperstudio.io/beekeeper.key | sudo apt-key add -
-    curl -fsSL https://deb.beekeeperstudio.io/beekeeper.key | sudo gpg --dearmor --output /usr/share/keyrings/beekeeper.gpg \
-      && sudo chmod go+r /usr/share/keyrings/beekeeper.gpg
+    curl -fsSL https://deb.beekeeperstudio.io/beekeeper.key | sudo gpg --dearmor -o /usr/share/keyrings/beekeeper.gpg && sudo chmod go+r /usr/share/keyrings/beekeeper.gpg
 
     ## QOwnNotes
     echo -e "$VE Agregando clave para $RO QOwnNotes$CL"
-    curl -fsSL http://download.opensuse.org/repositories/home:/pbek:/QOwnNotes/Debian_12/Release.key | gpg --dearmor | sudo tee /etc/apt/keyrings/qownnotes.gpg > /dev/null && sudo chmod u=rw,go=r /etc/apt/keyrings/qownnotes.gpg
+    curl -fsSL http://download.opensuse.org/repositories/home:/pbek:/QOwnNotes/Debian_12/Release.key | gpg --dearmor  | sudo tee /etc/apt/keyrings/qownnotes.gpg > /dev/null && sudo chmod u=rw,go=r /etc/apt/keyrings/qownnotes.gpg
+
+    ## Stripe
+    curl -s https://packages.stripe.dev/api/security/keypair/stripe-cli-gpg/public | gpg --dearmor  | sudo tee /usr/share/keyrings/stripe.gpg && sudo chmod u=rw,go=r /usr/share/keyrings/stripe.gpg
 }
 
 ##

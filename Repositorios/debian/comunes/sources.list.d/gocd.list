@@ -1,6 +1,6 @@
 ########################################################
 ##                       GOCD                         ##
 ########################################################
-# curl https://download.gocd.org/GOCD-GPG-KEY.asc | sudo gpg --dearmor -o /etc/apt/keyrings/gocd.gpg && sudo chmod a+r /etc/apt/keyrings/gocd.gpg
+# curl https://download.gocd.org/GOCD-GPG-KEY.asc | sudo gpg --dearmor -o /usr/share/keyrings/gocd.gpg && sudo chmod a+r /usr/share/keyrings/gocd.gpg
 
-deb [signed-by=/etc/apt/keyrings/gocd.gpg] https://download.gocd.org /
+deb [signed-by=/usr/share/keyrings/gocd.gpg] https://download.gocd.org /

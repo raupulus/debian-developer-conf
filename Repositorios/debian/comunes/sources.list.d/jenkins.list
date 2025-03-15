@@ -1,5 +1,0 @@
-########################################################
-##                     JENKINS                        ##
-########################################################
-
-deb [signed-by=/usr/share/keyrings/jenkins-keyring.asc] https://pkg.jenkins.io/debian binary/
