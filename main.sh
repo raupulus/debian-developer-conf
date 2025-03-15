@@ -54,6 +54,11 @@ if [[ -a "$WORKSCRIPT/.env" ]]; then
     source "$WORKSCRIPT/.env"
 fi
 
+if [[ -f "$HOME/.gnupg" ]]; then
+    chmod -R 700 "$HOME/.gnupg"
+fi
+
+
 USER=$(whoami)   ## Usuario que ejecuta el script
 VERSION='0.8.14'  ## Versión en desarrollo
 MY_DISTRO="$DISTRO"  ## Distribución sobre la que se ejecuta
