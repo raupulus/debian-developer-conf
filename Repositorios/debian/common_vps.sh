@@ -25,10 +25,6 @@
 ## Añade llaves oficiales para cada repositorio común
 ##
 common_vps_add_keys() {
-    ## Agregando llave para Gitlab Runner.
-    echo -e "$VE Agregando llave para$RO Gitlab Runner$CL"
-    curl -L "https://packages.gitlab.com/runner/gitlab-runner/gpgkey" 2> /dev/null | sudo apt-key add - &>/dev/null
-
     ## Docker
     echo -e "$VE Agregando clave para$RO Docker$CL"
     sudo apt-key adv --keyserver hkp://p80.pool.sks-keyservers.net:80 --recv-keys F76221572C52609D
@@ -36,10 +32,6 @@ common_vps_add_keys() {
     ## Heroku
     echo -e "$VE Agregando clave para$RO Heroku$CL"
     curl -fsSL https://cli-assets.heroku.com/channels/stable/apt/release.key | gpg --dearmor  | sudo tee /usr/share/keyrings/heroku.gpg >/dev/null && sudo chmod go+r /usr/share/keyrings/heroku.gpg
-
-    ## Mi propio repositorio en launchpad
-    echo -e "$VE Agregando clave para$RO Fryntiz Repositorio$CL"
-    gpg --keyserver keyserver.ubuntu.com --recv-key B5C6D9592512B8CD && gpg -a --export $PUBKRY | sudo apt-key add -
 
     ## Repositorio de PostgreSQL Oficial
     wget --quiet -O - https://www.postgresql.org/media/keys/ACCC4CF8.asc | sudo apt-key add -

@@ -6,15 +6,15 @@ deb http://ftp.es.debian.org/debian/ stable main contrib non-free non-free-firmw
 deb-src http://ftp.es.debian.org/debian/ stable main contrib non-free non-free-firmware
 
 ##### Actualizaciones de seguridad Debian Estable
-deb http://security.debian.org/ stable/updates main contrib non-free non-free-firmware
-deb-src http://security.debian.org/ stable/updates non-free contrib main non-free-firmware
+deb http://security.debian.org/debian-security/ stable-security main contrib non-free non-free-firmware
+deb-src http://security.debian.org/debian-security/ stable-security main contrib non-free non-free-firmware
 
 ##### Actualizaciones para Stretch (Updates)
 deb http://ftp.es.debian.org/debian/ stable-updates non-free contrib main non-free-firmware
 deb-src http://ftp.es.debian.org/debian/ stable-updates non-free contrib main non-free-firmware
 
 ########################################################
-##                 STRETCH BACKPORTS                  ##
+##                    BACKPORTS                       ##
 ########################################################
 ##### apt-get install debian-keyring
 deb http://ftp.es.debian.org/debian/ stable-backports main contrib non-free non-free-firmware
@@ -25,13 +25,3 @@ deb-src http://ftp.es.debian.org/debian/ stable-backports main contrib non-free 
 ########################################################
 ###### apt-get install deb-multimedia-keyring
 # deb http://www.deb-multimedia.org/ stable non-free main
-
-########################################################
-##                     FRYNTIZ                        ##
-########################################################
-### Mi propio repositorio en Launchpad
-### gpg --keyserver keyserver.ubuntu.com --recv-key B5C6D9592512B8CD && gpg -a --export $PUBKRY | sudo apt-key add -
-# deb http://ppa.launchpad.net/fryntiz/webdevtools/ubuntu/ xenial main
-# deb-src http://ppa.launchpad.net/fryntiz/webdevtools/ubuntu/ xenial main
-# deb http://ppa.launchpad.net/fryntiz/pentesting/ubuntu/ xenial main
-# deb-src http://ppa.launchpad.net/fryntiz/pentesting/ubuntu/ xenial main

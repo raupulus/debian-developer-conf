@@ -30,14 +30,6 @@
 ##
 stable_agregar_llaves() {
     echo -e "$VE Agregando llaves solo para repositorios$RO stable$CL"
-
-    ## Agregando llave para Gitlab Runner.
-    echo -e "$VE Agregando llave para$RO Gitlab Runner$CL"
-    curl -L "https://packages.gitlab.com/runner/gitlab-runner/gpgkey" 2> /dev/null | sudo apt-key add - &>/dev/null
-
-    ## Agregando llave para QOwnNotes
-    echo -e "$VE Agregando llave para$RO QOwnNotes$CL"
-    wget http://download.opensuse.org/repositories/home:/pbek:/QOwnNotes/Debian_10/Release.key -O - | sudo apt-key add -
 }
 
 ##

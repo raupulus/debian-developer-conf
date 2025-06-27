@@ -640,3 +640,6 @@ bindsym XF86AudioPrev exec playerctl previous
 ###########################################################
 ############               PRUEBAS             ############
 ###########################################################
+
+# Fuerza encendido del wifi
+exec nmcli radio wifi on
