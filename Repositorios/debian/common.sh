@@ -67,7 +67,7 @@ common_add_key() {
 
     ## QOwnNotes
     echo -e "$VE Agregando clave para $RO QOwnNotes$CL"
-    curl -fsSL http://download.opensuse.org/repositories/home:/pbek:/QOwnNotes/Debian_12/Release.key | gpg --dearmor  | sudo tee /etc/apt/keyrings/qownnotes.gpg > /dev/null && sudo chmod u=rw,go=r /etc/apt/keyrings/qownnotes.gpg
+    curl --silent --show-error --location http://download.opensuse.org/repositories/home:/pbek:/QOwnNotes/Debian_13/Release.key | gpg --dearmor | sudo tee /etc/apt/keyrings/qownnotes.gpg > /dev/null && sudo chmod u=rw,go=r /etc/apt/keyrings/qownnotes.gpg
 
     ## Stripe
     curl -s https://packages.stripe.dev/api/security/keypair/stripe-cli-gpg/public | gpg --dearmor  | sudo tee /usr/share/keyrings/stripe.gpg && sudo chmod u=rw,go=r /usr/share/keyrings/stripe.gpg

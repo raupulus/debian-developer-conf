@@ -1,3 +1,3 @@
-# curl -fsSL http://download.opensuse.org/repositories/home:/pbek:/QOwnNotes/Debian_12/Release.key | gpg --dearmor | sudo tee /etc/apt/keyrings/qownnotes.gpg > /dev/null && sudo chmod u=rw,go=r /etc/apt/keyrings/qownnotes.gpg
+# curl --silent --show-error --location http://download.opensuse.org/repositories/home:/pbek:/QOwnNotes/Debian_13/Release.key | gpg --dearmor | sudo tee "${SIGNED_BY}" > /dev/null
 
 deb [arch=amd64 signed-by=/etc/apt/keyrings/qownnotes.gpg] http://download.opensuse.org/repositories/home:/pbek:/QOwnNotes/Debian_12/ /
