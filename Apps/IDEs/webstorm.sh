@@ -70,7 +70,7 @@ webstorm_postconfiguracion() {
 }
 
 webstorm_instalador() {
-    local version='WebStorm-2024.3.2'
+    local version='WebStorm-2025.2.1'
 
     echo -e "$VE Comenzando instalación de$RO WebStorm$CL"
 

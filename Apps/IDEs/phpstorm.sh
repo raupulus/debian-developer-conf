@@ -75,7 +75,7 @@ phpstorm_postconfiguracion() {
 }
 
 phpstorm_instalador() {
-    local version='PhpStorm-2024.3.5'
+    local version='PhpStorm-2025.2.1'
 
     echo -e "$VE Comenzando instalación de$RO PhpStorm$CL"
 
