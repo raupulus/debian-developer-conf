@@ -285,6 +285,8 @@ status.register("pulseaudio",
     )
 
 ## TEMPERATURA ---------------------------------------------------------
+
+"""
 status.register("temp",
     hints = {"markup": "pango","separator": False,"separator_block_width": 0},
     #format = " {temp}°",
@@ -294,6 +296,7 @@ status.register("temp",
     alert_color = "#FFEF00",
     alert_temp = 60,
   )
+"""
 
 ## CPU USO -------------------------------------------------------------
 status.register("cpu_usage",
