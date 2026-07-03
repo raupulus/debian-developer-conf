@@ -21,9 +21,11 @@
 #######################################
 import subprocess
 import os.path as path
+import configparser
 
 from i3pystatus import Status
 from i3pystatus.updates import aptget
+from i3pystatus.battery import UEventParser as _UEventParser
 
 from time import sleep
 from os import listdir
@@ -31,6 +33,20 @@ import re
 
 # Importo módulos personalizados
 from i3pystatus_modules.SocketClient import SocketClient
+
+#######################################
+# #             Parches              # #
+#######################################
+
+# Algunos equipos (p.ej. Dell G-series) duplican la clave
+# POWER_SUPPLY_TYPE en /sys/class/power_supply/BAT*/uevent. El
+# ConfigParser de i3pystatus usa modo "strict" y lanza
+# DuplicateOptionError al leerlo. Forzamos strict=False; no afecta a
+# equipos cuyo uevent no tiene claves duplicadas.
+def _uevent_parser_init(self):
+    configparser.ConfigParser.__init__(self, default_section="id10t", strict=False)
+
+_UEventParser.__init__ = _uevent_parser_init
 
 #######################################
 # #             Variables           # #
