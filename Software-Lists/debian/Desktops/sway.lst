@@ -20,6 +20,8 @@ keepass2
 tilix
 wdisplays
 gnome-keyring
+libsecret-1-0
+libpam-gnome-keyring
 nm-tray
 nm-tray-l10n
 pavucontrol

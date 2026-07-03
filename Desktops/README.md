@@ -78,6 +78,50 @@ trabajar con las herramientas necesarias.
 - 8 → Games
 
 
+## Gnome Keyring (guardar sesión de apps mediante libsecret)
+
+Tanto `i3.sh` como `sway.sh` instalan `gnome-keyring`, `libsecret-1-0` y
+`libpam-gnome-keyring`, y arrancan el daemon con
+`exec gnome-keyring-daemon --start --components=pkcs11,secrets,ssh` desde
+la configuración de la WM. Esto es necesario para que aplicaciones que
+guardan credenciales vía D-Bus (`org.freedesktop.secrets`), como por
+ejemplo **Claude Code Desktop** para persistir la sesión, encuentren un
+keyring desbloqueado.
+
+Con **GDM3** como gestor de login (caso por defecto en este repo) no hace
+falta nada más: el paquete `libpam-gnome-keyring` ya deja configurado
+`/etc/pam.d/gdm-password` con:
+
+```
+auth    optional    pam_gnome_keyring.so
+...
+session optional    pam_gnome_keyring.so auto_start
+```
+
+y el keyring queda desbloqueado automáticamente al iniciar sesión con tu
+contraseña de usuario.
+
+### Paso manual (solo si usas otro gestor de login, ej. lightdm, o `startx` sin gestor gráfico)
+
+Si el keyring pide contraseña aparte de la de login, o `busctl --user list`
+no muestra `org.freedesktop.secrets`, añade estas dos líneas al archivo PAM
+de tu gestor de login (`/etc/pam.d/lightdm`, `/etc/pam.d/login`, etc.):
+
+```
+auth    optional    pam_gnome_keyring.so
+session optional    pam_gnome_keyring.so auto_start
+```
+
+- La línea `auth` debe ir justo después de `@include common-auth`.
+- La línea `session` debe ir justo después de `@include common-session`.
+
+Verificar que quedó activo tras reiniciar sesión:
+
+```bash
+ps aux | grep gnome-keyring-daemon
+busctl --user list | grep secret   # debe listar org.freedesktop.secrets
+```
+
 ## Openbox
 
 ### Paquetes instalados por este escritorio

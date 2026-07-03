@@ -550,8 +550,10 @@ exec --no-startup-id unclutter -idle 1
 ## Configuraciones para X
 exec --no-startup-id xrdb -load ~/.Xresources
 
-## Authentication agent
+## Authentication agent and keyring (requerido por apps que usan libsecret,
+## por ejemplo Claude Code Desktop para guardar la sesión)
 exec --no-startup-id lxpolkit
+exec --no-startup-id gnome-keyring-daemon --start --components=pkcs11,secrets,ssh
 
 ## Temperatura de pantalla según zona y hora
 #exec --no-startup-id redshift -l $coordenadas -t 5500:4500
@@ -652,7 +654,7 @@ bindsym $mod+F12 mode "$mode_servers"
 #exec --no-startup-id nextcloud
 
 ## pCloud
-exec --no-startup-id "$HOME/AppImage/pcloud"
+exec --no-startup-id "$HOME/AppImage/pCloud.AppImage"
 
 ## Red
 exec --no-startup-id nm-applet

@@ -6,3 +6,6 @@ i3status
 i3pystatus
 pavucontrol
 lm-sensors
+gnome-keyring
+libsecret-1-0
+libpam-gnome-keyring

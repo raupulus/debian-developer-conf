@@ -476,11 +476,11 @@ seat seat0 hide_cursor 1000
 #exec --no-startup-id xrdb -load ~/.Xresources
 #exec --no-startup-id xrdb ~/.Xresources
 
-## Authentication agent and keyring
+## Authentication agent and keyring (requerido por apps que usan libsecret,
+## por ejemplo Claude Code Desktop para guardar la sesión)
 exec --no-startup-id lxpolkit
 exec dbus-update-activation-environment --all
-exec gnome-keyring-daemon --start --components=secrets
-exec export $(gnome-keyring-daemon)
+exec --no-startup-id gnome-keyring-daemon --start --components=pkcs11,secrets,ssh
 
 ## Temperatura de pantalla según zona y hora
 #exec --no-startup-id redshift -l $coordenadas -t 5500:4500
@@ -563,7 +563,7 @@ bindsym $mod+F12 mode "$mode_servers"
 #exec --no-startup-id nextcloud
 
 ## pCloud
-exec "$HOME/AppImage/pcloud"
+exec "$HOME/AppImage/pCloud.AppImage"
 
 ## Red
 #exec nm-applet --indicator
