@@ -6,7 +6,7 @@ Script para tener un entorno funcional en poco tiempo y además tener
 sincronizada la configuración de distintos dispositivos con los que trabajo.
 
 Este script prepara completamente el entorno de programación, aplicaciones,
-servidores, comandos personalizados, interfaz gráfica, plantillas y repositorios en Debian Stable.
+servidores, comandos personalizados, interfaz gráfica, plantillas y repositorios en Debian Stable y Testing.
 
 ![Imagen de previsualización](docs/Preview.jpg)
 
@@ -84,15 +84,17 @@ Previsualización de menú Personalización:
 
 ## Distribución compatible
 
-Está destinado única y exclusivamente para **Debian 9** (estable) y se irá
-actualizando con esta rama estable.
+Está pensado principalmente para **Debian Stable** y **Debian Testing**, así
+como para **Raspberry Pi OS** (Raspbian). El soporte para **Fedora**,
+**Gentoo** y **macOS** es parcial y experimental: no se garantiza que
+funcione sin ajustes.
 
-En otras ramas y distribuciones puede romper el sistema, para portarlo no hay
-demasiadas complicaciones y se deberá renombrar la instalación/nombre de
+En distribuciones no soportadas puede romper el sistema; para portarlo no hay
+demasiadas complicaciones, pero se deberá renombrar la instalación/nombre de
 paquetes si procede y establecer repositorios de acorde a la distribución. El
 resto de los pasos deberían ser idénticos.
 
-Todo el script se basa en funciones.sh por lo que editando este archivo y
+Todo el script se basa en `functions.sh` por lo que editando este archivo y
 adaptándolo a tu distribución podrás conseguir un cierto nivel de
 compatibilidad.
 
@@ -128,7 +130,7 @@ Clonamos el repositorio actual en nuestro equipo
 Entramos y ejecutamos el script principal
 
 ```bash
-    cd preparar_entorno
+    cd debian-developer-conf
     ./main.sh
 ```
 
@@ -270,75 +272,75 @@ Se plantea la instalación y configuración de los siguientes lenguajes:
 
 ## Directorios
 
-- Accesos_Directos → Contiene los accesos directos individuales para usuario
-que van en ~/.local/share/applications
-- Apache2 → Contenido para la estructura de apache
-- Apps → Contiene scripts y configuraciones especiales para ciertas aplicaciones
-- docs → Directorio con la documentación del proyecto e imágenes.
-- fonts → Contiene un directorio por cada conjunto de fuentes similares
-- Personalizar → Scripts para configurar la estética y comportamientos del sistema, cambiar fondos/temas/iconos/cursores y la instalación opcional de escritorios o window manager.
-- conf → Contiene archivos de configuración o plantillas para generarlos
-- tmp → Directorio donde se descargan los archivos temporales, se crea al
-iniciar el script.
-- Servidores → Instala y configura servidores.
-- Lenguajes-Programacion → Instala y configura lenguajes de programación.
-- Repositorios → Contiene las listas de repositorios para añadirlas al sistema
-cuando se elige la opción de agregar repositorios.
-- Desktops → Instala y configura escritorios o window manager
+El proyecto está organizado en módulos, cada uno con su propio menú
+(`0_Main.sh`). Los principales son:
 
-# Scripts
+- **Apps/** → Instalación de aplicaciones de todo tipo (IDEs, ofimática,
+navegación, ver subcarpeta `IDEs/`).
+- **Repositorios/** → Listas y scripts para añadir repositorios de terceros
+por distro y rama.
+- **configurations/** → Ajustes genéricos y variables del sistema (crons,
+archivo hosts).
+- **Personalizar/** → Mejoras visuales (temas GTK/QT, iconos, Grub, fuentes,
+cursores).
+- **servers/** → Software para servidores (Apache, Nginx, MariaDB, Docker,
+etc.).
+- **Lenguajes-Programacion/** → Entornos de programación (PHP, Python, Ruby,
+Go, etc.).
+- **Usuario/** → Configuración específica del entorno del usuario (dotfiles,
+tmux, vim, shell).
+- **Desktops/** → Entornos de escritorio y gestores de ventanas (i3, xmonad,
+openbox, sway).
+- **root/** → Configuración base para el usuario administrador.
+- **VPS/** → Configuraciones especializadas en servidores privados virtuales
+(fail2ban, firewall).
+- **raspberry/** → Scripts exclusivos de optimización para Raspberry Pi.
+- **Software-Lists/** → Listas planas de paquetes (`.lst`) por distro,
+consumidas por los módulos anteriores.
+- **Accesos_Directos/** → Accesos directos `.desktop` para el usuario
+(`~/.local/share/applications`).
+- **fonts/** → Tipografías, un directorio por familia.
+- **conf/** → Archivos de configuración o plantillas para generarlos.
+- **docs/** → Documentación del proyecto e imágenes (ver `docs/info/` para el
+detalle técnico de cada módulo).
+- **Backups/** y **tmp/** → Directorios de trabajo generados en tiempo de
+ejecución (backups y descargas temporales), no versionados.
 
-- funciones.sh → Contiene funciones globales y auxiliares para no repetir código
-- configuraciones.sh → Establece aplicaciones determinadas.
-- limpiador.sh → Este script limpia los directorios y archivos que pueden
-causar más problemas en algún momento, esto existe para depurar principalmente
-y su uso se desaconseja por ser áltamente arriesgado a perder datos.
-- main.sh → Programa principal con menú para elegir paso a realizar
+Para el detalle técnico y de comportamiento de cada módulo, consulta
+[`AGENTS.md`](AGENTS.md) y los documentos en `docs/info/`.
 
-Dentro de Apps/
+## Scripts principales
+
+- `main.sh` → Programa principal con menú para elegir el paso a realizar.
+Debe ejecutarse desde la raíz del repositorio.
+- `main-vps.sh` → Punto de entrada alternativo para VPS, se ejecuta como
+**root** antes de clonar el repositorio completo (crea el usuario del
+sistema y luego continúa con `main.sh`).
+- `functions.sh` → Contiene funciones globales y auxiliares para no repetir
+código.
+- `routes.sh` / `preferences.sh` → Rutas de Apache por distro y configuración
+interactiva inicial (distro/rama/entorno), persistida en `/etc/environment`.
+- `limpiador.sh` → Limpia directorios y archivos de personalización de forma
+agresiva; existe para depurar y su uso se desaconseja por ser altamente
+arriesgado para perder datos (no restaura backups pese a estar planteado).
+- `env.example` → Plantilla de variables de entorno; cópiala a `.env` para
+fijar `DISTRO`, `BRANCH`, `ENV`, etc. antes de la primera ejecución.
 
 ## IDEs
 
 ![Previsualización Menú IDEs](docs/IDEs.png)
 
-  - Brackets.sh → Instala y configura Brackets
-  - Ninja-IDE.sh → Instala y configura Ninja IDE
-  - aptanastudio.sh → (No implementado aún, en proceso)
-  - netbeans.sh → (No implementado aún, en proceso)
-  - phpstorm.sh → Instala y configura el IDE PhpStorm para Debian GNU/Linux
-  - pycharm.sh → (No implementado aún, en proceso)
-  - webstorm.sh → (No implementado aún, en proceso)
-- bashit.sh → Instala y configura Bash-it
-- DBeaver.sh → Instala y configura DBeaver
-- Firefox.sh → Instala la versión para desarrolladores **Quantum** y la versión
-en desarrollo principal **Nightly**
-- GitKraken.sh → Instala y configura GitKraken
-- Haroopad.sh → Instala y configura Haroopad
-- i3wm.sh → Instala y configura gestor de ventanas i3wm
-- OhMyZsh.sh → Instala y configura OhMyZsh
-- Pencil-Project.sh → Instala y configura Pencil Project
-- spacevim.sh → Instala y configura SpaceVim
-- vim.sh → Instala y configura Vim
+Dentro de `Apps/IDEs/` se instalan y configuran distintos editores/IDEs
+(PhpStorm, WebStorm, PyCharm Pro, Android Studio, Arduino IDE, entre otros).
+El estado y detalle de cada script puede variar entre versiones del proyecto;
+consulta `docs/info/apps.md` para la lista actualizada.
 
-Estructura pendiente de ordenar, alguna información extra:
-
-- Configurar_GIT.sh → Scripts para configurar la integración de GIT, GitHub y
-GitLab
-- Instalar_Software → Instala los programas indicados en la lista
-"Software.lst" y algunos extras
-- Personalización_GTK.sh → Genera fondos para grub, escritorio, gdm... y además
-iconos, temas y cursores
-- Tipografías.sh → Instala fuentes tipográficas
-- Variables_Entorno.sh → Genera variables de entorno que seran globales en el
-sistema
-
-## Desktops y Windows Manager
+## Desktops y Window Managers
 
 Sección opcional que permite instalar y dejar configurado automáticamente el
-estcritorio o window manager elegido.
+escritorio o window manager elegido (i3, Sway, Xmonad, Openbox, entre otros).
 
-Puedes leer más sobre los escritorios desde aquí:
-https://github.com/raupulus/debian-developer-conf/Personalizar/Desktops/README.md
+Puedes leer más sobre los escritorios en [`Desktops/README.md`](Desktops/README.md).
 
 ### i3 Window Manager
 
