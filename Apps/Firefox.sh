@@ -55,7 +55,7 @@ firefox_instalador() {
             mv "$WORKSCRIPT/tmp/Firefox-Developer/firefox" "$HOME/.local/opt/Firefox_Developer" 2>> /dev/null
 
             ## Crear enlaces de usuario y permisos de ejecución
-            echo "$HOME/.local/opt/Firefox_Developer/firefox - P Firefox-Developer" > "$HOME/.local/bin/firefox-developer"
+            echo "$HOME/.local/opt/Firefox_Developer/firefox -P Firefox-Developer" > "$HOME/.local/bin/firefox-developer"
             chmod +x "$HOME/.local/bin/firefox-developer"
 
             ## Copiar acceso directo
