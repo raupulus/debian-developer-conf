@@ -16,11 +16,13 @@ El directorio `Lenguajes-Programacion/` gestiona el núcleo de las herramientas 
    - Instala herramientas satelitales (como Xdebug, Composer, Psysh).
 
 2. **Python (`python.sh`)**:
-   - Instala intérpretes de Python (contemplando la coexistencia de `python2` y `python3`).
-   - Setea e instala el gestor de paquetes (`pip` y `pip3`) habilitando también instalaciones globales si corresponde (gracias a métodos envoltorio como `python3Install` en la librería base).
+   - Instala intérpretes de Python y el gestor `pip3`, con instalaciones globales cuando corresponde mediante los envoltorios `python3Install` y `python3InstallGlobal` de la librería base.
+   - **Estado**: la coexistencia con Python 2 ya no es real. `python2Install` sigue existiendo en `functions.sh` pero su línea `pip2 install` está comentada: la función solo imprime mensajes. Python 2 lleva años EOL.
+   - `python3Install` usa `--break-system-packages`, necesario desde PEP 668 en Debian, pero elude la protección del sistema. Conviene revisarlo en la fase 2.
 
 3. **NodeJS y Ecosistema JavaScript**:
-   - (El componente NodeJS tiene fuertes enlaces cruzados con el script de servidor `servers/nodejs.sh` y repositorios), en este módulo recae la responsabilidad de instalar utilidades globales usando NPM (como linters tipo `eslint`, `stylelint` o preprocesadores como `compass`).
+   - **NodeJS no se instala desde este módulo**: vive en `servers/nodejs.sh` y no aparece en el menú de lenguajes. Es una incoherencia de organización heredada.
+   - Lo que sí ofrece la librería base son los envoltorios `instalarNpm` e `instalarNpmGlobal`, usados para utilidades globales (`eslint`, `stylelint`, `compass`).
 
 4. **Lenguajes Compilados y Secundarios**:
    - `c.sh`, `go.sh`, `ruby.sh`, `perl.sh`, `android.sh`: Instalan colecciones de compiladores como GCC/Clang, entornos de Go (GOPATH), Ruby (junto a gems) y herramientas SDK para Android.

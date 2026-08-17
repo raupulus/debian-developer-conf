@@ -1,93 +1,227 @@
 # Reglas y Directrices para Agentes de IA
 
-Este archivo (`AGENTS.md`) documenta el propósito, la estructura, el flujo de arranque y las directrices de estilo y desarrollo para este proyecto. Como agente de IA, debes leer y acatar estas reglas antes de realizar cualquier modificación en el código. Es la fuente de verdad más reciente: el `README.md` contiene datos desactualizados (ver sección 6).
+> **Ubicación**: este fichero debe vivir en la **raíz del repositorio**, no en
+> `docs/`. Está aquí temporalmente porque la herramienta que lo generó no tenía
+> permiso de escritura en la raíz. Muévelo con:
+> `mv docs/AGENTS.md AGENTS.md`
+
+Este archivo documenta el propósito, la estructura, el flujo de arranque y las
+directrices de estilo y desarrollo del proyecto. Como agente de IA, léelo y
+acátalo antes de modificar nada. Es la fuente de verdad: el `README.md` contiene
+datos desactualizados (ver sección 8).
+
+La documentación técnica detallada vive en `docs/info/`, con un documento corto
+por área. El índice está en [`docs/info/indice.md`](docs/info/indice.md).
+
+## 0. Cómo trabajar en este repositorio
+
+Léelo antes que nada:
+
+1. **`docs/info/` describe lo que hay, no lo que se pretende.** Si un documento
+   describe una intención en vez de la realidad, es un error a corregir. Toda
+   afirmación debe poder verificarse contra el fichero que describe.
+2. **La planificación va a `docs/planning/`**, que está **excluido de git** a
+   propósito. No propongas versionarlo ni muevas su contenido a `docs/info/`.
+3. **`main` está congelada en cuanto a código.** El trabajo de modificación va
+   en la rama `dev`. No hagas cambios de código sobre `main`.
+4. **Cuando modifiques código, actualiza su documentación en el mismo commit.**
+   No dejes `docs/info/` describiendo un comportamiento que ya cambiaste.
+5. **No improvises implementaciones.** Si detectas algo roto y no se te ha
+   pedido arreglarlo, anótalo en
+   [`docs/info/auditoria-estado.md`](docs/info/auditoria-estado.md) y sigue.
+6. **No muevas ni renombres ficheros que empiecen por punto** dentro de
+   `conf/home/`: son los dotfiles maestros y hay symlinks vivos apuntando a
+   ellos, con ruta absoluta, en varios equipos.
 
 ## 1. Propósito del Proyecto
 
-El objetivo de `debian-developer-conf` es configurar entornos de trabajo automatizados para desarrollo, principalmente en **Debian stable** y **Debian testing**, así como en **Raspberry OS** (Raspbian). El soporte para **Fedora**, **Gentoo** y **macOS** es parcial y de carácter experimental; no se garantiza un funcionamiento seguro en ellos.
+`debian-developer-conf` configura entornos de trabajo automatizados para
+desarrollo, y sincroniza la configuración del autor entre varios equipos y
+servidores.
 
-El script principal automatiza la instalación de aplicaciones, lenguajes de programación, configuraciones de servidor, personalizaciones de interfaz y ajustes a nivel de usuario y root. **Es deliberadamente no interactivo y destructivo con la configuración existente** (fuerza `-y` en apt, sobrescribe dotfiles); solo debe ejecutarse tras un backup o en una VM/equipo dedicado a ello.
+El script principal automatiza la instalación de aplicaciones, lenguajes de
+programación, configuraciones de servidor, personalizaciones de interfaz y
+ajustes a nivel de usuario y root. **Es deliberadamente no interactivo y
+destructivo con la configuración existente** (fuerza `-y` en apt, sobrescribe
+dotfiles); solo debe ejecutarse tras un backup o en una VM/equipo dedicado.
 
-## 2. Flujo de arranque
+## 2. Sistemas objetivo
 
-Hay dos puntos de entrada:
+Documento de referencia: [`docs/info/sistemas-objetivo.md`](docs/info/sistemas-objetivo.md).
+
+| Sistema | `$DISTRO` | Gestor | Estado |
+|---|---|---|---|
+| **Debian Testing** | `debian` + `BRANCH=testing` | apt | **Referencia del proyecto** |
+| Debian Stable | `debian` + `BRANCH=stable` | apt | Bueno |
+| Debian Stable VPS | `debian` + `stable` + `ENV=prod` | apt | Funcional con deuda |
+| Raspberry OS | `raspbian` | apt | Desfasado (repos en `buster`) |
+| Fedora | `fedora` | dnf | Parcial / experimental |
+| Gentoo | `gentoo` | emerge | Roto |
+| macOS | `macos` | brew | Parcial / experimental |
+| SteamOS | *(pendiente)* | pacman | No implementado |
+
+Reglas:
+
+- **Debian Testing es la referencia.** Si una funcionalidad solo puede estar en
+  un sitio, va ahí. Es donde primero se prueba todo.
+- **La variante VPS no es una distro**, es `DISTRO=debian` + `BRANCH=stable` +
+  `ENV=prod`. La detección está en `Repositorios/debian.sh`. Arrastra
+  dependencias extra (`Apps/vps.sh`, `Repositorios/debian/common_vps.sh`) y el
+  módulo `VPS/` (UFW, fail2ban, usuario administrador, zona horaria).
+- **Añadir una distro exige tocar tres ficheros a la vez**: `preferences.sh`
+  (validación), `functions.sh` (gestor de paquetes) y `routes.sh` (rutas). Si
+  falta la rama en `routes.sh`, el script **aborta con `exit 1`** al arrancar.
+- No asumas apt. Ramifica siempre por `$DISTRO` de forma explícita.
+- Si el nombre del paquete cambia entre distros, resuélvelo con una lista en
+  `Software-Lists/<distro>/`, no con un `if` dentro del script.
+
+## 3. Flujo de arranque
+
+Detalle completo en [`docs/info/arquitectura.md`](docs/info/arquitectura.md).
+
+Dos puntos de entrada:
 
 - **`main.sh`**: uso normal como usuario con `sudo`, clonando el repo primero.
-- **`main-vps.sh`**: pensado para ejecutarse **como root** en un VPS recién creado, antes de clonar nada (se descarga suelto vía `wget`). Crea el usuario del sistema (`adduser`, grupos `sudo crontab go www-data`), clona el repo (nota: usa la URL de **GitLab**, mientras que el README usa **GitHub** — ambos orígenes son válidos, mantenlos en mente si tocas URLs), **deshabilita IPv6 de forma permanente** vía `sysctl`, y finalmente hace `su $username ./main.sh` para continuar. Tiene un bug conocido sin arreglar: la comprobación de usuario vacío usa `&&` en vez de `||` y nunca se cumple.
+  `WORKSCRIPT=$PWD`, así que **hay que ejecutarlo desde la raíz del repo**.
+- **`main-vps.sh`**: se ejecuta **como root** en un VPS recién creado, antes de
+  clonar nada (se descarga suelto vía `wget`). Crea el usuario del sistema,
+  clona el repo (usa la URL de **GitLab**, mientras el README usa **GitHub**;
+  ambos orígenes son válidos), **deshabilita IPv6 de forma permanente** y hace
+  `su $username ./main.sh`. Bug conocido sin arreglar: la comprobación de
+  usuario vacío usa `&&` en vez de `||` y nunca se cumple.
 
-Orden de carga dentro de `main.sh`:
+Orden de carga de `main.sh`:
 
-1. `source /etc/environment` (si existe) y luego `source $WORKSCRIPT/.env` (si existe) — el `.env` local pisa lo global. `WORKSCRIPT=$PWD`, así que **hay que ejecutar el script desde la raíz del repo**.
+1. `source /etc/environment` y luego `source $WORKSCRIPT/.env` — el `.env`
+   local pisa lo global.
 2. `source routes.sh`, `functions.sh`, `preferences.sh`, `limpiador.sh`.
-3. `configurePreferences` (de `preferences.sh`): si es la primera ejecución, pregunta interactivamente distro/rama/entorno/hostname/idioma/monitores y persiste las respuestas en `/etc/environment` vía `setVariableGlobal` (de `functions.sh`), para que ejecuciones futuras no vuelvan a preguntar.
-4. `setAllRoutes` (de `routes.sh`): fija rutas de Apache (`APACHECONF`, `DIRWEB`, `APACHESITES`, etc.) según `$DISTRO` (debian/raspbian, fedora, gentoo, macos vía Homebrew); si la distro no coincide con ninguna rama, el script aborta con `exit 1`.
-5. Se define `SOFTLIST="${WORKSCRIPT}/Software-Lists/${MY_DISTRO}"` — variable clave que usan todos los módulos para localizar las listas `.lst` de paquetes de la distro activa.
-6. Se cargan los `0_Main.sh` de cada módulo (ver sección 3) y se muestra `menuPrincipal()`.
+3. `configurePreferences`: en la primera ejecución pregunta
+   distro/rama/entorno/hostname/idioma/monitores y persiste las respuestas en
+   `/etc/environment` vía `setVariableGlobal`.
+4. `setAllRoutes`: fija rutas de Apache según `$DISTRO`; aborta si no encaja.
+5. `SOFTLIST="${WORKSCRIPT}/Software-Lists/${MY_DISTRO}"`.
+6. Carga los `0_Main.sh` de cada módulo y muestra `menuPrincipal()`.
 
-Configuración de entorno (`env.example` → copiar a `.env`, sin punto en el nombre origen): `DISTRO`, `BRANCH` (stable/testing/unstable), `ENV` (dev/prod), `ADMIN_EMAIL`, `DEBUG`, `PATH_LOG`. Nota: el default de `PATH_LOG` en `main.sh` apunta a `errors.log` (inglés) pero el valor real usado en `.env`/`env.example` es `errores.log` (español) — por eso `.gitignore` ignora ambas variantes. No es un bug a "corregir" sin más: cambiarlo rompería configuraciones ya persistidas en `/etc/environment` de otros equipos.
+Configuración: `env.example` → copiar a `.env`. Variables `DISTRO`, `BRANCH`
+(stable/testing/unstable), `ENV` (dev/prod), `ADMIN_EMAIL`, `DEBUG`, `PATH_LOG`.
+El default de `PATH_LOG` en `main.sh` apunta a `errors.log` pero `env.example`
+usa `errores.log` — por eso `.gitignore` ignora ambas. **No lo "corrijas" sin
+más**: cambiarlo rompería configuraciones ya persistidas en otros equipos.
 
-Variables `MY_DISTRO`/`MY_BRANCH`/`MY_ENV` conviven con `$DISTRO`/`$BRANCH`/`$ENV`: unas funciones usan unas, otras las otras. Es una inconsistencia real del código existente, no una convención a seguir en código nuevo — usa `$DISTRO` salvo que el contexto ya use `$MY_DISTRO`.
+`MY_DISTRO`/`MY_BRANCH`/`MY_ENV` conviven con `$DISTRO`/`$BRANCH`/`$ENV`. Es una
+inconsistencia real del código, no una convención: usa `$DISTRO` salvo que el
+contexto ya use `$MY_DISTRO`.
 
-`main.sh` acepta flags posicionales que saltan el menú (`./main.sh vim`, `./main.sh nano`, `./main.sh terminals`), y una opción de menú "Todos los pasos anteriores a la vez" que encadena Repositorios+Apps+configurations+Personalizar+servers+Lenguajes-Programacion en modo automático.
+`main.sh` acepta flags posicionales que saltan el menú (`./main.sh vim`,
+`nano`, `terminals`).
 
-`limpiador.sh` es un script de limpieza **agresiva y destructiva** (borra dotfiles, directorios de personalización y desinstala paquetes con `rm -Rf`/`apt remove`) sin desinstalador limpio: su función `restaurar_Backups()` es solo un placeholder que no restaura nada pese a existir un TODO pendiente para implementarlo. Trátalo como zona de alto riesgo.
+`limpiador.sh` es **agresivo y destructivo** (`rm -Rf`, `apt remove`) y su
+`restaurar_Backups()` es un placeholder que no restaura nada. Zona de alto
+riesgo.
 
-## 3. Arquitectura de Módulos
+## 4. Arquitectura de módulos
 
-El proyecto está estructurado modularmente para evitar depender de un único macro-script. La funcionalidad se encuentra dividida en carpetas. Cada carpeta suele contener un archivo `0_Main.sh` que actúa como menú y controlador de ese módulo específico (el patrón se repite recursivamente en al menos un submódulo: `Apps/IDEs/0_Main.sh`).
+Cada carpeta de módulo contiene un `0_Main.sh` que actúa como menú y controlador
+y acepta `-a` para ejecución desatendida. El patrón se anida en
+`Apps/IDEs/0_Main.sh`.
 
-Los principales módulos (y sus correspondientes directorios) son:
-- **Apps/**: Instalación de aplicaciones de todo tipo (IDEs, ofimática, navegación).
-- **Repositorios/**: Listas y scripts para añadir repositorios de terceros, separados por distro y rama (`debian/stable`, `debian/testing`, `debian/comunes`, `debian/vps`, etc. — ver `docs/info/repositorios.md`).
-- **configurations/**: Ajustes genéricos y variables del sistema (crons, archivos hosts).
-- **Personalizar/**: Mejoras visuales (temas GTK/QT, iconos, Grub, fuentes, cursores).
-- **servers/**: Software para servidores (Apache, Nginx, MariaDB, Docker, etc.).
-- **Lenguajes-Programacion/**: Entornos de programación (PHP, Python, Ruby, Go, etc.).
-- **Usuario/**: Configuración específica del entorno del usuario (dotfiles, tmux, vim, shell).
-- **Desktops/**: Entornos de escritorio y gestores de ventanas (i3, xmonad, openbox, sway).
-- **root/**: Configuración base para el usuario administrador.
-- **VPS/**: Configuraciones especializadas en servidores privados virtuales (fail2ban, firewall).
-- **raspberry/**: Scripts exclusivos de optimización para Raspberry Pi.
+| Módulo | Doc | Contenido |
+|---|---|---|
+| `Apps/` | [`apps.md`](docs/info/apps.md) | Aplicaciones e IDEs |
+| `Repositorios/` | [`repositorios.md`](docs/info/repositorios.md) | Repos y claves GPG por distro y rama |
+| `configurations/` | [`configurations.md`](docs/info/configurations.md) | Crons, hosts, scripts en PATH |
+| `Personalizar/` | [`personalizar.md`](docs/info/personalizar.md) | GTK/QT, iconos, fuentes, cursores, git |
+| `servers/` | [`servers.md`](docs/info/servers.md) | Apache, Nginx, MariaDB, PostgreSQL, Docker |
+| `Lenguajes-Programacion/` | [`lenguajes_programacion.md`](docs/info/lenguajes_programacion.md) | PHP, Python, Ruby, Go, C/C++, Perl, Android |
+| `Usuario/` | [`usuario.md`](docs/info/usuario.md) | Dotfiles, shell, editores CLI |
+| `Desktops/` | [`desktops.md`](docs/info/desktops.md) · [`window-managers.md`](docs/info/window-managers.md) | GNOME · i3, Sway, Xmonad, Openbox |
+| `root/` | [`root.md`](docs/info/root.md) | Entorno del superusuario |
+| `VPS/` | [`vps.md`](docs/info/vps.md) | Firewall, fail2ban, hardening |
+| `raspberry/` | [`raspberry.md`](docs/info/raspberry.md) | Optimizaciones Raspberry Pi |
 
-Carpetas auxiliares (no son módulos de instalación, no sigas el patrón `0_Main.sh` en ellas):
-- **Accesos_Directos/**: ficheros `.desktop` sueltos que se copian a `~/.local/share/applications`.
-- **fonts/**: tipografías organizadas por familia; excluida del análisis de CodeClimate.
-- **resources/**: reservada para uso futuro, sin lógica activa actualmente.
-- **Backups/** y **tmp/**: directorios de **runtime**, generados por `crearBackup()`/`descargar()` (en `functions.sh`) durante la ejecución del script, no código fuente. Están en `.gitignore`.
-- **Software-Lists/**: listas planas `.lst` (un paquete por línea, sin comentarios), una carpeta por distro, consumidas por `instalarSoftwareLista`/`instalarSoftwareFlatPakLista` de `functions.sh`. **No están sincronizadas 1:1 entre distros** — no asumas paridad de ficheros al portar una feature de una distro a otra.
+Carpetas auxiliares — **no sigas el patrón `0_Main.sh` en ellas**:
+`Accesos_Directos/` (ficheros `.desktop`), `fonts/`,
+`conf/` (ver [`conf.md`](docs/info/conf.md)), `resources/` (sin uso activo),
+`Software-Lists/` (ver [`software-lists.md`](docs/info/software-lists.md)), y
+`Backups/` y `tmp/`, que son de runtime y están en `.gitignore`.
 
-### Gotcha conocido: `servers/` vs `Servidores/`
-En `Software-Lists/`, la subcarpeta de listas de servidores se llama `servers/` (debian, raspbian, macos) pero `Servidores/` (fedora, gentoo). Sin embargo, todos los scripts de `servers/*.sh` referencian el path hardcodeado `${SOFTLIST}/servers/...`. Resultado: en Fedora y Gentoo esa ruta no existe y la instalación de listas de servidores falla silenciosamente o no encuentra el fichero. Coherente con el aviso de soporte "experimental" en esas distros — si vas a arreglar Fedora/Gentoo, este es uno de los primeros puntos a tocar.
+## 5. Librería común
 
-## 4. Guía de Estilo (Bash Style Guide)
+`functions.sh` es la API interna. Referencia completa en
+[`docs/info/functions.md`](docs/info/functions.md). **Reutilízala siempre en vez
+de reimplementar.** Piezas clave: `instalarSoftware`, `instalarSoftwareLista`,
+`enlazarHome`, `crearBackup`, `descargarGIT`, `setVariableGlobal`,
+`dir_exist_or_create`, `addScriptToBin`, `strFileReplace`.
 
-Los scripts deben escribirse en **Bash**, procurando seguir buenas prácticas de programación:
-- Reutiliza funciones de `functions.sh` siempre que sea posible.
-- Evita configuraciones "hardcodeadas" y variables de entorno fijas para todas las distribuciones si pueden variar; confía en `routes.sh` o condicionales.
-- Emplea la terminología de color declarada en `main.sh`:
-  - `$RO`: Rojo (peligro, atención, mensajes de borrado/stop).
-  - `$VE`: Verde (éxito, procesos instalándose).
-  - `$AZ`: Azul (títulos, menú).
-  - `$AM`: Amarillo (avisos).
-  - `$BL`: Blanco.
-  - `$CY`: Cyan.
-  - `$GR`: Gris.
-  - `$MA`: Magenta.
-  - `$CL`: Clean (resetear color al final de cada `echo`).
-  - `limpiador.sh` redeclara su propio subconjunto de estas variables (sin `CY/GR/MA`) en vez de heredarlas — si cambias la paleta en `main.sh`, revisa también ese fichero para no divergir.
+Ojo: varias de estas funciones tienen defectos conocidos y documentados en
+[`docs/info/auditoria-estado.md`](docs/info/auditoria-estado.md). Consúltalo
+antes de dar por bueno un comportamiento.
 
-## 5. Reglas de Comportamiento
+## 6. Guía de estilo
 
-1. **No Interactividad**: el script de base debe ser lo menos interactivo posible durante los procesos de instalación para que corra ininterrumpidamente. Esto se logra forzando el flag de la interfaz a `DEBIAN_FRONTEND=noninteractive` e instalando con banderas `-y`.
-2. **Backups**: al reescribir configuraciones de usuario que ya existen, se debe crear un respaldo (`crearBackup`).
-3. **Distribuciones**: si añades soporte o características, cerciórate con una comprobación (`if [[ "$DISTRO" = 'debian' ]]`) de la distribución antes de aplicar un paquete cuyo nombre puede variar.
-4. **Permisos**: ningún script debe contener comandos con `sudo` asumiendo que el usuario es root sin antes validar, o bien invocar `sudo` explícitamente donde corresponda sin romper el flujo de terminal.
-5. **Compatibilidad multi-equipo**: este repositorio se sincroniza vía git entre varios equipos del autor. Cualquier arreglo específico de una máquina (drivers, hardware, claves GPG puntuales) debe aplicarse de forma que sea inofensivo o condicional en el resto de equipos — nunca asumir que el hardware/entorno actual es el único caso real.
+Bash, siguiendo <https://gitlab.com/raupulus/bash-guide-style>.
 
-## 6. Calidad y CI
+- Reutiliza `functions.sh` siempre que puedas.
+- Evita rutas y variables hardcodeadas que puedan variar entre distros; apóyate
+  en `routes.sh` o en condicionales.
+- Paleta declarada en `main.sh`: `$RO` rojo (peligro/borrado), `$VE` verde
+  (éxito/instalando), `$AZ` azul (títulos), `$AM` amarillo (avisos), `$BL`
+  blanco, `$CY` cyan, `$GR` gris, `$MA` magenta, `$CL` reset al final de cada
+  `echo`. `limpiador.sh` redeclara su propio subconjunto (sin `CY/GR/MA`): si
+  cambias la paleta, revísalo también.
+- Convive nomenclatura mezclada (`menuServidores` / `menu_configurations`,
+  `*_installer` / `*_instalador`, español e inglés). Es deuda existente: sigue
+  la convención del fichero que estés tocando, no introduzcas una tercera.
 
-`.codeclimate.yml` define el análisis estático: `shellcheck` con las reglas **SC2162, SC2086, SC2033, SC1090 deshabilitadas a propósito** (no uses eso como excusa para introducir más deuda a propósito, pero tampoco "arregles" esos warnings masivamente sin que te lo pidan), `markdownlint` (MD002 deshabilitado), detección de duplicación y de `FIXME`/`TODO`. Excluye `conf/`, `Apache2/`, `fonts/`, `usr/` del rating.
+## 7. Reglas de comportamiento
 
-El `README.md` de la raíz tiene información **desactualizada** en varios puntos (declara soporte "única y exclusivamente para Debian 9 stable", enlaza a una ruta de `Desktops/` que ya no existe dentro de `Personalizar/`) — no lo tomes como referencia de arquitectura actual, prevalece este `AGENTS.md`. Sí es útil para el detalle de paquetes/versiones instalados por stack (PHP, PostgreSQL, MariaDB, Apache vhosts) que no se repite aquí.
+1. **No interactividad**: `DEBIAN_FRONTEND=noninteractive` y `-y`. El script
+   debe correr sin bloquearse.
+2. **Backups**: al reescribir configuración de usuario existente, `crearBackup`.
+3. **Distribuciones**: comprueba `$DISTRO` antes de instalar un paquete cuyo
+   nombre pueda variar.
+4. **Permisos**: no asumas root; invoca `sudo` donde corresponda sin romper el
+   flujo de terminal.
+5. **Compatibilidad multi-equipo**: el repo se sincroniza vía git entre varios
+   equipos del autor. Cualquier arreglo específico de una máquina (drivers,
+   claves GPG puntuales) debe ser inofensivo o condicional en el resto.
+6. **No muevas ni renombres ficheros que empiecen por punto** dentro de
+   `conf/home/`: son los dotfiles maestros y hay symlinks vivos apuntando a
+   ellos en varios equipos.
 
-Al interactuar con el código o responder consultas, asume estas guías y refiérete a la documentación en `docs/info/` para información más minuciosa de cada subsistema (`docs/README.md` es solo un placeholder pendiente de desarrollar).
+## 8. Calidad y CI
+
+`.codeclimate.yml`: `shellcheck` con **SC2162, SC2086, SC2033 y SC1090
+deshabilitadas a propósito** (no las "arregles" masivamente sin que te lo
+pidan), `markdownlint` (MD002 deshabilitado), duplicación y detección de
+`FIXME`/`TODO`. Excluye `conf/`, `Apache2/`, `fonts/`, `usr/`.
+
+No hay tests ni modo `--dry-run`.
+
+El `README.md` de la raíz tiene información desactualizada en varios puntos. No
+lo tomes como referencia de arquitectura: prevalece este `AGENTS.md`. Sí sirve
+para el detalle de paquetes y versiones por stack (PHP, PostgreSQL, MariaDB,
+vhosts de Apache) que no se repite aquí.
+
+## 9. Estado del código
+
+Antes de tocar nada, consulta:
+
+- [`docs/info/auditoria-estado.md`](docs/info/auditoria-estado.md) — registro
+  numerado de qué está roto, qué está desfasado y qué funciona tal cual.
+- [`docs/info/riesgos.md`](docs/info/riesgos.md) — riesgos de diseño y
+  problemas potenciales. Incluye una sección **"Cosas que parecen bugs pero no
+  lo son"**: léela antes de "arreglar" nada por iniciativa propia.
+
+## 10. Estructura de la documentación
+
+| Ruta | Contenido | ¿En git? |
+|---|---|---|
+| `AGENTS.md` | Este fichero. Reglas y arquitectura | Sí |
+| `README.md` | Presentación e instrucciones de uso | Sí |
+| `docs/info/` | Documentación técnica del estado actual | Sí |
+| `docs/planning/` | Planificación, plan de refactor, backlog | **No** |
+| `docs/*.png`, `*.jpg` | Capturas del README | Sí |
+
+Índice completo en [`docs/info/indice.md`](docs/info/indice.md). Lo que ignora
+git y por qué está en [`docs/info/gitignore.md`](docs/info/gitignore.md).

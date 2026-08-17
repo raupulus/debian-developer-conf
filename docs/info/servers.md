@@ -26,6 +26,7 @@ El directorio `servers/` se focaliza en el backend y la infraestructura. Es capa
 4. **Herramientas Adicionales y Demonios de Red**:
    - `bind.sh` automatiza un servidor DNS interno para resolver nombres `.local` en las máquinas de desarrollo.
    - `ssh.sh`, `postfix.sh`, `mumble.sh` aseguran servidores base para conectividad, emulación de correos y VoIP si fuera necesario.
+   - **Estado de `postfix.sh`**: el fichero existe y define `postfix_instalador`, pero `servers/0_Main.sh` **no le hace `source`**, así que la opción 12 del menú falla con *command not found*. Además `postfix_postconfiguracion` tiene la condición invertida y nunca asigna el dominio introducido. Ver [`auditoria-estado.md`](auditoria-estado.md).
 
 ### Mecanismo de Ejecución
 

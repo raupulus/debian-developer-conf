@@ -15,8 +15,9 @@ El directorio `Usuario/` trabaja en una capa no destructiva para el sistema oper
    - A través de la función `enlazarHome`, crea enlaces simbólicos (`symlinks`) desde el directorio `conf/home/` hacia la raíz del usuario (ej. `.bashrc`, `.zshrc`, `.aliases`), proveyendo un control de versiones de la configuración personal.
    - Instala comodines visuales y de estado como *Powerline* para enriquecer la interfaz de línea de comandos.
 
-2. **Editores CLI (`vim.sh`, `nano.sh`, `spacevim.sh`, `gedit.sh`)**:
-   - Automatiza la creación de `~/.vimrc`, `~/.nanorc` o el despliegue del framework de SpaceVim.
+2. **Editores CLI (`vim.sh`, `nano.sh`, `gedit.sh`)**:
+   - Automatiza la creación de `~/.vimrc` y `~/.nanorc`.
+   - **Nota de estado**: `spacevim.sh` existe en el directorio pero su `source` está comentado en `Usuario/0_Main.sh`, igual que el menú que permitía elegir entre Vim y SpaceVim dentro de `softwareUsuarioMinimo`. Hoy siempre se instala Vim.
    - Habilita plugins por defecto, esquemas de color, tabulaciones y comportamientos predeterminados idóneos para la lectura y escritura de código directamente en el servidor o entorno local.
 
 3. **Estructura y Permisos (`directories.sh`, `permisos.sh`, `plantillas.sh`)**:
